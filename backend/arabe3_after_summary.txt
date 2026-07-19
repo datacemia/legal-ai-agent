@@ -1,0 +1,115 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 181782
+PDF_LINES_DEBUG {'line_count': 1396, 'non_empty_line_count': 1244, 'max_line_len': 295, 'first_20': ['ﺍﻟﻮﻃﻨﻲ ﺍﻟﻌﺮﺑﻲ ﺍﻟﺒﻨﻚ ﻣﻠﺨﺺ ﺣﺴﺎﺏ ﻛﺸﻒ', '', '', '                                                SA03/205668ﺍﻟﺮﻗﻢﺍﻟﻤﺮﺟﻌﻲ', '', '                                                                      0108095537030010        ﺍﻟﺤﺴﺎﺏ ﺭﻗﻢ', 'ﻭﺍﻻﻟﻤﻨﻴﻮﻡ ﻟﻠﺤﺪﺍﺩﺓ ﺍﻟﺨﻴﺮ ﺍﻟﻤﺎﺳﺔ ﻭﺭﺷﺔ', '                                                             SA3230400108095537030010               ﺍﻵﻳﺒﺎﻥ', '', '                                                                                         ﺇﺳﻼﻣﻲ ﺟﺎﺭﻱ ﺣﺴﺎﺏ       ﺍﻟﺤﺴﺎﺏ ﻧﻮﻉ', 'ﺍﻟﺘﻌﺎﻭﻥ-ﺣﻲ  13 3503', '                                                                                              ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ       ﺍﻟﺤﺴﺎﺏ ﻋﻤﻠﺔ', '34632-7151                                                                                                                                            ﺍﻟﻔﺮﻉ', '', '                                                                                                           ﺍﻟﺤﺴﺎﺏ ﻛﺸﻒ ﺗﻔﺎﺻﻴﻞ', '', 'May 26, 2025                                                                                                    ﺍﻹﺻﺪﺍﺭ ﺗﺎﺭﻳﺦ', '', '2025-02-25                                                                                                                                       ﺗﺎﺭﻳﺦ ﻣﻦ', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': False, 'preview': 'ﺍﻟﻮﻃﻨﻲ ﺍﻟﻌﺮﺑﻲ ﺍﻟﺒﻨﻚ ﻣﻠﺨﺺ ﺣﺴﺎﺏ ﻛﺸﻒ\n\n\n                                                sa03/205668ﺍﻟﺮﻗﻢﺍﻟﻤﺮﺟﻌﻲ\n\n                                                                      0108095537030010        ﺍﻟﺤﺴﺎﺏ ﺭﻗﻢ\nﻭﺍﻻﻟﻤﻨﻴﻮﻡ ﻟﻠﺤﺪﺍﺩﺓ ﺍﻟﺨﻴﺮ ﺍﻟﻤﺎﺳﺔ ﻭﺭﺷﺔ\n                                                  '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': False, 'preview': 'ﺍﻟﻮﻃﻨﻲ ﺍﻟﻌﺮﺑﻲ ﺍﻟﺒﻨﻚ ﻣﻠﺨﺺ ﺣﺴﺎﺏ ﻛﺸﻒ\n\n\n                                                sa03/205668ﺍﻟﺮﻗﻢﺍﻟﻤﺮﺟﻌﻲ\n\n                                                                      0108095537030010        ﺍﻟﺤﺴﺎﺏ ﺭﻗﻢ\nﻭﺍﻻﻟﻤﻨﻴﻮﻡ ﻟﻠﺤﺪﺍﺩﺓ ﺍﻟﺨﻴﺮ ﺍﻟﻤﺎﺳﺔ ﻭﺭﺷﺔ\n                                                  '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': False, 'preview': 'ﺍﻟﻮﻃﻨﻲ ﺍﻟﻌﺮﺑﻲ ﺍﻟﺒﻨﻚ ﻣﻠﺨﺺ ﺣﺴﺎﺏ ﻛﺸﻒ\n\n\n                                                sa03/205668ﺍﻟﺮﻗﻢﺍﻟﻤﺮﺟﻌﻲ\n\n                                                                      0108095537030010        ﺍﻟﺤﺴﺎﺏ ﺭﻗﻢ\nﻭﺍﻻﻟﻤﻨﻴﻮﻡ ﻟﻠﺤﺪﺍﺩﺓ ﺍﻟﺨﻴﺮ ﺍﻟﻤﺎﺳﺔ ﻭﺭﺷﺔ\n                                                  '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': False, 'preview': 'ﺍﻟﻮﻃﻨﻲ ﺍﻟﻌﺮﺑﻲ ﺍﻟﺒﻨﻚ ﻣﻠﺨﺺ ﺣﺴﺎﺏ ﻛﺸﻒ\n\n\n                                                sa03/205668ﺍﻟﺮﻗﻢﺍﻟﻤﺮﺟﻌﻲ\n\n                                                                      0108095537030010        ﺍﻟﺤﺴﺎﺏ ﺭﻗﻢ\nﻭﺍﻻﻟﻤﻨﻴﻮﻡ ﻟﻠﺤﺪﺍﺩﺓ ﺍﻟﺨﻴﺮ ﺍﻟﻤﺎﺳﺔ ﻭﺭﺷﺔ\n                                                  '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': False, 'preview': 'ﺍﻟﻮﻃﻨﻲ ﺍﻟﻌﺮﺑﻲ ﺍﻟﺒﻨﻚ ﻣﻠﺨﺺ ﺣﺴﺎﺏ ﻛﺸﻒ\n\n\n                                                sa03/205668ﺍﻟﺮﻗﻢﺍﻟﻤﺮﺟﻌﻲ\n\n                                                                      0108095537030010        ﺍﻟﺤﺴﺎﺏ ﺭﻗﻢ\nﻭﺍﻻﻟﻤﻨﻴﻮﻡ ﻟﻠﺤﺪﺍﺩﺓ ﺍﻟﺨﻴﺮ ﺍﻟﻤﺎﺳﺔ ﻭﺭﺷﺔ\n                                                  '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+ANB_ARABE3_V14_EXTRACTED {'transactions': 300, 'income_total': 321969.9, 'expense_total': 232215.54}
+ANB_ARABE3_V12_EXTRACTED {'transactions': 8, 'income_total': 16389.0, 'expense_total': 841.0}
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 300, 'income_total': 321969.9, 'expense_total': 232215.54}, {'parser': 'parser_anb_arabe3_v12', 'count': 8, 'income_total': 16389.0, 'expense_total': 841.0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parse_riyad_position_lines_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+SUSPICIOUS ARABE3.pdf | tx=300 income=321969.9 expenses=232215.54 expected_income=None expected_expenses=None summary_ok=None real_ok=None opening=None ending=None gap=None reason=NO_RELIABLE_REAL_VALUES_FROM_STATEMENT

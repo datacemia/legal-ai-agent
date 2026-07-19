@@ -1,0 +1,793 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+MuPDF error: library error: zlib error: invalid distance too far back
+
+MuPDF error: library error: zlib error: invalid distance too far back
+
+MuPDF error: syntax error: unknown keyword: '166.6217413328.107340'
+
+MuPDF error: syntax error: unknown keyword: '411..55619'
+
+MuPDF error: syntax error: unknown keyword: '130.8.8519'
+
+MuPDF error: syntax error: unknown keyword: '407.75424c'
+
+MuPDF error: syntax error: unknown keyword: '404.27822c'
+
+MuPDF error: syntax error: unknown keyword: 'c2356.428940'
+
+MuPDF error: syntax error: unknown keyword: '404.7397712102.696521'
+
+MuPDF error: syntax error: unknown keyword: '406..27348'
+
+MuPDF error: syntax error: unknown keyword: '404780765c'
+
+MuPDF error: syntax error: unknown keyword: '10.39904970414.547803'
+
+MuPDF error: syntax error: unknown keyword: '137.2.9323'
+
+MuPDF error: syntax error: unknown keyword: '404.1.4648'
+
+MuPDF error: syntax error: unknown keyword: '403327308c'
+
+MuPDF error: syntax error: unknown keyword: '415.63354c'
+
+MuPDF error: syntax error: unknown keyword: '404683358c95'
+
+MuPDF error: syntax error: unknown keyword: '417.6353490414.873230'
+
+MuPDF error: syntax error: unknown keyword: '404.7.0464'
+
+MuPDF error: syntax error: unknown keyword: '400.75598c'
+
+MuPDF error: syntax error: unknown keyword: '40.70452582171.405639'
+
+MuPDF error: syntax error: unknown keyword: 'c23584293255'
+
+MuPDF error: syntax error: unknown keyword: 'c2164.14059504145.10988'
+
+MuPDF error: syntax error: unknown keyword: '404.6501952415.180893'
+
+MuPDF error: syntax error: unknown keyword: '40..19793c'
+
+MuPDF error: syntax error: unknown keyword: '403.3.3972'
+
+MuPDF error: syntax error: unknown keyword: '92..84220'
+
+MuPDF error: syntax error: unknown keyword: '104.4.8915'
+
+MuPDF error: syntax error: unknown keyword: '1343185349041.7.98529'
+
+MuPDF error: syntax error: unknown keyword: '1336.85349041.4074910'
+
+MuPDF error: syntax error: unknown keyword: '404.0255843157.266016'
+
+MuPDF error: syntax error: unknown keyword: '403..55617'
+
+MuPDF error: syntax error: unknown keyword: '1403654349041..521271'
+
+MuPDF error: syntax error: unknown keyword: '1407030609041.4.62861'
+
+MuPDF error: syntax error: unknown keyword: '140.702780041.7.61771'
+
+MuPDF error: syntax error: unknown keyword: '407.3355413409.745153'
+
+MuPDF error: syntax error: unknown keyword: '1374.3559504145.848'
+
+MuPDF error: syntax error: unknown keyword: '135.8637750412.348895'
+
+MuPDF error: syntax error: unknown keyword: 'c2179.723504'
+
+MuPDF error: syntax error: unknown keyword: '1284869349041..765864'
+
+MuPDF error: syntax error: unknown keyword: '128.392780041.7.64167'
+
+MuPDF error: syntax error: unknown keyword: '41444.529524187.48709041..59603c'
+
+MuPDF error: syntax error: unknown keyword: '404.5.90'
+
+MuPDF error: syntax error: unknown keyword: 'c2162.916016'
+
+MuPDF error: syntax error: unknown keyword: '40.35417302162.880975'
+
+MuPDF error: syntax error: unknown keyword: 'c2411.166103'
+
+MuPDF error: syntax error: unknown keyword: '404.86673c'
+
+MuPDF error: syntax error: unknown keyword: '408.34170c84'
+
+MuPDF error: syntax error: unknown keyword: '404.75598c'
+
+MuPDF error: syntax error: unknown keyword: '4160587609041.4.91956'
+
+MuPDF error: syntax error: unknown keyword: '415.3.9323'
+
+MuPDF error: syntax error: unknown keyword: '412.5885950416.215388'
+
+MuPDF error: syntax error: unknown keyword: '155.4.9955'
+
+MuPDF error: syntax error: unknown keyword: 'c0177.105225'
+
+MuPDF error: syntax error: unknown keyword: 'c0123.357309'
+
+MuPDF error: syntax error: unknown keyword: '405235424c013.5181812'
+
+MuPDF error: syntax error: unknown keyword: '598.31890c'
+
+MuPDF error: syntax error: unknown keyword: '598.43354c'
+
+MuPDF error: syntax error: unknown keyword: 'c914.522115'
+
+MuPDF error: syntax error: unknown keyword: 'c91532227800417.26248c915.332639'
+
+MuPDF error: syntax error: unknown keyword: 'c9166671644'
+
+MuPDF error: syntax error: unknown keyword: 'c01405.11633'
+
+MuPDF error: syntax error: unknown keyword: 'c0149.934829'
+
+MuPDF error: syntax error: unknown keyword: '402.0.77'
+
+MuPDF error: syntax error: unknown keyword: '170.77354c'
+
+MuPDF error: syntax error: unknown keyword: '417.9678960410.6058'
+
+MuPDF error: syntax error: unknown keyword: '170.3.4760'
+
+MuPDF error: syntax error: unknown keyword: '40630451939139.96878c'
+
+MuPDF error: syntax error: unknown keyword: 'c01756.8462391348595312'
+
+MuPDF error: syntax error: unknown keyword: 'c0418.730103913.4332483'
+
+MuPDF error: syntax error: unknown keyword: '409.1.13437'
+
+MuPDF error: syntax error: unknown keyword: '170.8837239130.318948'
+
+MuPDF error: syntax error: unknown keyword: 'c1171.7103139130087308c'
+
+MuPDF error: syntax error: unknown keyword: '152.0126739130.203195'
+
+MuPDF error: syntax error: unknown keyword: '412.4.93439418.615824'
+
+MuPDF error: syntax error: unknown keyword: '1132.442739130.129115'
+
+MuPDF error: syntax error: unknown keyword: '16.01994039130.896018'
+
+MuPDF error: syntax error: unknown keyword: '11442.93239139.180668'
+
+MuPDF error: syntax error: unknown keyword: '9..3910'
+
+MuPDF error: syntax error: unknown keyword: '116.3.73139133.369248'
+
+MuPDF error: syntax error: unknown keyword: '417.6001039132.577367'
+
+MuPDF error: syntax error: unknown keyword: '418.113713913.97.4022'
+
+MuPDF error: syntax error: unknown keyword: '4174.86673913.3.57180'
+
+MuPDF error: syntax error: unknown keyword: '4156644463913838.950c84'
+
+MuPDF error: syntax error: unknown keyword: 'c2411.51095601400.2424c'
+
+MuPDF error: syntax error: unknown keyword: '123.9.6638'
+
+MuPDF error: syntax error: unknown keyword: 'c21641137253'
+
+MuPDF error: syntax error: unknown keyword: '416.37771c'
+
+MuPDF error: syntax error: unknown keyword: '410.99197c'
+
+MuPDF error: syntax error: unknown keyword: '411.9834903410.3693490411.788453'
+
+MuPDF error: syntax error: unknown keyword: '1376.443490411.28738c'
+
+MuPDF error: syntax error: unknown keyword: '411.8.3259'
+
+MuPDF error: syntax error: unknown keyword: 'c3105.604755'
+
+MuPDF error: syntax error: unknown keyword: '418.1537603406.369755'
+
+MuPDF error: syntax error: unknown keyword: '14c'
+
+MuPDF error: syntax error: unknown keyword: 'c4412.542214'
+
+MuPDF error: syntax error: unknown keyword: '69..392214'
+
+MuPDF error: syntax error: unknown keyword: 'c4405.084851'
+
+MuPDF error: syntax error: unknown keyword: '140.4.3976'
+
+MuPDF error: syntax error: unknown keyword: '121316377c'
+
+MuPDF error: syntax error: unknown keyword: '401.60119c'
+
+MuPDF error: syntax error: unknown keyword: '4018.4092c48'
+
+MuPDF error: syntax error: unknown keyword: 'c07.331106'
+
+MuPDF error: syntax error: unknown keyword: '403.2123013749.935120'
+
+MuPDF error: syntax error: unknown keyword: '403.2335902759.935180'
+
+MuPDF error: syntax error: unknown keyword: 'c08.867974'
+
+MuPDF error: syntax error: unknown keyword: 'c08.1271124759.935180'
+
+MuPDF error: syntax error: unknown keyword: 'c08.115775'
+
+MuPDF error: syntax error: unknown keyword: 'c08.18055'
+
+MuPDF error: syntax error: unknown keyword: 'c59.935120'
+
+MuPDF error: syntax error: unknown keyword: 'c00.438725'
+
+MuPDF error: syntax error: unknown keyword: '420.7793260759.935180'
+
+MuPDF error: syntax error: unknown keyword: '401.2665090749.984806'
+
+MuPDF error: syntax error: unknown keyword: '411.2531423750.016348'
+
+MuPDF error: syntax error: unknown keyword: '441.7691745750.047917'
+
+MuPDF error: syntax error: unknown keyword: '93750.0175745712.264023'
+
+MuPDF error: syntax error: unknown keyword: '413.0382153750.447162'
+
+MuPDF error: syntax error: unknown keyword: 'c13.5870'
+
+MuPDF error: syntax error: unknown keyword: 'c15.398186'
+
+MuPDF error: syntax error: unknown keyword: 'c15.723626'
+
+MuPDF error: syntax error: unknown keyword: 'c15.7070'
+
+MuPDF error: syntax error: unknown keyword: '426.0377890750.915571'
+
+MuPDF error: syntax error: unknown keyword: '750.9209553416.330'
+
+MuPDF error: syntax error: unknown keyword: '750.9241387416.897045'
+
+MuPDF error: syntax error: unknown keyword: '750.9120707417.12687'
+
+MuPDF error: syntax error: unknown keyword: '750.9248169417.164268'
+
+MuPDF error: syntax error: unknown keyword: '750.8977344418.00780'
+
+MuPDF error: syntax error: unknown keyword: '454.9298017c'
+
+MuPDF error: syntax error: unknown keyword: '751.3007593c'
+
+MuPDF error: syntax error: unknown keyword: '469.4580791751.8409545469.462643'
+
+MuPDF error: syntax error: unknown keyword: 'c20.611692'
+
+MuPDF error: syntax error: unknown keyword: 'c21.112202'
+
+MuPDF error: syntax error: unknown keyword: 'c51.836184'
+
+MuPDF error: syntax error: unknown keyword: 'c51.838521'
+
+MuPDF error: syntax error: unknown keyword: '401.8430206752.836128'
+
+MuPDF error: syntax error: unknown keyword: 'c20.105608'
+
+MuPDF error: syntax error: unknown keyword: '424.4995191751.87268'
+
+MuPDF error: syntax error: unknown keyword: '481.0736591751.872115'
+
+MuPDF error: syntax error: unknown keyword: '426.3769237756.4431'
+
+MuPDF error: syntax error: unknown keyword: 'c27.276788'
+
+MuPDF error: syntax error: unknown keyword: '754.5596718c'
+
+MuPDF error: syntax error: unknown keyword: '427.4754944751.9627003427.949759'
+
+MuPDF error: syntax error: unknown keyword: 'c08.249400'
+
+MuPDF error: syntax error: unknown keyword: '003427.2012596751.918709'
+
+MuPDF error: syntax error: unknown keyword: '751.8864902731.118740'
+
+MuPDF error: syntax error: unknown keyword: '751.8462725731.10703'
+
+MuPDF error: syntax error: unknown keyword: '751.8766154c'
+
+MuPDF error: syntax error: unknown keyword: '751.8269815c'
+
+MuPDF error: syntax error: unknown keyword: '462.3287393751.886464'
+
+MuPDF error: syntax error: unknown keyword: '751.8932812432.756917'
+
+MuPDF error: syntax error: unknown keyword: 'c33.99918'
+
+MuPDF error: syntax error: unknown keyword: '451.8058442434.152575'
+
+MuPDF error: syntax error: unknown keyword: '451.8051017c'
+
+MuPDF error: syntax error: unknown keyword: '9434.5671179751.889615'
+
+MuPDF error: syntax error: unknown keyword: '443.7335719751.889682'
+
+MuPDF error: syntax error: unknown keyword: '413.3904309751.889811'
+
+MuPDF error: syntax error: unknown keyword: 'c36.0635744751.940669'
+
+MuPDF error: syntax error: unknown keyword: '486.026.849751.88943'
+
+MuPDF error: syntax error: unknown keyword: '437.3861529751.940625'
+
+MuPDF error: syntax error: unknown keyword: 'c38.741954'
+
+MuPDF error: syntax error: unknown keyword: 'c34.829711'
+
+MuPDF error: syntax error: unknown keyword: '401.6266382757.187046'
+
+MuPDF error: syntax error: unknown keyword: '432.0180688757.840160'
+
+MuPDF error: syntax error: unknown keyword: '332.0565260757.187068'
+
+MuPDF error: syntax error: unknown keyword: 'c42.791484'
+
+MuPDF error: syntax error: unknown keyword: 'c42.0053876757.187068'
+
+MuPDF error: syntax error: unknown keyword: 'c42.0596525757.840168'
+
+MuPDF error: syntax error: unknown keyword: 'c42.0917'
+
+MuPDF error: syntax error: unknown keyword: 'c44.169956'
+
+MuPDF error: syntax error: unknown keyword: 'c44.143228'
+
+MuPDF error: syntax error: unknown keyword: '413.6740530752.840129'
+
+MuPDF error: syntax error: unknown keyword: 'c44.193'
+
+MuPDF error: syntax error: unknown keyword: 'c44.1425591751.887068'
+
+MuPDF error: syntax error: unknown keyword: 'c42.6687447751.870168'
+
+MuPDF error: syntax error: unknown keyword: 'c42.6878758751.887068'
+
+MuPDF error: syntax error: unknown keyword: 'c42.3567375752.870168'
+
+MuPDF error: syntax error: unknown keyword: 'c42.3001051751.887068'
+
+MuPDF error: syntax error: unknown keyword: 'c4270078758751.887068'
+
+MuPDF error: syntax error: unknown keyword: 'c47.3348837757.840168'
+
+MuPDF error: syntax error: unknown keyword: 'ccc47.35'
+
+MuPDF error: syntax error: unknown keyword: 'c47.31970'
+
+MuPDF error: syntax error: unknown keyword: 'c47.0463501751.887068'
+
+MuPDF error: syntax error: unknown keyword: '332.2733285751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c47.0913'
+
+MuPDF error: syntax error: unknown keyword: 'c47.0995'
+
+MuPDF error: syntax error: unknown keyword: '332.2075684751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c479.9143'
+
+MuPDF error: syntax error: unknown keyword: 'c479.99563'
+
+MuPDF error: syntax error: unknown keyword: '332.4919664751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c47.7046373751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c47.724194'
+
+MuPDF error: syntax error: unknown keyword: 'c40.391963'
+
+MuPDF error: syntax error: unknown keyword: 'c40.3664028751.887068'
+
+MuPDF error: syntax error: unknown keyword: '330.8508124751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c45.08036'
+
+MuPDF error: syntax error: unknown keyword: 'c45.0336694751.887068'
+
+MuPDF error: syntax error: unknown keyword: '330.5636782751.897068'
+
+MuPDF error: syntax error: unknown keyword: 'c45.08844'
+
+MuPDF error: syntax error: unknown keyword: 'c42.0633082751.887068'
+
+MuPDF error: syntax error: unknown keyword: '330.3242144751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c42.0025439751.827068'
+
+MuPDF error: syntax error: unknown keyword: 'c42.0864746757.187068'
+
+MuPDF error: syntax error: unknown keyword: '568.90576993.06'
+
+MuPDF error: syntax error: unknown keyword: 'm2938.7925422'
+
+MuPDF error: syntax error: unknown keyword: 'm26.91498'
+
+MuPDF error: syntax error: unknown keyword: 'm2010.9149'
+
+MuPDF error: syntax error: unknown keyword: 'm55'
+
+MuPDF error: syntax error: unknown keyword: '6.687958426564.0558'
+
+MuPDF error: syntax error: unknown keyword: '02933.4609877834.11511206'
+
+MuPDF error: syntax error: unknown keyword: '6.687978485706.1151124153.46095233'
+
+MuPDF error: syntax error: unknown keyword: '293.46090295c'
+
+MuPDF error: syntax error: unknown keyword: '.70587c'
+
+MuPDF error: syntax error: unknown keyword: '33869.7036170993.1703065'
+
+MuPDF error: syntax error: unknown keyword: '2916.1151156922.08378'
+
+MuPDF error: syntax error: unknown keyword: '2335.1151184093.3837692'
+
+MuPDF error: syntax error: unknown keyword: '64.0558729318.077209373697.70361347'
+
+MuPDF error: syntax error: unknown keyword: '993.088707231549.6051'
+
+MuPDF error: syntax error: unknown keyword: '5.08871.735'
+
+MuPDF error: syntax error: unknown keyword: '293.271.293373.0036099'
+
+MuPDF error: syntax error: unknown keyword: '3.0660477058.2425772'
+
+MuPDF error: syntax error: unknown keyword: '20.9920829489.2425285696.9920095708.07758914'
+
+MuPDF error: syntax error: unknown keyword: '5c'
+
+MuPDF error: syntax error: unknown keyword: '.7589570366.992063296679510'
+
+MuPDF error: syntax error: unknown keyword: '070.5589310294.0510029147.1621129323.302798'
+
+MuPDF error: syntax error: unknown keyword: '294.7921149489.27956835'
+
+MuPDF error: syntax error: unknown keyword: '943.0660570097.56053'
+
+MuPDF error: syntax error: unknown keyword: '824.7921325293.2630811344.792132'
+
+MuPDF error: syntax error: unknown keyword: '729.220255428070.9178243070.8470294127.1621'
+
+MuPDF error: syntax error: unknown keyword: '52256.1552055844.7921554816.68716609'
+
+MuPDF error: syntax error: unknown keyword: '594720c'
+
+MuPDF error: syntax error: unknown keyword: '5332.3609029393.2729769160.3258678038.792729097349.9838929495.1489933817.7221c'
+
+MuPDF error: syntax error: unknown keyword: '565.0550076m20.957367223209.9838263122.00636'
+
+MuPDF error: syntax error: unknown keyword: '229.0063297228.6203293408.077441'
+
+MuPDF error: syntax error: unknown keyword: '569.5930716893.844475'
+
+MuPDF error: syntax error: unknown keyword: '29.0845856539.5930772297.c.0845373'
+
+MuPDF error: syntax error: unknown keyword: '594410554798.6203386394.546520412569.3203378'
+
+MuPDF error: syntax error: unknown keyword: '93.4241846009.320329'
+
+MuPDF error: syntax error: unknown keyword: '8470.957309769959.131126'
+
+MuPDF error: syntax error: unknown keyword: '5c'
+
+MuPDF error: syntax error: unknown keyword: '.7309073970.7223934697.7842460'
+
+MuPDF error: syntax error: unknown keyword: '87.5930125660.957775699397.593018'
+
+MuPDF error: syntax error: unknown keyword: '743.7775173230.3258047393.03885099'
+
+MuPDF error: syntax error: unknown keyword: '9391.985596412756.434398'
+
+MuPDF error: syntax error: unknown keyword: '714.1616247993.71865c'
+
+MuPDF error: syntax error: unknown keyword: '34.3537696992.994321689290.2642225772.40116'
+
+MuPDF error: syntax error: unknown keyword: '553.7186593.16.687809803154.43439857'
+
+MuPDF error: syntax error: unknown keyword: '5485309293645.6600047393.785309'
+
+MuPDF error: syntax error: unknown keyword: '787.5930112905.88309693'
+
+MuPDF error: syntax error: unknown keyword: '59131126c'
+
+MuPDF error: syntax error: unknown keyword: '57.077728c'
+
+MuPDF error: syntax error: unknown keyword: '536.267120584495.3203'
+
+MuPDF error: syntax error: unknown keyword: '.267160428097.59308'
+
+MuPDF error: syntax error: unknown keyword: '.98389966c'
+
+MuPDF error: syntax error: unknown keyword: '571.c.154119'
+
+MuPDF error: syntax error: unknown keyword: '270.9920355844.28829327'
+
+MuPDF error: syntax error: unknown keyword: '288293338126.6409468297.520190'
+
+MuPDF error: syntax error: unknown keyword: '2.288293034022.3609'
+
+MuPDF error: syntax error: unknown keyword: '56547.8293073797.16216118'
+
+MuPDF error: syntax error: unknown keyword: '5c292.7921683293.1293311300.917826'
+
+MuPDF error: syntax error: unknown keyword: '670.9920044957.5201073336.6409509294.1293724125.64095864'
+
+MuPDF error: syntax error: unknown keyword: '29315.9920099070.827855'
+
+MuPDF error: syntax error: unknown keyword: '295.5921699247.8242295'
+
+MuPDF error: syntax error: unknown keyword: 'm17'
+
+MuPDF error: syntax error: unknown keyword: 'm8557.521104'
+
+MuPDF error: syntax error: unknown keyword: 'm9397.c.1541379777.162106'
+
+MuPDF error: syntax error: unknown keyword: '16595.5921695707.52117'
+
+MuPDF error: syntax error: unknown keyword: '2925.6409c'
+
+MuPDF error: syntax error: unknown keyword: '2.267160077745.59216'
+
+MuPDF error: syntax error: unknown keyword: '5693.7160229798.9920'
+
+MuPDF error: syntax error: unknown keyword: '283.267160743430.9178995593.22964175'
+
+MuPDF error: syntax error: unknown keyword: '5c'
+
+MuPDF error: syntax error: unknown keyword: '966.795847993067120784022.3688577893.0229090149.7958'
+
+MuPDF error: syntax error: unknown keyword: '08489.c.0229397269.11519'
+
+MuPDF error: syntax error: unknown keyword: 'c295.3380813893.9921126793.3380977656.4380229895.437728'
+
+MuPDF error: syntax error: unknown keyword: '595.5188556297.c.9974373019.5188297295.1318242982.518885'
+
+MuPDF error: syntax error: unknown keyword: '542.1318902770.5985'
+
+MuPDF error: syntax error: unknown keyword: '538.c.99748255'
+
+MuPDF error: syntax error: unknown keyword: '29516.1184120298.785309840'
+
+MuPDF error: syntax error: unknown keyword: '5768.218418780387809865645.6625210'
+
+MuPDF error: syntax error: unknown keyword: '42953.7125292993.1011607686.1184557392.9041377399.1184524292.9943218'
+
+MuPDF error: syntax error: unknown keyword: '344.0797869343.0698'
+
+MuPDF error: syntax error: unknown keyword: 'c3793.785330'
+
+MuPDF error: syntax error: unknown keyword: 'c303185330855757.1184521302.77754'
+
+MuPDF error: syntax error: unknown keyword: '293.957775962953.0698'
+
+MuPDF error: syntax error: unknown keyword: '4656.4325299293.2409'
+
+MuPDF error: syntax error: unknown keyword: '57.077409870613.712522'
+
+MuPDF error: syntax error: unknown keyword: '20.992521892387241195640.3225210759.267241402185.118499362992017'
+
+MuPDF error: syntax error: unknown keyword: '62.288421325581.2184180197.4420825569.518414'
+
+MuPDF error: syntax error: unknown keyword: '29157367438669.5184148409.49148908'
+
+MuPDF error: syntax error: unknown keyword: '34.3584140868.792729'
+
+MuPDF error: syntax error: unknown keyword: '520.957166570404.9698'
+
+MuPDF error: syntax error: unknown keyword: 'c8'
+
+MuPDF error: syntax error: unknown keyword: 'c8'
+
+MuPDF error: syntax error: unknown keyword: 'c8'
+
+MuPDF error: syntax error: unknown keyword: 'c83.06'
+
+MuPDF error: syntax error: unknown keyword: 'c8993.95763095c953.7125'
+
+MuPDF error: syntax error: unknown keyword: 'm55576306'
+
+MuPDF error: syntax error: unknown keyword: '493.2744242292.9698'
+
+MuPDF error: syntax error: unknown keyword: '759.288605577882.11841'
+
+MuPDF error: syntax error: unknown keyword: '47.8509024567.16841'
+
+MuPDF error: syntax error: unknown keyword: '2489.2421149139.16841'
+
+MuPDF error: syntax error: unknown keyword: '2620.957120095006.43251'
+
+MuPDF error: syntax error: unknown keyword: '108.2980395708.946855'
+
+MuPDF error: syntax error: unknown keyword: 'c3532.241576'
+
+MuPDF error: syntax error: unknown keyword: '14.036444c'
+
+MuPDF error: syntax error: unknown keyword: '187603342c'
+
+MuPDF error: syntax error: unknown keyword: '58.27183848531.4776'
+
+MuPDF error: syntax error: unknown keyword: '1.05.70203'
+
+MuPDF error: syntax error: unknown keyword: '1426.660824..40591482'
+
+MuPDF error: syntax error: unknown keyword: '17.3.27707'
+
+MuPDF error: syntax error: unknown keyword: '1038.393666560.510608'
+
+MuPDF error: syntax error: unknown keyword: '53.933612c'
+
+MuPDF error: syntax error: unknown keyword: '529.760356.55606.5308'
+
+MuPDF error: syntax error: unknown keyword: '576.2921140..67174304'
+
+MuPDF error: syntax error: unknown keyword: '70..147395640.8139797'
+
+MuPDF error: syntax error: unknown keyword: '70.40.778101'
+
+MuPDF error: syntax error: unknown keyword: '55070109870.6.0438101'
+
+MuPDF error: syntax error: unknown keyword: '70..37717105'
+
+MuPDF error: syntax error: unknown keyword: '70.7.6163379'
+
+MuPDF error: syntax error: unknown keyword: '55073196770.7.7134812'
+
+MuPDF error: syntax error: unknown keyword: '70.75.555847'
+
+MuPDF error: syntax error: unknown keyword: '70.76.118447'
+
+MuPDF error: syntax error: unknown keyword: '70...7665847'
+
+MuPDF error: syntax error: unknown keyword: '550.3972c9870.6.4385847'
+
+MuPDF error: syntax error: unknown keyword: '70.4665071411.76.0628'
+
+MuPDF error: syntax error: unknown keyword: '116.1863652106.43011c'
+
+MuPDF error: syntax error: unknown keyword: '127789959c'
+
+MuPDF error: syntax error: unknown keyword: 'c3107.512347'
+
+MuPDF error: syntax error: unknown keyword: 'c318.5255847'
+
+MuPDF error: syntax error: unknown keyword: '56134176030546.06143c'
+
+MuPDF error: syntax error: unknown keyword: '53115071410.430.28679'
+
+MuPDF error: syntax error: unknown keyword: '539.92413c'
+
+MuPDF error: syntax error: unknown keyword: '544.2.1482'
+
+MuPDF error: syntax error: unknown keyword: 'c9536.384729'
+
+MuPDF error: syntax error: unknown keyword: '535.9400.36115.83011c'
+
+MuPDF error: syntax error: unknown keyword: '52429.14821539.2340'
+
+MuPDF error: syntax error: unknown keyword: '140.4947885187.221610'
+
+MuPDF error: syntax error: unknown keyword: '112.0828c997'
+
+MuPDF error: syntax error: unknown keyword: '5962.400.36187.377869'
+
+MuPDF error: syntax error: unknown keyword: '10615.40.361126.892'
+
+MuPDF error: syntax error: unknown keyword: '5.753347293532.490769'
+
+MuPDF error: syntax error: unknown keyword: '.14729313.31972'
+
+MuPDF error: syntax error: unknown keyword: '513.6984293147.96246c'
+
+MuPDF error: syntax error: unknown keyword: '508.0.2482'
+
+MuPDF error: syntax error: unknown keyword: '514.8402c386'
+
+MuPDF error: syntax error: unknown keyword: '12221972c386'
+
+MuPDF error: syntax error: unknown keyword: '102.67724c'
+
+MuPDF error: syntax error: unknown keyword: '1.3155865c'
+
+MuPDF error: syntax error: unknown keyword: '107.57825c'
+
+MuPDF error: syntax error: unknown keyword: '102.3302c386'
+
+MuPDF error: syntax error: unknown keyword: '16.0.22634'
+
+MuPDF error: syntax error: unknown keyword: '53.057724c'
+
+MuPDF error: syntax error: unknown keyword: '524.2.1457'
+
+MuPDF error: syntax error: unknown keyword: '526.4158c'
+
+FINANCE_TEXT_PDF_EXTRACTED 18503
+PDF_LINES_DEBUG {'line_count': 252, 'non_empty_line_count': 221, 'max_line_len': 446, 'first_20': ['CIBC Account Statement', '', '', 'MR GORD BURKE                                                        For Dec 1 to Dec 31, 2017', '                                                         May 1 to May 31, 2023', '                                                                    Account number', '                                                                          12-34567', 'The names shown are based on our current records, as of JanuaryJuly 31, 25,', '                                                                    Branch transit number2018.2023 This statement does not reflect any changes in account holders', '                                                                      01234and account holder names that may have occurred prior to this date.', '', '', 'Account summary                                    Contact information', 'Opening balance on DecMay 1,1, 20232017                                   $3,102.28       1 800 465 CIBC (2422)', '                                                                                   Contact us by phone for questionsWithdrawals                                                       -                 2,965.24            ', '                                                                         24 hours a day, 7 days a week.Closing balance onMayDec31,31,20232017           =                $3,047.04', '                                                                 TTY hearing impaired', '                                                                         1 800 465 7401', '                                                                             Outside Canada and the U.S.', '                                                                         1 902 420 CIBC (2422)']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+CIBC_ACCOUNT_STATEMENT_EXTRACTED {'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'sample': [{'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -8.77, 'signed_amount': -8.77, 'type': 'expense', 'currency': 'CAD', 'balance': 3093.51, '_balance': 3093.51, 'locked_amount': -8.77, '_locked_amount': -8.77, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -2.3, 'signed_amount': -2.3, 'type': 'expense', 'currency': 'CAD', 'balance': 3091.21, '_balance': 3091.21, 'locked_amount': -2.3, '_locked_amount': -2.3, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -10.0, 'signed_amount': -10.0, 'type': 'expense', 'currency': 'CAD', 'balance': 3081.21, '_balance': 3081.21, 'locked_amount': -10.0, '_locked_amount': -10.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -33.87, 'signed_amount': -33.87, 'type': 'expense', 'currency': 'CAD', 'balance': 3047.34, '_balance': 3047.34, 'locked_amount': -33.87, '_locked_amount': -33.87, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -21.4, 'signed_amount': -21.4, 'type': 'expense', 'currency': 'CAD', 'balance': 3025.94, '_balance': 3025.94, 'locked_amount': -21.4, '_locked_amount': -21.4, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -27.83, 'signed_amount': -27.83, 'type': 'expense', 'currency': 'CAD', 'balance': 2998.11, '_balance': 2998.11, 'locked_amount': -27.83, '_locked_amount': -27.83, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -15.27, 'signed_amount': -15.27, 'type': 'expense', 'currency': 'CAD', 'balance': 2982.84, '_balance': 2982.84, 'locked_amount': -15.27, '_locked_amount': -15.27, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -9.82, 'signed_amount': -9.82, 'type': 'expense', 'currency': 'CAD', 'balance': 2973.02, '_balance': 2973.02, 'locked_amount': -9.82, '_locked_amount': -9.82, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}]}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 10, 'dep_line': 'Contact us by phone for questionsWithdrawals                                                       -                 2,965.24                                                                         on this update, change of personal              May 1Deposits                                 +                 2,910.00          information, and general inquiries,', 'wd_i': 56, 'wd_line': 'INSTANT TELLER WITHDRAWAL                          40.00                                       2,839.46', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'cibc_account_statement', 'count': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5875.24, 'max_tx_abs': 930.86, 'score': -98.75}]
+STATEMENT_LAYOUT_DETECTED cibc_account_statement
+FINANCE_CANDIDATE_SELECTED {'parser': 'cibc_account_statement', 'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': None, 'expense_gap': None, 'score': -98.75}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04, 'deposits': 2910.0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04, 'deposits': 2910.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+CIBC_ACCOUNT_STATEMENT_EXTRACTED {'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'sample': [{'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -8.77, 'signed_amount': -8.77, 'type': 'expense', 'currency': 'CAD', 'balance': 3093.51, '_balance': 3093.51, 'locked_amount': -8.77, '_locked_amount': -8.77, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -2.3, 'signed_amount': -2.3, 'type': 'expense', 'currency': 'CAD', 'balance': 3091.21, '_balance': 3091.21, 'locked_amount': -2.3, '_locked_amount': -2.3, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -10.0, 'signed_amount': -10.0, 'type': 'expense', 'currency': 'CAD', 'balance': 3081.21, '_balance': 3081.21, 'locked_amount': -10.0, '_locked_amount': -10.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -33.87, 'signed_amount': -33.87, 'type': 'expense', 'currency': 'CAD', 'balance': 3047.34, '_balance': 3047.34, 'locked_amount': -33.87, '_locked_amount': -33.87, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -21.4, 'signed_amount': -21.4, 'type': 'expense', 'currency': 'CAD', 'balance': 3025.94, '_balance': 3025.94, 'locked_amount': -21.4, '_locked_amount': -21.4, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -27.83, 'signed_amount': -27.83, 'type': 'expense', 'currency': 'CAD', 'balance': 2998.11, '_balance': 2998.11, 'locked_amount': -27.83, '_locked_amount': -27.83, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -15.27, 'signed_amount': -15.27, 'type': 'expense', 'currency': 'CAD', 'balance': 2982.84, '_balance': 2982.84, 'locked_amount': -15.27, '_locked_amount': -15.27, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -9.82, 'signed_amount': -9.82, 'type': 'expense', 'currency': 'CAD', 'balance': 2973.02, '_balance': 2973.02, 'locked_amount': -9.82, '_locked_amount': -9.82, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}]}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 10, 'dep_line': 'Contact us by phone for questionsWithdrawals                                                       -                 2,965.24                                                                         on this update, change of personal              May 1Deposits                                 +                 2,910.00          information, and general inquiries,', 'wd_i': 56, 'wd_line': 'INSTANT TELLER WITHDRAWAL                          40.00                                       2,839.46', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'cibc_account_statement', 'count': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5875.24, 'max_tx_abs': 930.86, 'score': -98.75}]
+STATEMENT_LAYOUT_DETECTED cibc_account_statement
+FINANCE_CANDIDATE_SELECTED {'parser': 'cibc_account_statement', 'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': None, 'expense_gap': None, 'score': -98.75}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04, 'deposits': 2910.0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04, 'deposits': 2910.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04}
+CIBC_ACCOUNT_STATEMENT_EXTRACTED {'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'sample': [{'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -8.77, 'signed_amount': -8.77, 'type': 'expense', 'currency': 'CAD', 'balance': 3093.51, '_balance': 3093.51, 'locked_amount': -8.77, '_locked_amount': -8.77, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -2.3, 'signed_amount': -2.3, 'type': 'expense', 'currency': 'CAD', 'balance': 3091.21, '_balance': 3091.21, 'locked_amount': -2.3, '_locked_amount': -2.3, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -10.0, 'signed_amount': -10.0, 'type': 'expense', 'currency': 'CAD', 'balance': 3081.21, '_balance': 3081.21, 'locked_amount': -10.0, '_locked_amount': -10.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -33.87, 'signed_amount': -33.87, 'type': 'expense', 'currency': 'CAD', 'balance': 3047.34, '_balance': 3047.34, 'locked_amount': -33.87, '_locked_amount': -33.87, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -21.4, 'signed_amount': -21.4, 'type': 'expense', 'currency': 'CAD', 'balance': 3025.94, '_balance': 3025.94, 'locked_amount': -21.4, '_locked_amount': -21.4, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -27.83, 'signed_amount': -27.83, 'type': 'expense', 'currency': 'CAD', 'balance': 2998.11, '_balance': 2998.11, 'locked_amount': -27.83, '_locked_amount': -27.83, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -15.27, 'signed_amount': -15.27, 'type': 'expense', 'currency': 'CAD', 'balance': 2982.84, '_balance': 2982.84, 'locked_amount': -15.27, '_locked_amount': -15.27, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -9.82, 'signed_amount': -9.82, 'type': 'expense', 'currency': 'CAD', 'balance': 2973.02, '_balance': 2973.02, 'locked_amount': -9.82, '_locked_amount': -9.82, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}]}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 10, 'dep_line': 'Contact us by phone for questionsWithdrawals                                                       -                 2,965.24                                                                         on this update, change of personal              May 1Deposits                                 +                 2,910.00          information, and general inquiries,', 'wd_i': 56, 'wd_line': 'INSTANT TELLER WITHDRAWAL                          40.00                                       2,839.46', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'cibc_account_statement', 'count': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5875.24, 'max_tx_abs': 930.86, 'score': -98.75}]
+STATEMENT_LAYOUT_DETECTED cibc_account_statement
+FINANCE_CANDIDATE_SELECTED {'parser': 'cibc_account_statement', 'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': None, 'expense_gap': None, 'score': -98.75}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04, 'deposits': 2910.0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3102.28, 'withdrawals': 2965.24, 'ending_balance': 3047.04, 'deposits': 2910.0}
+CIBC_ACCOUNT_STATEMENT_EXTRACTED {'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'sample': [{'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -8.77, 'signed_amount': -8.77, 'type': 'expense', 'currency': 'CAD', 'balance': 3093.51, '_balance': 3093.51, 'locked_amount': -8.77, '_locked_amount': -8.77, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -2.3, 'signed_amount': -2.3, 'type': 'expense', 'currency': 'CAD', 'balance': 3091.21, '_balance': 3091.21, 'locked_amount': -2.3, '_locked_amount': -2.3, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -10.0, 'signed_amount': -10.0, 'type': 'expense', 'currency': 'CAD', 'balance': 3081.21, '_balance': 3081.21, 'locked_amount': -10.0, '_locked_amount': -10.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -33.87, 'signed_amount': -33.87, 'type': 'expense', 'currency': 'CAD', 'balance': 3047.34, '_balance': 3047.34, 'locked_amount': -33.87, '_locked_amount': -33.87, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-01', 'description': 'RETAIL PURCHASE', 'amount': -21.4, 'signed_amount': -21.4, 'type': 'expense', 'currency': 'CAD', 'balance': 3025.94, '_balance': 3025.94, 'locked_amount': -21.4, '_locked_amount': -21.4, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -27.83, 'signed_amount': -27.83, 'type': 'expense', 'currency': 'CAD', 'balance': 2998.11, '_balance': 2998.11, 'locked_amount': -27.83, '_locked_amount': -27.83, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -15.27, 'signed_amount': -15.27, 'type': 'expense', 'currency': 'CAD', 'balance': 2982.84, '_balance': 2982.84, 'locked_amount': -15.27, '_locked_amount': -15.27, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}, {'date': '2017-12-04', 'description': 'RETAIL PURCHASE', 'amount': -9.82, 'signed_amount': -9.82, 'type': 'expense', 'currency': 'CAD', 'balance': 2973.02, '_balance': 2973.02, 'locked_amount': -9.82, '_locked_amount': -9.82, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'cibc_account_statement'}]}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 10, 'dep_line': 'Contact us by phone for questionsWithdrawals                                                       -                 2,965.24                                                                         on this update, change of personal              May 1Deposits                                 +                 2,910.00          information, and general inquiries,', 'wd_i': 56, 'wd_line': 'INSTANT TELLER WITHDRAWAL                          40.00                                       2,839.46', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'cibc_account_statement', 'count': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 5875.24, 'max_tx_abs': 930.86, 'score': 0.0}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'cibc_account_statement', 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}]
+STATEMENT_LAYOUT_DETECTED cibc_account_statement
+FINANCE_CANDIDATE_SELECTED {'parser': 'cibc_account_statement', 'transactions': 77, 'income_total': 2910.0, 'expense_total': 2965.24, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}
+OK_REAL 15.pdf | tx=77 income=2910.0 expenses=2965.24 expected_income=2910.0 expected_expenses=2965.24 summary_ok=True real_ok=None opening=3102.28 ending=3047.04 gap=None reason=MATCHES_REAL_STATEMENT_VALUES

@@ -1,0 +1,1539 @@
+=== GLOBAL BLOCKED DIAGNOSTIC ===
+TOTAL BLOCKED: 84
+OUTPUT: regression_results_multilang\_blocked_diagnostic_all_languages.json
+
+=== BY LANGUAGE ===
+ar   40
+en   24
+fr   20
+
+=== BY REASON ===
+83 FINAL_TEXT_SOURCE_CONTAMINATION
+1 SEMANTIC_ARGUMENT_COVERAGE_LOSS
+1 RIGHT_POLARITY_OR_SCOPE_WEAKENING
+
+=== BY FIELD ===
+ 38 recommendation
+ 19 negotiation_advice
+ 14 market_comparison
+ 12 legal_insight
+  1 safer_alternative
+
+=== BY CLAUSE TYPE ===
+ 11 loan
+  8 indemnity
+  7 warranty
+  6 liability
+  5 termination
+  4 subcontracting
+  4 employment
+  3 confidentiality
+  3 dispute_resolution
+  3 intellectual_property
+  2 lease
+  2 share_transfer_rights
+  2 corporate_governance
+  2 services
+  2 renewal
+  2 covenant
+  2 guarantee
+  2 assignment
+  2 automatic_renewal
+  1 license
+  1 supply_distribution
+  1 delivery
+  1 real_estate
+  1 fees
+  1 notice
+  1 payment
+  1 compliance
+  1 data_protection
+  1 penalty
+  1 collateral
+  1 anti_dilution_preemptive_rights
+
+=== LANGUAGE / FIELD ===
+ 18 ('ar', 'recommendation')
+ 16 ('ar', 'negotiation_advice')
+ 13 ('en', 'recommendation')
+  9 ('fr', 'market_comparison')
+  7 ('en', 'legal_insight')
+  7 ('fr', 'recommendation')
+  3 ('fr', 'legal_insight')
+  3 ('ar', 'market_comparison')
+  2 ('en', 'negotiation_advice')
+  2 ('en', 'market_comparison')
+  2 ('ar', 'legal_insight')
+  1 ('fr', 'negotiation_advice')
+  1 ('ar', 'safer_alternative')
+
+=== TYPE / FIELD ===
+  8 ('loan', 'recommendation')
+  6 ('indemnity', 'recommendation')
+  4 ('warranty', 'legal_insight')
+  4 ('liability', 'recommendation')
+  3 ('termination', 'recommendation')
+  2 ('confidentiality', 'legal_insight')
+  2 ('subcontracting', 'recommendation')
+  2 ('employment', 'negotiation_advice')
+  2 ('intellectual_property', 'recommendation')
+  2 ('warranty', 'negotiation_advice')
+  2 ('share_transfer_rights', 'recommendation')
+  2 ('corporate_governance', 'market_comparison')
+  2 ('termination', 'market_comparison')
+  2 ('dispute_resolution', 'negotiation_advice')
+  2 ('loan', 'negotiation_advice')
+  2 ('covenant', 'negotiation_advice')
+  1 ('confidentiality', 'recommendation')
+  1 ('dispute_resolution', 'recommendation')
+  1 ('liability', 'legal_insight')
+  1 ('subcontracting', 'legal_insight')
+  1 ('employment', 'legal_insight')
+  1 ('license', 'recommendation')
+  1 ('supply_distribution', 'recommendation')
+  1 ('intellectual_property', 'legal_insight')
+  1 ('lease', 'recommendation')
+  1 ('lease', 'market_comparison')
+  1 ('loan', 'legal_insight')
+  1 ('services', 'market_comparison')
+  1 ('delivery', 'market_comparison')
+  1 ('real_estate', 'market_comparison')
+  1 ('fees', 'market_comparison')
+  1 ('notice', 'market_comparison')
+  1 ('warranty', 'market_comparison')
+  1 ('indemnity', 'market_comparison')
+  1 ('payment', 'recommendation')
+  1 ('liability', 'market_comparison')
+  1 ('renewal', 'recommendation')
+  1 ('renewal', 'negotiation_advice')
+  1 ('indemnity', 'negotiation_advice')
+  1 ('subcontracting', 'negotiation_advice')
+  1 ('compliance', 'market_comparison')
+  1 ('services', 'negotiation_advice')
+  1 ('employment', 'recommendation')
+  1 ('data_protection', 'legal_insight')
+  1 ('penalty', 'negotiation_advice')
+  1 ('guarantee', 'recommendation')
+  1 ('guarantee', 'negotiation_advice')
+  1 ('collateral', 'recommendation')
+  1 ('assignment', 'safer_alternative')
+  1 ('anti_dilution_preemptive_rights', 'negotiation_advice')
+  1 ('assignment', 'negotiation_advice')
+  1 ('automatic_renewal', 'recommendation')
+  1 ('automatic_renewal', 'negotiation_advice')
+
+=== LANGUAGE / TYPE / FIELD ===
+  4 ('ar', 'indemnity', 'recommendation')
+  4 ('ar', 'loan', 'recommendation')
+  3 ('fr', 'warranty', 'legal_insight')
+  3 ('fr', 'liability', 'recommendation')
+  3 ('ar', 'termination', 'recommendation')
+  2 ('en', 'loan', 'recommendation')
+  2 ('en', 'share_transfer_rights', 'recommendation')
+  2 ('fr', 'loan', 'recommendation')
+  2 ('ar', 'dispute_resolution', 'negotiation_advice')
+  2 ('ar', 'loan', 'negotiation_advice')
+  2 ('ar', 'covenant', 'negotiation_advice')
+  1 ('en', 'confidentiality', 'legal_insight')
+  1 ('en', 'confidentiality', 'recommendation')
+  1 ('en', 'dispute_resolution', 'recommendation')
+  1 ('en', 'liability', 'legal_insight')
+  1 ('en', 'subcontracting', 'legal_insight')
+  1 ('en', 'subcontracting', 'recommendation')
+  1 ('en', 'employment', 'negotiation_advice')
+  1 ('en', 'employment', 'legal_insight')
+  1 ('en', 'license', 'recommendation')
+  1 ('en', 'supply_distribution', 'recommendation')
+  1 ('en', 'intellectual_property', 'legal_insight')
+  1 ('en', 'intellectual_property', 'recommendation')
+  1 ('en', 'lease', 'recommendation')
+  1 ('en', 'lease', 'market_comparison')
+  1 ('en', 'loan', 'legal_insight')
+  1 ('en', 'indemnity', 'recommendation')
+  1 ('en', 'warranty', 'negotiation_advice')
+  1 ('en', 'warranty', 'legal_insight')
+  1 ('en', 'corporate_governance', 'market_comparison')
+  1 ('en', 'liability', 'recommendation')
+  1 ('fr', 'services', 'market_comparison')
+  1 ('fr', 'delivery', 'market_comparison')
+  1 ('fr', 'termination', 'market_comparison')
+  1 ('fr', 'real_estate', 'market_comparison')
+  1 ('fr', 'fees', 'market_comparison')
+  1 ('fr', 'notice', 'market_comparison')
+  1 ('fr', 'warranty', 'negotiation_advice')
+  1 ('fr', 'warranty', 'market_comparison')
+  1 ('fr', 'indemnity', 'market_comparison')
+  1 ('fr', 'indemnity', 'recommendation')
+  1 ('fr', 'payment', 'recommendation')
+  1 ('fr', 'liability', 'market_comparison')
+  1 ('ar', 'confidentiality', 'legal_insight')
+  1 ('ar', 'renewal', 'recommendation')
+  1 ('ar', 'renewal', 'negotiation_advice')
+  1 ('ar', 'indemnity', 'negotiation_advice')
+  1 ('ar', 'subcontracting', 'recommendation')
+  1 ('ar', 'subcontracting', 'negotiation_advice')
+  1 ('ar', 'termination', 'market_comparison')
+  1 ('ar', 'compliance', 'market_comparison')
+  1 ('ar', 'services', 'negotiation_advice')
+  1 ('ar', 'employment', 'negotiation_advice')
+  1 ('ar', 'intellectual_property', 'recommendation')
+  1 ('ar', 'corporate_governance', 'market_comparison')
+  1 ('ar', 'employment', 'recommendation')
+  1 ('ar', 'data_protection', 'legal_insight')
+  1 ('ar', 'penalty', 'negotiation_advice')
+  1 ('ar', 'guarantee', 'recommendation')
+  1 ('ar', 'guarantee', 'negotiation_advice')
+  1 ('ar', 'collateral', 'recommendation')
+  1 ('ar', 'assignment', 'safer_alternative')
+  1 ('ar', 'anti_dilution_preemptive_rights', 'negotiation_advice')
+  1 ('ar', 'assignment', 'negotiation_advice')
+  1 ('ar', 'automatic_renewal', 'recommendation')
+  1 ('ar', 'automatic_renewal', 'negotiation_advice')
+
+=== FULL CASES ===
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 01_NDA_Confidentiality_Agreement.docx
+CLAUSE: 4.1
+TITLE: Confidential Information Ownership
+TYPE: confidentiality
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 01_NDA_Confidentiality_Agreement.docx
+CLAUSE: 4.1
+TITLE: Confidential Information Ownership
+TYPE: confidentiality
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 01_NDA_Confidentiality_Agreement.docx
+CLAUSE: 6.1
+TITLE: Governing Law and Jurisdiction
+TYPE: dispute_resolution
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Confirm that the chosen law and forum are practical, accessible, and consistent with the parties' location and transaction.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 04_Cybersecurity_Services_Agreement.docx
+CLAUSE: 5.1
+TITLE: Limitation of Liability
+TYPE: liability
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 04_Cybersecurity_Services_Agreement.docx
+CLAUSE: 4.1
+TITLE: Subcontractor Engagement
+TYPE: subcontracting
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause defines operational obligations, service scope, performance expectations, or delivery mechanics.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 04_Cybersecurity_Services_Agreement.docx
+CLAUSE: 4.1
+TITLE: Subcontractor Engagement
+TYPE: subcontracting
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Confirm that scope, responsibilities, acceptance criteria, timelines, change control, and support obligations are sufficiently specific.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 06_Executive_Employment_Agreement.docx
+CLAUSE: 4.2
+TITLE: Non-Solicitation
+TYPE: employment
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Consider limiting the scope, duration, territory, restricted activities, covered customers or personnel, and remedies for restrictive covenants. The restriction should be tied to a legitimate commercial interest and should include clear carve-outs for ordinary business activity.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 06_Executive_Employment_Agreement.docx
+CLAUSE: 2.2
+TITLE: Bonus and Equity Grant
+TYPE: employment
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause may affect employment status, compensation, benefits, working conditions, termination of employment, or Contracting Party B obligations.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 07_Software_Licensing_Agreement.docx
+CLAUSE: 1.2
+TITLE: License Restrictions
+TYPE: license
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+The clause effectively safeguards the Licensor's intellectual property rights while allowing for legal exceptions.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 08_Procurement_Supply_Agreement.docx
+CLAUSE: 4.1
+TITLE: Warranty of Goods
+TYPE: supply_distribution
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+The warranty terms are reasonable and provide adequate protection for the buyer.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 09_Consulting_Services_Agreement.docx
+CLAUSE: 3.1
+TITLE: Ownership of Work Product
+TYPE: intellectual_property
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 09_Consulting_Services_Agreement.docx
+CLAUSE: 3.1
+TITLE: Ownership of Work Product
+TYPE: intellectual_property
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 11_Commercial_Lease_Agreement.docx
+CLAUSE: 1.1
+TITLE: Term of Lease
+TYPE: lease
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Check payment timing, permitted use, maintenance obligations, repair allocation, deposit treatment, access rights, and termination consequences.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 11_Commercial_Lease_Agreement.docx
+CLAUSE: 4.1
+TITLE: Use of Premises
+TYPE: lease
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause is common in commercial leases to ensure the property is used appropriately and maintained.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 12_Loan_Credit_Agreement.docx
+CLAUSE: 3.1
+TITLE: Debt-Service Coverage Ratio
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Check repayment timing, interest, security, guarantees, default triggers, acceleration rights, and enforcement mechanics.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 13_Asset_Purchase_Agreement.docx
+CLAUSE: 7.1
+TITLE: Non-Compete Obligation
+TYPE: loan
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause may affect repayment obligations, interest exposure, security rights, guarantees, default consequences, or lender remedies.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 13_Asset_Purchase_Agreement.docx
+CLAUSE: 7.1
+TITLE: Non-Compete Obligation
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Check repayment timing, interest, security, guarantees, default triggers, acceleration rights, and enforcement mechanics.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 13_Asset_Purchase_Agreement.docx
+CLAUSE: 2.1
+TITLE: Purchase Price
+TYPE: indemnity
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Confirm which claims are covered, who controls the defense, whether notice is required, and whether liability limits apply.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 13_Asset_Purchase_Agreement.docx
+CLAUSE: 3.1
+TITLE: Seller Representations and Warranties
+TYPE: warranty
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Consider clarifying representations and warranties, quality standards, disclaimers, exclusions, remedy periods, reliance limitations, and how warranty remedies interact with limitation of liability.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 13_Asset_Purchase_Agreement.docx
+CLAUSE: 5.1
+TITLE: Buyer's Obligation to Close
+TYPE: warranty
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 14_Shareholders_Agreement.docx
+CLAUSE: 3.2
+TITLE: Tag-Along Right
+TYPE: share_transfer_rights
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Check whether the trigger is clearly defined and whether consent, notice, termination, vesting, payment, or assignment consequences are proportionate.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 14_Shareholders_Agreement.docx
+CLAUSE: 5.1
+TITLE: Share Transfer Restrictions
+TYPE: share_transfer_rights
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Check whether the trigger is clearly defined and whether consent, notice, termination, vesting, payment, or assignment consequences are proportionate.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 14_Shareholders_Agreement.docx
+CLAUSE: 6.1
+TITLE: Investor Consent Rights
+TYPE: corporate_governance
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+This type of clause is common in investment agreements to protect minority shareholders, particularly in venture capital or private equity contexts.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: EN
+FILE: 15_General_Commercial_Agreement.docx
+CLAUSE: 7.1
+TITLE: Limitation of Liability
+TYPE: liability
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.
+
+FINAL TEXT:
+Manual review required: generated text did not pass source-fidelity validation.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 01_NDA_Confidentiality_Agreement_FR.docx
+CLAUSE: 4.1
+TITLE: Confidentialité
+TYPE: warranty
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause définit des déclarations, engagements de qualité, exclusions ou recours si les faits ou standards de performance ne sont pas respectés.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 04_Cybersecurity_Services_Agreement_FR.docx
+CLAUSE: 3.1
+TITLE: Obligations de certification
+TYPE: services
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est courante dans les contrats de services impliquant des données sensibles.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 08_Procurement_Supply_Agreement_FR.docx
+CLAUSE: 3.1
+TITLE: Inspection et remplacement des Biens
+TYPE: delivery
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est courante dans les contrats de fourniture.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 09_Consulting_Services_Agreement_FR.docx
+CLAUSE: 1.1
+TITLE: Statut du Consultant
+TYPE: liability
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 10_Outsourcing_Managed_Services_Agreement_FR.docx
+CLAUSE: 6.1
+TITLE: Durée et assistance à la sortie
+TYPE: termination
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est courante dans les contrats de services.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 11_Commercial_Lease_Agreement_FR.docx
+CLAUSE: Clause 4.2
+TITLE: Responsabilité d'entretien
+TYPE: liability
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 11_Commercial_Lease_Agreement_FR.docx
+CLAUSE: 4.1
+TITLE: Utilisation des Locaux
+TYPE: real_estate
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est standard dans les contrats de location commerciale.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 11_Commercial_Lease_Agreement_FR.docx
+CLAUSE: 2.2
+TITLE: Paiement des Charges d'Exploitation
+TYPE: fees
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est courante dans les contrats de location.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 12_Loan_Credit_Agreement_FR.docx
+CLAUSE: 3.1
+TITLE: Engagement de l'Emprunteur
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier les échéances de remboursement, les intérêts, les sûretés, les garanties, les cas de défaut, l'exigibilité anticipée et les mécanismes d'exécution.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 12_Loan_Credit_Agreement_FR.docx
+CLAUSE: 6.1
+TITLE: Cas de Défaut
+TYPE: notice
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+La clause est relativement standard dans les contrats de prêt, où des périodes de grâce sont souvent accordées.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 12_Loan_Credit_Agreement_FR.docx
+CLAUSE: 5.1
+TITLE: Garantie des obligations de l'Emprunteur
+TYPE: warranty
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause définit des déclarations, engagements de qualité, exclusions ou recours si les faits ou standards de performance ne sont pas respectés.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 13_Asset_Purchase_Agreement_FR.docx
+CLAUSE: 3.1
+TITLE: Déclarations et garanties du Vendeur
+TYPE: warranty
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause définit des déclarations, engagements de qualité, exclusions ou recours si les faits ou standards de performance ne sont pas respectés.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 13_Asset_Purchase_Agreement_FR.docx
+CLAUSE: 3.1
+TITLE: Déclarations et garanties du Vendeur
+TYPE: warranty
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Envisager de clarifier les déclarations et garanties, les standards de qualité, les exclusions, les délais de recours, les limites de confiance accordée aux déclarations et l'interaction entre les recours de garantie et la limitation de responsabilité.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 13_Asset_Purchase_Agreement_FR.docx
+CLAUSE: 5.1
+TITLE: Obligation de clôture
+TYPE: warranty
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est courante dans les transactions d'acquisition.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 13_Asset_Purchase_Agreement_FR.docx
+CLAUSE: 6.1
+TITLE: Indemnisation
+TYPE: indemnity
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette clause est relativement standard dans les transactions commerciales, bien que les limites d'indemnisation puissent varier.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 13_Asset_Purchase_Agreement_FR.docx
+CLAUSE: 6.1
+TITLE: Indemnisation
+TYPE: indemnity
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier quelles réclamations sont couvertes, qui contrôle la défense, si une notification est requise et si les limites de responsabilité s'appliquent.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 13_Asset_Purchase_Agreement_FR.docx
+CLAUSE: 2.1
+TITLE: Prix d'achat
+TYPE: payment
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier les échéances de paiement, les exigences de facturation, les intérêts, les pénalités, le traitement fiscal et les conséquences du non-paiement.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 14_Shareholders_Agreement_FR.docx
+CLAUSE: 6.1
+TITLE: Restrictions sur les modifications statutaires
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier les échéances de remboursement, les intérêts, les sûretés, les garanties, les cas de défaut, l'exigibilité anticipée et les mécanismes d'exécution.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 15_General_Commercial_Agreement_FR.docx
+CLAUSE: Clause 7.1
+TITLE: Limitation de responsabilité
+TYPE: liability
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Cette limitation de responsabilité est standard dans les contrats commerciaux.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: FR
+FILE: 15_General_Commercial_Agreement_FR.docx
+CLAUSE: Clause 7.1
+TITLE: Limitation de responsabilité
+TYPE: liability
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.
+
+FINAL TEXT:
+Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 01_NDA_Confidentiality_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حقوق الملكية في المعلومات السرية
+TYPE: confidentiality
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+تنشئ هذه المادة التزام عدم الإفصاح الأساسي: من يلتزم به، وما معيار العناية المطبق، وما إذا كان الإفصاح الفرعي المصرح به (مثلاً للممثلين) مسموحاً.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 01_NDA_Confidentiality_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: القانون الواجب التطبيق والاختصاص القضائي
+TYPE: dispute_resolution
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 02_Master_Services_Agreement_AR.docx
+CLAUSE: 2.2
+TITLE: زيادة الرسوم
+TYPE: renewal
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 02_Master_Services_Agreement_AR.docx
+CLAUSE: 2.2
+TITLE: زيادة الرسوم
+TYPE: renewal
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على توضيح آليات التجديد، ومهل الإشعار، والتجديد التلقائي، وتغييرات الأسعار، والإنهاء قبل التجديد، وأي تغييرات في الخدمة أو الدفع.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 03_SaaS_Cloud_Agreement_AR.docx
+CLAUSE: 7.1
+TITLE: إنهاء الاتفاقية
+TYPE: termination
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 5.2
+TITLE: تعويض الطرف الطرف المتعاقد ب ب
+TYPE: indemnity
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 5.2
+TITLE: تعويض الطرف الطرف المتعاقد ب ب
+TYPE: indemnity
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حظر التعاقد مع مقاول من الباطن
+TYPE: subcontracting
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من أن النطاق والمسؤوليات ومعايير القبول والجداول الزمنية وإدارة التغييرات والتزامات الدعم محددة بما يكفي.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حظر التعاقد مع مقاول من الباطن
+TYPE: subcontracting
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على معايير قبول موضوعية، ومراحل التسليم، وإجراءات الاختبار، وحقوق الرفض، ومهل المعالجة، والقبول الضمني، والتزامات إعادة التسليم، وربط الدفع بالقبول.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: مدة الاتفاقية وحقوق الإنهاء
+TYPE: termination
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+تعتبر هذه الشروط متوازنة، حيث توفر حقوق إنهاء معقولة للطرفين.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 05_Data_Processing_Agreement_AR.docx
+CLAUSE: 8.1
+TITLE: التدقيق والامتثال
+TYPE: compliance
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+تعتبر هذه الفقرة معيارية في عقود معالجة البيانات.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: الامتناع عن المنافسة
+TYPE: services
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على تقليل فترة الحظر لتكون أكثر توازنًا.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 4.2
+TITLE: الامتناع عن استقطاب الطرف الطرف المتعاقد ب بين
+TYPE: employment
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: تنازل عن الحقوق
+TYPE: intellectual_property
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من ملكية المواد السابقة، والمخرجات المنشأة، ونطاق الترخيص، وقيود الاستخدام، والحقوق المعنوية، والحقوق بعد الإنهاء.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 07_Software_Licensing_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: مدة الاتفاقية وإنهائها
+TYPE: termination
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 09_Consulting_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: سرية المعلومات
+TYPE: corporate_governance
+FIELD: market_comparison
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+تعتبر هذه الشروط شائعة في عقود الاستشارات.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 10_Outsourcing_Managed_Services_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: شروط العمل للموظفين المنقولين
+TYPE: employment
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة التعويض والمزايا والمهام وآليات إنهاء العمل والإشعار والالتزامات بعد العمل والامتثال لإطار العمل المحدد.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 10_Outsourcing_Managed_Services_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: ضمانات البيانات
+TYPE: data_protection
+FIELD: legal_insight
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يتناول هذا البند التعامل مع الحوادث أو الاختراقات، لذلك يجب توضيح المهل والتعاون وحفظ الأدلة وواجبات الإخطار ومعالجة المسؤولية.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 11_Commercial_Lease_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: إنهاء العقد بسبب عدم السداد
+TYPE: termination
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 6.2
+TITLE: حالة تعثر
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: سداد القرض المبكر
+TYPE: penalty
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ضمان الالتزامات
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ضمان الالتزامات
+TYPE: loan
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: حالة التعثر
+TYPE: covenant
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: التعهد بالحفاظ على نسبة تغطية خدمة الدين
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: التعهد بالحفاظ على نسبة تغطية خدمة الدين
+TYPE: loan
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزامات الطرف المتعاقد ب
+TYPE: guarantee
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزامات الطرف المتعاقد ب
+TYPE: guarantee
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على آجال الدفع، وفترات السماح، وفوائد التأخير، وإجراءات الاعتراض على الفواتير، والمعالجة الضريبية، والعملة، وحقوق المقاصة، وحقوق تعليق الالتزامات عند عدم السداد.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 7.1
+TITLE: القانون الواجب التطبيق وحل النزاعات
+TYPE: dispute_resolution
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 1.1
+TITLE: شروط صرف القرض
+TYPE: loan
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزام الطرف الطرف المتعاقد ب أ بالإغلاق
+TYPE: covenant
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 1.1
+TITLE: نقل الحقوق
+TYPE: collateral
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ثمن شراء الأصول
+TYPE: indemnity
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: إدارة النشاط
+TYPE: indemnity
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: التعويض
+TYPE: indemnity
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: حق التنازل الإلزامي
+TYPE: assignment
+FIELD: safer_alternative
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['SEMANTIC_ARGUMENT_COVERAGE_LOSS', 'RIGHT_POLARITY_OR_SCOPE_WEAKENING']
+
+TEXT BEFORE VALIDATION:
+يجب أن تتضمن الفقرة شروطًا واضحة لحماية حقوق المساهمين الأقلية.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: حق الشراء
+TYPE: anti_dilution_preemptive_rights
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على تعريف تغيير السيطرة، وما إذا كانت الموافقة المسبقة أو الإشعار مطلوباً، وما إذا كان ذلك يفعّل حق الإنهاء، وما إذا كان يؤثر على المدفوعات أو الاستحقاق أو التنازل أو السرية أو استمرارية الخدمة.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: حق الشفعة
+TYPE: assignment
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على اشتراط الموافقة الخطية المسبقة على أي تنازل أو نقل أو تفويض، مع السماح باستثناءات معقولة للشركات التابعة أو إعادة الهيكلة أو الاندماج أو الاستحواذ أو بيع معظم الأصول إذا كان المتنازل له قادراً على تنفيذ الالتزامات.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: البند 7.1
+TITLE: إنهاء الاتفاقية
+TYPE: automatic_renewal
+FIELD: recommendation
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+====================================================================================================
+LANGUAGE: AR
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: البند 7.1
+TITLE: إنهاء الاتفاقية
+TYPE: automatic_renewal
+FIELD: negotiation_advice
+GATE RESULT: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على توضيح آليات التجديد، ومهل الإشعار، والتجديد التلقائي، وتغييرات الأسعار، والإنهاء قبل التجديد، وأي تغييرات في الخدمة أو الدفع.
+
+FINAL TEXT:
+مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.
+
+DIAGNOSTIC RESULT: PASS

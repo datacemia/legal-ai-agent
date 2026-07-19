@@ -1,0 +1,1250 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 212, in <module>
+    main()
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 163, in main
+    results.append(analyze(path))
+                   ^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 86, in analyze
+    summary = extract_global_statement_summary(text) or {}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19342, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12747, in extract_global_statement_summary
+    txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 16065, in _runexa_core_extract_transactions
+    statement_summary = extract_global_statement_summary(text)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 19237, in extract_global_statement_summary
+    original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 12629, in extract_global_statement_summary
+    cc_summary = extract_credit_card_statement_summary(text)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 18036, in extract_credit_card_statement_summary
+    raw = " ".join(str(text or "").replace("\n", " ").split())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

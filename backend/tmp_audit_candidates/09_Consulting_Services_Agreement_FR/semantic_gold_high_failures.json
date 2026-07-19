@@ -1,0 +1,35 @@
+[
+  {
+    "fixture_id": "09_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Le Consultant est un prestataire indépendant et non un salarié, mandataire, coentrepreneur ou associé du Client. Le Consultant sera seul responsable de l'ensemble des taxes, assurances et prestations applicables.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "liability",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INDEPENDENT_CONTRACTOR"
+    ]
+  }
+]

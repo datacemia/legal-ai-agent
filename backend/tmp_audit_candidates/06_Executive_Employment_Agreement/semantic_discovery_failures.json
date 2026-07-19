@@ -1,0 +1,1396 @@
+[
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.",
+    "primary_type": "restrictive_covenants",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 63,
+            "end": 242,
+            "text": "Executive shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 73,
+            "end": 242,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "df1d314ad9fe96ec8c544adf36540f772b09cf3070408f4f41cce4927bec9e15",
+        "normalized_concept": "NON_COMPETE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18,
+              "unit": "MONTHS",
+              "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+              "related_mechanism": "NON_COMPETE"
+            }
+          ]
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 73,
+            "end": 243,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "2df3cc6cd5b9c108fa35224067ea9e8ca9aa2f245187bf71e3d14f00f2200e44",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 63,
+            "end": 242,
+            "text": "Executive shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 73,
+            "end": 242,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "df1d314ad9fe96ec8c544adf36540f772b09cf3070408f4f41cce4927bec9e15",
+        "normalized_concept": "NON_COMPETE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18,
+              "unit": "MONTHS",
+              "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+              "related_mechanism": "NON_COMPETE"
+            }
+          ]
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 73,
+            "end": 243,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "2df3cc6cd5b9c108fa35224067ea9e8ca9aa2f245187bf71e3d14f00f2200e44",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 The Company may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein. If Executive is terminated without Cause or resigns for Good Reason, Executive shall receive twelve (12) months of base salary continuation and twelve (12) months of COBRA premium reimbursement, subject to exécution of a release of claims.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "base salary",
+            "start": 248,
+            "end": 259
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 248,
+            "end": 371,
+            "text": "base salary continuation and twelve (12) months of COBRA premium reimbursement, subject to exécution of a release of claims"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9221a5793dbd8d1f3a4f71faa2816d8bdf669b19ee385ee03ec439e0d591a3b0",
+        "normalized_concept": "BASE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 16,
+            "end": 131,
+            "text": "may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 20,
+            "end": 131,
+            "text": "terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ba5310fa1dba74a0abf6cbd511118cdbd3edec26cfc39c168e035ae38fba0d5e",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 16,
+            "end": 131,
+            "text": "may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 20,
+            "end": 131,
+            "text": "terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "da8c04015f072eed08df8aa6c9cf55ba9cfd51a0647675269e196be68aa02eb7",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 16,
+            "end": 131,
+            "text": "may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 20,
+            "end": 131,
+            "text": "terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ba5310fa1dba74a0abf6cbd511118cdbd3edec26cfc39c168e035ae38fba0d5e",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 16,
+            "end": 131,
+            "text": "may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 20,
+            "end": 131,
+            "text": "terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "da8c04015f072eed08df8aa6c9cf55ba9cfd51a0647675269e196be68aa02eb7",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "MISMATCH",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "4.2",
+    "source_language": "en",
+    "source_text": "4.2 During employment and for twenty-four (24) months thereafter, Executive shall not solicit for employment any employee of the Company.",
+    "primary_type": "restrictive_covenants",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 66,
+            "end": 136,
+            "text": "Executive shall not solicit for employment any Contracting Party B of Contracting Party A"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 76,
+            "end": 136,
+            "text": "shall not solicit for employment any Contracting Party B of Contracting Party A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3494152499b9b65bf50a911ca114358554d7976fd3b738db01d7a0965c08f649",
+        "normalized_concept": "NON_SOLICITATION_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 76,
+            "end": 137,
+            "text": "shall not solicit for employment any Contracting Party B of Contracting Party A."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "100bb727e6545b9918f3eb00c9fe61ea92fbb0ba54affa6bf83f81944c680fa5",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 66,
+            "end": 136,
+            "text": "Executive shall not solicit for employment any Contracting Party B of Contracting Party A"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 76,
+            "end": 136,
+            "text": "shall not solicit for employment any Contracting Party B of Contracting Party A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3494152499b9b65bf50a911ca114358554d7976fd3b738db01d7a0965c08f649",
+        "normalized_concept": "NON_SOLICITATION_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 76,
+            "end": 137,
+            "text": "shall not solicit for employment any Contracting Party B of Contracting Party A."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "100bb727e6545b9918f3eb00c9fe61ea92fbb0ba54affa6bf83f81944c680fa5",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "2.2",
+    "source_language": "en",
+    "source_text": "2.2 Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "base salary",
+            "start": 82,
+            "end": 93
+          }
+        ]
+      },
+      {
+        "concept": "BONUS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "discretionary bonus",
+            "start": 46,
+            "end": 65
+          }
+        ]
+      },
+      {
+        "concept": "EQUITY_GRANT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "equity grant",
+            "start": 151,
+            "end": 163
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BONUS",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BONUS",
+            "start": 4,
+            "end": 225,
+            "text": "Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "BONUS",
+            "start": 23,
+            "end": 225,
+            "text": "eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "BONUS",
+            "start": 39,
+            "end": 78,
+            "text": "annual discretionary bonus of up to 40%"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "49d63fbba4fbe4066f6a992f87d526bd8f50d45dbdf9469e3b9d5fae4872f13d",
+        "normalized_concept": "BONUS",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EQUITY_GRANT",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_GRANT",
+            "start": 143,
+            "end": 225,
+            "text": "initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "EQUITY_GRANT",
+            "start": 126,
+            "end": 197,
+            "text": "shall receive an initial equity grant of 150,000 restricted stock units"
+          },
+          {
+            "label": "EQUITY_GRANT",
+            "start": 175,
+            "end": 205,
+            "text": "restricted stock units vesting"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "1b9adaddfd328bde2839c89c9e5ca436c4f1e9fae2f7f62a52c10ef943abcbe8",
+        "normalized_concept": "EQUITY_GRANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 82,
+            "end": 225,
+            "text": "base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "81d7082c25dcd54b33257e07cd196e86e0c68f7070f5cea3081b52160bda42c0",
+        "normalized_concept": "BASE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 225,
+            "text": "Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 60,
+            "end": 225,
+            "text": "bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "dcc4f48c481de757b15d3dd30da7c5e4cfa0bba71fd49ac280f6e19ced9a4433",
+        "normalized_concept": "INCENTIVE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EQUITY_COMPENSATION_GRANT",
+        "rank": 92,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_COMPENSATION_GRANT",
+            "start": 23,
+            "end": 225,
+            "text": "eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "60fa85ac5d249cf5782a531ffd5b4432d5883e8094cfcb7f84ac6545577d7085",
+        "normalized_concept": "EQUITY_COMPENSATION_GRANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "VESTING_SCHEDULE",
+        "rank": 90,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VESTING_SCHEDULE",
+            "start": 151,
+            "end": 225,
+            "text": "equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "VESTING_SCHEDULE",
+        "evidence_hash": "0eff6cc545c1d27ce534066eb4b9ab23264e7122596d5fa199e6e2b6d12aa183",
+        "normalized_concept": "VESTING_SCHEDULE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 225,
+            "text": "Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 60,
+            "end": 225,
+            "text": "bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "dcc4f48c481de757b15d3dd30da7c5e4cfa0bba71fd49ac280f6e19ced9a4433",
+        "normalized_concept": "INCENTIVE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EQUITY_COMPENSATION_GRANT",
+        "rank": 92,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_COMPENSATION_GRANT",
+            "start": 23,
+            "end": 225,
+            "text": "eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "60fa85ac5d249cf5782a531ffd5b4432d5883e8094cfcb7f84ac6545577d7085",
+        "normalized_concept": "EQUITY_COMPENSATION_GRANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "VESTING_SCHEDULE",
+        "rank": 90,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VESTING_SCHEDULE",
+            "start": 151,
+            "end": 225,
+            "text": "equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "VESTING_SCHEDULE",
+        "evidence_hash": "0eff6cc545c1d27ce534066eb4b9ab23264e7122596d5fa199e6e2b6d12aa183",
+        "normalized_concept": "VESTING_SCHEDULE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 This Agreement shall be governed by the laws of the State of Delaware. Executive acknowledges that the non-compete provisions herein are supported by adequate consideration and are reasonable in scope and duration.",
+    "primary_type": "governing_law",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 28,
+            "end": 211,
+            "text": "governed by the laws of the State of Delaware. Executive acknowledges that the non-compete provisions herein are supported by adequate consideration and are reasonable in scope and du"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "079feba4b0864202e7cf1827ed9975f78fb0b9276606e553a911a736f0eec9b2",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 28,
+            "end": 211,
+            "text": "governed by the laws of the State of Delaware. Executive acknowledges that the non-compete provisions herein are supported by adequate consideration and are reasonable in scope and du"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "079feba4b0864202e7cf1827ed9975f78fb0b9276606e553a911a736f0eec9b2",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to the Company's affairs.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 93,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 4,
+            "end": 171,
+            "text": "Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to Contracting Party A's affairs"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "54c19b305ca4162672e6c1cee9fd9397079e7eac7bf4a347f07bb4f117921272",
+        "normalized_concept": "EMPLOYMENT_ROLE_DUTY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 93,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 4,
+            "end": 171,
+            "text": "Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to Contracting Party A's affairs"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "54c19b305ca4162672e6c1cee9fd9397079e7eac7bf4a347f07bb4f117921272",
+        "normalized_concept": "EMPLOYMENT_ROLE_DUTY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 The Company shall pay Executive an annual base salary of $410,000, payable in accordance with the Company's standard payroll practices, subject to annual review by the Board.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "annual base salary",
+            "start": 39,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 39,
+            "end": 177,
+            "text": "annual base salary of $410,000, payable in accordance with Contracting Party A's standard payroll practices, subject to annual review by the Board"
+          },
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 8,
+            "end": 177,
+            "text": "Contracting Party A shall pay Executive an annual base salary of $410,000, payable in accordance with Contracting Party A's standard payroll practices, subject to annual review by the Board"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "54754be25d269cb05ce99739167f81262c694efe3460655f8735ec157649ae7c",
+        "normalized_concept": "BASE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 410000,
+              "unit": "USD",
+              "semantic_role": "ANNUAL_BASE_COMPENSATION",
+              "related_mechanism": "BASE_COMPENSATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 16,
+            "end": 177,
+            "text": "shall pay Executive an annual base salary of $410,000, payable in accordance with Contracting Party A's standard payroll practices, subject to annual review by the Board"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "90b002413e985cdc1e928d146c46d82350eca16014c38189cee26c8a259aa61c",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 410000,
+              "unit": "USD",
+              "semantic_role": "ANNUAL_BASE_COMPENSATION",
+              "related_mechanism": "BASE_COMPENSATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 71,
+            "end": 138,
+            "text": "payable in accordance with Contracting Party A's standard payroll practices"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c5a9746aee964a620e5934c40b7afd490971dac39ce49fb2e8d30bf5ac974c5b",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 16,
+            "end": 177,
+            "text": "shall pay Executive an annual base salary of $410,000, payable in accordance with Contracting Party A's standard payroll practices, subject to annual review by the Board"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "90b002413e985cdc1e928d146c46d82350eca16014c38189cee26c8a259aa61c",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 410000,
+              "unit": "USD",
+              "semantic_role": "ANNUAL_BASE_COMPENSATION",
+              "related_mechanism": "BASE_COMPENSATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 71,
+            "end": 138,
+            "text": "payable in accordance with Contracting Party A's standard payroll practices"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c5a9746aee964a620e5934c40b7afd490971dac39ce49fb2e8d30bf5ac974c5b",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Executive hereby assigns to the Company all right, title, and interest in any inventions, discoveries, and works of authorship conceived or developed during employment that relate to the Company's business or arise from the use of Company resources.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_ASSIGNMENT",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_ASSIGNMENT",
+            "start": 14,
+            "end": 130,
+            "text": "hereby assigns to Contracting Party A all right, title, and interest in any inventions, discoveries, and works of authorship"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8315038073fc6852a2fa9875f9e6ddc6fb4fdd6c5202616b88446a8b4e144aca",
+        "normalized_concept": "IP_ASSIGNMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_ASSIGNMENT",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_ASSIGNMENT",
+            "start": 14,
+            "end": 130,
+            "text": "hereby assigns to Contracting Party A all right, title, and interest in any inventions, discoveries, and works of authorship"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8315038073fc6852a2fa9875f9e6ddc6fb4fdd6c5202616b88446a8b4e144aca",
+        "normalized_concept": "IP_ASSIGNMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

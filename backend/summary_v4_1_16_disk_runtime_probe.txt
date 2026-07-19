@@ -1,0 +1,29 @@
+====================================================================================================
+V4.1.16 DISK / FRESH PYTHON RUNTIME PROBE
+====================================================================================================
+MODULE:
+C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\unified_report_from_pipeline.py
+
+HAS DANGEROUS_PATTERN_MARKERS:
+True
+
+ROLE NORMALIZATION:
+'La Client peut auditer la Prestataire.' => 'le Client peut auditer le Prestataire.'
+'La responsabilité du Provider est limitée.' => 'La responsabilité du Prestataire est limitée.'
+'Les frais sont payés par la Client.' => 'Les frais sont payés par le Client.'
+
+GENERIC ACTION:
+IS GENERIC: True
+FINALIZED: ''
+
+FUNCTION SOURCES
+
+----------------------------------------------------------------------------------------------------
+FUNCTION: normalize_published_role_text
+FOUND: True
+Traceback (most recent call last):
+  File "<stdin>", line 87, in <module>
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 1796-1799: character maps to <undefined>

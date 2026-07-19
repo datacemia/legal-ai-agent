@@ -1,0 +1,1197 @@
+========================================================================================================================
+V4.1.21A CLEANED TEXT PROVENANCE PROBE
+========================================================================================================================
+
+FILE: app\workers\handlers\contract_handler.py
+
+========================================================================================================================
+FUNCTION: delete_local_file_safely
+LINES: 48 - 56
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 48
+>>>    48: def delete_local_file_safely(file_path):
+       49:     if not file_path:
+       50:         return
+       51: 
+       52:     try:
+       53:         if os.path.exists(file_path):
+       54:             os.remove(file_path)
+       55:     except Exception:
+       56:         pass
+
+========================================================================================================================
+FUNCTION: legal_progress_message
+LINES: 81 - 128
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 84
+       81: def legal_progress_message(key: str, language: str) -> str:
+       82:     messages = {
+       83:         "loading": {
+>>>    84:             "en": "Loading legal document...",
+       85:             "fr": "Chargement du document juridique...",
+       86:             "ar": "جارٍ تحميل المستند القانوني...",
+       87:         },
+       88:         "extracting": {
+       89:             "en": "Extracting contract text...",
+       90:             "fr": "Extraction du texte du contrat...",
+       91:             "ar": "جارٍ استخراج نص العقد...",
+       92:         },
+       93:         "splitting": {
+       94:             "en": "Splitting contract clauses...",
+       95:             "fr": "Découpage des clauses du contrat...",
+       96:             "ar": "جارٍ تقسيم بنود العقد...",
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 85
+       81: def legal_progress_message(key: str, language: str) -> str:
+       82:     messages = {
+       83:         "loading": {
+       84:             "en": "Loading legal document...",
+>>>    85:             "fr": "Chargement du document juridique...",
+       86:             "ar": "جارٍ تحميل المستند القانوني...",
+       87:         },
+       88:         "extracting": {
+       89:             "en": "Extracting contract text...",
+       90:             "fr": "Extraction du texte du contrat...",
+       91:             "ar": "جارٍ استخراج نص العقد...",
+       92:         },
+       93:         "splitting": {
+       94:             "en": "Splitting contract clauses...",
+       95:             "fr": "Découpage des clauses du contrat...",
+       96:             "ar": "جارٍ تقسيم بنود العقد...",
+       97:         },
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 88
+       81: def legal_progress_message(key: str, language: str) -> str:
+       82:     messages = {
+       83:         "loading": {
+       84:             "en": "Loading legal document...",
+       85:             "fr": "Chargement du document juridique...",
+       86:             "ar": "جارٍ تحميل المستند القانوني...",
+       87:         },
+>>>    88:         "extracting": {
+       89:             "en": "Extracting contract text...",
+       90:             "fr": "Extraction du texte du contrat...",
+       91:             "ar": "جارٍ استخراج نص العقد...",
+       92:         },
+       93:         "splitting": {
+       94:             "en": "Splitting contract clauses...",
+       95:             "fr": "Découpage des clauses du contrat...",
+       96:             "ar": "جارٍ تقسيم بنود العقد...",
+       97:         },
+       98:         "analyzing": {
+       99:             "en": "Analyzing risky clauses...",
+      100:             "fr": "Analyse des clauses à risque...",
+
+========================================================================================================================
+FUNCTION: handle_contract_ai
+LINES: 158 - 602
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 161
+      158: def handle_contract_ai(job: Job, db):
+      159:     input_data = get_job_input(job)
+      160: 
+>>>   161:     document_id = input_data.get("document_id")
+      162:     output_language = input_data.get("output_language", "en")
+      163:     access_type = input_data.get("access_type")
+      164:     credits_used = input_data.get("credits_used", 0)
+      165:     storage_path = input_data.get("storage_path")
+      166: 
+      167:     if output_language not in SUPPORTED_LANGUAGES:
+      168:         output_language = "en"
+      169: 
+      170:     update_job_progress(
+      171:         job,
+      172:         db,
+      173:         10,
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 177
+      169: 
+      170:     update_job_progress(
+      171:         job,
+      172:         db,
+      173:         10,
+      174:         legal_progress_message("loading", output_language),
+      175:     )
+      176: 
+>>>   177:     document = db.query(Document).filter(Document.id == document_id).first()
+      178: 
+      179:     if not document:
+      180:         raise ValueError("Document not found")
+      181: 
+      182:     downloaded_temp_file_path = None
+      183: 
+      184:     # Everything that touches the downloaded/temp file or the cloud
+      185:     # storage object is wrapped in try/finally so cleanup always runs
+      186:     # exactly once -- on success, on early rejection (unsupported
+      187:     # document), and on any unexpected exception. Previously, cleanup
+      188:     # only happened on the success path, leaking the temp file and the
+      189:     # cloud storage object whenever the document was rejected or any
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 179
+      171:         job,
+      172:         db,
+      173:         10,
+      174:         legal_progress_message("loading", output_language),
+      175:     )
+      176: 
+      177:     document = db.query(Document).filter(Document.id == document_id).first()
+      178: 
+>>>   179:     if not document:
+      180:         raise ValueError("Document not found")
+      181: 
+      182:     downloaded_temp_file_path = None
+      183: 
+      184:     # Everything that touches the downloaded/temp file or the cloud
+      185:     # storage object is wrapped in try/finally so cleanup always runs
+      186:     # exactly once -- on success, on early rejection (unsupported
+      187:     # document), and on any unexpected exception. Previously, cleanup
+      188:     # only happened on the success path, leaking the temp file and the
+      189:     # cloud storage object whenever the document was rejected or any
+      190:     # step raised.
+      191:     try:
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 182
+      174:         legal_progress_message("loading", output_language),
+      175:     )
+      176: 
+      177:     document = db.query(Document).filter(Document.id == document_id).first()
+      178: 
+      179:     if not document:
+      180:         raise ValueError("Document not found")
+      181: 
+>>>   182:     downloaded_temp_file_path = None
+      183: 
+      184:     # Everything that touches the downloaded/temp file or the cloud
+      185:     # storage object is wrapped in try/finally so cleanup always runs
+      186:     # exactly once -- on success, on early rejection (unsupported
+      187:     # document), and on any unexpected exception. Previously, cleanup
+      188:     # only happened on the success path, leaking the temp file and the
+      189:     # cloud storage object whenever the document was rejected or any
+      190:     # step raised.
+      191:     try:
+      192:         update_job_progress(
+      193:             job,
+      194:             db,
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 185
+      177:     document = db.query(Document).filter(Document.id == document_id).first()
+      178: 
+      179:     if not document:
+      180:         raise ValueError("Document not found")
+      181: 
+      182:     downloaded_temp_file_path = None
+      183: 
+      184:     # Everything that touches the downloaded/temp file or the cloud
+>>>   185:     # storage object is wrapped in try/finally so cleanup always runs
+      186:     # exactly once -- on success, on early rejection (unsupported
+      187:     # document), and on any unexpected exception. Previously, cleanup
+      188:     # only happened on the success path, leaking the temp file and the
+      189:     # cloud storage object whenever the document was rejected or any
+      190:     # step raised.
+      191:     try:
+      192:         update_job_progress(
+      193:             job,
+      194:             db,
+      195:             20,
+      196:             legal_progress_message("extracting", output_language),
+      197:         )
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 187
+      179:     if not document:
+      180:         raise ValueError("Document not found")
+      181: 
+      182:     downloaded_temp_file_path = None
+      183: 
+      184:     # Everything that touches the downloaded/temp file or the cloud
+      185:     # storage object is wrapped in try/finally so cleanup always runs
+      186:     # exactly once -- on success, on early rejection (unsupported
+>>>   187:     # document), and on any unexpected exception. Previously, cleanup
+      188:     # only happened on the success path, leaking the temp file and the
+      189:     # cloud storage object whenever the document was rejected or any
+      190:     # step raised.
+      191:     try:
+      192:         update_job_progress(
+      193:             job,
+      194:             db,
+      195:             20,
+      196:             legal_progress_message("extracting", output_language),
+      197:         )
+      198: 
+      199:         file_path = document.file_path
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 189
+      181: 
+      182:     downloaded_temp_file_path = None
+      183: 
+      184:     # Everything that touches the downloaded/temp file or the cloud
+      185:     # storage object is wrapped in try/finally so cleanup always runs
+      186:     # exactly once -- on success, on early rejection (unsupported
+      187:     # document), and on any unexpected exception. Previously, cleanup
+      188:     # only happened on the success path, leaking the temp file and the
+>>>   189:     # cloud storage object whenever the document was rejected or any
+      190:     # step raised.
+      191:     try:
+      192:         update_job_progress(
+      193:             job,
+      194:             db,
+      195:             20,
+      196:             legal_progress_message("extracting", output_language),
+      197:         )
+      198: 
+      199:         file_path = document.file_path
+      200: 
+      201:         if storage_path:
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 196
+      188:     # only happened on the success path, leaking the temp file and the
+      189:     # cloud storage object whenever the document was rejected or any
+      190:     # step raised.
+      191:     try:
+      192:         update_job_progress(
+      193:             job,
+      194:             db,
+      195:             20,
+>>>   196:             legal_progress_message("extracting", output_language),
+      197:         )
+      198: 
+      199:         file_path = document.file_path
+      200: 
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 199
+      191:     try:
+      192:         update_job_progress(
+      193:             job,
+      194:             db,
+      195:             20,
+      196:             legal_progress_message("extracting", output_language),
+      197:         )
+      198: 
+>>>   199:         file_path = document.file_path
+      200: 
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 202
+      194:             db,
+      195:             20,
+      196:             legal_progress_message("extracting", output_language),
+      197:         )
+      198: 
+      199:         file_path = document.file_path
+      200: 
+      201:         if storage_path:
+>>>   202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 204
+      196:             legal_progress_message("extracting", output_language),
+      197:         )
+      198: 
+      199:         file_path = document.file_path
+      200: 
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+>>>   204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 206
+      198: 
+      199:         file_path = document.file_path
+      200: 
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+>>>   206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 208
+      200: 
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+>>>   208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 209
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+>>>   209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 210
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+>>>   210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 213
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+>>>   213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 214
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+>>>   214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 215
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+>>>   215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 216
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+>>>   216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 218
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+>>>   218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 219
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+>>>   219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+      231:         detected_language = detect_language(cleaned_text)
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 223
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+>>>   223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+      231:         detected_language = detect_language(cleaned_text)
+      232: 
+      233:         update_job_progress(
+      234:             job,
+      235:             db,
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 225
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+>>>   225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+      231:         detected_language = detect_language(cleaned_text)
+      232: 
+      233:         update_job_progress(
+      234:             job,
+      235:             db,
+      236:             35,
+      237:             legal_progress_message("splitting", output_language),
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 226
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+>>>   226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+      231:         detected_language = detect_language(cleaned_text)
+      232: 
+      233:         update_job_progress(
+      234:             job,
+      235:             db,
+      236:             35,
+      237:             legal_progress_message("splitting", output_language),
+      238:         )
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 228
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+>>>   228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+      231:         detected_language = detect_language(cleaned_text)
+      232: 
+      233:         update_job_progress(
+      234:             job,
+      235:             db,
+      236:             35,
+      237:             legal_progress_message("splitting", output_language),
+      238:         )
+      239: 
+      240:         clauses = split_into_clauses(cleaned_text)
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 231
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+      230: 
+>>>   231:         detected_language = detect_language(cleaned_text)
+      232: 
+      233:         update_job_progress(
+      234:             job,
+      235:             db,
+      236:             35,
+      237:             legal_progress_message("splitting", output_language),
+      238:         )
+      239: 
+      240:         clauses = split_into_clauses(cleaned_text)
+      241: 
+      242:         if not clauses:
+      243:             clauses = [cleaned_text]
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 240
+      232: 
+      233:         update_job_progress(
+      234:             job,
+      235:             db,
+      236:             35,
+      237:             legal_progress_message("splitting", output_language),
+      238:         )
+      239: 
+>>>   240:         clauses = split_into_clauses(cleaned_text)
+      241: 
+      242:         if not clauses:
+      243:             clauses = [cleaned_text]
+      244: 
+      245:         update_job_progress(
+      246:             job,
+      247:             db,
+      248:             50,
+      249:             legal_progress_message("analyzing", output_language),
+      250:         )
+      251: 
+      252:         # Detect party roles ONCE for the entire document, from the raw
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 243
+      235:             db,
+      236:             35,
+      237:             legal_progress_message("splitting", output_language),
+      238:         )
+      239: 
+      240:         clauses = split_into_clauses(cleaned_text)
+      241: 
+      242:         if not clauses:
+>>>   243:             clauses = [cleaned_text]
+      244: 
+      245:         update_job_progress(
+      246:             job,
+      247:             db,
+      248:             50,
+      249:             legal_progress_message("analyzing", output_language),
+      250:         )
+      251: 
+      252:         # Detect party roles ONCE for the entire document, from the raw
+      253:         # contract text, and reuse it across all 3 pipelines below (clause
+      254:         # analysis, summary, simplified version). Without this, each
+      255:         # pipeline independently redetects roles from its own
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 252
+      244: 
+      245:         update_job_progress(
+      246:             job,
+      247:             db,
+      248:             50,
+      249:             legal_progress_message("analyzing", output_language),
+      250:         )
+      251: 
+>>>   252:         # Detect party roles ONCE for the entire document, from the raw
+      253:         # contract text, and reuse it across all 3 pipelines below (clause
+      254:         # analysis, summary, simplified version). Without this, each
+      255:         # pipeline independently redetects roles from its own
+      256:         # already-processed text -- the root cause of "Client"/"Service
+      257:         # Provider" vs "Employer"/"Employee" inconsistency across sections
+      258:         # of the same report.
+      259:         party_roles = get_display_roles(
+      260:             contract_type="",
+      261:             text=cleaned_text[:2000],
+      262:             language=output_language,
+      263:             anonymized=True,
+      264:         )
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 261
+      253:         # contract text, and reuse it across all 3 pipelines below (clause
+      254:         # analysis, summary, simplified version). Without this, each
+      255:         # pipeline independently redetects roles from its own
+      256:         # already-processed text -- the root cause of "Client"/"Service
+      257:         # Provider" vs "Employer"/"Employee" inconsistency across sections
+      258:         # of the same report.
+      259:         party_roles = get_display_roles(
+      260:             contract_type="",
+>>>   261:             text=cleaned_text[:2000],
+      262:             language=output_language,
+      263:             anonymized=True,
+      264:         )
+      265: 
+      266:         clause_results = analyze_contract_clauses(
+      267:             clauses,
+      268:             output_language,
+      269:             party_roles=party_roles,
+      270:         )
+      271: 
+      272:         # Document-level clause-coverage transparency, computed inside
+      273:         # analyze_contract_clauses() but previously never copied out of
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 266
+      258:         # of the same report.
+      259:         party_roles = get_display_roles(
+      260:             contract_type="",
+      261:             text=cleaned_text[:2000],
+      262:             language=output_language,
+      263:             anonymized=True,
+      264:         )
+      265: 
+>>>   266:         clause_results = analyze_contract_clauses(
+      267:             clauses,
+      268:             output_language,
+      269:             party_roles=party_roles,
+      270:         )
+      271: 
+      272:         # Document-level clause-coverage transparency, computed inside
+      273:         # analyze_contract_clauses() but previously never copied out of
+      274:         # the nested clause_results dict -- so a caller inspecting the
+      275:         # top-level response had no way to know whether every detected
+      276:         # clause was actually analyzed, or some were silently dropped
+      277:         # past the internal max_clauses cap.
+      278:         total_clauses_detected = clause_results.get("total_clauses_detected")
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 273
+      265: 
+      266:         clause_results = analyze_contract_clauses(
+      267:             clauses,
+      268:             output_language,
+      269:             party_roles=party_roles,
+      270:         )
+      271: 
+      272:         # Document-level clause-coverage transparency, computed inside
+>>>   273:         # analyze_contract_clauses() but previously never copied out of
+      274:         # the nested clause_results dict -- so a caller inspecting the
+      275:         # top-level response had no way to know whether every detected
+      276:         # clause was actually analyzed, or some were silently dropped
+      277:         # past the internal max_clauses cap.
+      278:         total_clauses_detected = clause_results.get("total_clauses_detected")
+      279:         clauses_analyzed = clause_results.get("clauses_analyzed")
+      280:         clauses_truncated = clause_results.get("clauses_truncated", False)
+      281: 
+      282:         clauses_obj = clause_results.get("clauses")
+      283: 
+      284:         if isinstance(clauses_obj, dict):
+      285:             clauses_list = (
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 294
+      286:                 clauses_obj.get("results")
+      287:                 or clauses_obj.get("items")
+      288:                 or clauses_obj.get("clauses")
+      289:                 or []
+      290:             )
+      291:         else:
+      292:             clauses_list = clauses_obj or []
+      293: 
+>>>   294:         clause_results = normalize_ai_role_words(
+      295:             clause_results,
+      296:             party_roles,
+      297:             output_language,
+      298:         )
+      299: 
+      300:         unified_report = build_unified_report_from_pipeline(
+      301:             clause_results,
+      302:             cleaned_text,
+      303:             output_language,
+      304:             party_roles=party_roles,
+      305:         )
+      306: 
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 300
+      292:             clauses_list = clauses_obj or []
+      293: 
+      294:         clause_results = normalize_ai_role_words(
+      295:             clause_results,
+      296:             party_roles,
+      297:             output_language,
+      298:         )
+      299: 
+>>>   300:         unified_report = build_unified_report_from_pipeline(
+      301:             clause_results,
+      302:             cleaned_text,
+      303:             output_language,
+      304:             party_roles=party_roles,
+      305:         )
+      306: 
+      307:         risk_score = unified_report.get("risk_score", {})
+      308: 
+      309:         if isinstance(risk_score, dict):
+      310:             explanation = risk_score.get("explanation", "")
+      311: 
+      312:             if (
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 302
+      294:         clause_results = normalize_ai_role_words(
+      295:             clause_results,
+      296:             party_roles,
+      297:             output_language,
+      298:         )
+      299: 
+      300:         unified_report = build_unified_report_from_pipeline(
+      301:             clause_results,
+>>>   302:             cleaned_text,
+      303:             output_language,
+      304:             party_roles=party_roles,
+      305:         )
+      306: 
+      307:         risk_score = unified_report.get("risk_score", {})
+      308: 
+      309:         if isinstance(risk_score, dict):
+      310:             explanation = risk_score.get("explanation", "")
+      311: 
+      312:             if (
+      313:                 "risk_node_" in explanation
+      314:                 or "Score reflects" in explanation
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 428
+      420:                         )
+      421:                     else:
+      422:                         risk_score["explanation"] = (
+      423:                             "The contract contains only low-risk clauses."
+      424:                         )
+      425: 
+      426:                 unified_report["risk_score"] = risk_score
+      427: 
+>>>   428:         unified_report = normalize_ai_role_words(
+      429:             unified_report,
+      430:             party_roles,
+      431:             output_language,
+      432:         )
+      433: 
+      434:         global_risk = calculate_global_risk(clause_results)
+      435: 
+      436:         update_job_progress(
+      437:             job,
+      438:             db,
+      439:             70,
+      440:             legal_progress_message("summary", output_language),
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 444
+      436:         update_job_progress(
+      437:             job,
+      438:             db,
+      439:             70,
+      440:             legal_progress_message("summary", output_language),
+      441:         )
+      442: 
+      443:         jurisdiction_detection = detect_jurisdiction(
+>>>   444:             cleaned_text,
+      445:             output_language,
+      446:         )
+      447: 
+      448:         jurisdiction_fields = format_jurisdiction_fields(
+      449:             jurisdiction_detection,
+      450:             output_language,
+      451:         )
+      452: 
+      453:         # Single analysis truth: enrich the unified report once, then render
+      454:         # all legacy/user-facing views from the same structured overview.
+      455:         overview = unified_report.get("contract_overview", {}) or {}
+      456: 
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 539
+      531:         update_job_progress(
+      532:             job,
+      533:             db,
+      534:             90,
+      535:             legal_progress_message("saving", output_language),
+      536:         )
+      537: 
+      538:         analysis = AnalysisResult(
+>>>   539:             document_id=document.id,
+      540:             summary=summary,
+      541:             clauses=json.dumps(clause_results, ensure_ascii=False),
+      542:             risk_level=global_risk["risk_level"],
+      543:             risk_score=global_risk["risk_score"],
+      544:             simplified_version=simplified,
+      545:             recommendations=json.dumps(recommendations, ensure_ascii=False),
+      546:             access_type=access_type,
+      547:             credits_used=credits_used,
+      548:         )
+      549: 
+      550:         document.language = detected_language
+      551:         document.status = "completed"
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 550
+      542:             risk_level=global_risk["risk_level"],
+      543:             risk_score=global_risk["risk_score"],
+      544:             simplified_version=simplified,
+      545:             recommendations=json.dumps(recommendations, ensure_ascii=False),
+      546:             access_type=access_type,
+      547:             credits_used=credits_used,
+      548:         )
+      549: 
+>>>   550:         document.language = detected_language
+      551:         document.status = "completed"
+      552: 
+      553:         db.add(analysis)
+      554:         db.commit()
+      555:         db.refresh(analysis)
+      556: 
+      557:         overview = unified_report.get("contract_overview", {})
+      558: 
+      559:         response = {
+      560:             "id": analysis.id,
+      561:             "document_id": analysis.document_id,
+      562:             "summary": analysis.summary,
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 551
+      543:             risk_score=global_risk["risk_score"],
+      544:             simplified_version=simplified,
+      545:             recommendations=json.dumps(recommendations, ensure_ascii=False),
+      546:             access_type=access_type,
+      547:             credits_used=credits_used,
+      548:         )
+      549: 
+      550:         document.language = detected_language
+>>>   551:         document.status = "completed"
+      552: 
+      553:         db.add(analysis)
+      554:         db.commit()
+      555:         db.refresh(analysis)
+      556: 
+      557:         overview = unified_report.get("contract_overview", {})
+      558: 
+      559:         response = {
+      560:             "id": analysis.id,
+      561:             "document_id": analysis.document_id,
+      562:             "summary": analysis.summary,
+      563:             "clauses": clause_results,
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 561
+      553:         db.add(analysis)
+      554:         db.commit()
+      555:         db.refresh(analysis)
+      556: 
+      557:         overview = unified_report.get("contract_overview", {})
+      558: 
+      559:         response = {
+      560:             "id": analysis.id,
+>>>   561:             "document_id": analysis.document_id,
+      562:             "summary": analysis.summary,
+      563:             "clauses": clause_results,
+      564:             "risk_level": analysis.risk_level,
+      565:             "risk_score": unified_report.get("risk_score", analysis.risk_score),
+      566:             "simplified_version": analysis.simplified_version,
+      567:             "recommendations": recommendations,
+      568:             "unified_report": unified_report,
+      569:             "created_at": analysis.created_at.isoformat() if analysis.created_at else None,
+      570:             "contract_quality_score": unified_report.get("confidence_score"),
+      571:             "overall_balance": overview.get("overall_balance"),
+      572:             "contract_complexity": overview.get("contract_complexity"),
+      573:             "jurisdiction_detected": overview.get("jurisdiction_detected"),
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 579
+      571:             "overall_balance": overview.get("overall_balance"),
+      572:             "contract_complexity": overview.get("contract_complexity"),
+      573:             "jurisdiction_detected": overview.get("jurisdiction_detected"),
+      574:             "total_clauses_detected": total_clauses_detected,
+      575:             "clauses_analyzed": clauses_analyzed,
+      576:             "clauses_truncated": clauses_truncated,
+      577:         }
+      578: 
+>>>   579:         response = normalize_ai_role_words(
+      580:             response,
+      581:             party_roles,
+      582:             output_language,
+      583:         )
+      584: 
+      585:         response["quality_check"] = validate_contract_result(response)
+      586: 
+      587:         update_job_progress(
+      588:             job,
+      589:             db,
+      590:             95,
+      591:             legal_progress_message("finalizing", output_language),
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 601
+      593: 
+      594:         with open("last_analysis.json", "w", encoding="utf-8") as f:
+      595:             json.dump(response, f, ensure_ascii=False, indent=2)
+      596: 
+      597:         return response
+      598: 
+      599:     finally:
+      600:         delete_api_file_from_cloud(storage_path)
+>>>   601:         delete_local_file_safely(downloaded_temp_file_path)
+      602:         delete_local_file_safely(document.file_path)
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 602
+      594:         with open("last_analysis.json", "w", encoding="utf-8") as f:
+      595:             json.dump(response, f, ensure_ascii=False, indent=2)
+      596: 
+      597:         return response
+      598: 
+      599:     finally:
+      600:         delete_api_file_from_cloud(storage_path)
+      601:         delete_local_file_safely(downloaded_temp_file_path)
+>>>   602:         delete_local_file_safely(document.file_path)
+
+========================================================================================================================
+CLEANED_TEXT ASSIGNMENTS
+========================================================================================================================
+
+ASSIGNMENT LINE: 213
+      201:         if storage_path:
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+>>>   213:         cleaned_text = clean_text(raw_text)
+      214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+
+ASSIGNMENT LINE: 214
+      202:             downloaded_temp_file_path = download_api_file_from_cloud(
+      203:                 storage_path=str(storage_path),
+      204:                 suffix=f".{document.file_type}",
+      205:             )
+      206:             file_path = downloaded_temp_file_path
+      207: 
+      208:         raw_text = extract_text(
+      209:             file_path,
+      210:             document.file_type,
+      211:         )
+      212: 
+      213:         cleaned_text = clean_text(raw_text)
+>>>   214:         cleaned_text = redact_sensitive_data(cleaned_text)
+      215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+      216:            f.write(cleaned_text)
+      217: 
+      218:         if not is_probably_contract(cleaned_text):
+      219:             document.status = "rejected"
+      220:             db.commit()
+      221: 
+      222:             return {
+      223:                 "error": "unsupported_document",
+      224:                 "message": {
+      225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+      226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+      227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+      228:                 }.get(output_language, "Unsupported document"),
+      229:             }
+
+========================================================================================================================
+IMPORTS RELEVANT TO EXTRACTION / CLEANING
+========================================================================================================================
+from app.models.document import Document
+from app.services.contract_agent.contract_parser import extract_text
+from app.services.text_cleaner import clean_text
+from app.services.contract_agent.summary_service import (
+    calculate_global_risk,
+    render_summary_text,
+)

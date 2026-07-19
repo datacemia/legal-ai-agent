@@ -1,0 +1,57 @@
+====================================================================================================
+V4.1.9 GOVERNANCE ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 4
+BY LANGUAGE: {'ar': 2, 'en': 2}
+BY PIPELINE TYPE: {'corporate_governance': 3, 'governance': 1}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 4}
+SIGNAL COUNTS: {}
+NO SIGNAL ROWS: 4
+
+====================================================================================================
+[1/4]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_5
+PIPELINE: corporate_governance
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.1 تدفع الشركة للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة.
+MECHANISMS: []
+
+====================================================================================================
+[2/4]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_3
+PIPELINE: corporate_governance
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.1 ينفذ المزود الخدمات وفقاً لمستويات الخدمة المحددة في الملحق أ. ينشئ الطرفان لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر.
+MECHANISMS: []
+
+====================================================================================================
+[3/4]
+LANG: en
+DOC: 02_Master_Services_Agreement.json
+REF: clause_6
+PIPELINE: governance
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+1.2 In the event of a conflict between this Agreement and a SOW, this Agreement shall control unless the SOW expressly states an intent to override a specific provision.
+MECHANISMS: []
+
+====================================================================================================
+[4/4]
+LANG: en
+DOC: 14_Shareholders_Agreement.json
+REF: clause_7
+PIPELINE: corporate_governance
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+6.1 For so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, the Company shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebtedness in excess of $2,000,000, other than in the ordinary course of business.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']

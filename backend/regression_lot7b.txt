@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_45_contracts_multilang.py", line 26, in <module>
+    from app.services.contract_agent.contract_agent import ClauseAnalysisPipeline
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 51, in <module>
+    from app.services.contract_agent.semantic_source_profile import (
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\semantic_source_profile.py", line 294, in <module>
+    _r(
+TypeError: _r() missing 5 required positional arguments: 'fr', 'ar', 'rank', 'primary', and 'role'

@@ -1,0 +1,1203 @@
+[
+  {
+    "fixture_id": "01_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "relations": [
+        {
+          "concept": "CONFIDENTIALITY_OBLIGATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "NON_DISCLOSURE",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "confidentiality",
+      "mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:CONFIDENTIALITY_OBLIGATION",
+      "POLARITY_INFORMATION_LOST:CONFIDENTIALITY_OBLIGATION"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NON_DISCLOSURE"
+    ]
+  },
+  {
+    "fixture_id": "01_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Chaque Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles du présent Accord.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "relations": [
+        {
+          "concept": "CONFIDENTIALITY_OBLIGATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "NON_DISCLOSURE",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "confidentiality",
+      "mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:CONFIDENTIALITY_OBLIGATION",
+      "POLARITY_INFORMATION_LOST:CONFIDENTIALITY_OBLIGATION"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NON_DISCLOSURE"
+    ]
+  },
+  {
+    "fixture_id": "01_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة، باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "relations": [
+        {
+          "concept": "CONFIDENTIALITY_OBLIGATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "NON_DISCLOSURE",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "confidentiality",
+      "mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:CONFIDENTIALITY_OBLIGATION",
+      "POLARITY_INFORMATION_LOST:CONFIDENTIALITY_OBLIGATION"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NON_DISCLOSURE"
+    ]
+  },
+  {
+    "fixture_id": "01_1_2_en",
+    "language": "en",
+    "source_text": "1.2 Each Receiving Party shall use the Confidential Information solely for the Purpose.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "confidentiality",
+      "mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PURPOSE_LIMITATION",
+      "POLARITY_INFORMATION_LOST:PURPOSE_LIMITATION"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "01_1_2_fr",
+    "language": "fr",
+    "source_text": "1.2 Chaque Partie Réceptrice n'utilisera les Informations Confidentielles qu'aux fins de l'Objet.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "confidentiality",
+      "mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PURPOSE_LIMITATION",
+      "POLARITY_INFORMATION_LOST:PURPOSE_LIMITATION"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "01_1_2_ar",
+    "language": "ar",
+    "source_text": "1.2 يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "confidentiality",
+      "mechanisms": [
+        "MANDATORY_OBLIGATION",
+        "PURPOSE_LIMITATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "MANDATORY_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PURPOSE_LIMITATION",
+      "POLARITY_INFORMATION_LOST:PURPOSE_LIMITATION"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "02_4_2_en",
+    "language": "en",
+    "source_text": "4.2 Provider may terminate this Agreement or any SOW immediately, for any reason or no reason, upon written notice to Client. Client may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "NOTICE_PROCEDURE",
+        "TERMINATION_FOR_CAUSE"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PROCEDURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TERMINATION_FOR_CAUSE"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NOTICE_PREREQUISITE",
+      "MISSING_MATERIAL_MECHANISM:TERMINATION_FOR_CONVENIENCE",
+      "MISSING_PROCEDURAL_STATE:MANUAL",
+      "MISSING_PROCEDURAL_STATE:NOTICE_REQUIRED"
+    ]
+  },
+  {
+    "fixture_id": "02_4_2_fr",
+    "language": "fr",
+    "source_text": "4.2 Le Prestataire pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite au Client. Le Client ne pourra résilier que pour manquement substantiel non corrigé du Prestataire, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "IMMEDIATE_TERMINATION",
+        "NOTICE_PREREQUISITE",
+        "NOTICE_PROCEDURE",
+        "TERMINATION_CURE_PERIOD",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "states": [
+        "CURE_PERIOD",
+        "NOTICE_PERIOD",
+        "NOTICE_REQUIRED",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CONVENIENCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "IMMEDIATE_TERMINATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_CURE_PERIOD",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PROCEDURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TERMINATION_FOR_CONVENIENCE",
+      "WRONG_MATERIAL_ACTOR:TERMINATION_FOR_CAUSE"
+    ],
+    "high": [
+      "MISSING_PROCEDURAL_STATE:MANUAL"
+    ]
+  },
+  {
+    "fixture_id": "02_4_2_ar",
+    "language": "ar",
+    "source_text": "4.2 يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل. ولا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من المزود، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "IMMEDIATE_TERMINATION",
+        "NOTICE_PREREQUISITE",
+        "PROHIBITION",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "states": [
+        "NOTICE_PERIOD",
+        "NOTICE_REQUIRED",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CONVENIENCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "IMMEDIATE_TERMINATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TERMINATION_FOR_CONVENIENCE",
+      "WRONG_MATERIAL_ACTOR:TERMINATION_FOR_CAUSE"
+    ],
+    "high": [
+      "MISSING_PROCEDURAL_STATE:MANUAL"
+    ]
+  },
+  {
+    "fixture_id": "04_2_1_en",
+    "language": "en",
+    "source_text": "2.1 Provider shall notify Client of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DATA_BREACH_NOTICE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "DATA_BREACH_NOTICE",
+          "obligated_actor": "PROVIDER",
+          "beneficiary": "CLIENT",
+          "trigger": "CONFIRMED_SECURITY_INCIDENT",
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": [
+        {
+          "value": 4,
+          "unit": "HOURS",
+          "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+          "related_mechanism": "DATA_BREACH_NOTICE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "security",
+      "mechanisms": [
+        "DATA_BREACH_NOTICE"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "DATA_BREACH_NOTICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:DATA_BREACH_NOTICE",
+      "POLARITY_INFORMATION_LOST:DATA_BREACH_NOTICE"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NOTICE_PREREQUISITE",
+      "MISSING_PROCEDURAL_STATE:NOTICE_REQUIRED",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:DATA_BREACH_NOTICE_DEADLINE"
+    ]
+  },
+  {
+    "fixture_id": "04_2_1_fr",
+    "language": "fr",
+    "source_text": "2.1 Le Prestataire notifiera le Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DATA_BREACH_NOTICE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "DATA_BREACH_NOTICE",
+          "obligated_actor": "PROVIDER",
+          "beneficiary": "CLIENT",
+          "trigger": "CONFIRMED_SECURITY_INCIDENT",
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": [
+        {
+          "value": 4,
+          "unit": "HOURS",
+          "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+          "related_mechanism": "DATA_BREACH_NOTICE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "security",
+      "mechanisms": [
+        "DATA_BREACH_NOTICE"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "DATA_BREACH_NOTICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:DATA_BREACH_NOTICE",
+      "POLARITY_INFORMATION_LOST:DATA_BREACH_NOTICE"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NOTICE_PREREQUISITE",
+      "MISSING_PROCEDURAL_STATE:NOTICE_REQUIRED",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:DATA_BREACH_NOTICE_DEADLINE"
+    ]
+  },
+  {
+    "fixture_id": "04_2_1_ar",
+    "language": "ar",
+    "source_text": "2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DATA_BREACH_NOTICE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "DATA_BREACH_NOTICE",
+          "obligated_actor": "PROVIDER",
+          "beneficiary": "CLIENT",
+          "trigger": "CONFIRMED_SECURITY_INCIDENT",
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": [
+        {
+          "value": 4,
+          "unit": "HOURS",
+          "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+          "related_mechanism": "DATA_BREACH_NOTICE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "security",
+      "mechanisms": [
+        "DATA_BREACH_NOTICE"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "DATA_BREACH_NOTICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:DATA_BREACH_NOTICE",
+      "POLARITY_INFORMATION_LOST:DATA_BREACH_NOTICE"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:NOTICE_PREREQUISITE",
+      "MISSING_PROCEDURAL_STATE:NOTICE_REQUIRED",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:DATA_BREACH_NOTICE_DEADLINE"
+    ]
+  },
+  {
+    "fixture_id": "07_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "intellectual_property",
+      "mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LICENSE_GRANT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LICENSE_GRANT",
+      "POLARITY_INFORMATION_LOST:LICENSE_GRANT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "07_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Le Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "intellectual_property",
+      "mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LICENSE_GRANT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LICENSE_GRANT",
+      "POLARITY_INFORMATION_LOST:LICENSE_GRANT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "07_1_2_en",
+    "language": "en",
+    "source_text": "1.2 Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LICENSE_RESTRICTION"
+      ],
+      "relations": [
+        {
+          "concept": "LICENSE_RESTRICTION",
+          "obligated_actor": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "intellectual_property",
+      "mechanisms": [
+        "LICENSE_RESTRICTION",
+        "PROHIBITION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "LICENSE_RESTRICTION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LICENSE_RESTRICTION",
+      "POLARITY_INFORMATION_LOST:LICENSE_RESTRICTION"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "07_1_2_fr",
+    "language": "fr",
+    "source_text": "1.2 Le Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LICENSE_RESTRICTION"
+      ],
+      "relations": [
+        {
+          "concept": "LICENSE_RESTRICTION",
+          "obligated_actor": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "intellectual_property",
+      "mechanisms": [
+        "LICENSE_RESTRICTION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LICENSE_RESTRICTION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LICENSE_RESTRICTION",
+      "POLARITY_INFORMATION_LOST:LICENSE_RESTRICTION"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "11_5_1_ar",
+    "language": "ar",
+    "source_text": "5.1 لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "assignment",
+      "mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:ASSIGNMENT_RESTRICTION",
+      "POLARITY_INFORMATION_LOST:ASSIGNMENT_RESTRICTION"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_4_1_en",
+    "language": "en",
+    "source_text": "4.1 Borrower may prepay the Loan, in whole or in part, at any time without penalty, provided that any partial prepayment shall be applied first to accrued interest and then to outstanding principal.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREPAYMENT_RIGHT",
+          "right_holder": "BORROWER",
+          "object": "LOAN",
+          "action": "PREPAY",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PREPAYMENT_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PREPAYMENT_RIGHT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_4_1_fr",
+    "language": "fr",
+    "source_text": "4.1 L'Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité, tout remboursement partiel étant imputé en premier lieu sur les intérêts courus puis sur le principal restant dû.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREPAYMENT_RIGHT",
+          "right_holder": "BORROWER",
+          "object": "LOAN",
+          "action": "PREPAY",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PREPAYMENT_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PREPAYMENT_RIGHT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_4_1_ar",
+    "language": "ar",
+    "source_text": "4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREPAYMENT_RIGHT",
+          "right_holder": "BORROWER",
+          "object": "LOAN",
+          "action": "PREPAY",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PREPAYMENT_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PREPAYMENT_RIGHT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "14_4_1_en",
+    "language": "en",
+    "source_text": "4.1 For so long as the Investor holds at least 3% of the Company's fully-diluted capitalization, the Company shall deliver to the Investor audited annual financial statements within ninety (90) days of fiscal year end, and unaudited quarterly financial statements within forty-five (45) days of each fiscal quarter end.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "relations": [
+        {
+          "concept": "FINANCIAL_REPORTING_OBLIGATION",
+          "obligated_actor": "COMPANY",
+          "beneficiary": "INVESTOR",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 3,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 90,
+          "unit": "DAYS",
+          "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 45,
+          "unit": "DAYS",
+          "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "investor_information_rights",
+      "mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:FINANCIAL_REPORTING_OBLIGATION",
+      "POLARITY_INFORMATION_LOST:FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "high": [
+      "WRONG_OR_MISSING_NUMERIC_ROLE:INVESTOR_HOLDING_THRESHOLD",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:QUARTERLY_FINANCIAL_REPORTING_DEADLINE"
+    ]
+  },
+  {
+    "fixture_id": "14_4_1_fr",
+    "language": "fr",
+    "source_text": "4.1 Tant que l'Investisseur détiendra au moins 3 % du capital pleinement dilué de la Société, la Société lui remettra des états financiers annuels audités dans un délai de quatre-vingt-dix (90) jours suivant la fin de l'exercice fiscal, et des états financiers trimestriels non audités dans un délai de quarante-cinq (45) jours suivant la fin de chaque trimestre fiscal.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "relations": [
+        {
+          "concept": "FINANCIAL_REPORTING_OBLIGATION",
+          "obligated_actor": "COMPANY",
+          "beneficiary": "INVESTOR",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 3,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 90,
+          "unit": "DAYS",
+          "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 45,
+          "unit": "DAYS",
+          "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "investor_information_rights",
+      "mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:FINANCIAL_REPORTING_OBLIGATION",
+      "POLARITY_INFORMATION_LOST:FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "high": [
+      "WRONG_OR_MISSING_NUMERIC_ROLE:INVESTOR_HOLDING_THRESHOLD",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+      "WRONG_OR_MISSING_NUMERIC_ROLE:QUARTERLY_FINANCIAL_REPORTING_DEADLINE"
+    ]
+  }
+]

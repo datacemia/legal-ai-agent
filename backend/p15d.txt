@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_one_finance_real.py", line 6, in <module>
+    from tools.test_finance_real_reconciliation import test_file
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_real_reconciliation.py", line 9, in <module>
+    from app.services.finance_agent.transaction_extractor import (
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 22093
+    if (
+    ^
+IndentationError: expected an indented block after 'for' statement on line 22092

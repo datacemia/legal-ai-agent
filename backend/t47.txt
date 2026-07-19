@@ -1,0 +1,108 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 6201
+PDF_LINES_DEBUG {'line_count': 109, 'non_empty_line_count': 75, 'max_line_len': 167, 'first_20': ['www.bendigobank.com.au', '', '', '                                                          Your details at a glance', '', '                                                             BSB number                           633-000', '                         009358', '                                                                            Account number                    163776974', '                                                                             Customer number               23597032/1401', '            Ms Linda Troy                                                 Account title                 MS LINDA TROY', '             38 Turfan Way ,', '               Munster WA 6166', '                                                         Account summary', '', '                                                                                Statement period           9 Feb 2023 – Mar 2023', '                                                                                Statement number                          5', '                                                                               Opening balance on 6 Oct                   $97.39', '                                                                                     Deposits & credits Withdrawals                $0.01', '                                                          & debits                                 $42.40', '                                                                                        Closing Balance on 9 Mar 2023              $55.00']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 21, 'dep_line': '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', 'wd_i': 24, 'wd_line': 'E-0       9 Feb 23    WITHDRAWAL - EFTPOS     8883                                  6.00                       91.39', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': 'www.bendigobank.com.au\n\n\n                                                          your details at a glance\n\n                                                             bsb number                           633-000\n                         009358\n                                                     '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES ["'Opening balance on 6 Oct                   $97.39'", "'Deposits & credits Withdrawals                $0.01'", "'& debits                                 $42.40'", "'Closing Balance on 9 Mar 2023              $55.00'", "'/       Opening balance                                                                                           $97.39S-3691'", "'Transaction totals / Closing balance                                       $42.40          $0.01          $55.00'"]
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 7, 'amounts': 0, 'date_sample': [], 'description_sample': ['Deposits & credits Withdrawals                $0.01', '& debits                                 $42.40', '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', '11 Feb 23     Interest Rate       0.050%PA', '09 Mar 23   INTEREST                                                                          0.00         54.99', 'Date         Transaction                                                     Withdrawals          Deposits           Balance', '09 Mar 23   INTEREST                                                                           0.01            55.00'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+MONTH_NAME_LEDGER_EXTRACTED {'transactions': 11, 'income': 11, 'expenses': 0, 'income_total': 441.75, 'expense_total': 0}
+STATEMENT_LAYOUT_DETECTED month_name_ledger
+MONTH_NAME_LEDGER_ROUTE {'transactions': 11, 'income': 11, 'expenses': 0}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 97.39, 'withdrawals': 0, 'ending_balance': 42.4, 'deposits': 441.75}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0, 'ending_balance': 42.4, 'deposits': 441.75}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 21, 'dep_line': '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', 'wd_i': 24, 'wd_line': 'E-0       9 Feb 23    WITHDRAWAL - EFTPOS     8883                                  6.00                       91.39', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': 'www.bendigobank.com.au\n\n\n                                                          your details at a glance\n\n                                                             bsb number                           633-000\n                         009358\n                                                     '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES ["'Opening balance on 6 Oct                   $97.39'", "'Deposits & credits Withdrawals                $0.01'", "'& debits                                 $42.40'", "'Closing Balance on 9 Mar 2023              $55.00'", "'/       Opening balance                                                                                           $97.39S-3691'", "'Transaction totals / Closing balance                                       $42.40          $0.01          $55.00'"]
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 7, 'amounts': 0, 'date_sample': [], 'description_sample': ['Deposits & credits Withdrawals                $0.01', '& debits                                 $42.40', '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', '11 Feb 23     Interest Rate       0.050%PA', '09 Mar 23   INTEREST                                                                          0.00         54.99', 'Date         Transaction                                                     Withdrawals          Deposits           Balance', '09 Mar 23   INTEREST                                                                           0.01            55.00'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+MONTH_NAME_LEDGER_EXTRACTED {'transactions': 11, 'income': 11, 'expenses': 0, 'income_total': 441.75, 'expense_total': 0}
+STATEMENT_LAYOUT_DETECTED month_name_ledger
+MONTH_NAME_LEDGER_ROUTE {'transactions': 11, 'income': 11, 'expenses': 0}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 97.39, 'withdrawals': 0, 'ending_balance': 42.4, 'deposits': 441.75}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0, 'ending_balance': 42.4, 'deposits': 441.75}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0.01, 'ending_balance': 42.4}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 21, 'dep_line': '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', 'wd_i': 24, 'wd_line': 'E-0       9 Feb 23    WITHDRAWAL - EFTPOS     8883                                  6.00                       91.39', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': 'www.bendigobank.com.au\n\n\n                                                          your details at a glance\n\n                                                             bsb number                           633-000\n                         009358\n                                                     '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES ["'Opening balance on 6 Oct                   $97.39'", "'Deposits & credits Withdrawals                $0.01'", "'& debits                                 $42.40'", "'Closing Balance on 9 Mar 2023              $55.00'", "'/       Opening balance                                                                                           $97.39S-3691'", "'Transaction totals / Closing balance                                       $42.40          $0.01          $55.00'"]
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 7, 'amounts': 0, 'date_sample': [], 'description_sample': ['Deposits & credits Withdrawals                $0.01', '& debits                                 $42.40', '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', '11 Feb 23     Interest Rate       0.050%PA', '09 Mar 23   INTEREST                                                                          0.00         54.99', 'Date         Transaction                                                     Withdrawals          Deposits           Balance', '09 Mar 23   INTEREST                                                                           0.01            55.00'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+MONTH_NAME_LEDGER_EXTRACTED {'transactions': 11, 'income': 11, 'expenses': 0, 'income_total': 441.75, 'expense_total': 0}
+STATEMENT_LAYOUT_DETECTED month_name_ledger
+MONTH_NAME_LEDGER_ROUTE {'transactions': 11, 'income': 11, 'expenses': 0}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 97.39, 'withdrawals': 0, 'ending_balance': 42.4, 'deposits': 441.75}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 97.39, 'withdrawals': 0, 'ending_balance': 42.4, 'deposits': 441.75}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 21, 'dep_line': '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', 'wd_i': 24, 'wd_line': 'E-0       9 Feb 23    WITHDRAWAL - EFTPOS     8883                                  6.00                       91.39', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': 'www.bendigobank.com.au\n\n\n                                                          your details at a glance\n\n                                                             bsb number                           633-000\n                         009358\n                                                     '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES ["'Opening balance on 6 Oct                   $97.39'", "'Deposits & credits Withdrawals                $0.01'", "'& debits                                 $42.40'", "'Closing Balance on 9 Mar 2023              $55.00'", "'/       Opening balance                                                                                           $97.39S-3691'", "'Transaction totals / Closing balance                                       $42.40          $0.01          $55.00'"]
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 7, 'amounts': 0, 'date_sample': [], 'description_sample': ['Deposits & credits Withdrawals                $0.01', '& debits                                 $42.40', '/       Date          Transaction                                                    Withdrawals         Deposits           BalanceI-3691', '11 Feb 23     Interest Rate       0.050%PA', '09 Mar 23   INTEREST                                                                          0.00         54.99', 'Date         Transaction                                                     Withdrawals          Deposits           Balance', '09 Mar 23   INTEREST                                                                           0.01            55.00'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+MONTH_NAME_LEDGER_EXTRACTED {'transactions': 11, 'income': 11, 'expenses': 0, 'income_total': 441.75, 'expense_total': 0}
+STATEMENT_LAYOUT_DETECTED month_name_ledger
+MONTH_NAME_LEDGER_ROUTE {'transactions': 11, 'income': 11, 'expenses': 0}
+OK_REAL t47.pdf | tx=11 income=441.75 expenses=0 expected_income=441.75 expected_expenses=0.0 summary_ok=True real_ok=None opening=97.39 ending=42.4 gap=None reason=MATCHES_REAL_STATEMENT_VALUES

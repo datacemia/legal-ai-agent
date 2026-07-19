@@ -1,0 +1,342 @@
+========================================================================================================================
+V4.1.17A TOP-RISK BUILDER PROBE
+========================================================================================================================
+
+========================================================================================================================
+FUNCTION: infer_exposure_dimensions
+LINES: 409 - 455
+TARGETS: ['legal_insight']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 414
+------------------------------------------------------------------------------------------------------------------------
+00409: def infer_exposure_dimensions(clause: dict, risk_level: str) -> dict:
+00410:     text = safe_get_text(
+00411:         clause.get("clause_type"),
+00412:         clause.get("title"),
+00413:         clause.get("clause_title"),
+00414:         clause.get("legal_insight"),
+00415:         clause.get("explanation_simple"),
+00416:         clause.get("quoted_text"),
+00417:         clause.get("original_text"),
+00418:     ).lower()
+00419: 
+00420:     exposure = {dimension: "low" for dimension in EXPOSURE_DIMENSIONS}
+00421: 
+00422:     base = RISK_LEVEL_EXPOSURE.get(risk_level, "low")
+00423: 
+00424:     if risk_level in {"medium", "high"}:
+00425:         exposure["legal"] = base
+00426:         exposure["operational"] = base
+
+========================================================================================================================
+FUNCTION: infer_negotiability
+LINES: 458 - 477
+TARGETS: ['legal_insight']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 463
+------------------------------------------------------------------------------------------------------------------------
+00458: def infer_negotiability(clause: dict) -> str:
+00459:     text = safe_get_text(
+00460:         clause.get("clause_type"),
+00461:         clause.get("title"),
+00462:         clause.get("clause_title"),
+00463:         clause.get("legal_insight"),
+00464:         clause.get("quoted_text"),
+00465:         clause.get("original_text"),
+00466:     ).lower()
+00467: 
+00468:     if any(k in text for k in ["mandatory law", "public procurement", "consumer law", "sanctions", "anti-bribery", "gdpr", "droit impératif", "marché public", "قانون إلزامي", "العقوبات"]):
+00469:         return "limited"
+00470: 
+00471:     if any(k in text for k in ["governing law", "jurisdiction", "arbitration", "droit applicable", "juridiction", "تحكيم", "اختصاص"]):
+00472:         return "usually"
+00473: 
+00474:     if any(k in text for k in ["tax", "employment law", "labor law", "data protection", "consumer", "ضريبة", "حماية البيانات", "قانون العمل"]):
+00475:         return "jurisdiction_dependent"
+
+========================================================================================================================
+FUNCTION: build_contract_quality_score
+LINES: 763 - 844
+TARGETS: ['legal_insight']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 820
+------------------------------------------------------------------------------------------------------------------------
+00812:         coverage = 1.0
+00813: 
+00814:     fidelity_failures = sum(
+00815:         1
+00816:         for clause in clauses
+00817:         if isinstance(clause, dict)
+00818:         and any(
+00819:             marker in safe_get_text(
+00820:                 clause.get("legal_insight"),
+00821:                 clause.get("recommendation"),
+00822:                 clause.get("negotiation_advice"),
+00823:                 clause.get("safer_alternative"),
+00824:             ).lower()
+00825:             for marker in (
+00826:                 "manual review required",
+00827:                 "examen manuel requis",
+00828:                 "مراجعة يدوية مطلوبة",
+00829:             )
+00830:         )
+00831:     )
+00832: 
+
+========================================================================================================================
+FUNCTION: build_contract_overview
+LINES: 984 - 1086
+TARGETS: ['executive_summary', 'executive_report']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1002
+------------------------------------------------------------------------------------------------------------------------
+00994:     Structured values already resolved upstream are preserved. Conservative
+00995:     document-level extractors only fill gaps and never overwrite a substantive
+00996:     value with a localized "Not specified" placeholder.
+00997:     """
+00998:     language = normalize_language(language)
+00999:     not_specified = localized_default("not_specified", language)
+01000:     not_applicable = localized_default("not_applicable", language)
+01001: 
+01002:     exec_summary = pipeline_result.get("executive_summary", {}) or {}
+01003:     exec_report = pipeline_result.get("executive_report", {}) or {}
+01004:     overview = exec_report.get("contract_overview", {}) or {}
+01005: 
+01006:     family = family_detection.get("family", "General")
+01007:     optional_fields = get_optional_fields_for_family(family)
+01008: 
+01009:     payment_terms = exec_summary.get("payment_terms")
+01010:     source_duration = extract_contract_duration(
+01011:         contract_text,
+01012:         language,
+01013:     )
+01014:     duration = (
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1003
+------------------------------------------------------------------------------------------------------------------------
+00995:     document-level extractors only fill gaps and never overwrite a substantive
+00996:     value with a localized "Not specified" placeholder.
+00997:     """
+00998:     language = normalize_language(language)
+00999:     not_specified = localized_default("not_specified", language)
+01000:     not_applicable = localized_default("not_applicable", language)
+01001: 
+01002:     exec_summary = pipeline_result.get("executive_summary", {}) or {}
+01003:     exec_report = pipeline_result.get("executive_report", {}) or {}
+01004:     overview = exec_report.get("contract_overview", {}) or {}
+01005: 
+01006:     family = family_detection.get("family", "General")
+01007:     optional_fields = get_optional_fields_for_family(family)
+01008: 
+01009:     payment_terms = exec_summary.get("payment_terms")
+01010:     source_duration = extract_contract_duration(
+01011:         contract_text,
+01012:         language,
+01013:     )
+01014:     duration = (
+01015:         source_duration
+
+========================================================================================================================
+FUNCTION: select_clause_report_text
+LINES: 1434 - 1504
+TARGETS: ['legal_insight']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1454
+------------------------------------------------------------------------------------------------------------------------
+01446:     the historical path.
+01447:     """
+01448:     language = normalize_language(language)
+01449: 
+01450:     field_orders = {
+01451:         "explanation": (
+01452:             "explanation_simple",
+01453:             "why_it_matters",
+01454:             "legal_insight",
+01455:             "business_impact",
+01456:             "commercial_impact",
+01457:             "operational_impact",
+01458:         ),
+01459:         "risk": (
+01460:             "risk_reason",
+01461:             "business_impact",
+01462:             "commercial_impact",
+01463:             "operational_impact",
+01464:             "legal_insight",
+01465:             "explanation_simple",
+01466:             "why_it_matters",
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1464
+------------------------------------------------------------------------------------------------------------------------
+01456:             "commercial_impact",
+01457:             "operational_impact",
+01458:         ),
+01459:         "risk": (
+01460:             "risk_reason",
+01461:             "business_impact",
+01462:             "commercial_impact",
+01463:             "operational_impact",
+01464:             "legal_insight",
+01465:             "explanation_simple",
+01466:             "why_it_matters",
+01467:         ),
+01468:         "action": (
+01469:             "recommendation",
+01470:             "negotiation_advice",
+01471:             "safer_alternative",
+01472:         ),
+01473:         "negotiation": (
+01474:             "negotiation_advice",
+01475:             "recommendation",
+01476:             "safer_alternative",
+
+========================================================================================================================
+FUNCTION: build_unified_report_from_pipeline
+LINES: 1875 - 1938
+TARGETS: ['executive_summary', 'executive_report']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1904
+------------------------------------------------------------------------------------------------------------------------
+01896:     contract_overview = build_contract_overview(
+01897:         pipeline_result,
+01898:         family_detection,
+01899:         contract_text,
+01900:         party_roles,
+01901:         language,
+01902:     )
+01903: 
+01904:     executive_summary_text = (
+01905:         pipeline_result.get("executive_risk_narrative")
+01906:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01907:         or ""
+01908:     )
+01909: 
+01910:     missing_clauses, confidence_notes, fallback_position = (
+01911:         _generate_missing_clauses_and_notes(
+01912:             contract_text,
+01913:             family_detection,
+01914:             clauses,
+01915:             language,
+01916:         )
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1906
+------------------------------------------------------------------------------------------------------------------------
+01898:         family_detection,
+01899:         contract_text,
+01900:         party_roles,
+01901:         language,
+01902:     )
+01903: 
+01904:     executive_summary_text = (
+01905:         pipeline_result.get("executive_risk_narrative")
+01906:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01907:         or ""
+01908:     )
+01909: 
+01910:     missing_clauses, confidence_notes, fallback_position = (
+01911:         _generate_missing_clauses_and_notes(
+01912:             contract_text,
+01913:             family_detection,
+01914:             clauses,
+01915:             language,
+01916:         )
+01917:     )
+01918: 
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 1927
+------------------------------------------------------------------------------------------------------------------------
+01919:     quality_score = build_contract_quality_score(
+01920:         pipeline_result,
+01921:         clauses,
+01922:     )
+01923: 
+01924:     return {
+01925:         "contract_family": family_detection.get("family", "General"),
+01926:         "contract_overview": contract_overview,
+01927:         "executive_summary": executive_summary_text,
+01928:         "key_clauses": key_clauses,
+01929:         "risks_identified": risks,
+01930:         "negotiation_priorities": negotiation_priorities,
+01931:         "suggested_wording": suggested_wording,
+01932:         "fallback_position": fallback_position,
+01933:         "action_checklist": action_checklist,
+01934:         "risk_score": risk_score,
+01935:         "confidence_score": quality_score,
+01936:         "missing_clauses": missing_clauses,
+01937:         "confidence_notes": confidence_notes,
+01938:     }
+
+========================================================================================================================
+FUNCTION: title_aware_clause_text
+LINES: 2065 - 2086
+TARGETS: ['legal_insight']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 2076
+------------------------------------------------------------------------------------------------------------------------
+02068: ) -> str:
+02069:     title = clause_display_title(clause, language)
+02070:     insight = clean_clause_lead(
+02071:         clause.get("why_it_matters")
+02072:         or clause.get("business_impact")
+02073:         or clause.get("commercial_impact")
+02074:         or clause.get("operational_impact")
+02075:         or clause.get("risk_reason")
+02076:         or clause.get("legal_insight")
+02077:         or clause.get("explanation_simple")
+02078:         or "",
+02079:         language,
+02080:     )
+02081: 
+02082:     if not insight or is_generic_report_text(insight, language):
+02083:         return ""
+02084: 
+02085:     separator = " — " if language != "ar" else " — "
+02086:     return f"{title}{separator}{insight}"
+
+========================================================================================================================
+FUNCTION: to_legacy_summary_data
+LINES: 2213 - 2447
+TARGETS: ['executive_summary']
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+MATCH LINE: 2381
+------------------------------------------------------------------------------------------------------------------------
+02373:                     language,
+02374:                 )
+02375:                 for item in main_obligations
+02376:             ],
+02377:             language,
+02378:             limit=8,
+02379:         ),
+02380:         "global_summary": finalize_published_text(
+02381:             report.get("executive_summary", ""),
+02382:             language,
+02383:         ),
+02384:         "important_points": compact_unique_texts(
+02385:             [
+02386:                 finalize_published_text(
+02387:                     item,
+02388:                     language,
+02389:                 )
+02390:                 for item in important_points
+02391:             ],
+02392:             language,
+02393:             limit=8,

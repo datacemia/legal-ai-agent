@@ -1,0 +1,553 @@
+[
+  {
+    "language": "en",
+    "document": "15_General_Commercial_Agreement.json",
+    "reference": "clause_7",
+    "source_text": "6.1 This Agreement shall continue for two (2) years from the Effective Date, renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice.",
+    "pipeline_clause_type": "renewal",
+    "semantic_profile_version": "shadow-p0-v4.1.7-termination-wave",
+    "shadow_primary_type": "termination",
+    "shadow_primary_type_confidence": 0.9276,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2704,
+    "shadow_dominance_margin": 38.3598,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "termination",
+        "score": 101.515,
+        "coverage": 0.2704,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "renewal",
+        "score": 63.1552,
+        "coverage": 0.658,
+        "independent_support": 1,
+        "core_count": 0,
+        "secondary_count": 0,
+        "procedural_count": 1
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "TERMINATION_FOR_CONVENIENCE",
+      "TERMINATION_RIGHT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 77,
+            "end": 279,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 224,
+            "end": 306,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 228,
+            "end": 306,
+            "text": "terminate this Agreement for convenience upon ninety (90) days' written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 224,
+            "end": 307,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 188,
+            "end": 307,
+            "text": "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 77,
+            "end": 279,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "e219797e9f73a6c7ac7db8b4f139d4ec34b27e1b97d3c2da36c15e8707eff1a4"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 224,
+            "end": 306,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 228,
+            "end": 306,
+            "text": "terminate this Agreement for convenience upon ninety (90) days' written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "fb9ef5751accf19c05a87d123c2d0f0cda32da90df4f7513867cc2a242ca6296"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 224,
+            "end": 307,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fead9d9c10ef88c003f09d82738ddb4090663ae5fd993a81d8100dad014242d0"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 188,
+            "end": 307,
+            "text": "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d3091a106bb6b7f5acb10bb43412307837e508b1903fda5b0cb5ddc88d72ed41"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 77,
+            "end": 279,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "e219797e9f73a6c7ac7db8b4f139d4ec34b27e1b97d3c2da36c15e8707eff1a4"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 224,
+            "end": 306,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 228,
+            "end": 306,
+            "text": "terminate this Agreement for convenience upon ninety (90) days' written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "fb9ef5751accf19c05a87d123c2d0f0cda32da90df4f7513867cc2a242ca6296"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 224,
+            "end": 307,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fead9d9c10ef88c003f09d82738ddb4090663ae5fd993a81d8100dad014242d0"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 188,
+            "end": 307,
+            "text": "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d3091a106bb6b7f5acb10bb43412307837e508b1903fda5b0cb5ddc88d72ed41"
+      }
+    ],
+    "semantic_profile_hash": "1945d7729a831fc746bd6b928bc2dfd46fc6421ddacf1d1fc3cb6a5ad2d80375",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "clause_6",
+    "source_text": "6.1 Le présent Accord se poursuivra pendant deux (2) ans à compter de la Date d'Effet, se renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins soixante (60) jours à l'avance. Chaque Partie pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours.",
+    "pipeline_clause_type": "renewal",
+    "semantic_profile_version": "shadow-p0-v4.1.7-termination-wave",
+    "shadow_primary_type": "termination",
+    "shadow_primary_type_confidence": 0.927,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.268,
+    "shadow_dominance_margin": 44.3224,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "termination",
+        "score": 101.4156,
+        "coverage": 0.268,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "renewal",
+        "score": 57.0932,
+        "coverage": 0.5136,
+        "independent_support": 1,
+        "core_count": 0,
+        "secondary_count": 0,
+        "procedural_count": 1
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "TERMINATION_FOR_CONVENIENCE",
+      "TERMINATION_RIGHT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 90,
+            "end": 297,
+            "text": "renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins soixante (60) jours à l'avance. Chaque Partie po"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 295,
+            "end": 402,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 302,
+            "end": 402,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 358,
+            "end": 402,
+            "text": "préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 295,
+            "end": 403,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 90,
+            "end": 297,
+            "text": "renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins soixante (60) jours à l'avance. Chaque Partie po"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "734fed273fcb325bfecad9e099ddada038fe2996826f589a51466bb5dd13b9d6"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 295,
+            "end": 402,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 302,
+            "end": 402,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4e9b20946b6cdc5b24a8f19f976402593939ffe5d1357bf2966f795e6f492f94"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 358,
+            "end": 402,
+            "text": "préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "e00990c88f3f813fff2ef850bc62806a85febaa326082aae784d9a63885ee070"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 295,
+            "end": 403,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7d12387171c62a4c181a8b3d3f0f8103895812b5a52a9e7ec514c7b70809be93"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 90,
+            "end": 297,
+            "text": "renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins soixante (60) jours à l'avance. Chaque Partie po"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "734fed273fcb325bfecad9e099ddada038fe2996826f589a51466bb5dd13b9d6"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 295,
+            "end": 402,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 302,
+            "end": 402,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4e9b20946b6cdc5b24a8f19f976402593939ffe5d1357bf2966f795e6f492f94"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 295,
+            "end": 403,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7d12387171c62a4c181a8b3d3f0f8103895812b5a52a9e7ec514c7b70809be93"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 358,
+            "end": 402,
+            "text": "préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "e00990c88f3f813fff2ef850bc62806a85febaa326082aae784d9a63885ee070"
+      }
+    ],
+    "semantic_profile_hash": "679457f685a058f84113397a490eb3a1b87e8a01b062f7767b68934228cb8d39",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

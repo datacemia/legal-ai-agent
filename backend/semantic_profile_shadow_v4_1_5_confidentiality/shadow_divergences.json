@@ -1,0 +1,330 @@
+[
+  {
+    "language": "fr",
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "clause_6",
+    "source_text": "4.1 Le Consultant conservera confidentielle toute information non publique du Client divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable du Client.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4.1.5-confidentiality-wave",
+    "shadow_primary_type": "confidentiality",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9109,
+    "shadow_dominance_margin": 82.8174,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "confidentiality",
+        "score": 82.8174,
+        "coverage": 0.9109,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "CONFIDENTIALITY_DUTY"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 155,
+            "end": 191,
+            "text": "sans le consentement écrit préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 163,
+            "end": 191,
+            "text": "consentement écrit préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 202,
+            "text": "conservera confidentielle toute information non publique du Client divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable du Client."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 155,
+            "end": 191,
+            "text": "sans le consentement écrit préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 163,
+            "end": 191,
+            "text": "consentement écrit préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "b9c792d6085fa3ef5f6a5bb87e438869ad3a412a4b165ba65bf08d1743dd6b7e"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 202,
+            "text": "conservera confidentielle toute information non publique du Client divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable du Client."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d7f33087c6d53a19c13bf42a66ad8d731bf3bacbbdb4d3766f260810170fb05f"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 155,
+            "end": 191,
+            "text": "sans le consentement écrit préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 163,
+            "end": 191,
+            "text": "consentement écrit préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "b9c792d6085fa3ef5f6a5bb87e438869ad3a412a4b165ba65bf08d1743dd6b7e"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 202,
+            "text": "conservera confidentielle toute information non publique du Client divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable du Client."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d7f33087c6d53a19c13bf42a66ad8d731bf3bacbbdb4d3766f260810170fb05f"
+      }
+    ],
+    "semantic_profile_hash": "5cab9709118ad64b986ac870fd2c0778f1ff309c6ca9ac1cf72c9c03aa2db48e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "4.1 يحافظ الاستشاري على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من العميل.",
+    "pipeline_clause_type": "corporate_governance",
+    "semantic_profile_version": "shadow-p0-v4.1.5-confidentiality-wave",
+    "shadow_primary_type": "confidentiality",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9733,
+    "shadow_dominance_margin": 85.44,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "confidentiality",
+        "score": 85.44,
+        "coverage": 0.9733,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "CONFIDENTIALITY_DUTY"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 118,
+            "end": 138,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 122,
+            "end": 138,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 4,
+            "end": 150,
+            "text": "يحافظ الاستشاري على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من العميل."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 118,
+            "end": 138,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 122,
+            "end": 138,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "cdec5413afe5960dfb6c55e177a153f4ab48e2a2ebe3054fb1d6570a273713b1"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 4,
+            "end": 150,
+            "text": "يحافظ الاستشاري على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من العميل."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a27cb0ede7a63a36fec163376bdcf2ef408538df2783e8780fee3453f07f0863"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 118,
+            "end": 138,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 122,
+            "end": 138,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "cdec5413afe5960dfb6c55e177a153f4ab48e2a2ebe3054fb1d6570a273713b1"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 4,
+            "end": 150,
+            "text": "يحافظ الاستشاري على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من العميل."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a27cb0ede7a63a36fec163376bdcf2ef408538df2783e8780fee3453f07f0863"
+      }
+    ],
+    "semantic_profile_hash": "9ad8ad20a57f7332d3b67b7025747b48f9e877541bbbff638a4aee74d63cca7c",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

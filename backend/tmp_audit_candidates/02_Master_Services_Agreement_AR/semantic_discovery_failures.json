@@ -1,0 +1,1315 @@
+[
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "2.2",
+    "source_language": "ar",
+    "source_text": "2.2 يحتفظ المزود بالحق في زيادة الرسوم من جانب واحد لأي فترة تجديد بنسبة تصل إلى خمسة عشر بالمائة (15%)، بإشعار خطي مدته ثلاثون (30) يوماً، دون الحاجة إلى موافقة العميل.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 105,
+            "end": 115,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "549fb3bedb39b0f3641e56857edce0d7ae4b8c0c0528c2cb9f94a63f92951186",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 106,
+            "end": 168,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً، دون الحاجة إلى موافقة الطرف الطرف المتعاقد ب أ"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "5340355042053387a3469fcf7f768a010d6f913312ac9250fd0b9b4e39c6dee5",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 105,
+            "end": 115,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "549fb3bedb39b0f3641e56857edce0d7ae4b8c0c0528c2cb9f94a63f92951186",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 106,
+            "end": 168,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً، دون الحاجة إلى موافقة الطرف الطرف المتعاقد ب أ"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "5340355042053387a3469fcf7f768a010d6f913312ac9250fd0b9b4e39c6dee5",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 تسري هذه الاتفاقية اعتباراً من تاريخ النفاذ وتستمر لمدة أولية قدرها سنتان (2)، وتتجدد تلقائياً لمدد متتالية قدرها سنة (1) واحدة ما لم يقدم أحد الطرفين إشعاراً خطياً بعدم التجديد قبل تسعين (90) يوماً على الأقل.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة أولية قدرها سنتان (2)، وتتجدد تلقائياً لمدد متتالية قدرها سنة",
+            "start": 56,
+            "end": 121
+          }
+        ]
+      },
+      {
+        "concept": "AUTO_RENEW_OPT_OUT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "تتجدد تلقائياً",
+            "start": 84,
+            "end": 98
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 84,
+            "end": 213,
+            "text": "تتجدد تلقائياً لمدد متتالية قدرها سنة (1) واحدة ما لم يقدم أحد الطرفين إشعاراً خطياً بعدم التجديد قبل تسعين (90) يوماً على الأقل."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "a187ac1f5722d752874b9f5592a3db58f032bf15e0e095a222c0a043fdd9882e",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة أولية قدرها سنتان (2)، وتتجدد تلقائياً لمدد متتالية قدرها سنة",
+            "start": 56,
+            "end": 121
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يلتزم العميل بدفع جميع الرسوم المحددة في كل بيان عمل خلال خمسة وأربعين (45) يوماً من تاريخ الفاتورة. يترتب على أي مبلغ غير مدفوع بعد ستين (60) يوماً فائدة بنسبة 1% شهرياً.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "MANDATORY_CONJUNCTION",
+        "rank": 94,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 4,
+            "end": 104,
+            "text": "يلتزم الطرف الطرف المتعاقد ب أ بدفع جميع الرسوم المحددة في كل بيان عمل خلال خمسة وأربعين (45) يوماً من تاريخ الفاتورة."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "arguments": [
+          {
+            "text": "يلتزم الطرف الطرف المتعاقد ب أ بدفع جميع الرسوم المحددة في كل بيان عمل خلال خمسة",
+            "tokens": [
+              "يلتزم",
+              "الطرف الطرف المتعاقد ب أ",
+              "بدفع",
+              "جميع",
+              "الرسوم",
+              "المحددة",
+              "بيان",
+              "عمل",
+              "خلال",
+              "خمسة"
+            ]
+          },
+          {
+            "text": "أربعين (45) يوماً من تاريخ الفاتورة.",
+            "tokens": [
+              "أربعين",
+              "يوما",
+              "تاريخ",
+              "الفاتورة"
+            ]
+          }
+        ],
+        "evidence_hash": "be208c2df174c26b4b2ff84fad42798d7e058bfa74061bcf52ec228e9dcbc623",
+        "normalized_concept": "MANDATORY_CONJUNCTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 175,
+            "text": "يلتزم الطرف الطرف المتعاقد ب أ بدفع جميع الرسوم المحددة في كل بيان عمل خلال خمسة وأربعين (45) يوماً من تاريخ الفاتورة. يترتب على أي مبلغ غير مدفوع بعد ستين (60) يوماً فائدة بنسبة 1% شهرياً."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6e3f5c232820c1edabc162c85b62c26e64a056efb972d354b0ebf2d650f402b1",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 175,
+            "text": "يلتزم الطرف الطرف المتعاقد ب أ بدفع جميع الرسوم المحددة في كل بيان عمل خلال خمسة وأربعين (45) يوماً من تاريخ الفاتورة. يترتب على أي مبلغ غير مدفوع بعد ستين (60) يوماً فائدة بنسبة 1% شهرياً."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6e3f5c232820c1edabc162c85b62c26e64a056efb972d354b0ebf2d650f402b1",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "3.2",
+    "source_language": "ar",
+    "source_text": "3.2 تُعتبر جميع المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى العميل عند السداد الكامل للرسوم المعنية.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 107,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "24bc528efb190c9751b559398e89d0593b82eb1a0d1d8946eafec573e37bb2f6",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 107,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "24bc528efb190c9751b559398e89d0593b82eb1a0d1d8946eafec573e37bb2f6",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "4.2",
+    "source_language": "ar",
+    "source_text": "4.2 يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل. ولا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من المزود، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 78,
+            "end": 88,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "bd98f71e6f766974d534ba83e7d95ba1fd27afe650bc497e1ae384714fb5c781",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 4,
+            "end": 95,
+            "text": "يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 101,
+            "end": 219,
+            "text": "يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من الطرف الطرف المتعاقد ب ب، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 16,
+            "end": 95,
+            "text": "إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 115,
+            "end": 219,
+            "text": "إنهاء إلا بسبب إخلال جوهري غير معالج من الطرف الطرف المتعاقد ب ب، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "174cbcc7699a1a7557f5c8fec0d3f7a9fd518874ec77926a8a79fe577c958302",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 4,
+            "end": 95,
+            "text": "يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "4fe540705b32b3bde390f5412c9122b515a1d28b75fcef697bf9d29e10014fa7",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 4,
+            "end": 95,
+            "text": "يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ab243d772bf6c5ef2965a84dd06ff5c1536b08bdbcef01eafd2df997ccbc6545",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 98,
+            "end": 220,
+            "text": "لا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من الطرف الطرف المتعاقد ب ب، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "c8724e33c354d7f831d671bbc36ff886d2b4536d659127cb8f13be005a1a7673",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 167,
+            "end": 219,
+            "text": "إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "7554d6dd86cea769cc936abe64a70b29341b387a15bfddadf12d1e7f8962e300",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 78,
+            "end": 88,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "bd98f71e6f766974d534ba83e7d95ba1fd27afe650bc497e1ae384714fb5c781",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 4,
+            "end": 95,
+            "text": "يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 101,
+            "end": 219,
+            "text": "يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من الطرف الطرف المتعاقد ب ب، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 16,
+            "end": 95,
+            "text": "إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 115,
+            "end": 219,
+            "text": "إنهاء إلا بسبب إخلال جوهري غير معالج من الطرف الطرف المتعاقد ب ب، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "174cbcc7699a1a7557f5c8fec0d3f7a9fd518874ec77926a8a79fe577c958302",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 4,
+            "end": 95,
+            "text": "يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "4fe540705b32b3bde390f5412c9122b515a1d28b75fcef697bf9d29e10014fa7",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 4,
+            "end": 95,
+            "text": "يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ab243d772bf6c5ef2965a84dd06ff5c1536b08bdbcef01eafd2df997ccbc6545",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 98,
+            "end": 220,
+            "text": "لا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من الطرف الطرف المتعاقد ب ب، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "c8724e33c354d7f831d671bbc36ff886d2b4536d659127cb8f13be005a1a7673",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 167,
+            "end": 219,
+            "text": "إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "7554d6dd86cea769cc936abe64a70b29341b387a15bfddadf12d1e7f8962e300",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من العميل خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل المزود بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "الأضرار غير المباشرة أو التبعية أو العقابية",
+            "start": 211,
+            "end": 254
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 4,
+            "end": 48,
+            "text": "باستثناء الإخلال بالتزامات السرية أو التعويض"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "7201da5005c3b00f236a89f032fb31d0fc0cb110807d7c667c5e25bb646b2beb",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 174,
+            "end": 231,
+            "text": "لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "50faa2f74d1f693766d0b3a5626bf34b79053be548df446eeff7d3ea49ecf5a1",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 50,
+            "end": 172,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "f908dd5b239384fcbe336b22da5cc03a554ce25cd834c80e6a9305e6ca140cde",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 174,
+            "end": 254,
+            "text": "لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية"
+          },
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 211,
+            "end": 254,
+            "text": "الأضرار غير المباشرة أو التبعية أو العقابية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "8f4e1916a9093b03c15d8d48ca69117ddcf167c5c8a5f08f01f3aacd3a78118e",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 50,
+            "end": 172,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f908dd5b239384fcbe336b22da5cc03a554ce25cd834c80e6a9305e6ca140cde",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 4,
+            "end": 48,
+            "text": "باستثناء الإخلال بالتزامات السرية أو التعويض"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "7201da5005c3b00f236a89f032fb31d0fc0cb110807d7c667c5e25bb646b2beb",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 50,
+            "end": 172,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "f908dd5b239384fcbe336b22da5cc03a554ce25cd834c80e6a9305e6ca140cde",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 50,
+            "end": 172,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f908dd5b239384fcbe336b22da5cc03a554ce25cd834c80e6a9305e6ca140cde",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 يحاول الطرفان أولاً تسوية أي نزاع عبر التفاوض بحسن نية بين كبار المسؤولين التنفيذيين لمدة ثلاثين (30) يوماً. وفي حال عدم التوصل إلى تسوية، يُحسم أي نزاع نهائياً بالتحكيم الملزم الذي تديره الجمعية الأمريكية للتحكيم وفقاً لقواعدها للتحكيم التجاري، على أن يكون مقر التحكيم في ويلمنغتون، ديلاوير، أمام محكم واحد، باللغة الإنجليزية.",
+    "primary_type": "dispute_resolution",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة ثلاثين (30) يوم",
+            "start": 90,
+            "end": 109
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "dispute_resolution",
+        "anchors": [
+          "أمام",
+          "أن",
+          "أولا",
+          "الأمريكية",
+          "الإنجليزية",
+          "التجاري",
+          "التحكيم",
+          "التفاوض",
+          "التنفيذيين",
+          "التوصل",
+          "الجمعية",
+          "الذي",
+          "الطرفان",
+          "المسؤولين",
+          "الملزم",
+          "بالتحكيم",
+          "باللغة",
+          "بحسن",
+          "بين",
+          "تديره",
+          "تسوية",
+          "ثلاثين",
+          "حال",
+          "حسم",
+          "ديلاوير",
+          "عبر",
+          "عدم",
+          "كبار",
+          "لقواعدها",
+          "للتحكيم",
+          "لمدة",
+          "محكم",
+          "مقر",
+          "نزاع",
+          "نهائيا",
+          "نية",
+          "واحد",
+          "وفقا",
+          "وفي",
+          "ويلمنغتون",
+          "يحاول",
+          "يوما"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة ثلاثين (30) يوم",
+            "start": 90,
+            "end": 109
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  }
+]

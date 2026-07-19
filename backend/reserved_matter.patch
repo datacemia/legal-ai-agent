@@ -1,0 +1,23 @@
+diff --git a/app/services/contract_agent/normalized_legal_relation.py b/app/services/contract_agent/normalized_legal_relation.py
+index 1111111..2222222 100644
+--- a/app/services/contract_agent/normalized_legal_relation.py
++++ b/app/services/contract_agent/normalized_legal_relation.py
+@@ -30,6 +30,9 @@ _CONCEPT_NORMALIZATION = {
+     "PROCESSING_INSTRUCTION_LIMIT": "PURPOSE_LIMITATION",
+     "NON_COMPETE_RESTRICTION": "NON_COMPETE",
+     "LOAN_PRINCIPAL_DISBURSEMENT": "LOAN_DISBURSEMENT",
+     "TRANSITION_SERVICE_OBLIGATION": "TRANSITION_PLAN",
++
++    # Governance
++    "RESERVED_MATTERS_CONSENT": "RESERVED_MATTER",
+ }
+@@ -313,6 +316,9 @@ _ACTION_BY_CONCEPT = {
+     "INSPECTION_RIGHT": "INSPECT",
+     "TAG_ALONG_RIGHT": "PARTICIPATE_IN_SALE",
++
++    # Governance
++    "RESERVED_MATTER": "OBTAIN_REQUIRED_CONSENT",
++
+     "NON_DISCLOSURE": "DISCLOSE",
+     "DELIVERY_OBLIGATION": "DELIVER_GOODS",
+     "REPLACEMENT_REMEDY": "REPLACE_NON_CONFORMING_GOODS",

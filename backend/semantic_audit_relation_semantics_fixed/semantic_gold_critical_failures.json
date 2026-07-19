@@ -1,0 +1,140 @@
+[
+  {
+    "fixture_id": "02_4_2_ar",
+    "language": "ar",
+    "source_text": "4.2 يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل. ولا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من المزود، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "IMMEDIATE_TERMINATION",
+        "NOTICE_PREREQUISITE",
+        "PROHIBITION",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "states": [
+        "NOTICE_PERIOD",
+        "NOTICE_REQUIRED",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CONVENIENCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "IMMEDIATE_TERMINATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TERMINATION_FOR_CAUSE"
+    ],
+    "high": [
+      "MISSING_PROCEDURAL_STATE:MANUAL"
+    ]
+  },
+  {
+    "fixture_id": "11_5_1_ar",
+    "language": "ar",
+    "source_text": "5.1 لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "assignment",
+      "mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:ASSIGNMENT_RESTRICTION",
+      "POLARITY_INFORMATION_LOST:ASSIGNMENT_RESTRICTION"
+    ],
+    "high": []
+  }
+]

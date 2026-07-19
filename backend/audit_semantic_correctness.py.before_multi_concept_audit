@@ -1,0 +1,1083 @@
+#!/usr/bin/env python3
+"""P0 semantic audit: source-signal discovery plus frozen-gold semantic metrics."""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from collections import Counter, defaultdict
+from pathlib import Path
+from typing import Any
+
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="backslashreplace")
+
+GENERIC = {"SOURCE_ANCHORS", "SOURCE_PROFILE", "PREREQUISITE", "PROCEDURAL_STATE", "MANDATORY_CONJUNCTION"}
+
+# Discovery-only source signals. These are heuristics, never gold truth.
+RULES = {
+    "CONFIDENTIALITY_OBLIGATION": [r"\b(?:hold|keep|maintain).{0,50}confiden", r"(?:garder|tenir|maintenir).{0,50}confident", r"(?:يحافظ|الحفاظ|يلتزم).{0,60}(?:سرية|سري)"],
+    "NON_DISCLOSURE": [r"shall\s+not\s+disclos", r"ne\s+(?:doit|peut)\s+pas.{0,40}divulgu", r"(?:لا يجوز|يجب ألا|يلتزم بعدم).{0,50}(?:إفشاء|كشف)"],
+    "PURPOSE_LIMITATION": [r"(?:solely|only)\s+for.{0,50}purpose", r"(?:uniquement|exclusivement|qu'aux fins).{0,60}(?:fin|objet)", r"(?:فقط|حصراً|حصرياً|حصريًا).{0,60}(?:الغرض|الغاية|أغراض)"],
+    "LIABILITY_CAP": [r"(?:aggregate|total).{0,40}liabilit.{0,60}(?:not exceed|limited to|cap)", r"responsabilit.{0,70}(?:ne dépass|limitée? à|plafond)", r"المسؤولية.{0,80}(?:لا تتجاوز|محدودة|حد أقصى)"],
+    "EXCLUDED_DAMAGES": [r"(?:indirect|consequential|special|punitive).{0,60}damages", r"dommages.{0,60}(?:indirects|consécutifs|spéciaux|punitifs)", r"الأضرار.{0,60}(?:غير المباشرة|التبعية|الخاصة|العقابية)"],
+    "TERM_DURATION": [r"(?:initial\s+)?term.{0,60}(?:year|month|day)s?", r"durée.{0,60}(?:an|année|mois|jour)", r"(?:مدة|فترة).{0,60}(?:سنة|سنوات|شهر|أشهر|يوم|أيام)"],
+    "AUTO_RENEW_OPT_OUT": [r"automatically\s+renew", r"renouvel.{0,30}automatique", r"(?:يتجدد|تتجدد).{0,30}(?:تلقائياً|تلقائيًا|تلقائيا)"],
+    "AUTOMATIC_TERMINATION": [r"(?:terminate|expire|end)\w*\s+automatically\s+(?:upon|on)", r"(?:prend fin|résili\w*|expire\w*)\s+automatiquement", r"(?:ينتهي|تنتهي).{0,40}تلقائي(?:اً|ًا|ا)?"],
+    "CONSENT_PREREQUISITE": [r"without.{0,100}prior\s+(?:written\s+)?(?:consent|approval)", r"sans.{0,100}(?:consentement|approbation).{0,50}préalable", r"(?:دون|بدون).{0,100}(?:موافقة|الموافقة).{0,50}(?:مسبق|المسبقة)"],
+    "FINANCIAL_REPORTING_OBLIGATION": [r"shall\s+deliver.{0,120}financial\s+statements", r"doit\s+(?:remettre|fournir|livrer).{0,120}états?\s+financiers", r"(?:يجب|يتعين).{0,80}(?:تسليم|تقديم).{0,120}(?:القوائم|البيانات)\s+المالية"],
+    "ANNUAL_FINANCIAL_STATEMENTS": [r"annual\s+financial\s+statements", r"états?\s+financiers\s+annuels", r"(?:القوائم|البيانات)\s+المالية\s+السنوية"],
+    "QUARTERLY_FINANCIAL_STATEMENTS": [r"quarterly\s+financial\s+statements", r"états?\s+financiers\s+trimestriels", r"(?:القوائم|البيانات)\s+المالية\s+الربع"],
+    "AUDITED_REPORTING": [r"audited.{0,40}financial\s+statements", r"états?\s+financiers.{0,40}audités", r"(?:قوائم|بيانات).{0,40}(?:مدققة|مراجعة)"],
+    "BOARD_COMPOSITION": [r"board\s+of\s+directors.{0,80}consist\s+of", r"conseil\s+d['’]administration.{0,80}(?:composé|compose|comprend)", r"(?:مجلس الإدارة|مجلس الادارة).{0,80}(?:يتكون|يتألف)"],
+    "MANDATORY_PARTICIPATION": [r"(?:required|obliged|obligated)\s+to.{0,120}vote", r"(?:tenu|obligé).{0,120}voter", r"(?:يجب|يتعين).{0,120}(?:التصويت|يصوت)"],
+    "OBLIGATION_TO_VOTE_IN_FAVOR": [r"(?:required|obliged|obligated)\s+to\s+vote\s+in\s+favor", r"(?:tenu|obligé).{0,40}voter\s+en\s+faveur", r"(?:يجب|يتعين).{0,60}(?:التصويت|يصوت).{0,30}(?:لصالح|بالموافقة)"],
+    "OBLIGATION_TO_CONSENT": [r"(?:required|obliged|obligated)\s+to.{0,100}consent\s+to", r"(?:tenu|obligé).{0,100}consentir", r"(?:يجب|يتعين).{0,100}(?:الموافقة|يوافق)"],
+    "TAG_ALONG_RIGHT": [r"tag[- ]along\s+right", r"droit\s+de\s+(?:cession|sortie)\s+conjointe", r"(?:حق|حقوق).{0,30}(?:البيع|الخروج|الانضمام).{0,30}(?:المشترك|التبعي)"],
+    "PARTICIPATION_OPTION": [r"shall\s+have\s+the\s+right\s+to\s+participate", r"aura\s+le\s+droit\s+de\s+participer", r"(?:له|يكون له).{0,30}الحق.{0,30}(?:المشاركة|أن يشارك)"],
+    "SAME_TERMS_RIGHT": [r"on\s+the\s+same\s+terms", r"aux\s+mêmes\s+conditions", r"(?:بنفس|بذات)\s+(?:الشروط|الأحكام)"],
+    "BASE_COMPENSATION": [r"(?:annual\s+)?base\s+salary", r"salaire\s+de\s+base", r"(?:الراتب|الأجر)\s+الأساسي"],
+    "PAY_FREQUENCY": [r"payable\s+(?:monthly|biweekly|weekly|quarterly)", r"payable\s+(?:mensuellement|chaque\s+mois|hebdomadairement)", r"(?:يدفع|مستحق).{0,30}(?:شهرياً|شهريًا|أسبوعياً|أسبوعيًا)"],
+    "BONUS": [r"(?:annual|performance|discretionary)\s+bonus", r"prime\s+(?:annuelle|de\s+performance|discrétionnaire)", r"(?:مكافأة|حافز).{0,30}(?:سنوية|أداء|تقديرية)"],
+    "EQUITY_GRANT": [r"(?:equity|stock|option)\s+(?:grant|award)", r"(?:attribution|octroi).{0,30}(?:actions|options|titres)", r"(?:منحة|منح).{0,30}(?:أسهم|خيارات|حقوق ملكية)"],
+}
+
+COMPAT = {
+    "confidentiality": {"CONFIDENTIALITY_OBLIGATION","NON_DISCLOSURE","PURPOSE_LIMITATION"},
+    "limitation_of_liability": {"LIABILITY_CAP","EXCLUDED_DAMAGES"},
+    "liability": {"LIABILITY_CAP","EXCLUDED_DAMAGES"},
+    "termination": {"TERM_DURATION","AUTO_RENEW_OPT_OUT","AUTOMATIC_TERMINATION"},
+    "term_and_termination": {"TERM_DURATION","AUTO_RENEW_OPT_OUT","AUTOMATIC_TERMINATION"},
+    "investor_information_rights": {"FINANCIAL_REPORTING_OBLIGATION","ANNUAL_FINANCIAL_STATEMENTS","QUARTERLY_FINANCIAL_STATEMENTS","AUDITED_REPORTING"},
+    "financial_reporting": {"FINANCIAL_REPORTING_OBLIGATION","ANNUAL_FINANCIAL_STATEMENTS","QUARTERLY_FINANCIAL_STATEMENTS","AUDITED_REPORTING"},
+    "corporate_governance": {"BOARD_COMPOSITION","CONSENT_PREREQUISITE","MANDATORY_PARTICIPATION","OBLIGATION_TO_VOTE_IN_FAVOR","OBLIGATION_TO_CONSENT"},
+    "share_transfer_rights": {"MANDATORY_PARTICIPATION","OBLIGATION_TO_VOTE_IN_FAVOR","OBLIGATION_TO_CONSENT","TAG_ALONG_RIGHT","PARTICIPATION_OPTION","SAME_TERMS_RIGHT"},
+    "payment": {"BASE_COMPENSATION","PAY_FREQUENCY","BONUS","EQUITY_GRANT"},
+    "compensation": {"BASE_COMPENSATION","PAY_FREQUENCY","BONUS","EQUITY_GRANT"},
+}
+
+def walk(obj: Any):
+    if isinstance(obj, dict):
+        yield obj
+        for value in obj.values():
+            yield from walk(value)
+    elif isinstance(obj, list):
+        for value in obj:
+            yield from walk(value)
+
+def clause_results(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, dict):
+        clauses = payload.get("clauses")
+        if isinstance(clauses, dict) and isinstance(clauses.get("results"), list):
+            return [x for x in clauses["results"] if isinstance(x, dict)]
+        if isinstance(payload.get("results"), list):
+            return [x for x in payload["results"] if isinstance(x, dict)]
+    return [x for x in walk(payload) if "_source_text_exact" in x and ("clause_type" in x or "primary_type" in x)]
+
+def source(item: dict[str, Any]) -> str:
+    return str(item.get("_source_text_exact") or item.get("original_text") or item.get("clause_text") or item.get("quoted_text") or "")
+
+def primary_type(item: dict[str, Any]) -> str:
+    return str(item.get("primary_type") or item.get("clause_type") or item.get("type") or "").strip().lower()
+
+def actual_mechanisms(item: dict[str, Any]) -> list[dict[str, Any]]:
+    """Read the richest persisted semantic mechanism set before fidelity fallbacks."""
+    containers = [
+        item,
+        item.get("_semantic_source_profile"),
+        item.get("semantic_source_profile"),
+        item.get("source_semantic_profile"),
+        item.get("source_profile"),
+    ]
+
+    for key in ("ranked_material_mechanisms", "grounded_mechanisms", "extracted_mechanisms"):
+        for container in containers:
+            if isinstance(container, dict) and isinstance(container.get(key), list):
+                values = [x for x in container[key] if isinstance(x, dict)]
+                if values:
+                    return values
+
+    profile = item.get("source_evidence_model")
+    if isinstance(profile, dict) and isinstance(profile.get("mechanisms"), list):
+        return [x for x in profile["mechanisms"] if isinstance(x, dict)]
+    return []
+
+CONCEPT_EQUIVALENCE = {
+    "CONFIDENTIALITY_DUTY": "CONFIDENTIALITY_OBLIGATION",
+    "CONFIDENTIAL_USE_RESTRICTION": "PURPOSE_LIMITATION",
+    "EXCLUDED_DAMAGE_CATEGORY": "EXCLUDED_DAMAGES",
+    "AUTOMATIC_RENEWAL": "AUTO_RENEW_OPT_OUT",
+    "AUTOMATIC_EVENT_TRANSITION": "AUTOMATIC_TERMINATION",
+    "TERMINATION_NOTICE_PERIOD": "NOTICE_PREREQUISITE",
+    "PRIOR_CONSENT_PREREQUISITE": "CONSENT_PREREQUISITE",
+    "SECURITY_INCIDENT_NOTIFICATION": "DATA_BREACH_NOTICE",
+    "SECURITY_SAFEGUARD_OBLIGATION": "SECURITY_MEASURES",
+    "WORK_PRODUCT_OWNERSHIP_TRANSFER": "OWNERSHIP",
+    "BACKGROUND_IP_RETENTION": "BACKGROUND_IP",
+    "ASSIGNMENT_TRANSFER": "ASSIGNMENT_RESTRICTION",
+    "SERVICE_PERFORMANCE_OBLIGATION": "SERVICE_SCOPE",
+    "VOLUNTARY_PREPAYMENT_RIGHT": "PREPAYMENT_RIGHT",
+    "NON_COMPETE_RESTRICTION": "NON_COMPETE",
+    "BOARD_COMPOSITION_STRUCTURE": "BOARD_COMPOSITION",
+    "LOAN_PRINCIPAL_DISBURSEMENT": "LOAN_DISBURSEMENT",
+    "TRANSITION_SERVICE_OBLIGATION": "TRANSITION_PLAN",
+}
+
+def concept(mech: dict[str, Any]) -> str:
+    raw = str(
+        mech.get("normalized_concept")
+        or mech.get("concept")
+        or mech.get("kind")
+        or mech.get("mechanism")
+        or mech.get("type")
+        or ""
+    ).upper()
+    return CONCEPT_EQUIVALENCE.get(raw, raw)
+
+
+def language(path: Path) -> str:
+    n = path.name.upper()
+    return "fr" if "_FR" in n else "ar" if "_AR" in n else "en"
+
+def derive(text: str) -> list[dict[str, Any]]:
+    out = []
+    for name, patterns in RULES.items():
+        evidence = []
+        for pattern in patterns:
+            for match in re.finditer(pattern, text, re.I | re.S):
+                evidence.append({"text": match.group(0), "start": match.start(), "end": match.end()})
+        if evidence:
+            out.append({"concept": name, "confidence": 0.95, "source_evidence": evidence})
+    return out
+
+def discovery_audit(item: dict[str, Any], path: Path, index: int) -> dict[str, Any]:
+    text = source(item)
+    expected = derive(text)
+    exp = {x["concept"] for x in expected}
+    mechs = actual_mechanisms(item)
+    act = {concept(x) for x in mechs if concept(x)}
+    missing = [x for x in expected if x["concept"] not in act]
+    unsupported = [x for x in mechs if concept(x) not in GENERIC and concept(x) not in exp]
+    no_evidence = [concept(x) for x in mechs if concept(x) not in GENERIC and not (x.get("source_evidence") or x.get("evidence_spans"))]
+    ptype = primary_type(item)
+    if not exp:
+        type_verdict = "REVIEW_REQUIRED"
+    elif ptype not in COMPAT:
+        type_verdict = "REVIEW_REQUIRED"
+    elif exp & COMPAT[ptype]:
+        type_verdict = "SUPPORTED"
+    elif ptype in {"other", "general", "payment", "corporate_governance"}:
+        type_verdict = "BROAD_COMPATIBLE"
+    else:
+        type_verdict = "MISMATCH"
+    extraction = "FAIL" if unsupported else "PARTIAL" if missing else "PASS" if exp else "REVIEW_REQUIRED"
+    grounding = "FAIL" if no_evidence else "PASS" if mechs else "REVIEW_REQUIRED"
+    return {
+        "document": path.name,
+        "reference": str(item.get("clause_reference") or item.get("reference") or item.get("clause_number") or item.get("number") or item.get("id") or f"clause_{index}"),
+        "source_language": language(path),
+        "source_text": text,
+        "primary_type": ptype,
+        "expected_source_mechanisms": expected,
+        "extracted_mechanisms": mechs,
+        "unsupported_extracted_mechanisms": unsupported,
+        "missing_high_confidence_mechanisms": missing,
+        "material_mechanisms_without_evidence": no_evidence,
+        "primary_type_verdict": type_verdict,
+        "mechanism_extraction_verdict": extraction,
+        "grounding_verdict": grounding,
+    }
+
+def normalize_text(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip().casefold()
+
+def evidence_entries(mech: dict[str, Any]) -> list[dict[str, Any]]:
+    raw = mech.get("source_evidence") or mech.get("evidence_spans") or []
+    if isinstance(raw, str):
+        return [{"text": raw}]
+    if isinstance(raw, dict):
+        return [raw]
+    return [x for x in raw if isinstance(x, dict)] if isinstance(raw, list) else []
+
+def semantic_support(con: str, evidence_text: str) -> bool:
+    if not evidence_text:
+        return False
+    if con in RULES:
+        return any(re.search(p, evidence_text, re.I | re.S) for p in RULES[con])
+    # For normalized engine concepts outside discovery RULES, require concept-family lexical support.
+    tokens = [t.casefold() for t in con.split("_") if len(t) >= 4 and t not in {"RIGHT","OBLIGATION","PREREQUISITE"}]
+    norm = normalize_text(evidence_text)
+    return any(t in norm for t in tokens)
+
+def grounding_verdict(mech: dict[str, Any], source_text: str, title: str = "") -> str:
+    entries = evidence_entries(mech)
+    if not entries:
+        return "NO_EVIDENCE"
+    valid_contained = []
+    for entry in entries:
+        text = str(entry.get("text") or entry.get("evidence") or "")
+        start, end = entry.get("start"), entry.get("end")
+        offsets_valid = True
+        if isinstance(start, int) and isinstance(end, int):
+            offsets_valid = 0 <= start <= end <= len(source_text) and source_text[start:end] == text
+        contained = bool(text) and text in source_text
+        title_only = bool(title) and normalize_text(text) == normalize_text(title)
+        generated = bool(text) and text not in source_text
+        if offsets_valid and contained and not title_only and not generated:
+            valid_contained.append(text)
+    if not valid_contained:
+        return "UNSUPPORTED"
+    if any(semantic_support(concept(mech), e) for e in valid_contained):
+        return "GROUNDED"
+    return "WEAKLY_GROUNDED" if concept(mech) in GENERIC else "UNSUPPORTED"
+
+def fixture_lookup(rows: list[dict[str, Any]]) -> dict[tuple[str, str], dict[str, Any]]:
+    out = {}
+    for row in rows:
+        out[(row["document"], row["reference"])] = row
+    return out
+
+def ratio(num: int, den: int) -> float | None:
+    return round(num / den, 4) if den else None
+
+def macro_metric(by_lang: dict[str, float | None]) -> float | None:
+    vals = [v for v in by_lang.values() if isinstance(v, (int, float))]
+    return round(sum(vals) / len(vals), 4) if vals else None
+
+def relation_candidates(mechs: list[dict[str, Any]], target_concept: str) -> list[dict[str, Any]]:
+    return [m for m in mechs if concept(m) == target_concept]
+
+def relation_payload(actual: dict[str, Any]) -> dict[str, Any]:
+    """Return the persisted normalized relation when available."""
+    relation = actual.get("normalized_relation")
+
+    if isinstance(relation, dict):
+        return relation
+
+    relation = actual.get("relation")
+
+    if isinstance(relation, dict):
+        return relation
+
+    return {}
+
+
+def relation_value(
+    actual: dict[str, Any],
+    key: str,
+) -> Any:
+    """Read normalized relation fields before legacy top-level fields."""
+    relation = relation_payload(actual)
+
+    aliases = {
+        "actor": (
+            "obligated_actor",
+            "right_holder",
+            "actor",
+        ),
+        "obligated_actor": (
+            "obligated_actor",
+        ),
+        "right_holder": (
+            "right_holder",
+        ),
+        "object": (
+            "object",
+            "legal_object",
+        ),
+        "trigger": (
+            "trigger",
+        ),
+        "polarity": (
+            "polarity",
+            "normalized_polarity",
+            "state",
+        ),
+    }
+
+    keys = aliases.get(key, (key,))
+
+    for candidate_key in keys:
+        value = relation.get(candidate_key)
+
+        if value is not None:
+            return value
+
+    for candidate_key in keys:
+        value = actual.get(candidate_key)
+
+        if value is not None:
+            return value
+
+    if key == "polarity":
+        value = actual.get("normalized_polarity")
+
+        if value is not None:
+            return value
+
+    return None
+
+
+def attr_match(
+    actual: dict[str, Any],
+    key: str,
+    expected: Any,
+) -> bool:
+    value = relation_value(
+        actual,
+        key,
+    )
+
+    if isinstance(value, list):
+        values = {
+            str(item).upper()
+            for item in value
+        }
+
+        return str(expected).upper() in values
+
+    if value is None:
+        return False
+
+    return (
+        str(value).upper()
+        == str(expected).upper()
+    )
+
+PROCEDURAL_STATE_EQUIVALENCE = {
+    "PRIOR_CONSENT": {"CONSENT_REQUIRED", "PRIOR_APPROVAL"},
+    "AUTOMATIC_EVENT": {"AUTOMATIC"},
+    "AUTOMATIC_RENEWAL": {"AUTOMATIC", "OPT_OUT"},
+}
+
+def actual_states(mechs: list[dict[str, Any]]) -> set[str]:
+    out = set()
+    for m in mechs:
+        raw_values = []
+        for key in ("procedural_state", "state"):
+            val = m.get(key)
+            if isinstance(val, str):
+                raw_values.append(val.upper())
+            elif isinstance(val, list):
+                raw_values.extend(str(x).upper() for x in val)
+
+        relation = relation_payload(m)
+        relation_states = relation.get("procedural_states")
+
+        if isinstance(relation_states, str):
+            raw_values.append(relation_states.upper())
+        elif isinstance(relation_states, list):
+            raw_values.extend(
+                str(value).upper()
+                for value in relation_states
+            )
+        if concept(m) == "PROCEDURAL_STATE":
+            for key in ("value", "name", "state"):
+                if m.get(key):
+                    raw_values.append(str(m[key]).upper())
+
+        for raw in raw_values:
+            out.add(raw)
+            out.update(PROCEDURAL_STATE_EQUIVALENCE.get(raw, set()))
+
+        con = concept(m)
+        if con == "CONSENT_PREREQUISITE":
+            out.add("CONSENT_REQUIRED")
+            if str(m.get("procedural_state") or m.get("state") or "").upper() == "PRIOR_CONSENT":
+                out.add("PRIOR_APPROVAL")
+        elif con == "AUTOMATIC_TERMINATION":
+            out.add("AUTOMATIC")
+        elif con == "AUTO_RENEW_OPT_OUT":
+            out.update({"AUTOMATIC", "OPT_OUT"})
+        elif con == "NOTICE_PREREQUISITE":
+            out.add("NOTICE_REQUIRED")
+    return out
+
+def actual_numeric_roles(item: dict[str, Any], mechs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out = []
+    candidates = [item.get("numeric_semantic_roles"), item.get("numeric_roles")]
+    profile = item.get("source_evidence_model")
+    if isinstance(profile, dict):
+        candidates += [profile.get("numeric_semantic_roles"), profile.get("numeric_roles")]
+    for m in mechs:
+        candidates += [
+            m.get("numeric_semantic_roles"),
+            m.get("numeric_roles"),
+        ]
+
+        relation = relation_payload(m)
+
+        candidates += [
+            relation.get("numeric_semantic_roles"),
+            relation.get("numeric_roles"),
+        ]
+    for candidate in candidates:
+        if isinstance(candidate, list):
+            out.extend(x for x in candidate if isinstance(x, dict))
+    return out
+
+def numeric_match(actual: dict[str, Any], expected: dict[str, Any]) -> bool:
+    return (
+        str(actual.get("value")) == str(expected.get("value"))
+        and str(actual.get("unit") or "").upper() == str(expected.get("unit") or "").upper()
+        and str(actual.get("semantic_role") or actual.get("role") or "").upper() == str(expected.get("semantic_role") or "").upper()
+        and str(actual.get("related_mechanism") or actual.get("concept") or "").upper() == str(expected.get("related_mechanism") or "").upper()
+    )
+
+def gold_audit(gold: dict[str, Any], lookup: dict[tuple[str, str], dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    details = []
+    aggregate = defaultdict(lambda: Counter())
+    family = defaultdict(Counter)
+    grounding_counts = Counter()
+    failures = []
+
+    # Diagnostic uniquement:
+    # conserve les comparaisons d'attributs échouées sans modifier
+    # les métriques, les verdicts ou la logique d'extraction.
+    attribute_diagnostics = []
+
+    for fixture in gold["clauses"]:
+        key = (fixture["document"], fixture["clause_reference"])
+        row = lookup.get(key)
+        lang = fixture["language"]
+        if row is None:
+            details.append({"fixture_id": fixture["fixture_id"], "language": lang, "error": "SOURCE_RESULT_NOT_FOUND"})
+            aggregate[lang]["fixture_missing"] += 1
+            continue
+        item = row["_item"]
+        mechs = actual_mechanisms(item)
+        material = [m for m in mechs if concept(m) and concept(m) not in GENERIC]
+        actual_concepts = {concept(m) for m in material}
+        required = set(fixture.get("required_mechanisms", []))
+        optional = set(fixture.get("optional_mechanisms", []))
+        forbidden = set(fixture.get("forbidden_mechanisms", []))
+        allowed_all = required | optional
+
+        ptype = primary_type(item)
+        pexp = fixture["primary_type_expectation"]
+        if ptype in pexp.get("allowed", []):
+            pverdict = "SUPPORTED"
+        elif ptype in pexp.get("broad_compatible", []):
+            pverdict = "BROAD_COMPATIBLE"
+        elif ptype in pexp.get("forbidden", []):
+            pverdict = "MISMATCH"
+        else:
+            pverdict = "WEAK"
+        aggregate[lang]["primary_total"] += 1
+        if pverdict in {"SUPPORTED", "BROAD_COMPATIBLE"}:
+            aggregate[lang]["primary_supported"] += 1
+
+        tp = sum(1 for c in actual_concepts if c in allowed_all)
+        fp = sum(1 for c in actual_concepts if c in forbidden or c not in allowed_all)
+        detected_required = len(required & actual_concepts)
+        aggregate[lang]["mech_tp"] += tp
+        aggregate[lang]["mech_fp"] += fp
+        aggregate[lang]["recall_hit"] += detected_required
+        aggregate[lang]["recall_total"] += len(required)
+        fam = fixture.get("semantic_family", "OTHER")
+        family[fam]["tp"] += tp
+        family[fam]["fp"] += fp
+        family[fam]["recall_hit"] += detected_required
+        family[fam]["recall_total"] += len(required)
+
+        grounding = []
+        title = str(item.get("title") or item.get("clause_title") or "")
+        for mech in material:
+            gv = grounding_verdict(mech, row["source_text"], title)
+            grounding_counts[gv] += 1
+            grounding.append({"concept": concept(mech), "verdict": gv})
+
+        attr_results = {"actor": [], "object": [], "trigger": [], "polarity": []}
+        for rel in fixture.get("required_relations", []):
+            candidates = relation_candidates(material, rel["concept"])
+            for attr in ("actor", "object", "trigger", "polarity"):
+                expected_value = None
+                comparison_key = attr
+
+                if attr == "actor":
+                    if rel.get("obligated_actor") is not None:
+                        expected_value = rel.get("obligated_actor")
+                        comparison_key = "obligated_actor"
+                    elif rel.get("right_holder") is not None:
+                        expected_value = rel.get("right_holder")
+                        comparison_key = "right_holder"
+                    else:
+                        expected_value = rel.get("actor")
+                        comparison_key = "actor"
+                else:
+                    expected_value = rel.get(attr)
+
+                if expected_value is None:
+                    continue
+
+                ok = any(
+                    attr_match(
+                        candidate,
+                        comparison_key,
+                        expected_value,
+                    )
+                    for candidate in candidates
+                )
+
+                # Ne journaliser que les échecs afin de garder un rapport
+                # lisible. Cette instrumentation n'intervient pas dans le
+                # calcul de `ok` ni dans les compteurs.
+                if not ok:
+                    actual_values = [
+                        relation_value(
+                            candidate,
+                            comparison_key,
+                        )
+                        for candidate in candidates
+                    ]
+
+                    non_null_values = [
+                        value
+                        for value in actual_values
+                        if value is not None
+                    ]
+
+                    if not candidates:
+                        diagnostic_reason = "NO_CONCEPT_CANDIDATE"
+                    elif not non_null_values:
+                        diagnostic_reason = "ATTRIBUTE_MISSING"
+                    else:
+                        diagnostic_reason = "VALUE_MISMATCH"
+
+                    attribute_diagnostics.append({
+                        "fixture_id": fixture.get("fixture_id"),
+                        "document": fixture.get("document"),
+                        "clause_reference": fixture.get(
+                            "clause_reference"
+                        ),
+                        "language": lang,
+                        "semantic_family": fixture.get(
+                            "semantic_family",
+                            "OTHER",
+                        ),
+                        "concept": rel.get("concept"),
+                        "attribute": attr,
+                        "comparison_key": comparison_key,
+                        "expected": expected_value,
+                        "actual_values": actual_values,
+                        "candidate_count": len(candidates),
+                        "reason": diagnostic_reason,
+                        "source_text": fixture.get("source_text"),
+                    })
+
+                attr_results[attr].append(ok)
+                aggregate[lang][f"{attr}_total"] += 1
+                aggregate[lang][f"{attr}_hit"] += int(ok)
+
+        states_expected = set(fixture.get("required_procedural_states", []))
+        states_actual = actual_states(mechs)
+        aggregate[lang]["state_total"] += len(states_expected)
+        aggregate[lang]["state_hit"] += len(states_expected & states_actual)
+
+        nums_expected = fixture.get("required_numeric_roles", [])
+        nums_actual = actual_numeric_roles(item, mechs)
+        numeric_hits = sum(1 for n in nums_expected if any(numeric_match(a, n) for a in nums_actual))
+        aggregate[lang]["numeric_total"] += len(nums_expected)
+        aggregate[lang]["numeric_hit"] += numeric_hits
+
+        critical = []
+        high = []
+        if pverdict == "MISMATCH":
+            critical.append("FORBIDDEN_PRIMARY_TYPE")
+        for rel in fixture.get("required_relations", []):
+            candidates = relation_candidates(
+                material,
+                rel["concept"],
+            )
+
+            actor_key = None
+            actor_exp = None
+
+            if rel.get("obligated_actor") is not None:
+                actor_key = "obligated_actor"
+                actor_exp = rel.get("obligated_actor")
+            elif rel.get("right_holder") is not None:
+                actor_key = "right_holder"
+                actor_exp = rel.get("right_holder")
+            elif rel.get("actor") is not None:
+                actor_key = "actor"
+                actor_exp = rel.get("actor")
+
+            if (
+                candidates
+                and actor_key is not None
+                and actor_exp is not None
+                and not any(
+                    attr_match(
+                        candidate,
+                        actor_key,
+                        actor_exp,
+                    )
+                    for candidate in candidates
+                )
+            ):
+                critical.append(
+                    f"WRONG_MATERIAL_ACTOR:{rel['concept']}"
+                )
+
+            pol_exp = rel.get("polarity")
+
+            if (
+                candidates
+                and pol_exp is not None
+                and not any(
+                    attr_match(
+                        candidate,
+                        "polarity",
+                        pol_exp,
+                    )
+                    for candidate in candidates
+                )
+            ):
+                critical.append(
+                    f"POLARITY_INFORMATION_LOST:{rel['concept']}"
+                )
+        for c in sorted(required - actual_concepts):
+            high.append(f"MISSING_MATERIAL_MECHANISM:{c}")
+        for s in sorted(states_expected - states_actual):
+            high.append(f"MISSING_PROCEDURAL_STATE:{s}")
+        if numeric_hits < len(nums_expected):
+            for n in nums_expected:
+                if not any(numeric_match(a, n) for a in nums_actual):
+                    high.append(f"WRONG_OR_MISSING_NUMERIC_ROLE:{n['semantic_role']}")
+
+        if critical or high:
+            failures.append({
+                "fixture_id": fixture["fixture_id"],
+                "language": lang,
+                "source_text": fixture["source_text"],
+                "expected_semantics": {
+                    "required_mechanisms": sorted(required),
+                    "relations": fixture.get("required_relations", []),
+                    "states": sorted(states_expected),
+                    "numeric_roles": nums_expected,
+                },
+                "actual_semantics": {
+                    "primary_type": ptype,
+                    "mechanisms": sorted(actual_concepts),
+                    "states": sorted(states_actual),
+                    "numeric_roles": nums_actual,
+                },
+                "source_evidence": grounding,
+                "first_bad_stage": "SOURCE_EVIDENCE_MODEL" if not actual_concepts else "NORMALIZED_SEMANTIC_EXTRACTION",
+                "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+                "critical": critical,
+                "high": high,
+            })
+
+        details.append({
+            "fixture_id": fixture["fixture_id"],
+            "document": fixture["document"],
+            "reference": fixture["clause_reference"],
+            "language": lang,
+            "semantic_family": fam,
+            "primary_type_actual": ptype,
+            "primary_type_verdict": pverdict,
+            "required_mechanisms": sorted(required),
+            "actual_material_mechanisms": sorted(actual_concepts),
+            "missing_required_mechanisms": sorted(required - actual_concepts),
+            "forbidden_detected_mechanisms": sorted(forbidden & actual_concepts),
+            "grounding": grounding,
+            "argument_results": attr_results,
+            "expected_states": sorted(states_expected),
+            "actual_states": sorted(states_actual),
+            "numeric_hits": numeric_hits,
+            "numeric_total": len(nums_expected),
+        })
+
+    metrics = {}
+    metric_names = {
+        "primary_type_support_rate": ("primary_supported", "primary_total"),
+        "mechanism_precision": ("mech_tp", None),
+        "mechanism_recall": ("recall_hit", "recall_total"),
+        "actor_accuracy": ("actor_hit", "actor_total"),
+        "object_accuracy": ("object_hit", "object_total"),
+        "trigger_accuracy": ("trigger_hit", "trigger_total"),
+        "polarity_accuracy": ("polarity_hit", "polarity_total"),
+        "procedural_state_accuracy": ("state_hit", "state_total"),
+        "numeric_semantic_role_accuracy": ("numeric_hit", "numeric_total"),
+    }
+    for name, (num_key, den_key) in metric_names.items():
+        by_lang = {}
+        for lang in ("en", "fr", "ar"):
+            if name == "mechanism_precision":
+                den = aggregate[lang]["mech_tp"] + aggregate[lang]["mech_fp"]
+                by_lang[lang] = 0.0 if den == 0 and aggregate[lang]["recall_total"] > 0 else ratio(aggregate[lang][num_key], den)
+                continue
+            den = aggregate[lang][den_key]
+            by_lang[lang] = ratio(aggregate[lang][num_key], den)
+        metrics[name] = {**by_lang, "macro": macro_metric(by_lang)}
+
+    per_family = {}
+    for fam, count in sorted(family.items()):
+        per_family[fam] = {
+            "mechanism_precision": ratio(count["tp"], count["tp"] + count["fp"]),
+            "mechanism_recall": ratio(count["recall_hit"], count["recall_total"]),
+            "required_mechanisms": count["recall_total"],
+        }
+
+    # Cross-language equivalence for aligned document/reference triples.
+    by_semantic_key = defaultdict(dict)
+    detail_map = {d["fixture_id"]: d for d in details if "error" not in d}
+    for fixture in gold["clauses"]:
+        d = detail_map.get(fixture["fixture_id"])
+        if d:
+            by_semantic_key[(fixture["document"][:2], fixture["clause_reference"])][fixture["language"]] = d
+    pair_counts = {p: Counter() for p in ("EN-FR", "EN-AR", "FR-AR")}
+    pair_map = {"EN-FR": ("en", "fr"), "EN-AR": ("en", "ar"), "FR-AR": ("fr", "ar")}
+    for triple in by_semantic_key.values():
+        for label, (a, b) in pair_map.items():
+            if a not in triple or b not in triple:
+                continue
+            da, db = triple[a], triple[b]
+            pair_counts[label]["total"] += 1
+            pair_counts[label]["concept"] += int(set(da["actual_material_mechanisms"]) == set(db["actual_material_mechanisms"]))
+            pair_counts[label]["argument"] += int(da["argument_results"] == db["argument_results"])
+            pa = {x for x, vals in da["argument_results"].items() if x == "polarity" and vals}
+            pb = {x for x, vals in db["argument_results"].items() if x == "polarity" and vals}
+            pair_counts[label]["polarity"] += int(pa == pb)
+            pair_counts[label]["state"] += int(set(da["actual_states"]) == set(db["actual_states"]))
+            pair_counts[label]["numeric"] += int((da["numeric_hits"], da["numeric_total"]) == (db["numeric_hits"], db["numeric_total"]))
+    equivalence = {}
+    for label, c in pair_counts.items():
+        equivalence[label] = {
+            "concept_equivalence": ratio(c["concept"], c["total"]),
+            "argument_equivalence": ratio(c["argument"], c["total"]),
+            "polarity_equivalence": ratio(c["polarity"], c["total"]),
+            "procedural_state_equivalence": ratio(c["state"], c["total"]),
+            "numeric_role_equivalence": ratio(c["numeric"], c["total"]),
+            "pairs": c["total"],
+        }
+
+    observed_specs = {
+        "LIABILITY → GOVERNING LAW": ("02_5_1", {"LIABILITY_CAP"}, {"GOVERNING_LAW", "FORUM_SELECTION"}),
+        "FINANCIAL REPORTING → BOARD / DEADLOCK": ("14_4_1", {"FINANCIAL_REPORTING_OBLIGATION"}, {"BOARD_COMPOSITION", "DEADLOCK_RESOLUTION"}),
+        "BOARD → SUBCONTRACTING": ("14_1_1", {"BOARD_COMPOSITION"}, {"SUBCONTRACTING_CONTROL"}),
+        "DRAG-ALONG POLARITY": ("14_3_1", {"DRAG_ALONG_RIGHT", "MANDATORY_PARTICIPATION"}, {"TAG_ALONG_RIGHT"}),
+        "TAG-ALONG POLARITY": ("14_3_2", {"TAG_ALONG_RIGHT", "PARTICIPATION_OPTION"}, {"DRAG_ALONG_RIGHT", "MANDATORY_PARTICIPATION"}),
+        "AUTOMATIC TERMINATION": ("14_7_1", {"AUTOMATIC_TERMINATION"}, {"NOTICE_PREREQUISITE"}),
+        "INVESTOR PRIOR WRITTEN CONSENT": ("14_6_1", {"CONSENT_PREREQUISITE", "INVESTOR_CONSENT_RIGHT"}, set()),
+        "CONFIDENTIALITY MULTI-MECHANISM": ("01_1_1", {"CONFIDENTIALITY_OBLIGATION", "NON_DISCLOSURE"}, set()),
+    }
+    observed_regressions = {}
+    required_languages = {
+        "en",
+        "fr",
+        "ar",
+    }
+
+    for label, (prefix, expected, forbidden) in observed_specs.items():
+        matching_rows = [
+            detail
+            for detail in details
+            if detail.get(
+                "fixture_id",
+                "",
+            ).startswith(
+                prefix + "_"
+            )
+        ]
+
+        rows = [
+            detail
+            for detail in matching_rows
+            if (
+                "error" not in detail
+                and "actual_material_mechanisms" in detail
+                and detail.get("language")
+            )
+        ]
+
+        actual_by_lang = {
+            detail["language"]:
+            detail["actual_material_mechanisms"]
+            for detail in rows
+        }
+
+        pass_by_lang = {
+            detail["language"]: (
+                expected.issubset(
+                    set(
+                        detail[
+                            "actual_material_mechanisms"
+                        ]
+                    )
+                )
+                and not (
+                    forbidden
+                    & set(
+                        detail[
+                            "actual_material_mechanisms"
+                        ]
+                    )
+                )
+            )
+            for detail in rows
+        }
+
+        observed_languages = set(
+            actual_by_lang
+        )
+
+        missing_languages = sorted(
+            required_languages
+            - observed_languages
+        )
+
+        malformed_rows = [
+            {
+                "fixture_id": detail.get(
+                    "fixture_id"
+                ),
+                "language": detail.get(
+                    "language"
+                ),
+                "error": detail.get(
+                    "error"
+                ),
+                "available_keys": sorted(
+                    detail
+                ),
+            }
+            for detail in matching_rows
+            if detail not in rows
+        ]
+
+        complete_language_set = (
+            observed_languages
+            == required_languages
+        )
+
+        observed_regressions[label] = {
+            "result": (
+                "PASS"
+                if (
+                    complete_language_set
+                    and all(
+                        pass_by_lang.get(
+                            language,
+                            False,
+                        )
+                        for language
+                        in required_languages
+                    )
+                )
+                else "FAIL"
+            ),
+            "expected": sorted(expected),
+            "forbidden": sorted(forbidden),
+            "actual_by_language": actual_by_lang,
+            "pass_by_language": pass_by_lang,
+            "missing_languages": missing_languages,
+            "malformed_or_missing_rows": malformed_rows,
+        }
+
+    return details, {
+        "metrics": metrics,
+        "per_semantic_family": per_family,
+        "grounding": dict(grounding_counts),
+        "cross_language_equivalence": equivalence,
+        "observed_failure_regressions": observed_regressions,
+        "critical_failures": [f for f in failures if f["critical"]],
+        "high_failures": [f for f in failures if f["high"]],
+        "failure_count": len(failures),
+
+        # Diagnostic non bloquant. Les métriques et les listes
+        # critical/high ci-dessus restent strictement inchangées.
+        "attribute_diagnostics": attribute_diagnostics,
+        "attribute_diagnostic_summary": {
+            "total_failures": len(attribute_diagnostics),
+            "by_attribute": {
+                attribute: sum(
+                    1
+                    for diagnostic in attribute_diagnostics
+                    if diagnostic["attribute"] == attribute
+                )
+                for attribute in (
+                    "actor",
+                    "object",
+                    "trigger",
+                    "polarity",
+                )
+            },
+            "by_reason": {
+                reason: sum(
+                    1
+                    for diagnostic in attribute_diagnostics
+                    if diagnostic["reason"] == reason
+                )
+                for reason in (
+                    "NO_CONCEPT_CANDIDATE",
+                    "ATTRIBUTE_MISSING",
+                    "VALUE_MISMATCH",
+                )
+            },
+        },
+    }
+
+def publication_integrity_summary(input_dir: Path) -> dict[str, Any]:
+    receipts = blocked = hash_mismatch = post_gate_mutation = 0
+    completed = errors = integrity_failures = 0
+    files = [p for p in input_dir.rglob("*.json") if "_summary" not in p.name.lower() and "semantic_audit" not in p.name]
+    for path in files:
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            completed += 1
+            for item in clause_results(payload):
+                history = item.get("_publication_validation_history")
+                if isinstance(history, list):
+                    for h in history:
+                        if isinstance(h, dict):
+                            receipts += int(bool(h.get("validated") or h.get("success") or h.get("receipt")))
+                            blocked += int(bool(h.get("blocked")))
+                            hash_mismatch += int(bool(h.get("hash_mismatch")))
+                            post_gate_mutation += int(bool(h.get("post_gate_mutation")))
+                vr = item.get("validation_receipts")
+                if isinstance(vr, list):
+                    receipts += len(vr)
+        except Exception:
+            errors += 1
+    integrity_failures = hash_mismatch + post_gate_mutation
+    return {
+        "expected_runs": 45,
+        "completed_runs": completed,
+        "errors": errors,
+        "integrity_failures": integrity_failures,
+        "total_receipts_observed_in_json": receipts,
+        "total_blocked_observed_in_json": blocked,
+        "hash_mismatch_count": hash_mismatch,
+        "post_gate_mutation_count": post_gate_mutation,
+        "final_result": "PASS" if completed == 45 and errors == 0 and integrity_failures == 0 else "FAIL",
+        "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts.",
+    }
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("input", type=Path)
+    ap.add_argument("--out", type=Path, default=Path("semantic_audit"))
+    ap.add_argument("--gold", type=Path, default=Path("tests/semantic_gold/semantic_gold_corpus.json"))
+    ap.add_argument("--baseline", type=Path)
+    args = ap.parse_args()
+
+    files = [args.input] if args.input.is_file() else sorted(
+        p for p in args.input.rglob("*.json")
+        if "_summary" not in p.name.lower() and "semantic_audit" not in p.name
+    )
+    discovery_rows, errors = [], []
+    for path in files:
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            for i, item in enumerate(clause_results(payload), 1):
+                row = discovery_audit(item, path, i)
+                row["_item"] = item
+                discovery_rows.append(row)
+        except Exception as exc:
+            errors.append({"file": str(path), "error": repr(exc)})
+
+    args.out.mkdir(parents=True, exist_ok=True)
+    serializable_discovery = [{k: v for k, v in r.items() if k != "_item"} for r in discovery_rows]
+    discovery_failures = [
+        r for r in serializable_discovery
+        if r["primary_type_verdict"] == "MISMATCH"
+        or r["mechanism_extraction_verdict"] in {"FAIL", "PARTIAL"}
+        or r["grounding_verdict"] == "FAIL"
+    ]
+    by_lang = {}
+    for lang in ("en", "fr", "ar"):
+        rows = [r for r in serializable_discovery if r["source_language"] == lang]
+        by_lang[lang] = {
+            "clauses_audited": len(rows),
+            "review_required": sum(r["primary_type_verdict"] == "REVIEW_REQUIRED" for r in rows),
+            "primary_type_mismatch_candidates": sum(r["primary_type_verdict"] == "MISMATCH" for r in rows),
+            "partial_extraction_candidates": sum(r["mechanism_extraction_verdict"] == "PARTIAL" for r in rows),
+            "unsupported_grounding_candidates": sum(r["grounding_verdict"] == "FAIL" for r in rows),
+        }
+
+    discovery_summary = {
+        "audit_layer": "SOURCE_SIGNAL_DISCOVERY_HEURISTIC_NOT_SEMANTIC_ACCURACY",
+        "files_scanned": len(files),
+        "file_errors": errors,
+        "clauses_audited": len(serializable_discovery),
+        "by_language": by_lang,
+        "combined": {
+            "clauses_audited": len(serializable_discovery),
+            "review_required": sum(r["primary_type_verdict"] == "REVIEW_REQUIRED" for r in serializable_discovery),
+            "primary_type_mismatch_candidates": sum(r["primary_type_verdict"] == "MISMATCH" for r in serializable_discovery),
+            "partial_extraction_candidates": sum(r["mechanism_extraction_verdict"] == "PARTIAL" for r in serializable_discovery),
+            "unsupported_grounding_candidates": sum(r["grounding_verdict"] == "FAIL" for r in serializable_discovery),
+        },
+    }
+
+    (args.out / "semantic_discovery_details.json").write_text(json.dumps(serializable_discovery, ensure_ascii=False, indent=2), encoding="utf-8")
+    (args.out / "semantic_discovery_failures.json").write_text(json.dumps(discovery_failures, ensure_ascii=False, indent=2), encoding="utf-8")
+    (args.out / "semantic_discovery_summary.json").write_text(json.dumps(discovery_summary, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if not args.gold.exists():
+        print(f"GOLD CORPUS NOT FOUND: {args.gold}", file=sys.stderr)
+        return 2
+    gold = json.loads(args.gold.read_text(encoding="utf-8"))
+    lookup = fixture_lookup(discovery_rows)
+    gold_details, gold_summary = gold_audit(gold, lookup)
+    gold_summary["corpus_status"] = gold.get("corpus_status")
+    gold_summary["gold_clause_count"] = len(gold.get("clauses", []))
+    gold_summary["gold_clauses_by_language"] = dict(Counter(x["language"] for x in gold.get("clauses", [])))
+    gold_summary["publication_baseline_persisted_json_check"] = publication_integrity_summary(args.input)
+
+    baseline_path = args.baseline or (args.out / "frozen_gold_baseline_metrics.json")
+    if args.baseline and args.baseline.exists():
+        baseline = json.loads(args.baseline.read_text(encoding="utf-8"))
+    elif not baseline_path.exists():
+        baseline = {
+            "frozen_gold_corpus_status": gold.get("corpus_status"),
+            "metrics": gold_summary["metrics"],
+            "recorded_before_product_semantic_fixes": True,
+        }
+        baseline_path.write_text(json.dumps(baseline, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+
+    comparison = {}
+    for metric, after in gold_summary["metrics"].items():
+        before = baseline.get("metrics", {}).get(metric, {})
+        comparison[metric] = {}
+        for scope in ("en", "fr", "ar", "macro"):
+            b, a = before.get(scope), after.get(scope)
+            comparison[metric][scope] = {
+                "baseline": b,
+                "after_fix": a,
+                "delta": round(a - b, 4) if isinstance(a, (int, float)) and isinstance(b, (int, float)) else None,
+            }
+    gold_summary["before_after_metric_comparison"] = comparison
+    gold_summary["baseline_path"] = str(baseline_path)
+
+    (args.out / "semantic_gold_details.json").write_text(json.dumps(gold_details, ensure_ascii=False, indent=2), encoding="utf-8")
+    (args.out / "semantic_gold_summary.json").write_text(json.dumps(gold_summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    (args.out / "semantic_gold_critical_failures.json").write_text(json.dumps(gold_summary["critical_failures"], ensure_ascii=False, indent=2), encoding="utf-8")
+    (args.out / "semantic_gold_high_failures.json").write_text(json.dumps(gold_summary["high_failures"], ensure_ascii=False, indent=2), encoding="utf-8")
+
+    print("P0 SEMANTIC AUDIT — DISCOVERY + FROZEN GOLD")
+    print("DISCOVERY FILES SCANNED:", len(files))
+    print("DISCOVERY FILE ERRORS:", len(errors))
+    print("DISCOVERY CLAUSES AUDITED:", len(serializable_discovery))
+    print("DISCOVERY COMBINED:", discovery_summary["combined"])
+    print("GOLD CORPUS STATUS:", gold.get("corpus_status"))
+    print("GOLD CLAUSES:", gold_summary["gold_clause_count"], gold_summary["gold_clauses_by_language"])
+    print("TRUE GOLD METRICS:")
+    for name, values in gold_summary["metrics"].items():
+        print(f"  {name}: {values}")
+    print("GROUNDING:", gold_summary["grounding"])
+    print("CRITICAL FAILURES:", len(gold_summary["critical_failures"]))
+    print("HIGH FAILURES:", len(gold_summary["high_failures"]))
+    print("PUBLICATION PERSISTED-JSON CHECK:", gold_summary["publication_baseline_persisted_json_check"])
+    print("GOLD SUMMARY:", args.out / "semantic_gold_summary.json")
+    return 2 if errors else 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,311 @@
+        "ensure clarity",
+        "consider negotiating",
+        "market standards",
+        "potential disputes",
+        "may lead to",
+        "could impact",
+        "more favorable",
+        "business growth",
+        "operational flexibility",
+        "sets the foundation",
+        "while this clause is standard",
+        "avoid ambiguity",
+        "market conditions change",
+        "cash flow is a concern",
+        "work-life balance",
+
+        "éviter les litiges",
+        "éviter toute ambiguïté",
+        "assurer la clarté",
+        "envisager de négocier",
+        "normes du marché",
+        "risques potentiels",
+        "conditions du marché",
+
+        "تجنب النزاعات",
+        "تجنب الغموض",
+        "ضمان الوضوح",
+        "معايير السوق",
+        "مخاطر محتملة",
+        "ظروف السوق",
+    ]
+
+    for field in detail_fields:
+        value = safe_str(
+            analysis.get(field)
+        ).lower()
+
+        if any(
+            phrase in value
+            for phrase in generic_detail_phrases
+        ):
+            analysis[field] = ""
+
+    analysis["has_details"] = any(
+        safe_str(
+            analysis.get(field)
+        )
+        for field in detail_fields
+    )
+
+    if (
+        not safe_str(analysis.get("explanation_simple"))
+        and analysis.get("risk_level") in {"medium", "high"}
+    ):
+        combined = " ".join([
+            safe_str(analysis.get("clause_title")),
+            safe_str(analysis.get("title")),
+            safe_str(analysis.get("clause_type")),
+            safe_str(analysis.get("quoted_text")),
+            safe_str(clause_text),
+        ]).lower()
+
+        if (
+            "service level" in combined
+            or "uptime" in combined
+            or "niveau de service" in combined
+            or "disponibilité" in combined
+            or "مستوى الخدمة" in combined
+            or "الجاهزية" in combined
+            or "توفر الخدمة" in combined
+        ):
+            analysis["explanation_simple"] = (
+                "The clause defines uptime or service availability obligations."
+                if language == "en"
+                else
+                "La clause définit les engagements de disponibilité du service."
+                if language == "fr"
+                else
+                "تحدد هذه المادة التزامات توفر الخدمة أو نسبة الجاهزية."
+            )
+
+        elif "fees" in combined or "payment" in combined or "paiement" in combined or "الدفع" in combined or "الرسوم" in combined:
+            analysis["explanation_simple"] = (
+                "The clause defines payment timing and financial obligations."
+                if language == "en"
+                else
+                "Cette clause définit les délais de paiement et les obligations financières."
+                if language == "fr"
+                else
+                "تحدد هذه المادة مواعيد الدفع والالتزامات المالية."
+            )
+
+        else:
+            analysis["explanation_simple"] = ""
+
+    for field in [
+        "legal_insight",
+        "recommendation",
+        "market_comparison",
+    ]:
+        value = str(
+            analysis.get(field, "")
+        ).lower()
+
+        if any(
+            p in value
+            for p in UNSUPPORTED_MARKET_PHRASES
+        ):
+            analysis[field] = ""
+
+    return analysis
+
+def analyze_clause(
+    clause: str,
+    language: str = "en",
+) -> dict:
+
+    if not clause or not clause.strip():
+
+        return normalize_clause_result(
+            fallback_clause_result(language)
+        )
+
+    prompt = build_clause_prompt(
+        clause,
+        language,
+    )
+
+    try:
+        ai_result = call_clause_ai(prompt)
+
+    except Exception as e:
+
+        print("CLAUSE AI ERROR:", ascii(str(e)))
+
+        ai_result = fallback_clause_result(
+            language
+        )
+
+    ai_result["language"] = language
+
+   
+
+    normalized = normalize_clause_result(
+        ai_result
+    )
+
+   
+
+    ai_result = normalized
+
+    # -------------------------------------------------
+    # Taxonomy fallback classification
+    # -------------------------------------------------
+
+    _debug_candidates = detect_clause_type_candidates(clause)
+
+    # print("\n=== TAXONOMY DEBUG ===")
+    # print("CLAUSE:", clause[:1000])
+    # print("AI TYPE:", ai_result.get("clause_type"))
+
+    # for candidate in _debug_candidates[:10]:
+    #     print(
+    #         candidate["type"],
+    #         "score=", candidate["score"],
+    #         "base=", candidate["base_score"],
+    #         "specificity=", candidate["specificity_bonus"],
+    #         "context+=", candidate["context_bonus"],
+    #         "context-=", candidate["context_penalty"],
+    #         "signals=", candidate["signals"],
+    #     )
+
+    # print("=== END TAXONOMY DEBUG ===\n")
+
+    taxonomy_type = detect_clause_type_from_taxonomy(clause)
+
+    if taxonomy_type != "other":
+        current_type = ai_result.get("clause_type")
+
+        if current_type == "other":
+            ai_result["clause_type"] = taxonomy_type
+
+        elif not has_clause_type_signal(clause, current_type):
+            ai_result["clause_type"] = taxonomy_type
+            ai_result["confidence"] = "medium"
+
+    # -------------------------------------------------
+    # Grounded semantic primary-type arbitration
+    # -------------------------------------------------
+    #
+    # The semantic source profile may override the existing AI + lexical
+    # taxonomy result only when it derives a high-confidence, non-abstained
+    # primary type from exact source evidence.
+    #
+    # Control modifiers such as prohibitions, express rights, mandatory
+    # wording, or prior-consent prerequisites are not primary-type eligible.
+    # If the semantic profiler abstains or cannot run, the existing
+    # classification path above remains unchanged.
+    try:
+        semantic_profile = build_semantic_source_profile(
+            clause,
+            language=language,
+        )
+    except Exception:
+        semantic_profile = {}
+
+    semantic_type = safe_str(
+        semantic_profile.get("primary_type")
+    ).lower()
+
+    semantic_confidence = float(
+        semantic_profile.get("confidence")
+        or 0.0
+    )
+
+    semantic_abstained = bool(
+        semantic_profile.get(
+            "abstained",
+            True,
+        )
+    )
+
+    semantic_primary_supported = (
+        not semantic_abstained
+        and semantic_type
+        and semantic_type != SEMANTIC_UNKNOWN.lower()
+        and semantic_type in ALLOWED_CLAUSE_TYPES
+        and semantic_confidence >= 0.90
+        and bool(
+            semantic_profile.get(
+                "supporting_mechanisms"
+            )
+        )
+    )
+
+    if semantic_primary_supported:
+        current_type = ai_result.get("clause_type")
+
+        if current_type != semantic_type:
+            ai_result["clause_type"] = semantic_type
+            ai_result["confidence"] = "high"
+
+    ai_result["_meta"] = {
+        "risk_modified_by": [],
+        "reasoning_modified_by": [],
+        "cleanup_applied": [],
+        "changes": [],
+    }
+
+    if not ai_result["clause_title"]:
+
+        ai_result["clause_title"] = (
+            extract_clause_title(clause)
+        )
+
+    ai_result["clause_title"] = normalize_final_clause_title(
+        ai_result.get("clause_title", "")
+    )
+
+    ai_result["title"] = ai_result["clause_title"]
+
+    ai_result = apply_rule_based_risk(
+        ai_result,
+        clause,
+        language,
+    )
+
+    reasoning = get_reasoning_for_text(
+        clause,
+        language,
+        title=ai_result.get("clause_title", ""),
+        clause_type=ai_result.get("clause_type"),
+    )
+
+    if reasoning:
+        if reasoning.get("legal_insight"):
+            ai_result["legal_insight"] = reasoning.get("legal_insight")
+
+        if reasoning.get("recommendation"):
+            ai_result["recommendation"] = reasoning.get("recommendation")
+
+        if reasoning.get("negotiation"):
+            ai_result["negotiation_advice"] = reasoning.get("negotiation")
+
+        if reasoning.get("contextual_reasoning"):
+            ai_result["has_contextual_reasoning"] = True
+
+    if not ai_result.get(
+        "explanation_simple"
+    ):
+
+        legal_insight = str(
+            ai_result.get(
+                "legal_insight",
+                "",
+            )
+        ).strip()
+
+        if legal_insight:
+            ai_result[
+                "explanation_simple"
+            ] = legal_insight
+
+
+    ai_result = remove_speculative_analysis(
+        ai_result
+    )
+
+    if is_truncated_clause(clause):
+        ai_result["confidence"] = "low"
+        ai_result["red_flag"] = False

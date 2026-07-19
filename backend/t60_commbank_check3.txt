@@ -1,0 +1,25 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 23208
+PDF_LINES_DEBUG {'line_count': 413, 'non_empty_line_count': 277, 'max_line_len': 255, 'first_20': ['Your Statement', '                                                                Statement 15              (Page 1 of 6)', '', '                                                              Account Number    06 3010 13274026', '                                      027', '                                                                Statement', '                                                                    Period        1 Jul 2023 - 14 Jul 2023      MS W N ABD KADIR', '        UNIT 4 23-25 HILLCREST GR', '                                                                    Closing Balance         $12,567.82 CR', '       SPRINGVALE VIC 3171', '                                                                       Enquiries                   13 2221', '', '', '', '', '    Smart Access', '', '         Enjoy the convenience and security of withdrawing what you need, when you need it. Plus you can have your', '         monthly account fee waived if you deposit at least $2,000 each calendar month.', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+COMMBANK_SMART_ACCESS_EXTRACTED {'transactions': 108, 'income_total': 36042.61, 'expense_total': 23631.04}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'commbank_smart_access', 'count': 108, 'income_total': 36042.61, 'expense_total': 23631.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 59673.65, 'max_tx_abs': 13000.0, 'score': 1500.0}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'commbank_smart_access', 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 1500.0}]
+STATEMENT_LAYOUT_DETECTED commbank_smart_access
+FINANCE_CANDIDATE_SELECTED {'parser': 'commbank_smart_access', 'transactions': 108, 'income_total': 36042.61, 'expense_total': 23631.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 1500.0}
+OK_REAL t60.pdf | tx=108 income=36042.61 expenses=23631.04 expected_income=36042.61 expected_expenses=23631.04 summary_ok=True real_ok=True opening=156.25 ending=12567.82 gap=0.0 reason=MATCHES_REAL_STATEMENT_VALUES

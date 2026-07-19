@@ -1,0 +1,607 @@
+[
+  {
+    "fixture_id": "01_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_fr",
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "delivery",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DELIVERY_OBLIGATION",
+      "PURCHASE_ORDER"
+    ],
+    "actual_material_mechanisms": [
+      "DELIVERY_OBLIGATION",
+      "PURCHASE_ORDER"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "DELIVERY_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        true
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_fr",
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "3.1",
+    "language": "fr",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "INSPECTION_RIGHT",
+      "REPLACEMENT_REMEDY"
+    ],
+    "actual_material_mechanisms": [
+      "INSPECTION_RIGHT",
+      "REPLACEMENT_REMEDY"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "REPLACEMENT_REMEDY",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  }
+]

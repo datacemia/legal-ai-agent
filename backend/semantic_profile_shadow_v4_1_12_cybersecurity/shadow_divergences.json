@@ -1,0 +1,188 @@
+[
+  {
+    "language": "fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "clause_5",
+    "source_text": "5.1 Le Prestataire maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données du Client conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera le Client de tout incident de sécurité dans un délai de vingt-quatre (24) heures.",
+    "pipeline_clause_type": "data_protection",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.9,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2535,
+    "shadow_dominance_margin": 55.5679,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 55.5679,
+        "coverage": 0.2535,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_INCIDENT_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 264,
+            "end": 354,
+            "text": "notifiera le Client de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 264,
+            "end": 354,
+            "text": "notifiera le Client de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1af2b07b0d10d1009b58f20655afd5db3844a0b441e4eb6ca4ede559c0eb4ecc"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 264,
+            "end": 354,
+            "text": "notifiera le Client de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1af2b07b0d10d1009b58f20655afd5db3844a0b441e4eb6ca4ede559c0eb4ecc"
+      }
+    ],
+    "semantic_profile_hash": "c5e7cf0840e89b7c711fa04b5fe809f313f75f0e3223b13ca105499d08cdf528",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "clause_3",
+    "source_text": "2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.",
+    "pipeline_clause_type": "cybersecurity",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9606,
+    "shadow_dominance_margin": 85.2665,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 85.2665,
+        "coverage": 0.9606,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_INCIDENT_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 126,
+            "text": "يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 126,
+            "text": "يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4b4d6d87a7b192baa0ebc7735044fed42bbfd0069e16787058a67a9e8ef2a3c3"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 126,
+            "text": "يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4b4d6d87a7b192baa0ebc7735044fed42bbfd0069e16787058a67a9e8ef2a3c3"
+      }
+    ],
+    "semantic_profile_hash": "c7979087f39b0d5be2e485c9f15d3b29286497a5116e43442738f73a46fd43bd",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

@@ -1,0 +1,14 @@
+================================================================================================
+V4.1.16 FINAL PUBLICATION INVARIANT APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\unified_report_from_pipeline.py
+BACKUP : app\services\contract_agent\unified_report_from_pipeline.py.before_v4_1_16_20260714_182506
+A: fixed final EN/FR/AR role regex normalization
+B: expanded generic fallback suppression
+C: semantic metadata corroboration for type-specific negotiation advice
+D: dangerous_patterns restricted to red flags or substantive danger markers
+E: final publication normalization applied to legacy summary buckets
+UNTOUCHED: semantic_source_profile.py, RULES, dominance thresholds,
+           evidence engine, publication gate validation logic, risk scoring,
+           missing-clause taxonomy, frontend
+================================================================================================

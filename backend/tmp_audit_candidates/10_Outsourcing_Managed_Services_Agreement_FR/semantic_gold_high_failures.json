@@ -1,0 +1,38 @@
+[
+  {
+    "fixture_id": "10_6_1_fr",
+    "language": "fr",
+    "source_text": "6.1 Le présent Accord a une durée initiale de cinq (5) ans. À l'expiration ou à la résiliation, le Prestataire fournira une assistance raisonnable à la sortie pendant une période pouvant aller jusqu'à cent quatre-vingts (180) jours pour faciliter la transition vers le Client ou un prestataire successeur, à la demande du Client et à ses frais aux tarifs alors en vigueur du Prestataire.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+      "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+    ]
+  }
+]

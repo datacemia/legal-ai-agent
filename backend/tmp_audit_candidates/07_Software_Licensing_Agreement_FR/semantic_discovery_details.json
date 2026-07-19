@@ -1,0 +1,827 @@
+[
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Le Concédant garantit qu'il détient le droit d'accorder la licence prévue aux présentes. SAUF DISPOSITION EXPRESSE CONTRAIRE, LE LOGICIEL CONCÉDÉ EST FOURNI « TEL QUEL » SANS GARANTIE D'AUCUNE SORTE, EXPRESSE OU IMPLICITE, Y COMPRIS LES GARANTIES DE QUALITÉ MARCHANDE OU D'ADÉQUATION À UN USAGE PARTICULIER.",
+    "primary_type": "warranty",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "warranty",
+        "anchors": [
+          "accorder",
+          "adéquation",
+          "aucune",
+          "aux",
+          "compri",
+          "concédant",
+          "concédé",
+          "contraire",
+          "disposition",
+          "droit",
+          "détient",
+          "expresse",
+          "fourni",
+          "garantie",
+          "garantit",
+          "garanty",
+          "il",
+          "implicite",
+          "licence",
+          "logiciel",
+          "marchande",
+          "particulier",
+          "présente",
+          "prévue",
+          "qu",
+          "qualité",
+          "quel",
+          "sauf",
+          "sorte",
+          "tel",
+          "usage"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 La responsabilité globale du Concédant au titre du présent Accord n'excédera pas le total des redevances payées par le Licencié au cours des douze (12) mois précédant la réclamation, sauf en cas de violation par le Concédant de l'article 3 (Propriété de la Propriété Intellectuelle).",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 7,
+            "end": 286,
+            "text": "responsabilité globale du Concédant au titre du présent Accord n'excédera pas le total des redevances payées par le Licencié au cours des douze (12) mois précédant la réclamation, sauf en cas de violation par le Concédant de l'article 3 (Propriété de la Propriété Intellectuelle)"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f3108e8e6fa6145ad7bbaf34f5fa1836cbe54cb892bbfa18e34571c72d64a5f6",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 7,
+            "end": 286,
+            "text": "responsabilité globale du Concédant au titre du présent Accord n'excédera pas le total des redevances payées par le Licencié au cours des douze (12) mois précédant la réclamation, sauf en cas de violation par le Concédant de l'article 3 (Propriété de la Propriété Intellectuelle)"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f3108e8e6fa6145ad7bbaf34f5fa1836cbe54cb892bbfa18e34571c72d64a5f6",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Le Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 41,
+            "end": 74,
+            "text": "licence non exclusive, incessible"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "6b7a2262b3d5c64375e79b0f4c91d9ab6ce289b51903fef6004c466cf208837a",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 7,
+            "end": 219,
+            "text": "Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "acbe8459dda25ddf96ce8cf5ad1bef8b6740cde742098882f18f208d31e67efc",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "LICENSEE",
+          "obligated_actor": null,
+          "counterparty": "LICENSOR",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 41,
+            "end": 74,
+            "text": "licence non exclusive, incessible"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "6b7a2262b3d5c64375e79b0f4c91d9ab6ce289b51903fef6004c466cf208837a",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 7,
+            "end": 219,
+            "text": "Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "acbe8459dda25ddf96ce8cf5ad1bef8b6740cde742098882f18f208d31e67efc",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "LICENSEE",
+          "obligated_actor": null,
+          "counterparty": "LICENSOR",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "1.2",
+    "source_language": "fr",
+    "source_text": "1.2 Le Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 7,
+            "end": 214,
+            "text": "Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "85956dfaa7e484bd3b698f7e7ea6d7985aec6e9e489bd2a06b06200aaafe5732",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 7,
+            "end": 214,
+            "text": "Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "85956dfaa7e484bd3b698f7e7ea6d7985aec6e9e489bd2a06b06200aaafe5732",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le Licencié versera au Concédant une redevance de 4,5 % des Ventes Nettes de Produits Concédés, payable trimestriellement, accompagnée d'un rapport de redevances détaillant les unités vendues et les Ventes Nettes.",
+    "primary_type": "royalties",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 100,
+            "end": 125,
+            "text": "payable trimestriellement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c37a8daa296912207c72f20802a7029547bbcc5ae538508a24e007c21a9b4cba",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 100,
+            "end": 125,
+            "text": "payable trimestriellement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c37a8daa296912207c72f20802a7029547bbcc5ae538508a24e007c21a9b4cba",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "2.2",
+    "source_language": "fr",
+    "source_text": "2.2 Le Concédant aura le droit, moyennant un préavis de trente (30) jours, d'auditer les livres et registres du Licencié relatifs au calcul des redevances, au maximum une fois par an ; si un audit révèle un sous-paiement supérieur à cinq pour cent (5 %), le Licencié supportera le coût raisonnable de l'audit.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "termination",
+        "anchors": [
+          "au",
+          "audit",
+          "auditer",
+          "aura",
+          "calcul",
+          "cent",
+          "cinq",
+          "concédant",
+          "coût",
+          "droit",
+          "fois",
+          "jours",
+          "licencié",
+          "livre",
+          "maximum",
+          "moyennant",
+          "notice",
+          "paiement",
+          "raisonnable",
+          "redevance",
+          "registre",
+          "relatif",
+          "révèle",
+          "si",
+          "sous",
+          "supportera",
+          "supérieur",
+          "trente"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Le Concédant conserve l'intégralité des droits sur le Logiciel Concédé, y compris toutes modifications et améliorations, qu'elles soient réalisées par le Concédant ou le Licencié.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_RIGHTS_RETENTION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_RIGHTS_RETENTION",
+            "start": 7,
+            "end": 123,
+            "text": "Concédant conserve l'intégralité des droits sur le Logiciel Concédé, y compris toutes modifications et améliorations"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "598ae9e52f47f476510053f02cddfff4b1dd62b550de87b788971cfe3968ca46",
+        "normalized_concept": "IP_RIGHTS_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_RIGHTS_RETENTION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_RIGHTS_RETENTION",
+            "start": 7,
+            "end": 123,
+            "text": "Concédant conserve l'intégralité des droits sur le Logiciel Concédé, y compris toutes modifications et améliorations"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "598ae9e52f47f476510053f02cddfff4b1dd62b550de87b788971cfe3968ca46",
+        "normalized_concept": "IP_RIGHTS_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Le présent Accord se poursuivra pendant cinq (5) ans à compter de la Date d'Effet. Le Concédant pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 100,
+            "end": 295,
+            "text": "pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 107,
+            "end": 295,
+            "text": "résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "e5affea9dd4a5b6eaa27ca86fdeea70c3484e12756387f79712920d9e4c26ab3",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "NON_PAYMENT_TERMINATION",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_PAYMENT_TERMINATION",
+            "start": 100,
+            "end": 295,
+            "text": "pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "bee92bebc2a33c8b09f0fcf63d03d5e228b158fc8d7c683850b921707185da67",
+        "normalized_concept": "NON_PAYMENT_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 100,
+            "end": 295,
+            "text": "pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          },
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 107,
+            "end": 295,
+            "text": "résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ec53b36462f72a7eb58f2cbfd8080473db6887c7af5711adda0a7acf794634c8",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 100,
+            "end": 295,
+            "text": "pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 107,
+            "end": 295,
+            "text": "résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "e5affea9dd4a5b6eaa27ca86fdeea70c3484e12756387f79712920d9e4c26ab3",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "NON_PAYMENT_TERMINATION",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_PAYMENT_TERMINATION",
+            "start": 100,
+            "end": 295,
+            "text": "pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "bee92bebc2a33c8b09f0fcf63d03d5e228b158fc8d7c683850b921707185da67",
+        "normalized_concept": "NON_PAYMENT_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 100,
+            "end": 295,
+            "text": "pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          },
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 107,
+            "end": 295,
+            "text": "résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ec53b36462f72a7eb58f2cbfd8080473db6887c7af5711adda0a7acf794634c8",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

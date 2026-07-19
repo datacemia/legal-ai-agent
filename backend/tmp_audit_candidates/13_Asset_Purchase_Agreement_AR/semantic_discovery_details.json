@@ -1,0 +1,746 @@
+[
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يُقر البائع ويضمن أن: (أ) لديه سند ملكية صحيح وقابل للتداول على الأصول المشتراة؛ (ب) البيانات المالية المقدمة للمشتري تعرض بأمانة الوضع المالي للنشاط؛ و(ج) لا توجد دعاوى قضائية معلقة أو محتملة من شأنها الإضرار الجوهري بالأصول المشتراة.",
+    "primary_type": "ownership",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "ownership",
+        "anchors": [
+          "أن",
+          "الأصول",
+          "الإضرار",
+          "البائع",
+          "البيانات",
+          "الجوهري",
+          "المالي",
+          "المالية",
+          "المشتراة",
+          "المقدمة",
+          "الوضع",
+          "بأمانة",
+          "بالأصول",
+          "تعرض",
+          "توجد",
+          "دعاوى",
+          "سند",
+          "شأنها",
+          "صحيح",
+          "قر",
+          "قضائية",
+          "لا",
+          "لديه",
+          "للتداول",
+          "للمشتري",
+          "للنشاط",
+          "محتملة",
+          "معلقة",
+          "ملكية",
+          "وقابل",
+          "ويضمن"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 يخضع التزام المشتري بالإغلاق لاستيفاء الشروط المعتادة، بما في ذلك دقة إقرارات وضمانات البائع كما في تاريخ الإغلاق، والحصول على جميع موافقات الأطراف الثالثة المطلوبة، وعدم وجود أي تغيير جوهري سلبي يؤثر على النشاط.",
+    "primary_type": "covenant",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 120,
+            "end": 168,
+            "text": "الحصول على جميع موافقات الأطراف الثالثة المطلوبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "786b0b5a73e42a8420aec9189d7f047aa39fc7cc54911828693a0ab86ee273cf",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CLOSING_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "transaction",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 4,
+            "end": 41,
+            "text": "يخضع التزام الطرف الطرف المتعاقد ب أ بالإغلاق لاستيفاء"
+          },
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 9,
+            "end": 57,
+            "text": "التزام الطرف الطرف المتعاقد ب أ بالإغلاق لاستيفاء الشروط المعتادة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "0824c8aeee13f4d0b693d10e15a005651e898431ab29256f3f8071d24ea25b4e",
+        "normalized_concept": "CLOSING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 120,
+            "end": 168,
+            "text": "الحصول على جميع موافقات الأطراف الثالثة المطلوبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "786b0b5a73e42a8420aec9189d7f047aa39fc7cc54911828693a0ab86ee273cf",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CLOSING_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "transaction",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 4,
+            "end": 41,
+            "text": "يخضع التزام الطرف الطرف المتعاقد ب أ بالإغلاق لاستيفاء"
+          },
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 9,
+            "end": 57,
+            "text": "التزام الطرف الطرف المتعاقد ب أ بالإغلاق لاستيفاء الشروط المعتادة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "0824c8aeee13f4d0b693d10e15a005651e898431ab29256f3f8071d24ea25b4e",
+        "normalized_concept": "CLOSING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "7.1",
+    "source_language": "ar",
+    "source_text": "7.1 لمدة خمس (5) سنوات بعد تاريخ الإغلاق، يمتنع البائع وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة خمس (5) سنوات",
+            "start": 5,
+            "end": 22
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "أمريكا",
+          "الإغلاق",
+          "البائع",
+          "الشمالية",
+          "بشكل",
+          "بعد",
+          "تاريخ",
+          "خمس",
+          "سنوات",
+          "غير",
+          "للنشاط",
+          "لمدة",
+          "مباشر",
+          "مزاولة",
+          "مساهميه",
+          "منافس",
+          "نشاط",
+          "وكبار",
+          "يمتنع"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة خمس (5) سنوات",
+            "start": 5,
+            "end": 22
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 عند الإغلاق، يبيع البائع وينقل ويسلم إلى المشتري، ويشتري المشتري من البائع، كامل حقوق البائع في الأصول المشتراة، خالية من أي رهن، باستثناء الرهون المسموح بها المدرجة في الملحق ج.",
+    "primary_type": "collateral",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "collateral",
+        "anchors": [
+          "الأصول",
+          "الإغلاق",
+          "البائع",
+          "الرهون",
+          "المدرجة",
+          "المسموح",
+          "المشتراة",
+          "المشتري",
+          "الملحق",
+          "باستثناء",
+          "بها",
+          "حقوق",
+          "خالية",
+          "رهن",
+          "عند",
+          "كامل",
+          "ويسلم",
+          "ويشتري",
+          "وينقل",
+          "يبيع"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يبلغ إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق؛ و(ب) 2,000,000 دولار تُودع في حساب ضمان لمدة ثمانية عشر (18) شهراً لضمان التزامات تعويض البائع بموجب البند 6.",
+    "primary_type": "indemnity",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة ثمانية عشر (18) شهر",
+            "start": 155,
+            "end": 178
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PURCHASE_PRICE",
+        "rank": 96,
+        "candidate_primary_type": "purchase_price",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 9,
+            "end": 112,
+            "text": "إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          },
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 16,
+            "end": 112,
+            "text": "ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "76d57aa2de77a5d82bcc800b41bd98b2b4be57c3d255a9bd117313e550363c6d",
+        "normalized_concept": "PURCHASE_PRICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 16,
+            "end": 112,
+            "text": "ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          },
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 59,
+            "end": 112,
+            "text": "يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "988f99229353bdb5edb79b088139eb6692d10cb7e30e4f3909002a92b9b4fc36",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PURCHASE_PRICE",
+        "rank": 96,
+        "candidate_primary_type": "purchase_price",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 9,
+            "end": 112,
+            "text": "إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          },
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 16,
+            "end": 112,
+            "text": "ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "76d57aa2de77a5d82bcc800b41bd98b2b4be57c3d255a9bd117313e550363c6d",
+        "normalized_concept": "PURCHASE_PRICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 16,
+            "end": 112,
+            "text": "ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          },
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 59,
+            "end": 112,
+            "text": "يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "988f99229353bdb5edb79b088139eb6692d10cb7e30e4f3909002a92b9b4fc36",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة ثمانية عشر (18) شهر",
+            "start": 155,
+            "end": 178
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 بين تاريخ هذه الاتفاقية وتاريخ الإغلاق، يدير البائع النشاط في السياق الاعتيادي وفقاً للممارسات السابقة، ولا يجوز له، دون موافقة خطية مسبقة من المشتري، إبرام عقد جوهري، أو التصرف في أصل جوهري، أو زيادة تعويضات الموظفين الرئيسيين.",
+    "primary_type": "indemnity",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 121,
+            "end": 141
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 121,
+            "end": 141,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 125,
+            "end": 141,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "28b61e9e38c5fc592f4b39ec2282a637c0993c589b381e81e798b336fb40286f",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 125,
+            "end": 135,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "af58911b9b04b9a0d18e3c89cc99ae3c1312441ccf15612a4714ed01ccccf05e",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 109,
+            "end": 232,
+            "text": "لا يجوز له، دون موافقة خطية مسبقة من الطرف الطرف المتعاقد ب أ، إبرام عقد جوهري، أو التصرف في أصل جوهري، أو زيادة تعويضات الطرف الطرف المتعاقد ب بين الرئيسيين."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "4239fe3000d99c54f8e7d6010ccbf287307490f580efaf9684daae6eab24ea75",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 109,
+            "end": 232,
+            "text": "لا يجوز له، دون موافقة خطية مسبقة من الطرف الطرف المتعاقد ب أ، إبرام عقد جوهري، أو التصرف في أصل جوهري، أو زيادة تعويضات الطرف الطرف المتعاقد ب بين الرئيسيين."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "4239fe3000d99c54f8e7d6010ccbf287307490f580efaf9684daae6eab24ea75",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 يعوض البائع المشتري عن الخسائر الناشئة عن الإخلال بإقرارات وضمانات البائع، رهناً بحد أدنى قدره 100,000 دولار وحد أقصى إجمالي قدره 2,000,000 دولار، باستثناء الإخلال بإقرارات الملكية والصلاحية، التي لا تخضع لهذا الحد الأدنى أو الحد الأقصى.",
+    "primary_type": "indemnity",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "indemnity",
+        "anchors": [
+          "أدنى",
+          "أقصى",
+          "إجمالي",
+          "الأدنى",
+          "الأقصى",
+          "الإخلال",
+          "البائع",
+          "التي",
+          "الحد",
+          "الخسائر",
+          "المشتري",
+          "الملكية",
+          "الناشئة",
+          "بإقرارات",
+          "باستثناء",
+          "بحد",
+          "تخضع",
+          "دولار",
+          "رهنا",
+          "قدره",
+          "لا",
+          "لهذا",
+          "والصلاحية",
+          "وحد",
+          "وضمانات",
+          "يعوض"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  }
+]

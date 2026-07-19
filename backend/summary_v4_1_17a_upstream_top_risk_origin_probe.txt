@@ -1,0 +1,525 @@
+
+========================================================================================================================
+FILE: app\services\business_agent\business_weekly_report.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_weekly_report_prompt
+LINES: 70 - 184
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 149
+00134:     "expenses": 0,
+00135:     "profit": 0,
+00136:     "profit_margin_percent": 0,
+00137:     "growth_rate_percent": 0,
+00138:     "cashflow_status": "unknown"
+00139:   }},
+00140:   "forecast_snapshot": {{
+00141:     "available": false,
+00142:     "next_month_revenue": 0,
+00143:     "next_quarter_revenue": 0,
+00144:     "trend": "unknown",
+00145:     "cashflow_risk": "unknown",
+00146:     "volatility": "unknown"
+00147:   }},
+00148:   "memory_summary": "business memory summary or not available",
+00149:   "top_risks": [
+00150:     {{
+00151:       "title": "risk title",
+00152:       "severity": "medium",
+00153:       "why_it_matters": "practical explanation",
+00154:       "recommended_action": "specific action"
+00155:     }}
+00156:   ],
+00157:   "top_opportunities": [
+00158:     {{
+00159:       "title": "opportunity title",
+00160:       "impact": "medium",
+00161:       "why_it_matters": "practical explanation",
+00162:       "recommended_action": "specific action"
+00163:     }}
+00164:   ],
+00165:   "priority_actions": [
+00166:     {{
+00167:       "title": "action title",
+00168:       "priority": "high",
+00169:       "expected_impact": "expected impact",
+00170:       "owner_focus": "what the owner should do this week"
+00171:     }}
+00172:   ],
+00173:   "ceo_decision": {{
+00174:     "decision": "single most important decision",
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_fallback_weekly_report
+LINES: 235 - 361
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 345
+00330:                 "next_month_revenue",
+00331:                 0,
+00332:             ),
+00333:             "next_quarter_revenue": forecast.get(
+00334:                 "next_quarter_revenue",
+00335:                 0,
+00336:             ),
+00337:             "trend": forecast.get("trend", "unknown"),
+00338:             "cashflow_risk": forecast.get(
+00339:                 "cashflow_risk",
+00340:                 "unknown",
+00341:             ),
+00342:             "volatility": forecast.get("volatility", "unknown"),
+00343:         },
+00344:         "memory_summary": memory_summary,
+00345:         "top_risks": latest_result.get("risks", [])[:3],
+00346:         "top_opportunities": latest_result.get("opportunities", [])[:3],
+00347:         "priority_actions": latest_result.get("recommendations", [])[:3],
+00348:         "ceo_decision": {
+00349:             "decision": decision.get(
+00350:                 "decision",
+00351:                 "No specific CEO decision available.",
+00352:             ),
+00353:             "why": decision.get(
+00354:                 "why",
+00355:                 "No decision rationale available.",
+00356:             ),
+00357:             "timeframe": decision.get("timeframe", "this week"),
+00358:         },
+00359:         "data_limitations": limitations,
+00360:         "disclaimer": disclaimer,
+00361:     }
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: generate_weekly_report_for_user
+LINES: 364 - 425
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 408
+00393:                 "expenses": 0,
+00394:                 "profit": 0,
+00395:                 "profit_margin_percent": 0,
+00396:                 "growth_rate_percent": 0,
+00397:                 "cashflow_status": "unknown",
+00398:             },
+00399:             "forecast_snapshot": {
+00400:                 "available": False,
+00401:                 "next_month_revenue": 0,
+00402:                 "next_quarter_revenue": 0,
+00403:                 "trend": "unknown",
+00404:                 "cashflow_risk": "unknown",
+00405:                 "volatility": "unknown",
+00406:             },
+00407:             "memory_summary": "No previous business memory available.",
+00408:             "top_risks": [],
+00409:             "top_opportunities": [],
+00410:             "priority_actions": [],
+00411:             "ceo_decision": {
+00412:                 "decision": "Analyze a business file first.",
+00413:                 "why": "A weekly report requires at least one saved business analysis.",
+00414:                 "timeframe": "now",
+00415:             },
+00416:             "data_limitations": [
+00417:                 "No saved business analysis found."
+00418:             ],
+00419:             "disclaimer": "This report is for business decision support only. Verify important decisions with a qualified professional.",
+00420:         }
+00421: 
+00422:     return generate_weekly_report_from_result(
+00423:         latest_result=latest_result,
+00424:         output_language=output_language,
+00425:     )
+
+RAW TOP_RISKS OCCURRENCES:
+00149:   "top_risks": [
+00345:         "top_risks": latest_result.get("risks", [])[:3],
+00408:             "top_risks": [],
+
+========================================================================================================================
+FILE: app\services\contract_agent\executive_report_builder.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_executive_report
+LINES: 158 - 309
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 282
+00267:                 "contract_complexity",
+00268:                 summary.get("contract_complexity"),
+00269:             ),
+00270:             "overall_balance": analysis_result.get(
+00271:                 "overall_balance",
+00272:                 summary.get("overall_balance"),
+00273:             ),
+00274:             "jurisdiction_detected": analysis_result.get(
+00275:                 "jurisdiction_detected",
+00276:                 summary.get("jurisdiction_detected"),
+00277:             ),
+00278:         },
+00279: 
+00280:         "executive_narrative": narrative,
+00281: 
+00282:         "top_risks": safe_list(
+00283:             executive_summary.get("top_risks")
+00284:         )[:10],
+00285: 
+00286:         "negotiation_priorities": safe_list(
+00287:             executive_summary.get("negotiation_priorities")
+00288:         )[:10],
+00289: 
+00290:         "recommended_actions": safe_list(
+00291:             executive_summary.get(
+00292:                 "recommended_actions",
+00293:                 summary.get("recommended_actions", []),
+00294:             )
+00295:         )[:10],
+00296: 
+00297:         "contradictions": contradictions,
+00298: 
+00299:         "clause_groups": clause_groups,
+00300: 
+00301:         "dependency_insights": dependency_insights,
+00302: 
+00303:         # Backward-compatible raw references for consumers that already
+00304:         # expect these names elsewhere in the pipeline.
+00305:         "risk_overview": safe_dict(
+00306:             executive_summary.get("risk_overview")
+00307:         ),
+
+MATCH LINE: 283
+00268:                 summary.get("contract_complexity"),
+00269:             ),
+00270:             "overall_balance": analysis_result.get(
+00271:                 "overall_balance",
+00272:                 summary.get("overall_balance"),
+00273:             ),
+00274:             "jurisdiction_detected": analysis_result.get(
+00275:                 "jurisdiction_detected",
+00276:                 summary.get("jurisdiction_detected"),
+00277:             ),
+00278:         },
+00279: 
+00280:         "executive_narrative": narrative,
+00281: 
+00282:         "top_risks": safe_list(
+00283:             executive_summary.get("top_risks")
+00284:         )[:10],
+00285: 
+00286:         "negotiation_priorities": safe_list(
+00287:             executive_summary.get("negotiation_priorities")
+00288:         )[:10],
+00289: 
+00290:         "recommended_actions": safe_list(
+00291:             executive_summary.get(
+00292:                 "recommended_actions",
+00293:                 summary.get("recommended_actions", []),
+00294:             )
+00295:         )[:10],
+00296: 
+00297:         "contradictions": contradictions,
+00298: 
+00299:         "clause_groups": clause_groups,
+00300: 
+00301:         "dependency_insights": dependency_insights,
+00302: 
+00303:         # Backward-compatible raw references for consumers that already
+00304:         # expect these names elsewhere in the pipeline.
+00305:         "risk_overview": safe_dict(
+00306:             executive_summary.get("risk_overview")
+00307:         ),
+00308:         "dependency_graph": dependency_graph,
+
+RAW TOP_RISKS OCCURRENCES:
+00282:         "top_risks": safe_list(
+00283:             executive_summary.get("top_risks")
+
+========================================================================================================================
+FILE: app\services\contract_agent\executive_risk_narrative.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_executive_risk_narrative
+LINES: 51 - 190
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 74
+00059:     Compatible with all contract families, industries, and jurisdictions.
+00060:     Does not assume any specific legal system.
+00061:     EN / FR / AR compatible.
+00062:     Privacy-first: does not reconstruct or infer personal data.
+00063:     Backward compatible with the previous signature.
+00064: 
+00065:     Optional dependency_graph:
+00066:     - when provided, the narrative uses the final graph count;
+00067:     - this keeps the narrative count identical to the UI dependency count.
+00068:     """
+00069: 
+00070:     executive_summary = executive_summary or {}
+00071:     language = _normalize_language(language)
+00072: 
+00073:     overview = executive_summary.get("risk_overview", {}) or {}
+00074:     top_risks = executive_summary.get("top_risks", []) or []
+00075: 
+00076:     high = _safe_int(
+00077:         overview.get("high", 0)
+00078:     )
+00079: 
+00080:     medium = _safe_int(
+00081:         overview.get("medium", 0)
+00082:     )
+00083: 
+00084:     titles = []
+00085:     seen = set()
+00086: 
+00087:     if not isinstance(top_risks, list):
+00088:         top_risks = []
+00089: 
+00090:     for item in top_risks:
+00091:         if not isinstance(item, dict):
+00092:             continue
+00093: 
+00094:         title = str(
+00095:             item.get("title")
+00096:             or item.get("clause_title")
+00097:             or item.get("name")
+00098:             or ""
+00099:         ).strip()
+
+MATCH LINE: 87
+00072: 
+00073:     overview = executive_summary.get("risk_overview", {}) or {}
+00074:     top_risks = executive_summary.get("top_risks", []) or []
+00075: 
+00076:     high = _safe_int(
+00077:         overview.get("high", 0)
+00078:     )
+00079: 
+00080:     medium = _safe_int(
+00081:         overview.get("medium", 0)
+00082:     )
+00083: 
+00084:     titles = []
+00085:     seen = set()
+00086: 
+00087:     if not isinstance(top_risks, list):
+00088:         top_risks = []
+00089: 
+00090:     for item in top_risks:
+00091:         if not isinstance(item, dict):
+00092:             continue
+00093: 
+00094:         title = str(
+00095:             item.get("title")
+00096:             or item.get("clause_title")
+00097:             or item.get("name")
+00098:             or ""
+00099:         ).strip()
+00100: 
+00101:         if not title:
+00102:             continue
+00103: 
+00104:         dedupe_key = title.casefold()
+00105: 
+00106:         if dedupe_key in seen:
+00107:             continue
+00108: 
+00109:         seen.add(dedupe_key)
+00110:         titles.append(title)
+00111: 
+00112:         if len(titles) >= 3:
+
+MATCH LINE: 88
+00073:     overview = executive_summary.get("risk_overview", {}) or {}
+00074:     top_risks = executive_summary.get("top_risks", []) or []
+00075: 
+00076:     high = _safe_int(
+00077:         overview.get("high", 0)
+00078:     )
+00079: 
+00080:     medium = _safe_int(
+00081:         overview.get("medium", 0)
+00082:     )
+00083: 
+00084:     titles = []
+00085:     seen = set()
+00086: 
+00087:     if not isinstance(top_risks, list):
+00088:         top_risks = []
+00089: 
+00090:     for item in top_risks:
+00091:         if not isinstance(item, dict):
+00092:             continue
+00093: 
+00094:         title = str(
+00095:             item.get("title")
+00096:             or item.get("clause_title")
+00097:             or item.get("name")
+00098:             or ""
+00099:         ).strip()
+00100: 
+00101:         if not title:
+00102:             continue
+00103: 
+00104:         dedupe_key = title.casefold()
+00105: 
+00106:         if dedupe_key in seen:
+00107:             continue
+00108: 
+00109:         seen.add(dedupe_key)
+00110:         titles.append(title)
+00111: 
+00112:         if len(titles) >= 3:
+00113:             break
+
+MATCH LINE: 90
+00075: 
+00076:     high = _safe_int(
+00077:         overview.get("high", 0)
+00078:     )
+00079: 
+00080:     medium = _safe_int(
+00081:         overview.get("medium", 0)
+00082:     )
+00083: 
+00084:     titles = []
+00085:     seen = set()
+00086: 
+00087:     if not isinstance(top_risks, list):
+00088:         top_risks = []
+00089: 
+00090:     for item in top_risks:
+00091:         if not isinstance(item, dict):
+00092:             continue
+00093: 
+00094:         title = str(
+00095:             item.get("title")
+00096:             or item.get("clause_title")
+00097:             or item.get("name")
+00098:             or ""
+00099:         ).strip()
+00100: 
+00101:         if not title:
+00102:             continue
+00103: 
+00104:         dedupe_key = title.casefold()
+00105: 
+00106:         if dedupe_key in seen:
+00107:             continue
+00108: 
+00109:         seen.add(dedupe_key)
+00110:         titles.append(title)
+00111: 
+00112:         if len(titles) >= 3:
+00113:             break
+00114: 
+00115:     if language == "fr":
+
+RAW TOP_RISKS OCCURRENCES:
+00074:     top_risks = executive_summary.get("top_risks", []) or []
+00087:     if not isinstance(top_risks, list):
+00088:         top_risks = []
+00090:     for item in top_risks:
+
+========================================================================================================================
+FILE: app\services\contract_agent\executive_summary.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_executive_summary
+LINES: 81 - 250
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 210
+00195:         )
+00196:         if jurisdiction_detection
+00197:         else ""
+00198:     )
+00199: 
+00200:     return {
+00201:         "language": language,
+00202:         "privacy_first": True,
+00203:         "jurisdiction": jurisdiction_detection,
+00204:         "jurisdiction_summary": jurisdiction_summary,
+00205:         "risk_overview": {
+00206:             "high": len(high),
+00207:             "medium": len(medium),
+00208:             "low": len(low),
+00209:         },
+00210:         "top_risks": [
+00211:             {
+00212:                 "title": clause_title(c),
+00213:                 "risk_level": c["_normalized_risk_level"],
+00214:                 "importance_score": c.get("importance_score"),
+00215:                 "legal_insight": (
+00216:                     get_clause_type_description(
+00217:                         c.get("clause_type"),
+00218:                         language,
+00219:                     )
+00220:                     or (
+00221:                         get_clause_type_description(
+00222:                             "limitation_of_liability_exceptions",
+00223:                             language,
+00224:                         )
+00225:                         if clause_title(c).lower() == "limitation of liability exceptions"
+00226:                         else ""
+00227:                     )
+00228:                     or c.get("legal_insight")
+00229:                     or c.get("explanation_simple")
+00230:                 ),
+00231:             }
+00232:             for c in ranked
+00233:         ],
+00234:         "negotiation_priorities": [
+00235:             {
+
+RAW TOP_RISKS OCCURRENCES:
+00210:         "top_risks": [
+
+========================================================================================================================
+FILE: test_business_backend.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: quality_check_report
+LINES: 117 - 150
+------------------------------------------------------------------------------------------------------------------------
+
+MATCH LINE: 130
+00117: def quality_check_report(report: dict) -> list[str]:
+00118:     errors: list[str] = []
+00119: 
+00120:     required_keys = [
+00121:         "title",
+00122:         "generated_at",
+00123:         "business_model",
+00124:         "executive_brief",
+00125:         "weekly_summary",
+00126:         "business_health_score",
+00127:         "kpi_snapshot",
+00128:         "forecast_snapshot",
+00129:         "memory_summary",
+00130:         "top_risks",
+00131:         "top_opportunities",
+00132:         "priority_actions",
+00133:         "ceo_decision",
+00134:         "data_limitations",
+00135:         "disclaimer",
+00136:     ]
+00137: 
+00138:     for key in required_keys:
+00139:         assert_key(report, key, errors)
+00140: 
+00141:     if not isinstance(report.get("kpi_snapshot", {}), dict):
+00142:         errors.append("kpi_snapshot must be an object.")
+00143: 
+00144:     if not isinstance(report.get("forecast_snapshot", {}), dict):
+00145:         errors.append("forecast_snapshot must be an object.")
+00146: 
+00147:     if not isinstance(report.get("priority_actions", []), list):
+00148:         errors.append("priority_actions must be a list.")
+00149: 
+00150:     return errors
+
+RAW TOP_RISKS OCCURRENCES:
+00130:         "top_risks",

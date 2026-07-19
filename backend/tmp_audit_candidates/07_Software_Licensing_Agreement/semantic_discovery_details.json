@@ -1,0 +1,844 @@
+[
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "2.2",
+    "source_language": "en",
+    "source_text": "2.2 Licensor shall have the right, upon thirty (30) days' notice, to audit Licensee's books and records relevant to royalty calculations no more than once per year; if an audit reveals an underpayment exceeding five percent (5%), Licensee shall bear the reasonable cost of the audit.",
+    "primary_type": "audit_rights",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "audit_rights",
+        "anchors": [
+          "audit",
+          "bear",
+          "books",
+          "calculation",
+          "cost",
+          "days",
+          "exceeding",
+          "five",
+          "have",
+          "if",
+          "licensee",
+          "licensor",
+          "more",
+          "no",
+          "notice",
+          "once",
+          "per",
+          "percent",
+          "reasonable",
+          "record",
+          "relevant",
+          "reveal",
+          "right",
+          "royalty",
+          "than",
+          "thirty",
+          "underpayment",
+          "upon",
+          "year"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Licensor warrants that it has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.",
+    "primary_type": "warranty",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4be6b4676a574b8207ee3e2aaf6e94eda6a54a9b163854735a83af10f81d9e9d",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4be6b4676a574b8207ee3e2aaf6e94eda6a54a9b163854735a83af10f81d9e9d",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 Licensor's aggregate liability under this Agreement shall not exceed the total royalties paid by Licensee in the twelve (12) months preceding the claim, except for claims arising from Licensor's breach of Section 3 (Intellectual Property Ownership).",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aggregate liability under this Agreement shall not exceed",
+            "start": 15,
+            "end": 72
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 15,
+            "end": 252,
+            "text": "aggregate liability under this Agreement shall not exceed the total royalties paid by Licensee in the twelve (12) months preceding the claim, except for claims arising from Licensor's breach of Section 3 (Intellectual Property Ownership)"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fc9310995db756736b93415fc42ef0b22317e7fc38adc14fcf647b92e5ae8aff",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 56,
+            "end": 253,
+            "text": "shall not exceed the total royalties paid by Licensee in the twelve (12) months preceding the claim, except for claims arising from Licensor's breach of Section 3 (Intellectual Property Ownership)."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "d866255e8d6ba11f8fd07410a6698c537668585b16e896bc5f634eec710067fa",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 56,
+            "end": 253,
+            "text": "shall not exceed the total royalties paid by Licensee in the twelve (12) months preceding the claim, except for claims arising from Licensor's breach of Section 3 (Intellectual Property Ownership)."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "d866255e8d6ba11f8fd07410a6698c537668585b16e896bc5f634eec710067fa",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 4,
+            "end": 203,
+            "text": "Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c57fb5b436776034957d8ff1fa1ba944cb956d5efc285d2e0ff9baea58a59b33",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "LICENSEE",
+          "obligated_actor": null,
+          "counterparty": "LICENSOR",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 4,
+            "end": 203,
+            "text": "Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c57fb5b436776034957d8ff1fa1ba944cb956d5efc285d2e0ff9baea58a59b33",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "LICENSEE",
+          "obligated_actor": null,
+          "counterparty": "LICENSOR",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "1.2",
+    "source_language": "en",
+    "source_text": "1.2 Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 181,
+            "text": "shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "578f62b55e94918dd3498a95b25e686cf5ab30e51d883749fc63765cdef54135",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 181,
+            "text": "Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "3e180f3ab7fc71ac3037c45bf5e48b3bb72886b6ac345bb7c92a59e4d8df86ee",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 181,
+            "text": "shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "578f62b55e94918dd3498a95b25e686cf5ab30e51d883749fc63765cdef54135",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 181,
+            "text": "Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "3e180f3ab7fc71ac3037c45bf5e48b3bb72886b6ac345bb7c92a59e4d8df86ee",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Licensee shall pay Licensor a royalty of 4.5% of Net Sales of Licensed Products, payable quarterly, together with a royalty report detailing units sold and Net Sales.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PAY_FREQUENCY",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "payable quarterly",
+            "start": 85,
+            "end": 102
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 13,
+            "end": 46,
+            "text": "shall pay Licensor a royalty of 4"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "03d1f79cccbae3aafe40f2e8776828e6e8c47b41eae768722b21647553359a7f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 85,
+            "end": 102,
+            "text": "payable quarterly"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3b3e21f2666dfca49f9dfc166e694e3da06eb5a877007003d633eb3dbb2bbd0f",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 13,
+            "end": 46,
+            "text": "shall pay Licensor a royalty of 4"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "03d1f79cccbae3aafe40f2e8776828e6e8c47b41eae768722b21647553359a7f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Licensor retains all right, title, and interest in and to the Licensed Software, including all modifications and improvements, whether made by Licensor or Licensee.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_RIGHTS_RETENTION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_RIGHTS_RETENTION",
+            "start": 4,
+            "end": 129,
+            "text": "Licensor retains all right, title, and interest in and to the Licensed Software, including all modifications and improvements"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2b60acfa19b69173a9fcef7ca6c3c94b3009cdda0e71862bbb235678b797d96b",
+        "normalized_concept": "IP_RIGHTS_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_RIGHTS_RETENTION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_RIGHTS_RETENTION",
+            "start": 4,
+            "end": 129,
+            "text": "Licensor retains all right, title, and interest in and to the Licensed Software, including all modifications and improvements"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2b60acfa19b69173a9fcef7ca6c3c94b3009cdda0e71862bbb235678b797d96b",
+        "normalized_concept": "IP_RIGHTS_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 This Agreement shall continue for five (5) years from the Effective Date. Licensor may terminate this Agreement immediately if Licensee fails to pay royalties when due and does not cure such failure within fifteen (15) days of written notice.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_PAYMENT_TERMINATION",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_PAYMENT_TERMINATION",
+            "start": 87,
+            "end": 245,
+            "text": "may terminate this Agreement immediately if Licensee fails to pay royalties when due and does not cure such failure within fifteen (15) days of written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "5e086fe95d72e0157f1d90dd829a6ccef04a700cc00c02de0e9825139d813f5c",
+        "normalized_concept": "NON_PAYMENT_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 185,
+            "end": 245,
+            "text": "cure such failure within fifteen (15) days of written notice"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "aebda3eb50e619babc23cf911fbc0a48a8b2562917b7e5f8cbece3e3504688d9",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_PAYMENT_TERMINATION",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_PAYMENT_TERMINATION",
+            "start": 87,
+            "end": 245,
+            "text": "may terminate this Agreement immediately if Licensee fails to pay royalties when due and does not cure such failure within fifteen (15) days of written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "5e086fe95d72e0157f1d90dd829a6ccef04a700cc00c02de0e9825139d813f5c",
+        "normalized_concept": "NON_PAYMENT_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 185,
+            "end": 245,
+            "text": "cure such failure within fifteen (15) days of written notice"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "aebda3eb50e619babc23cf911fbc0a48a8b2562917b7e5f8cbece3e3504688d9",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

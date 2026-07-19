@@ -1,0 +1,446 @@
+"""Grounded source-semantic profile builder — V3 dominance arbitration.
+
+Invariants:
+- exact source text is the only semantic input;
+- canonical mechanism names are language-neutral;
+- every mechanism is backed by exact validated source spans;
+- CONTROL_MODIFIER never becomes a primary type;
+- primary type is selected by role-aware domain dominance;
+- EN / FR / AR pipeline aliases canonicalize to the same ontology;
+- uncertainty abstains as UNKNOWN;
+- publication-gate code is not imported or modified.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import unicodedata
+from dataclasses import dataclass
+from typing import Any, Iterable
+
+UNKNOWN = "UNKNOWN"
+
+DOMAIN_CORE = "DOMAIN_CORE"
+DOMAIN_SECONDARY = "DOMAIN_SECONDARY"
+GENERIC_SECONDARY = "GENERIC_SECONDARY"
+CONTROL_MODIFIER = "CONTROL_MODIFIER"
+PROCEDURAL_STATE = "PROCEDURAL_STATE"
+
+PRIMARY_ROLES = {DOMAIN_CORE, DOMAIN_SECONDARY, PROCEDURAL_STATE}
+
+@dataclass(frozen=True)
+class MechanismRule:
+    kind: str
+    patterns: dict[str, tuple[str, ...]]
+    rank: int
+    primary_type: str
+    semantic_role: str
+    primary_eligible: bool = False
+    polarity: str | None = None
+    procedural_state: str | None = None
+
+def _r(kind, en, fr, ar, rank, primary, role, eligible=True, polarity=None, state=None):
+    return MechanismRule(
+        kind,
+        {"en": tuple(en), "fr": tuple(fr), "ar": tuple(ar)},
+        rank, primary, role, eligible, polarity, state,
+    )
+
+RULES: tuple[MechanismRule, ...] = (
+    _r("PRIOR_CONSENT_PREREQUISITE",
+       (r"\bwithout\b.{0,120}\bprior\s+(?:written\s+)?(?:consent|approval)\b", r"\bprior\s+written\s+(?:consent|approval)\b"),
+       (r"\bsans\b.{0,120}\b(?:consentement|approbation)\b.{0,40}\bpr[eé]alable\b", r"\b(?:consentement|approbation)\s+[eé]crit(?:e)?\s+pr[eé]alable\b"),
+       (r"(?:دون|بدون).{0,120}(?:موافقة|الموافقة).{0,50}(?:مسبق|المسبقة)", r"(?:الموافقة|موافقة).{0,30}(?:الخطية|المكتوبة)?.{0,20}(?:المسبقة|مسبق)"),
+       100, "consent_control", CONTROL_MODIFIER, False, state="PRIOR_CONSENT"),
+
+    _r("AUTOMATIC_EVENT_TRANSITION",
+       (r"\b(?:terminate|expire|end)\w*\s+automatically\s+(?:upon|on)\b.{0,240}",),
+       (r"\b(?:prend\s+fin|expire\w*|r[eé]sili\w*)\s+automatiquement\b.{0,240}",),
+       (r"(?:ينتهي|تنتهي|تنقضي).{0,50}تلقائي(?:اً|ًا|ا)?.{0,240}",),
+       98, "termination", PROCEDURAL_STATE, True, state="AUTOMATIC_EVENT"),
+
+    _r("AUTOMATIC_RENEWAL",
+       (r"\b(?:automatically\s+renew|renew\w*\s+automatically)\b.{0,180}",),
+       (r"\b(?:renouvel\w*.{0,30}automatique\w*|automatiquement\s+renouvel\w*).{0,180}",),
+       (r"(?:يتجدد|تتجدد).{0,40}(?:تلقائياً|تلقائيًا|تلقائيا).{0,180}",),
+       96, "renewal", PROCEDURAL_STATE, True, state="AUTOMATIC_RENEWAL"),
+
+    _r("MANDATORY_CONJUNCTION",
+       (r"\b(?:required|obliged|obligated)\s+to\s+(.{1,260}?)(?:,\s*subject\s+to|[.;]|$)",),
+       (r"\b(?:tenu|oblig[eé])(?:e|s|es)?\s+de\s+(.{1,260}?)(?:[.;]|$)",),
+       (r"(?:يجب|يتعين|يلتزم).{0,30}(?:أن\s+)?(.{1,260}?)(?:[.;؛]|$)",),
+       94, "mandatory_obligation", CONTROL_MODIFIER, False, polarity="REQUIRED"),
+
+    _r("PROHIBITION",
+       (r"\bshall\s+not\b.{1,220}", r"\bmust\s+not\b.{1,220}"),
+       (r"\bne\s+(?:doit|peut)\s+pas\b.{1,220}", r"\bil\s+est\s+interdit\s+de\b.{1,220}"),
+       (r"(?:لا\s+يجوز|يجب\s+ألا|يلتزم\s+بعدم).{1,220}",),
+       92, "prohibition", CONTROL_MODIFIER, False, polarity="PROHIBITED"),
+
+    _r("EXPRESS_RIGHT",
+       (r"\bshall\s+have\s+the\s+right\s+to\b.{1,220}", r"\bhas\s+the\s+right\s+to\b.{1,220}"),
+       (r"\b(?:aura|a)\s+le\s+droit\s+de\b.{1,220}",),
+       (r"(?:له|لها|يكون\s+له|يكون\s+لها).{0,30}الحق.{0,30}(?:في|أن).{1,220}",),
+       90, "express_right", CONTROL_MODIFIER, False, polarity="RIGHT"),
+
+    _r("FINANCIAL_REPORTING_OBLIGATION",
+       (r"\bshall\s+(?:deliver|provide|furnish)\b.{0,160}\bfinancial\s+statements\b", r"\bfinancial\s+statements\b.{0,120}\bwithin\b.{0,40}\bdays\b"),
+       (r"\bdoit\s+(?:remettre|fournir|livrer)\b.{0,160}\b[eé]tats?\s+financiers\b", r"\b[eé]tats?\s+financiers\b.{0,120}\bdans\s+un\s+d[eé]lai\b"),
+       (r"(?:يجب|يتعين).{0,80}(?:تسليم|تقديم|توفير).{0,160}(?:القوائم|البيانات)\s+المالية", r"(?:القوائم|البيانات)\s+المالية.{0,120}(?:خلال|في\s+غضون).{0,50}(?:يوم|أيام)"),
+       91, "financial_reporting", DOMAIN_CORE, True, polarity="REQUIRED"),
+
+    _r("BOARD_COMPOSITION_STRUCTURE",
+       (r"\bboard\s+of\s+directors\b.{0,100}\b(?:consist\s+of|comprise|composed\s+of)\b.{0,220}",),
+       (r"\bconseil\s+d['’]administration\b.{0,100}\b(?:compos[eé]|comprend|constitu[eé])\b.{0,220}",),
+       (r"(?:مجلس\s+الإدارة|مجلس\s+الادارة).{0,100}(?:يتكون|يتألف|يضم).{0,220}",),
+       90, "governance", DOMAIN_CORE),
+
+    _r("LIABILITY_CAP",
+       (r"\b(?:aggregate|total)\s+liabilit\w*\b.{0,120}\b(?:not\s+exceed|limited\s+to|capped\s+at)\b.{0,120}", r"\bliabilit\w*\b.{0,120}\b(?:not\s+exceed|limited\s+to|capped\s+at)\b.{0,120}"),
+       (r"\bresponsabilit[eé]\b.{0,140}\b(?:ne\s+d[eé]pass|limit[eé]e?\s+(?:[aà]|au)|plafonn[eé]e?\s+(?:[aà]|au))\b.{0,120}",),
+       (r"(?:المسؤولية).{0,140}(?:لا\s+تتجاوز|محدودة|حد\s+أقصى).{0,120}",),
+       89, "liability", DOMAIN_CORE),
+
+    _r("EXCLUDED_DAMAGE_CATEGORY",
+       (r"\b(?:indirect|consequential|special|incidental|punitive)\s+damages\b.{0,160}",),
+       (r"\bdommages\b.{0,80}(?:indirects|cons[eé]cutifs|sp[eé]ciaux|accessoires|punitifs).{0,160}",),
+       (r"(?:الأضرار).{0,80}(?:غير\s+المباشرة|التبعية|الخاصة|العقابية).{0,160}",),
+       84, "liability", DOMAIN_SECONDARY, True, polarity="EXCLUDED"),
+
+    _r("CONFIDENTIALITY_DUTY",
+       (r"\bshall\s+(?:hold|keep|maintain)\b.{0,100}\bconfiden\w*\b.{0,180}", r"\bstrict\s+confidence\b.{0,180}"),
+       (r"\bdoit\s+(?:garder|tenir|maintenir)\b.{0,100}\bconfident\w*\b.{0,180}", r"\bstrictement\s+confidentiel\w*\b.{0,180}"),
+       (r"(?:يجب|يتعين|يلتزم).{0,80}(?:الحفاظ|المحافظة).{0,80}(?:سرية|سري).{0,180}",),
+       88, "confidentiality", DOMAIN_CORE, True, polarity="REQUIRED"),
+
+    _r("PAYMENT_OBLIGATION",
+       (r"\bshall\s+pay\b[^.;]{0,180}", r"\bpayment\s+(?:is|shall\s+be)\s+(?:due|payable)\b.{0,180}"),
+       (r"\bdoit\s+payer\b.{0,220}", r"\bpaiement\b.{0,80}(?:exigible|d[uû])\b.{0,180}"),
+       (r"(?:يجب|يلتزم).{0,60}(?:بدفع|سداد).{0,220}", r"(?:الدفع|السداد).{0,80}(?:مستحق|واجب).{0,180}"),
+       90, "payment", DOMAIN_CORE, True, polarity="REQUIRED"),
+
+    _r("TERMINATION_RIGHT",
+       (r"\b(?:may|shall\s+have\s+the\s+right\s+to)\s+terminate\b.{0,220}",),
+       (r"\b(?:peut|a\s+le\s+droit\s+de)\s+r[eé]silier\b.{0,220}",),
+       (r"(?:يجوز|له|لها).{0,50}(?:فسخ|إنهاء).{0,220}",),
+       91, "termination", DOMAIN_CORE),
+
+    _r("GOVERNING_LAW_SELECTION",
+       (r"\bgoverned\s+by\s+the\s+laws?\s+of\b.{0,160}",),
+       (r"\br[eé]gi(?:e)?\s+par\s+le\s+droit\b.{0,160}",),
+       (r"(?:يخضع|تخضع).{0,60}(?:لقوانين|للقانون).{0,160}",),
+       88, "governing_law", DOMAIN_CORE),
+
+    _r("DATA_PROTECTION_DUTY",
+       (r"\b(?:personal\s+data|personal\s+information)\b.{0,160}\b(?:protect|process|processing|security)\w*\b.{0,160}",),
+       (r"\bdonn[eé]es?\s+[aà]\s+caract[eè]re\s+personnel\b.{0,160}\b(?:prot[eé]g|traitement|s[eé]curit[eé])\w*\b.{0,160}",),
+       (r"(?:البيانات\s+الشخصية).{0,160}(?:حماية|معالجة|أمن).{0,160}",),
+       89, "data_protection", DOMAIN_CORE),
+
+    _r("SERVICE_LEVEL_COMMITMENT",
+       (r"\b(?:service\s+level|uptime|availability)\b.{0,160}\b(?:percent|%|commit|target|guarantee)\w*\b.{0,160}",),
+       (r"\b(?:niveau\s+de\s+service|disponibilit[eé])\b.{0,160}(?:%|engagement|objectif|garanti)\w*.{0,160}",),
+       (r"(?:مستوى\s+الخدمة|توفر\s+الخدمة|الجاهزية).{0,160}(?:%|التزام|هدف|ضمان).{0,160}",),
+       89, "service_level", DOMAIN_CORE),
+
+    _r("ASSIGNMENT_TRANSFER",
+       (r"\b(?:assign|transfer)\b.{0,180}\b(?:agreement|rights?|obligations?)\b",),
+       (r"\b(?:c[eé]der|transf[eé]rer)\b.{0,180}\b(?:contrat|droits?|obligations?)\b",),
+       (r"(?:التنازل|تحويل).{0,180}(?:العقد|الحقوق|الالتزامات)",),
+       82, "assignment", DOMAIN_SECONDARY),
+
+    _r("NOTICE_PROCEDURE",
+       (r"\bnotice\b.{0,140}\b(?:written|writing|address|delivered|days)\b.{0,160}",),
+       (r"\bnotification\b.{0,140}\b(?:[eé]crit|adresse|remis|jours)\b.{0,160}",),
+       (r"(?:الإشعار|إشعار).{0,140}(?:كتابي|العنوان|تسليم|أيام).{0,160}",),
+       78, "notice", GENERIC_SECONDARY, False),
+)
+
+ROLE_WEIGHT = {
+    DOMAIN_CORE: 34.0,
+    DOMAIN_SECONDARY: 20.0,
+    PROCEDURAL_STATE: 24.0,
+    GENERIC_SECONDARY: 4.0,
+    CONTROL_MODIFIER: 0.0,
+}
+
+_TYPE_EQUIVALENCE = {
+    "investor_information_rights": "financial_reporting",
+    "information_rights": "financial_reporting",
+    "financial_reporting": "financial_reporting",
+    "limitation_of_liability": "liability",
+    "liability": "liability",
+    "automatic_renewal": "renewal",
+    "renewal": "renewal",
+    "term_and_termination": "termination",
+    "termination_for_cause": "termination",
+    "termination_for_convenience": "termination",
+    "termination": "termination",
+    "corporate_governance": "governance",
+    "governance": "governance",
+    "privacy": "data_protection",
+    "data_processing": "data_protection",
+    "data_protection": "data_protection",
+    "notices": "notice",
+    "notice": "notice",
+}
+
+def _hash_json(value: Any) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+def _normalize_for_language_detection(text: str) -> str:
+    return unicodedata.normalize("NFKC", str(text or ""))
+
+def detect_source_language(text: str) -> str:
+    value = _normalize_for_language_detection(text)
+    if re.search(r"[\u0600-\u06FF]", value):
+        return "ar"
+    if re.search(r"[àâçéèêëîïôùûüÿœæ]", value.lower()):
+        return "fr"
+    markers = re.findall(r"\b(?:le|la|les|des|une|du|aux|doit|sans|droit|délai|contrat|partie)\b", value.lower())
+    return "fr" if len(markers) >= 3 else "en"
+
+def _evidence(source: str, pattern: str, label: str) -> Iterable[dict]:
+    for match in re.finditer(pattern, source, re.IGNORECASE | re.DOTALL):
+        yield {"label": label, "start": match.start(), "end": match.end(), "text": match.group(0)}
+
+def _valid_span(source: str, span: dict) -> bool:
+    start, end, text = span.get("start"), span.get("end"), span.get("text")
+    return isinstance(start, int) and isinstance(end, int) and 0 <= start < end <= len(source) and source[start:end] == text
+
+def _mandatory_arguments(span_text: str, language: str) -> list[dict]:
+    if language == "ar":
+        parts = re.split(r"\s+و(?=[\u0600-\u06FF])|،", span_text)
+    elif language == "fr":
+        parts = re.split(r"\s+et\s+", span_text, flags=re.IGNORECASE)
+    else:
+        parts = re.split(r"\s+and\s+", span_text, flags=re.IGNORECASE)
+    result = []
+    for part in parts:
+        tokens = re.findall(r"[^\W\d_]{3,}", part.lower(), flags=re.UNICODE)
+        if tokens:
+            result.append({"text": part.strip(), "tokens": tokens[:20]})
+    return result if len(result) >= 2 else []
+
+def extract_source_mechanisms(source_text: str, language: str | None = None) -> list[dict]:
+    source = str(source_text or "")
+    lang = language or detect_source_language(source)
+    mechanisms: list[dict] = []
+    for rule in RULES:
+        spans: list[dict] = []
+        for pattern in rule.patterns.get(lang, ()):
+            spans.extend(_evidence(source, pattern, rule.kind))
+        unique, seen = [], set()
+        for span in spans:
+            key = (span["start"], span["end"], span["label"])
+            if key not in seen and _valid_span(source, span):
+                seen.add(key)
+                unique.append(span)
+        if not unique:
+            continue
+        item: dict[str, Any] = {
+            "kind": rule.kind,
+            "rank": rule.rank,
+            "candidate_primary_type": canonicalize_pipeline_type(rule.primary_type),
+            "semantic_role": rule.semantic_role,
+            "primary_eligible": rule.primary_eligible,
+            "source_evidence": unique,
+            "grounded": True,
+        }
+        if rule.polarity:
+            item["polarity"] = rule.polarity
+        if rule.procedural_state:
+            item["procedural_state"] = rule.procedural_state
+        if rule.kind == "MANDATORY_CONJUNCTION":
+            args = _mandatory_arguments(unique[0]["text"], lang)
+            if args:
+                item["arguments"] = args
+            else:
+                item["kind"] = "MANDATORY_OBLIGATION"
+                item["rank"] = 72
+        mechanisms.append(item)
+    return mechanisms
+
+def attach_source_evidence(source_text: str, mechanisms: list[dict]) -> list[dict]:
+    source = str(source_text or "")
+    grounded = []
+    for mechanism in mechanisms:
+        valid = [s for s in mechanism.get("source_evidence") or [] if isinstance(s, dict) and _valid_span(source, s)]
+        if not valid:
+            continue
+        item = dict(mechanism)
+        item["source_evidence"] = valid
+        item["grounded"] = True
+        item["evidence_hash"] = _hash_json(valid)
+        grounded.append(item)
+    return grounded
+
+def ground_mechanisms(source_text: str, mechanisms: list[dict]) -> list[dict]:
+    return attach_source_evidence(source_text, mechanisms)
+
+def rank_material_mechanisms(grounded_mechanisms: list[dict]) -> list[dict]:
+    material = [
+        dict(m) for m in grounded_mechanisms
+        if m.get("grounded") is True and m.get("source_evidence") and int(m.get("rank", 0)) >= 70
+    ]
+    material.sort(key=lambda m: (-int(m.get("rank", 0)), str(m.get("kind", "")), int(m["source_evidence"][0]["start"])))
+    return material
+
+def _merged_coverage(mechanisms: list[dict], source_length: int) -> float:
+    if source_length <= 0:
+        return 0.0
+    intervals = []
+    for mechanism in mechanisms:
+        for span in mechanism.get("source_evidence") or []:
+            start, end = int(span.get("start", 0)), int(span.get("end", 0))
+            if end > start:
+                intervals.append((start, end))
+    if not intervals:
+        return 0.0
+    intervals.sort()
+    merged: list[list[int]] = []
+    for start, end in intervals:
+        if not merged or start > merged[-1][1]:
+            merged.append([start, end])
+        else:
+            merged[-1][1] = max(merged[-1][1], end)
+    return min(1.0, sum(end - start for start, end in merged) / source_length)
+
+def _independent_support(mechanisms: list[dict]) -> int:
+    kinds = {str(m.get("kind", "")) for m in mechanisms}
+    return len(kinds)
+
+def derive_primary_type_from_ranked_mechanisms(ranked_mechanisms: list[dict], *, source_length: int = 0) -> dict:
+    eligible = [
+        m for m in ranked_mechanisms
+        if m.get("primary_eligible") is True and m.get("semantic_role") in PRIMARY_ROLES
+    ]
+    if not eligible:
+        return {
+            "primary_type": UNKNOWN, "confidence": 0.0, "supporting_mechanisms": [],
+            "abstained": True, "abstention_reason": "NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM",
+            "dominance_scores": [],
+        }
+
+    grouped: dict[str, list[dict]] = {}
+    for mechanism in eligible:
+        candidate = canonicalize_pipeline_type(mechanism.get("candidate_primary_type"))
+        if candidate and candidate != UNKNOWN.lower():
+            grouped.setdefault(candidate, []).append(mechanism)
+
+    scored = []
+    for candidate, mechanisms in grouped.items():
+        coverage = _merged_coverage(mechanisms, source_length)
+        independent = _independent_support(mechanisms)
+        core_count = sum(m.get("semantic_role") == DOMAIN_CORE for m in mechanisms)
+        secondary_count = sum(m.get("semantic_role") == DOMAIN_SECONDARY for m in mechanisms)
+        procedural_count = sum(m.get("semantic_role") == PROCEDURAL_STATE for m in mechanisms)
+        rank_signal = max(int(m.get("rank", 0)) for m in mechanisms) / 100.0
+        role_signal = sum(ROLE_WEIGHT.get(str(m.get("semantic_role")), 0.0) for m in mechanisms)
+        support_signal = min(22.0, max(0, independent - 1) * 11.0)
+        coverage_signal = coverage * 42.0
+        score = role_signal + support_signal + coverage_signal + rank_signal * 12.0
+        scored.append({
+            "type": candidate,
+            "score": round(score, 4),
+            "coverage": round(coverage, 4),
+            "independent_support": independent,
+            "core_count": core_count,
+            "secondary_count": secondary_count,
+            "procedural_count": procedural_count,
+            "mechanisms": mechanisms,
+        })
+
+    scored.sort(key=lambda x: (-x["score"], -x["coverage"], x["type"]))
+    winner = scored[0]
+    runner = scored[1] if len(scored) > 1 else None
+    margin = winner["score"] - runner["score"] if runner else winner["score"]
+
+    enough_domain_mass = (
+        winner["core_count"] >= 1 and winner["coverage"] >= 0.16
+    ) or winner["independent_support"] >= 2 or (
+        winner["procedural_count"] >= 1 and winner["coverage"] >= 0.22
+    )
+    enough_dominance = runner is None or margin >= 8.0 or winner["score"] >= runner["score"] * 1.18
+
+    public_scores = [
+        {k: v for k, v in item.items() if k != "mechanisms"}
+        for item in scored
+    ]
+
+    if not enough_domain_mass:
+        return {
+            "primary_type": UNKNOWN,
+            "confidence": round(min(0.79, 0.42 + winner["coverage"]), 4),
+            "supporting_mechanisms": [m["kind"] for m in winner["mechanisms"]],
+            "abstained": True,
+            "abstention_reason": "DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH",
+            "candidate_primary_type": winner["type"],
+            "candidate_coverage": winner["coverage"],
+            "dominance_scores": public_scores,
+        }
+
+    if not enough_dominance:
+        return {
+            "primary_type": UNKNOWN,
+            "confidence": 0.79,
+            "supporting_mechanisms": [m["kind"] for m in winner["mechanisms"]],
+            "abstained": True,
+            "abstention_reason": "COMPETING_DOMAIN_MECHANISMS",
+            "candidate_primary_type": winner["type"],
+            "candidate_margin": round(margin, 4),
+            "dominance_scores": public_scores,
+        }
+
+    confidence = min(
+        0.99,
+        0.78
+        + min(0.10, winner["coverage"] * 0.25)
+        + min(0.06, max(0, winner["independent_support"] - 1) * 0.03)
+        + min(0.05, max(0.0, margin) / 200.0),
+    )
+    # Contract-agent integration requires >= .90 before overriding.
+    # A resolved dominant primary is intentionally promoted into that band.
+    confidence = max(0.90, confidence)
+
+    return {
+        "primary_type": winner["type"],
+        "confidence": round(confidence, 4),
+        "supporting_mechanisms": [m["kind"] for m in winner["mechanisms"]],
+        "abstained": False,
+        "abstention_reason": None,
+        "primary_evidence_coverage": winner["coverage"],
+        "dominance_margin": round(margin, 4),
+        "dominance_scores": public_scores,
+    }
+
+def build_semantic_source_profile(source_text: str, language: str | None = None) -> dict:
+    source = str(source_text or "")
+    lang = language or detect_source_language(source)
+    extracted = extract_source_mechanisms(source, lang)
+    grounded = ground_mechanisms(source, extracted)
+    ranked = rank_material_mechanisms(grounded)
+    primary = derive_primary_type_from_ranked_mechanisms(ranked, source_length=len(source))
+    profile = {
+        "profile_version": "shadow-p0-v3",
+        "source_language": lang,
+        "source_text_hash": hashlib.sha256(source.encode("utf-8")).hexdigest(),
+        "extracted_mechanisms": extracted,
+        "grounded_mechanisms": grounded,
+        "ranked_material_mechanisms": ranked,
+        **primary,
+    }
+    profile["semantic_profile_hash"] = _hash_json({
+        "source_language": profile["source_language"],
+        "ranked_material_mechanisms": profile["ranked_material_mechanisms"],
+        "primary_type": profile["primary_type"],
+        "abstained": profile["abstained"],
+        "dominance_scores": profile.get("dominance_scores", []),
+    })
+    return profile
+
+def canonicalize_pipeline_type(value: str | None) -> str:
+    normalized = str(value or "").strip().lower()
+    return _TYPE_EQUIVALENCE.get(normalized, normalized or UNKNOWN.lower())

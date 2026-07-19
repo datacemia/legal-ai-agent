@@ -1,0 +1,1346 @@
+[
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يدفع العميل رسوم الاشتراك مقدماً، سنوياً، وفقاً لنموذج الطلب. تتجدد هذه الاتفاقية تلقائياً لمدد متتالية قدرها سنة (1) واحدة بالسعر المعلن السائد لدى Northwind حينذاك، ما لم يقدم العميل إشعاراً خطياً بعدم التجديد قبل ستين (60) يوماً على الأقل من نهاية المدة الجارية.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUTO_RENEW_OPT_OUT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "تتجدد هذه الاتفاقية تلقائياً",
+            "start": 66,
+            "end": 94
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 66,
+            "end": 269,
+            "text": "تتجدد هذه الاتفاقية تلقائياً لمدد متتالية قدرها سنة (1) واحدة بالسعر المعلن السائد لدى Northwind حينذاك، ما لم يقدم الطرف الطرف المتعاقد ب أ إشعاراً خطياً بعدم التجديد قبل ستين (60) يوماً على الأقل من نهاية المدة الجارية."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "81e6e795c1bd9176dfdc55c03163a7d55c7913fc36e0aad1e9684c34a8ecebb2",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 64,
+            "text": "يدفع الطرف الطرف المتعاقد ب أ رسوم الاشتراك مقدماً، سنوياً، وفقاً لنموذج الطلب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c9b3a60e0bd7a37faaadba0ea54cbecc02bb68c6435bd1949b68ea5663d7ed65",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 4,
+            "end": 44,
+            "text": "يدفع الطرف الطرف المتعاقد ب أ رسوم الاشتراك مقدماً، سنوياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "72c5b67fbd25ea47e106e27dceffa666e8b32336d3304e9a828596ec2c07f268",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 64,
+            "text": "يدفع الطرف الطرف المتعاقد ب أ رسوم الاشتراك مقدماً، سنوياً، وفقاً لنموذج الطلب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c9b3a60e0bd7a37faaadba0ea54cbecc02bb68c6435bd1949b68ea5663d7ed65",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 4,
+            "end": 44,
+            "text": "يدفع الطرف الطرف المتعاقد ب أ رسوم الاشتراك مقدماً، سنوياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "72c5b67fbd25ea47e106e27dceffa666e8b32336d3304e9a828596ec2c07f268",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 فيما بين الطرفين، يحتفظ العميل بكامل الحقوق في بيانات العميل. عند الإنهاء، تتيح Northwind بيانات العميل للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة ثلاثين (30) يوم",
+            "start": 130,
+            "end": 149
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "OWNERSHIP",
+        "rank": 96,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OWNERSHIP",
+            "start": 22,
+            "end": 64,
+            "text": "يحتفظ الطرف الطرف المتعاقد ب أ بكامل الحقوق في بيانات الطرف الطرف المتعاقد ب أ"
+          },
+          {
+            "label": "OWNERSHIP",
+            "start": 4,
+            "end": 47,
+            "text": "فيما بين الطرفين، يحتفظ الطرف الطرف المتعاقد ب أ بكامل الحقوق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "1b5222236328ad8c5e34a6293db7f39d4aacd02ee3b16a7039b3f858426d83bd",
+        "normalized_concept": "OWNERSHIP",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "OWN",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 94,
+            "end": 180,
+            "text": "بيانات الطرف الطرف المتعاقد ب أ للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e6ba52dba7ba298469dd8c37db05c31e2ec85f4e3787a8323cb5f49f9bcc5a91",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN",
+            "start": 66,
+            "end": 115,
+            "text": "عند الإنهاء، تتيح Northwind بيانات الطرف الطرف المتعاقد ب أ للتصدير"
+          },
+          {
+            "label": "DATA_RETURN",
+            "start": 79,
+            "end": 115,
+            "text": "تتيح Northwind بيانات الطرف الطرف المتعاقد ب أ للتصدير"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9264210bdc83d3fe8907162ad4241051e97537e1f5ebfe89830bc7853bc36b5a",
+        "normalized_concept": "DATA_RETURN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "RETURN_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CUSTOMER_DATA_LIFECYCLE",
+        "rank": 82,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CUSTOMER_DATA_LIFECYCLE",
+            "start": 94,
+            "end": 180,
+            "text": "بيانات الطرف الطرف المتعاقد ب أ للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f61b872b08947ceb9e03e75de4999ae233be76f4bf809491750f440c55b63261",
+        "normalized_concept": "CUSTOMER_DATA_LIFECYCLE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "OWNERSHIP",
+        "rank": 96,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OWNERSHIP",
+            "start": 22,
+            "end": 64,
+            "text": "يحتفظ الطرف الطرف المتعاقد ب أ بكامل الحقوق في بيانات الطرف الطرف المتعاقد ب أ"
+          },
+          {
+            "label": "OWNERSHIP",
+            "start": 4,
+            "end": 47,
+            "text": "فيما بين الطرفين، يحتفظ الطرف الطرف المتعاقد ب أ بكامل الحقوق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "1b5222236328ad8c5e34a6293db7f39d4aacd02ee3b16a7039b3f858426d83bd",
+        "normalized_concept": "OWNERSHIP",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "OWN",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 94,
+            "end": 180,
+            "text": "بيانات الطرف الطرف المتعاقد ب أ للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e6ba52dba7ba298469dd8c37db05c31e2ec85f4e3787a8323cb5f49f9bcc5a91",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN",
+            "start": 66,
+            "end": 115,
+            "text": "عند الإنهاء، تتيح Northwind بيانات الطرف الطرف المتعاقد ب أ للتصدير"
+          },
+          {
+            "label": "DATA_RETURN",
+            "start": 79,
+            "end": 115,
+            "text": "تتيح Northwind بيانات الطرف الطرف المتعاقد ب أ للتصدير"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9264210bdc83d3fe8907162ad4241051e97537e1f5ebfe89830bc7853bc36b5a",
+        "normalized_concept": "DATA_RETURN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "RETURN_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CUSTOMER_DATA_LIFECYCLE",
+        "rank": 82,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CUSTOMER_DATA_LIFECYCLE",
+            "start": 94,
+            "end": 180,
+            "text": "بيانات الطرف الطرف المتعاقد ب أ للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f61b872b08947ceb9e03e75de4999ae233be76f4bf809491750f440c55b63261",
+        "normalized_concept": "CUSTOMER_DATA_LIFECYCLE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة ثلاثين (30) يوم",
+            "start": 130,
+            "end": 149
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 تحافظ Northwind على ضمانات إدارية ومادية وتقنية متوافقة مع معايير SOC 2 Type II، وتخطر العميل بأي حادث أمني مؤكد يؤثر على بيانات العميل خلال اثنتين وسبعين (72) ساعة من اكتشافه.",
+    "primary_type": "cybersecurity",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "cybersecurity",
+        "anchors": [
+          "ii",
+          "northwind",
+          "soc",
+          "type",
+          "أمني",
+          "إدارية",
+          "اثنتين",
+          "اكتشافه",
+          "العميل",
+          "بأي",
+          "بيانات",
+          "تحافظ",
+          "حادث",
+          "خلال",
+          "ساعة",
+          "ضمانات",
+          "مؤكد",
+          "متوافقة",
+          "معايير",
+          "وتخطر",
+          "وتقنية",
+          "وسبعين",
+          "ومادية",
+          "يؤثر"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 تبذل Northwind جهوداً معقولة تجارياً للحفاظ على نسبة توافر قدرها 99.9%، تُقاس شهرياً، باستثناء الصيانة المجدولة. يتمثل سبيل الانتصاف الحصري للعميل في حال عدم الوفاء بهذا الالتزام في رصيد خدمة وفقاً للملحق أ.",
+    "primary_type": "maintenance",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "maintenance",
+        "anchors": [
+          "northwind",
+          "الالتزام",
+          "الانتصاف",
+          "الحصري",
+          "الصيانة",
+          "المجدولة",
+          "الوفاء",
+          "باستثناء",
+          "بهذا",
+          "تبذل",
+          "تجاريا",
+          "توافر",
+          "جهودا",
+          "حال",
+          "خدمة",
+          "رصيد",
+          "سبيل",
+          "شهريا",
+          "عدم",
+          "قاس",
+          "قدرها",
+          "للحفاظ",
+          "للعميل",
+          "للملحق",
+          "معقولة",
+          "نسبة",
+          "وفقا",
+          "يتمثل"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 رهناً بأحكام هذه الاتفاقية، تمنح Northwind العميل حقاً غير حصري وغير قابل للتحويل للوصول إلى المنصة واستخدامها خلال مدة الاشتراك، حصراً للأغراض التجارية الداخلية للعميل.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "حصراً للأغراض",
+            "start": 134,
+            "end": 147
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 32,
+            "end": 103,
+            "text": "تمنح Northwind الطرف الطرف المتعاقد ب أ حقاً غير حصري وغير قابل للتحويل للوصول إلى المنصة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "871314575f13dcb6c068db880c96effbe215b0c08c89529eb51f8648a5bb6f23",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 54,
+            "end": 85,
+            "text": "حقاً غير حصري وغير قابل للتحويل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "f12f40b96cb47e2c72bdf618b80acf5ea80145b30de92665c2e98bff7712a008",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "CUSTOMER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 54,
+            "end": 85,
+            "text": "حقاً غير حصري وغير قابل للتحويل"
+          },
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 105,
+            "end": 165,
+            "text": "استخدامها خلال مدة الاشتراك، حصراً للأغراض التجارية الداخلية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "ea4b31d0e1af6cdd8de30934815042eb7edf62ec3a791893d70940fb52ff80c6",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "CUSTOMER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 32,
+            "end": 103,
+            "text": "تمنح Northwind الطرف الطرف المتعاقد ب أ حقاً غير حصري وغير قابل للتحويل للوصول إلى المنصة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "871314575f13dcb6c068db880c96effbe215b0c08c89529eb51f8648a5bb6f23",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 54,
+            "end": 85,
+            "text": "حقاً غير حصري وغير قابل للتحويل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "f12f40b96cb47e2c72bdf618b80acf5ea80145b30de92665c2e98bff7712a008",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "CUSTOMER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 54,
+            "end": 85,
+            "text": "حقاً غير حصري وغير قابل للتحويل"
+          },
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 105,
+            "end": 165,
+            "text": "استخدامها خلال مدة الاشتراك، حصراً للأغراض التجارية الداخلية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "ea4b31d0e1af6cdd8de30934815042eb7edf62ec3a791893d70940fb52ff80c6",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "CUSTOMER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "حصراً للأغراض",
+            "start": 134,
+            "end": 147
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من العميل خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 143,
+            "end": 196,
+            "text": "باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "174126f62ace76572c65404352fdec69813ea3ce5cf84bb0dcd857b5c461bd0f",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 262,
+            "text": "لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "8f03bdcdcd71524c0c9e178e540f61ab6ec901b8e53bde04c7934e387e74e0ad",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 262,
+            "text": "لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8f03bdcdcd71524c0c9e178e540f61ab6ec901b8e53bde04c7934e387e74e0ad",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 143,
+            "end": 196,
+            "text": "باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "174126f62ace76572c65404352fdec69813ea3ce5cf84bb0dcd857b5c461bd0f",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 262,
+            "text": "لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "8f03bdcdcd71524c0c9e178e540f61ab6ec901b8e53bde04c7934e387e74e0ad",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 262,
+            "text": "لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8f03bdcdcd71524c0c9e178e540f61ab6ec901b8e53bde04c7934e387e74e0ad",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "7.1",
+    "source_language": "ar",
+    "source_text": "7.1 لا يجوز للعميل إنهاء هذه الاتفاقية للمصلحة قبل نهاية مدة الاشتراك الجارية. يجوز لـ Northwind إنهاء هذه الاتفاقية للمصلحة في أي وقت بإشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 135,
+            "end": 145,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "15aa78c904da5030a0b45077777375c9bf0670191915ce32c0e777e0629b601a",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 79,
+            "end": 224,
+            "text": "يجوز لـ Northwind إنهاء هذه الاتفاقية للمصلحة في أي وقت بإشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "6f85a533ffc556658a4e2e03c87215dc4c15bd906c1054044f376674e53f2ac7",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 225,
+            "text": "لا يجوز للعميل إنهاء هذه الاتفاقية للمصلحة قبل نهاية مدة الاشتراك الجارية. يجوز لـ Northwind إنهاء هذه الاتفاقية للمصلحة في أي وقت بإشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "c46fa840242aafe10f95987f9efdda33d9a970965b96bb061774d44ac60ada20",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 136,
+            "end": 224,
+            "text": "إشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "68215ec32a3bb64165a401b36c18f993c871baf39b43fac152859f2a2316b2ab",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 135,
+            "end": 145,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "15aa78c904da5030a0b45077777375c9bf0670191915ce32c0e777e0629b601a",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 79,
+            "end": 224,
+            "text": "يجوز لـ Northwind إنهاء هذه الاتفاقية للمصلحة في أي وقت بإشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "6f85a533ffc556658a4e2e03c87215dc4c15bd906c1054044f376674e53f2ac7",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 225,
+            "text": "لا يجوز للعميل إنهاء هذه الاتفاقية للمصلحة قبل نهاية مدة الاشتراك الجارية. يجوز لـ Northwind إنهاء هذه الاتفاقية للمصلحة في أي وقت بإشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "c46fa840242aafe10f95987f9efdda33d9a970965b96bb061774d44ac60ada20",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 136,
+            "end": 224,
+            "text": "إشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "68215ec32a3bb64165a401b36c18f993c871baf39b43fac152859f2a2316b2ab",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

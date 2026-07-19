@@ -1,0 +1,67 @@
+========================================================================================================================
+V4.1.17C REAL DURATION PROBE
+========================================================================================================================
+
+EXECUTIVE SUMMARY DURATION: None
+EXECUTIVE REPORT DURATION: None
+UNIFIED OVERVIEW DURATION: 'trois (3) ans'
+
+SUMMARY:
+Type: MSA
+Parties: Client, Prestataire
+Durée: trois (3) ans
+Paiement: Non spécifié
+
+Qualité du contrat: 89/100
+Complexité du contrat: Moyenne
+Équilibre du contrat: Non spécifié
+Juridiction: Non spécifié
+
+Obligations principales:
+- Certifications — le Prestataire doit maintenir des certifications de conformité et fournir des rapports d'audit au Client.
+- Notification des incidents de sécurité — le Prestataire doit informer le Client rapidement des incidents de sécurité.
+- Analyse des causes profondes — le Prestataire doit fournir une analyse écrite dans un délai spécifique après un incident de sécurité.
+- Approbation des sous-traitants — le Prestataire doit obtenir l'approbation écrite du Client avant d'engager un nouveau sous-traitant.
+- Services de surveillance de sécurité — le Prestataire s'engage à fournir des services de sécurité de manière continue.
+
+Points clés:
+- Limitation de responsabilité — La responsabilité du Prestataire est limitée à trois fois les honoraires annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+- Indemnisation — le Prestataire est responsable d'indemniser le Client pour certains coûts liés à des incidents de sécurité.
+- Droit d'audit de sécurité — le Client peut auditer les installations du Prestataire une fois par an.
+- Durée et résiliation — Permet la résiliation de l'accord sous certaines conditions.
+
+Clauses manquantes:
+- confidential_information: Dans le cadre d'un Accord de Services de Cybersécurité, la protection des informations confidentielles est cruciale pour maintenir la confiance des clients et se conformer aux exigences réglementaires.
+- force_majeure: Les contrats de services, en particulier dans le domaine de la cybersécurité, doivent prévoir des protections contre des événements externes qui pourraient entraver la prestation des services.
+
+Schémas dangereux:
+- Limitation de responsabilité — Détermine la répartition de la responsabilité financière en cas de pertes, de réclamations ou de litiges.
+
+Risques clés:
+- Limitation de responsabilité — Détermine la répartition de la responsabilité financière en cas de pertes, de réclamations ou de litiges.
+- Certifications — le Prestataire doit maintenir des certifications de conformité et fournir des rapports d'audit au Client.
+- Notification des incidents de sécurité — le Prestataire doit informer le Client rapidement des incidents de sécurité.
+- Analyse des causes profondes — le Prestataire doit fournir une analyse écrite dans un délai spécifique après un incident de sécurité.
+- Approbation des sous-traitants — Encadre la possibilité et les conditions de sous-traiter l'exécution contractuelle.
+
+Priorités de négociation:
+- Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.
+- Envisager de définir le périmètre de l’audit, sa fréquence, le préavis, la confidentialité, l’accès aux registres, le recours à des auditeurs tiers, les délais de correction et la partie qui supporte les coûts de l’audit.
+
+Actions recommandées:
+- Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.
+- Envisager de définir le périmètre de l’audit, sa fréquence, le préavis, la confidentialité, l’accès aux registres, le recours à des auditeurs tiers, les délais de correction et la partie qui supporte les coûts de l’audit.
+- Vérifier quelles réclamations sont couvertes, qui contrôle la défense, si une notification est requise et si les limites de responsabilité s'appliquent.
+- Définir clairement les critères d'un Incident de Sécurité et les niveaux de négligence pour éviter des interprétations ambiguës.
+
+Décision pratique:
+Si la négociation échoue, il est essentiel d'inclure au moins une clause de confidentialité et une clause de force majeure pour protéger les parties contre les risques juridiques et opérationnels, tout en maintenant les obligations de service existantes.
+
+SIMPLIFIED:
+Il s'agit d'un contrat de type MSA entre Client, Prestataire. Il fixe les principaux droits, obligations et mécanismes de répartition des risques. La durée contractuelle indiquée est trois (3) ans. Les principaux sujets comprennent : Limitation de responsabilité, Certifications, Notification des incidents de sécurité, Analyse des causes profondes.
+
+Points à surveiller:
+- Limitation de responsabilité — Détermine la répartition de la responsabilité financière en cas de pertes, de réclamations ou de litiges.
+- Certifications — le Prestataire doit maintenir des certifications de conformité et fournir des rapports d'audit au Client.
+- Notification des incidents de sécurité — le Prestataire doit informer le Client rapidement des incidents de sécurité.
+- Analyse des causes profondes — le Prestataire doit fournir une analyse écrite dans un délai spécifique après un incident de sécurité.

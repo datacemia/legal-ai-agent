@@ -1,0 +1,60 @@
+{
+  "frozen_gold_corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": 0.8333,
+      "fr": null,
+      "ar": null,
+      "macro": 0.8333
+    },
+    "mechanism_precision": {
+      "en": 0.4444,
+      "fr": null,
+      "ar": null,
+      "macro": 0.4444
+    },
+    "mechanism_recall": {
+      "en": 0.2857,
+      "fr": null,
+      "ar": null,
+      "macro": 0.2857
+    },
+    "actor_accuracy": {
+      "en": 0.3333,
+      "fr": null,
+      "ar": null,
+      "macro": 0.3333
+    },
+    "object_accuracy": {
+      "en": 0.0,
+      "fr": null,
+      "ar": null,
+      "macro": 0.0
+    },
+    "trigger_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "polarity_accuracy": {
+      "en": 0.3333,
+      "fr": null,
+      "ar": null,
+      "macro": 0.3333
+    },
+    "procedural_state_accuracy": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    }
+  },
+  "recorded_before_product_semantic_fixes": true
+}

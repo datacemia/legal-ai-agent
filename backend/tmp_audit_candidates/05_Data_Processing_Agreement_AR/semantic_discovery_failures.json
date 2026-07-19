@@ -1,0 +1,982 @@
+[
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 يخطر المعالج المتحكم، دون تأخير غير مبرر وفي جميع الأحوال خلال ثمانٍ وأربعين (48) ساعة، بأي خرق للبيانات الشخصية يعلم به، ويقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PERSONAL_DATA_BREACH_NOTIFICATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PERSONAL_DATA_BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 221,
+            "text": "يخطر المعالج المتحكم، دون تأخير غير مبرر وفي جميع الأحوال خلال ثمانٍ وأربعين (48) ساعة، بأي خرق للبيانات الشخصية يعلم به، ويقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c08c5455d1f49b44ad16833a545fab944e1728617322c690c2acdfb0a2b65093",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 48,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 127,
+            "end": 221,
+            "text": "يقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2eda2bd24a520d1a93470484dc9b617ebb8244301ae921114e7bcaec6dc73809",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PERSONAL_DATA_BREACH_NOTIFICATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PERSONAL_DATA_BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 221,
+            "text": "يخطر المعالج المتحكم، دون تأخير غير مبرر وفي جميع الأحوال خلال ثمانٍ وأربعين (48) ساعة، بأي خرق للبيانات الشخصية يعلم به، ويقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c08c5455d1f49b44ad16833a545fab944e1728617322c690c2acdfb0a2b65093",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 48,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 127,
+            "end": 221,
+            "text": "يقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2eda2bd24a520d1a93470484dc9b617ebb8244301ae921114e7bcaec6dc73809",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "7.1",
+    "source_language": "ar",
+    "source_text": "7.1 وفقاً لاختيار المتحكم، عند إنهاء اتفاقية الخدمات الأساسية، يحذف المعالج أو يعيد جميع البيانات الشخصية إلى المتحكم ويحذف النسخ الموجودة، ما لم يقتضِ القانون المعمول به الاحتفاظ بها.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 63,
+            "end": 183,
+            "text": "يحذف المعالج أو يعيد جميع البيانات الشخصية إلى المتحكم ويحذف النسخ الموجودة، ما لم يقتضِ القانون المعمول به الاحتفاظ بها"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2f84a2fe8829e3193d36580af0e13abd1049ece1cd55c59c95ad2b5fc97002b4",
+        "normalized_concept": "DATA_RETURN_OR_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 63,
+            "end": 183,
+            "text": "يحذف المعالج أو يعيد جميع البيانات الشخصية إلى المتحكم ويحذف النسخ الموجودة، ما لم يقتضِ القانون المعمول به الاحتفاظ بها"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2f84a2fe8829e3193d36580af0e13abd1049ece1cd55c59c95ad2b5fc97002b4",
+        "normalized_concept": "DATA_RETURN_OR_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PURPOSE_LIMITATION",
+        "rank": 96,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURPOSE_LIMITATION",
+            "start": 4,
+            "end": 76,
+            "text": "لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "99a9e137ec937c3e6736a178a1282d118f81c28bf784100b15e94439d1a0f5bc",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROCESSING_INSTRUCTION_LIMIT",
+        "rank": 94,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROCESSING_INSTRUCTION_LIMIT",
+            "start": 4,
+            "end": 160,
+            "text": "لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "a4d72a76b01a08fa7d70b212007ee99cbdaed794069e3457a8d800a0ae835794",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 151,
+            "text": "لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f058370890716bf47074a26139f903a9f9741cfc71f3f8cb01c726dd458f46f4",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PURPOSE_LIMITATION",
+        "rank": 96,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURPOSE_LIMITATION",
+            "start": 4,
+            "end": 76,
+            "text": "لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "99a9e137ec937c3e6736a178a1282d118f81c28bf784100b15e94439d1a0f5bc",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROCESSING_INSTRUCTION_LIMIT",
+        "rank": 94,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROCESSING_INSTRUCTION_LIMIT",
+            "start": 4,
+            "end": 160,
+            "text": "لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "a4d72a76b01a08fa7d70b212007ee99cbdaed794069e3457a8d800a0ae835794",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 151,
+            "text": "لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f058370890716bf47074a26139f903a9f9741cfc71f3f8cb01c726dd458f46f4",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم. في حالة التفويض العام، يُخطر المعالج المتحكم بأي تغييرات مقترحة تتعلق بإضافة أو استبدال المعالجين الفرعيين، مع منح المتحكم فرصة الاعتراض خلال أربعة عشر (14) يوماً.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SUBPROCESSOR_AUTHORIZATION",
+        "rank": 93,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SUBPROCESSOR_AUTHORIZATION",
+            "start": 4,
+            "end": 85,
+            "text": "لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "9026f5abae0ab2f98724ca47c0286ad1cec2705b220a03dcf9ecc7d9d34e5c8a",
+        "normalized_concept": "SUBPROCESSOR_AUTHORIZATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 231,
+            "text": "لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم. في حالة التفويض العام، يُخطر المعالج المتحكم بأي تغييرات مقترحة تتعلق بإضافة أو استبدال المعالجين الفرعيين، مع منح المتحكم فرصة الاعتراض خلال أر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "aeafd16260afd29b4ef5e41085cc3062cdefe01b56c37e8df4af3329147424e8",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SUBPROCESSOR_AUTHORIZATION",
+        "rank": 93,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SUBPROCESSOR_AUTHORIZATION",
+            "start": 4,
+            "end": 85,
+            "text": "لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "9026f5abae0ab2f98724ca47c0286ad1cec2705b220a03dcf9ecc7d9d34e5c8a",
+        "normalized_concept": "SUBPROCESSOR_AUTHORIZATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 231,
+            "text": "لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم. في حالة التفويض العام، يُخطر المعالج المتحكم بأي تغييرات مقترحة تتعلق بإضافة أو استبدال المعالجين الفرعيين، مع منح المتحكم فرصة الاعتراض خلال أر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "aeafd16260afd29b4ef5e41085cc3062cdefe01b56c37e8df4af3329147424e8",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 4,
+            "end": 38,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a7160c721504d9a020e8f2581c8e474f16fb4ae2a9556a90c72a8f0816754a44",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 142,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "165de53a7bad54f6233d13dfd5a11a8a877a798bb033adb74c0357fd5e0aa5a3",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 4,
+            "end": 38,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a7160c721504d9a020e8f2581c8e474f16fb4ae2a9556a90c72a8f0816754a44",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 142,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "165de53a7bad54f6233d13dfd5a11a8a877a798bb033adb74c0357fd5e0aa5a3",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 4,
+            "end": 114,
+            "text": "يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "58e038a35cf45afa839bacd29e346ba003f16bf997e8618c147950e08d9ed20a",
+        "normalized_concept": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 4,
+            "end": 114,
+            "text": "يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "58e038a35cf45afa839bacd29e346ba003f16bf997e8618c147950e08d9ed20a",
+        "normalized_concept": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 4,
+            "end": 165,
+            "text": "يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1c3c2916ba03d04c9bf6303ed87ad1e07c10ed8af038551c627b92b22a63cbc6",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 4,
+            "end": 165,
+            "text": "يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1c3c2916ba03d04c9bf6303ed87ad1e07c10ed8af038551c627b92b22a63cbc6",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "8.1",
+    "source_language": "ar",
+    "source_text": "8.1 يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 220,
+            "text": "يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d5bc6549ae35dd4fd8b90640ca11cc1b334fccecf87e0208773900b4b651f973",
+        "normalized_concept": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 220,
+            "text": "يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d5bc6549ae35dd4fd8b90640ca11cc1b334fccecf87e0208773900b4b651f973",
+        "normalized_concept": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

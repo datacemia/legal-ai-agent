@@ -1,0 +1,51 @@
+P0 SEMANTIC CORRECTNESS AUDIT
+FILES SCANNED: 48
+FILE ERRORS: 0
+CLAUSES AUDITED: 355
+PRIMARY TYPE: {'REVIEW_REQUIRED': 277, 'SUPPORTED': 32, 'MISMATCH': 41, 'BROAD_COMPATIBLE': 5}
+MECHANISM EXTRACTION: {'REVIEW_REQUIRED': 277, 'PARTIAL': 78}
+GROUNDING: {'PASS': 355}
+FAIL/PARTIAL CLAUSES: 78
+SUMMARY: semantic_audit\semantic_audit_summary.json
+
+TOP FINDINGS
+AR | 01_NDA_Confidentiality_Agreement_AR.json | clause_3 | type=confidentiality | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['CONFIDENTIALITY_OBLIGATION', 'CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 01_NDA_Confidentiality_Agreement_AR.json | clause_4 | type=confidentiality | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['CONFIDENTIALITY_OBLIGATION'] | unsupported=[]
+AR | 01_NDA_Confidentiality_Agreement_AR.json | clause_6 | type=confidentiality | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 02_Master_Services_Agreement_AR.json | clause_7 | type=automatic_renewal | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION', 'AUTO_RENEW_OPT_OUT'] | unsupported=[]
+AR | 02_Master_Services_Agreement_AR.json | clause_9 | type=liability | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['EXCLUDED_DAMAGES'] | unsupported=[]
+AR | 02_Master_Services_Agreement_AR.json | clause_10 | type=dispute_resolution | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 03_SaaS_Cloud_Agreement_AR.json | clause_1 | type=automatic_renewal | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['AUTO_RENEW_OPT_OUT'] | unsupported=[]
+AR | 03_SaaS_Cloud_Agreement_AR.json | clause_3 | type=data_protection | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 04_Cybersecurity_Services_Agreement_AR.json | clause_5 | type=subcontracting | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 04_Cybersecurity_Services_Agreement_AR.json | clause_9 | type=termination | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 06_Executive_Employment_Agreement_AR.json | clause_2 | type=services | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 06_Executive_Employment_Agreement_AR.json | clause_3 | type=employment | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 06_Executive_Employment_Agreement_AR.json | clause_4 | type=other | type_verdict=BROAD_COMPATIBLE | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION', 'BONUS'] | unsupported=[]
+AR | 06_Executive_Employment_Agreement_AR.json | clause_7 | type=termination | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 07_Software_Licensing_Agreement_AR.json | clause_8 | type=termination | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 08_Procurement_Supply_Agreement_AR.json | clause_3 | type=liability | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['LIABILITY_CAP', 'EXCLUDED_DAMAGES'] | unsupported=[]
+AR | 08_Procurement_Supply_Agreement_AR.json | clause_5 | type=other | type_verdict=BROAD_COMPATIBLE | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 08_Procurement_Supply_Agreement_AR.json | clause_9 | type=termination | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 09_Consulting_Services_Agreement_AR.json | clause_6 | type=corporate_governance | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['CONFIDENTIALITY_OBLIGATION', 'CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 10_Outsourcing_Managed_Services_Agreement_AR.json | clause_1 | type=pricing | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 11_Commercial_Lease_Agreement_AR.json | clause_1 | type=assignment | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 11_Commercial_Lease_Agreement_AR.json | clause_3 | type=term | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 12_Loan_Credit_Agreement_AR.json | clause_5 | type=covenant | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 13_Asset_Purchase_Agreement_AR.json | clause_3 | type=other | type_verdict=BROAD_COMPATIBLE | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 13_Asset_Purchase_Agreement_AR.json | clause_5 | type=indemnity | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+AR | 13_Asset_Purchase_Agreement_AR.json | clause_6 | type=indemnity | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 14_Shareholders_Agreement_AR.json | clause_2 | type=assignment | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TAG_ALONG_RIGHT'] | unsupported=[]
+AR | 14_Shareholders_Agreement_AR.json | clause_6 | type=payment | type_verdict=BROAD_COMPATIBLE | extraction=PARTIAL | grounding=PASS | missing=['AUDITED_REPORTING'] | unsupported=[]
+AR | 14_Shareholders_Agreement_AR.json | clause_7 | type=payment | type_verdict=BROAD_COMPATIBLE | extraction=PARTIAL | grounding=PASS | missing=['CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 14_Shareholders_Agreement_AR.json | clause_8 | type=automatic_renewal | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['AUTOMATIC_TERMINATION'] | unsupported=[]
+AR | 15_General_Commercial_Agreement_AR.json | clause_1 | type=automatic_renewal | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['AUTO_RENEW_OPT_OUT'] | unsupported=[]
+AR | 15_General_Commercial_Agreement_AR.json | clause_2 | type=liability | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['EXCLUDED_DAMAGES'] | unsupported=[]
+AR | 15_General_Commercial_Agreement_AR.json | clause_6 | type=trademark_branding | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['CONSENT_PREREQUISITE'] | unsupported=[]
+AR | 15_General_Commercial_Agreement_AR.json | clause_7 | type=confidentiality | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['CONFIDENTIALITY_OBLIGATION'] | unsupported=[]
+EN | 02_Master_Services_Agreement.json | clause_2 | type=renewal | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+EN | 02_Master_Services_Agreement.json | clause_3 | type=renewal | type_verdict=MISMATCH | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+EN | 02_Master_Services_Agreement.json | clause_9 | type=liability | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['EXCLUDED_DAMAGES'] | unsupported=[]
+EN | 03_SaaS_Cloud_Agreement.json | clause_3 | type=liability | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['LIABILITY_CAP'] | unsupported=[]
+EN | 04_Cybersecurity_Services_Agreement.json | clause_2 | type=termination | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['TERM_DURATION'] | unsupported=[]
+EN | 07_Software_Licensing_Agreement.json | clause_1 | type=liability | type_verdict=SUPPORTED | extraction=PARTIAL | grounding=PASS | missing=['LIABILITY_CAP'] | unsupported=[]

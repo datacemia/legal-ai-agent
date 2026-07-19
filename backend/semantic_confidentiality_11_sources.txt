@@ -1,0 +1,78 @@
+ROWS: 11
+
+====================================================================================================
+[1/11]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_4
+PIPELINE: confidentiality
+SOURCE:
+3.1 This Agreement shall remain in effect for two (2) years from the Effective Date. The confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law.
+
+====================================================================================================
+[2/11]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_5
+PIPELINE: confidentiality
+SOURCE:
+4.1 Nothing in this Agreement grants any license or ownership interest in the Confidential Information. All Confidential Information is provided "as is" without warranty of any kind.
+
+====================================================================================================
+[3/11]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_6
+PIPELINE: confidentiality
+SOURCE:
+5.1 Each Party acknowledges that unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond.
+
+====================================================================================================
+[4/11]
+LANG: fr
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_2
+PIPELINE: confidentiality
+SOURCE:
+1.1 Chaque Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles du présent Accord.
+
+====================================================================================================
+[5/11]
+LANG: fr
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_5
+PIPELINE: confidentiality
+SOURCE:
+3.1 Le présent Accord restera en vigueur pendant deux (2) ans à compter de la Date d'Effet. Les obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard du droit applicable.
+
+====================================================================================================
+[6/11]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_7
+PIPELINE: confidentiality
+SOURCE:
+2.1 Le Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité.
+
+====================================================================================================
+[7/11]
+LANG: fr
+DOC: 15_General_Commercial_Agreement_FR.json
+REF: clause_6
+PIPELINE: confidentiality
+SOURCE:
+5.1 Chaque Partie conservera confidentielle toute information non publique divulguée par l'autre Partie dans le cadre du présent Accord et ne l'utilisera qu'aux fins des Activités de Coopération.
+
+====================================================================================================
+[8/11]
+LANG: ar
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_1
+PIPELINE: confidentiality
+SOURCE:
+Traceback (most recent call last):
+  File "<stdin>", line 33, in <module>
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 4-5: character maps to <undefined>

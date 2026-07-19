@@ -1,0 +1,214 @@
+FINANCE_TEXT_PDF_EXTRACTED 11765
+PDF_LINES_DEBUG {'line_count': 291, 'non_empty_line_count': 161, 'max_line_len': 154, 'first_20': ['栀栀栀栀栀栀 栀栀栀', '', '                         RELEVE DE COMPTE', '', '', '', '', '', '                                                               栀栀 栀栀栀栀栀 栀 栀栀栀栀                                    NOM ET ADRESSE', '', '', '', '', '', '                               栀栀栀栀栀AGENCE  : CASA AVIATIONS                 MR HAFIDI HASSAN', '                                           RESIDENCE HAMZA N 59', '', '', '', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 48, 'first_20': ['CM_POSITION_TX 2025-05-31 expense 0,00 EUR AU page=1', 'CM_POSITION_TX 2025-05-31 income 19.993,31 EUR AU page=1', 'CM_POSITION_TX 2025-05-30 expense 9.500,00 EUR HAFIDI page=1', 'CM_POSITION_TX 2025-05-30 expense 3.000,00 EUR Atlantica Beach page=1', 'CM_POSITION_TX 2025-06-03 income 6.000,00 EUR HASSAN page=1', 'CM_POSITION_TX 2025-05-30 expense 4.100,00 EUR AICHA DOUNASR page=1', 'CM_POSITION_TX 2025-06-01 expense 44,00 EUR et services page=1', 'CM_POSITION_TX 2025-06-02 expense 200,00 EUR Rahima BUHMUCH page=1', 'CM_POSITION_TX 2025-05-31 expense 349,00 EUR FACTU5906 page=1', 'CM_POSITION_TX 2025-05-31 expense 554,12 EUR ECOM5906 page=1', 'CM_POSITION_TX 2025-06-03 expense 22,00 EUR et services page=1', 'CM_POSITION_TX 2025-06-05 income 600,00 EUR GESTION page=1', 'CM_POSITION_TX 2025-06-04 expense 3.000,00 EUR HAFIDI page=1', 'CM_POSITION_TX 2025-06-02 expense 183,64 EUR *CHAT5906 page=1', 'CM_POSITION_TX 2025-06-02 expense 20.956,16 EUR / Paiement INT 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=1', 'CM_POSITION_TX 2025-06-02 income 6.600,00 EUR / Paiement INT 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=1', "CM_POSITION_TX 2025-06-30 expense 20.956,16 EUR APPARTEMENT 07 栀 栀 栀 栀 栀 栀 栀 DAR BOUAZZA 27223 DAR BOUAZZA MAROC 0 1 4 0 5 2 0 0 0 RELEVE D'IDENTITE BANCAIRE Banque Ville Numéro de ------------------------------------------------------------------------------------- 013 780 0140520002500133 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 (1) OPERATIONS D.V DEBIT débiteurs créditeurs page=2", "CM_POSITION_TX 2025-06-30 income 6.600,00 EUR APPARTEMENT 07 栀 栀 栀 栀 栀 栀 栀 DAR BOUAZZA 27223 DAR BOUAZZA MAROC 0 1 4 0 5 2 0 0 0 RELEVE D'IDENTITE BANCAIRE Banque Ville Numéro de ------------------------------------------------------------------------------------- 013 780 0140520002500133 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 (1) OPERATIONS D.V DEBIT débiteurs créditeurs page=2", 'CM_POSITION_TX 2025-06-05 expense 52,00 EUR et services page=2', 'CM_POSITION_TX 2025-06-04 expense 685,83 EUR 05/06/20 05/06/20 05/06/20 page=2']}
+CM_POSITION_LINES_APPENDED 48
+1: 栀栀栀栀栀栀 栀栀栀
+3: RELEVE DE COMPTE
+9: 栀栀 栀栀栀栀栀 栀 栀栀栀栀 NOM ET ADRESSE
+15: 栀栀栀栀栀AGENCE : CASA AVIATIONS MR HAFIDI HASSAN
+16: RESIDENCE HAMZA N 59
+22: 栀栀栀栀栀栀栀DATE : 30/06/2025 APPARTEMENT 07 ETAGE 2
+23: DAR BOUAZZA
+24: 27223 DAR BOUAZZA - CASABLANCA
+25: MAROC
+31: 0140520002500133
+37: 栀栀栀栀栀栀 栀栀栀栀栀栀栀 栀栀栀 RELEVE D'IDENTITE BANCAIRE
+39: Banque Ville Numéro de Compte RIB Devise Ind. Bam
+40: -------------------------------------------------------------------------------------
+41: 013 780 0140520002500133 48 MAD
+47: 栀栀栀栀栀栀栀 栀栀栀栀栀栀栀栀 栀栀 栀 栀栀栀栀栀栀栀栀 栀栀栀栀栀 栀栀栀
+49: (1)
+50: DATE OPERATIONS D.V DEBIT CREDIT
+52: SOLDE PRECEDENT AU 31/05/2025 0,00 19.993,31
+55: 02/06/2025 VIRT EMIS HASSAN HAFIDI 30/05/2025 9.500,00
+56: /Viremen
+57: 02/06/2025 VIRT EMIS Ste Atlantica Beach 30/05/2025 3.000,00
+58: /Viremen
+59: 02/06/2025 VIRT RECU HAFIDI HASSAN 03/06/2025 6.000,00
+60: 02/06/2025 VIRT EMIS Mme AICHA DOUNASR 30/05/2025 4.100,00
+61: /Viremen
+62: 02/06/2025 Frais de produits et services 01/06/2025 44,00
+63: 03/06/2025 VIRT EMIS Mme Rahima BUHMUCH 02/06/2025 200,00
+64: /Viremen
+65: 03/06/2025 01/06/25 17:15ORANGE FACTU5906 31/05/2025 349,00
+66: 5906/PAYM CARTE
+67: 5906
+68: 103251
+69: 03/06/2025 01/06/25 17:13SRM CS ECOM 5906 31/05/2025 554,12
+70: 5906/PAYM CARTE
+71: 5906
+72: 103139
+73: 04/06/2025 Frais de produits et services 03/06/2025 22,00
+74: 04/06/2025 VIRT RECU CNSS GESTION 05/06/2025 600,00
+75: 250609245713
+76: 250609245713
+77: 05/06/2025 VIRT EMIS HASSAN HAFIDI 04/06/2025 3.000,00
+78: /Viremen
+79: 05/06/2025 03/06/25 12:54OPENAI *CHAT5906 02/06/2025 183,64
+80: 5906/PAYM CARTE
+81: 5906
+82: 193432
+83: 05/06/2025 Comm Change / Paiement INT 02/06/2025 3,40
+84: 5906
+85: 5906
+86: 193432
+89: 栀栀栀 栀栀栀栀栀栀 TOTAL MOUVEMENTS 栀栀栀栀栀栀栀栀 栀栀栀栀栀 20.956,16 6.600,00
+90: PAGE N°
+91: NOUVEAU SOLDE AU 栀栀栀栀 栀栀 栀栀栀栀栀栀 1
+97: 栀栀栀栀栀栀栀栀 栀栀栀栀栀 (1) D.V : Date valeur.
+98: Nous vous prions de vérifier les écritures figurant sur votre relevé et de nous signaler toute erreur ou omission.
+99: 栀栀栀栀栀栀 栀栀栀
+101: RELEVE DE COMPTE
+107: 栀栀 栀栀栀栀栀 栀 栀栀栀栀 NOM ET ADRESSE
+113: 栀栀栀栀栀AGENCE : CASA AVIATIONS MR HAFIDI HASSAN
+114: RESIDENCE HAMZA N 59
+120: 栀栀栀栀栀栀栀DATE : 30/06/2025 APPARTEMENT 07 ETAGE 2
+121: DAR BOUAZZA
+122: 27223 DAR BOUAZZA - CASABLANCA
+123: MAROC
+129: 0140520002500133
+135: 栀栀栀栀栀栀 栀栀栀栀栀栀栀 栀栀栀 RELEVE D'IDENTITE BANCAIRE
+137: Banque Ville Numéro de Compte RIB Devise Ind. Bam
+138: -------------------------------------------------------------------------------------
+139: 013 780 0140520002500133 48 MAD
+145: 栀栀栀栀栀栀栀 栀栀栀栀栀栀栀栀 栀栀 栀 栀栀栀栀栀栀栀栀 栀栀栀栀栀 栀栀栀
+147: (1)
+148: DATE OPERATIONS D.V DEBIT CREDIT
+150: Report mouvements débiteurs 20.956,16
+151: Report mouvements créditeurs 6.600,00
+153: 05/06/2025 Frais de produits et services 05/06/2025 52,00
+154: 05/06/2025 PRLV WAFASALAF 04/06/2025 685,83
+155: EDMBM067410 05/06/20
+156: EDMBM067410 05/06/20
+157: EDMBM067410 05/06/20
+158: 06/06/2025 05/06/25 01:58NETFLIX.COM 5906 03/06/2025 97,85
+159: 5906/PAYM CARTE
+160: 5906
+161: 286819
+162: 06/06/2025 Comm Change / Paiement INT 03/06/2025 1,81
+163: 5906
+164: 5906
+165: 286819
+166: 06/06/2025 CHEQUE N 0283207 05/06/2025 4.700,00
+167: 00283207/CHEQUE RECU
+168: 00283207
+169: 0283207
+170: 13/06/2025 RechargeInwi du 12/06/25 11/06/2025 30,00
+171: 9999/PAYM CARTE
+172: 9999
+173: 576060
+174: 16/05/2025 Frais Position Debit T1 25 16/05/2025 264,00
+175: 18/06/2025 VIRT EMIS Mlle imane Kandali 17/06/2025 500,00
+176: /Viremen
+177: 18/06/2025 VIRT RECU HAFIDI HASSAN 19/06/2025 700,00
+178: 19/06/2025 Frais de produits et services 18/06/2025 22,00
+179: 23/06/2025 VIRT RECU HAFIDI HASSAN 24/06/2025 50,00
+180: 23/06/2025 VIRT RECU HAFIDI HASSAN 24/06/2025 90,00
+181: 23/06/2025 RechargeInwi du 22/06/25 21/06/2025 20,00
+182: 9999/PAYM CARTE
+183: 9999
+184: 987999
+187: 栀栀栀 栀栀栀栀栀栀 TOTAL MOUVEMENTS 栀栀栀栀栀栀栀栀 栀栀栀栀栀 27.329,65 7.440,00
+188: PAGE N°
+189: NOUVEAU SOLDE AU 栀栀栀栀 栀栀 栀栀栀栀栀栀 2
+195: 栀栀栀栀栀栀栀栀 栀栀栀栀栀 (1) D.V : Date valeur.
+196: Nous vous prions de vérifier les écritures figurant sur votre relevé et de nous signaler toute erreur ou omission.
+197: 栀栀栀栀栀栀 栀栀栀
+199: RELEVE DE COMPTE
+205: 栀栀 栀栀栀栀栀 栀 栀栀栀栀 NOM ET ADRESSE
+211: 栀栀栀栀栀AGENCE : CASA AVIATIONS MR HAFIDI HASSAN
+212: RESIDENCE HAMZA N 59
+218: 栀栀栀栀栀栀栀DATE : 30/06/2025 APPARTEMENT 07 ETAGE 2
+219: DAR BOUAZZA
+220: 27223 DAR BOUAZZA - CASABLANCA
+221: MAROC
+227: 0140520002500133
+233: 栀栀栀栀栀栀 栀栀栀栀栀栀栀 栀栀栀 RELEVE D'IDENTITE BANCAIRE
+235: Banque Ville Numéro de Compte RIB Devise Ind. Bam
+236: -------------------------------------------------------------------------------------
+237: 013 780 0140520002500133 48 MAD
+243: 栀栀栀栀栀栀栀 栀栀栀栀栀栀栀栀 栀栀 栀 栀栀栀栀栀栀栀栀 栀栀栀栀栀 栀栀栀
+245: (1)
+246: DATE OPERATIONS D.V DEBIT CREDIT
+248: Report mouvements débiteurs 27.329,65
+249: Report mouvements créditeurs 7.440,00
+251: 23/06/2025 Facture Inwi du 22/06/25 21/06/2025 98,00
+252: 9999/PAYM CARTE
+253: 9999
+254: 988226
+255: 25/06/2025 REGL ECHE 24/06/25001779700177 25/06/2025 1.505,65
+256: 0017797001779701
+257: 26/06/2025 Retrait chèque 0283210 0035082 25/06/2025 16.000,00
+258: 26/06/2025 COM. RETRAIT AUTRE AGENCE /02 25/06/2025 15,00
+259: 26/06/2025 TVA sur COM. RETRAIT AUTRE AGE 25/06/2025 1,50
+260: 26/06/2025 REGL ECHE 24/06/25001779700177 26/06/2025 2.318,60
+261: 0017797001779701
+262: 26/06/2025 REGL INT RETARD / ECH 24/06/25 26/06/2025 1,19
+263: 0017797001779701
+264: 26/06/2025 REGL TVA/INT RETARD/ECH 24/06/ 26/06/2025 0,12
+265: 0017797001779701
+266: 26/06/2025 VIRT RECU CHALLENGE DISTRIBU 30/06/2025 43.262,00
+267: 30/06/2025 VIRT EMIS HASSAN HAFIDI 26/06/2025 14.000,00
+268: /Viremen
+269: 30/06/2025 28/06/25 00:19ORANGE FACTU5906 27/06/2025 349,00
+270: 5906/PAYM CARTE
+271: 5906
+272: 220990
+273: 30/06/2025 28/06/25 00:16SRM CS ECOM 5906 27/06/2025 530,62
+274: 5906/PAYM CARTE
+275: 5906
+276: 220942
+282: 栀栀栀 栀栀栀栀栀栀 TOTAL MOUVEMENTS 栀栀栀栀栀栀栀栀 栀栀栀栀栀 62.149,33 50.702,00
+283: PAGE N°
+284: NOUVEAU SOLDE AU 栀栀栀栀 栀栀 栀栀栀栀栀栀 30/06/2025 0,00 8.545,98 3
+290: 栀栀栀栀栀栀栀栀 栀栀栀栀栀 (1) D.V : Date valeur.
+291: Nous vous prions de vérifier les écritures figurant sur votre relevé et de nous signaler toute erreur ou omission.
+293: CM_POSITION_TX 2025-05-31 expense 0,00 EUR AU page=1
+294: CM_POSITION_TX 2025-05-31 income 19.993,31 EUR AU page=1
+295: CM_POSITION_TX 2025-05-30 expense 9.500,00 EUR HAFIDI page=1
+296: CM_POSITION_TX 2025-05-30 expense 3.000,00 EUR Atlantica Beach page=1
+297: CM_POSITION_TX 2025-06-03 income 6.000,00 EUR HASSAN page=1
+298: CM_POSITION_TX 2025-05-30 expense 4.100,00 EUR AICHA DOUNASR page=1
+299: CM_POSITION_TX 2025-06-01 expense 44,00 EUR et services page=1
+300: CM_POSITION_TX 2025-06-02 expense 200,00 EUR Rahima BUHMUCH page=1
+301: CM_POSITION_TX 2025-05-31 expense 349,00 EUR FACTU5906 page=1
+302: CM_POSITION_TX 2025-05-31 expense 554,12 EUR ECOM5906 page=1
+303: CM_POSITION_TX 2025-06-03 expense 22,00 EUR et services page=1
+304: CM_POSITION_TX 2025-06-05 income 600,00 EUR GESTION page=1
+305: CM_POSITION_TX 2025-06-04 expense 3.000,00 EUR HAFIDI page=1
+306: CM_POSITION_TX 2025-06-02 expense 183,64 EUR *CHAT5906 page=1
+307: CM_POSITION_TX 2025-06-02 expense 20.956,16 EUR / Paiement INT 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=1
+308: CM_POSITION_TX 2025-06-02 income 6.600,00 EUR / Paiement INT 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=1
+309: CM_POSITION_TX 2025-06-30 expense 20.956,16 EUR APPARTEMENT 07 栀 栀 栀 栀 栀 栀 栀 DAR BOUAZZA 27223 DAR BOUAZZA MAROC 0 1 4 0 5 2 0 0 0 RELEVE D'IDENTITE BANCAIRE Banque Ville Numéro de ------------------------------------------------------------------------------------- 013 780 0140520002500133 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 (1) OPERATIONS D.V DEBIT débiteurs créditeurs page=2
+310: CM_POSITION_TX 2025-06-30 income 6.600,00 EUR APPARTEMENT 07 栀 栀 栀 栀 栀 栀 栀 DAR BOUAZZA 27223 DAR BOUAZZA MAROC 0 1 4 0 5 2 0 0 0 RELEVE D'IDENTITE BANCAIRE Banque Ville Numéro de ------------------------------------------------------------------------------------- 013 780 0140520002500133 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 (1) OPERATIONS D.V DEBIT débiteurs créditeurs page=2
+311: CM_POSITION_TX 2025-06-05 expense 52,00 EUR et services page=2
+312: CM_POSITION_TX 2025-06-04 expense 685,83 EUR 05/06/20 05/06/20 05/06/20 page=2
+313: CM_POSITION_TX 2025-06-03 expense 1,81 EUR / Paiement INT page=2
+314: CM_POSITION_TX 2025-06-05 expense 4.700,00 EUR RECU page=2
+315: CM_POSITION_TX 2025-06-11 expense 30,00 EUR du 12/06/25 page=2
+316: CM_POSITION_TX 2025-05-16 expense 264,00 EUR Debit T1 25 page=2
+317: CM_POSITION_TX 2025-06-17 expense 500,00 EUR imane Kandali page=2
+318: CM_POSITION_TX 2025-06-19 income 700,00 EUR HASSAN page=2
+319: CM_POSITION_TX 2025-06-18 expense 22,00 EUR et services page=2
+320: CM_POSITION_TX 2025-06-24 income 50,00 EUR HASSAN page=2
+321: CM_POSITION_TX 2025-06-24 income 90,00 EUR HASSAN page=2
+322: CM_POSITION_TX 2025-06-21 expense 27.329,65 EUR du 22/06/25 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=2
+323: CM_POSITION_TX 2025-06-21 income 7.440,00 EUR du 22/06/25 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=2
+324: CM_POSITION_TX 2025-06-30 expense 27.329,65 EUR APPARTEMENT 07 栀 栀 栀 栀 栀 栀 栀 DAR BOUAZZA 27223 DAR BOUAZZA MAROC 0 1 4 0 5 2 0 0 0 RELEVE D'IDENTITE BANCAIRE Banque Ville Numéro de ------------------------------------------------------------------------------------- 013 780 0140520002500133 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 (1) OPERATIONS D.V DEBIT débiteurs créditeurs page=3
+325: CM_POSITION_TX 2025-06-30 income 7.440,00 EUR APPARTEMENT 07 栀 栀 栀 栀 栀 栀 栀 DAR BOUAZZA 27223 DAR BOUAZZA MAROC 0 1 4 0 5 2 0 0 0 RELEVE D'IDENTITE BANCAIRE Banque Ville Numéro de ------------------------------------------------------------------------------------- 013 780 0140520002500133 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 (1) OPERATIONS D.V DEBIT débiteurs créditeurs page=3
+326: CM_POSITION_TX 2025-06-21 expense 98,00 EUR 22/06/25 page=3
+327: CM_POSITION_TX 2025-06-25 expense 1.505,65 EUR 24/06/25001779700177 page=3
+328: CM_POSITION_TX 2025-06-25 expense 16.000,00 EUR 0283210 0035082 page=3
+329: CM_POSITION_TX 2025-06-25 expense 15,00 EUR AUTRE AGENCE /02 page=3
+330: CM_POSITION_TX 2025-06-25 expense 1,50 EUR RETRAIT AUTRE AGE page=3
+331: CM_POSITION_TX 2025-06-26 expense 2.318,60 EUR 24/06/25001779700177 page=3
+332: CM_POSITION_TX 2025-06-26 expense 1,19 EUR / ECH 24/06/25 page=3
+333: CM_POSITION_TX 2025-06-26 expense 0,12 EUR RETARD/ECH 24/06/ page=3
+334: CM_POSITION_TX 2025-06-30 income 43.262,00 EUR CHALLENGE DISTRIBU page=3
+335: CM_POSITION_TX 2025-06-26 expense 14.000,00 EUR HAFIDI page=3
+336: CM_POSITION_TX 2025-06-27 expense 349,00 EUR FACTU5906 page=3
+337: CM_POSITION_TX 2025-06-27 expense 62.149,33 EUR ECOM5906 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU page=3
+338: CM_POSITION_TX 2025-06-27 income 50.702,00 EUR ECOM5906 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 AU page=3
+339: CM_POSITION_TX 2025-06-30 expense 0,00 EUR 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=3
+340: CM_POSITION_TX 2025-06-30 income 8.545,98 EUR 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 栀 D.V : Date valeur. écritures figurant sur votre relevé et de nous signaler toute erreur ou omission. page=3

@@ -1,0 +1,218 @@
+{
+  "input_rows": 60,
+  "candidate_rows": 60,
+  "review_status": "REVIEW_REQUIRED",
+  "languages": {
+    "en": 20,
+    "fr": 20,
+    "ar": 20
+  },
+  "candidate_primary_types": {
+    "payment": 7,
+    "data_protection": 7,
+    "intellectual_property": 4,
+    "termination": 3,
+    "renewal": 3,
+    "liability": 3,
+    "indemnity": 3,
+    "confidentiality": 3,
+    "data_processing": 2,
+    "security_interest": 2,
+    "guarantee": 2,
+    "employment": 2,
+    "covenant": 2,
+    "services": 2,
+    "supply_distribution": 2,
+    "work_product": 2,
+    "UNRESOLVED": 2,
+    "restrictive_covenants": 2,
+    "pricing": 1,
+    "fees": 1,
+    "license": 1,
+    "service_level": 1,
+    "delivery": 1,
+    "anti_dilution_preemptive_rights": 1,
+    "share_transfer_rights": 1
+  },
+  "unresolved_candidate_primary_type": 2,
+  "primary_type_disagreements_with_pipeline": 17,
+  "candidate_evidence_integrity_failures": 0,
+  "pipeline_candidate_pairs": [
+    {
+      "pipeline": "termination",
+      "candidate": "termination",
+      "count": 3
+    },
+    {
+      "pipeline": "renewal",
+      "candidate": "renewal",
+      "count": 3
+    },
+    {
+      "pipeline": "liability",
+      "candidate": "liability",
+      "count": 3
+    },
+    {
+      "pipeline": "indemnity",
+      "candidate": "indemnity",
+      "count": 3
+    },
+    {
+      "pipeline": "intellectual_property",
+      "candidate": "intellectual_property",
+      "count": 3
+    },
+    {
+      "pipeline": "confidentiality",
+      "candidate": "confidentiality",
+      "count": 3
+    },
+    {
+      "pipeline": "data_protection",
+      "candidate": "data_protection",
+      "count": 3
+    },
+    {
+      "pipeline": "security",
+      "candidate": "data_protection",
+      "count": 3
+    },
+    {
+      "pipeline": "loan",
+      "candidate": "payment",
+      "count": 3
+    },
+    {
+      "pipeline": "payment",
+      "candidate": "payment",
+      "count": 2
+    },
+    {
+      "pipeline": "data_processing",
+      "candidate": "data_processing",
+      "count": 2
+    },
+    {
+      "pipeline": "security_interest",
+      "candidate": "security_interest",
+      "count": 2
+    },
+    {
+      "pipeline": "guarantee",
+      "candidate": "guarantee",
+      "count": 2
+    },
+    {
+      "pipeline": "employment",
+      "candidate": "employment",
+      "count": 2
+    },
+    {
+      "pipeline": "compensation",
+      "candidate": "covenant",
+      "count": 2
+    },
+    {
+      "pipeline": "services",
+      "candidate": "services",
+      "count": 2
+    },
+    {
+      "pipeline": "pricing",
+      "candidate": "supply_distribution",
+      "count": 2
+    },
+    {
+      "pipeline": "pricing",
+      "candidate": "pricing",
+      "count": 1
+    },
+    {
+      "pipeline": "fees",
+      "candidate": "fees",
+      "count": 1
+    },
+    {
+      "pipeline": "license",
+      "candidate": "license",
+      "count": 1
+    },
+    {
+      "pipeline": "service_level",
+      "candidate": "service_level",
+      "count": 1
+    },
+    {
+      "pipeline": "fees",
+      "candidate": "payment",
+      "count": 1
+    },
+    {
+      "pipeline": "ownership",
+      "candidate": "intellectual_property",
+      "count": 1
+    },
+    {
+      "pipeline": "work_product",
+      "candidate": "work_product",
+      "count": 1
+    },
+    {
+      "pipeline": "cybersecurity",
+      "candidate": "UNRESOLVED",
+      "count": 1
+    },
+    {
+      "pipeline": "payment",
+      "candidate": "work_product",
+      "count": 1
+    },
+    {
+      "pipeline": "ownership",
+      "candidate": "UNRESOLVED",
+      "count": 1
+    },
+    {
+      "pipeline": "cybersecurity",
+      "candidate": "data_protection",
+      "count": 1
+    },
+    {
+      "pipeline": "employment",
+      "candidate": "restrictive_covenants",
+      "count": 1
+    },
+    {
+      "pipeline": "services",
+      "candidate": "restrictive_covenants",
+      "count": 1
+    },
+    {
+      "pipeline": "delivery",
+      "candidate": "delivery",
+      "count": 1
+    },
+    {
+      "pipeline": "corporate_governance",
+      "candidate": "payment",
+      "count": 1
+    },
+    {
+      "pipeline": "anti_dilution_preemptive_rights",
+      "candidate": "anti_dilution_preemptive_rights",
+      "count": 1
+    },
+    {
+      "pipeline": "assignment",
+      "candidate": "share_transfer_rights",
+      "count": 1
+    }
+  ],
+  "gold_fields_approved": 0,
+  "pipeline_modified": false,
+  "publication_gate_modified": false,
+  "human_review_required": true,
+  "jsonl": "semantic_gold\\review_pack_60_gold_candidate\\review_pack_60_gold_candidate.jsonl",
+  "csv": "semantic_gold\\review_pack_60_gold_candidate\\review_pack_60_gold_candidate.csv"
+}

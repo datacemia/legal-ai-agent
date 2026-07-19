@@ -1,0 +1,1178 @@
+[
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 At Controller's election, upon termination of the underlying services agreement, Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 85,
+            "end": 237,
+            "text": "Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ef939ab24450e952f7cd15f236279f2a44e83f4434d359b96e84d723fdd49672",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": null,
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 85,
+            "end": 237,
+            "text": "Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e887fd53f7feb988a8a5542252aec6bf8b245ea08373ba5a6e4b7f5a0473126f",
+        "normalized_concept": "DATA_RETURN_OR_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 85,
+            "end": 237,
+            "text": "Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ef939ab24450e952f7cd15f236279f2a44e83f4434d359b96e84d723fdd49672",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": null,
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 85,
+            "end": 237,
+            "text": "Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e887fd53f7feb988a8a5542252aec6bf8b245ea08373ba5a6e4b7f5a0473126f",
+        "normalized_concept": "DATA_RETURN_OR_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PURPOSE_LIMITATION",
+        "rank": 96,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURPOSE_LIMITATION",
+            "start": 4,
+            "end": 89,
+            "text": "Processor shall process Personal Data only on documented instructions from Controller"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1a0641432054b8a54d4ac3d947ec86971237b6f5e334cb72b09b21412d73e2d6",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROCESSING_INSTRUCTION_LIMIT",
+        "rank": 94,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROCESSING_INSTRUCTION_LIMIT",
+            "start": 4,
+            "end": 195,
+            "text": "Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "800e3f5d7eb9cc560376a0cfc8eca94e1174a2fc627d9bc6466a1fd16fe0f068",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 41,
+            "text": "Processor shall process Personal Data"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "806ed90fc6ca8706aff39048ae845160c5f2d9d072e7af37055538ad00dd8fb9",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "MANDATORY_OBLIGATION",
+        "rank": 72,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 153,
+            "end": 196,
+            "text": "required to do otherwise by applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4430f00512927f98c048b9465faf5db5a12a5a37c29e4c48ee3f8703cc6bfe07",
+        "normalized_concept": "MANDATORY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PURPOSE_LIMITATION",
+        "rank": 96,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURPOSE_LIMITATION",
+            "start": 4,
+            "end": 89,
+            "text": "Processor shall process Personal Data only on documented instructions from Controller"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1a0641432054b8a54d4ac3d947ec86971237b6f5e334cb72b09b21412d73e2d6",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROCESSING_INSTRUCTION_LIMIT",
+        "rank": 94,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROCESSING_INSTRUCTION_LIMIT",
+            "start": 4,
+            "end": 195,
+            "text": "Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "800e3f5d7eb9cc560376a0cfc8eca94e1174a2fc627d9bc6466a1fd16fe0f068",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 41,
+            "text": "Processor shall process Personal Data"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "806ed90fc6ca8706aff39048ae845160c5f2d9d072e7af37055538ad00dd8fb9",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "MANDATORY_OBLIGATION",
+        "rank": 72,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 153,
+            "end": 196,
+            "text": "required to do otherwise by applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4430f00512927f98c048b9465faf5db5a12a5a37c29e4c48ee3f8703cc6bfe07",
+        "normalized_concept": "MANDATORY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Processor shall not engage a Subprocessor without prior specific or general written authorization from Controller. In the case of general authorization, Processor shall inform Controller of any intended changes concerning the addition or replacement of Subprocessors, giving Controller the opportunity to object within fourteen (14) days.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SUBPROCESSOR_AUTHORIZATION",
+        "rank": 93,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SUBPROCESSOR_AUTHORIZATION",
+            "start": 4,
+            "end": 117,
+            "text": "Processor shall not engage a Subprocessor without prior specific or general written authorization from Controller"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "5c38bf33a04f5a73df9486168a146a2bf54f3c13e7f8478d0c5ac2db744aef32",
+        "normalized_concept": "SUBPROCESSOR_AUTHORIZATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 14,
+            "end": 243,
+            "text": "shall not engage a Subprocessor without prior specific or general written authorization from Controller. In the case of general authorization, Processor shall inform Controller of any intended changes concerning the addition or r"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "584b12fe48bfc0e8cf2f7838620ec16879f4506a80b4936009f6c29b1ea6aa37",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SUBPROCESSOR_AUTHORIZATION",
+        "rank": 93,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SUBPROCESSOR_AUTHORIZATION",
+            "start": 4,
+            "end": 117,
+            "text": "Processor shall not engage a Subprocessor without prior specific or general written authorization from Controller"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "5c38bf33a04f5a73df9486168a146a2bf54f3c13e7f8478d0c5ac2db744aef32",
+        "normalized_concept": "SUBPROCESSOR_AUTHORIZATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 14,
+            "end": 243,
+            "text": "shall not engage a Subprocessor without prior specific or general written authorization from Controller. In the case of general authorization, Processor shall inform Controller of any intended changes concerning the addition or r"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "584b12fe48bfc0e8cf2f7838620ec16879f4506a80b4936009f6c29b1ea6aa37",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 14,
+            "end": 79,
+            "text": "shall implement appropriate technical and organizational measures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2e7611cdc1c420e9e4171e6cdef8eee5a5993324e022567e2848fd90712150b5",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 211,
+            "text": "Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a33df7a73696adaf2afbb135dfcd35c81e4b25439ba81614b55083397468dda9",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 14,
+            "end": 79,
+            "text": "shall implement appropriate technical and organizational measures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2e7611cdc1c420e9e4171e6cdef8eee5a5993324e022567e2848fd90712150b5",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 211,
+            "text": "Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a33df7a73696adaf2afbb135dfcd35c81e4b25439ba81614b55083397468dda9",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 Processor shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach, and shall provide reasonable assistance to Controller in meeting its obligations to notify supervisory authorities and affected data subjects.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 14,
+            "end": 153,
+            "text": "shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "05ea25833e8cc2ff6b8f61b9cdf76f6df43e3a3bf74fb13f1f1e26db12e860d4",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PERSONAL_DATA_BREACH_NOTIFICATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PERSONAL_DATA_BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 296,
+            "text": "Processor shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach, and shall provide reasonable assistance to Controller in meeting its obligations to notify supervisory authorities and affected data subjects"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a0427f1c10a52de1b30b2193f350ef45d5612f36f98049ded1ed2d17b8b18b1b",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 48,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 14,
+            "end": 153,
+            "text": "shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "05ea25833e8cc2ff6b8f61b9cdf76f6df43e3a3bf74fb13f1f1e26db12e860d4",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PERSONAL_DATA_BREACH_NOTIFICATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PERSONAL_DATA_BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 296,
+            "text": "Processor shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach, and shall provide reasonable assistance to Controller in meeting its obligations to notify supervisory authorities and affected data subjects"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a0427f1c10a52de1b30b2193f350ef45d5612f36f98049ded1ed2d17b8b18b1b",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 48,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "8.1",
+    "source_language": "en",
+    "source_text": "8.1 Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 302,
+            "text": "Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a553ab4801e0de670ba84774f2163e514c2b6734b73f64a22a1434af086164b9",
+        "normalized_concept": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 302,
+            "text": "Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a553ab4801e0de670ba84774f2163e514c2b6734b73f64a22a1434af086164b9",
+        "normalized_concept": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 4,
+            "end": 188,
+            "text": "Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6ed0aca40173401df66d2b3836d134a46d135925fa8ca6f1ee50713e36564211",
+        "normalized_concept": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 75,
+            "text": "Processor shall ensure that persons authorized to process Personal Data"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9e6fc5c4738710b6bb735871bcbbaa4dd43995c6b0c15f32465c8c180b5b948f",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 4,
+            "end": 188,
+            "text": "Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6ed0aca40173401df66d2b3836d134a46d135925fa8ca6f1ee50713e36564211",
+        "normalized_concept": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 75,
+            "text": "Processor shall ensure that persons authorized to process Personal Data"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9e6fc5c4738710b6bb735871bcbbaa4dd43995c6b0c15f32465c8c180b5b948f",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Processor shall assist Controller, insofar as possible, in fulfilling Controller's obligation to respond to requests for exercising data subject rights, and shall notify Controller without undue delay if Processor receives such a request directly.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 4,
+            "end": 250,
+            "text": "Processor shall assist Controller, insofar as possible, in fulfilling Controller's obligation to respond to requests for exercising data subject rights, and shall notify Controller without undue delay if Processor receives such a request directly"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "18078379144311607a7d991e66e5717009995827c360f14c606607729400aefa",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 4,
+            "end": 250,
+            "text": "Processor shall assist Controller, insofar as possible, in fulfilling Controller's obligation to respond to requests for exercising data subject rights, and shall notify Controller without undue delay if Processor receives such a request directly"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "18078379144311607a7d991e66e5717009995827c360f14c606607729400aefa",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

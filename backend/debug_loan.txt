@@ -1,0 +1,4 @@
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+DEBUG_LOAN_DISBURSEMENT {'kind': 'LOAN_PRINCIPAL_DISBURSEMENT', 'roles': ['BORROWER', 'LENDER'], 'role_text': "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalable", 'source_text': "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt."}
+DEBUG_ROLE_RESULT {'right_holder': None, 'obligated_actor': 'LENDER', 'counterparty': 'BORROWER', 'beneficiary': 'BORROWER'}

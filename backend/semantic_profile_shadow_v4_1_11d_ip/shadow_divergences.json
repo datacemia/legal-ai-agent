@@ -1,0 +1,92 @@
+[
+  {
+    "language": "fr",
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "clause_7",
+    "source_text": "3.1 Le Prestataire conserve l'intégralité des droits sur ses outils, méthodologies et savoir-faire préexistants utilisés pour fournir les services.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4.1.10b-governance-ar-symmetry",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.6259,
+    "shadow_dominance_margin": 71.3257,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 71.3257,
+        "coverage": 0.6259,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BACKGROUND_IP_RETENTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 19,
+            "end": 111,
+            "text": "conserve l'intégralité des droits sur ses outils, méthodologies et savoir-faire préexistants"
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 19,
+            "end": 111,
+            "text": "conserve l'intégralité des droits sur ses outils, méthodologies et savoir-faire préexistants"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f3f6badad8a6a02267ba2c1693edd60b85a6ff4ada0a19ce38747aef5fd98933"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 19,
+            "end": 111,
+            "text": "conserve l'intégralité des droits sur ses outils, méthodologies et savoir-faire préexistants"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f3f6badad8a6a02267ba2c1693edd60b85a6ff4ada0a19ce38747aef5fd98933"
+      }
+    ],
+    "semantic_profile_hash": "9a474455bcf637e774af0bf334510db2b7316f20c04daabf8d374a48fcd2925e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

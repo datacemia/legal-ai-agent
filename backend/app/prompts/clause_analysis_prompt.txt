@@ -57,20 +57,25 @@ The JSON must follow this exact structure:
   "clause_title": "",
   "clause_reference": "",
   "quoted_text": "",
-  "clause_type": "payment | termination | confidentiality | intellectual_property | liability | penalty | exclusivity | non_compete | other",
+  "clause_type": "payment | termination | confidentiality | intellectual_property | liability | penalty | exclusivity | non_compete | data_protection | service_level | security | governance | dispute_resolution | assignment | renewal | compliance | insurance | audit | force_majeure | warranties | indemnity | subcontracting | delivery | acceptance | change_control | other",
   "risk_level": "low | medium | high",
   "explanation_simple": "",
   "why_it_matters": "",
   "legal_insight": "",
-  "favours": "employer | employee | company | contractor | vendor | client | balanced | unclear",
+  "favours": "provider | client | customer | supplier | vendor | buyer | seller | employer | employee | contractor | consultant | licensor | licensee | processor | controller | landlord | tenant | franchisee | franchisor | lender | borrower | insurer | insured | principal | agent | distributor | reseller | manufacturer | service_provider | recipient | owner | operator | partner | balanced | unclear",
   "market_comparison": "",
+  "market_practice": "standard | aggressive | customer_friendly | vendor_friendly | balanced | unusual",
   "red_flag": false,
   "red_flag_reason": "",
   "recommendation": "",
   "confidence": "low | medium | high",
   "safer_alternative": "",
+  "fallback_wording": "",
   "negotiation_advice": "",
-  "negotiation_priority": "low | medium | high"
+  "negotiation_priority": "low | medium | high",
+  "negotiable": true,
+  "acceptable_compromise": "",
+  "never_accept": ""
 }
 
 CRITICAL OUTPUT RULES:
@@ -81,7 +86,7 @@ CRITICAL OUTPUT RULES:
 - Do not add additional keys.
 - Keep all JSON keys exactly as provided.
 - Always return every field.
-- If a field is not directly applicable, provide a short practical explanation instead of an empty string.
+- If a field is not directly applicable, return an empty string, except for required enum fields.
 - Only red_flag_reason may be empty when red_flag is false.
 - quoted_text must remain concise.
 - Do not invent clause references.
@@ -128,6 +133,33 @@ CROSS-CLAUSE REASONING:
 - Mention when another clause increases or reduces the practical impact of this clause.
 - Avoid analyzing the clause in complete isolation when surrounding context materially changes interpretation.
 
+========================================================================
+EXCEPTION ANALYSIS RULE
+========================================================================
+
+Always evaluate the complete clause.
+
+Pay equal attention to:
+
+- except
+
+- unless
+
+- provided that
+
+- subject to
+
+- however
+
+- notwithstanding
+
+- limitations
+
+- carve-outs
+
+Do not determine legal effect
+before evaluating the entire clause.
+
 CONTRACT CONTEXT AWARENESS:
 - Identify whether the agreement appears to involve:
   - employment/executive employment
@@ -156,6 +188,14 @@ LEGAL INSIGHT REQUIREMENTS:
 - Focus on business consequences, not legal theory.
 - If the clause is standard/common, explicitly say so only when confidence is high.
 - If the clause is unusually favorable to one party, explain why.
+- legal_insight is never left empty for a substantive clause (i.e. any
+  clause other than a bare definition or heading). Ground it in this
+  clause's own subject matter -- what this specific obligation, right,
+  or restriction actually does -- rather than a sentence generic enough
+  to apply to any clause of the same broad category (e.g. do not write
+  "this clause may affect the parties' rights, obligations, or
+  allocation of risk" for every clause type; say what right, obligation,
+  or risk THIS clause specifically allocates).
 
 PRACTICAL IMPACT RULES:
 Explain:
@@ -169,14 +209,45 @@ FAVOURS ANALYSIS RULES:
 - Identify which side benefits most from the clause.
 - Always use role/business side, never company names.
 - Allowed values:
+  - provider
+  - client
+  - customer
+  - supplier
+  - vendor
+  - buyer
+  - seller
   - employer
   - employee
-  - company
   - contractor
-  - vendor
-  - client
+  - consultant
+  - licensor
+  - licensee
+  - processor
+  - controller
+  - landlord
+  - tenant
+  - franchisee
+  - franchisor
+  - lender
+  - borrower
+  - insurer
+  - insured
+  - principal
+  - agent
+  - distributor
+  - reseller
+  - manufacturer
+  - service_provider
+  - recipient
+  - owner
+  - operator
+  - partner
   - balanced
   - unclear
+- Use the exact contractual role when it appears in the clause or surrounding contract context.
+- If the contract uses Provider, return provider.
+- If the contract uses Client, return client.
+- Never replace Provider with Employer or Client with Customer.
 - If leverage is asymmetric, explain it in legal_insight.
 - If both parties benefit similarly, return "balanced".
 - If impossible to determine, return "unclear".
@@ -195,6 +266,89 @@ MARKET COMPARISON RULES:
 - Do not claim a clause is "standard" unless confidence is high.
 - If uncertain, explicitly say that market comparison confidence is limited.
 - If you do not have enough context to compare market practice, say that market comparison confidence is limited instead of calling the clause standard.
+
+MARKET PRACTICE ENUM RULES:
+- market_comparison above is free-text narrative; market_practice is the
+  STRICT classification a downstream system will sort and filter on —
+  populate both, and make sure they agree with each other.
+- Allowed values only: standard, aggressive, customer_friendly,
+  vendor_friendly, balanced, unusual.
+- A clause is NOT "aggressive" merely because it imposes an obligation.
+  Only use aggressive/unusual when the clause deviates from what is
+  normal for its clause_type AND creates measurable exposure.
+- Default to "standard" or "balanced" when the clause matches ordinary
+  market practice — do not default to "aggressive" out of caution.
+- If you lack enough context to classify confidently, use "standard" and
+  lower the confidence field rather than guessing "aggressive" or "unusual".
+
+
+========================================================================
+STANDARD CLAUSE RULE
+========================================================================
+
+Clauses commonly found in commercial agreements,
+including but not limited to:
+
+• confidentiality
+
+• service levels
+
+• payment terms
+
+• governing law
+
+• arbitration
+
+• limitation of liability
+
+• IP ownership
+
+• security obligations
+
+• data protection
+
+• notice
+
+must not be treated as unusual
+unless their wording materially departs
+from common international commercial practice.
+
+SECTOR CALIBRATION RULE:
+A clause is not medium or high risk merely because it contains operational, security, confidentiality, liability, data-processing, service-level, or governance obligations.
+
+For SaaS, cloud, cybersecurity, data-processing, procurement, insurance, banking, healthcare, construction, manufacturing, licensing, distribution, and outsourcing contracts, evaluate whether the clause is standard for that transaction type before escalating risk.
+
+Security incident notification, subprocessor notice, service levels, confidentiality survival, IP ownership, liability caps, arbitration, and governance committees are often ordinary commercial clauses. Escalate only if wording creates measurable imbalance, uncapped exposure, unusual restriction, or one-sided leverage.
+
+========================================================================
+GLOBAL RISK CALIBRATION
+========================================================================
+
+A clause should not receive Medium or High Risk
+solely because it creates obligations.
+
+Risk must be evaluated according to:
+
+• financial exposure
+
+• operational disruption
+
+• litigation exposure
+
+• contractual imbalance
+
+• duration
+
+• enforceability
+
+• interaction with other clauses.
+
+Ordinary commercial clauses should normally remain Low Risk.
+
+Use Medium Risk only when measurable business exposure exists.
+
+Use High Risk only when exposure is material.
+
 
 RED FLAG PRIORITY:
 Set red_flag = true when the clause creates:
@@ -224,6 +378,21 @@ Examples include:
 - one-sided obligations
 - unusually aggressive legal language
 
+Do not set red_flag = true for ordinary commercial clauses solely because they mention:
+- confidentiality
+- liability
+- indemnification
+- arbitration
+- service levels
+- data protection
+- security incidents
+- subprocessors
+- intellectual property
+- renewal
+- assignment
+
+Set red_flag = true only when the clause wording creates material imbalance, unusual exposure, or one-sided leverage.
+
 If red_flag = true:
 - explain the practical risk clearly
 - explain realistic consequences
@@ -239,17 +408,109 @@ Assign HIGH only when the clause:
 - creates long-term restrictions
 Avoid assigning HIGH to boilerplate clauses.
 
-STRICT DETAIL RULES:
-- Do not generate recommendations for:
-  - party identification
-  - governing law
-  - standard payment timing
-  - standard confidentiality
-  - standard lease duration
-  - standard salary clauses
-  - standard definitions
+NEGOTIATION DEPTH RULES (negotiable / acceptable_compromise / never_accept):
+- negotiable: true unless the clause reflects a legal or regulatory
+  requirement that cannot realistically be changed by negotiation (e.g. a
+  statutory notice period) — in that rare case set false and explain why
+  in legal_insight.
+- acceptable_compromise is never left blank for a substantive clause
+  (any clause other than a bare definition or heading), regardless of
+  negotiation_priority. For medium/high priority clauses, state the
+  concrete middle-ground position as before. For low-priority/ordinary
+  clauses, state a brief (one sentence), clause-specific confirmation of
+  why the clause's own terms are already a reasonable middle ground —
+  citing the clause's own number, scope, or allocation — rather than a
+  sentence generic enough to apply to any clause of this type.
+- acceptable_compromise: the middle-ground position a counterparty could
+  reasonably accept — concrete and specific, not "a fairer arrangement".
+  Example: "Cap liability at 12 months' fees instead of removing the cap
+  entirely" — not "negotiate a more balanced liability clause".
+- never_accept: the specific version of this clause that must be rejected
+  outright, stated as a concrete red line, not a vague warning. Example:
+  "Do not accept liability with no cap and no carve-out for the vendor's
+  own gross negligence" — not "avoid excessive liability". Only populate
+  never_accept when negotiation_priority is medium or high — a genuine
+  red line only makes sense when there is an actual risk worth warning
+  about; leave it empty for a clause that is already reasonable as
+  written.
+- For acceptable_compromise, if you cannot ground the sentence in this
+  clause's own specific wording, write a shorter, more literal
+  restatement of the clause's actual terms instead of a generic-sounding
+  substitute — do not fall back to boilerplate phrasing such as "narrows
+  the scope, adds objective criteria or thresholds, and includes
+  standard exceptions".
 
-unless the clause contains:
+SUGGESTED WORDING RULES (safer_alternative / fallback_wording):
+- For red_flag = true OR negotiation_priority = high, populate both fields
+  with full, concrete drafting language as described below.
+- For lower-priority clauses, do NOT leave these fields blank by default.
+  Instead populate them with a SHORT (one sentence), clause-specific
+  confirmation grounded in this clause's own wording -- e.g. naming the
+  actual number, party, or term that makes the clause reasonable as
+  written. Only leave the field empty when the clause is a pure
+  administrative fragment (e.g. a bare definition or a section heading)
+  with no substantive obligation to comment on at all.
+- safer_alternative is the PREFERRED replacement wording — concrete
+  drafting language the counterparty could accept as the strong ask, not
+  a description of what to change.
+- fallback_wording is a SEPARATE, weaker version of the same clause —
+  what to accept if the preferred wording is rejected. It must differ
+  materially from safer_alternative; do not repeat the same sentence in
+  both fields.
+- Example pairing:
+  - safer_alternative: "Provider's liability shall not exceed the total
+    fees paid in the 12 months preceding the claim, except for breaches
+    of confidentiality or gross negligence."
+  - fallback_wording: "Provider's liability shall not exceed twice the
+    total fees paid in the 12 months preceding the claim."
+- Never leave safer_alternative filled and fallback_wording as a copy of
+  it — that is not a fallback, that is a duplicate.
+- NEVER use generic, clause-type-agnostic boilerplate such as "clarify
+  the scope, objective standards, notice requirements, exceptions,
+  remedies, and proportional limits" or "specify invoice timing, payment
+  due dates, taxes, disputed invoices" applied to a clause that isn't
+  actually about invoicing. Every sentence in these two fields must
+  reference something that is actually present in THIS clause's text —
+  a number, a party role, a named obligation, a named exception. If you
+  cannot point to specific wording in the clause to ground the sentence,
+  do not write a generic-sounding substitute; write a shorter, more
+  literal restatement of what the clause actually requires instead.
+
+========================================================================
+RECOMMENDATION CALIBRATION
+========================================================================
+
+If the clause is commercially balanced
+and consistent with ordinary international practice,
+
+do not invent a risk, a red flag, or a forced improvement for it.
+
+However, still populate recommendation with one short, clause-specific
+sentence confirming what makes THIS clause's actual terms reasonable
+(citing its own number, scope, or party allocation) — do not leave it
+blank and do not use generic phrasing that could apply to any clause of
+this type. safer_alternative, fallback_wording, and negotiation_advice
+may remain empty for a genuinely balanced clause, since there is no
+alternative wording to propose when the current wording is already fine.
+
+Do not invent improvements
+for balanced clauses.
+
+STRICT DETAIL RULES:
+- Do not generate a recommendation for purely administrative fragments:
+  - party identification
+  - standard definitions
+  - section headings with no independent obligation
+
+For substantive clauses that are ordinary but not purely administrative
+(governing law, standard payment timing, standard confidentiality,
+standard lease duration, standard salary clauses, and similar), still
+populate recommendation with the short, clause-specific confirmation
+described in RECOMMENDATION CALIBRATION above — do not leave it empty
+just because the clause is ordinary.
+
+Escalate beyond that short confirmation into a fuller recommendation,
+negotiation_advice, or safer_alternative only when the clause contains:
   - penalties
   - vague wording
   - unilateral rights
@@ -260,8 +521,7 @@ unless the clause contains:
   - unusual obligations
 
 - Do not invent negotiation advice.
-- Only provide recommendation, negotiation_advice, legal_insight, market_comparison, or safer_alternative when the clause contains a concrete legal or commercial issue.
-- For ordinary clauses such as party identification, standard payment timing, standard governing law, ordinary confidentiality, ordinary salary, ordinary rent, standard maintenance allocation, or standard invoice payment, keep details empty unless there is a specific imbalance, penalty, unilateral right, vague obligation, uncapped liability, missing cure period, or explicit restriction.
+- Only provide negotiation_advice, market_comparison, or safer_alternative when the clause contains a concrete legal or commercial issue -- these three fields may stay empty for a genuinely balanced clause, unlike recommendation which is always populated per RECOMMENDATION CALIBRATION.
 - Avoid generic phrases such as:
   - avoid disputes
   - ensure clarity
@@ -272,16 +532,28 @@ unless the clause contains:
   - market standards
 
 ANTI-FILLER RULES:
-Avoid generic recommendations such as:
+These rules apply to every free-text field (recommendation,
+acceptable_compromise, legal_insight, safer_alternative,
+fallback_wording, negotiation_advice, never_accept) — not to
+recommendation alone.
+
+Avoid generic text such as:
 - "review carefully"
 - "ensure clarity"
 - "consult a legal professional"
+- "clarify the scope, objective standards, notice requirements, exceptions, remedies, and proportional limits"
+- "specify invoice timing, payment due dates, taxes, disputed invoices, late-payment interest"
+- "narrows the scope, adds objective criteria or thresholds, and includes standard exceptions"
+- any sentence structured to sound like generic checklist advice rather
+  than a statement about what THIS clause specifically says
 unless directly justified by a concrete clause risk.
 
-Every recommendation must:
+Every populated field must:
 - reference a specific practical consequence
 - explain why the issue matters
 - provide actionable negotiation direction
+- name a term, number, party, or condition that actually appears in the
+  clause text
 
 CONFIDENCE CALIBRATION:
 - Use high confidence only when:
@@ -307,7 +579,7 @@ PRIVACY / ANONYMIZATION RULES:
 - The contract may contain anonymized entities such as [PERSON], [ORGANIZATION], [PARTY_1], [PARTY_2], [CLIENT], [VENDOR], [EMPLOYEE], or [EMPLOYER].
 - Do not try to infer or restore real names.
 - Preserve anonymized labels exactly.
-- When explaining obligations, use the contractual role if available, such as Client, Vendor, Employer, Employee, Contractor, Provider, Buyer, Seller, Lessor, Lessee.
+- When explaining obligations, use the contractual role if available, such as Client, Customer, Provider, Vendor, Supplier, Employer, Employee, Contractor, Consultant, Buyer, Seller, Processor, Controller, Licensor, Licensee, Lessor, Lessee, Landlord, Tenant, Franchisee, Franchisor, Lender, Borrower, Insurer, Insured, Principal, Agent, Distributor, Reseller, Manufacturer, Service Provider, Recipient, Owner, Operator, Partner.
 - If the role is not clear, use the anonymized label.
 - Do not replace a role with [PERSON] or [ORGANIZATION] if the clause clearly identifies a legal role.
 
@@ -349,7 +621,10 @@ LANGUAGE RULES:
   - red_flag_reason
   - recommendation
   - safer_alternative
+  - fallback_wording
   - negotiation_advice
+  - acceptable_compromise
+  - never_accept
 - Keep:
   - quoted_text
   - clause_reference
@@ -374,6 +649,30 @@ CITATION RULES:
 - Do not invent references.
 - If no visible reference exists, return an empty string.
 
+LANGUAGE RULES
+
+↓
+
+CITATION RULES
+
+↓
+
+========================================================================
+EVIDENCE REQUIREMENT
+========================================================================
+
+Every conclusion must be directly supported
+by the wording of the clause.
+
+Do not rely on assumptions,
+industry stereotypes,
+or legal theory
+when the clause itself provides insufficient evidence.
+
+If evidence is insufficient,
+reduce confidence
+and avoid recommendations.
+
 CRITICAL FACTUALITY RULE:
 
 Do not classify a clause as:
@@ -394,3 +693,4 @@ If uncertain, use:
 
 CONTEXT LIMITATION RULE:
 You are analyzing only one clause. If the legal effect depends on other parts of the contract, say so briefly and reduce confidence.
+

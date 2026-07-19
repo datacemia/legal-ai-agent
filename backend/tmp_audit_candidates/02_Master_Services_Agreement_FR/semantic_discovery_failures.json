@@ -1,0 +1,1288 @@
+[
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "Clause 4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Le présent Accord prendra effet à la Date d'Effet et se poursuivra pour une durée initiale de deux (2) ans, se renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins quatre-vingt-dix (90) jours à l'avance.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée initiale de deux (2) ans, se renouvelan",
+            "start": 80,
+            "end": 125
+          }
+        ]
+      },
+      {
+        "concept": "AUTO_RENEW_OPT_OUT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "renouvelant automatique",
+            "start": 115,
+            "end": 138
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 115,
+            "end": 313,
+            "text": "renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins quatre-vingt-dix (90) jours à l'avance."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "36576376eba860e929dd5c06c6f3dd0238c15398e1c33a9194bfa5e0b167b5a3",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée initiale de deux (2) ans, se renouvelan",
+            "start": 80,
+            "end": 125
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "Clause 3.2",
+    "source_language": "fr",
+    "source_text": "3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive du Client dès le paiement intégral des honoraires applicables.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 13,
+            "end": 197,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0845f5647cbe47f64f0fb659f869fd37b94387410d9ed94b935483c5c4541eb8",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 13,
+            "end": 197,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0845f5647cbe47f64f0fb659f869fd37b94387410d9ed94b935483c5c4541eb8",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Le Prestataire exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 19,
+            "end": 161,
+            "text": "exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur"
+          },
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 33,
+            "end": 161,
+            "text": "services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "47418eb522bfc1902309fe4315a9e3b5e0cd6c8d1939e4f912b2b8f08b89479d",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 161,
+            "text": "Partie contractante B exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "46671836dc9546323b013f26d0fc13aac68e40a484c6313302bf753414466b48",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 19,
+            "end": 161,
+            "text": "exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur"
+          },
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 33,
+            "end": 161,
+            "text": "services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "47418eb522bfc1902309fe4315a9e3b5e0cd6c8d1939e4f912b2b8f08b89479d",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 161,
+            "text": "Partie contractante B exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "46671836dc9546323b013f26d0fc13aac68e40a484c6313302bf753414466b48",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le Client paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation. Tout montant impayé après soixante (60) jours portera intérêt au taux de 1 % par mois.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 159,
+            "text": "Partie contractante A paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "e2207b3e5ea60d74aef4f0ee49f2e8abc38e83863ade52aa1cb3b207f694fa4f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 159,
+            "text": "Partie contractante A paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2207b3e5ea60d74aef4f0ee49f2e8abc38e83863ade52aa1cb3b207f694fa4f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 159,
+            "text": "Partie contractante A paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "e2207b3e5ea60d74aef4f0ee49f2e8abc38e83863ade52aa1cb3b207f694fa4f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 159,
+            "text": "Partie contractante A paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2207b3e5ea60d74aef4f0ee49f2e8abc38e83863ade52aa1cb3b207f694fa4f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "2.2",
+    "source_language": "fr",
+    "source_text": "2.2 Le Prestataire se réserve le droit d'augmenter unilatéralement les honoraires pour toute période de renouvellement jusqu'à quinze pour cent (15 %), moyennant un préavis écrit de trente (30) jours, sans nécessiter le consentement du Client.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 165,
+            "end": 242,
+            "text": "préavis écrit de trente (30) jours, sans nécessiter le consentement de la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "94cc0086f6fbee6d0b1e3737d72c99976161f5a14bcccf12ad0b9f60d86dab1d",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 165,
+            "end": 242,
+            "text": "préavis écrit de trente (30) jours, sans nécessiter le consentement de la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "94cc0086f6fbee6d0b1e3737d72c99976161f5a14bcccf12ad0b9f60d86dab1d",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "4.2",
+    "source_language": "fr",
+    "source_text": "4.2 Le Prestataire pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite au Client. Le Client ne pourra résilier que pour manquement substantiel non corrigé du Prestataire, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 279,
+            "end": 346,
+            "text": "préavis écrit de soixante (60) jours et une possibilité de remédier"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0c3d3692d75a71261e65587d04e12aa2f0ca36d6a2c8d4e49a8a3ba89930794f",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 194,
+            "end": 360,
+            "text": "pourra résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 201,
+            "end": 360,
+            "text": "résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "00ed3ea6b3411858e681fdcd7595e92abc78e4086eb7091458e8cef9c9563862",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 19,
+            "end": 179,
+            "text": "pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 26,
+            "end": 179,
+            "text": "résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "848125a9c3ab7139ec62045987765c6b3aa3651246fe0310aafd601d01c036dc",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 26,
+            "end": 179,
+            "text": "résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "84d1dcf9ad5065a437e1ee36b95a8a401ab7a302138f45304dbcf528effb0606",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 219,
+            "end": 360,
+            "text": "manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "ecc69931734fd88911e702ef99b2fadac15d4b8795137d009fb09da527a77ef6",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 279,
+            "end": 360,
+            "text": "préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "fc2e6ad58bb2cb30de4e3ac276bb17443d2c5050acd61f1a9fad633e3932a7b3",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 150,
+            "end": 361,
+            "text": "notification écrite à la Partie contractante A. La Partie contractante A ne pourra résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c7e6fdb4e387e4a3c531d0c9546455cba7fcc418408111f37b954a3d673d9d1e",
+        "normalized_concept": "NOTICE_PROCEDURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 279,
+            "end": 346,
+            "text": "préavis écrit de soixante (60) jours et une possibilité de remédier"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0c3d3692d75a71261e65587d04e12aa2f0ca36d6a2c8d4e49a8a3ba89930794f",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 194,
+            "end": 360,
+            "text": "pourra résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 201,
+            "end": 360,
+            "text": "résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "00ed3ea6b3411858e681fdcd7595e92abc78e4086eb7091458e8cef9c9563862",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 19,
+            "end": 179,
+            "text": "pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 26,
+            "end": 179,
+            "text": "résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "848125a9c3ab7139ec62045987765c6b3aa3651246fe0310aafd601d01c036dc",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 26,
+            "end": 179,
+            "text": "résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "84d1dcf9ad5065a437e1ee36b95a8a401ab7a302138f45304dbcf528effb0606",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "PROVIDER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 219,
+            "end": 360,
+            "text": "manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "ecc69931734fd88911e702ef99b2fadac15d4b8795137d009fb09da527a77ef6",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 279,
+            "end": 360,
+            "text": "préavis écrit de soixante (60) jours et une possibilité de remédier au manquement"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "fc2e6ad58bb2cb30de4e3ac276bb17443d2c5050acd61f1a9fad633e3932a7b3",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 150,
+            "end": 361,
+            "text": "notification écrite à la Partie contractante A. La Partie contractante A ne pourra résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c7e6fdb4e387e4a3c531d0c9546455cba7fcc418408111f37b954a3d673d9d1e",
+        "normalized_concept": "NOTICE_PROCEDURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ OU D'INDEMNISATION, LA RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION. LE PRESTATAIRE NE SERA EN AUCUN CAS RESPONSABLE DE DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS",
+            "start": 289,
+            "end": 332
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 4,
+            "end": 63,
+            "text": "SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "45489cb77a952d307f81e901d196fd547a8141931a063044a613bf7509231ece",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 253,
+            "end": 307,
+            "text": "NE SERA EN AUCUN CAS RESPONSABLE DE DOMMAGES INDIRECTS"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "b5de9284fa9e7d01612a937093faff49dbf2f140d0a170608a79ed5058735eec",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 87,
+            "end": 236,
+            "text": "RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "0e7a162f6dc364a9f122ed02814cb77600bf990b3af79a5932a1ad119712f18d",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 289,
+            "end": 332,
+            "text": "DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "13fd2aa0aeec004e1df1c4e648847e1f5a0f43062810de943d73a7e7142d60bd",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 4,
+            "end": 63,
+            "text": "SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "45489cb77a952d307f81e901d196fd547a8141931a063044a613bf7509231ece",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 87,
+            "end": 236,
+            "text": "RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "0e7a162f6dc364a9f122ed02814cb77600bf990b3af79a5932a1ad119712f18d",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

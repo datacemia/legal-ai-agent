@@ -1,0 +1,120 @@
+OK 1.pdf
+OK 15.pdf
+OK 18.pdf
+OK 19.pdf
+OK 1v.pdf
+OK 2.pdf
+OK 20.pdf
+OK 21.pdf
+OK 3.pdf
+OK 772605810-كشف-حساب-بنكي (2).pdf
+OK 820869074-كشف-حساب-جديد.pdf
+OK ARABE 4.pdf
+OK ARABE1.pdf
+OK ARABE2.pdf
+OK ARABE3.pdf
+OK arabe5.pdf
+OK BANCORP.pdf
+OK BANK CHAABI.pdf
+OK bank of america.pdf
+OK banque d'epagne.pdf
+OK banque populare 1 france.pdf
+OK BANQUE POSTALE (2).pdf
+OK banque postale.pdf
+OK belfis.pdf
+OK BMCE.pdf
+OK bnb 1.pdf
+OK chase.pdf
+OK cic.pdf
+OK city bank.pdf
+OK credit mutuel.pdf
+OK dakar.pdf
+OK EGPTE.pdf
+OK EJJAMI10.pdf
+OK EJJAMI11.pdf
+OK EJJAMI12.pdf
+OK EJJAMI2.pdf
+OK EJJAMI3.pdf
+OK EJJAMI5.pdf
+OK EJJAMI6.pdf
+OK ejjami7.pdf
+OK ejjami8.pdf
+OK EJJAMI9.pdf
+OK emirate.pdf
+OK g1.pdf
+OK g2.pdf
+OK G3.pdf
+OK general1.pdf
+OK habitat.pdf
+OK ISLAMIQE.pdf
+OK llc.pdf
+OK mercury.pdf
+OK n26 .1.pdf
+OK OMAR1.pdf
+OK OMAR2.pdf
+OK OMAR3.pdf
+OK Relevés compte 3.pdf
+OK revolut france.pdf
+OK soc general.pdf
+OK well fargo.pdf
+OK x.pdf
+OK                 1.pdf | validated=True tx=221 income=53236.11 expenses=243233.16 expected_income=53236.11 expected_expenses=243233.16 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 15.pdf | validated=True tx=5 income=0 expenses=14850.66 expected_income=0.0 expected_expenses=14850.66 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 18.pdf | validated=True tx=7 income=11120.63 expenses=1193.62 expected_income=11120.63 expected_expenses=1193.62 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 19.pdf | validated=True tx=54 income=156470.06 expenses=405026.1 expected_income=156470.06 expected_expenses=405026.1 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 1v.pdf | validated=True tx=123 income=30839.84 expenses=38647.75 expected_income=30839.84 expected_expenses=38647.75 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 2.pdf | validated=True tx=75 income=8810.0 expenses=12028.97 expected_income=8810.0 expected_expenses=12028.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 20.pdf | validated=True tx=3 income=1113.33 expenses=0 expected_income=1113.33 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 21.pdf | validated=True tx=22 income=2654.46 expenses=672.49 expected_income=2654.46 expected_expenses=672.49 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 3.pdf | validated=True tx=515 income=710721.0 expenses=3212040.21 expected_income=710721.0 expected_expenses=3212040.21 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 772605810-كشف-حساب-بنكي (2).pdf | validated=True tx=45 income=208052.0 expenses=100469.56 expected_income=208052.0 expected_expenses=100469.56 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 820869074-كشف-حساب-جديد.pdf | validated=True tx=123 income=30839.84 expenses=38647.75 expected_income=30839.84 expected_expenses=38647.75 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ARABE 4.pdf | validated=True tx=1 income=10.0 expenses=0 expected_income=10.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ARABE1.pdf | validated=True tx=11 income=55500.0 expenses=58823.11 expected_income=55500.0 expected_expenses=58823.11 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ARABE2.pdf | validated=True tx=75 income=8810.0 expenses=12028.97 expected_income=8810.0 expected_expenses=12028.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ARABE3.pdf | validated=True tx=331 income=325458.0 expenses=370995.44 expected_income=325458.0 expected_expenses=370995.44 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 arabe5.pdf | validated=True tx=15 income=3581826.0 expenses=7609876.0 expected_income=3581826.0 expected_expenses=7609876.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 BANCORP.pdf | validated=True tx=14 income=313.03 expenses=929.06 expected_income=313.03 expected_expenses=929.06 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 BANK CHAABI.pdf | validated=True tx=102 income=912747.13 expenses=431702.87 expected_income=912747.13 expected_expenses=431702.87 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 bank of america.pdf | validated=True tx=4 income=390.92 expenses=168.23 expected_income=390.92 expected_expenses=168.23 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 banque d'epagne.pdf | validated=True tx=23 income=80.0 expenses=626.71 expected_income=80.0 expected_expenses=626.71 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 banque populare 1 france.pdf | validated=True tx=53 income=10011.7 expenses=9832.14 expected_income=10011.7 expected_expenses=9832.14 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 BANQUE POSTALE (2).pdf | validated=True tx=42 income=1994.78 expenses=2461.61 expected_income=1994.78 expected_expenses=2461.61 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 banque postale.pdf | validated=True tx=65 income=4258.68 expenses=20502.46 expected_income=4258.68 expected_expenses=20502.46 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 belfis.pdf | validated=True tx=4 income=34.0 expenses=84.0 expected_income=34.0 expected_expenses=84.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 BMCE.pdf | validated=True tx=45 income=31542.0 expenses=39227.31 expected_income=31542.0 expected_expenses=39227.31 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 bnb 1.pdf | validated=True tx=4 income=0 expenses=1966.58 expected_income=0.0 expected_expenses=1966.58 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 chase.pdf | validated=True tx=66 income=6352.33 expenses=5286.17 expected_income=6352.33 expected_expenses=5286.17 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 cic.pdf | validated=True tx=22 income=5529.86 expenses=5684.96 expected_income=5529.86 expected_expenses=5684.96 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 city bank.pdf | validated=True tx=38 income=16.0 expenses=60028.9 expected_income=16.0 expected_expenses=60028.9 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 credit mutuel.pdf | validated=True tx=29 income=1870.78 expenses=1264.0 expected_income=1870.78 expected_expenses=1264.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 dakar.pdf | validated=True tx=13 income=33842734.0 expenses=17999670.0 expected_income=33842734.0 expected_expenses=17999670.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EGPTE.pdf | validated=True tx=33 income=2237.61 expenses=12592.11 expected_income=2237.61 expected_expenses=12592.11 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI10.pdf | validated=True tx=3 income=2520.0 expenses=0 expected_income=2520.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI11.pdf | validated=True tx=6 income=130.0 expenses=30334.76 expected_income=130.0 expected_expenses=30334.76 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI12.pdf | validated=True tx=61 income=112693.44 expenses=104354.06 expected_income=112693.44 expected_expenses=104354.06 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI2.pdf | validated=True tx=37 income=2511.55 expenses=1682.44 expected_income=2511.55 expected_expenses=1682.44 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI3.pdf | validated=True tx=4 income=130.0 expenses=356.04 expected_income=130.0 expected_expenses=356.04 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI5.pdf | validated=True tx=28 income=0 expenses=432405.35 expected_income=0.0 expected_expenses=432405.35 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI6.pdf | validated=True tx=53 income=1749.0 expenses=1775.55 expected_income=1749.0 expected_expenses=1775.55 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ejjami7.pdf | validated=True tx=97 income=150.0 expenses=12054.77 expected_income=150.0 expected_expenses=12054.77 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ejjami8.pdf | validated=True tx=24 income=0 expenses=698.77 expected_income=0.0 expected_expenses=698.77 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 EJJAMI9.pdf | validated=True tx=12 income=1700.0 expenses=2155.26 expected_income=1700.0 expected_expenses=2155.26 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 emirate.pdf | validated=True tx=6 income=0 expenses=4491.83 expected_income=0.0 expected_expenses=4491.83 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 g1.pdf | validated=True tx=40 income=17527020.0 expenses=3198040.0 expected_income=17527020.0 expected_expenses=3198040.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 g2.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 G3.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 general1.pdf | validated=True tx=31 income=12332.0 expenses=12328.0 expected_income=12332.0 expected_expenses=12328.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 habitat.pdf | validated=True tx=23 income=2250.0 expenses=45586.86 expected_income=2250.0 expected_expenses=45586.86 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ISLAMIQE.pdf | validated=True tx=7 income=22000.0 expenses=18345.0 expected_income=22000.0 expected_expenses=18345.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 llc.pdf | validated=True tx=11 income=63868.0 expenses=79.74 expected_income=63868.0 expected_expenses=79.74 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 mercury.pdf | validated=True tx=7 income=32.97 expenses=32.97 expected_income=32.97 expected_expenses=32.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 n26 .1.pdf | validated=True tx=81 income=2975.12 expenses=2997.02 expected_income=2975.12 expected_expenses=2997.02 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 OMAR1.pdf | validated=True tx=108 income=20393.0 expenses=15474.28 expected_income=20393.0 expected_expenses=15474.28 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 OMAR2.pdf | validated=True tx=53 income=10374.0 expenses=20210.19 expected_income=10374.0 expected_expenses=20210.19 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 OMAR3.pdf | validated=True tx=107 income=36653.99 expenses=25940.92 expected_income=36653.99 expected_expenses=25940.92 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 Relevés compte 3.pdf | validated=True tx=38 income=5708.0 expenses=9937.8 expected_income=5708.0 expected_expenses=9937.8 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 revolut france.pdf | validated=True tx=10 income=2110.0 expenses=412.0 expected_income=2110.0 expected_expenses=412.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 soc general.pdf | validated=True tx=38 income=641.43 expenses=852.96 expected_income=641.43 expected_expenses=852.96 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 well fargo.pdf | validated=True tx=18 income=0 expenses=14082.7 expected_income=0.0 expected_expenses=14082.7 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 x.pdf | validated=True tx=515 income=710721.0 expenses=3212040.21 expected_income=710721.0 expected_expenses=3212040.21 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents

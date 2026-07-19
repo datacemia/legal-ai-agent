@@ -1,0 +1,873 @@
+{
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": 0.9429,
+      "fr": 0.7879,
+      "ar": 0.7143,
+      "macro": 0.815
+    },
+    "mechanism_precision": {
+      "en": 0.7442,
+      "fr": 0.8026,
+      "ar": 0.7901,
+      "macro": 0.779
+    },
+    "mechanism_recall": {
+      "en": 0.9846,
+      "fr": 1.0,
+      "ar": 0.9846,
+      "macro": 0.9897
+    },
+    "actor_accuracy": {
+      "en": 0.9286,
+      "fr": 0.8846,
+      "ar": 0.9286,
+      "macro": 0.9139
+    },
+    "object_accuracy": {
+      "en": 0.9333,
+      "fr": 0.8571,
+      "ar": 0.9333,
+      "macro": 0.9079
+    },
+    "trigger_accuracy": {
+      "en": 1.0,
+      "fr": 1.0,
+      "ar": 1.0,
+      "macro": 1.0
+    },
+    "polarity_accuracy": {
+      "en": 1.0,
+      "fr": 1.0,
+      "ar": 1.0,
+      "macro": 1.0
+    },
+    "procedural_state_accuracy": {
+      "en": 1.0,
+      "fr": 1.0,
+      "ar": 1.0,
+      "macro": 1.0
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": 1.0,
+      "fr": 1.0,
+      "ar": 1.0,
+      "macro": 1.0
+    }
+  },
+  "per_semantic_family": {
+    "ASSIGNMENT": {
+      "mechanism_precision": 0.6,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 6
+    },
+    "COMPENSATION": {
+      "mechanism_precision": 0.6,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "CONFIDENTIALITY": {
+      "mechanism_precision": 0.6429,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 9
+    },
+    "CONSENT": {
+      "mechanism_precision": 0.7778,
+      "mechanism_recall": 0.7778,
+      "required_mechanisms": 9
+    },
+    "DATA_OWNERSHIP": {
+      "mechanism_precision": 0.6667,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 6
+    },
+    "DATA_PROTECTION": {
+      "mechanism_precision": 0.8571,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 6
+    },
+    "FINANCE": {
+      "mechanism_precision": 0.8,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "FINANCIAL_REPORTING": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 3
+    },
+    "GOVERNANCE": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 6
+    },
+    "INVESTOR_RIGHTS": {
+      "mechanism_precision": 0.75,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 3
+    },
+    "LEASE": {
+      "mechanism_precision": 0.6316,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "LIABILITY": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 9
+    },
+    "LICENSE": {
+      "mechanism_precision": 0.75,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "M&A": {
+      "mechanism_precision": 0.8,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "PROCUREMENT": {
+      "mechanism_precision": 0.9231,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "RESTRICTIVE_COVENANTS": {
+      "mechanism_precision": 0.5,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 2
+    },
+    "SECURITY": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 15
+    },
+    "SERVICES": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 3
+    },
+    "SHARE_TRANSFER": {
+      "mechanism_precision": 0.84,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 21
+    },
+    "TERMINATION": {
+      "mechanism_precision": 0.6,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 9
+    },
+    "TRANSITION": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    }
+  },
+  "grounding": {
+    "GROUNDED": 78,
+    "UNSUPPORTED": 196
+  },
+  "cross_language_equivalence": {
+    "EN-FR": {
+      "concept_equivalence": 0.6364,
+      "argument_equivalence": 0.9697,
+      "polarity_equivalence": 1.0,
+      "procedural_state_equivalence": 0.9394,
+      "numeric_role_equivalence": 1.0,
+      "pairs": 33
+    },
+    "EN-AR": {
+      "concept_equivalence": 0.6286,
+      "argument_equivalence": 1.0,
+      "polarity_equivalence": 1.0,
+      "procedural_state_equivalence": 0.9429,
+      "numeric_role_equivalence": 1.0,
+      "pairs": 35
+    },
+    "FR-AR": {
+      "concept_equivalence": 0.7273,
+      "argument_equivalence": 0.9697,
+      "polarity_equivalence": 1.0,
+      "procedural_state_equivalence": 0.9697,
+      "numeric_role_equivalence": 1.0,
+      "pairs": 33
+    }
+  },
+  "observed_failure_regressions": {
+    "LIABILITY → GOVERNING LAW": {
+      "result": "PASS",
+      "expected": [
+        "LIABILITY_CAP"
+      ],
+      "forbidden": [
+        "FORUM_SELECTION",
+        "GOVERNING_LAW"
+      ],
+      "actual_by_language": {
+        "en": [
+          "EXCLUDED_DAMAGES",
+          "LIABILITY_CAP",
+          "LIABILITY_CARVEOUT"
+        ],
+        "fr": [
+          "EXCLUDED_DAMAGES",
+          "LIABILITY_CAP",
+          "LIABILITY_CARVEOUT"
+        ],
+        "ar": [
+          "EXCLUDED_DAMAGES",
+          "LIABILITY_CAP",
+          "LIABILITY_CARVEOUT"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "FINANCIAL REPORTING → BOARD / DEADLOCK": {
+      "result": "PASS",
+      "expected": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "forbidden": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "actual_by_language": {
+        "en": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ],
+        "fr": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ],
+        "ar": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "BOARD → SUBCONTRACTING": {
+      "result": "PASS",
+      "expected": [
+        "BOARD_COMPOSITION"
+      ],
+      "forbidden": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "actual_by_language": {
+        "en": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ],
+        "fr": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ],
+        "ar": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "DRAG-ALONG POLARITY": {
+      "result": "PASS",
+      "expected": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "forbidden": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "actual_by_language": {
+        "en": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ],
+        "fr": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ],
+        "ar": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "TAG-ALONG POLARITY": {
+      "result": "PASS",
+      "expected": [
+        "PARTICIPATION_OPTION",
+        "TAG_ALONG_RIGHT"
+      ],
+      "forbidden": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "actual_by_language": {
+        "en": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "fr": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "ar": [
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "AUTOMATIC TERMINATION": {
+      "result": "FAIL",
+      "expected": [
+        "AUTOMATIC_TERMINATION"
+      ],
+      "forbidden": [
+        "NOTICE_PREREQUISITE"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": []
+    },
+    "INVESTOR PRIOR WRITTEN CONSENT": {
+      "result": "FAIL",
+      "expected": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT"
+      ],
+      "forbidden": [],
+      "actual_by_language": {
+        "en": [
+          "INVESTOR_CONSENT_RIGHT",
+          "PROHIBITION",
+          "RESERVED_MATTER"
+        ],
+        "fr": [
+          "CONSENT_PREREQUISITE",
+          "INVESTOR_CONSENT_RIGHT",
+          "RESERVED_MATTER"
+        ],
+        "ar": [
+          "INVESTOR_CONSENT_RIGHT",
+          "PROHIBITION",
+          "RESERVED_MATTER"
+        ]
+      },
+      "pass_by_language": {
+        "en": false,
+        "fr": true,
+        "ar": false
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "CONFIDENTIALITY MULTI-MECHANISM": {
+      "result": "PASS",
+      "expected": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "forbidden": [],
+      "actual_by_language": {
+        "en": [
+          "CONFIDENTIALITY_OBLIGATION",
+          "CONSENT_PREREQUISITE",
+          "NON_DISCLOSURE",
+          "PROHIBITION"
+        ],
+        "fr": [
+          "CONFIDENTIALITY_OBLIGATION",
+          "CONSENT_PREREQUISITE",
+          "NON_DISCLOSURE"
+        ],
+        "ar": [
+          "CONFIDENTIALITY_OBLIGATION",
+          "CONSENT_PREREQUISITE",
+          "NON_DISCLOSURE"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    }
+  },
+  "critical_failures": [],
+  "high_failures": [],
+  "failure_count": 0,
+  "attribute_diagnostics": [
+    {
+      "fixture_id": "14_3_2_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "3.2",
+      "language": "en",
+      "semantic_family": "SHARE_TRANSFER",
+      "concept": "PARTICIPATION_OPTION",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\")."
+    },
+    {
+      "fixture_id": "14_3_2_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "3.2",
+      "language": "fr",
+      "semantic_family": "SHARE_TRANSFER",
+      "concept": "PARTICIPATION_OPTION",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »)."
+    },
+    {
+      "fixture_id": "14_3_2_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "3.2",
+      "language": "ar",
+      "semantic_family": "SHARE_TRANSFER",
+      "concept": "PARTICIPATION_OPTION",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\")."
+    },
+    {
+      "fixture_id": "14_2_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "semantic_family": "INVESTOR_RIGHTS",
+      "concept": "PREEMPTIVE_RIGHT",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances."
+    },
+    {
+      "fixture_id": "14_2_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "semantic_family": "INVESTOR_RIGHTS",
+      "concept": "PREEMPTIVE_RIGHT",
+      "attribute": "object",
+      "comparison_key": "object",
+      "expected": "NEW_SECURITIES",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances."
+    },
+    {
+      "fixture_id": "14_2_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "semantic_family": "INVESTOR_RIGHTS",
+      "concept": "PREEMPTIVE_RIGHT",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "2.1 L'Investisseur aura le droit d'acquérir sa quote-part proportionnelle de tout nouveau titre émis par la Société, sous réserve des exceptions usuelles pour les émissions au titre des plans d'intéressement, les acquisitions et les émissions liées à une Introduction en Bourse Qualifiée."
+    },
+    {
+      "fixture_id": "14_2_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "semantic_family": "INVESTOR_RIGHTS",
+      "concept": "PREEMPTIVE_RIGHT",
+      "attribute": "object",
+      "comparison_key": "object",
+      "expected": "NEW_SECURITIES",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "2.1 L'Investisseur aura le droit d'acquérir sa quote-part proportionnelle de tout nouveau titre émis par la Société, sous réserve des exceptions usuelles pour les émissions au titre des plans d'intéressement, les acquisitions et les émissions liées à une Introduction en Bourse Qualifiée."
+    },
+    {
+      "fixture_id": "14_2_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "semantic_family": "INVESTOR_RIGHTS",
+      "concept": "PREEMPTIVE_RIGHT",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل."
+    },
+    {
+      "fixture_id": "14_2_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "semantic_family": "INVESTOR_RIGHTS",
+      "concept": "PREEMPTIVE_RIGHT",
+      "attribute": "object",
+      "comparison_key": "object",
+      "expected": "NEW_SECURITIES",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل."
+    },
+    {
+      "fixture_id": "14_6_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "6.1",
+      "language": "fr",
+      "semantic_family": "CONSENT",
+      "concept": "INVESTOR_CONSENT_RIGHT",
+      "attribute": "actor",
+      "comparison_key": "right_holder",
+      "expected": "INVESTOR",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires."
+    },
+    {
+      "fixture_id": "14_6_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "6.1",
+      "language": "fr",
+      "semantic_family": "CONSENT",
+      "concept": "INVESTOR_CONSENT_RIGHT",
+      "attribute": "object",
+      "comparison_key": "object",
+      "expected": "RESERVED_MATTER",
+      "actual_values": [
+        null
+      ],
+      "candidate_count": 1,
+      "reason": "ATTRIBUTE_MISSING",
+      "source_text": "6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires."
+    }
+  ],
+  "attribute_diagnostic_summary": {
+    "total_failures": 11,
+    "by_attribute": {
+      "actor": 7,
+      "object": 4,
+      "trigger": 0,
+      "polarity": 0
+    },
+    "by_reason": {
+      "NO_CONCEPT_CANDIDATE": 0,
+      "ATTRIBUTE_MISSING": 11,
+      "VALUE_MISMATCH": 0
+    }
+  },
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_clause_count": 105,
+  "gold_clauses_by_language": {
+    "en": 35,
+    "fr": 35,
+    "ar": 35
+  },
+  "publication_baseline_persisted_json_check": {
+    "expected_runs": 45,
+    "completed_runs": 45,
+    "errors": 0,
+    "integrity_failures": 0,
+    "total_receipts_observed_in_json": 0,
+    "total_blocked_observed_in_json": 0,
+    "hash_mismatch_count": 0,
+    "post_gate_mutation_count": 0,
+    "final_result": "PASS",
+    "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts."
+  },
+  "before_after_metric_comparison": {
+    "primary_type_support_rate": {
+      "en": {
+        "baseline": 0.9429,
+        "after_fix": 0.9429,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.7879,
+        "after_fix": 0.7879,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.7143,
+        "after_fix": 0.7143,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.815,
+        "after_fix": 0.815,
+        "delta": 0.0
+      }
+    },
+    "mechanism_precision": {
+      "en": {
+        "baseline": 0.7442,
+        "after_fix": 0.7442,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.8026,
+        "after_fix": 0.8026,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.7901,
+        "after_fix": 0.7901,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.779,
+        "after_fix": 0.779,
+        "delta": 0.0
+      }
+    },
+    "mechanism_recall": {
+      "en": {
+        "baseline": 0.9846,
+        "after_fix": 0.9846,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.9846,
+        "after_fix": 0.9846,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.9897,
+        "after_fix": 0.9897,
+        "delta": 0.0
+      }
+    },
+    "actor_accuracy": {
+      "en": {
+        "baseline": 0.9286,
+        "after_fix": 0.9286,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.8846,
+        "after_fix": 0.8846,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.9286,
+        "after_fix": 0.9286,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.9139,
+        "after_fix": 0.9139,
+        "delta": 0.0
+      }
+    },
+    "object_accuracy": {
+      "en": {
+        "baseline": 0.9333,
+        "after_fix": 0.9333,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.8571,
+        "after_fix": 0.8571,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.9333,
+        "after_fix": 0.9333,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.9079,
+        "after_fix": 0.9079,
+        "delta": 0.0
+      }
+    },
+    "trigger_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "polarity_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "procedural_state_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    }
+  },
+  "baseline_path": "semantic_audit\\frozen_gold_baseline_metrics.json"
+}

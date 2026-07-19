@@ -1,0 +1,3 @@
+parties AVANT tout traitement: None
+party_roles: {'party_a': 'Company', 'party_b': 'Shareholder', 'family': 'shareholder', 'anonymized': True}
+parties APRES force_generic_parties: None

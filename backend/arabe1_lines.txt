@@ -1,0 +1,61 @@
+FINANCE_TEXT_PDF_EXTRACTED 5789
+PDF_LINES_DEBUG {'line_count': 102, 'non_empty_line_count': 58, 'max_line_len': 290, 'first_20': ['ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ', '              Account Statement', '', '', '  CLICK TO VALIDATE', 'Ref. No           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ', 'Date                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ', 'Time                                            2:39       AMﺍﻟﻮﻗﺖ', '  Statement  Detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ', '', 'Customer Nameﻋﻠﻲﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ                                                                                                         ﺍﻟﻌﻤﻴﻞ ﺍﺳﻢ', '', 'Account Number             215608010156629ﺭﻗﻢﺍﻟﺤﺴﺎﺏ', '', 'IBAN Number                SA9780000215608010156629ﺭﻗﻢﺍﻵﻳﺒﺎﻥ', '', 'Opening Balance                              3,323.54        SARﺭﺻﻴﺪﺍﻹﻓﺘﺘﺎﺣﻲ ﺍﻟﺤﺴﺎﺏ', '', 'Closing Balance                                 0.43       SARﺭﺻﻴﺪﺍﻹﻗﻔﺎﻝ', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+1: ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ
+2: Account Statement
+5: CLICK TO VALIDATE
+6: Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ
+7: Date 12/11/2023 - 28/04/1445ﺍﻟﺘﺎﺭﻳﺦ
+8: Time 2:39 AMﺍﻟﻮﻗﺖ
+9: Statement Detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ
+11: Customer Nameﻋﻠﻲﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﻟﻌﻤﻴﻞ ﺍﺳﻢ
+13: Account Number 215608010156629ﺭﻗﻢﺍﻟﺤﺴﺎﺏ
+15: IBAN Number SA9780000215608010156629ﺭﻗﻢﺍﻵﻳﺒﺎﻥ
+17: Opening Balance 3,323.54 SARﺭﺻﻴﺪﺍﻹﻓﺘﺘﺎﺣﻲ ﺍﻟﺤﺴﺎﺏ
+19: Closing Balance 0.43 SARﺭﺻﻴﺪﺍﻹﻗﻔﺎﻝ
+21: Number Of Deposits 1ﻋﺪﺩﺍﻹﻳﺪﺍﻋﺎﺕ
+23: Number Of Withdrawals 10ﻋﺪﺩﺍﻟﺴﺤﻮﺑﺎﺕ
+25: Total Deposits 55,500.00 SARﺇﺟﻤﺎﻟﻲﺍﻹﻳﺪﺍﻋﺎﺕ
+27: Total Withdrawals 58,823.11 SARﺇﺟﻤﺎﻟﻲﺍﻟﺴﺤﻮﺑﺎﺕ
+29: On The Period 2023/11/09 - 2023/11/11ﺧﻼﻝﺍﻟﻔﺘﺮﺓ
+31: National Addressﺍﻟﻌﻨﻮﺍﻥﺍﻟﻮﻃﻨﻲ
+33: Cityﺍﻟﺮﻳﺎﺽ ﺍﻟﻤﺪﻳﻨﺔ
+35: Street ﺍﻟﺒﻠﻴﺪﻩ ﺍﻟﺸﺎﺭﻉ
+37: District ﺍﻟﺒﻴﻀﺎﺀ ﺍﻟﺪﺍﺭ ﺍﻟﺤﻲ
+39: Postal Code 14519ﺍﻟﺮﻣﺰﺍﻟﺒﺮﻳﺪﻱ
+41: Building Number 7131ﺭﻗﻢﺍﻟﻤﺒﻨﻰ
+43: Secondary Number 4003ﺍﻟﺮﻗﻢﺍﻟﻔﺮﻋﻲ
+49: 1
+50: Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ
+51: ﺍﻟﺮﺻﻴﺪ ﺩﺍﺋﻦ ﻣﺪﻳﻦ ﺍﻟﻌﻤﻠﻴﺔ ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺎﺭﻳﺦ
+53: ﺍﻟﻌﻤﻴﻞ ﺣﺴﺎﺏ ﺇﻟﻰ 58,823.54 SAR 55,500.00 SAR 0.00 SARﺗﺤﻮﻳﻞ ﺳﻴﺎﺭﺓ10:27:15:ﺍﻟﻮﻗﺖ2023/11/09ﺷﺮﺍ / ﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﺑﺮﺍﻫﻴﻢ **ﻣﻼﺣﻈﺔ:ﺗﺤﻮﻳﻞ
+55: (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ
+56: 58,785.54 SAR 0.00 SAR 38.00 SAR Faida (331300262532-6451354000078624):**ﻣﻼﺣﻈﺔ00:27:03:ﺍﻟﻮﻗﺖ 2023/11/09
+57: AlSaiari Foundat, RIYADH, SA
+59: (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ
+60: 58,685.54 SAR 0.00 SAR 100.00 SAR Al Jeri (331300281240-6418044945230131):**ﻣﻼﺣﻈﺔ00:28:20:ﺍﻟﻮﻗﺖ 2023/11/09
+61: dar albydha, RIYADH, SA
+63: (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ
+64: 58,653.43 SAR 0.00 SAR 32.11 SAR aswaq (331301423282-6321647801934801):**ﻣﻼﺣﻈﺔ01:42:40:ﺍﻟﻮﻗﺖ 2023/11/09
+65: althalatheen, RIYADH, SA
+67: (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ
+68: 58,627.43 SAR 0.00 SAR 26.00 SAR (331302344328-6301497901942260):**ﻣﻼﺣﻈﺔ02:34:51:ﺍﻟﻮﻗﺖ 2023/11/09
+69: TURKISH VALLEY ESTAURA, RIYADH, SA
+70: 8,627.43 SAR 0.00 SAR 50,000.00 SARﺗﺤﻮﻳﻞ-ﻣﺤﻤﺪW-/TOACCT/43300608010053343TO:**ﻣﻼﺣﻈﺔ16:28:24:ﺍﻟﻮﻗﺖ ﺍﻟﻨﻌﻤﻲ2023/11/09ﻋﻠﻲ ﻋﺒﺪﻩ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﻣﺤﻤﺪ
+72: ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺳﺤﺐ
+73: 8,127.43 SAR 0.00 SAR 500.00 SAR ALFAISAL STATION ALMASANI, RIYADH:**ﻣﻼﺣﻈﺔ18:09:04:ﺍﻟﻮﻗﺖ 2023/11/09
+74: ((OP0101ND01055856-180857526615
+76: (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ
+77: 8,104.93 SAR 0.00 SAR 22.50 SAR (331319123393-6327019701980248):**ﻣﻼﺣﻈﺔ19:12:42:ﺍﻟﻮﻗﺖ 2023/11/09
+78: tamwinat talal al fale, RIYADH, SA
+80: ()ﻣﺤﻠﻲApple Pay ﺍﻧﺘﺮﻧﺖ ﺷﺮﺍﺀ
+81: 1,405.93 SAR 0.00 SAR 6,699.00 SAR Online Purchase from Yaqoot, Riyadh:**ﻣﻼﺣﻈﺔ20:58:16:ﺍﻟﻮﻗﺖ2023/11/10
+83: ﺻﺮﺍﻑ-ﺑﻄﺎﻗﺔ ﺗﺠﺪﻳﺪ ﺭﺳﻮﻡ ﺫﺍﺗﻴﺔ ﺧﺪﻣﺔ
+84: 1,371.43 SAR 0.00 SAR 34.50 SAR CardPrnFee-0180K9IB KIOUDF01:**ﻣﻼﺣﻈﺔ20:50:10:ﺍﻟﻮﻗﺖ2023/11/10
+86: ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺍﻟﺤﺴﺎﺏ ﻣﻦ ﺍﻟﺘﺤﻮﻳﻞ
+87: 0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11
+88: ﺯﻳﻦ433000010006080362223$ﻣﺤﻤﺪ ﻋﻠﻲ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﺍﺣﻤﺪ
+94: Noteﻣﻼﺣﻈﺔ
+95: This document is
+96: responsibility of the confidentialholder.ﻫﺬﻩand under the ﺍﻟﻤﺤﺎﻓﻈﺔ ﻣﺴﺆﻭﻟﻴﺔ ﻛﺎﻣﻞ ﺣﺎﻣﻠﻬﺎ ﻭﻳﺘﺤﻤﻞ ﺳﺮﻳﺔ ﺍﻟﻮﺛﻴﻘﺔ
+102: 2

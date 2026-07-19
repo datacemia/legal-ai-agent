@@ -1,0 +1,12 @@
+================================================================================================
+V4.1.17A EXECUTIVE TOP-RISK PUBLICATION INVARIANT APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\executive_summary.py
+BACKUP : app\services\contract_agent\executive_summary.py.before_v4_1_17a_20260714_190501
+SHA256 : b51e9d7057d501c7341c7734e4e76adeda18c96faf99227125bcebe688d34e07
+A: clause-specific risk evidence preferred over taxonomy prose
+B: EN/FR/AR internal diagnostics blocked from Top Risks
+C: generic report prose demoted to fallback-only
+D: clause-type descriptions retained as safe backward-compatible fallback
+UNTOUCHED: semantic profile, RULES, thresholds, evidence engine, publication gate, risk scoring, taxonomy, frontend
+AST: OK

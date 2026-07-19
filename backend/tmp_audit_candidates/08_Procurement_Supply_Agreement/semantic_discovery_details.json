@@ -1,0 +1,1206 @@
+[
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "1.2",
+    "source_language": "en",
+    "source_text": "1.2 Time is of the essence. If Supplier fails to deliver Goods within five (5) business days of the scheduled delivery date, Buyer may, at its option, cancel the affected Purchase Order without penalty and procure substitute goods, with Supplier liable for any reasonable cover costs.",
+    "primary_type": "delivery",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "liability",
+        "anchors": [
+          "affected",
+          "busines",
+          "buyer",
+          "cancel",
+          "costs",
+          "cover",
+          "date",
+          "days",
+          "deliver",
+          "delivery",
+          "essence",
+          "fails",
+          "five",
+          "goods",
+          "if",
+          "liable",
+          "option",
+          "order",
+          "penalty",
+          "procure",
+          "purchase",
+          "reasonable",
+          "scheduled",
+          "substitute",
+          "supplier",
+          "time",
+          "within"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 During the Term, Buyer shall purchase no less than seventy percent (70%) of its requirements for the Goods from Supplier, provided Supplier remains competitive on price, quality, and delivery performance as benchmarked against the market.",
+    "primary_type": "supply_distribution",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "supply_distribution",
+        "anchors": [
+          "against",
+          "benchmarked",
+          "buyer",
+          "competitive",
+          "delivery",
+          "during",
+          "goods",
+          "less",
+          "market",
+          "no",
+          "percent",
+          "performance",
+          "price",
+          "provided",
+          "purchase",
+          "quality",
+          "remain",
+          "requirement",
+          "seventy",
+          "supplier",
+          "term",
+          "than"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 Neither Party shall be liable for indirect, incidental, or consequential damages. Supplier's aggregate liability shall not exceed the value of the Purchase Order giving rise to the claim.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aggregate liability shall not exceed",
+            "start": 97,
+            "end": 133
+          }
+        ]
+      },
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "indirect, incidental, or consequential damages",
+            "start": 38,
+            "end": 84
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 63,
+            "end": 84,
+            "text": "consequential damages"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "c80416c7629f474aa1792bc12fdd1b9403e88bb01069911515e77d72e57057bf",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 97,
+            "end": 190,
+            "text": "aggregate liability shall not exceed the value of the Purchase Order giving rise to the claim"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5ee0b0a319c3e7ffa4dadf6607fe983d440fb31aea05f702990d070249407c13",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 117,
+            "end": 191,
+            "text": "shall not exceed the value of the Purchase Order giving rise to the claim."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "90cd539e76ab5d251cbdfb17eb078d9d3398d98aff1a5ace3251a7db8f9d10d5",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 117,
+            "end": 191,
+            "text": "shall not exceed the value of the Purchase Order giving rise to the claim."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "90cd539e76ab5d251cbdfb17eb078d9d3398d98aff1a5ace3251a7db8f9d10d5",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Buyer shall submit Purchase Orders at least sixty (60) days prior to the requested delivery date. Supplier shall deliver Goods conforming to the Specifications on the dates set forth in each accepted Purchase Order.",
+    "primary_type": "delivery",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 102,
+            "end": 130,
+            "text": "Supplier shall deliver Goods"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7b92005d316258c5053224ee674db79e9204bf6d9ff24502b421748d2ca72f60",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PURCHASE_ORDER",
+        "rank": 94,
+        "candidate_primary_type": "purchase_order",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 4,
+            "end": 100,
+            "text": "Buyer shall submit Purchase Orders at least sixty (60) days prior to the requested delivery date"
+          },
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 23,
+            "end": 95,
+            "text": "Purchase Orders at least sixty (60) days prior to the requested delivery"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a3044f4b19c88b432637096ec2b4fac3f091276c43bc6e735b21dd5750453d5e",
+        "normalized_concept": "PURCHASE_ORDER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "BUYER",
+          "counterparty": "SUPPLIER",
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 60,
+              "unit": "DAYS",
+              "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+              "related_mechanism": "PURCHASE_ORDER"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 102,
+            "end": 130,
+            "text": "Supplier shall deliver Goods"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7b92005d316258c5053224ee674db79e9204bf6d9ff24502b421748d2ca72f60",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PURCHASE_ORDER",
+        "rank": 94,
+        "candidate_primary_type": "purchase_order",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 4,
+            "end": 100,
+            "text": "Buyer shall submit Purchase Orders at least sixty (60) days prior to the requested delivery date"
+          },
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 23,
+            "end": 95,
+            "text": "Purchase Orders at least sixty (60) days prior to the requested delivery"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a3044f4b19c88b432637096ec2b4fac3f091276c43bc6e735b21dd5750453d5e",
+        "normalized_concept": "PURCHASE_ORDER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "BUYER",
+          "counterparty": "SUPPLIER",
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 60,
+              "unit": "DAYS",
+              "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+              "related_mechanism": "PURCHASE_ORDER"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Prices for the Goods are as set forth in Exhibit A and shall remain fixed for the first twelve (12) months of the Term, subject thereafter to adjustment no more than once annually based on documented increases in raw material costs, capped at 6% per year.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRICING_ADJUSTMENT",
+        "rank": 88,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRICING_ADJUSTMENT",
+            "start": 4,
+            "end": 258,
+            "text": "Prices for the Goods are as set forth in Exhibit A and shall remain fixed for the first twelve (12) months of the Term, subject thereafter to adjustment no more than once annually based on documented increases in raw material costs, capped at 6% per year"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "ac78fc2283f3c03b3df3342212c51a09abdd9d73e623f6ad97e5b6bf1bd1dfc6",
+        "normalized_concept": "PRICING_ADJUSTMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PRICING_ADJUSTMENT",
+        "rank": 88,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRICING_ADJUSTMENT",
+            "start": 4,
+            "end": 258,
+            "text": "Prices for the Goods are as set forth in Exhibit A and shall remain fixed for the first twelve (12) months of the Term, subject thereafter to adjustment no more than once annually based on documented increases in raw material costs, capped at 6% per year"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "ac78fc2283f3c03b3df3342212c51a09abdd9d73e623f6ad97e5b6bf1bd1dfc6",
+        "normalized_concept": "PRICING_ADJUSTMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "2.2",
+    "source_language": "en",
+    "source_text": "2.2 Buyer shall pay all undisputed invoices within sixty (60) days of receipt.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 77,
+            "text": "Buyer shall pay all undisputed invoices within sixty (60) days of receipt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "6f3bebfb25b4f81a6fcd052df05e68e382358eeeba5129f796a2f1614aab9360",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 10,
+            "end": 77,
+            "text": "shall pay all undisputed invoices within sixty (60) days of receipt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b53ba059736d7a563125b07670c1dcb0f113c8d6e99b345fe0adc9e61ff9be8b",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 10,
+            "end": 77,
+            "text": "shall pay all undisputed invoices within sixty (60) days of receipt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "fcd43834d8dbb0302883466de078adac2038afaefc4b874b30c1eeab0da77d9f",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 77,
+            "text": "Buyer shall pay all undisputed invoices within sixty (60) days of receipt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "6f3bebfb25b4f81a6fcd052df05e68e382358eeeba5129f796a2f1614aab9360",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 10,
+            "end": 77,
+            "text": "shall pay all undisputed invoices within sixty (60) days of receipt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b53ba059736d7a563125b07670c1dcb0f113c8d6e99b345fe0adc9e61ff9be8b",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 10,
+            "end": 77,
+            "text": "shall pay all undisputed invoices within sixty (60) days of receipt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "fcd43834d8dbb0302883466de078adac2038afaefc4b874b30c1eeab0da77d9f",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Buyer shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications. Supplier shall replace non-conforming Goods at its own expense within ten (10) business days.",
+    "primary_type": "supply_distribution",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "REPLACEMENT_REMEDY",
+        "rank": 95,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 158,
+            "end": 201,
+            "text": "Supplier shall replace non-conforming Goods"
+          },
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 173,
+            "end": 220,
+            "text": "replace non-conforming Goods at its own expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a4b87bd947c498b51735fff89d437d3e3e71eb7a4f8637df2b7151f6c4afffa5",
+        "normalized_concept": "REPLACEMENT_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "REPLACE_NON_CONFORMING_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INSPECTION_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "inspection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "Buyer shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications"
+          },
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 25,
+            "end": 114,
+            "text": "right to inspect Goods within fifteen (15) business days of delivery and reject any Goods"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "46502ed583747b547f9e06fc2d7fbc2bde7cad922a94e5daa67a499b8c6517bd",
+        "normalized_concept": "INSPECTION_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BUYER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "INSPECT",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 10,
+            "end": 251,
+            "text": "shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications. Supplier shall replace non-conforming Goods at its own expense within ten (10) business days."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "681cc2889f1f2cf5709a42a445d0bc327760214b320c7dc4bc1340bc1fb6ebc4",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "REPLACEMENT_REMEDY",
+        "rank": 95,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 158,
+            "end": 201,
+            "text": "Supplier shall replace non-conforming Goods"
+          },
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 173,
+            "end": 220,
+            "text": "replace non-conforming Goods at its own expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a4b87bd947c498b51735fff89d437d3e3e71eb7a4f8637df2b7151f6c4afffa5",
+        "normalized_concept": "REPLACEMENT_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "REPLACE_NON_CONFORMING_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INSPECTION_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "inspection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "Buyer shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications"
+          },
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 25,
+            "end": 114,
+            "text": "right to inspect Goods within fifteen (15) business days of delivery and reject any Goods"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "46502ed583747b547f9e06fc2d7fbc2bde7cad922a94e5daa67a499b8c6517bd",
+        "normalized_concept": "INSPECTION_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BUYER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "INSPECT",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 10,
+            "end": 251,
+            "text": "shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications. Supplier shall replace non-conforming Goods at its own expense within ten (10) business days."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "681cc2889f1f2cf5709a42a445d0bc327760214b320c7dc4bc1340bc1fb6ebc4",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Supplier warrants that the Goods will be free from defects in material and workmanship for a period of twenty-four (24) months from delivery, and will conform to the Specifications.",
+    "primary_type": "supply_distribution",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "supply_distribution",
+        "anchors": [
+          "conform",
+          "defect",
+          "delivery",
+          "four",
+          "free",
+          "goods",
+          "material",
+          "month",
+          "period",
+          "specification",
+          "supplier",
+          "twenty",
+          "warrant",
+          "will",
+          "workmanship"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 This Agreement has an initial term of three (3) years. Either Party may terminate for the other's uncured material breach following thirty (30) days' written notice and an opportunity to cure.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of three (3) years",
+            "start": 26,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 154,
+            "end": 195,
+            "text": "written notice and an opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5f86ca81593d8e31f5e99ac40fb0f2ae16b6f5072690e3b61ca29d76435bbece",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 72,
+            "end": 195,
+            "text": "may terminate for the other's uncured material breach following thirty (30) days' written notice and an opportunity to cure"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 76,
+            "end": 195,
+            "text": "terminate for the other's uncured material breach following thirty (30) days' written notice and an opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "67d3ebf4fc1c95dd186d6be62975c764899f35a26fced9d905af71a8e7483438",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 154,
+            "end": 195,
+            "text": "written notice and an opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5f86ca81593d8e31f5e99ac40fb0f2ae16b6f5072690e3b61ca29d76435bbece",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 72,
+            "end": 195,
+            "text": "may terminate for the other's uncured material breach following thirty (30) days' written notice and an opportunity to cure"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 76,
+            "end": 195,
+            "text": "terminate for the other's uncured material breach following thirty (30) days' written notice and an opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "67d3ebf4fc1c95dd186d6be62975c764899f35a26fced9d905af71a8e7483438",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of three (3) years",
+            "start": 26,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

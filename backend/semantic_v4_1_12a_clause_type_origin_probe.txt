@@ -1,0 +1,784 @@
+
+====================================================================================================
+HIT 1
+LINE: 1036
+REASON: DICT CLAUSE_TYPE
+====================================================================================================
+01018:         "ar": {
+01019:             "parse": (
+01020:                 "تعذر تحليل رد الذكاء الاصطناعي "
+01021:                 "بشكل صحيح."
+01022:             ),
+01023:             "missing": "غير محدد",
+01024:             "review": (
+01025:                 "راجع هذا البند يدويًا لأن "
+01026:                 "التحليل التلقائي فشل."
+01027:             ),
+01028:         },
+01029:     }
+01030: 
+01031:     t = fallback_text.get(
+01032:         language,
+01033:         fallback_text["en"]
+01034:     )
+01035: 
+01036:     return {
+01037:         "clause_title": "",
+01038:         "clause_reference": "",
+01039:         "quoted_text": "",
+01040:         "clause_type": "other",
+01041:         "risk_level": "low",
+01042:         "explanation_simple": t["parse"],
+01043:         "why_it_matters": t["missing"],
+01044:         "legal_insight": "",
+01045:         "favours": "unclear",
+01046:         "market_comparison": "",
+01047:         "red_flag": False,
+01048:         "red_flag_reason": "",
+01049:         "recommendation": t["review"],
+01050:         "confidence": "low",
+01051:         "safer_alternative": "",
+01052:         "negotiation_advice": t["review"],
+01053:         "negotiation_priority": "medium",
+01054:     }
+01055: 
+01056: 
+01057: def normalize_clause_result(
+01058:     ai_result: dict
+01059: ) -> dict:
+01060: 
+
+====================================================================================================
+HIT 2
+LINE: 1061
+REASON: DICT CLAUSE_TYPE
+====================================================================================================
+01043:         "why_it_matters": t["missing"],
+01044:         "legal_insight": "",
+01045:         "favours": "unclear",
+01046:         "market_comparison": "",
+01047:         "red_flag": False,
+01048:         "red_flag_reason": "",
+01049:         "recommendation": t["review"],
+01050:         "confidence": "low",
+01051:         "safer_alternative": "",
+01052:         "negotiation_advice": t["review"],
+01053:         "negotiation_priority": "medium",
+01054:     }
+01055: 
+01056: 
+01057: def normalize_clause_result(
+01058:     ai_result: dict
+01059: ) -> dict:
+01060: 
+01061:     return {
+01062:         "clause_title": safe_str(
+01063:             ai_result.get("clause_title")
+01064:         ),
+01065: 
+01066:         "clause_reference": localize_clause_reference(
+01067:             safe_str(
+01068:                 ai_result.get("clause_reference")
+01069:             ),
+01070:             ai_result.get("language", "en"),
+01071:         ),
+01072: 
+01073:         "quoted_text": safe_str(
+01074:             ai_result.get("quoted_text")
+01075:         )[:600],
+01076: 
+01077:         "clause_type": clamp_enum(
+01078:             ai_result.get("clause_type"),
+01079:             ALLOWED_CLAUSE_TYPES,
+01080:             "other",
+01081:         ),
+01082: 
+01083:         "risk_level": clamp_enum(
+01084:             ai_result.get("risk_level"),
+01085:             ALLOWED_RISK_LEVELS,
+
+====================================================================================================
+HIT 3
+LINE: 1078
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+01060: 
+01061:     return {
+01062:         "clause_title": safe_str(
+01063:             ai_result.get("clause_title")
+01064:         ),
+01065: 
+01066:         "clause_reference": localize_clause_reference(
+01067:             safe_str(
+01068:                 ai_result.get("clause_reference")
+01069:             ),
+01070:             ai_result.get("language", "en"),
+01071:         ),
+01072: 
+01073:         "quoted_text": safe_str(
+01074:             ai_result.get("quoted_text")
+01075:         )[:600],
+01076: 
+01077:         "clause_type": clamp_enum(
+01078:             ai_result.get("clause_type"),
+01079:             ALLOWED_CLAUSE_TYPES,
+01080:             "other",
+01081:         ),
+01082: 
+01083:         "risk_level": clamp_enum(
+01084:             ai_result.get("risk_level"),
+01085:             ALLOWED_RISK_LEVELS,
+01086:             "low",
+01087:         ),
+01088: 
+01089:         "explanation_simple": safe_str(
+01090:             ai_result.get("explanation_simple")
+01091:         ),
+01092: 
+01093:         "why_it_matters": safe_str(
+01094:             ai_result.get("why_it_matters")
+01095:         ),
+01096: 
+01097:         "legal_insight": safe_str(
+01098:             ai_result.get("legal_insight")
+01099:         ),
+01100: 
+01101:         "favours": clamp_enum(
+01102:             ai_result.get("favours"),
+
+====================================================================================================
+HIT 4
+LINE: 1557
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+01539:             for phrase in generic_detail_phrases
+01540:         ):
+01541:             analysis[field] = ""
+01542: 
+01543:     analysis["has_details"] = any(
+01544:         safe_str(
+01545:             analysis.get(field)
+01546:         )
+01547:         for field in detail_fields
+01548:     )
+01549: 
+01550:     if (
+01551:         not safe_str(analysis.get("explanation_simple"))
+01552:         and analysis.get("risk_level") in {"medium", "high"}
+01553:     ):
+01554:         combined = " ".join([
+01555:             safe_str(analysis.get("clause_title")),
+01556:             safe_str(analysis.get("title")),
+01557:             safe_str(analysis.get("clause_type")),
+01558:             safe_str(analysis.get("quoted_text")),
+01559:             safe_str(clause_text),
+01560:         ]).lower()
+01561: 
+01562:         if (
+01563:             "service level" in combined
+01564:             or "uptime" in combined
+01565:             or "niveau de service" in combined
+01566:             or "disponibilité" in combined
+01567:             or "مستوى الخدمة" in combined
+01568:             or "الجاهزية" in combined
+01569:             or "توفر الخدمة" in combined
+01570:         ):
+01571:             analysis["explanation_simple"] = (
+01572:                 "The clause defines uptime or service availability obligations."
+01573:                 if language == "en"
+01574:                 else
+01575:                 "La clause définit les engagements de disponibilité du service."
+01576:                 if language == "fr"
+01577:                 else
+01578:                 "تحدد هذه المادة التزامات توفر الخدمة أو نسبة الجاهزية."
+01579:             )
+01580: 
+01581:         elif "fees" in combined or "payment" in combined or "paiement" in combined or "الدفع" in combined or "الرسوم" in combined:
+
+====================================================================================================
+HIT 5
+LINE: 1677
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+01659:     # print("AI TYPE:", ai_result.get("clause_type"))
+01660: 
+01661:     # for candidate in _debug_candidates[:10]:
+01662:     #     print(
+01663:     #         candidate["type"],
+01664:     #         "score=", candidate["score"],
+01665:     #         "base=", candidate["base_score"],
+01666:     #         "specificity=", candidate["specificity_bonus"],
+01667:     #         "context+=", candidate["context_bonus"],
+01668:     #         "context-=", candidate["context_penalty"],
+01669:     #         "signals=", candidate["signals"],
+01670:     #     )
+01671: 
+01672:     # print("=== END TAXONOMY DEBUG ===\n")
+01673: 
+01674:     taxonomy_type = detect_clause_type_from_taxonomy(clause)
+01675: 
+01676:     if taxonomy_type != "other":
+01677:         current_type = ai_result.get("clause_type")
+01678: 
+01679:         if current_type == "other":
+01680:             ai_result["clause_type"] = taxonomy_type
+01681: 
+01682:         elif not has_clause_type_signal(clause, current_type):
+01683:             ai_result["clause_type"] = taxonomy_type
+01684:             ai_result["confidence"] = "medium"
+01685: 
+01686:     # -------------------------------------------------
+01687:     # Grounded semantic primary-type arbitration
+01688:     # -------------------------------------------------
+01689:     #
+01690:     # The semantic source profile may override the existing AI + lexical
+01691:     # taxonomy result only when it derives a high-confidence, non-abstained
+01692:     # primary type from exact source evidence.
+01693:     #
+01694:     # Control modifiers such as prohibitions, express rights, mandatory
+01695:     # wording, or prior-consent prerequisites are not primary-type eligible.
+01696:     # If the semantic profiler abstains or cannot run, the existing
+01697:     # classification path above remains unchanged.
+01698:     try:
+01699:         semantic_profile = build_semantic_source_profile(
+01700:             clause,
+01701:             language=language,
+
+====================================================================================================
+HIT 6
+LINE: 1736
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+01718:             True,
+01719:         )
+01720:     )
+01721: 
+01722:     semantic_primary_supported = (
+01723:         not semantic_abstained
+01724:         and semantic_type
+01725:         and semantic_type != SEMANTIC_UNKNOWN.lower()
+01726:         and semantic_type in ALLOWED_CLAUSE_TYPES
+01727:         and semantic_confidence >= 0.90
+01728:         and bool(
+01729:             semantic_profile.get(
+01730:                 "supporting_mechanisms"
+01731:             )
+01732:         )
+01733:     )
+01734: 
+01735:     if semantic_primary_supported:
+01736:         current_type = ai_result.get("clause_type")
+01737: 
+01738:         if current_type != semantic_type:
+01739:             ai_result["clause_type"] = semantic_type
+01740:             ai_result["confidence"] = "high"
+01741: 
+01742:     ai_result["_meta"] = {
+01743:         "risk_modified_by": [],
+01744:         "reasoning_modified_by": [],
+01745:         "cleanup_applied": [],
+01746:         "changes": [],
+01747:     }
+01748: 
+01749:     if not ai_result["clause_title"]:
+01750: 
+01751:         ai_result["clause_title"] = (
+01752:             extract_clause_title(clause)
+01753:         )
+01754: 
+01755:     ai_result["clause_title"] = normalize_final_clause_title(
+01756:         ai_result.get("clause_title", "")
+01757:     )
+01758: 
+01759:     ai_result["title"] = ai_result["clause_title"]
+01760: 
+
+====================================================================================================
+HIT 7
+LINE: 1771
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+01753:         )
+01754: 
+01755:     ai_result["clause_title"] = normalize_final_clause_title(
+01756:         ai_result.get("clause_title", "")
+01757:     )
+01758: 
+01759:     ai_result["title"] = ai_result["clause_title"]
+01760: 
+01761:     ai_result = apply_rule_based_risk(
+01762:         ai_result,
+01763:         clause,
+01764:         language,
+01765:     )
+01766: 
+01767:     reasoning = get_reasoning_for_text(
+01768:         clause,
+01769:         language,
+01770:         title=ai_result.get("clause_title", ""),
+01771:         clause_type=ai_result.get("clause_type"),
+01772:     )
+01773: 
+01774:     if reasoning:
+01775:         if reasoning.get("legal_insight"):
+01776:             ai_result["legal_insight"] = reasoning.get("legal_insight")
+01777: 
+01778:         if reasoning.get("recommendation"):
+01779:             ai_result["recommendation"] = reasoning.get("recommendation")
+01780: 
+01781:         if reasoning.get("negotiation"):
+01782:             ai_result["negotiation_advice"] = reasoning.get("negotiation")
+01783: 
+01784:         if reasoning.get("contextual_reasoning"):
+01785:             ai_result["has_contextual_reasoning"] = True
+01786: 
+01787:     if not ai_result.get(
+01788:         "explanation_simple"
+01789:     ):
+01790: 
+01791:         legal_insight = str(
+01792:             ai_result.get(
+01793:                 "legal_insight",
+01794:                 "",
+01795:             )
+
+====================================================================================================
+HIT 8
+LINE: 1940
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+01922:         "لأغراض مرجعية فقط",
+01923:     ]
+01924: 
+01925:     return any(
+01926:         pattern in text
+01927:         for pattern in safe_patterns
+01928:     )
+01929: 
+01930: 
+01931: 
+01932: def validate_clause_type(
+01933:     analysis: dict,
+01934:     clause_text: str,
+01935:     language: str = "en",
+01936: ) -> dict:
+01937: 
+01938:     text = clause_text.lower()
+01939: 
+01940:     clause_type = analysis.get("clause_type")
+01941: 
+01942:     explicit_patterns = {
+01943: 
+01944:         "non_compete": [
+01945:             "non-compete",
+01946:             "non compete",
+01947:             "shall not compete",
+01948:             "may not compete",
+01949:             "cannot compete",
+01950:             "restriction on competition",
+01951:             "restrictive covenant",
+01952: 
+01953:             "non-concurrence",
+01954:             "clause de non-concurrence",
+01955: 
+01956:             "عدم المنافسة",
+01957:         ],
+01958: 
+01959:         "exclusivity": [
+01960:             "exclusive",
+01961:             "exclusivity",
+01962:             "sole provider",
+01963:             "exclusive rights",
+01964: 
+
+====================================================================================================
+HIT 9
+LINE: 2450
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+02432:             "pénalité sévère",
+02433:             "dommages-intérêts forfaitaires",
+02434:             "تعويضات مقطوعة",
+02435:         ],
+02436:     }
+02437: 
+02438:     for label, patterns in high_patterns.items():
+02439:         if any(p in text for p in patterns):
+02440:             return label
+02441: 
+02442:     for label, patterns in medium_patterns.items():
+02443:         if any(p in text for p in patterns):
+02444:             return label
+02445: 
+02446:     for label, patterns in low_patterns.items():
+02447:         if any(p in text for p in patterns):
+02448:             return label
+02449: 
+02450:     clause_type = analysis.get("clause_type", "other")
+02451: 
+02452:     if clause_type == "penalty":
+02453:         return "severe_penalties"
+02454: 
+02455:     if clause_type == "non_compete":
+02456:         return "perpetual_non_compete" if "perpetual" in text else "asymmetrical_termination"
+02457: 
+02458:     if clause_type == "intellectual_property":
+02459: 
+02460:         broad_ip_patterns = [
+02461:             "assign any and all rights",
+02462:             "all intellectual property",
+02463:             "irrevocable",
+02464:             "perpetual",
+02465:             "cession de tous les droits",
+02466:             "irrévocable",
+02467:             "perpétuel",
+02468:             "التنازل عن جميع الحقوق",
+02469:             "غير قابل للإلغاء",
+02470:             "دائم",
+02471:         ]
+02472: 
+02473:         if any(
+02474:             pattern in text
+
+====================================================================================================
+HIT 10
+LINE: 2678
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+02660:     return round(
+02661:         min(
+02662:             100,
+02663:             (
+02664:                 total_risk_points
+02665:                 / total_materiality_points
+02666:             ) * 100,
+02667:         )
+02668:     )
+02669: 
+02670: 
+02671: def calibrate_risk_level(
+02672:     analysis: dict,
+02673:     clause_text: str,
+02674: ) -> dict:
+02675: 
+02676:     text = clause_text.lower()
+02677: 
+02678:     clause_type = analysis.get("clause_type")
+02679: 
+02680:     red_flag = analysis.get("red_flag")
+02681: 
+02682:     # -------------------
+02683:     # Low-materiality / informational clauses
+02684:     # -------------------
+02685: 
+02686:     low_materiality_patterns = [
+02687: 
+02688:         # Generic informational terms
+02689:         "effective as of",
+02690:         "notice address",
+02691:         "contact information",
+02692:         "headings",
+02693:         "table of contents",
+02694:         "reference only",
+02695:         "entire agreement",
+02696: 
+02697:         # Payment/admin
+02698:         "invoice number",
+02699:         "billing address",
+02700:         "payment date",
+02701: 
+02702:         # French
+
+====================================================================================================
+HIT 11
+LINE: 2848
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+02830:         "unlimited liability",
+02831:         "sole discretion",
+02832:         "unilateral",
+02833:         "must pay",
+02834:         "shall pay regardless",
+02835:         "impossible payment",
+02836: 
+02837:         "pénalité",
+02838:         "responsabilité illimitée",
+02839:         "seule discrétion",
+02840:         "unilatéral",
+02841: 
+02842:         "غرامة",
+02843:         "مسؤولية غير محدودة",
+02844:         "تقديره المطلق",
+02845:     ]
+02846: 
+02847:     if (
+02848:         analysis.get("clause_type") == "payment"
+02849:         and any(
+02850:             p in text
+02851:             for p in payment_calculation_patterns
+02852:         )
+02853:     ):
+02854: 
+02855:         severe_payment_risk = any(
+02856:             p in text
+02857:             for p in severe_payment_risk_patterns
+02858:         )
+02859: 
+02860:         if not severe_payment_risk:
+02861: 
+02862:             analysis["red_flag"] = False
+02863:             analysis["red_flag_reason"] = ""
+02864: 
+02865:             if analysis.get("risk_level") == "high":
+02866:                 analysis["risk_level"] = "medium"
+02867: 
+02868:             if analysis.get("negotiation_priority") == "high":
+02869:                 analysis["negotiation_priority"] = "medium"
+02870: 
+02871: 
+02872:     # -------------------
+
+====================================================================================================
+HIT 12
+LINE: 3101
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+03083:         "القانون الواجب التطبيق",
+03084:         "الاختصاص",
+03085:         "إشعار",
+03086:         "مدة",
+03087:     ]
+03088: 
+03089:     if any(
+03090:         pattern in text
+03091:         for pattern in high_materiality_patterns
+03092:     ):
+03093:         return "high"
+03094: 
+03095:     if any(
+03096:         pattern in text
+03097:         for pattern in medium_materiality_patterns
+03098:     ):
+03099:         return "medium"
+03100: 
+03101:     clause_type = analysis.get("clause_type", "other")
+03102: 
+03103:     if clause_type == "confidentiality":
+03104:         return "medium"
+03105: 
+03106:     if clause_type in {
+03107:         "payment",
+03108:         "termination",
+03109:         "intellectual_property",
+03110:         "liability",
+03111:         "penalty",
+03112:         "exclusivity",
+03113:         "non_compete",
+03114:     }:
+03115:         return "high"
+03116: 
+03117:     return "low"
+03118: 
+03119: 
+03120: def calculate_clause_importance(
+03121:     analysis: dict,
+03122:     clause_text: str,
+03123: ) -> int:
+03124: 
+03125:     text = clause_text.lower()
+
+====================================================================================================
+HIT 13
+LINE: 3532
+REASON: ANALYSIS/AI_RESULT ASSIGN
+====================================================================================================
+03514:         full_contract_text
+03515:     )
+03516: 
+03517:     contract_domain_reasoning = (
+03518:         get_reasoning_for_text(
+03519:             full_contract_text,
+03520:             language,
+03521:         )
+03522:     )
+03523: 
+03524:     results = []
+03525: 
+03526:     for clause_obj in clause_objects:
+03527: 
+03528:         clause = str(
+03529:             clause_obj.get("text", "")
+03530:         )
+03531: 
+03532:         analysis = analyze_clause(
+03533:             clause,
+03534:             language,
+03535:         )
+03536: 
+03537:         analysis = attach_clause_object_metadata(
+03538:             analysis,
+03539:             clause_obj,
+03540:         )
+03541: 
+03542:         analysis = validate_clause_type(
+03543:             analysis,
+03544:             clause,
+03545:             language,
+03546:         )
+03547: 
+03548:         analysis = validate_protective_clause(
+03549:             analysis,
+03550:             clause,
+03551:         )
+03552: 
+03553:         analysis = validate_standard_market_protection(
+03554:             analysis,
+03555:             clause,
+03556:         )
+
+====================================================================================================
+HIT 14
+LINE: 3542
+REASON: ANALYSIS/AI_RESULT ASSIGN
+====================================================================================================
+03524:     results = []
+03525: 
+03526:     for clause_obj in clause_objects:
+03527: 
+03528:         clause = str(
+03529:             clause_obj.get("text", "")
+03530:         )
+03531: 
+03532:         analysis = analyze_clause(
+03533:             clause,
+03534:             language,
+03535:         )
+03536: 
+03537:         analysis = attach_clause_object_metadata(
+03538:             analysis,
+03539:             clause_obj,
+03540:         )
+03541: 
+03542:         analysis = validate_clause_type(
+03543:             analysis,
+03544:             clause,
+03545:             language,
+03546:         )
+03547: 
+03548:         analysis = validate_protective_clause(
+03549:             analysis,
+03550:             clause,
+03551:         )
+03552: 
+03553:         analysis = validate_standard_market_protection(
+03554:             analysis,
+03555:             clause,
+03556:         )
+03557: 
+03558:         analysis = validate_explicit_permission_clause(
+03559:             analysis,
+03560:             clause,
+03561:         )
+03562: 
+03563:         analysis = validate_quoted_text(
+03564:             analysis,
+03565:             clause,
+03566:         )
+
+====================================================================================================
+HIT 15
+LINE: 3658
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+03640:             analysis["red_flag"] = False
+03641:             analysis["red_flag_reason"] = ""
+03642: 
+03643:         if detect_protective_beneficiary(clause):
+03644: 
+03645:             analysis["favours"] = "employee"
+03646: 
+03647:             if analysis.get("risk_level") == "medium":
+03648:                 analysis["risk_level"] = "low"
+03649: 
+03650:             analysis["negotiation_priority"] = "low"
+03651: 
+03652:         # Only downgrade generic clauses when the conceptual baseline
+03653:         # is explicitly low-risk. This avoids hiding real medium-risk
+03654:         # "other" clauses that do not match a safe baseline.
+03655:         if (
+03656:             analysis.get("risk_level") == "medium"
+03657:             and not analysis.get("red_flag")
+03658:             and analysis.get("clause_type") == "other"
+03659:             and analysis.get("risk_baseline") in LOW_RISK_CLAUSES
+03660:         ):
+03661:             analysis["risk_level"] = "low"
+03662:             analysis["negotiation_priority"] = "low"
+03663: 
+03664:         title = (
+03665:             analysis.get("clause_title")
+03666:             or extract_clause_title(clause)
+03667:         )
+03668: 
+03669:         title = normalize_final_clause_title(title)
+03670: 
+03671:         analysis["clause_title"] = title
+03672:         analysis["title"] = title
+03673: 
+03674:         clause_text = clause
+03675: 
+03676:         analysis = compute_analysis_metadata(
+03677:             analysis,
+03678:             clause_text,
+03679:             title,
+03680:         )
+03681: 
+03682:         if (
+
+====================================================================================================
+HIT 16
+LINE: 4362
+REASON: GET CLAUSE_TYPE
+====================================================================================================
+04344:             ):
+04345:                 analysis["explanation_simple"] = (
+04346:                     "This clause defines operational responsibilities, "
+04347:                     "maintenance obligations, or commercial duties."
+04348:                     if language == "en"
+04349:                     else
+04350:                     "Cette clause définit des responsabilités "
+04351:                     "opérationnelles, des obligations de maintenance "
+04352:                     "ou des engagements commerciaux."
+04353:                     if language == "fr"
+04354:                     else
+04355:                     "تحدد هذه المادة التزامات تشغيلية أو مسؤوليات "
+04356:                     "صيانة أو التزامات تجارية."
+04357:                 )
+04358: 
+04359:             if (
+04360:                 not analysis.get("recommendation")
+04361:                 and analysis.get("risk_level") in {"medium", "high"}
+04362:                 and analysis.get("clause_type") not in {"other"}
+04363:             ):
+04364:                 analysis["recommendation"] = ""
+04365:         high_risk_terms = [
+04366:             "unlimited liability",
+04367:             "acceleration",
+04368:             "immediate termination",
+04369:             "exclusive jurisdiction",
+04370:             "data breach",
+04371:             "security incident",
+04372:             "cross default",
+04373: 
+04374:             "responsabilité illimitée",
+04375:             "résiliation immédiate",
+04376:             "violation de données",
+04377: 
+04378:             "مسؤولية غير محدودة",
+04379:             "إنهاء فوري",
+04380:             "اختراق البيانات",
+04381:         ]
+04382: 
+04383:         if any(
+04384:             term in clause_type_text
+04385:             for term in high_risk_terms
+04386:         ):

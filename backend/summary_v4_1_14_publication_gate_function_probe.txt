@@ -1,0 +1,146 @@
+====================================================================================================
+PUBLICATION GATE FUNCTION PROBE
+====================================================================================================
+MODULE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\publication_gate.py
+
+====================================================================================================
+NAME: build_source_evidence_model
+FOUND: True
+SIGNATURE: (source_text: 'str') -> 'dict'
+def build_source_evidence_model(source_text: str) -> dict:
+    """Build one canonical EN/FR/AR source profile from exact clause text."""
+    source = str(source_text or "")
+    spans: list[dict] = []
+    mechanisms: list[dict] = []
+
+    mandatory = None
+    mandatory_body = ""
+
+    for pattern in _MANDATORY_PATTERNS:
+        match = pattern.search(source)
+
+        if match:
+            mandatory = match
+            mandatory_body = _first_group(match)
+            break
+
+    if mandatory and mandatory_body:
+        arguments = [
+            part.strip()
+            for part in _CONJUNCTION_SPLIT.split(mandatory_body)
+            if part.strip()
+        ]
+
+        if len(arguments) >= 2:
+            spans.append({
+                "label": "MANDATORY_CONJUNCTION",
+                "start": mandatory.start(),
+                "end": mandatory.end(),
+                "text": mandatory.group(0),
+            })
+            mechanisms.append({
+                "kind": "MANDATORY_CONJUNCTION",
+                "polarity": "REQUIRED",
+                "arguments": [
+                    {
+                        "tokens": sorted(_tokens(argument)),
+                        "signature": _argument_signature(argument),
+                    }
+                    for argument in arguments
+                ],
+            })
+
+    automatic = None
+
+    for pattern in _AUTOMATIC_PATTERNS:
+        automatic = _span(
+            source,
+            pattern,
+            "AUTOMATIC_EVENT_TRANSITION",
+        )
+
+        if automatic:
+            break
+
+    if automatic:
+        spans.append(automatic)
+        mechanisms.append({
+            "kind": "PROCEDURAL_STATE",
+            "state": "AUTOMATIC_EVENT",
+            "notice_prerequisite": False,
+        })
+
+    prior_consent = None
+
+    for pattern in _PRIOR_CONSENT_PATTERNS:
+        prior_consent = _span(
+            source,
+            pattern,
+            "PRIOR_CONSENT_PREREQUISITE",
+        )
+
+        if prior_consent:
+            break
+
+    if prior_consent:
+        spans.append(prior_consent)
+        consent_holder = _extract_consent_holder(source)
+
+        prerequisite: dict[str, Any] = {
+            "kind": "PREREQUISITE",
+            "state": "PRIOR_CONSENT",
+        }
+
+        if consent_holder:
+            prerequisite["consent_holder"] = consent_holder["normalized"]
+            prerequisite["consent_holder_text"] = consent_holder["raw"]
+            spans.append({
+                "label": "CONSENT_HOLDER",
+                "start": consent_holder["start"],
+                "end": consent_holder["end"],
+                "text": consent_holder["raw"],
+            })
+
+        mechanisms.append(prerequisite)
+
+    source_type = detect_clause_type_from_taxonomy(source)
+
+    mechanisms.append({
+        "kind": "SOURCE_PROFILE",
+        "primary_type": source_type,
+        "anchors": sorted(_tokens(source)),
+    })
+
+    canonical = json.dumps(
+        mechanisms,
+        sort_keys=True,
+        ensure_ascii=False,
+    )
+
+    return {
+        "evidence_spans": spans,
+        "mechanisms": mechanisms,
+        "semantic_profile_hash": _hash(canonical),
+    }
+
+
+====================================================================================================
+NAME: _semantic_coverage
+FOUND: True
+SIGNATURE: (source_text: 'str', generated_text: 'str') -> 'float | None'
+def _semantic_coverage(source_text: str, generated_text: str) -> float | None:
+    source_tokens = _tokens(source_text)
+    generated_tokens = _tokens(generated_text)
+    if not source_tokens or not generated_tokens:
+        return None
+    denominator = max(1, min(len(source_tokens), 12))
+    return round(len(source_tokens & generated_tokens) / denominator, 4)
+
+
+====================================================================================================
+NAME: _validate_generated_field
+FOUND: False
+
+====================================================================================================
+NAME: validate_publication_fields
+FOUND: False

@@ -1,0 +1,372 @@
+=== CONTAMINATION REASON ===
+app/services/contract_agent/publication_gate.py-720-                    reasons.append("PROCEDURAL_STATE_MISMATCH_AUTOMATIC_TO_NOTICE")
+app/services/contract_agent/publication_gate.py-721-
+app/services/contract_agent/publication_gate.py-722-        elif kind == "PREREQUISITE":
+app/services/contract_agent/publication_gate.py-723-            if mechanism.get("state") == "PRIOR_CONSENT":
+app/services/contract_agent/publication_gate.py-724-                has_consent = bool(_CONSENT_WORD_PATTERN.search(low))
+app/services/contract_agent/publication_gate.py-725-                has_notice = bool(_NOTICE_WORD_PATTERN.search(low))
+app/services/contract_agent/publication_gate.py-726-
+app/services/contract_agent/publication_gate.py-727-                if field in _FIDELITY_FIELDS and has_notice and not has_consent:
+app/services/contract_agent/publication_gate.py-728-                    reasons.append("CONSENT_PREREQUISITE_WEAKENED_TO_NOTICE")
+app/services/contract_agent/publication_gate.py-729-
+app/services/contract_agent/publication_gate.py-730-                # Compare the holder only when both source and generated text
+app/services/contract_agent/publication_gate.py-731-                # expressly attribute the same prior-consent mechanism.
+app/services/contract_agent/publication_gate.py-732-                source_holder = _normalize_actor_label(
+app/services/contract_agent/publication_gate.py-733-                    str(mechanism.get("consent_holder") or "")
+app/services/contract_agent/publication_gate.py-734-                )
+app/services/contract_agent/publication_gate.py-735-                generated_holder_data = _extract_consent_holder(generated)
+app/services/contract_agent/publication_gate.py-736-                generated_holder = _normalize_actor_label(
+app/services/contract_agent/publication_gate.py-737-                    generated_holder_data.get("normalized", "")
+app/services/contract_agent/publication_gate.py-738-                    if generated_holder_data
+app/services/contract_agent/publication_gate.py-739-                    else ""
+app/services/contract_agent/publication_gate.py-740-                )
+app/services/contract_agent/publication_gate.py-741-
+app/services/contract_agent/publication_gate.py-742-                if (
+app/services/contract_agent/publication_gate.py-743-                    has_consent
+app/services/contract_agent/publication_gate.py-744-                    and source_holder
+app/services/contract_agent/publication_gate.py-745-                    and generated_holder
+app/services/contract_agent/publication_gate.py-746-                    and source_holder != generated_holder
+app/services/contract_agent/publication_gate.py-747-                ):
+app/services/contract_agent/publication_gate.py-748-                    reasons.append("CONSENT_HOLDER_ACTOR_MISMATCH")
+app/services/contract_agent/publication_gate.py-749-
+app/services/contract_agent/publication_gate.py-750-    if field in _RELEVANCE_FIELDS:
+app/services/contract_agent/publication_gate.py-751-        source_type = detect_clause_type_from_taxonomy(source_text)
+app/services/contract_agent/publication_gate.py-752-        generated_type = detect_clause_type_from_taxonomy(generated)
+app/services/contract_agent/publication_gate.py-753-        weak_types = {"", "other", "general", None}
+app/services/contract_agent/publication_gate.py-754-        if (
+app/services/contract_agent/publication_gate.py-755-            source_type not in weak_types
+app/services/contract_agent/publication_gate.py-756-            and generated_type not in weak_types
+app/services/contract_agent/publication_gate.py-757-            and source_type != generated_type
+app/services/contract_agent/publication_gate.py-758-            and coverage == 0.0
+app/services/contract_agent/publication_gate.py-759-        ):
+app/services/contract_agent/publication_gate.py:760:            reasons.append("FINAL_TEXT_SOURCE_CONTAMINATION")
+app/services/contract_agent/publication_gate.py-761-
+app/services/contract_agent/publication_gate.py-762-    return list(dict.fromkeys(reasons)), coverage
+app/services/contract_agent/publication_gate.py-763-
+app/services/contract_agent/publication_gate.py-764-
+app/services/contract_agent/publication_gate.py-765-def _blocked_text(language: str) -> str:
+app/services/contract_agent/publication_gate.py-766-    return {
+app/services/contract_agent/publication_gate.py-767-        "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
+app/services/contract_agent/publication_gate.py-768-        "ar": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.",
+app/services/contract_agent/publication_gate.py-769-    }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
+app/services/contract_agent/publication_gate.py-770-
+app/services/contract_agent/publication_gate.py-771-
+app/services/contract_agent/publication_gate.py-772-def _issue(field: str, reason: str) -> dict:
+app/services/contract_agent/publication_gate.py-773-    high_markers = ("POLARITY", "PROCEDURAL", "CONSENT", "ACTOR", "CONTAMINATION")
+app/services/contract_agent/publication_gate.py-774-    return {
+app/services/contract_agent/publication_gate.py-775-        "kind": reason.lower(),
+app/services/contract_agent/publication_gate.py-776-        "field": field,
+app/services/contract_agent/publication_gate.py-777-        "severity": "high" if any(marker in reason for marker in high_markers) else "medium",
+app/services/contract_agent/publication_gate.py-778-        "note": reason,
+app/services/contract_agent/publication_gate.py-779-    }
+app/services/contract_agent/publication_gate.py-780-
+app/services/contract_agent/publication_gate.py-781-
+app/services/contract_agent/publication_gate.py-782-def enforce_final_publication_gate(
+app/services/contract_agent/publication_gate.py-783-    results: list[dict],
+app/services/contract_agent/publication_gate.py-784-    language: str = "en",
+app/services/contract_agent/publication_gate.py-785-    *,
+app/services/contract_agent/publication_gate.py-786-    final_pass: bool = False,
+app/services/contract_agent/publication_gate.py-787-) -> list[dict]:
+app/services/contract_agent/publication_gate.py-788-    """Validate and fail closed. A final pass emits exact-text receipts."""
+app/services/contract_agent/publication_gate.py-789-    for item in results:
+app/services/contract_agent/publication_gate.py-790-        if not isinstance(item, dict):
+app/services/contract_agent/publication_gate.py-791-            continue
+app/services/contract_agent/publication_gate.py-792-
+app/services/contract_agent/publication_gate.py-793-        source = str(
+app/services/contract_agent/publication_gate.py-794-            item.get("_source_text_exact")
+app/services/contract_agent/publication_gate.py-795-            or item.get("original_text")
+app/services/contract_agent/publication_gate.py-796-            or item.get("clause_text")
+app/services/contract_agent/publication_gate.py-797-            or item.get("quoted_text")
+app/services/contract_agent/publication_gate.py-798-            or ""
+app/services/contract_agent/publication_gate.py-799-        )
+app/services/contract_agent/publication_gate.py-800-        profile = build_source_evidence_model(source)
+app/services/contract_agent/publication_gate.py-801-        history = item.setdefault("_publication_validation_history", {})
+app/services/contract_agent/publication_gate.py-802-        emitted: list[dict] = []
+app/services/contract_agent/publication_gate.py-803-        current_failures: list[str] = []
+app/services/contract_agent/publication_gate.py-804-
+app/services/contract_agent/publication_gate.py-805-        for field in PROTECTED_FIELDS:
+app/services/contract_agent/publication_gate.py-806-            text = str(item.get(field) or "")
+app/services/contract_agent/publication_gate.py-807-            if not text.strip():
+app/services/contract_agent/publication_gate.py-808-                continue
+app/services/contract_agent/publication_gate.py-809-
+app/services/contract_agent/publication_gate.py-810-            reasons, coverage = validate_source_grounding(source, text, field, profile)
+app/services/contract_agent/publication_gate.py-811-            if reasons:
+app/services/contract_agent/publication_gate.py-812-                history[field] = {
+app/services/contract_agent/publication_gate.py-813-                    "input_text": text,
+app/services/contract_agent/publication_gate.py-814-                    "input_text_hash": _hash(text),
+app/services/contract_agent/publication_gate.py-815-                    "validation_reasons": reasons,
+app/services/contract_agent/publication_gate.py-816-                    "semantic_coverage": coverage,
+app/services/contract_agent/publication_gate.py-817-                }
+app/services/contract_agent/publication_gate.py-818-                item[field] = _blocked_text(language)
+app/services/contract_agent/publication_gate.py-819-                current_failures.extend(reasons)
+app/services/contract_agent/publication_gate.py-820-                emitted.extend(_issue(field, reason) for reason in reasons)
+app/services/contract_agent/publication_gate.py-821-
+app/services/contract_agent/publication_gate.py-822-        positive_field = str(item.get("legal_insight") or "")
+app/services/contract_agent/publication_gate.py-823-        positive_low = positive_field.lower()
+app/services/contract_agent/publication_gate.py-824-        prior_failures = [
+app/services/contract_agent/publication_gate.py-825-            reason
+app/services/contract_agent/publication_gate.py-826-            for entry in history.values()
+app/services/contract_agent/publication_gate.py-827-            for reason in entry.get("validation_reasons", [])
+app/services/contract_agent/publication_gate.py-828-        ]
+app/services/contract_agent/publication_gate.py-829-        if any(marker in positive_low for marker in _POSITIVE_SAFE) and (current_failures or prior_failures):
+app/services/contract_agent/publication_gate.py-830-            reason = "UNKNOWN_IS_NOT_SAFE_POSITIVE_CONCLUSION"
+app/services/contract_agent/publication_gate.py-831-            history["legal_insight"] = {
+app/services/contract_agent/publication_gate.py-832-                "input_text": positive_field,
+app/services/contract_agent/publication_gate.py-833-                "input_text_hash": _hash(positive_field),
+app/services/contract_agent/publication_gate.py-834-                "validation_reasons": [reason],
+app/services/contract_agent/publication_gate.py-835-                "semantic_coverage": _semantic_coverage(source, positive_field),
+app/services/contract_agent/publication_gate.py-836-            }
+app/services/contract_agent/publication_gate.py-837-            item["legal_insight"] = _blocked_text(language)
+app/services/contract_agent/publication_gate.py-838-            emitted.append(_issue("legal_insight", reason))
+app/services/contract_agent/publication_gate.py-839-
+app/services/contract_agent/publication_gate.py-840-        if emitted:
+app/services/contract_agent/publication_gate.py-841-            existing = item.setdefault("fidelity_issues", [])
+app/services/contract_agent/publication_gate.py-842-            existing.extend(emitted)
+app/services/contract_agent/publication_gate.py-843-            item["negotiation_fidelity_warning"] = True
+app/services/contract_agent/publication_gate.py-844-            item["negotiation_fidelity_note"] = emitted[0]["note"]
+app/services/contract_agent/publication_gate.py-845-
+app/services/contract_agent/publication_gate.py-846-        item["source_evidence_model"] = profile
+app/services/contract_agent/publication_gate.py-847-
+app/services/contract_agent/publication_gate.py-848-        if final_pass:
+app/services/contract_agent/publication_gate.py-849-            receipts: dict[str, dict] = {}
+app/services/contract_agent/publication_gate.py-850-            for field in PROTECTED_FIELDS:
+app/services/contract_agent/publication_gate.py-851-                final_text = str(item.get(field) or "")
+app/services/contract_agent/publication_gate.py-852-                if not final_text.strip():
+app/services/contract_agent/publication_gate.py-853-                    continue
+app/services/contract_agent/publication_gate.py-854-
+app/services/contract_agent/publication_gate.py-855-                final_reasons, final_coverage = validate_source_grounding(
+app/services/contract_agent/publication_gate.py-856-                    source, final_text, field, profile
+app/services/contract_agent/publication_gate.py-857-                )
+app/services/contract_agent/publication_gate.py-858-                if final_reasons:
+app/services/contract_agent/publication_gate.py-859-                    raise AssertionError(
+app/services/contract_agent/publication_gate.py-860-                        f"final publication field failed validation: {field}: {final_reasons}"
+app/services/contract_agent/publication_gate.py-861-                    )
+app/services/contract_agent/publication_gate.py-862-
+app/services/contract_agent/publication_gate.py-863-                prior = history.get(field, {})
+app/services/contract_agent/publication_gate.py-864-                prior_reasons = list(prior.get("validation_reasons", []))
+app/services/contract_agent/publication_gate.py-865-                receipts[field] = {
+app/services/contract_agent/publication_gate.py-866-                    "field": field,
+app/services/contract_agent/publication_gate.py-867-                    "field_policy": _FIELD_POLICIES.get(field, "relevance"),
+app/services/contract_agent/publication_gate.py-868-                    "publication_gate_called": True,
+app/services/contract_agent/publication_gate.py-869-                    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
+app/services/contract_agent/publication_gate.py-870-                    "validation_reasons": prior_reasons,
+app/services/contract_agent/publication_gate.py-871-                    "semantic_coverage": final_coverage,
+app/services/contract_agent/publication_gate.py-872-                    "semantic_profile_hash": profile["semantic_profile_hash"],
+app/services/contract_agent/publication_gate.py-873-                    "validated_text_hash": _hash(final_text),
+app/services/contract_agent/publication_gate.py-874-                    "final_text_hash": _hash(final_text),
+app/services/contract_agent/publication_gate.py-875-                    "source_text_hash": _hash(source),
+app/services/contract_agent/publication_gate.py-876-                    "input_text_hash": prior.get("input_text_hash", _hash(final_text)),
+app/services/contract_agent/publication_gate.py-877-                    "text_before_validation": prior.get("input_text", final_text),
+app/services/contract_agent/publication_gate.py-878-                    "successful": True,
+app/services/contract_agent/publication_gate.py-879-                    "post_gate_mutators": [],
+app/services/contract_agent/publication_gate.py-880-                }
+Binary file app/services/contract_agent/__pycache__/publication_gate.cpython-312.pyc matches
+
+=== PUBLICATION GATE ===
+742-                if (
+743-                    has_consent
+744-                    and source_holder
+745-                    and generated_holder
+746-                    and source_holder != generated_holder
+747-                ):
+748-                    reasons.append("CONSENT_HOLDER_ACTOR_MISMATCH")
+749-
+750-    if field in _RELEVANCE_FIELDS:
+751-        source_type = detect_clause_type_from_taxonomy(source_text)
+752-        generated_type = detect_clause_type_from_taxonomy(generated)
+753-        weak_types = {"", "other", "general", None}
+754-        if (
+755-            source_type not in weak_types
+756-            and generated_type not in weak_types
+757-            and source_type != generated_type
+758-            and coverage == 0.0
+759-        ):
+760-            reasons.append("FINAL_TEXT_SOURCE_CONTAMINATION")
+761-
+762-    return list(dict.fromkeys(reasons)), coverage
+763-
+764-
+765-def _blocked_text(language: str) -> str:
+766-    return {
+767-        "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
+768-        "ar": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.",
+769-    }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
+770-
+771-
+772-def _issue(field: str, reason: str) -> dict:
+773-    high_markers = ("POLARITY", "PROCEDURAL", "CONSENT", "ACTOR", "CONTAMINATION")
+774-    return {
+775-        "kind": reason.lower(),
+776-        "field": field,
+777-        "severity": "high" if any(marker in reason for marker in high_markers) else "medium",
+778-        "note": reason,
+779-    }
+780-
+781-
+782:def enforce_final_publication_gate(
+783-    results: list[dict],
+784-    language: str = "en",
+785-    *,
+786-    final_pass: bool = False,
+787-) -> list[dict]:
+788-    """Validate and fail closed. A final pass emits exact-text receipts."""
+789-    for item in results:
+790-        if not isinstance(item, dict):
+791-            continue
+792-
+793-        source = str(
+794-            item.get("_source_text_exact")
+795-            or item.get("original_text")
+796-            or item.get("clause_text")
+797-            or item.get("quoted_text")
+798-            or ""
+799-        )
+800-        profile = build_source_evidence_model(source)
+801-        history = item.setdefault("_publication_validation_history", {})
+802-        emitted: list[dict] = []
+803-        current_failures: list[str] = []
+804-
+805-        for field in PROTECTED_FIELDS:
+806-            text = str(item.get(field) or "")
+807-            if not text.strip():
+808-                continue
+809-
+810-            reasons, coverage = validate_source_grounding(source, text, field, profile)
+811-            if reasons:
+812-                history[field] = {
+813-                    "input_text": text,
+814-                    "input_text_hash": _hash(text),
+815-                    "validation_reasons": reasons,
+816-                    "semantic_coverage": coverage,
+817-                }
+818-                item[field] = _blocked_text(language)
+819-                current_failures.extend(reasons)
+820-                emitted.extend(_issue(field, reason) for reason in reasons)
+821-
+822-        positive_field = str(item.get("legal_insight") or "")
+823-        positive_low = positive_field.lower()
+824-        prior_failures = [
+825-            reason
+826-            for entry in history.values()
+827-            for reason in entry.get("validation_reasons", [])
+828-        ]
+829-        if any(marker in positive_low for marker in _POSITIVE_SAFE) and (current_failures or prior_failures):
+830-            reason = "UNKNOWN_IS_NOT_SAFE_POSITIVE_CONCLUSION"
+831-            history["legal_insight"] = {
+832-                "input_text": positive_field,
+833-                "input_text_hash": _hash(positive_field),
+834-                "validation_reasons": [reason],
+835-                "semantic_coverage": _semantic_coverage(source, positive_field),
+836-            }
+837-            item["legal_insight"] = _blocked_text(language)
+838-            emitted.append(_issue("legal_insight", reason))
+839-
+840-        if emitted:
+841-            existing = item.setdefault("fidelity_issues", [])
+842-            existing.extend(emitted)
+843-            item["negotiation_fidelity_warning"] = True
+844-            item["negotiation_fidelity_note"] = emitted[0]["note"]
+845-
+846-        item["source_evidence_model"] = profile
+847-
+848-        if final_pass:
+849-            receipts: dict[str, dict] = {}
+850-            for field in PROTECTED_FIELDS:
+851-                final_text = str(item.get(field) or "")
+852-                if not final_text.strip():
+853-                    continue
+854-
+855-                final_reasons, final_coverage = validate_source_grounding(
+856-                    source, final_text, field, profile
+857-                )
+858-                if final_reasons:
+859-                    raise AssertionError(
+860-                        f"final publication field failed validation: {field}: {final_reasons}"
+861-                    )
+862-
+863-                prior = history.get(field, {})
+864-                prior_reasons = list(prior.get("validation_reasons", []))
+865-                receipts[field] = {
+866-                    "field": field,
+867-                    "field_policy": _FIELD_POLICIES.get(field, "relevance"),
+868-                    "publication_gate_called": True,
+869-                    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
+870-                    "validation_reasons": prior_reasons,
+871-                    "semantic_coverage": final_coverage,
+872-                    "semantic_profile_hash": profile["semantic_profile_hash"],
+873-                    "validated_text_hash": _hash(final_text),
+874-                    "final_text_hash": _hash(final_text),
+875-                    "source_text_hash": _hash(source),
+876-                    "input_text_hash": prior.get("input_text_hash", _hash(final_text)),
+877-                    "text_before_validation": prior.get("input_text", final_text),
+878-                    "successful": True,
+879-                    "post_gate_mutators": [],
+880-                }
+881-            item["validation_receipts"] = receipts
+882-
+883-    return results
+884-
+885-
+886-def assert_final_serialization(results: list[dict]) -> None:
+887-    """Assert exact final-text and semantic-profile receipt integrity."""
+888-    for item in results:
+889-        if not isinstance(item, dict):
+890-            continue
+891-        source = str(
+892-            item.get("_source_text_exact")
+893-            or item.get("original_text")
+894-            or item.get("clause_text")
+895-            or item.get("quoted_text")
+896-            or ""
+897-        )
+898-        profile_hash = build_source_evidence_model(source)["semantic_profile_hash"]
+899-        receipts = item.get("validation_receipts") or {}
+900-
+901-        for field in PROTECTED_FIELDS:
+902-            text = str(item.get(field) or "")
+903-            if not text.strip():
+904-                continue
+905-            receipt = receipts.get(field)
+906-            if not receipt or receipt.get("successful") is not True:
+907-                raise AssertionError(f"missing successful validation receipt for {field}")
+908-            final_hash = _hash(text)
+909-            if receipt.get("validated_text_hash") != final_hash:
+910-                raise AssertionError(f"validated text hash mismatch for {field}")
+911-            if receipt.get("final_text_hash") != final_hash:
+912-                raise AssertionError(f"final text hash mismatch for {field}")
+913-            if receipt.get("semantic_profile_hash") != profile_hash:
+914-                raise AssertionError(f"semantic profile hash mismatch for {field}")
+915-            if receipt.get("post_gate_mutators"):
+916-                raise AssertionError(f"post-gate mutation recorded for {field}")
+
+=== FIELD POLICY REFERENCES ===
+17:    "legal_insight",
+18:    "market_comparison",
+20:    "recommendation",
+21:    "negotiation_advice",
+34:    "legal_insight": "relevance",
+35:    "market_comparison": "relevance",
+37:    "recommendation": "relevance",
+38:    "negotiation_advice": "relevance",
+49:    for field, policy in _FIELD_POLICIES.items()
+55:    for field, policy in _FIELD_POLICIES.items()
+61:    for field, policy in _FIELD_POLICIES.items()
+672:            # A collateral recommendation about a different protection
+767:        "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
+769:    }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
+801:        history = item.setdefault("_publication_validation_history", {})
+815:                    "validation_reasons": reasons,
+822:        positive_field = str(item.get("legal_insight") or "")
+827:            for reason in entry.get("validation_reasons", [])
+831:            history["legal_insight"] = {
+834:                "validation_reasons": [reason],
+837:            item["legal_insight"] = _blocked_text(language)
+838:            emitted.append(_issue("legal_insight", reason))
+860:                        f"final publication field failed validation: {field}: {final_reasons}"
+864:                prior_reasons = list(prior.get("validation_reasons", []))
+867:                    "field_policy": _FIELD_POLICIES.get(field, "relevance"),
+870:                    "validation_reasons": prior_reasons,
+877:                    "text_before_validation": prior.get("input_text", final_text),
+881:            item["validation_receipts"] = receipts
+899:        receipts = item.get("validation_receipts") or {}
+907:                raise AssertionError(f"missing successful validation receipt for {field}")

@@ -1,0 +1,460 @@
+BLOCKED: 37
+OUTPUT: regression_results_multilang\ar\_blocked_diagnostic.json
+
+=== COMPACT DIAGNOSTIC ===
+
+====================================================================================================
+FILE: 01_NDA_Confidentiality_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حقوق الملكية في المعلومات السرية
+FINAL TYPE: confidentiality
+FIELD: legal_insight
+CANDIDATES:
+  intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['ترخيص']
+  ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ملكية']
+  license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ترخيص']
+  deposit score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ضمان']
+GENERATED:
+تنشئ هذه المادة التزام عدم الإفصاح الأساسي: من يلتزم به، وما معيار العناية المطبق، وما إذا كان الإفصاح الفرعي المصرح به (مثلاً للممثلين) مسموحاً.
+
+====================================================================================================
+FILE: 01_NDA_Confidentiality_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: القانون الواجب التطبيق والاختصاص القضائي
+FINAL TYPE: dispute_resolution
+FIELD: negotiation_advice
+CANDIDATES:
+  dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['نزاع']
+GENERATED:
+يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.
+
+====================================================================================================
+FILE: 02_Master_Services_Agreement_AR.docx
+CLAUSE: 2.2
+TITLE: زيادة الرسوم
+FINAL TYPE: renewal
+FIELD: recommendation
+CANDIDATES:
+  pricing_adjustment score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['زيادة الرسوم']
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+  fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+  corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+GENERATED:
+ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.
+
+====================================================================================================
+FILE: 02_Master_Services_Agreement_AR.docx
+CLAUSE: 2.2
+TITLE: زيادة الرسوم
+FINAL TYPE: renewal
+FIELD: negotiation_advice
+CANDIDATES:
+  pricing_adjustment score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['زيادة الرسوم']
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+  fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+  corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+GENERATED:
+يمكن التفاوض على توضيح آليات التجديد، ومهل الإشعار، والتجديد التلقائي، وتغييرات الأسعار، والإنهاء قبل التجديد، وأي تغييرات في الخدمة أو الدفع.
+
+====================================================================================================
+FILE: 03_SaaS_Cloud_Agreement_AR.docx
+CLAUSE: 7.1
+TITLE: إنهاء الاتفاقية
+FINAL TYPE: termination
+FIELD: recommendation
+CANDIDATES:
+  termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+  refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+  payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+  term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+GENERATED:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حظر التعاقد مع مقاول من الباطن
+FINAL TYPE: subcontracting
+FIELD: recommendation
+CANDIDATES:
+  subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مقاول من الباطن']
+  corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+GENERATED:
+ينبغي التأكد من أن النطاق والمسؤوليات ومعايير القبول والجداول الزمنية وإدارة التغييرات والتزامات الدعم محددة بما يكفي.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حظر التعاقد مع مقاول من الباطن
+FINAL TYPE: subcontracting
+FIELD: negotiation_advice
+CANDIDATES:
+  subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مقاول من الباطن']
+  corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+GENERATED:
+يمكن التفاوض على معايير قبول موضوعية، ومراحل التسليم، وإجراءات الاختبار، وحقوق الرفض، ومهل المعالجة، والقبول الضمني، والتزامات إعادة التسليم، وربط الدفع بالقبول.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 5.2
+TITLE: تعويض الطرف الطرف المتعاقد ب ب
+FINAL TYPE: indemnity
+FIELD: recommendation
+CANDIDATES:
+  indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['يعوض', 'مطالبات']
+  cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+  data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+  default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+GENERATED:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 5.2
+TITLE: تعويض الطرف الطرف المتعاقد ب ب
+FINAL TYPE: indemnity
+FIELD: negotiation_advice
+CANDIDATES:
+  indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['يعوض', 'مطالبات']
+  cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+  data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+  default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+GENERATED:
+يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.
+
+====================================================================================================
+FILE: 05_Data_Processing_Agreement_AR.docx
+CLAUSE: 8.1
+TITLE: التدقيق والامتثال
+FINAL TYPE: compliance
+FIELD: market_comparison
+CANDIDATES:
+  compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الامتثال']
+GENERATED:
+تعتبر هذه الفقرة معيارية في عقود معالجة البيانات.
+
+====================================================================================================
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: الامتناع عن المنافسة
+FINAL TYPE: services
+FIELD: negotiation_advice
+CANDIDATES:
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['خدمات']
+  term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+GENERATED:
+يجب مناقشة تقليل فترة الامتناع عن المنافسة.
+
+====================================================================================================
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 4.2
+TITLE: الامتناع عن استقطاب الطرف الطرف المتعاقد ب بين
+FINAL TYPE: employment
+FIELD: negotiation_advice
+CANDIDATES:
+  employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['موظف']
+  term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+GENERATED:
+يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.
+
+====================================================================================================
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: تنازل عن الحقوق
+FINAL TYPE: intellectual_property
+FIELD: recommendation
+CANDIDATES:
+  intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['اختراع']
+  term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+GENERATED:
+ينبغي التأكد من ملكية المواد السابقة، والمخرجات المنشأة، ونطاق الترخيص، وقيود الاستخدام، والحقوق المعنوية، والحقوق بعد الإنهاء.
+
+====================================================================================================
+FILE: 07_Software_Licensing_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: مدة الاتفاقية وإنهائها
+FINAL TYPE: termination
+FIELD: recommendation
+CANDIDATES:
+  termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء', 'إشعار']
+  notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+  royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الإتاوات']
+GENERATED:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+====================================================================================================
+FILE: 09_Consulting_Services_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: ملكية نواتج العمل
+FINAL TYPE: payment
+FIELD: market_comparison
+CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+GENERATED:
+هذا النوع من النصوص شائع في عقود الاستشارات.
+
+====================================================================================================
+FILE: 09_Consulting_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: سرية المعلومات
+FINAL TYPE: corporate_governance
+FIELD: market_comparison
+CANDIDATES:
+  corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+GENERATED:
+تعتبر هذه الشروط قياسية في عقود الاستشارات.
+
+====================================================================================================
+FILE: 10_Outsourcing_Managed_Services_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: شروط العمل للموظفين المنقولين
+FINAL TYPE: employment
+FIELD: recommendation
+CANDIDATES:
+  employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['مزايا']
+  benefits score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مزايا']
+GENERATED:
+ينبغي مراجعة التعويض والمزايا والمهام وآليات إنهاء العمل والإشعار والالتزامات بعد العمل والامتثال لإطار العمل المحدد.
+
+====================================================================================================
+FILE: 10_Outsourcing_Managed_Services_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: ضمانات البيانات
+FINAL TYPE: security
+FIELD: legal_insight
+CANDIDATES:
+  cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+  data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+  security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['أمن']
+GENERATED:
+يتناول هذا البند التعامل مع الحوادث أو الاختراقات، لذلك يجب توضيح المهل والتعاون وحفظ الأدلة وواجبات الإخطار ومعالجة المسؤولية.
+
+====================================================================================================
+FILE: 11_Commercial_Lease_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: إنهاء العقد بسبب عدم السداد
+FINAL TYPE: termination
+FIELD: recommendation
+CANDIDATES:
+  termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء', 'إشعار']
+  notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+  refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+  payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+GENERATED:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 6.2
+TITLE: حالة تعثر
+FINAL TYPE: loan
+FIELD: recommendation
+CANDIDATES:
+  loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+GENERATED:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: سداد القرض المبكر
+FINAL TYPE: penalty
+FIELD: negotiation_advice
+CANDIDATES:
+  penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['غرامة']
+  repayment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['سداد']
+  loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+GENERATED:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ضمان الالتزامات
+FINAL TYPE: loan
+FIELD: recommendation
+CANDIDATES:
+  loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+GENERATED:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ضمان الالتزامات
+FINAL TYPE: loan
+FIELD: negotiation_advice
+CANDIDATES:
+  loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+GENERATED:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: التعهدات المالية
+FINAL TYPE: loan
+FIELD: recommendation
+CANDIDATES:
+  loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+  insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تغطية']
+GENERATED:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: التعهدات المالية
+FINAL TYPE: loan
+FIELD: negotiation_advice
+CANDIDATES:
+  loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+  insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تغطية']
+GENERATED:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: حالة التعثر
+FINAL TYPE: covenant
+FIELD: negotiation_advice
+CANDIDATES:
+  covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعهد']
+GENERATED:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزامات الطرف المتعاقد ب
+FINAL TYPE: guarantee
+FIELD: recommendation
+CANDIDATES:
+  guarantee score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['كفالة']
+GENERATED:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزامات الطرف المتعاقد ب
+FINAL TYPE: guarantee
+FIELD: negotiation_advice
+CANDIDATES:
+  guarantee score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['كفالة']
+GENERATED:
+يمكن التفاوض على آجال الدفع، وفترات السماح، وفوائد التأخير، وإجراءات الاعتراض على الفواتير، والمعالجة الضريبية، والعملة، وحقوق المقاصة، وحقوق تعليق الالتزامات عند عدم السداد.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 7.1
+TITLE: القانون الواجب التطبيق وحل النزاعات
+FINAL TYPE: dispute_resolution
+FIELD: negotiation_advice
+CANDIDATES:
+  dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['نزاع']
+  governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['المحاكم']
+  jurisdiction score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['المحاكم']
+GENERATED:
+يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 1.1
+TITLE: شروط صرف القرض
+FINAL TYPE: loan
+FIELD: recommendation
+CANDIDATES:
+  loan score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['قرض']
+  interest score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فائدة']
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+GENERATED:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزام الطرف الطرف المتعاقد ب أ بالإغلاق
+FINAL TYPE: covenant
+FIELD: negotiation_advice
+CANDIDATES:
+  covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['التزام']
+GENERATED:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 1.1
+TITLE: نقل الحقوق
+FINAL TYPE: collateral
+FIELD: recommendation
+CANDIDATES:
+  collateral score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['رهن']
+GENERATED:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ثمن شراء الأصول
+FINAL TYPE: indemnity
+FIELD: recommendation
+CANDIDATES:
+  indemnity score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعويض']
+  deposit score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ضمان']
+  compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعويض']
+GENERATED:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: إدارة النشاط
+FINAL TYPE: indemnity
+FIELD: recommendation
+CANDIDATES:
+  indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['تعويضات']
+  corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+GENERATED:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: التعويض
+FINAL TYPE: indemnity
+FIELD: recommendation
+CANDIDATES:
+  indemnity score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['يعوض']
+GENERATED:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التنازل عن الأسهم
+FINAL TYPE: assignment
+FIELD: negotiation_advice
+CANDIDATES:
+  assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['التنازل']
+  corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['مساهم']
+  governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['لقوانين']
+GENERATED:
+يمكن التفاوض على اشتراط الموافقة الخطية المسبقة على أي تنازل أو نقل أو تفويض، مع السماح باستثناءات معقولة للشركات التابعة أو إعادة الهيكلة أو الاندماج أو الاستحواذ أو بيع معظم الأصول إذا كان المتنازل له قادراً على تنفيذ الالتزامات.
+
+====================================================================================================
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: البند 7.1
+TITLE: إنهاء الاتفاقية
+FINAL TYPE: automatic_renewal
+FIELD: recommendation
+CANDIDATES:
+GENERATED:
+ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.

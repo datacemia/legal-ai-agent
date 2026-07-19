@@ -1,0 +1,23 @@
+====================================================================================================
+RUNTIME MODULE
+====================================================================================================
+MODULE FILE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\semantic_source_profile.py
+EXPECTED FILE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\semantic_source_profile.py
+SAME FILE: True
+
+====================================================================================================
+ENGINE FUNCTIONS
+====================================================================================================
+_evidence signature:
+(source: 'str', pattern: 'str', label: 'str') -> 'Iterable[dict]'
+
+_evidence source:
+def _evidence(source: str, pattern: str, label: str) -> Iterable[dict]:
+    for match in re.finditer(pattern, source, re.IGNORECASE | re.DOTALL):
+        yield {"label": label, "start": match.start(), "end": match.end(), "text": match.group(0)}
+
+
+_ranked_mechanisms source:
+Traceback (most recent call last):
+  File "<stdin>", line 56, in <module>
+AttributeError: module 'app.services.contract_agent.semantic_source_profile' has no attribute '_ranked_mechanisms'. Did you mean: 'ground_mechanisms'?

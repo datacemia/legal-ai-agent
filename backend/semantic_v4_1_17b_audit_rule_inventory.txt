@@ -1,0 +1,55 @@
+========================================================================================================================
+V4.1.17B AUDIT RULE INVENTORY
+========================================================================================================================
+RULES: 3
+
+========================================================================================================================
+KIND: TERMINATION_NOTICE_PERIOD
+RANK: 82
+PRIMARY: termination
+ROLE: DOMAIN_SECONDARY
+ELIGIBLE: False
+POLARITY: None
+
+EN PATTERNS: 1
+1 \b(?:prior\s+)?written\s+notice\b[^.;!?]{0,140}\b(?:days?|months?)\b[^.;!?]{0,180}
+
+FR PATTERNS: 1
+1 \b(?:pr[eé]avis|notification)\s+[eé]crit(?:e)?\b[^.;!?]{0,140}\b(?:jours?|mois)\b[^.;!?]{0,180}
+
+AR PATTERNS: 1
+1 (?:إشعار\s+خطي|إشعار\s+كتابي)[^.;؛!?]{0,140}(?:يوماً|يومًا|يوما|يوم|شهراً|شهرًا)[^.;؛!?]{0,180}
+
+========================================================================================================================
+KIND: DATA_PROTECTION_AUDIT_COOPERATION
+RANK: 87
+PRIMARY: data_protection
+ROLE: DOMAIN_CORE
+ELIGIBLE: True
+POLARITY: REQUIRED
+
+EN PATTERNS: 1
+1 \bprocessor\s+shall\s+make\s+available\s+to\s+controller\s+all\s+information\s+necessary\s+to\s+demonstrate\s+compliance\s+with\s+this\s+dpa\b[^.;!?]{0,280}\baudits?\b[^.;!?]{0,220}
+
+FR PATTERNS: 1
+1 \bsous-traitant\s+mettra\s+[aà]\s+la\s+disposition\s+du\s+responsable\s+du\s+traitement\s+toutes\s+les\s+informations\s+n[eé]cessaires\s+pour\s+d[eé]montrer\s+sa\s+conformit[eé]\s+au\s+pr[eé]sent\s+atd\b[^.;!?]{0,280}\baudits?\b[^.;!?]{0,220}
+
+AR PATTERNS: 1
+1 (?:يتيح|يقدم)\s+المعالج\s+للمتحكم\s+جميع\s+المعلومات\s+اللازمة\s+لإثبات\s+الامتثال[^.;؛!?]{0,280}(?:عمليات\s+التدقيق|التدقيق|التفتيش)[^.;؛!?]{0,220}
+
+========================================================================================================================
+KIND: NOTICE_PROCEDURE
+RANK: 78
+PRIMARY: notice
+ROLE: GENERIC_SECONDARY
+ELIGIBLE: False
+POLARITY: None
+
+EN PATTERNS: 1
+1 \bnotice\b.{0,140}\b(?:written|writing|address|delivered|days)\b.{0,160}
+
+FR PATTERNS: 1
+1 \bnotification\b.{0,140}\b(?:[eé]crit|adresse|remis|jours)\b.{0,160}
+
+AR PATTERNS: 1
+1 (?:الإشعار|إشعار).{0,140}(?:كتابي|العنوان|تسليم|أيام).{0,160}

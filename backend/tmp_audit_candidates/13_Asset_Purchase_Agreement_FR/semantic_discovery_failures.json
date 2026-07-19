@@ -1,0 +1,503 @@
+[
+  {
+    "document": "13_Asset_Purchase_Agreement_FR.json",
+    "reference": "4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Entre la date du présent Contrat et la Date de Clôture, le Vendeur exploitera l'Activité dans le cours normal des affaires, conformément aux pratiques antérieures, et ne pourra, sans le consentement écrit préalable de l'Acquéreur, conclure de contrat substantiel, céder un actif significatif, ou augmenter la rémunération des salariés clés.",
+    "primary_type": "compensation",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "sans le consentement écrit préalable",
+            "start": 182,
+            "end": 218
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 182,
+            "end": 218,
+            "text": "sans le consentement écrit préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 190,
+            "end": 218,
+            "text": "consentement écrit préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "e5c2acb1ec3d76eba8f215cc5d57a3f30206d521478761af51578af88865518b",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 190,
+            "end": 208,
+            "text": "consentement écrit"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0290aabd3f33f27c140d10b7ac98ee98ee748155fd0dcdce04cf567a2ce122c0",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "MISMATCH",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 L'obligation de clôture de l'Acquéreur est subordonnée à la satisfaction de conditions usuelles, y compris l'exactitude des déclarations et garanties du Vendeur à la Date de Clôture, l'obtention de tous les consentements de tiers requis, et l'absence de changement défavorable significatif affectant l'Activité.",
+    "primary_type": "warranty",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 47,
+            "end": 224,
+            "text": "subordonnée à la satisfaction de conditions usuelles, y compris l'exactitude des déclarations et garanties du Vendeur à la Date de Clôture, l'obtention de tous les consentements"
+          },
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 187,
+            "end": 240,
+            "text": "l'obtention de tous les consentements de tiers requis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d24e21f1a45d3017fa6ac6c627a7fa17c196ba3b86acbac547c53756868592cb",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CLOSING_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "transaction",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 4,
+            "end": 58,
+            "text": "L'obligation de clôture de l'Acquéreur est subordonnée"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "67682d490f8047e4b0472b57d034b147e218ed8e157b5b369ff9881ddc237339",
+        "normalized_concept": "CLOSING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 47,
+            "end": 224,
+            "text": "subordonnée à la satisfaction de conditions usuelles, y compris l'exactitude des déclarations et garanties du Vendeur à la Date de Clôture, l'obtention de tous les consentements"
+          },
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 187,
+            "end": 240,
+            "text": "l'obtention de tous les consentements de tiers requis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d24e21f1a45d3017fa6ac6c627a7fa17c196ba3b86acbac547c53756868592cb",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CLOSING_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "transaction",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 4,
+            "end": 58,
+            "text": "L'obligation de clôture de l'Acquéreur est subordonnée"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "67682d490f8047e4b0472b57d034b147e218ed8e157b5b369ff9881ddc237339",
+        "normalized_concept": "CLOSING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture ; et (b) 2 000 000 $ déposés sous séquestre pendant dix-huit (18) mois pour garantir les obligations d'indemnisation du Vendeur au titre de l'article 6.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PURCHASE_PRICE",
+        "rank": 96,
+        "candidate_primary_type": "purchase_price",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 7,
+            "end": 135,
+            "text": "prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture "
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "78d74675eebf8b37896653e1183f2a046def0423cabbd151b9853db9def4bd47",
+        "normalized_concept": "PURCHASE_PRICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 71,
+            "end": 135,
+            "text": "payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture "
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "a6b6898ad49acbcbf8357c4b763736d4294cab9b2d501d9075d427e93927019f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "rank": 92,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+            "start": 7,
+            "end": 135,
+            "text": "prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture "
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "246e7114bcf24013164d01faa00ae648c61dfde585d436e4398b5921cf60cf24",
+        "normalized_concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PURCHASE_PRICE",
+        "rank": 96,
+        "candidate_primary_type": "purchase_price",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 7,
+            "end": 135,
+            "text": "prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture "
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "78d74675eebf8b37896653e1183f2a046def0423cabbd151b9853db9def4bd47",
+        "normalized_concept": "PURCHASE_PRICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 71,
+            "end": 135,
+            "text": "payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture "
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "a6b6898ad49acbcbf8357c4b763736d4294cab9b2d501d9075d427e93927019f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "rank": 92,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+            "start": 7,
+            "end": 135,
+            "text": "prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture "
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "246e7114bcf24013164d01faa00ae648c61dfde585d436e4398b5921cf60cf24",
+        "normalized_concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

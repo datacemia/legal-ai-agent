@@ -1,0 +1,3183 @@
+========================================================================================================================
+V4.1.18 CONTRACT FAMILY DETECTOR FORENSICS
+========================================================================================================================
+
+MODULE
+========================================================================================================================
+C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_family_detector.py
+
+MODULE CONSTANTS
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+NAME: FAMILY_INDICATORS
+TYPE: dict
+{
+  "NDA": {
+    "5": [
+      "non-disclosure agreement",
+      "confidentiality agreement",
+      "accord de confidentialité",
+      "accord de non-divulgation",
+      "اتفاقية عدم إفصاح",
+      "اتفاقية سرية"
+    ],
+    "3": [
+      "confidential information",
+      "receiving party",
+      "disclosing party",
+      "non-disclosure",
+      "information confidentielle",
+      "partie destinataire",
+      "partie divulgatrice",
+      "non-divulgation",
+      "معلومات سرية",
+      "الطرف المتلقي",
+      "الطرف المفصح",
+      "عدم الإفصاح"
+    ],
+    "1": [
+      "confidential",
+      "trade secret",
+      "confidentiel",
+      "secret commercial",
+      "سرية",
+      "سر تجاري"
+    ]
+  },
+  "MSA": {
+    "5": [
+      "master services agreement",
+      "master service agreement",
+      "master agreement",
+      "accord-cadre de services",
+      "accord cadre de services",
+      "accord-cadre",
+      "اتفاقية الخدمات الرئيسية",
+      "الاتفاقية الرئيسية"
+    ],
+    "3": [
+      "statement of work",
+      "sow",
+      "work order",
+      "services agreement",
+      "bon de travail",
+      "ordre de mission",
+      "بيان العمل",
+      "أمر عمل",
+      "عقد خدمات"
+    ],
+    "1": [
+      "services",
+      "service provider",
+      "client",
+      "prestataire",
+      "services",
+      "مزود الخدمة",
+      "مقدم الخدمة",
+      "العميل"
+    ]
+  },
+  "SaaS": {
+    "5": [
+      "software as a service",
+      "saas agreement",
+      "cloud services agreement",
+      "logiciel en tant que service",
+      "contrat saas",
+      "عقد برمجيات كخدمة",
+      "برمجيات كخدمة"
+    ],
+    "3": [
+      "saas",
+      "subscription",
+      "uptime",
+      "service level",
+      "service credits",
+      "cloud-hosted",
+      "hosted platform",
+      "api access",
+      "abonnement",
+      "disponibilité",
+      "niveau de service",
+      "crédits de service",
+      "plateforme hébergée",
+      "accès api",
+      "اشتراك",
+      "التوافر",
+      "مستوى الخدمة",
+      "تعويض الخدمة",
+      "منصة مستضافة",
+      "وصول api"
+    ],
+    "1": [
+      "cloud",
+      "hosted",
+      "platform",
+      "support",
+      "maintenance",
+      "système hébergé",
+      "infonuagique",
+      "plateforme",
+      "support",
+      "سحابي",
+      "مستضاف",
+      "منصة",
+      "دعم"
+    ]
+  },
+  "Cybersecurity": {
+    "5": [
+      "cybersecurity services agreement",
+      "managed security services agreement",
+      "contrat de cybersécurité",
+      "عقد خدمات الأمن السيبراني"
+    ],
+    "3": [
+      "cybersecurity",
+      "security incident",
+      "threat detection",
+      "penetration test",
+      "vulnerability",
+      "incident response",
+      "security monitoring",
+      "iso/iec 27001",
+      "soc 2",
+      "cybersécurité",
+      "incident de sécurité",
+      "détection des menaces",
+      "test d'intrusion",
+      "vulnérabilité",
+      "réponse aux incidents",
+      "surveillance de sécurité",
+      "الأمن السيبراني",
+      "حادث أمني",
+      "كشف التهديدات",
+      "اختبار الاختراق",
+      "ثغرة أمنية",
+      "الاستجابة للحوادث",
+      "مراقبة أمنية"
+    ],
+    "1": [
+      "security",
+      "malware",
+      "phishing",
+      "encryption",
+      "access control",
+      "sécurité",
+      "chiffrement",
+      "contrôle d'accès",
+      "أمن",
+      "تشفير",
+      "التحكم في الوصول"
+    ]
+  },
+  "Data Processing": {
+    "5": [
+      "data processing agreement",
+      "data processing addendum",
+      "dpa",
+      "standard contractual clauses",
+      "sccs",
+      "accord de traitement des données",
+      "avenant de traitement des données",
+      "clauses contractuelles types",
+      "اتفاقية معالجة البيانات",
+      "ملحق معالجة البيانات",
+      "البنود التعاقدية القياسية"
+    ],
+    "3": [
+      "data processor",
+      "data controller",
+      "personal data",
+      "gdpr",
+      "subprocessor",
+      "data processing terms",
+      "data subject",
+      "cross-border transfer",
+      "international data transfer",
+      "sous-traitant",
+      "responsable du traitement",
+      "données personnelles",
+      "rgpd",
+      "personne concernée",
+      "transfert international",
+      "معالج البيانات",
+      "المتحكم بالبيانات",
+      "بيانات شخصية",
+      "صاحب البيانات",
+      "نقل البيانات عبر الحدود"
+    ],
+    "1": [
+      "privacy",
+      "processing",
+      "data breach",
+      "vie privée",
+      "traitement",
+      "violation de données",
+      "خصوصية",
+      "معالجة",
+      "اختراق البيانات"
+    ]
+  },
+  "Employment": {
+    "5": [
+      "employment agreement",
+      "employment contract",
+      "contrat de travail",
+      "عقد عمل"
+    ],
+    "3": [
+      "employee",
+      "employer",
+      "salary",
+      "job title",
+      "at-will",
+      "resignation",
+      "severance",
+      "non-compete",
+      "employé",
+      "salarié",
+      "employeur",
+      "poste",
+      "démission",
+      "indemnité de licenciement",
+      "موظف",
+      "صاحب العمل",
+      "راتب",
+      "استقالة",
+      "تعويض نهاية الخدمة"
+    ],
+    "1": [
+      "bonus",
+      "benefits",
+      "vacation",
+      "prime",
+      "avantages",
+      "congés",
+      "مكافأة",
+      "مزايا",
+      "إجازة"
+    ]
+  },
+  "Consulting": {
+    "5": [
+      "consulting agreement",
+      "consulting services agreement",
+      "contrat de conseil",
+      "عقد خدمات استشارية"
+    ],
+    "3": [
+      "consulting services",
+      "consultant",
+      "independent contractor",
+      "advisory services",
+      "services de conseil",
+      "consultant indépendant",
+      "prestations de conseil",
+      "خدمات استشارية",
+      "استشاري",
+      "متعاقد مستقل"
+    ],
+    "1": [
+      "deliverables",
+      "professional services",
+      "livrables",
+      "services professionnels",
+      "مخرجات العمل",
+      "خدمات مهنية"
+    ]
+  },
+  "Licensing": {
+    "5": [
+      "license agreement",
+      "software license agreement",
+      "contrat de licence",
+      "عقد ترخيص"
+    ],
+    "3": [
+      "license fee",
+      "licensed software",
+      "license grant",
+      "royalty",
+      "licensee",
+      "licensor",
+      "permitted use",
+      "redevance",
+      "logiciel sous licence",
+      "octroi de licence",
+      "licencié",
+      "concédant",
+      "usage autorisé",
+      "رسوم الترخيص",
+      "برنامج مرخص",
+      "منح الترخيص",
+      "إتاوة",
+      "المرخَّص له",
+      "المرخِّص",
+      "استخدام مسموح"
+    ],
+    "1": [
+      "license",
+      "licence",
+      "ترخيص"
+    ]
+  },
+  "Procurement": {
+    "5": [
+      "procurement agreement",
+      "supply agreement",
+      "contrat d'approvisionnement",
+      "contrat de fourniture",
+      "عقد توريد",
+      "اتفاقية شراء"
+    ],
+    "3": [
+      "purchase order",
+      "supplier",
+      "goods",
+      "delivery schedule",
+      "acceptance testing",
+      "vendor",
+      "bon de commande",
+      "fournisseur",
+      "marchandises",
+      "calendrier de livraison",
+      "essai de réception",
+      "أمر شراء",
+      "مورد",
+      "بضائع",
+      "جدول التسليم",
+      "اختبار القبول"
+    ],
+    "1": [
+      "delivery",
+      "acceptance",
+      "livraison",
+      "réception",
+      "تسليم",
+      "قبول"
+    ]
+  },
+  "Sale / Purchase": {
+    "5": [
+      "purchase agreement",
+      "sale agreement",
+      "sale and purchase agreement",
+      "contrat de vente",
+      "contrat d'achat",
+      "اتفاقية بيع",
+      "عقد بيع"
+    ],
+    "3": [
+      "sale of goods",
+      "buyer",
+      "seller",
+      "purchase price",
+      "delivery of goods",
+      "risk of loss",
+      "title transfer",
+      "vente de biens",
+      "acheteur",
+      "vendeur",
+      "prix d'achat",
+      "livraison des biens",
+      "transfert de propriété",
+      "بيع البضائع",
+      "المشتري",
+      "البائع",
+      "ثمن الشراء",
+      "تسليم البضائع",
+      "نقل الملكية"
+    ],
+    "1": [
+      "goods",
+      "price",
+      "warranty",
+      "biens",
+      "prix",
+      "garantie",
+      "بضائع",
+      "ثمن",
+      "ضمان"
+    ]
+  },
+  "Distribution / Reseller": {
+    "5": [
+      "distribution agreement",
+      "reseller agreement",
+      "dealer agreement",
+      "contrat de distribution",
+      "contrat de revente",
+      "عقد توزيع",
+      "اتفاقية موزع"
+    ],
+    "3": [
+      "distributor",
+      "reseller",
+      "territory",
+      "minimum purchase",
+      "channel partner",
+      "exclusive distributor",
+      "distributeur",
+      "revendeur",
+      "territoire",
+      "achat minimum",
+      "partenaire de distribution",
+      "موزع",
+      "إعادة البيع",
+      "منطقة",
+      "حد أدنى للشراء",
+      "شريك قناة"
+    ],
+    "1": [
+      "sales target",
+      "marketing",
+      "objectifs de vente",
+      "commercialisation",
+      "هدف المبيعات",
+      "تسويق"
+    ]
+  },
+  "Franchise": {
+    "5": [
+      "franchise agreement",
+      "contrat de franchise",
+      "عقد امتياز",
+      "اتفاقية امتياز تجاري"
+    ],
+    "3": [
+      "franchisor",
+      "franchisee",
+      "franchise fee",
+      "brand standards",
+      "operations manual",
+      "royalty fee",
+      "franchiseur",
+      "franchisé",
+      "droit d'entrée",
+      "standards de marque",
+      "manuel d'exploitation",
+      "مانح الامتياز",
+      "صاحب الامتياز",
+      "رسوم الامتياز",
+      "معايير العلامة",
+      "دليل التشغيل"
+    ],
+    "1": [
+      "brand",
+      "territory",
+      "training",
+      "marque",
+      "territoire",
+      "formation",
+      "علامة",
+      "منطقة",
+      "تدريب"
+    ]
+  },
+  "Agency": {
+    "5": [
+      "agency agreement",
+      "sales agency agreement",
+      "contrat d'agence",
+      "عقد وكالة"
+    ],
+    "3": [
+      "agent",
+      "principal",
+      "commission",
+      "authority to bind",
+      "commercial agent",
+      "mandataire",
+      "mandant",
+      "commission",
+      "agent commercial",
+      "وكيل",
+      "موكل",
+      "عمولة",
+      "صلاحية الإلزام"
+    ],
+    "1": [
+      "representation",
+      "territory",
+      "représentation",
+      "territoire",
+      "تمثيل",
+      "منطقة"
+    ]
+  },
+  "Outsourcing": {
+    "5": [
+      "outsourcing agreement",
+      "managed services agreement",
+      "contrat d'externalisation",
+      "عقد إسناد خارجي"
+    ],
+    "3": [
+      "outsourcing",
+      "transition services",
+      "service provider",
+      "managed services",
+      "transferred employees",
+      "externalisation",
+      "services de transition",
+      "prestataire de services",
+      "services gérés",
+      "employés transférés",
+      "إسناد خارجي",
+      "خدمات انتقالية",
+      "مزود الخدمة",
+      "خدمات مدارة",
+      "الموظفون المنقولون"
+    ],
+    "1": [
+      "service levels",
+      "governance",
+      "niveaux de service",
+      "gouvernance",
+      "مستويات الخدمة",
+      "حوكمة"
+    ]
+  },
+  "Real Estate": {
+    "5": [
+      "lease agreement",
+      "commercial lease",
+      "residential lease",
+      "contrat de bail",
+      "bail commercial",
+      "عقد إيجار",
+      "عقد كراء"
+    ],
+    "3": [
+      "lease",
+      "rent",
+      "tenant",
+      "landlord",
+      "lessor",
+      "lessee",
+      "leased premises",
+      "security deposit",
+      "property use",
+      "bail",
+      "loyer",
+      "locataire",
+      "bailleur",
+      "locaux loués",
+      "dépôt de garantie",
+      "إيجار",
+      "كراء",
+      "المستأجر",
+      "المؤجر",
+      "المباني المؤجرة",
+      "وديعة الضمان"
+    ],
+    "1": [
+      "premises",
+      "maintenance",
+      "utilities",
+      "locaux",
+      "entretien",
+      "charges",
+      "محل",
+      "صيانة",
+      "مرافق"
+    ]
+  },
+  "Finance / Lending": {
+    "5": [
+      "loan agreement",
+      "credit agreement",
+      "facility agreement",
+      "contrat de prêt",
+      "contrat de crédit",
+      "اتفاقية قرض",
+      "عقد قرض",
+      "اتفاقية تسهيل ائتماني"
+    ],
+    "3": [
+      "principal amount",
+      "interest rate",
+      "collateral",
+      "security interest",
+      "repayment schedule",
+      "acceleration",
+      "guarantor",
+      "borrower",
+      "lender",
+      "montant du principal",
+      "taux d'intérêt",
+      "garantie",
+      "sûreté",
+      "échéancier de remboursement",
+      "exigibilité anticipée",
+      "emprunteur",
+      "prêteur",
+      "المبلغ الأصلي",
+      "معدل الفائدة",
+      "ضمان",
+      "جدول السداد",
+      "حلول الأجل",
+      "المقترض",
+      "المقرض"
+    ],
+    "1": [
+      "loan",
+      "interest",
+      "default",
+      "prêt",
+      "intérêt",
+      "défaut",
+      "قرض",
+      "فائدة",
+      "تعثر"
+    ]
+  },
+  "Insurance": {
+    "5": [
+      "insurance policy",
+      "insurance agreement",
+      "contrat d'assurance",
+      "police d'assurance",
+      "عقد تأمين",
+      "وثيقة تأمين"
+    ],
+    "3": [
+      "insured",
+      "insurer",
+      "premium",
+      "coverage",
+      "claim",
+      "exclusion",
+      "deductible",
+      "assuré",
+      "assureur",
+      "prime d'assurance",
+      "couverture",
+      "sinistre",
+      "exclusion",
+      "franchise",
+      "المؤمن له",
+      "شركة التأمين",
+      "قسط التأمين",
+      "تغطية",
+      "مطالبة",
+      "استثناء",
+      "تحمل"
+    ],
+    "1": [
+      "policy",
+      "risk",
+      "loss",
+      "police",
+      "risque",
+      "perte",
+      "وثيقة",
+      "خطر",
+      "خسارة"
+    ]
+  },
+  "Construction": {
+    "5": [
+      "construction contract",
+      "engineering procurement and construction",
+      "epc contract",
+      "contrat de construction",
+      "contrat epc",
+      "عقد إنشاءات",
+      "عقد مقاولة"
+    ],
+    "3": [
+      "contractor",
+      "subcontractor",
+      "works",
+      "site",
+      "completion date",
+      "defects liability",
+      "retention",
+      "liquidated damages",
+      "entrepreneur",
+      "sous-traitant",
+      "travaux",
+      "chantier",
+      "date d'achèvement",
+      "garantie de parfait achèvement",
+      "retenue",
+      "مقاول",
+      "مقاول من الباطن",
+      "أعمال",
+      "موقع",
+      "تاريخ الإنجاز",
+      "عيوب",
+      "تعويضات مقطوعة"
+    ],
+    "1": [
+      "materials",
+      "change order",
+      "delay",
+      "matériaux",
+      "ordre de modification",
+      "retard",
+      "مواد",
+      "أمر تغيير",
+      "تأخير"
+    ]
+  },
+  "Manufacturing": {
+    "5": [
+      "manufacturing agreement",
+      "contract manufacturing agreement",
+      "contrat de fabrication",
+      "عقد تصنيع"
+    ],
+    "3": [
+      "manufacturer",
+      "production",
+      "quality control",
+      "specifications",
+      "minimum order quantity",
+      "defective products",
+      "fabricant",
+      "production",
+      "contrôle qualité",
+      "spécifications",
+      "quantité minimale de commande",
+      "produits défectueux",
+      "مصنع",
+      "إنتاج",
+      "مراقبة الجودة",
+      "مواصفات",
+      "حد أدنى للطلب",
+      "منتجات معيبة"
+    ],
+    "1": [
+      "materials",
+      "inventory",
+      "lead time",
+      "matières",
+      "stock",
+      "délai",
+      "مواد",
+      "مخزون",
+      "مهلة"
+    ]
+  },
+  "Transportation / Logistics": {
+    "5": [
+      "logistics agreement",
+      "transportation agreement",
+      "freight agreement",
+      "contrat de transport",
+      "contrat logistique",
+      "عقد نقل",
+      "عقد خدمات لوجستية"
+    ],
+    "3": [
+      "carrier",
+      "freight",
+      "shipment",
+      "delivery route",
+      "warehouse",
+      "customs",
+      "transporteur",
+      "fret",
+      "expédition",
+      "entrepôt",
+      "douanes",
+      "ناقل",
+      "شحن",
+      "بضاعة مشحونة",
+      "مستودع",
+      "جمارك"
+    ],
+    "1": [
+      "delivery",
+      "delay",
+      "loss",
+      "livraison",
+      "retard",
+      "perte",
+      "تسليم",
+      "تأخير",
+      "فقدان"
+    ]
+  },
+  "Settlement": {
+    "5": [
+      "settlement agreement",
+      "release agreement",
+      "accord transactionnel",
+      "protocole transactionnel",
+      "اتفاقية تسوية",
+      "عقد صلح"
+    ],
+    "3": [
+      "release of claims",
+      "settlement amount",
+      "no admission of liability",
+      "dismissal",
+      "renonciation aux réclamations",
+      "montant de la transaction",
+      "absence de reconnaissance de responsabilité",
+      "إبراء",
+      "مبلغ التسوية",
+      "دون إقرار بالمسؤولية"
+    ],
+    "1": [
+      "dispute",
+      "claim",
+      "litige",
+      "réclamation",
+      "نزاع",
+      "مطالبة"
+    ]
+  },
+  "Power of Attorney": {
+    "5": [
+      "power of attorney",
+      "procuration",
+      "وكالة",
+      "تفويض رسمي"
+    ],
+    "3": [
+      "attorney-in-fact",
+      "agent authority",
+      "principal",
+      "mandataire",
+      "mandant",
+      "pouvoir de représenter",
+      "وكيل",
+      "موكل",
+      "صلاحية التمثيل"
+    ],
+    "1": [
+      "authority",
+      "signature",
+      "pouvoir",
+      "signature",
+      "صلاحية",
+      "توقيع"
+    ]
+  },
+  "Corporate Resolution": {
+    "5": [
+      "corporate resolution",
+      "board resolution",
+      "shareholder resolution",
+      "résolution du conseil",
+      "résolution des actionnaires",
+      "قرار مجلس الإدارة",
+      "قرار المساهمين"
+    ],
+    "3": [
+      "resolved that",
+      "board of directors",
+      "authorized signatory",
+      "secretary certificate",
+      "il est décidé que",
+      "conseil d'administration",
+      "signataire autorisé",
+      "تقرر ما يلي",
+      "مجلس الإدارة",
+      "المفوض بالتوقيع"
+    ],
+    "1": [
+      "approval",
+      "minutes",
+      "approbation",
+      "procès-verbal",
+      "موافقة",
+      "محضر"
+    ]
+  },
+  "Partnership / JV": {
+    "5": [
+      "joint venture agreement",
+      "partnership agreement",
+      "contrat de partenariat",
+      "contrat de coentreprise",
+      "عقد شراكة",
+      "اتفاقية مشروع مشترك"
+    ],
+    "3": [
+      "joint venture",
+      "partner",
+      "capital contribution",
+      "profit sharing",
+      "management committee",
+      "deadlock",
+      "coentreprise",
+      "partenaire",
+      "apport en capital",
+      "partage des bénéfices",
+      "comité de gestion",
+      "blocage",
+      "مشروع مشترك",
+      "شريك",
+      "مساهمة رأسمالية",
+      "تقاسم الأرباح",
+      "لجنة الإدارة",
+      "طريق مسدود"
+    ],
+    "1": [
+      "governance",
+      "contribution",
+      "gouvernance",
+      "contribution",
+      "حوكمة",
+      "مساهمة"
+    ]
+  },
+  "Investment / Shareholder": {
+    "5": [
+      "shareholders agreement",
+      "investment agreement",
+      "share purchase agreement",
+      "pacte d'actionnaires",
+      "contrat d'investissement",
+      "اتفاقية المساهمين",
+      "اتفاقية استثمار"
+    ],
+    "3": [
+      "share purchase",
+      "equity stake",
+      "board seat",
+      "drag-along",
+      "tag-along",
+      "preemptive rights",
+      "cap table",
+      "convertible note",
+      "vesting",
+      "cession d'actions",
+      "participation au capital",
+      "siège au conseil",
+      "droit de préemption",
+      "شراء الأسهم",
+      "حصة ملكية",
+      "مقعد في المجلس",
+      "حق الأفضلية",
+      "استحقاق الأسهم"
+    ],
+    "1": [
+      "shares",
+      "investor",
+      "dividends",
+      "actions",
+      "investisseur",
+      "dividendes",
+      "أسهم",
+      "مستثمر",
+      "أرباح"
+    ]
+  },
+  "Terms of Service": {
+    "5": [
+      "terms of service",
+      "terms and conditions",
+      "website terms",
+      "conditions d'utilisation",
+      "conditions générales",
+      "شروط الخدمة",
+      "الشروط والأحكام"
+    ],
+    "3": [
+      "user account",
+      "acceptable use",
+      "platform rules",
+      "user content",
+      "compte utilisateur",
+      "utilisation acceptable",
+      "règles de la plateforme",
+      "حساب المستخدم",
+      "الاستخدام المقبول",
+      "قواعد المنصة"
+    ],
+    "1": [
+      "user",
+      "account",
+      "platform",
+      "utilisateur",
+      "compte",
+      "plateforme",
+      "مستخدم",
+      "حساب",
+      "منصة"
+    ]
+  }
+}
+
+------------------------------------------------------------------------------------------------------------------------
+NAME: FLAT_FAMILY_INDICATORS
+TYPE: dict
+{
+  "NDA": [
+    "non-disclosure agreement",
+    "confidentiality agreement",
+    "accord de confidentialité",
+    "accord de non-divulgation",
+    "اتفاقية عدم إفصاح",
+    "اتفاقية سرية",
+    "confidential information",
+    "receiving party",
+    "disclosing party",
+    "non-disclosure",
+    "information confidentielle",
+    "partie destinataire",
+    "partie divulgatrice",
+    "non-divulgation",
+    "معلومات سرية",
+    "الطرف المتلقي",
+    "الطرف المفصح",
+    "عدم الإفصاح",
+    "confidential",
+    "trade secret",
+    "confidentiel",
+    "secret commercial",
+    "سرية",
+    "سر تجاري"
+  ],
+  "MSA": [
+    "master services agreement",
+    "master service agreement",
+    "master agreement",
+    "accord-cadre de services",
+    "accord cadre de services",
+    "accord-cadre",
+    "اتفاقية الخدمات الرئيسية",
+    "الاتفاقية الرئيسية",
+    "statement of work",
+    "sow",
+    "work order",
+    "services agreement",
+    "bon de travail",
+    "ordre de mission",
+    "بيان العمل",
+    "أمر عمل",
+    "عقد خدمات",
+    "services",
+    "service provider",
+    "client",
+    "prestataire",
+    "services",
+    "مزود الخدمة",
+    "مقدم الخدمة",
+    "العميل"
+  ],
+  "SaaS": [
+    "software as a service",
+    "saas agreement",
+    "cloud services agreement",
+    "logiciel en tant que service",
+    "contrat saas",
+    "عقد برمجيات كخدمة",
+    "برمجيات كخدمة",
+    "saas",
+    "subscription",
+    "uptime",
+    "service level",
+    "service credits",
+    "cloud-hosted",
+    "hosted platform",
+    "api access",
+    "abonnement",
+    "disponibilité",
+    "niveau de service",
+    "crédits de service",
+    "plateforme hébergée",
+    "accès api",
+    "اشتراك",
+    "التوافر",
+    "مستوى الخدمة",
+    "تعويض الخدمة",
+    "منصة مستضافة",
+    "وصول api",
+    "cloud",
+    "hosted",
+    "platform",
+    "support",
+    "maintenance",
+    "système hébergé",
+    "infonuagique",
+    "plateforme",
+    "support",
+    "سحابي",
+    "مستضاف",
+    "منصة",
+    "دعم"
+  ],
+  "Cybersecurity": [
+    "cybersecurity services agreement",
+    "managed security services agreement",
+    "contrat de cybersécurité",
+    "عقد خدمات الأمن السيبراني",
+    "cybersecurity",
+    "security incident",
+    "threat detection",
+    "penetration test",
+    "vulnerability",
+    "incident response",
+    "security monitoring",
+    "iso/iec 27001",
+    "soc 2",
+    "cybersécurité",
+    "incident de sécurité",
+    "détection des menaces",
+    "test d'intrusion",
+    "vulnérabilité",
+    "réponse aux incidents",
+    "surveillance de sécurité",
+    "الأمن السيبراني",
+    "حادث أمني",
+    "كشف التهديدات",
+    "اختبار الاختراق",
+    "ثغرة أمنية",
+    "الاستجابة للحوادث",
+    "مراقبة أمنية",
+    "security",
+    "malware",
+    "phishing",
+    "encryption",
+    "access control",
+    "sécurité",
+    "chiffrement",
+    "contrôle d'accès",
+    "أمن",
+    "تشفير",
+    "التحكم في الوصول"
+  ],
+  "Data Processing": [
+    "data processing agreement",
+    "data processing addendum",
+    "dpa",
+    "standard contractual clauses",
+    "sccs",
+    "accord de traitement des données",
+    "avenant de traitement des données",
+    "clauses contractuelles types",
+    "اتفاقية معالجة البيانات",
+    "ملحق معالجة البيانات",
+    "البنود التعاقدية القياسية",
+    "data processor",
+    "data controller",
+    "personal data",
+    "gdpr",
+    "subprocessor",
+    "data processing terms",
+    "data subject",
+    "cross-border transfer",
+    "international data transfer",
+    "sous-traitant",
+    "responsable du traitement",
+    "données personnelles",
+    "rgpd",
+    "personne concernée",
+    "transfert international",
+    "معالج البيانات",
+    "المتحكم بالبيانات",
+    "بيانات شخصية",
+    "صاحب البيانات",
+    "نقل البيانات عبر الحدود",
+    "privacy",
+    "processing",
+    "data breach",
+    "vie privée",
+    "traitement",
+    "violation de données",
+    "خصوصية",
+    "معالجة",
+    "اختراق البيانات"
+  ],
+  "Employment": [
+    "employment agreement",
+    "employment contract",
+    "contrat de travail",
+    "عقد عمل",
+    "employee",
+    "employer",
+    "salary",
+    "job title",
+    "at-will",
+    "resignation",
+    "severance",
+    "non-compete",
+    "employé",
+    "salarié",
+    "employeur",
+    "poste",
+    "démission",
+    "indemnité de licenciement",
+    "موظف",
+    "صاحب العمل",
+    "راتب",
+    "استقالة",
+    "تعويض نهاية الخدمة",
+    "bonus",
+    "benefits",
+    "vacation",
+    "prime",
+    "avantages",
+    "congés",
+    "مكافأة",
+    "مزايا",
+    "إجازة"
+  ],
+  "Consulting": [
+    "consulting agreement",
+    "consulting services agreement",
+    "contrat de conseil",
+    "عقد خدمات استشارية",
+    "consulting services",
+    "consultant",
+    "independent contractor",
+    "advisory services",
+    "services de conseil",
+    "consultant indépendant",
+    "prestations de conseil",
+    "خدمات استشارية",
+    "استشاري",
+    "متعاقد مستقل",
+    "deliverables",
+    "professional services",
+    "livrables",
+    "services professionnels",
+    "مخرجات العمل",
+    "خدمات مهنية"
+  ],
+  "Licensing": [
+    "license agreement",
+    "software license agreement",
+    "contrat de licence",
+    "عقد ترخيص",
+    "license fee",
+    "licensed software",
+    "license grant",
+    "royalty",
+    "licensee",
+    "licensor",
+    "permitted use",
+    "redevance",
+    "logiciel sous licence",
+    "octroi de licence",
+    "licencié",
+    "concédant",
+    "usage autorisé",
+    "رسوم الترخيص",
+    "برنامج مرخص",
+    "منح الترخيص",
+    "إتاوة",
+    "المرخَّص له",
+    "المرخِّص",
+    "استخدام مسموح",
+    "license",
+    "licence",
+    "ترخيص"
+  ],
+  "Procurement": [
+    "procurement agreement",
+    "supply agreement",
+    "contrat d'approvisionnement",
+    "contrat de fourniture",
+    "عقد توريد",
+    "اتفاقية شراء",
+    "purchase order",
+    "supplier",
+    "goods",
+    "delivery schedule",
+    "acceptance testing",
+    "vendor",
+    "bon de commande",
+    "fournisseur",
+    "marchandises",
+    "calendrier de livraison",
+    "essai de réception",
+    "أمر شراء",
+    "مورد",
+    "بضائع",
+    "جدول التسليم",
+    "اختبار القبول",
+    "delivery",
+    "acceptance",
+    "livraison",
+    "réception",
+    "تسليم",
+    "قبول"
+  ],
+  "Sale / Purchase": [
+    "purchase agreement",
+    "sale agreement",
+    "sale and purchase agreement",
+    "contrat de vente",
+    "contrat d'achat",
+    "اتفاقية بيع",
+    "عقد بيع",
+    "sale of goods",
+    "buyer",
+    "seller",
+    "purchase price",
+    "delivery of goods",
+    "risk of loss",
+    "title transfer",
+    "vente de biens",
+    "acheteur",
+    "vendeur",
+    "prix d'achat",
+    "livraison des biens",
+    "transfert de propriété",
+    "بيع البضائع",
+    "المشتري",
+    "البائع",
+    "ثمن الشراء",
+    "تسليم البضائع",
+    "نقل الملكية",
+    "goods",
+    "price",
+    "warranty",
+    "biens",
+    "prix",
+    "garantie",
+    "بضائع",
+    "ثمن",
+    "ضمان"
+  ],
+  "Distribution / Reseller": [
+    "distribution agreement",
+    "reseller agreement",
+    "dealer agreement",
+    "contrat de distribution",
+    "contrat de revente",
+    "عقد توزيع",
+    "اتفاقية موزع",
+    "distributor",
+    "reseller",
+    "territory",
+    "minimum purchase",
+    "channel partner",
+    "exclusive distributor",
+    "distributeur",
+    "revendeur",
+    "territoire",
+    "achat minimum",
+    "partenaire de distribution",
+    "موزع",
+    "إعادة البيع",
+    "منطقة",
+    "حد أدنى للشراء",
+    "شريك قناة",
+    "sales target",
+    "marketing",
+    "objectifs de vente",
+    "commercialisation",
+    "هدف المبيعات",
+    "تسويق"
+  ],
+  "Franchise": [
+    "franchise agreement",
+    "contrat de franchise",
+    "عقد امتياز",
+    "اتفاقية امتياز تجاري",
+    "franchisor",
+    "franchisee",
+    "franchise fee",
+    "brand standards",
+    "operations manual",
+    "royalty fee",
+    "franchiseur",
+    "franchisé",
+    "droit d'entrée",
+    "standards de marque",
+    "manuel d'exploitation",
+    "مانح الامتياز",
+    "صاحب الامتياز",
+    "رسوم الامتياز",
+    "معايير العلامة",
+    "دليل التشغيل",
+    "brand",
+    "territory",
+    "training",
+    "marque",
+    "territoire",
+    "formation",
+    "علامة",
+    "منطقة",
+    "تدريب"
+  ],
+  "Agency": [
+    "agency agreement",
+    "sales agency agreement",
+    "contrat d'agence",
+    "عقد وكالة",
+    "agent",
+    "principal",
+    "commission",
+    "authority to bind",
+    "commercial agent",
+    "mandataire",
+    "mandant",
+    "commission",
+    "agent commercial",
+    "وكيل",
+    "موكل",
+    "عمولة",
+    "صلاحية الإلزام",
+    "representation",
+    "territory",
+    "représentation",
+    "territoire",
+    "تمثيل",
+    "منطقة"
+  ],
+  "Outsourcing": [
+    "outsourcing agreement",
+    "managed services agreement",
+    "contrat d'externalisation",
+    "عقد إسناد خارجي",
+    "outsourcing",
+    "transition services",
+    "service provider",
+    "managed services",
+    "transferred employees",
+    "externalisation",
+    "services de transition",
+    "prestataire de services",
+    "services gérés",
+    "employés transférés",
+    "إسناد خارجي",
+    "خدمات انتقالية",
+    "مزود الخدمة",
+    "خدمات مدارة",
+    "الموظفون المنقولون",
+    "service levels",
+    "governance",
+    "niveaux de service",
+    "gouvernance",
+    "مستويات الخدمة",
+    "حوكمة"
+  ],
+  "Real Estate": [
+    "lease agreement",
+    "commercial lease",
+    "residential lease",
+    "contrat de bail",
+    "bail commercial",
+    "عقد إيجار",
+    "عقد كراء",
+    "lease",
+    "rent",
+    "tenant",
+    "landlord",
+    "lessor",
+    "lessee",
+    "leased premises",
+    "security deposit",
+    "property use",
+    "bail",
+    "loyer",
+    "locataire",
+    "bailleur",
+    "locaux loués",
+    "dépôt de garantie",
+    "إيجار",
+    "كراء",
+    "المستأجر",
+    "المؤجر",
+    "المباني المؤجرة",
+    "وديعة الضمان",
+    "premises",
+    "maintenance",
+    "utilities",
+    "locaux",
+    "entretien",
+    "charges",
+    "محل",
+    "صيانة",
+    "مرافق"
+  ],
+  "Finance / Lending": [
+    "loan agreement",
+    "credit agreement",
+    "facility agreement",
+    "contrat de prêt",
+    "contrat de crédit",
+    "اتفاقية قرض",
+    "عقد قرض",
+    "اتفاقية تسهيل ائتماني",
+    "principal amount",
+    "interest rate",
+    "collateral",
+    "security interest",
+    "repayment schedule",
+    "acceleration",
+    "guarantor",
+    "borrower",
+    "lender",
+    "montant du principal",
+    "taux d'intérêt",
+    "garantie",
+    "sûreté",
+    "échéancier de remboursement",
+    "exigibilité anticipée",
+    "emprunteur",
+    "prêteur",
+    "المبلغ الأصلي",
+    "معدل الفائدة",
+    "ضمان",
+    "جدول السداد",
+    "حلول الأجل",
+    "المقترض",
+    "المقرض",
+    "loan",
+    "interest",
+    "default",
+    "prêt",
+    "intérêt",
+    "défaut",
+    "قرض",
+    "فائدة",
+    "تعثر"
+  ],
+  "Insurance": [
+    "insurance policy",
+    "insurance agreement",
+    "contrat d'assurance",
+    "police d'assurance",
+    "عقد تأمين",
+    "وثيقة تأمين",
+    "insured",
+    "insurer",
+    "premium",
+    "coverage",
+    "claim",
+    "exclusion",
+    "deductible",
+    "assuré",
+    "assureur",
+    "prime d'assurance",
+    "couverture",
+    "sinistre",
+    "exclusion",
+    "franchise",
+    "المؤمن له",
+    "شركة التأمين",
+    "قسط التأمين",
+    "تغطية",
+    "مطالبة",
+    "استثناء",
+    "تحمل",
+    "policy",
+    "risk",
+    "loss",
+    "police",
+    "risque",
+    "perte",
+    "وثيقة",
+    "خطر",
+    "خسارة"
+  ],
+  "Construction": [
+    "construction contract",
+    "engineering procurement and construction",
+    "epc contract",
+    "contrat de construction",
+    "contrat epc",
+    "عقد إنشاءات",
+    "عقد مقاولة",
+    "contractor",
+    "subcontractor",
+    "works",
+    "site",
+    "completion date",
+    "defects liability",
+    "retention",
+    "liquidated damages",
+    "entrepreneur",
+    "sous-traitant",
+    "travaux",
+    "chantier",
+    "date d'achèvement",
+    "garantie de parfait achèvement",
+    "retenue",
+    "مقاول",
+    "مقاول من الباطن",
+    "أعمال",
+    "موقع",
+    "تاريخ الإنجاز",
+    "عيوب",
+    "تعويضات مقطوعة",
+    "materials",
+    "change order",
+    "delay",
+    "matériaux",
+    "ordre de modification",
+    "retard",
+    "مواد",
+    "أمر تغيير",
+    "تأخير"
+  ],
+  "Manufacturing": [
+    "manufacturing agreement",
+    "contract manufacturing agreement",
+    "contrat de fabrication",
+    "عقد تصنيع",
+    "manufacturer",
+    "production",
+    "quality control",
+    "specifications",
+    "minimum order quantity",
+    "defective products",
+    "fabricant",
+    "production",
+    "contrôle qualité",
+    "spécifications",
+    "quantité minimale de commande",
+    "produits défectueux",
+    "مصنع",
+    "إنتاج",
+    "مراقبة الجودة",
+    "مواصفات",
+    "حد أدنى للطلب",
+    "منتجات معيبة",
+    "materials",
+    "inventory",
+    "lead time",
+    "matières",
+    "stock",
+    "délai",
+    "مواد",
+    "مخزون",
+    "مهلة"
+  ],
+  "Transportation / Logistics": [
+    "logistics agreement",
+    "transportation agreement",
+    "freight agreement",
+    "contrat de transport",
+    "contrat logistique",
+    "عقد نقل",
+    "عقد خدمات لوجستية",
+    "carrier",
+    "freight",
+    "shipment",
+    "delivery route",
+    "warehouse",
+    "customs",
+    "transporteur",
+    "fret",
+    "expédition",
+    "entrepôt",
+    "douanes",
+    "ناقل",
+    "شحن",
+    "بضاعة مشحونة",
+    "مستودع",
+    "جمارك",
+    "delivery",
+    "delay",
+    "loss",
+    "livraison",
+    "retard",
+    "perte",
+    "تسليم",
+    "تأخير",
+    "فقدان"
+  ],
+  "Settlement": [
+    "settlement agreement",
+    "release agreement",
+    "accord transactionnel",
+    "protocole transactionnel",
+    "اتفاقية تسوية",
+    "عقد صلح",
+    "release of claims",
+    "settlement amount",
+    "no admission of liability",
+    "dismissal",
+    "renonciation aux réclamations",
+    "montant de la transaction",
+    "absence de reconnaissance de responsabilité",
+    "إبراء",
+    "مبلغ التسوية",
+    "دون إقرار بالمسؤولية",
+    "dispute",
+    "claim",
+    "litige",
+    "réclamation",
+    "نزاع",
+    "مطالبة"
+  ],
+  "Power of Attorney": [
+    "power of attorney",
+    "procuration",
+    "وكالة",
+    "تفويض رسمي",
+    "attorney-in-fact",
+    "agent authority",
+    "principal",
+    "mandataire",
+    "mandant",
+    "pouvoir de représenter",
+    "وكيل",
+    "موكل",
+    "صلاحية التمثيل",
+    "authority",
+    "signature",
+    "pouvoir",
+    "signature",
+    "صلاحية",
+    "توقيع"
+  ],
+  "Corporate Resolution": [
+    "corporate resolution",
+    "board resolution",
+    "shareholder resolution",
+    "résolution du conseil",
+    "résolution des actionnaires",
+    "قرار مجلس الإدارة",
+    "قرار المساهمين",
+    "resolved that",
+    "board of directors",
+    "authorized signatory",
+    "secretary certificate",
+    "il est décidé que",
+    "conseil d'administration",
+    "signataire autorisé",
+    "تقرر ما يلي",
+    "مجلس الإدارة",
+    "المفوض بالتوقيع",
+    "approval",
+    "minutes",
+    "approbation",
+    "procès-verbal",
+    "موافقة",
+    "محضر"
+  ],
+  "Partnership / JV": [
+    "joint venture agreement",
+    "partnership agreement",
+    "contrat de partenariat",
+    "contrat de coentreprise",
+    "عقد شراكة",
+    "اتفاقية مشروع مشترك",
+    "joint venture",
+    "partner",
+    "capital contribution",
+    "profit sharing",
+    "management committee",
+    "deadlock",
+    "coentreprise",
+    "partenaire",
+    "apport en capital",
+    "partage des bénéfices",
+    "comité de gestion",
+    "blocage",
+    "مشروع مشترك",
+    "شريك",
+    "مساهمة رأسمالية",
+    "تقاسم الأرباح",
+    "لجنة الإدارة",
+    "طريق مسدود",
+    "governance",
+    "contribution",
+    "gouvernance",
+    "contribution",
+    "حوكمة",
+    "مساهمة"
+  ],
+  "Investment / Shareholder": [
+    "shareholders agreement",
+    "investment agreement",
+    "share purchase agreement",
+    "pacte d'actionnaires",
+    "contrat d'investissement",
+    "اتفاقية المساهمين",
+    "اتفاقية استثمار",
+    "share purchase",
+    "equity stake",
+    "board seat",
+    "drag-along",
+    "tag-along",
+    "preemptive rights",
+    "cap table",
+    "convertible note",
+    "vesting",
+    "cession d'actions",
+    "participation au capital",
+    "siège au conseil",
+    "droit de préemption",
+    "شراء الأسهم",
+    "حصة ملكية",
+    "مقعد في المجلس",
+    "حق الأفضلية",
+    "استحقاق الأسهم",
+    "shares",
+    "investor",
+    "dividends",
+    "actions",
+    "investisseur",
+    "dividendes",
+    "أسهم",
+    "مستثمر",
+    "أرباح"
+  ],
+  "Terms of Service": [
+    "terms of service",
+    "terms and conditions",
+    "website terms",
+    "conditions d'utilisation",
+    "conditions générales",
+    "شروط الخدمة",
+    "الشروط والأحكام",
+    "user account",
+    "acceptable use",
+    "platform rules",
+    "user content",
+    "compte utilisateur",
+    "utilisation acceptable",
+    "règles de la plateforme",
+    "حساب المستخدم",
+    "الاستخدام المقبول",
+    "قواعد المنصة",
+    "user",
+    "account",
+    "platform",
+    "utilisateur",
+    "compte",
+    "plateforme",
+    "مستخدم",
+    "حساب",
+    "منصة"
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------------
+NAME: TITLE_PATTERNS
+TYPE: list
+[
+  "^\\s*(master services agreement|master service agreement)",
+  "^\\s*(software as a service|saas agreement)",
+  "^\\s*(data processing agreement|data processing addendum|dpa)",
+  "^\\s*(non-disclosure agreement|confidentiality agreement)",
+  "^\\s*(employment agreement|employment contract)",
+  "^\\s*(license agreement|software license agreement)",
+  "^\\s*(lease agreement|commercial lease|residential lease)",
+  "^\\s*(loan agreement|credit agreement|facility agreement)",
+  "^\\s*(purchase agreement|sale agreement|sale and purchase agreement)",
+  "^\\s*(distribution agreement|reseller agreement|franchise agreement)",
+  "^\\s*(construction contract|epc contract)",
+  "^\\s*(settlement agreement|power of attorney|corporate resolution)",
+  "^\\s*(accord-cadre|contrat de services|contrat saas)",
+  "^\\s*(accord de traitement des données|avenant de traitement des données)",
+  "^\\s*(accord de confidentialité|contrat de travail|contrat de licence)",
+  "^\\s*(contrat de bail|contrat de prêt|contrat de vente)",
+  "^\\s*(contrat de distribution|contrat de franchise|contrat de construction)",
+  "^\\s*(accord transactionnel|procuration|résolution du conseil)",
+  "^\\s*(اتفاقية الخدمات الرئيسية|عقد خدمات|عقد برمجيات كخدمة)",
+  "^\\s*(اتفاقية معالجة البيانات|ملحق معالجة البيانات)",
+  "^\\s*(اتفاقية عدم إفصاح|عقد عمل|عقد ترخيص)",
+  "^\\s*(عقد إيجار|عقد كراء|عقد قرض|عقد بيع)",
+  "^\\s*(عقد توزيع|عقد امتياز|عقد إنشاءات|عقد مقاولة)",
+  "^\\s*(اتفاقية تسوية|عقد صلح|وكالة|قرار مجلس الإدارة)"
+]
+
+------------------------------------------------------------------------------------------------------------------------
+NAME: PRIMARY_FAMILY_PRIORITY
+TYPE: list
+[
+  "MSA",
+  "Employment",
+  "NDA",
+  "Data Processing",
+  "SaaS",
+  "Cybersecurity",
+  "Licensing",
+  "Procurement",
+  "Sale / Purchase",
+  "Distribution / Reseller",
+  "Franchise",
+  "Agency",
+  "Outsourcing",
+  "Real Estate",
+  "Finance / Lending",
+  "Insurance",
+  "Construction",
+  "Manufacturing",
+  "Transportation / Logistics",
+  "Settlement",
+  "Power of Attorney",
+  "Corporate Resolution",
+  "Partnership / JV",
+  "Investment / Shareholder",
+  "Terms of Service"
+]
+
+========================================================================================================================
+FUNCTION INVENTORY
+========================================================================================================================
+normalize_text: 1136-1139
+get_title_zone: 1142-1143
+count_term_occurrences: 1146-1158
+calculate_family_scores: 1161-1195
+pick_primary_family: 1198-1218
+detect_contract_family: 1221-1282
+build_family_hint: 1285-1321
+
+========================================================================================================================
+FAMILY-RELATED FUNCTION SOURCES
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: count_term_occurrences
+LINES: 1146 - 1158
+------------------------------------------------------------------------------------------------------------------------
+def count_term_occurrences(term: str, text: str) -> int:
+    term = normalize_text(term)
+
+    if not term:
+        return 0
+
+    pattern = re.escape(term)
+
+    # Use boundary-like checks for latin terms; Arabic often needs substring.
+    if re.search(r"[a-zA-ZÀ-ÿ]", term):
+        pattern = r"(?<!\w)" + pattern + r"(?!\w)"
+
+    return len(re.findall(pattern, text, flags=re.IGNORECASE))
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: calculate_family_scores
+LINES: 1161 - 1195
+------------------------------------------------------------------------------------------------------------------------
+def calculate_family_scores(contract_text: str) -> tuple[dict, dict]:
+    lowered = normalize_text(contract_text)
+    title_zone = get_title_zone(contract_text)
+
+    scores = defaultdict(int)
+    evidence = defaultdict(list)
+
+    for family, weighted_groups in FAMILY_INDICATORS.items():
+        for weight, indicators in weighted_groups.items():
+            for term in indicators:
+                count = count_term_occurrences(term, lowered)
+
+                if count:
+                    points = count * weight
+                    scores[family] += points
+                    evidence[family].append({
+                        "term": term,
+                        "count": count,
+                        "weight": weight,
+                        "points": points,
+                    })
+
+                title_count = count_term_occurrences(term, title_zone)
+                if title_count:
+                    title_points = title_count * 5
+                    scores[family] += title_points
+                    evidence[family].append({
+                        "term": term,
+                        "count": title_count,
+                        "weight": 5,
+                        "points": title_points,
+                        "zone": "title",
+                    })
+
+    return dict(scores), dict(evidence)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: pick_primary_family
+LINES: 1198 - 1218
+------------------------------------------------------------------------------------------------------------------------
+def pick_primary_family(ranked: list[tuple[str, int]]) -> tuple[str, int]:
+    if not ranked:
+        return "General", 0
+
+    top_score = ranked[0][1]
+    close = [
+        item
+        for item in ranked
+        if item[1] >= top_score * 0.85
+    ]
+
+    if len(close) == 1:
+        return ranked[0]
+
+    # Prefer structural family among close candidates.
+    for preferred in PRIMARY_FAMILY_PRIORITY:
+        for family, score in close:
+            if family == preferred:
+                return family, score
+
+    return ranked[0]
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: detect_contract_family
+LINES: 1221 - 1282
+------------------------------------------------------------------------------------------------------------------------
+def detect_contract_family(contract_text: str) -> dict:
+    """
+    Returns:
+        {
+            "family": str,
+            "confidence": "high" | "medium" | "low",
+            "co_occurring_families": list[str],
+            "scores": {family: weighted_score, ...},
+            "evidence": {family: [{term, count, weight, points}, ...]},
+        }
+    """
+    if not contract_text or not str(contract_text).strip():
+        return {
+            "family": "General",
+            "confidence": "low",
+            "co_occurring_families": [],
+            "scores": {},
+            "evidence": {},
+        }
+
+    scores, evidence = calculate_family_scores(contract_text)
+
+    if not scores:
+        return {
+            "family": "General",
+            "confidence": "low",
+            "co_occurring_families": [],
+            "scores": {},
+            "evidence": {},
+        }
+
+    ranked = sorted(
+        scores.items(),
+        key=lambda kv: kv[1],
+        reverse=True,
+    )
+
+    top_family, top_score = pick_primary_family(ranked)
+    second_score = ranked[1][1] if len(ranked) > 1 else 0
+
+    if top_score >= 18 and top_score >= second_score * 1.45:
+        confidence = "high"
+    elif top_score >= 8:
+        confidence = "medium"
+    else:
+        confidence = "low"
+
+    co_occurring = [
+        family
+        for family, score in ranked
+        if family != top_family
+        and score >= max(5, top_score * 0.45)
+    ]
+
+    return {
+        "family": top_family,
+        "confidence": confidence,
+        "co_occurring_families": co_occurring,
+        "scores": scores,
+        "evidence": evidence,
+        "ranked_families": ranked,
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_family_hint
+LINES: 1285 - 1321
+------------------------------------------------------------------------------------------------------------------------
+def build_family_hint(detection: dict) -> str:
+    family = detection.get("family", "General")
+    confidence = detection.get("confidence", "low")
+
+    hint = (
+        f'Detected contract_family: "{family}" '
+        f"(confidence: {confidence})."
+    )
+
+    if detection.get("co_occurring_families"):
+        hint += (
+            " This contract also shows strong signals for: "
+            + ", ".join(detection["co_occurring_families"])
+            + ". Apply reasoning from ALL relevant families where clauses overlap. "
+              "For hybrid contracts, do not force a single market standard. "
+              "For example, an MSA + SaaS + Cybersecurity + Data Processing hybrid "
+              "should be reasoned about using service-level norms, security-incident "
+              "norms, data-processing norms, confidentiality norms, and liability-allocation "
+              "norms together."
+        )
+
+    hint += (
+        " Important calibration rule: clauses that are standard for the detected "
+        "sector or contract family should not be classified as High Risk merely "
+        "because they impose obligations. High Risk should normally require substantial "
+        "financial exposure, major operational disruption, significant litigation or "
+        "regulatory exposure, severe imbalance, hidden leverage, or multiple interacting "
+        "clauses that materially increase risk."
+    )
+
+    if confidence == "low":
+        hint += (
+            " Confidence is low — do not force-fit a specialized framework; note the "
+            "ambiguity in confidence_notes instead of guessing the contract family."
+        )
+
+    return hint
+
+========================================================================================================================
+DETECT FUNCTION
+========================================================================================================================
+FOUND: True
+MODULE: app.services.contract_agent.contract_family_detector
+FILE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_family_detector.py
+def detect_contract_family(contract_text: str) -> dict:
+    """
+    Returns:
+        {
+            "family": str,
+            "confidence": "high" | "medium" | "low",
+            "co_occurring_families": list[str],
+            "scores": {family: weighted_score, ...},
+            "evidence": {family: [{term, count, weight, points}, ...]},
+        }
+    """
+    if not contract_text or not str(contract_text).strip():
+        return {
+            "family": "General",
+            "confidence": "low",
+            "co_occurring_families": [],
+            "scores": {},
+            "evidence": {},
+        }
+
+    scores, evidence = calculate_family_scores(contract_text)
+
+    if not scores:
+        return {
+            "family": "General",
+            "confidence": "low",
+            "co_occurring_families": [],
+            "scores": {},
+            "evidence": {},
+        }
+
+    ranked = sorted(
+        scores.items(),
+        key=lambda kv: kv[1],
+        reverse=True,
+    )
+
+    top_family, top_score = pick_primary_family(ranked)
+    second_score = ranked[1][1] if len(ranked) > 1 else 0
+
+    if top_score >= 18 and top_score >= second_score * 1.45:
+        confidence = "high"
+    elif top_score >= 8:
+        confidence = "medium"
+    else:
+        confidence = "low"
+
+    co_occurring = [
+        family
+        for family, score in ranked
+        if family != top_family
+        and score >= max(5, top_score * 0.45)
+    ]
+
+    return {
+        "family": top_family,
+        "confidence": confidence,
+        "co_occurring_families": co_occurring,
+        "scores": scores,
+        "evidence": evidence,
+        "ranked_families": ranked,
+    }
+
+
+========================================================================================================================
+REAL CONTRACT TEXT PROVENANCE
+========================================================================================================================
+FOUND: False
+PATH: None
+LENGTH: None
+
+No raw contract text persisted in last_analysis.json.
+
+========================================================================================================================
+DIRECT CONTROL CASES
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+EN CYBERSECURITY SERVICES
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "Cybersecurity",
+  "confidence": "high",
+  "co_occurring_families": [
+    "MSA"
+  ],
+  "scores": {
+    "MSA": 44,
+    "Cybersecurity": 94,
+    "Construction": 8
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "services agreement",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "services agreement",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "cybersecurity services agreement",
+        "count": 1,
+        "weight": 5,
+        "points": 5
+      },
+      {
+        "term": "cybersecurity services agreement",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "cybersecurity",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "cybersecurity",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "security incident",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "security incident",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "threat detection",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "threat detection",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "vulnerability",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "vulnerability",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "incident response",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "incident response",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "security monitoring",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "security monitoring",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "security",
+        "count": 6,
+        "weight": 1,
+        "points": 6
+      },
+      {
+        "term": "security",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      }
+    ],
+    "Construction": [
+      {
+        "term": "site",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "site",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "Cybersecurity",
+      94
+    ],
+    [
+      "MSA",
+      44
+    ],
+    [
+      "Construction",
+      8
+    ]
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------------
+FR CYBERSECURITY SERVICES
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "MSA",
+  "confidence": "medium",
+  "co_occurring_families": [
+    "Cybersecurity"
+  ],
+  "scores": {
+    "MSA": 78,
+    "Cybersecurity": 70
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "client",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "client",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "prestataire",
+        "count": 4,
+        "weight": 1,
+        "points": 4
+      },
+      {
+        "term": "prestataire",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "services",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "cybersécurité",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "cybersécurité",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "sécurité",
+        "count": 5,
+        "weight": 1,
+        "points": 5
+      },
+      {
+        "term": "sécurité",
+        "count": 5,
+        "weight": 5,
+        "points": 25,
+        "zone": "title"
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "MSA",
+      78
+    ],
+    [
+      "Cybersecurity",
+      70
+    ]
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------------
+AR CYBERSECURITY SERVICES
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "Cybersecurity",
+  "confidence": "high",
+  "co_occurring_families": [
+    "MSA"
+  ],
+  "scores": {
+    "MSA": 30,
+    "Cybersecurity": 60,
+    "Real Estate": 6
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "مقدم الخدمة",
+        "count": 4,
+        "weight": 1,
+        "points": 4
+      },
+      {
+        "term": "مقدم الخدمة",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "العميل",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "العميل",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "الأمن السيبراني",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "الأمن السيبراني",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "حادث أمني",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "حادث أمني",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "الاستجابة للحوادث",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "الاستجابة للحوادث",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "أمن",
+        "count": 6,
+        "weight": 1,
+        "points": 6
+      },
+      {
+        "term": "أمن",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      }
+    ],
+    "Real Estate": [
+      {
+        "term": "مرافق",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "مرافق",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "Cybersecurity",
+      60
+    ],
+    [
+      "MSA",
+      30
+    ],
+    [
+      "Real Estate",
+      6
+    ]
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------------
+EN GENERIC MSA WITH SECURITY
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "MSA",
+  "confidence": "high",
+  "co_occurring_families": [],
+  "scores": {
+    "MSA": 50,
+    "Cybersecurity": 12,
+    "Consulting": 12,
+    "Procurement": 6,
+    "Outsourcing": 6,
+    "Partnership / JV": 6
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "master services agreement",
+        "count": 1,
+        "weight": 5,
+        "points": 5
+      },
+      {
+        "term": "master services agreement",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "statement of work",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "statement of work",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "services agreement",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "services agreement",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "security",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "security",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      }
+    ],
+    "Consulting": [
+      {
+        "term": "deliverables",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "deliverables",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "professional services",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "professional services",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Procurement": [
+      {
+        "term": "acceptance",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "acceptance",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Outsourcing": [
+      {
+        "term": "governance",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "governance",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Partnership / JV": [
+      {
+        "term": "governance",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "governance",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "MSA",
+      50
+    ],
+    [
+      "Cybersecurity",
+      12
+    ],
+    [
+      "Consulting",
+      12
+    ],
+    [
+      "Procurement",
+      6
+    ],
+    [
+      "Outsourcing",
+      6
+    ],
+    [
+      "Partnership / JV",
+      6
+    ]
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------------
+FR GENERIC MSA WITH SECURITY
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "MSA",
+  "confidence": "high",
+  "co_occurring_families": [],
+  "scores": {
+    "MSA": 62,
+    "Cybersecurity": 12,
+    "Consulting": 12,
+    "Real Estate": 12
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "accord-cadre de services",
+        "count": 1,
+        "weight": 5,
+        "points": 5
+      },
+      {
+        "term": "accord-cadre de services",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "accord-cadre",
+        "count": 1,
+        "weight": 5,
+        "points": 5
+      },
+      {
+        "term": "accord-cadre",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "client",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "client",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "prestataire",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "prestataire",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "services",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "sécurité",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "sécurité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      }
+    ],
+    "Consulting": [
+      {
+        "term": "livrables",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "livrables",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "services professionnels",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "services professionnels",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Real Estate": [
+      {
+        "term": "charges",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "charges",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "MSA",
+      62
+    ],
+    [
+      "Cybersecurity",
+      12
+    ],
+    [
+      "Consulting",
+      12
+    ],
+    [
+      "Real Estate",
+      12
+    ]
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------------
+AR GENERIC MSA WITH SECURITY
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "MSA",
+  "confidence": "high",
+  "co_occurring_families": [
+    "Cybersecurity",
+    "Insurance"
+  ],
+  "scores": {
+    "MSA": 18,
+    "Cybersecurity": 12,
+    "Procurement": 6,
+    "Insurance": 12
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "مقدم الخدمة",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "مقدم الخدمة",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "العميل",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "العميل",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "أمن",
+        "count": 2,
+        "weight": 1,
+        "points": 2
+      },
+      {
+        "term": "أمن",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      }
+    ],
+    "Procurement": [
+      {
+        "term": "قبول",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "قبول",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Insurance": [
+      {
+        "term": "وثيقة",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "وثيقة",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "خطر",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "خطر",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "MSA",
+      18
+    ],
+    [
+      "Cybersecurity",
+      12
+    ],
+    [
+      "Insurance",
+      12
+    ],
+    [
+      "Procurement",
+      6
+    ]
+  ]
+}

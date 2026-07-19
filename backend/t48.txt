@@ -1,0 +1,23 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 224089
+PDF_LINES_DEBUG {'line_count': 5177, 'non_empty_line_count': 2466, 'max_line_len': 128, 'first_20': ['Statement Period', '                                         31 August 2023 - 29 February 2024', '', '', '', '                                                            Account NameWestpac Choice Basic', '                           MR JOHN THOMAS MCKINNON', '', '', '                                                          Customer ID', 'MR J MCKINNON                          1137 7425   MCKINNON, JOHN', '5 POINCIANA ST                             THOMAS', 'CRANBROOK QLD 4814', '                                               BSB                             Account Number', '                                           734-167               812 273', '', '', '', '                                              Opening Balance                     + $0.10', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.1, 'deposits': 23451.69, 'withdrawals': 23451.74, 'ending_balance': 0.05}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.1, 'deposits': 23451.69, 'withdrawals': 23451.74, 'ending_balance': 0.05}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.1, 'deposits': 23451.69, 'withdrawals': 23451.74, 'ending_balance': 0.05}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 19, 'dep_line': 'DATE     TRANSACTION DESCRIPTION                             DEBIT          CREDIT     BALANCE', 'wd_i': 27, 'wd_line': '01/09/23   Debit Card Purchase Woolworths 2537 Cairns', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 3, 'income': 0, 'expenses': 3, 'income_total': 0, 'expense_total': 140.79, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': True, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+WESTPAC_AU_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 1369, 'income_total': 23451.69, 'expense_total': 23451.74}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': True, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_VALUE_DATE_DEBIT_CREDIT_EXTRACTED {'transactions': 10, 'income': 8, 'expenses': 2}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 3, 'income_total': 0, 'expense_total': 140.79, 'income_gap': 23451.69, 'expense_gap': 23310.95, 'ledger_total': 140.79, 'max_tx_abs': 82.75, 'score': 46762.64}, {'parser': 'westpac_au_debit_credit_balance', 'count': 1369, 'income_total': 23451.69, 'expense_total': 23451.74, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 46903.43, 'max_tx_abs': 770.0, 'score': 20000.0}, {'parser': 'global_value_date_debit_credit', 'count': 10, 'income_total': 758.95, 'expense_total': 90.76, 'income_gap': 22692.74, 'expense_gap': 23360.98, 'ledger_total': 849.71, 'max_tx_abs': 160.1, 'score': 46053.72}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'westpac_au_debit_credit_balance', 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 20000.0}]
+STATEMENT_LAYOUT_DETECTED westpac_au_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'westpac_au_debit_credit_balance', 'transactions': 1369, 'income_total': 23451.69, 'expense_total': 23451.74, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 20000.0}
+OK_REAL t48.pdf | tx=1369 income=23451.69 expenses=23451.74 expected_income=23451.69 expected_expenses=23451.74 summary_ok=True real_ok=True opening=0.1 ending=0.05 gap=0.0 reason=MATCHES_REAL_STATEMENT_VALUES

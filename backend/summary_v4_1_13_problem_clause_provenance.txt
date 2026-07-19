@@ -1,0 +1,3 @@
+FILE: last_analysis.json
+CLAUSES: 0
+SELECTED: 0

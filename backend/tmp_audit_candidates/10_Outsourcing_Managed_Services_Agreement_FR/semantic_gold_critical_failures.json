@@ -1,0 +1,48 @@
+[
+  {
+    "fixture_id": "10_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Pendant la Période de Transition, le Prestataire mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations du Client.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  }
+]

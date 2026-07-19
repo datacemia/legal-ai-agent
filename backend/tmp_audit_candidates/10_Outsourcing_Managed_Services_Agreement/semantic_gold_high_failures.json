@@ -1,0 +1,38 @@
+[
+  {
+    "fixture_id": "10_6_1_en",
+    "language": "en",
+    "source_text": "6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Client or a successor provider, at Client's request and expense at Provider's then-current rates.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+      "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+    ]
+  }
+]

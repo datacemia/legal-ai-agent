@@ -1,0 +1,179 @@
+[
+  {
+    "language": "ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "4.1 طالما احتفظ المستثمر بنسبة لا تقل عن 3% من رأس المال المخفف بالكامل للشركة، تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "financial_reporting",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5804,
+    "shadow_dominance_margin": 69.2965,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "financial_reporting",
+        "score": 69.2965,
+        "coverage": 0.5804,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 95,
+            "end": 226,
+            "text": "بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوم"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 80,
+            "end": 228,
+            "text": "تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 95,
+            "end": 226,
+            "text": "بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوم"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 80,
+            "end": 228,
+            "text": "تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "26117d125e8fad13768284c851040c8368a225f005b1c442a0012bdccc3c9844",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 95,
+            "end": 226,
+            "text": "بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوم"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 80,
+            "end": 228,
+            "text": "تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "26117d125e8fad13768284c851040c8368a225f005b1c442a0012bdccc3c9844",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "semantic_profile_hash": "7c79cc3d62ddbe3d91be5cd081fe0216ceb68f5c40c1be826d978e937fdbf5be",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

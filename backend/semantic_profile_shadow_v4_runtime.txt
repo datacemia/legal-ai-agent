@@ -1,0 +1,47 @@
+========================================================================================
+SEMANTIC SOURCE PROFILE — SHADOW AUDIT
+========================================================================================
+EXACT FIXTURE FILES: 45
+CLAUSES AUDITED: 355
+FILE ERRORS: 0
+LANGUAGES: {'en': 117, 'fr': 119, 'ar': 119}
+TYPE VERDICTS: {'MATCH': 94, 'ABSTAINED': 229, 'DIVERGENCE': 32}
+ABSTENTION REASONS: {'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 26, 'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 197, 'COMPETING_DOMAIN_MECHANISMS': 6}
+EVIDENCE INTEGRITY FAILURES: 0
+TYPE DIVERGENCES: 32
+RANKED MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 21, 'PROHIBITION': 28, 'CONFIDENTIALITY_DUTY': 4, 'CONFIDENTIAL_USE_RESTRICTION': 2, 'CONFIDENTIALITY_EXCLUSION': 2, 'CONFIDENTIALITY_SURVIVAL': 3, 'LICENSE_GRANT': 6, 'CONFIDENTIALITY_REMEDY': 3, 'GOVERNING_LAW_SELECTION': 8, 'TERMINATION_FOR_CAUSE': 11, 'TERMINATION_FOR_CONVENIENCE': 10, 'TERMINATION_RIGHT': 17, 'NOTICE_PROCEDURE': 3, 'AUTOMATIC_RENEWAL': 9, 'WORK_PRODUCT_OWNERSHIP_TRANSFER': 4, 'SERVICE_PERFORMANCE_OBLIGATION': 4, 'PROFESSIONAL_STANDARD_OF_CARE': 2, 'PAYMENT_OBLIGATION': 11, 'PAYMENT_DEADLINE': 10, 'INDEMNIFICATION_OBLIGATION': 20, 'EXCLUDED_DAMAGE_CATEGORY': 9, 'SERVICE_LEVEL_COMMITMENT': 2, 'BREACH_NOTIFICATION': 8, 'SECURITY_SAFEGUARD_OBLIGATION': 4, 'LIABILITY_CAP': 8, 'PROCESSING_INSTRUCTION_LIMIT': 1, 'MANDATORY_OBLIGATION': 2, 'DATA_SUBJECT_ASSISTANCE': 3, 'BASE_COMPENSATION': 5, 'EMPLOYMENT_ROLE_DUTY': 3, 'EXPRESS_RIGHT': 5, 'LICENSE_RESTRICTION': 1, 'INTEREST_ACCRUAL': 5, 'FINANCIAL_REPORTING_OBLIGATION': 4, 'FINANCIAL_COVENANT': 2, 'LOAN_DISBURSEMENT': 1, 'PRINCIPAL_REPAYMENT': 5, 'ASSIGNMENT_TRANSFER': 6, 'MANDATORY_CONJUNCTION': 6, 'BOARD_COMPOSITION_STRUCTURE': 2, 'AUTOMATIC_EVENT_TRANSITION': 2, 'IP_OWNERSHIP_ALLOCATION': 8, 'BACKGROUND_IP_RETENTION': 1, 'DATA_RETURN_OR_DELETION': 1, 'NON_COMPETE_RESTRICTION': 2, 'NON_SOLICITATION_RESTRICTION': 1}
+SUMMARY: semantic_profile_shadow_v4\shadow_summary.json
+
+TOP TYPE DIVERGENCES
+EN | 01_NDA_Confidentiality_Agreement.json | clause_5 | pipeline=confidentiality | shadow=intellectual_property | mechanisms=['LICENSE_GRANT']
+EN | 02_Master_Services_Agreement.json | clause_4 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+EN | 02_Master_Services_Agreement.json | clause_9 | pipeline=liability | shadow=indemnity | mechanisms=['INDEMNIFICATION_OBLIGATION', 'EXCLUDED_DAMAGE_CATEGORY']
+EN | 03_SaaS_Cloud_Agreement.json | clause_4 | pipeline=security | shadow=data_protection | mechanisms=['BREACH_NOTIFICATION', 'SECURITY_SAFEGUARD_OBLIGATION']
+EN | 04_Cybersecurity_Services_Agreement.json | clause_4 | pipeline=security | shadow=data_protection | mechanisms=['BREACH_NOTIFICATION']
+EN | 04_Cybersecurity_Services_Agreement.json | clause_6 | pipeline=cybersecurity | shadow=services | mechanisms=['SERVICE_PERFORMANCE_OBLIGATION']
+EN | 05_Data_Processing_Agreement.json | clause_4 | pipeline=security | shadow=data_protection | mechanisms=['SECURITY_SAFEGUARD_OBLIGATION']
+EN | 07_Software_Licensing_Agreement.json | clause_2 | pipeline=warranty | shadow=intellectual_property | mechanisms=['EXPRESS_RIGHT', 'LICENSE_GRANT']
+EN | 10_Outsourcing_Managed_Services_Agreement.json | clause_5 | pipeline=corporate_governance | shadow=services | mechanisms=['SERVICE_PERFORMANCE_OBLIGATION']
+EN | 11_Commercial_Lease_Agreement.json | clause_9 | pipeline=insurance | shadow=indemnity | mechanisms=['INDEMNIFICATION_OBLIGATION']
+EN | 12_Loan_Credit_Agreement.json | clause_1 | pipeline=remedies | shadow=loan | mechanisms=['INTEREST_ACCRUAL']
+EN | 12_Loan_Credit_Agreement.json | clause_3 | pipeline=notice | shadow=payment | mechanisms=['PAYMENT_DEADLINE']
+EN | 15_General_Commercial_Agreement.json | clause_7 | pipeline=renewal | shadow=termination | mechanisms=['AUTOMATIC_RENEWAL', 'TERMINATION_FOR_CONVENIENCE', 'TERMINATION_RIGHT', 'NOTICE_PROCEDURE']
+FR | 01_NDA_Confidentiality_Agreement_FR.json | clause_6 | pipeline=warranty | shadow=intellectual_property | mechanisms=['LICENSE_GRANT']
+FR | 02_Master_Services_Agreement_FR.json | clause_2 | pipeline=work_product | shadow=intellectual_property | mechanisms=['IP_OWNERSHIP_ALLOCATION']
+FR | 03_SaaS_Cloud_Agreement_FR.json | clause_4 | pipeline=security | shadow=data_protection | mechanisms=['BREACH_NOTIFICATION']
+FR | 04_Cybersecurity_Services_Agreement_FR.json | clause_3 | pipeline=security | shadow=data_protection | mechanisms=['BREACH_NOTIFICATION']
+FR | 06_Executive_Employment_Agreement_FR.json | clause_1 | pipeline=change_of_control | shadow=employment | mechanisms=['BASE_COMPENSATION']
+AR | 01_NDA_Confidentiality_Agreement_AR.json | clause_6 | pipeline=other | shadow=confidentiality | mechanisms=['CONFIDENTIALITY_SURVIVAL']
+AR | 02_Master_Services_Agreement_AR.json | clause_6 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER', 'IP_OWNERSHIP_ALLOCATION']
+AR | 02_Master_Services_Agreement_AR.json | clause_9 | pipeline=liability | shadow=indemnity | mechanisms=['INDEMNIFICATION_OBLIGATION', 'EXCLUDED_DAMAGE_CATEGORY']
+AR | 03_SaaS_Cloud_Agreement_AR.json | clause_6 | pipeline=liability | shadow=indemnity | mechanisms=['INDEMNIFICATION_OBLIGATION']
+AR | 04_Cybersecurity_Services_Agreement_AR.json | clause_3 | pipeline=cybersecurity | shadow=data_protection | mechanisms=['BREACH_NOTIFICATION']
+AR | 06_Executive_Employment_Agreement_AR.json | clause_2 | pipeline=services | shadow=restrictive_covenants | mechanisms=['NON_COMPETE_RESTRICTION']
+AR | 06_Executive_Employment_Agreement_AR.json | clause_3 | pipeline=employment | shadow=restrictive_covenants | mechanisms=['NON_SOLICITATION_RESTRICTION']
+AR | 06_Executive_Employment_Agreement_AR.json | clause_5 | pipeline=other | shadow=employment | mechanisms=['BASE_COMPENSATION']
+AR | 06_Executive_Employment_Agreement_AR.json | clause_6 | pipeline=other | shadow=employment | mechanisms=['EMPLOYMENT_ROLE_DUTY']
+AR | 09_Consulting_Services_Agreement_AR.json | clause_4 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER', 'IP_OWNERSHIP_ALLOCATION']
+AR | 10_Outsourcing_Managed_Services_Agreement_AR.json | clause_7 | pipeline=liability | shadow=indemnity | mechanisms=['INDEMNIFICATION_OBLIGATION']
+AR | 11_Commercial_Lease_Agreement_AR.json | clause_9 | pipeline=insurance | shadow=indemnity | mechanisms=['INDEMNIFICATION_OBLIGATION']
+AR | 12_Loan_Credit_Agreement_AR.json | clause_1 | pipeline=penalty | shadow=loan | mechanisms=['PRINCIPAL_REPAYMENT']
+AR | 13_Asset_Purchase_Agreement_AR.json | clause_3 | pipeline=other | shadow=restrictive_covenants | mechanisms=['NON_COMPETE_RESTRICTION']

@@ -1,0 +1,2 @@
+HELPER FOUND: True
+OUTPUT: Cette limitation protège le Prestataire, mais expose le Client. La responsabilité du Prestataire est limitée. Le rapport est fourni au Client.

@@ -1,0 +1,921 @@
+[
+  {
+    "language": "en",
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "clause_5",
+    "source_text": "4.1 Nothing in this Agreement grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind.",
+    "pipeline_clause_type": "confidentiality",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8352,
+    "shadow_dominance_margin": 79.8769,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 79.8769,
+        "coverage": 0.8352,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 30,
+            "end": 182,
+            "text": "grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 30,
+            "end": 182,
+            "text": "grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f873da4c42e76157584cf8072812297c440482598c65f647b02421e7de680671"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 30,
+            "end": 182,
+            "text": "grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f873da4c42e76157584cf8072812297c440482598c65f647b02421e7de680671"
+      }
+    ],
+    "semantic_profile_hash": "6d4325dda0528a8de26845babb65254400400eca56f3837ee6ff84d7ac8156f4",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "3.2 All Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9463,
+    "shadow_dominance_margin": 85.025,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 85.025,
+        "coverage": 0.9463,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 149,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 149,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7d93eec77c02c1478dc432a8dfebda62bf25289bc961f7a30b34041e53b090a9"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 149,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7d93eec77c02c1478dc432a8dfebda62bf25289bc961f7a30b34041e53b090a9"
+      }
+    ],
+    "semantic_profile_hash": "53e49ffe9c0c52da706ec1b357e31f075efa9edbf0b84f19d27780b660c3f78c",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "clause_2",
+    "source_text": "4.1 Licensor warrants that it has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.",
+    "pipeline_clause_type": "warranty",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8315,
+    "shadow_dominance_margin": 79.7247,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 79.7247,
+        "coverage": 0.8315,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 47,
+            "end": 279,
+            "text": "grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4be6b4676a574b8207ee3e2aaf6e94eda6a54a9b163854735a83af10f81d9e9d"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 47,
+            "end": 279,
+            "text": "grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "cf4885264d6a957556af622796151e058d7c72441473fd4cb1eb997fd28ebd1b"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4be6b4676a574b8207ee3e2aaf6e94eda6a54a9b163854735a83af10f81d9e9d"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 47,
+            "end": 279,
+            "text": "grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "cf4885264d6a957556af622796151e058d7c72441473fd4cb1eb997fd28ebd1b"
+      }
+    ],
+    "semantic_profile_hash": "7fb5bda195ffb67ade644c40b08694a2a17f2fd0dafa827de31777328be027c7",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "1.2 Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.",
+    "pipeline_clause_type": "license",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9779,
+    "shadow_dominance_margin": 85.7518,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 85.7518,
+        "coverage": 0.9779,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "LICENSE_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 181,
+            "text": "shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 181,
+            "text": "Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 181,
+            "text": "shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "578f62b55e94918dd3498a95b25e686cf5ab30e51d883749fc63765cdef54135"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 181,
+            "text": "Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "3e180f3ab7fc71ac3037c45bf5e48b3bb72886b6ac345bb7c92a59e4d8df86ee"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 181,
+            "text": "shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "578f62b55e94918dd3498a95b25e686cf5ab30e51d883749fc63765cdef54135"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 89,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 181,
+            "text": "Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "3e180f3ab7fc71ac3037c45bf5e48b3bb72886b6ac345bb7c92a59e4d8df86ee"
+      }
+    ],
+    "semantic_profile_hash": "088a6ff4d307fa7dcad2aa6a049435f785a982631e7d8f1974b047ab48a5c307",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "clause_2",
+    "source_text": "3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables.",
+    "pipeline_clause_type": "work_product",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9395,
+    "shadow_dominance_margin": 84.7405,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 84.7405,
+        "coverage": 0.9395,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 13,
+            "end": 215,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 13,
+            "end": 215,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8240861d6530678fe5b07e9f3a29db099eef457eb0823b6eb206c9b0643961a6"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 13,
+            "end": 215,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8240861d6530678fe5b07e9f3a29db099eef457eb0823b6eb206c9b0643961a6"
+      }
+    ],
+    "semantic_profile_hash": "0e270db4b3d15814b882e716d2022b443b230cfc7c060379dce929185757d8ce",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "clause_2",
+    "source_text": "3.1 Tous les travaux, rapports, analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8954,
+    "shadow_dominance_margin": 82.8878,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 82.8878,
+        "coverage": 0.8954,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 32,
+            "end": 306,
+            "text": "analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 32,
+            "end": 306,
+            "text": "analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8997195d4a82ce233ba0f5430e9be30688b183402f733458d649cd64b88f1a36"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 32,
+            "end": 306,
+            "text": "analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8997195d4a82ce233ba0f5430e9be30688b183402f733458d649cd64b88f1a36"
+      }
+    ],
+    "semantic_profile_hash": "8e75f2b3c44999d9b997a01d9c321287279d2c71fbc697edcc480a0d40dce5aa",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "clause_5",
+    "source_text": "3.2 Le Consultant conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre de missions futures avec d'autres clients, à condition de ne divulguer aucune Information Confidentielle de la Partie contractante A.",
+    "pipeline_clause_type": "ownership",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5657,
+    "shadow_dominance_margin": 68.8,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 68.8,
+        "coverage": 0.5657,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BACKGROUND_IP_RETENTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 18,
+            "end": 216,
+            "text": "conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre"
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 18,
+            "end": 216,
+            "text": "conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e260d6f76387ce7c67ccfc71c281807116b19ef2a4a17683d92e8f1875519797"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 18,
+            "end": 216,
+            "text": "conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e260d6f76387ce7c67ccfc71c281807116b19ef2a4a17683d92e8f1875519797"
+      }
+    ],
+    "semantic_profile_hash": "6ec68715a121ae6fbcc6cd0fef1be61bbaa3f3f5c41ada2a6447127c10f785b8",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "clause_7",
+    "source_text": "3.2 تُعتبر جميع المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.872,
+    "shadow_dominance_margin": 81.904,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 81.904,
+        "coverage": 0.872,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "38b71aa99f02960ce15980bf5410640f96bb275e43ed42cf1e1eec2b14a34b86"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "38b71aa99f02960ce15980bf5410640f96bb275e43ed42cf1e1eec2b14a34b86"
+      }
+    ],
+    "semantic_profile_hash": "c8b45067ef125faf079102c74843be07a567c05fa4bfd1ee2c5b278a96a6aa8c",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "clause_4",
+    "source_text": "3.1 تُعتبر جميع نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4.1.2-ip-wave",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8599,
+    "shadow_dominance_margin": 81.3959,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 81.3959,
+        "coverage": 0.8599,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 29,
+            "end": 207,
+            "text": "التقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 29,
+            "end": 207,
+            "text": "التقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "227569efa6890e9ce7ac645e522cae13d81e7df65bbc3ae23d6fb72ea9fc58c7"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 29,
+            "end": 207,
+            "text": "التقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "227569efa6890e9ce7ac645e522cae13d81e7df65bbc3ae23d6fb72ea9fc58c7"
+      }
+    ],
+    "semantic_profile_hash": "4935e3169ed775b44d09a7127e06b5b5f3486588b66ddcc8a364fd14caff0fd8",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

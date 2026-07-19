@@ -1,0 +1,1107 @@
+[
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 If holders of a majority of the outstanding Preferred Stock and a majority of the board approve a sale of the Company, all other shareholders shall be required to vote in favor of and consent to such transaction (\"Drag-Along Right\"), subject to customary protections regarding consideration and representations.",
+    "primary_type": "share_transfer_rights",
+    "expected_source_mechanisms": [
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "required to vote",
+            "start": 155,
+            "end": 171
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "required to vote in favor",
+            "start": 155,
+            "end": 180
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "required to vote in favor of and consent to",
+            "start": 155,
+            "end": 198
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "MANDATORY_CONJUNCTION",
+        "rank": 94,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 155,
+            "end": 248,
+            "text": "required to vote in favor of and consent to such transaction (\"Drag-Along Right\"), subject to"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "arguments": [
+          {
+            "text": "required to vote in favor of",
+            "tokens": [
+              "required",
+              "vote",
+              "favor"
+            ]
+          },
+          {
+            "text": "consent to such transaction (\"Drag-Along Right\"), subject to",
+            "tokens": [
+              "consent",
+              "such",
+              "transaction",
+              "drag",
+              "along",
+              "right",
+              "subject"
+            ]
+          }
+        ],
+        "evidence_hash": "093bf4492d8e4b56412a0d34aad059f140ba0bffe092b7a66f49ee9d5b44c21b",
+        "normalized_concept": "MANDATORY_CONJUNCTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "required to vote",
+            "start": 155,
+            "end": 171
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "required to vote in favor",
+            "start": 155,
+            "end": 180
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "required to vote in favor of and consent to",
+            "start": 155,
+            "end": 198
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "3.2",
+    "source_language": "en",
+    "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\").",
+    "primary_type": "governance",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "Tag-Along Right",
+            "start": 197,
+            "end": 212
+          }
+        ]
+      },
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "shall have the right to participate",
+            "start": 128,
+            "end": 163
+          }
+        ]
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "on the same terms",
+            "start": 177,
+            "end": 194
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TAG_ALONG_RIGHT",
+        "rank": 96,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TAG_ALONG_RIGHT",
+            "start": 9,
+            "end": 214,
+            "text": "founder proposes to transfer shares representing more than 5% of Contracting Party A's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\")"
+          },
+          {
+            "label": "TAG_ALONG_RIGHT",
+            "start": 197,
+            "end": 214,
+            "text": "Tag-Along Right\")"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "48d8fa9affeb7cef606920efbd296be4ad561d0ff8e3f739e17cc3d2da656598",
+        "normalized_concept": "TAG_ALONG_RIGHT",
+        "normalized_relation": {
+          "right_holder": "INVESTOR",
+          "obligated_actor": null,
+          "counterparty": "COMPANY",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 128,
+            "end": 215,
+            "text": "shall have the right to participate in such sale on the same terms (\"Tag-Along Right\")."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "78cc5b309778a5b0d18277da1b8b53718b0eb4beb65332ac0e1d5f453918a5f4",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 29,
+            "end": 212,
+            "text": "transfer shares representing more than 5% of Contracting Party A's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "3369cfa3b2fc6e407521215cb9e6251c25b908e074a674c6ef7a710c50e2926c",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 128,
+            "end": 215,
+            "text": "shall have the right to participate in such sale on the same terms (\"Tag-Along Right\")."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "78cc5b309778a5b0d18277da1b8b53718b0eb4beb65332ac0e1d5f453918a5f4",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 29,
+            "end": 212,
+            "text": "transfer shares representing more than 5% of Contracting Party A's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "3369cfa3b2fc6e407521215cb9e6251c25b908e074a674c6ef7a710c50e2926c",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "shall have the right to participate",
+            "start": 128,
+            "end": 163
+          }
+        ]
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "on the same terms",
+            "start": 177,
+            "end": 194
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances.",
+    "primary_type": "anti_dilution_preemptive_rights",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 17,
+            "end": 225,
+            "text": "shall have the right to purchase its pro rata share of any new securities issued by Contracting Party A, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "23694a99c107843f33b1fe8314cc9343e16efb43640808076d3bb1b9d2a61cf5",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 17,
+            "end": 225,
+            "text": "shall have the right to purchase its pro rata share of any new securities issued by Contracting Party A, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "23694a99c107843f33b1fe8314cc9343e16efb43640808076d3bb1b9d2a61cf5",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 No shareholder shall transfer any shares of the Company's capital stock except in compliance with this Agreement, including a right of first refusal in favor of the Company and then the other shareholders, and compliance with applicable securities laws.",
+    "primary_type": "share_transfer_rights",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 25,
+            "end": 135,
+            "text": "transfer any shares of Contracting Party A's capital stock except in compliance with this Agreement, including a right"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5026b745526413fdc582f82ba484613bfd478e93605871852db588c018d84356",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 25,
+            "end": 135,
+            "text": "transfer any shares of Contracting Party A's capital stock except in compliance with this Agreement, including a right"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5026b745526413fdc582f82ba484613bfd478e93605871852db588c018d84356",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.",
+    "primary_type": "governance",
+    "expected_source_mechanisms": [
+      {
+        "concept": "BOARD_COMPOSITION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "board of directors shall consist of",
+            "start": 18,
+            "end": 53
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BOARD_COMPOSITION_STRUCTURE",
+        "rank": 90,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BOARD_COMPOSITION_STRUCTURE",
+            "start": 18,
+            "end": 273,
+            "text": "board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of Contracting Party A's fully-diluted capitalization, and two (2) independent directors mut"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "b8eb79d9779b0a710c9423373e60cd75a0cc46b17ccc959f8f993a2cfe850eed",
+        "normalized_concept": "BOARD_COMPOSITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "MEMBERS",
+              "semantic_role": "BOARD_SIZE",
+              "related_mechanism": "BOARD_COMPOSITION"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 For so long as the Investor holds at least 3% of the Company's fully-diluted capitalization, the Company shall deliver to the Investor audited annual financial statements within ninety (90) days of fiscal year end, and unaudited quarterly financial statements within forty-five (45) days of each fiscal quarter end.",
+    "primary_type": "investor_information_rights",
+    "expected_source_mechanisms": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "shall deliver to the Investor audited annual financial statements",
+            "start": 109,
+            "end": 174
+          }
+        ]
+      },
+      {
+        "concept": "ANNUAL_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "annual financial statements",
+            "start": 147,
+            "end": 174
+          }
+        ]
+      },
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "quarterly financial statements",
+            "start": 233,
+            "end": 263
+          }
+        ]
+      },
+      {
+        "concept": "AUDITED_REPORTING",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "audited annual financial statements",
+            "start": 139,
+            "end": 174
+          },
+          {
+            "text": "audited quarterly financial statements",
+            "start": 225,
+            "end": 263
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 109,
+            "end": 263,
+            "text": "shall deliver to the Investor audited annual financial statements within ninety (90) days of fiscal year end, and unaudited quarterly financial statements"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 154,
+            "end": 291,
+            "text": "financial statements within ninety (90) days of fiscal year end, and unaudited quarterly financial statements within forty-five (45) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e7eca133d56333dc3fe54cbb46f6b7e9277ce7b64b4e1da2a924a55c7ded28ee",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": "FINANCIAL_STATEMENTS",
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "ANNUAL_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "annual financial statements",
+            "start": 147,
+            "end": 174
+          }
+        ]
+      },
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "quarterly financial statements",
+            "start": 233,
+            "end": 263
+          }
+        ]
+      },
+      {
+        "concept": "AUDITED_REPORTING",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "audited annual financial statements",
+            "start": 139,
+            "end": 174
+          },
+          {
+            "text": "audited quarterly financial statements",
+            "start": 225,
+            "end": 263
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 For so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, the Company shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebtedness in excess of $2,000,000, other than in the ordinary course of business.",
+    "primary_type": "governance",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "without the Investor's prior written consent",
+            "start": 120,
+            "end": 164
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 120,
+            "end": 164,
+            "text": "without the Investor's prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 143,
+            "end": 164,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "8e102498c8f7a503c9ed2a3573d062e0b24c25c5e8723822f9e5d6838db1bb16",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+            },
+            {
+              "value": 2000000,
+              "unit": "USD",
+              "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+              "related_mechanism": "CONSENT_PREREQUISITE"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 143,
+            "end": 164,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2839dab2e0b2a2e68336cbb1100b6a84ab70f541f0d08d5db08d2de3be547a25",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+            },
+            {
+              "value": 2000000,
+              "unit": "USD",
+              "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+              "related_mechanism": "CONSENT_PREREQUISITE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "RESERVED_MATTERS_CONSENT",
+        "rank": 95,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "RESERVED_MATTERS_CONSENT",
+            "start": 101,
+            "end": 251,
+            "text": "Contracting Party A shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock"
+          }
+        ],
+        "grounded": true,
+        "polarity": "CONSENT_REQUIRED",
+        "evidence_hash": "c7bf858188e6a3b218d4a65b2c650e1e5e263b48a5a824994bdc2ec1eab6e4f9",
+        "normalized_concept": "RESERVED_MATTERS_CONSENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 109,
+            "end": 338,
+            "text": "shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fc72e4bd97a008c115004b34ade55748101b7ced49d8a0c15c5a8a5750ae85f0",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "RESERVED_MATTERS_CONSENT",
+        "rank": 95,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "RESERVED_MATTERS_CONSENT",
+            "start": 101,
+            "end": 251,
+            "text": "Contracting Party A shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock"
+          }
+        ],
+        "grounded": true,
+        "polarity": "CONSENT_REQUIRED",
+        "evidence_hash": "c7bf858188e6a3b218d4a65b2c650e1e5e263b48a5a824994bdc2ec1eab6e4f9",
+        "normalized_concept": "RESERVED_MATTERS_CONSENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 109,
+            "end": 338,
+            "text": "shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebt"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fc72e4bd97a008c115004b34ade55748101b7ced49d8a0c15c5a8a5750ae85f0",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 This Agreement shall terminate automatically upon the earlier of a Qualified IPO or a sale of the Company approved in accordance with Section 3.1.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUTOMATIC_TERMINATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "terminate automatically upon",
+            "start": 25,
+            "end": 53
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_EVENT_TRANSITION",
+        "rank": 98,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_EVENT_TRANSITION",
+            "start": 25,
+            "end": 150,
+            "text": "terminate automatically upon the earlier of a Qualified IPO or a sale of Contracting Party A approved in accordance with Section 3.1."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_EVENT",
+        "evidence_hash": "f2e3f6ed2444a496009e75cff87229431153b4949c2ee5c6333361a26f7c9b11",
+        "normalized_concept": "AUTOMATIC_EVENT_TRANSITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  }
+]

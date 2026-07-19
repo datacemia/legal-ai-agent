@@ -1,0 +1,104 @@
+========================================================================================
+SEMANTIC RUNTIME SHAPE INVENTORY
+========================================================================================
+EXACT FIXTURE FILES: 45
+FILE ERRORS: 0
+SEMANTIC PATHS: 42
+REPORT: semantic_runtime_shape\semantic_runtime_shape.json
+
+TOP-LEVEL CLAUSE KEYS
+ 355  reasoning_evidence
+ 355  clause_type
+ 355  confidence
+ 355  trigger
+ 355  semantic_parent
+ 355  confidence_score
+ 355  has_semantic_signal
+ 355  evidence_strength
+ 355  source_evidence_model
+
+SEMANTIC PATHS
+ 382  source_evidence_model.mechanisms[].kind  types={'str': 382}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="PREREQUISITE"
+ 355  reasoning_evidence  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without pr"
+ 355  clause_type  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="confidentiality"
+ 355  confidence  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="high"
+ 355  trigger  types={'str': 161, 'NoneType': 194}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="confidentiality"
+ 355  semantic_parent  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="1. OBLIGATIONS OF CONFIDENTIALITY"
+ 355  confidence_score  types={'float': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=0.85
+ 355  has_semantic_signal  types={'bool': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=true
+ 355  evidence_strength  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="medium"
+ 355  source_evidence_model  types={'dict': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value={"evidence_spans": [{"label": "PRIOR_CONSENT_PREREQUISITE", "start": 150, "end": 179, "text": "without prior written consent"}], "mechanisms": [{"kind": "PREREQUISITE", "state": "PRIOR_CONSENT"}, {"kind": "SOURCE_PROFILE", "primary_type": "corporate_governance", "anchors": ["bound", "confidence", "confidential", "confidentiality", "consent"]}], "semantic_profile_hash": "2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"}
+ 355  source_evidence_model.evidence_spans  types={'list': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=[{"label": "PRIOR_CONSENT_PREREQUISITE", "start": 150, "end": 179, "text": "without prior written consent"}]
+ 355  source_evidence_model.mechanisms  types={'list': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=[{"kind": "PREREQUISITE", "state": "PRIOR_CONSENT"}, {"kind": "SOURCE_PROFILE", "primary_type": "corporate_governance", "anchors": ["bound", "confidence", "confidential", "confidentiality", "consent"]}]
+ 355  source_evidence_model.mechanisms[].primary_type  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="corporate_governance"
+ 355  source_evidence_model.mechanisms[].anchors  types={'list': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=["bound", "confidence", "confidential", "confidentiality", "consent"]
+ 355  source_evidence_model.semantic_profile_hash  types={'str': 355}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+ 304  validation_receipts.recommendation.semantic_coverage  types={'float': 304}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=0.1667
+ 304  validation_receipts.recommendation.semantic_profile_hash  types={'str': 304}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+ 303  validation_receipts.legal_insight.semantic_coverage  types={'float': 303}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=0.0833
+ 303  validation_receipts.legal_insight.semantic_profile_hash  types={'str': 303}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+ 250  validation_receipts.market_comparison.semantic_coverage  types={'float': 250}
+      sample=01_NDA_Confidentiality_Agreement.json#6 value=0.1667
+ 250  validation_receipts.market_comparison.semantic_profile_hash  types={'str': 250}
+      sample=01_NDA_Confidentiality_Agreement.json#6 value="04d059783d9b8dc4cb4c4f5793d0b5c7daa68f462f74f559f57215f030559262"
+  92  validation_receipts.safer_alternative.semantic_coverage  types={'float': 92}
+      sample=02_Master_Services_Agreement.json#1 value=0.3333
+  92  validation_receipts.safer_alternative.semantic_profile_hash  types={'str': 92}
+      sample=02_Master_Services_Agreement.json#1 value="45280107edfcdbf4bdff991c5f8449a8e1a9d3bee352385a276043b278253ac7"
+  79  validation_receipts.negotiation_advice.semantic_coverage  types={'float': 79}
+      sample=02_Master_Services_Agreement.json#2 value=0.1667
+  79  validation_receipts.negotiation_advice.semantic_profile_hash  types={'str': 79}
+      sample=02_Master_Services_Agreement.json#2 value="221c4838460ab933416e7e6e4d1238fd997f751b77b54dd06aaefb44729e5a3d"
+  39  source_evidence_model.evidence_spans[].label  types={'str': 39}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="PRIOR_CONSENT_PREREQUISITE"
+  39  source_evidence_model.evidence_spans[].start  types={'int': 39}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=150
+  39  source_evidence_model.evidence_spans[].end  types={'int': 39}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value=179
+  39  source_evidence_model.evidence_spans[].text  types={'str': 39}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="without prior written consent"
+  27  _publication_validation_history.recommendation.semantic_coverage  types={'float': 27}
+      sample=07_Software_Licensing_Agreement.json#4 value=0.0
+  23  source_evidence_model.mechanisms[].state  types={'str': 23}
+      sample=01_NDA_Confidentiality_Agreement.json#1 value="PRIOR_CONSENT"
+  15  _publication_validation_history.negotiation_advice.semantic_coverage  types={'float': 15}
+      sample=06_Executive_Employment_Agreement.json#4 value=0.0
+  14  _publication_validation_history.market_comparison.semantic_coverage  types={'float': 14}
+      sample=02_Master_Services_Agreement.json#7 value=0.0
+  12  source_evidence_model.mechanisms[].consent_holder  types={'str': 12}
+      sample=04_Cybersecurity_Services_Agreement.json#8 value="contracting party a"
+  12  source_evidence_model.mechanisms[].consent_holder_text  types={'str': 12}
+      sample=04_Cybersecurity_Services_Agreement.json#8 value="to Contracting Party A systems or data without Contracting Party A"
+  11  _publication_validation_history.legal_insight.semantic_coverage  types={'float': 11}
+      sample=04_Cybersecurity_Services_Agreement.json#1 value=0.0
+   8  source_evidence_model.mechanisms[].arguments[].tokens  types={'list': 8}
+      sample=14_Shareholders_Agreement.json#1 value=["favor", "vote"]
+   8  source_evidence_model.mechanisms[].arguments[].signature  types={'list': 8}
+      sample=14_Shareholders_Agreement.json#1 value=["vote"]
+   4  source_evidence_model.mechanisms[].polarity  types={'str': 4}
+      sample=14_Shareholders_Agreement.json#1 value="REQUIRED"
+   4  source_evidence_model.mechanisms[].arguments  types={'list': 4}
+      sample=14_Shareholders_Agreement.json#1 value=[{"tokens": ["favor", "vote"], "signature": ["vote"]}, {"tokens": ["along", "consent", "drag", "right", "transaction"], "signature": ["consent"]}]
+   3  _publication_validation_history.safer_alternative.semantic_coverage  types={'float': 3}
+      sample=14_Shareholders_Agreement.json#8 value=1.0
+   2  source_evidence_model.mechanisms[].notice_prerequisite  types={'bool': 2}
+      sample=14_Shareholders_Agreement.json#8 value=false

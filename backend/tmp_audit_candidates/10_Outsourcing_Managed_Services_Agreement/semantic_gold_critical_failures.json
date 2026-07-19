@@ -1,0 +1,48 @@
+[
+  {
+    "fixture_id": "10_1_1_en",
+    "language": "en",
+    "source_text": "1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred Employees, with minimal disruption to Client's business operations.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  }
+]

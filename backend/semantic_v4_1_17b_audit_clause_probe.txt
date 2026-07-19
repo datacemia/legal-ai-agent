@@ -1,0 +1,36 @@
+========================================================================================================================
+SOURCE
+========================================================================================================================
+3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense.
+
+========================================================================================================================
+EXTRACT SOURCE MECHANISMS
+========================================================================================================================
+
+========================================================================================================================
+SEMANTIC PROFILE
+========================================================================================================================
+
+PRIMARY_TYPE
+"UNKNOWN"
+
+CONFIDENCE
+0.0
+
+ABSTAINED
+true
+
+ABSTENTION_REASON
+"NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM"
+
+CANDIDATE_PRIMARY_TYPE
+null
+
+DOMINANCE_MARGIN
+null
+
+SUPPORTING_MECHANISMS
+[]
+
+RANKED_MATERIAL_MECHANISMS
+[]

@@ -1,0 +1,270 @@
+[
+  {
+    "language": "en",
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "clause_6",
+    "source_text": "4.1 Contracting Party B shall keep confidential all non-public information of Contracting Party A disclosed in connection with the Services, and shall not disclose such information to third parties without Contracting Party A's prior written consent.",
+    "pipeline_clause_type": "services",
+    "shadow_primary_type": "confidentiality",
+    "shadow_primary_type_confidence": 0.945,
+    "shadow_abstained": false,
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 198,
+            "end": 249,
+            "text": "without Contracting Party A's prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 228,
+            "end": 249,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 145,
+            "end": 250,
+            "text": "shall not disclose such information to third parties without Contracting Party A's prior written consent."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 80,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_MECHANISM",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 24,
+            "end": 227,
+            "text": "shall keep confidential all non-public information of Contracting Party A disclosed in connection with the Services, and shall not disclose such information to third parties without Contracting Party A's"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 198,
+            "end": 249,
+            "text": "without Contracting Party A's prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 228,
+            "end": 249,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "49b6ce714cf65ea7815e10e43f4a29fdc703356cc8970352aca4c8bf2a604cca"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 145,
+            "end": 250,
+            "text": "shall not disclose such information to third parties without Contracting Party A's prior written consent."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "4fdb5de1be0d67953100464f19cfc7efe25036a573bcdc257500f81cf24c6b80"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 80,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_MECHANISM",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 24,
+            "end": 227,
+            "text": "shall keep confidential all non-public information of Contracting Party A disclosed in connection with the Services, and shall not disclose such information to third parties without Contracting Party A's"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f4d0b6b2ceeff32f53425d5bac06669fa35f06dbae6481294a29197d47cf6f01"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 198,
+            "end": 249,
+            "text": "without Contracting Party A's prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 228,
+            "end": 249,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "49b6ce714cf65ea7815e10e43f4a29fdc703356cc8970352aca4c8bf2a604cca"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 145,
+            "end": 250,
+            "text": "shall not disclose such information to third parties without Contracting Party A's prior written consent."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "4fdb5de1be0d67953100464f19cfc7efe25036a573bcdc257500f81cf24c6b80"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 80,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_MECHANISM",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 24,
+            "end": 227,
+            "text": "shall keep confidential all non-public information of Contracting Party A disclosed in connection with the Services, and shall not disclose such information to third parties without Contracting Party A's"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f4d0b6b2ceeff32f53425d5bac06669fa35f06dbae6481294a29197d47cf6f01"
+      }
+    ],
+    "semantic_profile_hash": "0e2cb66b3f9a986e8583578b5f7beeb90267cc9cec36f5f8f2d48fdf74e7f8fe",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "clause_8",
+    "source_text": "7.1 تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الطرف الطرف المتعاقد ب أ الموافق عليه وفقاً للبند 3.1.",
+    "pipeline_clause_type": "automatic_renewal",
+    "shadow_primary_type": "termination",
+    "shadow_primary_type_confidence": 0.99,
+    "shadow_abstained": false,
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_EVENT_TRANSITION",
+        "rank": 98,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_EVENT_TRANSITION",
+            "start": 4,
+            "end": 134,
+            "text": "تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الطرف الطرف المتعاقد ب أ الموافق عليه وفقاً للبند 3.1."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_EVENT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "AUTOMATIC_EVENT_TRANSITION",
+        "rank": 98,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_EVENT_TRANSITION",
+            "start": 4,
+            "end": 134,
+            "text": "تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الطرف الطرف المتعاقد ب أ الموافق عليه وفقاً للبند 3.1."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_EVENT",
+        "evidence_hash": "c0ff0d01ac1e4e9706aa28a621c2f128770a10ee66dd2ea38273148bc6493390"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "AUTOMATIC_EVENT_TRANSITION",
+        "rank": 98,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_EVENT_TRANSITION",
+            "start": 4,
+            "end": 134,
+            "text": "تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الطرف الطرف المتعاقد ب أ الموافق عليه وفقاً للبند 3.1."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_EVENT",
+        "evidence_hash": "c0ff0d01ac1e4e9706aa28a621c2f128770a10ee66dd2ea38273148bc6493390"
+      }
+    ],
+    "semantic_profile_hash": "7459854b8636ee3dfda3506b3ad3295af492ea1f6cbe09da2c82be3dfdef1edf",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

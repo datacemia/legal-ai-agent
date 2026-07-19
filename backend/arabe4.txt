@@ -1,0 +1,118 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 4638
+PDF_LINES_DEBUG {'line_count': 114, 'non_empty_line_count': 50, 'max_line_len': 228, 'first_20': ['\x82    \x82', '', '         2 من     1 صفحة                                                                                                             \x81"P&~*a ~ e G,', '', '                                                                                                                                                                                                                      \x81Q?K3I', '', '                C B D - G L O B A L S E R V I C E S W E S T E R N        القابضة عاشور عبدالحميد شادي شركة', '               30 0 0 2 9 1 35 9 9 4 0        : الحساب رقم                            2 34 36 ب . ص', '   1 4 4 5 / 1 0 / 1 9 الى 1 4 4 5 / 0 8 / 1 8  (ه )الفترة حساب كشف                               رامي حديقة', '   2 0 2 4 / 0 4 / 2 8 الى 2 0 2 4 / 0 2 / 2 8  (م )الفترة حساب كشف 2 34 36                                جدة', '', '', '', '', '', '                   المصرفية الحلول توفير في تساعدك متميزة مصرفية قة لعل .. الرياض بنك .. بنكي', '                    لمساعدتك لدينا المختص قه العل مدير مع التحدث يرجى سهولة، و يسر بكل عمالك ل', '                                        . مناسبة مصرفية خدمات من أعمالك تحتاجه ما كل تلبية في', '', '                                                                              العميل، عزيزنا']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': [('balance_history', 32, ['. 0 0                                                          فتتاحى ال الرصيد', '1 0 . 0 0', '1 0 . 0 0                                   سريعة حوالة    0 4 / 1 1', 'R E F R J H I 0 0 0 2 6 0 1 1 8 0 6 1     1 0 / 0 2', 'R E F 2 0 2 4 0 4 1 1 S A R J H I R J H I 6 B O P F 1 1 7', '332 72 9 6 2', 'R a j i A A s h o u r E s t', 'R J H I S A R I', 'S A 4 78 0 0 0 0 5 4 0 6 0 8 0 1 6 1 2 9 0 8 9', 'P M 0 5 : 34 : 1 2 1 1 - 0 4 - 2 0 2 4', 'لي ال النظام طريق عن', 'D A T E - T I M E 1 1 / 0 4 - 1 7: 34 : 1 2', 'V A L U E D T   1 1 / 0 4 / 2 4', '1 0 . 0 0                                             قفال ال رصيد', '. 0 0    2 0 2 ,4 فبراير 2 8     1 4 4 ,5 شعبان 1 8 فى فتتاحى ال الرصيد', '1 0 . 0 0                                                    ايداعات     1', '1 0 . 0 0     2 0 2 ,4 ابريل 2 8     1 4 4 ,5 شوال 1 9     فى قفال ال رصيد', 'على موقعنا بزيارة قم او 800 124 2225 المجاني الهاتف على ء العمل ت اتصال بمركز تصال ال يرجى ستفسار لل', 'http://www.riyadbank.com العنوان على نترنت ال', '370', 'www.riyadbank.com السعودي العربي النقد مؤسسة وإشراف لرقابة وخاضعة 911 بموجب مرخص 114013030 ت  11416 الرياض 22622 ب ص 1010001054 ج.س, ريال مليار30 رأسمال ,عامة مساهمة شركة', '\x82    \x82', '2 من     2 صفحة', '1 4 4 5 / 1 0 / 1 9 الى 1 4 4 5 / 0 8 / 1 8  (ه )الفترة حساب كشف', '2 0 2 4 / 0 4 / 2 8 الى 2 0 2 4 / 0 2 / 2 8  (م )الفترة حساب كشف'])]}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 17, 'dep_line': 'الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': '\x82    \x82\n\n         2 من     1 صفحة                                                                                                             \x81"p&~*a ~ e g,\n\n                                                                                                                                               '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES []
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 2, 'amounts': 0, 'date_sample': [], 'description_sample': ['الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', '1 0 . 0 0                                                    ايداعات     1'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': [('balance_history', 32, ['. 0 0                                                          فتتاحى ال الرصيد', '1 0 . 0 0', '1 0 . 0 0                                   سريعة حوالة    0 4 / 1 1', 'R E F R J H I 0 0 0 2 6 0 1 1 8 0 6 1     1 0 / 0 2', 'R E F 2 0 2 4 0 4 1 1 S A R J H I R J H I 6 B O P F 1 1 7', '332 72 9 6 2', 'R a j i A A s h o u r E s t', 'R J H I S A R I', 'S A 4 78 0 0 0 0 5 4 0 6 0 8 0 1 6 1 2 9 0 8 9', 'P M 0 5 : 34 : 1 2 1 1 - 0 4 - 2 0 2 4', 'لي ال النظام طريق عن', 'D A T E - T I M E 1 1 / 0 4 - 1 7: 34 : 1 2', 'V A L U E D T   1 1 / 0 4 / 2 4', '1 0 . 0 0                                             قفال ال رصيد', '. 0 0    2 0 2 ,4 فبراير 2 8     1 4 4 ,5 شعبان 1 8 فى فتتاحى ال الرصيد', '1 0 . 0 0                                                    ايداعات     1', '1 0 . 0 0     2 0 2 ,4 ابريل 2 8     1 4 4 ,5 شوال 1 9     فى قفال ال رصيد', 'على موقعنا بزيارة قم او 800 124 2225 المجاني الهاتف على ء العمل ت اتصال بمركز تصال ال يرجى ستفسار لل', 'http://www.riyadbank.com العنوان على نترنت ال', '370', 'www.riyadbank.com السعودي العربي النقد مؤسسة وإشراف لرقابة وخاضعة 911 بموجب مرخص 114013030 ت  11416 الرياض 22622 ب ص 1010001054 ج.س, ريال مليار30 رأسمال ,عامة مساهمة شركة', '\x82    \x82', '2 من     2 صفحة', '1 4 4 5 / 1 0 / 1 9 الى 1 4 4 5 / 0 8 / 1 8  (ه )الفترة حساب كشف', '2 0 2 4 / 0 4 / 2 8 الى 2 0 2 4 / 0 2 / 2 8  (م )الفترة حساب كشف'])]}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 17, 'dep_line': 'الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': '\x82    \x82\n\n         2 من     1 صفحة                                                                                                             \x81"p&~*a ~ e g,\n\n                                                                                                                                               '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES []
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 2, 'amounts': 0, 'date_sample': [], 'description_sample': ['الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', '1 0 . 0 0                                                    ايداعات     1'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': [('balance_history', 32, ['. 0 0                                                          فتتاحى ال الرصيد', '1 0 . 0 0', '1 0 . 0 0                                   سريعة حوالة    0 4 / 1 1', 'R E F R J H I 0 0 0 2 6 0 1 1 8 0 6 1     1 0 / 0 2', 'R E F 2 0 2 4 0 4 1 1 S A R J H I R J H I 6 B O P F 1 1 7', '332 72 9 6 2', 'R a j i A A s h o u r E s t', 'R J H I S A R I', 'S A 4 78 0 0 0 0 5 4 0 6 0 8 0 1 6 1 2 9 0 8 9', 'P M 0 5 : 34 : 1 2 1 1 - 0 4 - 2 0 2 4', 'لي ال النظام طريق عن', 'D A T E - T I M E 1 1 / 0 4 - 1 7: 34 : 1 2', 'V A L U E D T   1 1 / 0 4 / 2 4', '1 0 . 0 0                                             قفال ال رصيد', '. 0 0    2 0 2 ,4 فبراير 2 8     1 4 4 ,5 شعبان 1 8 فى فتتاحى ال الرصيد', '1 0 . 0 0                                                    ايداعات     1', '1 0 . 0 0     2 0 2 ,4 ابريل 2 8     1 4 4 ,5 شوال 1 9     فى قفال ال رصيد', 'على موقعنا بزيارة قم او 800 124 2225 المجاني الهاتف على ء العمل ت اتصال بمركز تصال ال يرجى ستفسار لل', 'http://www.riyadbank.com العنوان على نترنت ال', '370', 'www.riyadbank.com السعودي العربي النقد مؤسسة وإشراف لرقابة وخاضعة 911 بموجب مرخص 114013030 ت  11416 الرياض 22622 ب ص 1010001054 ج.س, ريال مليار30 رأسمال ,عامة مساهمة شركة', '\x82    \x82', '2 من     2 صفحة', '1 4 4 5 / 1 0 / 1 9 الى 1 4 4 5 / 0 8 / 1 8  (ه )الفترة حساب كشف', '2 0 2 4 / 0 4 / 2 8 الى 2 0 2 4 / 0 2 / 2 8  (م )الفترة حساب كشف'])]}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 17, 'dep_line': 'الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': '\x82    \x82\n\n         2 من     1 صفحة                                                                                                             \x81"p&~*a ~ e g,\n\n                                                                                                                                               '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES []
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 2, 'amounts': 0, 'date_sample': [], 'description_sample': ['الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', '1 0 . 0 0                                                    ايداعات     1'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': [('balance_history', 32, ['. 0 0                                                          فتتاحى ال الرصيد', '1 0 . 0 0', '1 0 . 0 0                                   سريعة حوالة    0 4 / 1 1', 'R E F R J H I 0 0 0 2 6 0 1 1 8 0 6 1     1 0 / 0 2', 'R E F 2 0 2 4 0 4 1 1 S A R J H I R J H I 6 B O P F 1 1 7', '332 72 9 6 2', 'R a j i A A s h o u r E s t', 'R J H I S A R I', 'S A 4 78 0 0 0 0 5 4 0 6 0 8 0 1 6 1 2 9 0 8 9', 'P M 0 5 : 34 : 1 2 1 1 - 0 4 - 2 0 2 4', 'لي ال النظام طريق عن', 'D A T E - T I M E 1 1 / 0 4 - 1 7: 34 : 1 2', 'V A L U E D T   1 1 / 0 4 / 2 4', '1 0 . 0 0                                             قفال ال رصيد', '. 0 0    2 0 2 ,4 فبراير 2 8     1 4 4 ,5 شعبان 1 8 فى فتتاحى ال الرصيد', '1 0 . 0 0                                                    ايداعات     1', '1 0 . 0 0     2 0 2 ,4 ابريل 2 8     1 4 4 ,5 شوال 1 9     فى قفال ال رصيد', 'على موقعنا بزيارة قم او 800 124 2225 المجاني الهاتف على ء العمل ت اتصال بمركز تصال ال يرجى ستفسار لل', 'http://www.riyadbank.com العنوان على نترنت ال', '370', 'www.riyadbank.com السعودي العربي النقد مؤسسة وإشراف لرقابة وخاضعة 911 بموجب مرخص 114013030 ت  11416 الرياض 22622 ب ص 1010001054 ج.س, ريال مليار30 رأسمال ,عامة مساهمة شركة', '\x82    \x82', '2 من     2 صفحة', '1 4 4 5 / 1 0 / 1 9 الى 1 4 4 5 / 0 8 / 1 8  (ه )الفترة حساب كشف', '2 0 2 4 / 0 4 / 2 8 الى 2 0 2 4 / 0 2 / 2 8  (م )الفترة حساب كشف'])]}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 17, 'dep_line': 'الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': '\x82    \x82\n\n         2 من     1 صفحة                                                                                                             \x81"p&~*a ~ e g,\n\n                                                                                                                                               '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES []
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 2, 'amounts': 0, 'date_sample': [], 'description_sample': ['الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', '1 0 . 0 0                                                    ايداعات     1'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+STATEMENT_SUMMARY_EXTRACTED {}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': [('balance_history', 32, ['. 0 0                                                          فتتاحى ال الرصيد', '1 0 . 0 0', '1 0 . 0 0                                   سريعة حوالة    0 4 / 1 1', 'R E F R J H I 0 0 0 2 6 0 1 1 8 0 6 1     1 0 / 0 2', 'R E F 2 0 2 4 0 4 1 1 S A R J H I R J H I 6 B O P F 1 1 7', '332 72 9 6 2', 'R a j i A A s h o u r E s t', 'R J H I S A R I', 'S A 4 78 0 0 0 0 5 4 0 6 0 8 0 1 6 1 2 9 0 8 9', 'P M 0 5 : 34 : 1 2 1 1 - 0 4 - 2 0 2 4', 'لي ال النظام طريق عن', 'D A T E - T I M E 1 1 / 0 4 - 1 7: 34 : 1 2', 'V A L U E D T   1 1 / 0 4 / 2 4', '1 0 . 0 0                                             قفال ال رصيد', '. 0 0    2 0 2 ,4 فبراير 2 8     1 4 4 ,5 شعبان 1 8 فى فتتاحى ال الرصيد', '1 0 . 0 0                                                    ايداعات     1', '1 0 . 0 0     2 0 2 ,4 ابريل 2 8     1 4 4 ,5 شوال 1 9     فى قفال ال رصيد', 'على موقعنا بزيارة قم او 800 124 2225 المجاني الهاتف على ء العمل ت اتصال بمركز تصال ال يرجى ستفسار لل', 'http://www.riyadbank.com العنوان على نترنت ال', '370', 'www.riyadbank.com السعودي العربي النقد مؤسسة وإشراف لرقابة وخاضعة 911 بموجب مرخص 114013030 ت  11416 الرياض 22622 ب ص 1010001054 ج.س, ريال مليار30 رأسمال ,عامة مساهمة شركة', '\x82    \x82', '2 من     2 صفحة', '1 4 4 5 / 1 0 / 1 9 الى 1 4 4 5 / 0 8 / 1 8  (ه )الفترة حساب كشف', '2 0 2 4 / 0 4 / 2 8 الى 2 0 2 4 / 0 2 / 2 8  (م )الفترة حساب كشف'])]}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 17, 'dep_line': 'الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', 'wd_i': -1, 'wd_line': None, 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': False, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': '\x82    \x82\n\n         2 من     1 صفحة                                                                                                             \x81"p&~*a ~ e g,\n\n                                                                                                                                               '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES []
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 2, 'amounts': 0, 'date_sample': [], 'description_sample': ['الرصيد             دائن             مدين                    الحركه وصف               (ه / م )', '1 0 . 0 0                                                    ايداعات     1'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {}
+WDB_MULTILINE_TOTALS_TARGET {}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 0, 'sample_date_lines': []}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 0, 'samples': []}
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+SUSPICIOUS ARABE 4.pdf | tx=0 income=0 expenses=0 expected_income=None expected_expenses=None summary_ok=None real_ok=None opening=None ending=None gap=None reason=NO_TRANSACTIONS; NO_RELIABLE_REAL_VALUES_FROM_STATEMENT

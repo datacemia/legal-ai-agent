@@ -1,0 +1,10 @@
+================================================================================================
+V4.1.15 DETERMINISTIC SUMMARY HARDENING APPLIED
+TARGET : app\services\contract_agent\unified_report_from_pipeline.py
+BACKUP : app\services\contract_agent\unified_report_from_pipeline.py.before_v4_1_15_20260714_180655
+A: EN/FR/AR source-grounded contract duration
+B: internal publication diagnostics skipped; next candidate or omission
+C: EN/FR/AR publication role lexical normalization
+UNTOUCHED: semantic_source_profile.py, RULES, thresholds, evidence engine,
+publication gate validation logic, risk weights/scoring, taxonomy, frontend
+================================================================================================

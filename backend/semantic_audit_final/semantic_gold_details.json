@@ -47,7 +47,7 @@
         true
       ],
       "object": [
-        false,
+        true,
         true
       ],
       "trigger": [],
@@ -111,7 +111,7 @@
         true
       ],
       "object": [
-        false,
+        true,
         true
       ],
       "trigger": [],
@@ -175,7 +175,7 @@
         true
       ],
       "object": [
-        false,
+        true,
         true
       ],
       "trigger": [],
@@ -334,11 +334,10 @@
     "actual_material_mechanisms": [
       "NOTICE_PREREQUISITE",
       "NOTICE_PROCEDURE",
-      "TERMINATION_FOR_CAUSE"
-    ],
-    "missing_required_mechanisms": [
+      "TERMINATION_FOR_CAUSE",
       "TERMINATION_FOR_CONVENIENCE"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
@@ -350,13 +349,17 @@
         "verdict": "UNSUPPORTED"
       },
       {
+        "concept": "TERMINATION_FOR_CONVENIENCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
         "concept": "NOTICE_PROCEDURE",
         "verdict": "UNSUPPORTED"
       }
     ],
     "argument_results": {
       "actor": [
-        false,
+        true,
         true
       ],
       "object": [],
@@ -364,7 +367,7 @@
         true
       ],
       "polarity": [
-        false,
+        true,
         true
       ]
     },
@@ -374,7 +377,8 @@
     ],
     "actual_states": [
       "MANUAL",
-      "NOTICE_REQUIRED"
+      "NOTICE_REQUIRED",
+      "TERMINATION_FOR_CONVENIENCE"
     ],
     "numeric_hits": 0,
     "numeric_total": 0
@@ -719,7 +723,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -764,7 +768,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -813,7 +817,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -883,8 +887,54 @@
   },
   {
     "fixture_id": "03_4_1_fr",
+    "document": "03_SaaS_Cloud_Agreement_FR.json",
+    "reference": "4.1",
     "language": "fr",
-    "error": "SOURCE_RESULT_NOT_FOUND"
+    "semantic_family": "DATA_OWNERSHIP",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "actual_material_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "OWNERSHIP",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "DATA_DELETION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "DATA_RETURN",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
   },
   {
     "fixture_id": "03_4_1_ar",
@@ -981,7 +1031,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -1030,7 +1080,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -1079,7 +1129,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -1225,7 +1275,6 @@
     ],
     "actual_material_mechanisms": [
       "MANDATORY_OBLIGATION",
-      "PROCESSING_INSTRUCTION_LIMIT",
       "PURPOSE_LIMITATION",
       "SERVICE_SCOPE"
     ],
@@ -1237,8 +1286,8 @@
         "verdict": "UNSUPPORTED"
       },
       {
-        "concept": "PROCESSING_INSTRUCTION_LIMIT",
-        "verdict": "GROUNDED"
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "UNSUPPORTED"
       },
       {
         "concept": "SERVICE_SCOPE",
@@ -1281,7 +1330,6 @@
       "SERVICE_SCOPE"
     ],
     "actual_material_mechanisms": [
-      "PROCESSING_INSTRUCTION_LIMIT",
       "PURPOSE_LIMITATION",
       "SERVICE_SCOPE"
     ],
@@ -1293,8 +1341,8 @@
         "verdict": "UNSUPPORTED"
       },
       {
-        "concept": "PROCESSING_INSTRUCTION_LIMIT",
-        "verdict": "GROUNDED"
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "UNSUPPORTED"
       },
       {
         "concept": "SERVICE_SCOPE",
@@ -1333,7 +1381,6 @@
       "SERVICE_SCOPE"
     ],
     "actual_material_mechanisms": [
-      "PROCESSING_INSTRUCTION_LIMIT",
       "PURPOSE_LIMITATION",
       "SERVICE_SCOPE"
     ],
@@ -1345,7 +1392,7 @@
         "verdict": "UNSUPPORTED"
       },
       {
-        "concept": "PROCESSING_INSTRUCTION_LIMIT",
+        "concept": "PURPOSE_LIMITATION",
         "verdict": "UNSUPPORTED"
       },
       {
@@ -1803,40 +1850,8 @@
   },
   {
     "fixture_id": "06_4_1_fr",
-    "document": "06_Executive_Employment_Agreement_FR.json",
-    "reference": "4.1",
     "language": "fr",
-    "semantic_family": "RESTRICTIVE_COVENANTS",
-    "primary_type_actual": "restrictive_covenants",
-    "primary_type_verdict": "SUPPORTED",
-    "required_mechanisms": [
-      "NON_COMPETE"
-    ],
-    "actual_material_mechanisms": [
-      "NON_COMPETE"
-    ],
-    "missing_required_mechanisms": [],
-    "forbidden_detected_mechanisms": [],
-    "grounding": [
-      {
-        "concept": "NON_COMPETE",
-        "verdict": "UNSUPPORTED"
-      }
-    ],
-    "argument_results": {
-      "actor": [
-        true
-      ],
-      "object": [],
-      "trigger": [],
-      "polarity": [
-        true
-      ]
-    },
-    "expected_states": [],
-    "actual_states": [],
-    "numeric_hits": 1,
-    "numeric_total": 1
+    "error": "SOURCE_RESULT_NOT_FOUND"
   },
   {
     "fixture_id": "06_4_1_ar",
@@ -1907,7 +1922,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -1951,7 +1966,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -1999,7 +2014,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -2374,8 +2389,8 @@
     "reference": "3.1",
     "language": "ar",
     "semantic_family": "PROCUREMENT",
-    "primary_type_actual": "delivery",
-    "primary_type_verdict": "SUPPORTED",
+    "primary_type_actual": "other",
+    "primary_type_verdict": "WEAK",
     "required_mechanisms": [
       "INSPECTION_RIGHT",
       "REPLACEMENT_REMEDY"
@@ -2693,7 +2708,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -2738,7 +2753,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -2783,7 +2798,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -3085,19 +3100,18 @@
     "reference": "5.1",
     "language": "en",
     "semantic_family": "ASSIGNMENT",
-    "primary_type_actual": "lease",
+    "primary_type_actual": "assignment",
     "primary_type_verdict": "SUPPORTED",
     "required_mechanisms": [
       "ASSIGNMENT_RESTRICTION",
       "CONSENT_PREREQUISITE"
     ],
     "actual_material_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
       "CONSENT_PREREQUISITE",
       "PROHIBITION"
     ],
-    "missing_required_mechanisms": [
-      "ASSIGNMENT_RESTRICTION"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
@@ -3109,20 +3123,24 @@
         "verdict": "UNSUPPORTED"
       },
       {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
         "concept": "PROHIBITION",
         "verdict": "UNSUPPORTED"
       }
     ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [
@@ -3143,18 +3161,19 @@
     "reference": "5.1",
     "language": "fr",
     "semantic_family": "ASSIGNMENT",
-    "primary_type_actual": "termination_for_convenience",
-    "primary_type_verdict": "WEAK",
+    "primary_type_actual": "assignment",
+    "primary_type_verdict": "SUPPORTED",
     "required_mechanisms": [
       "ASSIGNMENT_RESTRICTION",
       "CONSENT_PREREQUISITE"
     ],
     "actual_material_mechanisms": [
-      "CONSENT_PREREQUISITE"
+      "ASSIGNMENT_RESTRICTION",
+      "CONSENT_PREREQUISITE",
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
     ],
-    "missing_required_mechanisms": [
-      "ASSIGNMENT_RESTRICTION"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
@@ -3164,18 +3183,30 @@
       {
         "concept": "CONSENT_PREREQUISITE",
         "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "INVESTOR_CONSENT_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "RESERVED_MATTER",
+        "verdict": "UNSUPPORTED"
       }
     ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [
@@ -3219,6 +3250,10 @@
         "verdict": "UNSUPPORTED"
       },
       {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
         "concept": "PROHIBITION",
         "verdict": "UNSUPPORTED"
       },
@@ -3232,7 +3267,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -3284,7 +3319,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -3328,7 +3363,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -3372,7 +3407,7 @@
       ],
       "object": [],
       "trigger": [
-        false
+        true
       ],
       "polarity": [
         true
@@ -3410,7 +3445,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -3449,7 +3484,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -3488,7 +3523,7 @@
         true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
@@ -3640,42 +3675,8 @@
   },
   {
     "fixture_id": "12_4_1_fr",
-    "document": "12_Loan_Credit_Agreement_FR.json",
-    "reference": "4.1",
     "language": "fr",
-    "semantic_family": "FINANCE",
-    "primary_type_actual": "loan",
-    "primary_type_verdict": "SUPPORTED",
-    "required_mechanisms": [
-      "PREPAYMENT_RIGHT"
-    ],
-    "actual_material_mechanisms": [
-      "PREPAYMENT_RIGHT"
-    ],
-    "missing_required_mechanisms": [],
-    "forbidden_detected_mechanisms": [],
-    "grounding": [
-      {
-        "concept": "PREPAYMENT_RIGHT",
-        "verdict": "UNSUPPORTED"
-      }
-    ],
-    "argument_results": {
-      "actor": [
-        true
-      ],
-      "object": [
-        true
-      ],
-      "trigger": [],
-      "polarity": [
-        true
-      ]
-    },
-    "expected_states": [],
-    "actual_states": [],
-    "numeric_hits": 0,
-    "numeric_total": 0
+    "error": "SOURCE_RESULT_NOT_FOUND"
   },
   {
     "fixture_id": "12_4_1_ar",
@@ -3994,23 +3995,40 @@
       "OBLIGATION_TO_CONSENT",
       "OBLIGATION_TO_VOTE_IN_FAVOR"
     ],
-    "actual_material_mechanisms": [],
-    "missing_required_mechanisms": [
+    "actual_material_mechanisms": [
       "DRAG_ALONG_RIGHT",
       "MANDATORY_PARTICIPATION",
       "OBLIGATION_TO_CONSENT",
       "OBLIGATION_TO_VOTE_IN_FAVOR"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
-    "grounding": [],
+    "grounding": [
+      {
+        "concept": "DRAG_ALONG_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "verdict": "GROUNDED"
+      }
+    ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4032,23 +4050,40 @@
       "OBLIGATION_TO_CONSENT",
       "OBLIGATION_TO_VOTE_IN_FAVOR"
     ],
-    "actual_material_mechanisms": [],
-    "missing_required_mechanisms": [
+    "actual_material_mechanisms": [
       "DRAG_ALONG_RIGHT",
       "MANDATORY_PARTICIPATION",
       "OBLIGATION_TO_CONSENT",
       "OBLIGATION_TO_VOTE_IN_FAVOR"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
-    "grounding": [],
+    "grounding": [
+      {
+        "concept": "DRAG_ALONG_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "verdict": "GROUNDED"
+      }
+    ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4070,23 +4105,40 @@
       "OBLIGATION_TO_CONSENT",
       "OBLIGATION_TO_VOTE_IN_FAVOR"
     ],
-    "actual_material_mechanisms": [],
-    "missing_required_mechanisms": [
+    "actual_material_mechanisms": [
       "DRAG_ALONG_RIGHT",
       "MANDATORY_PARTICIPATION",
       "OBLIGATION_TO_CONSENT",
       "OBLIGATION_TO_VOTE_IN_FAVOR"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
-    "grounding": [],
+    "grounding": [
+      {
+        "concept": "DRAG_ALONG_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4110,12 +4162,11 @@
     "actual_material_mechanisms": [
       "ASSIGNMENT_RESTRICTION",
       "EXPRESS_RIGHT",
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
       "TAG_ALONG_RIGHT"
     ],
-    "missing_required_mechanisms": [
-      "PARTICIPATION_OPTION",
-      "SAME_TERMS_RIGHT"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
@@ -4129,6 +4180,14 @@
       {
         "concept": "ASSIGNMENT_RESTRICTION",
         "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "verdict": "GROUNDED"
       }
     ],
     "argument_results": {
@@ -4140,7 +4199,7 @@
       "trigger": [],
       "polarity": [
         true,
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4164,12 +4223,11 @@
     "actual_material_mechanisms": [
       "ASSIGNMENT_RESTRICTION",
       "EXPRESS_RIGHT",
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
       "TAG_ALONG_RIGHT"
     ],
-    "missing_required_mechanisms": [
-      "PARTICIPATION_OPTION",
-      "SAME_TERMS_RIGHT"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
@@ -4183,6 +4241,14 @@
       {
         "concept": "ASSIGNMENT_RESTRICTION",
         "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "verdict": "GROUNDED"
       }
     ],
     "argument_results": {
@@ -4194,7 +4260,7 @@
       "trigger": [],
       "polarity": [
         true,
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4216,16 +4282,23 @@
       "TAG_ALONG_RIGHT"
     ],
     "actual_material_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
       "TAG_ALONG_RIGHT"
     ],
-    "missing_required_mechanisms": [
-      "PARTICIPATION_OPTION",
-      "SAME_TERMS_RIGHT"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
         "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
         "verdict": "GROUNDED"
       }
     ],
@@ -4238,7 +4311,7 @@
       "trigger": [],
       "polarity": [
         true,
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4258,15 +4331,18 @@
       "PREEMPTIVE_RIGHT"
     ],
     "actual_material_mechanisms": [
-      "EXPRESS_RIGHT"
-    ],
-    "missing_required_mechanisms": [
+      "EXPRESS_RIGHT",
       "PREEMPTIVE_RIGHT"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
         "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PREEMPTIVE_RIGHT",
         "verdict": "UNSUPPORTED"
       }
     ],
@@ -4279,7 +4355,7 @@
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4298,12 +4374,17 @@
     "required_mechanisms": [
       "PREEMPTIVE_RIGHT"
     ],
-    "actual_material_mechanisms": [],
-    "missing_required_mechanisms": [
+    "actual_material_mechanisms": [
       "PREEMPTIVE_RIGHT"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
-    "grounding": [],
+    "grounding": [
+      {
+        "concept": "PREEMPTIVE_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
     "argument_results": {
       "actor": [
         false
@@ -4313,7 +4394,7 @@
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4332,12 +4413,17 @@
     "required_mechanisms": [
       "PREEMPTIVE_RIGHT"
     ],
-    "actual_material_mechanisms": [],
-    "missing_required_mechanisms": [
+    "actual_material_mechanisms": [
       "PREEMPTIVE_RIGHT"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
-    "grounding": [],
+    "grounding": [
+      {
+        "concept": "PREEMPTIVE_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
     "argument_results": {
       "actor": [
         false
@@ -4347,7 +4433,7 @@
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [],
@@ -4368,15 +4454,18 @@
       "BOARD_COMPOSITION"
     ],
     "actual_material_mechanisms": [
+      "APPOINTMENT_RIGHT",
       "BOARD_COMPOSITION"
     ],
-    "missing_required_mechanisms": [
-      "APPOINTMENT_RIGHT"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
         "concept": "BOARD_COMPOSITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "APPOINTMENT_RIGHT",
         "verdict": "UNSUPPORTED"
       }
     ],
@@ -4404,16 +4493,19 @@
       "BOARD_COMPOSITION"
     ],
     "actual_material_mechanisms": [
+      "APPOINTMENT_RIGHT",
       "BOARD_COMPOSITION"
     ],
-    "missing_required_mechanisms": [
-      "APPOINTMENT_RIGHT"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
         "concept": "BOARD_COMPOSITION",
         "verdict": "GROUNDED"
+      },
+      {
+        "concept": "APPOINTMENT_RIGHT",
+        "verdict": "UNSUPPORTED"
       }
     ],
     "argument_results": {
@@ -4440,15 +4532,18 @@
       "BOARD_COMPOSITION"
     ],
     "actual_material_mechanisms": [
+      "APPOINTMENT_RIGHT",
       "BOARD_COMPOSITION"
     ],
-    "missing_required_mechanisms": [
-      "APPOINTMENT_RIGHT"
-    ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
         "concept": "BOARD_COMPOSITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "APPOINTMENT_RIGHT",
         "verdict": "UNSUPPORTED"
       }
     ],
@@ -4588,43 +4683,50 @@
       "RESERVED_MATTER"
     ],
     "actual_material_mechanisms": [
-      "CONSENT_PREREQUISITE",
+      "INVESTOR_CONSENT_RIGHT",
       "PROHIBITION",
-      "RESERVED_MATTERS_CONSENT"
+      "RESERVED_MATTER"
     ],
     "missing_required_mechanisms": [
-      "INVESTOR_CONSENT_RIGHT",
-      "RESERVED_MATTER"
+      "CONSENT_PREREQUISITE"
     ],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
-        "concept": "CONSENT_PREREQUISITE",
+        "concept": "INVESTOR_CONSENT_RIGHT",
         "verdict": "GROUNDED"
       },
       {
-        "concept": "CONSENT_PREREQUISITE",
-        "verdict": "UNSUPPORTED"
+        "concept": "INVESTOR_CONSENT_RIGHT",
+        "verdict": "GROUNDED"
       },
       {
-        "concept": "RESERVED_MATTERS_CONSENT",
+        "concept": "INVESTOR_CONSENT_RIGHT",
         "verdict": "UNSUPPORTED"
       },
       {
         "concept": "PROHIBITION",
         "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "INVESTOR_CONSENT_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "RESERVED_MATTER",
+        "verdict": "UNSUPPORTED"
       }
     ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [
@@ -4653,12 +4755,11 @@
       "RESERVED_MATTER"
     ],
     "actual_material_mechanisms": [
-      "CONSENT_PREREQUISITE"
-    ],
-    "missing_required_mechanisms": [
+      "CONSENT_PREREQUISITE",
       "INVESTOR_CONSENT_RIGHT",
       "RESERVED_MATTER"
     ],
+    "missing_required_mechanisms": [],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
@@ -4667,6 +4768,14 @@
       },
       {
         "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "INVESTOR_CONSENT_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "RESERVED_MATTER",
         "verdict": "UNSUPPORTED"
       }
     ],
@@ -4679,7 +4788,7 @@
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [
@@ -4708,38 +4817,46 @@
       "RESERVED_MATTER"
     ],
     "actual_material_mechanisms": [
-      "CONSENT_PREREQUISITE",
-      "PROHIBITION"
+      "INVESTOR_CONSENT_RIGHT",
+      "PROHIBITION",
+      "RESERVED_MATTER"
     ],
     "missing_required_mechanisms": [
-      "INVESTOR_CONSENT_RIGHT",
-      "RESERVED_MATTER"
+      "CONSENT_PREREQUISITE"
     ],
     "forbidden_detected_mechanisms": [],
     "grounding": [
       {
-        "concept": "CONSENT_PREREQUISITE",
-        "verdict": "GROUNDED"
+        "concept": "INVESTOR_CONSENT_RIGHT",
+        "verdict": "UNSUPPORTED"
       },
       {
-        "concept": "CONSENT_PREREQUISITE",
+        "concept": "INVESTOR_CONSENT_RIGHT",
         "verdict": "UNSUPPORTED"
       },
       {
         "concept": "PROHIBITION",
         "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "INVESTOR_CONSENT_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "RESERVED_MATTER",
+        "verdict": "UNSUPPORTED"
       }
     ],
     "argument_results": {
       "actor": [
-        false
+        true
       ],
       "object": [
-        false
+        true
       ],
       "trigger": [],
       "polarity": [
-        false
+        true
       ]
     },
     "expected_states": [

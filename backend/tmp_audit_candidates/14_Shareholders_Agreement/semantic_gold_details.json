@@ -1,0 +1,768 @@
+[
+  {
+    "fixture_id": "01_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "3.1",
+    "language": "en",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "share_transfer_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "3.2",
+    "language": "en",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "EXPRESS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_3_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "INVESTOR_RIGHTS",
+    "primary_type_actual": "anti_dilution_preemptive_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "EXPRESS_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "GOVERNANCE",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "actual_material_mechanisms": [
+      "BOARD_COMPOSITION"
+    ],
+    "missing_required_mechanisms": [
+      "APPOINTMENT_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BOARD_COMPOSITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "FINANCIAL_REPORTING",
+    "primary_type_actual": "investor_information_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 3,
+    "numeric_total": 3
+  },
+  {
+    "fixture_id": "14_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "6.1",
+    "language": "en",
+    "semantic_family": "CONSENT",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "actual_material_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "PROHIBITION",
+      "RESERVED_MATTERS_CONSENT"
+    ],
+    "missing_required_mechanisms": [
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "RESERVED_MATTERS_CONSENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 2,
+    "numeric_total": 2
+  },
+  {
+    "fixture_id": "14_6_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  }
+]

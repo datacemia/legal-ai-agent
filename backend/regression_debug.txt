@@ -1,0 +1,240 @@
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'score': -220}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'score': -220}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'score': -220}"
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'score': -140}"
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': None, 'expense_gap': None, 'score': 99999878}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': None, 'expense_gap': None, 'score': 99999878}",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 100000000.0}"
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger"
+    "file": "BANK CHAABI.pdf",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'score': 100001360}",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'score': 100001360}",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': 0.0, 'expense_gap': 4.5, 'score': 100001504.5}"
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement"
+    "file": "banque d'epagne.pdf",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 11382.76, 'expense_gap': 635.59, 'score': 13518.35}",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 11382.76, 'expense_gap': 635.59, 'score': 13518.35}",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 0.0, 'expense_gap': 42.69, 'score': 1542.69}"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': None, 'expense_gap': None, 'score': -175.8}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': None, 'expense_gap': None, 'score': -175.8}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 32841.32, 'expense_gap': 20619.74, 'score': 53461.06}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 32841.32, 'expense_gap': 20619.74, 'score': 53461.06}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': None, 'expense_gap': None, 'score': -85.18}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': None, 'expense_gap': None, 'score': -85.18}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'score': 914.6}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'score': 914.6}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'score': 914.6}"
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED standard_date_description_amount_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_description_amount_balance', 'transactions': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_LAYOUT_DETECTED standard_date_description_amount_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_description_amount_balance', 'transactions': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_LAYOUT_DETECTED standard_date_description_amount_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_description_amount_balance', 'transactions': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'score': -140}"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 65001.19, 'expense_gap': 9931.24, 'score': 74932.43}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 65001.19, 'expense_gap': 9931.24, 'score': 74932.43}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'score': 5664.49}",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'score': 5664.49}",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED standard_date_particulars_debit_credit_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_particulars_debit_credit_balance', 'transactions': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_LAYOUT_DETECTED standard_date_particulars_debit_credit_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_particulars_debit_credit_balance', 'transactions': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_LAYOUT_DETECTED standard_date_particulars_debit_credit_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_particulars_debit_credit_balance', 'transactions': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED sectioned_balance_history_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_balance_history_statement', 'transactions': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 55564.01, 'expense_gap': 376841.34, 'score': 432405.35}",
+      "STATEMENT_LAYOUT_DETECTED sectioned_balance_history_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_balance_history_statement', 'transactions': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 55564.01, 'expense_gap': 376841.34, 'score': 432405.35}",
+      "STATEMENT_LAYOUT_DETECTED sectioned_balance_history_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_balance_history_statement', 'transactions': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    "file": "EJJAMI6.pdf",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 1749.0, 'expense_gap': 2497.46, 'score': 5246.46}",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 1749.0, 'expense_gap': 2497.46, 'score': 5246.46}",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 0.0, 'expense_gap': 2.5, 'score': 1002.5}"
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 5684.32, 'expense_gap': 5812.43, 'score': 11496.75}",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 5684.32, 'expense_gap': 5812.43, 'score': 11496.75}",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger"
+      "STATEMENT_LAYOUT_DETECTED keybank_hassle_free",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'keybank_hassle_free', 'transactions': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': None, 'expense_gap': None, 'score': -50.55}",
+      "STATEMENT_LAYOUT_DETECTED keybank_hassle_free",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'keybank_hassle_free', 'transactions': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': None, 'expense_gap': None, 'score': -50.55}",
+      "STATEMENT_LAYOUT_DETECTED keybank_hassle_free",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'keybank_hassle_free', 'transactions': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'score': 99999860}",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'score': 99999860}",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 100000000.0}"
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 31, 'income_total': 12332.0, 'expense_total': 12328.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 1000.0}"
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_LAYOUT_DETECTED lcl_date_libelle_valeur_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'lcl_date_libelle_valeur_debit_credit', 'transactions': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': None, 'expense_gap': None, 'score': -111}",
+      "STATEMENT_LAYOUT_DETECTED lcl_date_libelle_valeur_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'lcl_date_libelle_valeur_debit_credit', 'transactions': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': None, 'expense_gap': None, 'score': -111}",
+      "STATEMENT_LAYOUT_DETECTED lcl_date_libelle_valeur_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'lcl_date_libelle_valeur_debit_credit', 'transactions': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    "file": "n26 .1.pdf",
+      "STATEMENT_LAYOUT_DETECTED n26_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'n26_fr_statement', 'transactions': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': None, 'expense_gap': None, 'score': 6400.28}",
+      "STATEMENT_LAYOUT_DETECTED n26_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'n26_fr_statement', 'transactions': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': None, 'expense_gap': None, 'score': 6400.28}",
+      "STATEMENT_LAYOUT_DETECTED n26_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'n26_fr_statement', 'transactions': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': 70.0, 'expense_gap': 80.0, 'score': 6650.0}"
+    "file": "OMAR1.pdf",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 222.05, 'expense_gap': 222.05, 'score': 3944.1}",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 222.05, 'expense_gap': 222.05, 'score': 3944.1}",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 0.0, 'expense_gap': 15.3, 'score': 3515.3}"
+    "file": "OMAR2.pdf",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 2076.25, 'expense_gap': 5052.33, 'score': 7628.58}",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 2076.25, 'expense_gap': 5052.33, 'score': 7628.58}",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 0.0, 'expense_gap': 1.5, 'score': 501.5}"
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 245.56, 'expense_gap': 41.65, 'score': 287.21}",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 245.56, 'expense_gap': 41.65, 'score': 287.21}",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED revolut_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'revolut_fr_statement', 'transactions': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': None, 'expense_gap': None, 'score': -35.22}",
+      "STATEMENT_LAYOUT_DETECTED revolut_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'revolut_fr_statement', 'transactions': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': None, 'expense_gap': None, 'score': -35.22}",
+      "STATEMENT_LAYOUT_DETECTED revolut_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'revolut_fr_statement', 'transactions': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': 933027038.75, 'expense_gap': 85.0, 'score': 933027123.75}",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': 933027038.75, 'expense_gap': 85.0, 'score': 933027123.75}",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': None, 'expense_gap': None, 'score': -125.35}"
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 10386.5, 'expense_gap': 4626.66, 'score': 15013.16}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 10386.5, 'expense_gap': 4626.66, 'score': 15013.16}",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+NEEDS_PARSER_FIX BANK CHAABI.pdf -> expense_gap=4.5
+NEEDS_PARSER_FIX banque d'epagne.pdf -> expense_gap=42.69
+NEEDS_PARSER_FIX EJJAMI6.pdf -> expense_gap=2.5
+NEEDS_PARSER_FIX n26 .1.pdf -> income_gap=70.0; expense_gap=80.0
+NEEDS_PARSER_FIX OMAR1.pdf -> expense_gap=15.3
+NEEDS_PARSER_FIX OMAR2.pdf -> expense_gap=1.5
+NEEDS_PARSER_FIX   BANK CHAABI.pdf | validated=False tx=105 income=912747.13 expenses=431707.37 expected_income=912747.13 expected_expenses=431702.87 gap_i=0.0 gap_e=4.5 reason=expense_gap=4.5
+NEEDS_PARSER_FIX   banque d'epagne.pdf | validated=False tx=24 income=500.0 expenses=656.71 expected_income=500.0 expected_expenses=614.02 gap_i=0.0 gap_e=42.69 reason=expense_gap=42.69
+NEEDS_PARSER_FIX   EJJAMI6.pdf | validated=False tx=53 income=0 expenses=3524.55 expected_income=0.0 expected_expenses=3522.05 gap_i=0.0 gap_e=2.5 reason=expense_gap=2.5
+NEEDS_PARSER_FIX   n26 .1.pdf | validated=False tx=81 income=2975.12 expenses=2997.02 expected_income=2905.12 expected_expenses=2917.02 gap_i=70.0 gap_e=80.0 reason=income_gap=70.0; expense_gap=80.0
+NEEDS_PARSER_FIX   OMAR1.pdf | validated=False tx=115 income=20393.0 expenses=15489.58 expected_income=20393.0 expected_expenses=15474.28 gap_i=0.0 gap_e=15.3 reason=expense_gap=15.3
+NEEDS_PARSER_FIX   OMAR2.pdf | validated=False tx=54 income=10374.0 expenses=20211.69 expected_income=10374.0 expected_expenses=20210.19 gap_i=0.0 gap_e=1.5 reason=expense_gap=1.5

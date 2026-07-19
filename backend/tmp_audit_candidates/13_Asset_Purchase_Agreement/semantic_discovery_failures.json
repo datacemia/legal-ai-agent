@@ -1,0 +1,821 @@
+[
+  {
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Between the date of this Agreement and the Closing Date, Seller shall operate the Business in the ordinary course consistent with past practice and shall not, without Buyer's prior written consent, enter into any material contract, dispose of any material asset, or increase compensation for key employees.",
+    "primary_type": "compensation",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "without Buyer's prior written consent",
+            "start": 163,
+            "end": 200
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 163,
+            "end": 200,
+            "text": "without Buyer's prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 179,
+            "end": 200,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "9f67aea9c9a1aff6ef98c2024cc4539875afe43fc9df7dd548de656289c26787",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 179,
+            "end": 200,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e8c0ec46f9c32f1d9d1435008fcff18690e69d96439dc58a835c4e940e511eaf",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 152,
+            "end": 310,
+            "text": "shall not, without Buyer's prior written consent, enter into any material contract, dispose of any material asset, or increase compensation for key applicable Contracting Party Bs."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "7d0420281ee3f9e0e00dc44692c92a12b9ccd152ed0719d0265a17ee36b9306c",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 152,
+            "end": 310,
+            "text": "shall not, without Buyer's prior written consent, enter into any material contract, dispose of any material asset, or increase compensation for key applicable Contracting Party Bs."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "7d0420281ee3f9e0e00dc44692c92a12b9ccd152ed0719d0265a17ee36b9306c",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "MISMATCH",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 For a period of five (5) years following the Closing Date, Seller and its principal shareholders shall not, directly or indirectly, engage in a business competitive with the Business within North America.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 101,
+            "end": 208,
+            "text": "shall not, directly or indirectly, engage in a business competitive with the Business within North America."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "03e3299340925577018ccb3ffad988e0b6a331b62b6feaaf66c53738875e3de8",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 101,
+            "end": 208,
+            "text": "shall not, directly or indirectly, engage in a business competitive with the Business within North America."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "03e3299340925577018ccb3ffad988e0b6a331b62b6feaaf66c53738875e3de8",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Buyer's obligation to close is subject to the satisfaction of customary conditions, including the accuracy of Seller's representations and warranties as of the Closing Date, receipt of all required third-party consents, and the absence of any material adverse change in the Business.",
+    "primary_type": "warranty",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 35,
+            "end": 222,
+            "text": "subject to the satisfaction of customary conditions, including the accuracy of Seller's representations and warranties as of the Closing Date, receipt of all required third-party consents"
+          },
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 178,
+            "end": 222,
+            "text": "receipt of all required third-party consents"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5d89fc57c46f50b7a104a2d5e3919760cdd2ba3e7299900058be83f2732f395c",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CLOSING_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "transaction",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 4,
+            "end": 45,
+            "text": "Buyer's obligation to close is subject to"
+          },
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 12,
+            "end": 86,
+            "text": "obligation to close is subject to the satisfaction of customary conditions"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "fae96868426b07565531868645917cafcdd15b91f0d602c6bb3f65c534e1d68a",
+        "normalized_concept": "CLOSING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 35,
+            "end": 222,
+            "text": "subject to the satisfaction of customary conditions, including the accuracy of Seller's representations and warranties as of the Closing Date, receipt of all required third-party consents"
+          },
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 178,
+            "end": 222,
+            "text": "receipt of all required third-party consents"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5d89fc57c46f50b7a104a2d5e3919760cdd2ba3e7299900058be83f2732f395c",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CLOSING_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "transaction",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 4,
+            "end": 45,
+            "text": "Buyer's obligation to close is subject to"
+          },
+          {
+            "label": "CLOSING_OBLIGATION",
+            "start": 12,
+            "end": 86,
+            "text": "obligation to close is subject to the satisfaction of customary conditions"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "fae96868426b07565531868645917cafcdd15b91f0d602c6bb3f65c534e1d68a",
+        "normalized_concept": "CLOSING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 At the Closing, Seller shall sell, transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right, title, and interest in the Purchased Assets, free and clear of all liens, except Permitted Liens listed in Exhibit C.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 39,
+            "end": 130,
+            "text": "transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "4bfe956bee21429a9cb4b34d73f1b432cfd810b5e6c9de88a524acb8a6de66b4",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 39,
+            "end": 130,
+            "text": "transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "4bfe956bee21429a9cb4b34d73f1b432cfd810b5e6c9de88a524acb8a6de66b4",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 The aggregate purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing; and (b) $2,000,000 held in escrow for eighteen (18) months to secure Seller's indemnification obligations under Section 6.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PURCHASE_PRICE",
+        "rank": 96,
+        "candidate_primary_type": "purchase_price",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 8,
+            "end": 134,
+            "text": "aggregate purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2963137835d48397f2100c456d76da096ca07bb0281a35890f4a7815db08857d",
+        "normalized_concept": "PURCHASE_PRICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 80,
+            "end": 134,
+            "text": "payable as follows: (a) $10,750,000 in cash at Closing"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "f5a6cdb99042af16141f3b12dc72b9f5eb6c9a197744af62406ca238d2b1fca2",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "rank": 92,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+            "start": 18,
+            "end": 134,
+            "text": "purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "bd9eca0d95eb97e928f54b0b8cdc22f210e5ad167e76118f95995e67cf18744c",
+        "normalized_concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PURCHASE_PRICE",
+        "rank": 96,
+        "candidate_primary_type": "purchase_price",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE",
+            "start": 8,
+            "end": 134,
+            "text": "aggregate purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2963137835d48397f2100c456d76da096ca07bb0281a35890f4a7815db08857d",
+        "normalized_concept": "PURCHASE_PRICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 80,
+            "end": 134,
+            "text": "payable as follows: (a) $10,750,000 in cash at Closing"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "f5a6cdb99042af16141f3b12dc72b9f5eb6c9a197744af62406ca238d2b1fca2",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "rank": 92,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+            "start": 18,
+            "end": 134,
+            "text": "purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "bd9eca0d95eb97e928f54b0b8cdc22f210e5ad167e76118f95995e67cf18744c",
+        "normalized_concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12750000,
+              "unit": "USD",
+              "semantic_role": "PURCHASE_PRICE",
+              "related_mechanism": "PURCHASE_PRICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 Seller shall indemnify Buyer for losses arising from breaches of Seller's representations and warranties, subject to a deductible of $100,000 and an aggregate cap of $2,000,000, except for breaches of the title and authority representations, which shall not be subject to the deductible or cap.",
+    "primary_type": "indemnity",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 252,
+            "end": 298,
+            "text": "shall not be subject to the deductible or cap."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3b87271202043eb1a9ab613fdc60a32228ba0c20b8f01a1fc4f4be694ca5e3b4",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 252,
+            "end": 298,
+            "text": "shall not be subject to the deductible or cap."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3b87271202043eb1a9ab613fdc60a32228ba0c20b8f01a1fc4f4be694ca5e3b4",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

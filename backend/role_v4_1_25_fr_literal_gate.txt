@@ -1,0 +1,28 @@
+
+========================================================================================================================
+FR SERVICES MASCULINE
+========================================================================================================================
+INPUT : Cette limitation protège la Prestataire, mais expose la Client. La responsabilité de la Prestataire est limitée. Les frais sont payés par la Client. Le rapport est fourni à la Client. Les installations de la Prestataire sont auditées.
+OUTPUT: Cette limitation protège le Prestataire, mais expose le Client. La responsabilité du Prestataire est limitée. Les frais sont payés par le Client. Le rapport est fourni au Client. Les installations du Prestataire sont auditées.
+
+========================================================================================================================
+FR NDA FEMININE
+========================================================================================================================
+INPUT : La Partie divulgatrice communique les informations à la Partie réceptrice. Les obligations de la Partie réceptrice survivent.
+OUTPUT: La Partie divulgatrice communique les informations à la Partie réceptrice. Les obligations de la Partie réceptrice survivent.
+
+========================================================================================================================
+FORBIDDEN FR FORMS
+========================================================================================================================
+'la Client' => 0
+'la Prestataire' => 0
+'de la Client' => 0
+'de la Prestataire' => 0
+'à la Client' => 0
+'à la Prestataire' => 0
+'de le Client' => 0
+'de le Prestataire' => 0
+'à le Client' => 0
+'à le Prestataire' => 0
+
+V4.1.25 FR LITERAL ROLE GRAMMAR GATE: PASS

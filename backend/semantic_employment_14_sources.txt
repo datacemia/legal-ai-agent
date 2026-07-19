@@ -1,0 +1,141 @@
+ROWS: 14
+
+====================================================================================================
+[1/14]
+LANG: en
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_1
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.
+
+====================================================================================================
+[2/14]
+LANG: en
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_4
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+4.2 During employment and for twenty-four (24) months thereafter, Executive shall not solicit for employment any employee of the Company.
+
+====================================================================================================
+[3/14]
+LANG: en
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_5
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+2.2 Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years.
+
+====================================================================================================
+[4/14]
+LANG: en
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_6
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+1.1 Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to the Company's affairs.
+
+====================================================================================================
+[5/14]
+LANG: en
+DOC: 09_Consulting_Services_Agreement.json
+REF: clause_3
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+1.1 Consultant is an independent contractor and not an employee, agent, joint venturer, or partner of Client. Consultant shall be solely responsible for all applicable taxes, insurance, and benefits.
+
+====================================================================================================
+[6/14]
+LANG: en
+DOC: 10_Outsourcing_Managed_Services_Agreement.json
+REF: clause_3
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+3.1 Provider shall offer employment to the Transferred Employees on terms substantially comparable to their current terms with Client, and shall recognize their prior service with Client for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans.
+
+====================================================================================================
+[7/14]
+LANG: en
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_3
+PIPELINE: compensation
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+4.1 Between the date of this Agreement and the Closing Date, Seller shall operate the Business in the ordinary course consistent with past practice and shall not, without Buyer's prior written consent, enter into any material contract, dispose of any material asset, or increase compensation for key employees.
+
+====================================================================================================
+[8/14]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_3
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+1.1 La Dirigeante exercera les fonctions de Directrice Scientifique, sous l'autorité du Directeur Général, et consacrera l'essentiel de son temps de travail aux affaires de la Société.
+
+====================================================================================================
+[9/14]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_6
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+4.2 Pendant la durée du contrat et pendant vingt-quatre (24) mois après sa cessation, la Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société.
+
+====================================================================================================
+[10/14]
+LANG: fr
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_3
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+3.1 Le Prestataire proposera un emploi aux Salariés Transférés à des conditions substantiellement comparables à leurs conditions actuelles auprès du Client, et reconnaîtra leur ancienneté auprès du Client aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages du Prestataire.
+
+====================================================================================================
+[11/14]
+LANG: fr
+DOC: 13_Asset_Purchase_Agreement_FR.json
+REF: clause_3
+PIPELINE: compensation
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+4.1 Entre la date du présent Contrat et la Date de Clôture, le Vendeur exploitera l'Activité dans le cours normal des affaires, conformément aux pratiques antérieures, et ne pourra, sans le consentement écrit préalable de l'Acquéreur, conclure de contrat substantiel, céder un actif significatif, ou augmenter la rémunération des salariés clés.
+
+====================================================================================================
+[12/14]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_1
+PIPELINE: restrictive_covenants
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+6.1 يخضع هذا العقد لقانون ولاية ديلاوير. تقر المديرة التنفيذية بأن أحكام عدم المنافسة الواردة هنا مقابل عوض كافٍ ومعقولة من حيث النطاق والمدة.
+
+====================================================================================================
+[13/14]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_3
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل.
+
+====================================================================================================
+[14/14]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_4
+PIPELINE: employment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SOURCE:
+3.1 يعرض المزود على الموظفين المنقولين عملاً بشروط مماثلة إلى حد كبير لشروطهم الحالية لدى العميل، ويعترف بأقدميتهم لدى العميل لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا المزود.

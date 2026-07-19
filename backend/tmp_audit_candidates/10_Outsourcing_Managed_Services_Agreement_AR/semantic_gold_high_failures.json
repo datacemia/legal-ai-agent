@@ -1,0 +1,38 @@
+[
+  {
+    "fixture_id": "10_6_1_ar",
+    "language": "ar",
+    "source_text": "6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "pricing",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+      "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+    ]
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "fixture_id": "12_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "LOAN_DISBURSEMENT",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LOAN_DISBURSEMENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LOAN_DISBURSEMENT"
+    ],
+    "high": []
+  }
+]

@@ -1,0 +1,950 @@
+[
+  {
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "Clause 4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Le Preneur utilisera les Locaux exclusivement à des fins de bureaux et de studio de design, et maintiendra l'intérieur des Locaux en bon état, usure normale exceptée.",
+    "primary_type": "real_estate",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "exclusivement à des fin",
+            "start": 36,
+            "end": 59
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "real_estate",
+        "anchors": [
+          "bon",
+          "bureaux",
+          "design",
+          "en",
+          "exceptée",
+          "exclusivement",
+          "fins",
+          "intérieur",
+          "locaux",
+          "maintiendra",
+          "normale",
+          "preneur",
+          "studio",
+          "usure",
+          "utilisera",
+          "état"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "exclusivement à des fin",
+            "start": 36,
+            "end": 59
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "7.1",
+    "source_language": "fr",
+    "source_text": "7.1 Le Preneur maintiendra une assurance de responsabilité civile commerciale générale avec des plafonds d'au moins 2 000 000 $ par sinistre, désignant le Bailleur comme assuré additionnel, et indemnisera le Bailleur des réclamations résultant de l'usage des Locaux par le Preneur, sauf en cas de négligence du Bailleur.",
+    "primary_type": "indemnity",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "responsabilité civile commerciale générale avec des plafond",
+            "start": 44,
+            "end": 103
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "liability",
+        "anchors": [
+          "additionnel",
+          "assurance",
+          "assuré",
+          "au",
+          "bailleur",
+          "cas",
+          "civile",
+          "comme",
+          "commerciale",
+          "désignant",
+          "en",
+          "générale",
+          "indemnisera",
+          "locaux",
+          "maintiendra",
+          "moins",
+          "négligence",
+          "plafond",
+          "preneur",
+          "responsabilité",
+          "réclamation",
+          "résultant",
+          "sauf",
+          "sinistre",
+          "usage"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "responsabilité civile commerciale générale avec des plafond",
+            "start": 44,
+            "end": 103
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 La durée du présent Bail sera de cinq (5) ans, à compter du 1er août 2026 et jusqu'au 31 juillet 2031, sauf résiliation anticipée conformément au présent Bail.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du présent Bail sera de cinq (5) an",
+            "start": 7,
+            "end": 48
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "termination",
+        "anchors": [
+          "ans",
+          "anticipée",
+          "août",
+          "au",
+          "bail",
+          "cinq",
+          "compter",
+          "conformément",
+          "durée",
+          "er",
+          "juillet",
+          "jusqu",
+          "présent",
+          "sauf",
+          "sera",
+          "terminate"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du présent Bail sera de cinq (5) an",
+            "start": 7,
+            "end": 48
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 223,
+            "text": "Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "40c652ba0c87612af70c6ee06210a33b68e8090bbff2af4a623128777b99d268",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18500,
+              "unit": "USD",
+              "semantic_role": "MONTHLY_BASE_RENT",
+              "related_mechanism": "RENT_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 223,
+            "text": "Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "40c652ba0c87612af70c6ee06210a33b68e8090bbff2af4a623128777b99d268",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18500,
+              "unit": "USD",
+              "semantic_role": "MONTHLY_BASE_RENT",
+              "related_mechanism": "RENT_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 61,
+            "end": 108,
+            "text": "payable d'avance le premier jour de chaque mois"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b37c074fd47a437dfc2b3be6dea06dfdd2bebbd3087706817688360ee984c3b9",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 223,
+            "text": "Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "40c652ba0c87612af70c6ee06210a33b68e8090bbff2af4a623128777b99d268",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18500,
+              "unit": "USD",
+              "semantic_role": "MONTHLY_BASE_RENT",
+              "related_mechanism": "RENT_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 223,
+            "text": "Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "40c652ba0c87612af70c6ee06210a33b68e8090bbff2af4a623128777b99d268",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18500,
+              "unit": "USD",
+              "semantic_role": "MONTHLY_BASE_RENT",
+              "related_mechanism": "RENT_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 61,
+            "end": 108,
+            "text": "payable d'avance le premier jour de chaque mois"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b37c074fd47a437dfc2b3be6dea06dfdd2bebbd3087706817688360ee984c3b9",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "Clause 2.2",
+    "source_language": "fr",
+    "source_text": "2.2 Le Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "OPERATING_EXPENSES",
+        "rank": 97,
+        "candidate_primary_type": "real_estate",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 40,
+            "end": 229,
+            "text": "Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          },
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 7,
+            "end": 47,
+            "text": "Preneur paiera sa quote-part des Charges"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "b033ba3f076c84cbeabc49bda84f38f43d9deae02028ab074213ec00c87a37cf",
+        "normalized_concept": "OPERATING_EXPENSES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 229,
+            "text": "Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "f22f4f40d99c9ca9c9bc4892b41ad07c5d4c782ae28db55cffee96150522f036",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "OPERATING_CHARGE_RECONCILIATION",
+        "rank": 91,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OPERATING_CHARGE_RECONCILIATION",
+            "start": 7,
+            "end": 229,
+            "text": "Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a4be6c56d4bef8438daa02ca1170212b7621c2269d17785b6177d6abd7f0c22a",
+        "normalized_concept": "OPERATING_CHARGE_RECONCILIATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 229,
+            "text": "Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f22f4f40d99c9ca9c9bc4892b41ad07c5d4c782ae28db55cffee96150522f036",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 15,
+            "end": 229,
+            "text": "paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "287569760b715f72696a8d3fb50353fc344bdd95de9c23ab6fadb7bf895e304b",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "OPERATING_EXPENSES",
+        "rank": 97,
+        "candidate_primary_type": "real_estate",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 40,
+            "end": 229,
+            "text": "Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          },
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 7,
+            "end": 47,
+            "text": "Preneur paiera sa quote-part des Charges"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "b033ba3f076c84cbeabc49bda84f38f43d9deae02028ab074213ec00c87a37cf",
+        "normalized_concept": "OPERATING_EXPENSES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 229,
+            "text": "Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "f22f4f40d99c9ca9c9bc4892b41ad07c5d4c782ae28db55cffee96150522f036",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "OPERATING_CHARGE_RECONCILIATION",
+        "rank": 91,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OPERATING_CHARGE_RECONCILIATION",
+            "start": 7,
+            "end": 229,
+            "text": "Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a4be6c56d4bef8438daa02ca1170212b7621c2269d17785b6177d6abd7f0c22a",
+        "normalized_concept": "OPERATING_CHARGE_RECONCILIATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 229,
+            "text": "Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f22f4f40d99c9ca9c9bc4892b41ad07c5d4c782ae28db55cffee96150522f036",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 15,
+            "end": 229,
+            "text": "paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "287569760b715f72696a8d3fb50353fc344bdd95de9c23ab6fadb7bf895e304b",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Si le Preneur ne paie pas le Loyer de Base dans un délai de dix (10) jours suivant son échéance, ou manque à toute autre obligation substantielle du présent Bail sans y remédier dans un délai de trente (30) jours suivant notification écrite, le Bailleur pourra résilier le présent Bail et exercer tous les recours disponibles, y compris le recouvrement du loyer accéléré pour la durée restante du bail, sous réserve de l'obligation du Bailleur de limiter son préjudice.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée restan",
+            "start": 383,
+            "end": 395
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 258,
+            "end": 473,
+            "text": "pourra résilier le présent Bail et exercer tous les recours disponibles, y compris le recouvrement du loyer accéléré pour la durée restante du bail, sous réserve de l'obligation du Bailleur de limiter son préjudice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "67662ce3e63958ca40be913e96a46713192dce2a5a518e5efe862ec93558073c",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 173,
+            "end": 396,
+            "text": "remédier dans un délai de trente (30) jours suivant notification écrite, le Bailleur pourra résilier le présent Bail et exercer tous les recours disponibles, y compris le recouvrement du loyer accéléré pour la durée restant"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "dc82abcf916155553d5863118427d0a47a8d5677642ed5e7c08b423eb868d53f",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 258,
+            "end": 473,
+            "text": "pourra résilier le présent Bail et exercer tous les recours disponibles, y compris le recouvrement du loyer accéléré pour la durée restante du bail, sous réserve de l'obligation du Bailleur de limiter son préjudice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "67662ce3e63958ca40be913e96a46713192dce2a5a518e5efe862ec93558073c",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 173,
+            "end": 396,
+            "text": "remédier dans un délai de trente (30) jours suivant notification écrite, le Bailleur pourra résilier le présent Bail et exercer tous les recours disponibles, y compris le recouvrement du loyer accéléré pour la durée restant"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "dc82abcf916155553d5863118427d0a47a8d5677642ed5e7c08b423eb868d53f",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée restan",
+            "start": 383,
+            "end": 395
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

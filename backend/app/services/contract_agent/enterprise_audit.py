@@ -1,71 +1,156 @@
-def generate_enterprise_audit(
-    clauses: list[dict],
-    obligations: list[dict] | None = None,
-    timeline: list[dict] | None = None,
-    conflicts: list[dict] | None = None,
-    jurisdiction: dict | None = None,
-) -> dict:
+import re
+from collections import Counter
 
-    obligations = obligations or []
-    timeline = timeline or []
-    conflicts = conflicts or []
-    jurisdiction = jurisdiction or {}
 
-    high_risk_clauses = [
-        c for c in clauses
-        if c.get("risk_level") == "high"
+def normalize_line(line: str) -> str:
+    return re.sub(r"\s+", " ", str(line or "").strip())
+
+
+def heading_confidence(line: str) -> float:
+    line = normalize_line(line)
+
+    if not line:
+        return 0.0
+
+    patterns = [
+        r"^(article|section|clause)\s+\d+",
+        r"^\d+(\.\d+)*[\)\.\-]?\s+",
+        r"^(المادة|البند|الفقرة)\s*\d+",
+        r"^[A-Z][A-Z\s&/,()\-]{4,}$",
     ]
 
-    medium_risk_clauses = [
-        c for c in clauses
-        if c.get("risk_level") == "medium"
+    score = 0.0
+
+    for pattern in patterns:
+        if re.search(pattern, line, re.IGNORECASE):
+            score += 0.45
+
+    if re.fullmatch(r"[A-Z][A-Z\s&/,()\-]{4,}", line):
+        if len(line.split()) > 10:
+            score -= 0.25
+
+    if len(line) <= 120:
+        score += 0.2
+
+    if len(line.split()) <= 12:
+        score += 0.2
+
+    return max(0.0, min(score, 1.0))
+
+
+def is_repeated_noise(line: str, counts: Counter) -> bool:
+    normalized = normalize_line(line).lower()
+
+    noise_signals = [
+        "not intended as advice",
+        "professional services",
+        "consult competent counsel",
+        "readers should consult",
+        "à titre informatif",
+        "ne constitue pas un conseil",
+        "services professionnels",
+        "استشارة قانونية",
+        "خدمات مهنية",
+        "تنبيه",
     ]
 
-    negotiation_points = [
-        {
-            "clause": c.get("clause_title", ""),
-            "advice": c.get("negotiation_advice", ""),
-        }
-        for c in clauses
-        if c.get("negotiation_advice")
+    if any(signal in normalized for signal in noise_signals):
+        return True
+
+    return counts[normalize_line(line)] >= 3 and len(normalized) > 60
+
+
+def detect_heading_level(line: str) -> int:
+    line = normalize_line(line)
+
+    if re.search(r"^(article|المادة)\s+\d+", line, re.IGNORECASE):
+        return 1
+    if re.search(r"^(section|clause|البند)\s+\d+", line, re.IGNORECASE):
+        return 2
+    if re.search(r"^\d+\.\d+\.\d+", line):
+        return 3
+    if re.search(r"^\d+\.\d+", line):
+        return 2
+    if re.search(r"^\d+[\)\.\-]?\s+", line):
+        return 1
+    return 1
+
+
+def build_document_structure(text: str) -> list[dict]:
+    lines = [
+        normalize_line(line)
+        for line in str(text or "").splitlines()
+        if normalize_line(line)
     ]
 
-    critical_obligations = [
-        o for o in obligations
-        if o.get("type") in {
-            "payment",
-            "termination",
-            "confidentiality",
-            "data_protection",
-        }
-    ]
+    counts = Counter(lines)
+    roots = []
+    stack = []
 
-    critical_timeline = [
-        t for t in timeline
-        if t.get("event") in {
-            "payment",
-            "termination",
-            "confidentiality",
-        }
-    ]
+    for line in lines:
+        if is_repeated_noise(line, counts):
+            continue
 
-    return {
-        "risk_overview": {
-            "high_risk_count": len(high_risk_clauses),
-            "medium_risk_count": len(medium_risk_clauses),
-            "conflict_count": len(conflicts),
-        },
-        "top_risks": [
-            {
-                "title": c.get("clause_title", ""),
-                "risk_level": c.get("risk_level", ""),
-                "legal_insight": c.get("legal_insight", ""),
+        confidence = heading_confidence(line)
+
+        if confidence >= 0.65:
+            level = detect_heading_level(line)
+            node = {
+                "title": line,
+                "level": level,
+                "confidence": confidence,
+                "paragraphs": [],
+                "children": [],
             }
-            for c in high_risk_clauses + medium_risk_clauses
-        ][:10],
-        "critical_obligations": critical_obligations[:10],
-        "important_deadlines": critical_timeline[:10],
-        "negotiation_priorities": negotiation_points[:10],
-        "conflicts": conflicts,
-        "jurisdiction": jurisdiction,
-    }
+
+            while stack and stack[-1]["level"] >= level:
+                stack.pop()
+
+            if stack:
+                stack[-1]["children"].append(node)
+            else:
+                roots.append(node)
+
+            stack.append(node)
+        else:
+            if not stack:
+                node = {
+                    "title": "Untitled Section",
+                    "level": 1,
+                    "confidence": 0.3,
+                    "paragraphs": [],
+                    "children": [],
+                }
+                roots.append(node)
+                stack.append(node)
+
+            stack[-1]["paragraphs"].append(line)
+
+    return roots
+
+
+def flatten_structure_to_clauses(
+    structure: list[dict],
+    min_length: int = 80,
+) -> list[str]:
+    clauses = []
+
+    def visit(node: dict):
+        title = node.get("title", "").strip()
+        body = "\n".join(node.get("paragraphs", [])).strip()
+
+        clause = "\n".join(
+            part for part in [title, body]
+            if part
+        ).strip()
+
+        if len(clause) >= min_length:
+            clauses.append(clause)
+
+        for child in node.get("children", []):
+            visit(child)
+
+    for node in structure:
+        visit(node)
+
+    return clauses

@@ -1,0 +1,157 @@
+========================================================================================================================
+V4.1.15 RESULT PROBE
+========================================================================================================================
+
+FILE: last_analysis.json
+MODIFIED: 1784045701.2892096
+
+========================================================================================================================
+OVERVIEW
+========================================================================================================================
+CONTRACT_TYPE : 'Cybersecurity'
+PARTIES : ['Client', 'Prestataire']
+DURATION : 'Non spécifié'
+PAYMENT_TERMS : 'Non spécifié'
+JURISDICTION_DETECTED : 'Non spécifié'
+
+========================================================================================================================
+FORBIDDEN PUBLICATION MARKERS
+========================================================================================================================
+FOUND: 'La Client'
+FOUND: 'La Prestataire'
+FOUND: 'du Provider'
+
+========================================================================================================================
+RISKS
+========================================================================================================================
+
+[1]
+TITLE: Limitation de responsabilité
+TYPE: liability
+LEVEL: high
+EXPLANATION: La responsabilité du Provider est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+
+[2]
+TITLE: Durée et résiliation
+TYPE: termination
+LEVEL: high
+EXPLANATION: Cette clause détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation.
+
+[3]
+TITLE: Droit d'audit de sécurité
+TYPE: notice
+LEVEL: medium
+EXPLANATION: Cette clause crée des obligations contractuelles ou opérationnelles qui doivent être examinées dans le contexte global du contrat.
+
+[4]
+TITLE: Notification des incidents de sécurité
+TYPE: security
+LEVEL: high
+EXPLANATION: Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+
+[5]
+TITLE: Analyse des causes profondes
+TYPE: security
+LEVEL: high
+EXPLANATION: Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+
+[6]
+TITLE: Indemnisation
+TYPE: indemnity
+LEVEL: high
+EXPLANATION: La Prestataire doit indemniser la Client pour certains coûts liés à des incidents de sécurité.
+
+========================================================================================================================
+ACTIONS
+========================================================================================================================
+
+[1]
+ACTION: Vérifier que cette clause est cohérente avec l'objectif commercial, les processus opérationnels et la répartition globale des risques.
+CLAUSE REF: node_5
+
+[2]
+ACTION: Vérifier les instructions de traitement, les standards de sécurité, le contrôle des sous-traitants, les délais de notification des violations, les droits d'audit, les obligations de suppression ou restitution et la répartition réglementaire.
+CLAUSE REF: node_2
+
+[3]
+ACTION: Vérifier que cette clause est cohérente avec l'objectif commercial, les processus opérationnels et la répartition globale des risques.
+CLAUSE REF: node_1
+
+[4]
+ACTION: Vérifier que cette clause est cohérente avec l'objectif commercial, les processus opérationnels et la répartition globale des risques.
+CLAUSE REF: node_4
+
+[5]
+ACTION: Vérifier l'exigence de consentement, les exceptions permises, le maintien de la responsabilité principale et les obligations à répercuter.
+CLAUSE REF: node_6
+
+[6]
+ACTION: L'indemnisation de la Prestataire ne devrait couvrir que les réclamations résultant de sa négligence ou de sa faute.
+CLAUSE REF: node_8
+
+========================================================================================================================
+SIMPLIFIED VERSION
+========================================================================================================================
+Il s'agit d'un contrat de type Cybersecurity entre Client, Prestataire. Il fixe les principaux droits, obligations et mécanismes de répartition des risques. Les principaux sujets comprennent : Limitation de responsabilité, Durée et résiliation, Droit d'audit de sécurité, Notification des incidents de sécurité.
+
+Points à surveiller:
+- Limitation de responsabilité — La responsabilité du Provider est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+- Durée et résiliation — Détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation.
+- Droit d'audit de sécurité — Crée des obligations contractuelles ou opérationnelles qui doivent être examinées dans le contexte global du contrat.
+- Notification des incidents de sécurité — Régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+
+========================================================================================================================
+SUMMARY
+========================================================================================================================
+Type: Cybersecurity
+Parties: Client, Prestataire
+Durée: Non spécifié
+Paiement: Non spécifié
+
+Qualité du contrat: 82/100
+Complexité du contrat: Moyenne
+Équilibre du contrat: Non spécifié
+Juridiction: Non spécifié
+
+Obligations principales:
+- Droit d'audit de sécurité — La Client peut effectuer un audit de sécurité sur site une fois par an.
+- Notification des incidents de sécurité — La Prestataire doit informer la Client des incidents de sécurité et des vulnérabilités critiques dans des délais spécifiques.
+- Analyse des causes profondes — La Prestataire doit fournir une analyse écrite des causes profondes après un incident de sécurité grave.
+- Services de sécurité — Le fournisseur doit fournir des services de surveillance de sécurité, de détection de menaces et de réponse aux incidents en continu.
+- Certification et rapports d'audit — La Prestataire doit maintenir des certifications spécifiques et fournir des rapports d'audit.
+- Engagement de sous-traitants — La Prestataire doit obtenir l'approbation écrite préalable de la Client avant d'engager un nouveau sous-traitant.
+
+Points clés:
+- Limitation de responsabilité — La responsabilité du Provider est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+- Durée et résiliation — Permet la résiliation pour manquement matériel et en cas d'incident de sécurité.
+- Indemnisation — La Prestataire doit indemniser la Client pour certains coûts liés à des incidents de sécurité.
+
+Clauses manquantes:
+- confidential_information: Dans le cadre des services de cybersécurité, la protection des informations confidentielles est cruciale pour maintenir la confiance des clients et se conformer aux réglementations sur la protection des données.
+- personal_data: Les services de cybersécurité impliquent souvent le traitement de données personnelles, et il est impératif de définir comment ces données seront gérées et protégées.
+
+Schémas dangereux:
+- Limitation de responsabilité — La responsabilité du Provider est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+- Durée et résiliation — Détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation.
+- Notification des incidents de sécurité — Régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+- Analyse des causes profondes — Régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+- Indemnisation — La Prestataire doit indemniser la Client pour certains coûts liés à des incidents de sécurité.
+
+Risques clés:
+- Limitation de responsabilité — La responsabilité du Provider est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+- Durée et résiliation — Détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation.
+- Droit d'audit de sécurité — Crée des obligations contractuelles ou opérationnelles qui doivent être examinées dans le contexte global du contrat.
+- Notification des incidents de sécurité — Régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+- Analyse des causes profondes — Régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.
+
+Priorités de négociation:
+- Envisager de définir les modes de notification, les adresses requises, la réception réputée, la notification électronique, les exigences linguistiques, les notifications urgentes et les procédures de changement d'adresse.
+
+Actions recommandées:
+- Vérifier que cette clause est cohérente avec l'objectif commercial, les processus opérationnels et la répartition globale des risques.
+- Vérifier les instructions de traitement, les standards de sécurité, le contrôle des sous-traitants, les délais de notification des violations, les droits d'audit, les obligations de suppression ou restitution et la répartition réglementaire.
+- Vérifier l'exigence de consentement, les exceptions permises, le maintien de la responsabilité principale et les obligations à répercuter.
+- L'indemnisation de la Prestataire ne devrait couvrir que les réclamations résultant de sa négligence ou de sa faute.
+
+Décision pratique:
+Si la négociation échoue, la position minimale acceptable serait d'inclure des clauses de confidentialité et de traitement des données personnelles, même si d'autres clauses manquantes ne sont pas abordées. Cela garantirait une certaine protection des informations sensibles du Client.

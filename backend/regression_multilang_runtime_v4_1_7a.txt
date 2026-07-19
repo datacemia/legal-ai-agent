@@ -1,0 +1,2808 @@
+DOCX FOUND: 45
+EN: 15
+FR: 15
+AR: 15
+
+########################################################################################
+LANGUAGE: EN
+########################################################################################
+
+========================================================================================
+[EN 1/15] 01_NDA_Confidentiality_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['period']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['warranty']
+intellectual_property score= 6 base= 2 specificity= 4 context+= 0 context-= 0 signals= ['ownership', 'license']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+disclaimer score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['as is', 'without warranty']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ownership']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['license']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+remedies score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['remedies', 'injunctive relief']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['dispute']
+governing_law score= 4 base= 4 specificity= 0 context+= 0 context-= 0 signals= ['governed by the laws of', 'state of', 'jurisdiction', 'courts']
+jurisdiction score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['jurisdiction', 'courts']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=14 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 2/15] 02_Master_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+acceptance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['accepted']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['perform']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 14 base= 10 specificity= 0 context+= 4 context-= 0 signals= ['pay', 'invoice', 'fees', 'interest']
+invoice score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['invoice']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+interest score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['accrue interest']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+pricing_adjustment score= 6 base= 2 specificity= 4 context+= 0 context-= 0 signals= ['increase fees', 'unilaterally increase']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['fees']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renewal']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 6 base= 2 specificity= 4 context+= 0 context-= 0 signals= ['right, title, and interest', 'pre-existing tools']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['deliver']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+payment score= 6 base= 4 specificity= 0 context+= 2 context-= 0 signals= ['payment', 'fees']
+work_product score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['deliverables']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['deliverables']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['renewing automatically']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renewal']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['material breach']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnification']
+liability score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['liability', 'liable', 'punitive damages']
+payment score= 4 base= 4 specificity= 0 context+= 1 context-= 1 signals= ['paid', 'fees', 'paid by']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: dispute_resolution
+arbitration score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['arbitration', 'arbitrator']
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['dispute']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=10 | receipts=28 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 3/15] 03_SaaS_Cloud_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+sla score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['uptime', 'service credit']
+service_level score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['uptime']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['shall automatically renew']
+payment score= 7 base= 5 specificity= 0 context+= 2 context-= 0 signals= ['pay', 'fees', 'price']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+renewal score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['renewal', 'renew']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['price']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['right, title, and interest']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['termination']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notify']
+security score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['security', 'safeguards']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnification']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liability']
+payment score= 4 base= 4 specificity= 0 context+= 1 context-= 1 signals= ['paid', 'fees', 'paid by']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['fees']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['refund']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 4/15] 04_Cybersecurity_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cybersecurity']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cybersecurity']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['deliver']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notify']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: compliance
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['duration']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notice']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: subcontracting
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['subcontractor']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['approval']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+payment score= 5 base= 4 specificity= 0 context+= 1 context-= 0 signals= ['paid', 'fees', 'paid by']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liability']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: indemnity
+indemnity score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['indemnify', 'claims']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['costs']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['regulatory']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['material breach']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['penalty']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=26 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 5/15] 05_Data_Processing_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['processor', 'controller']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['personal data']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['processor']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['personal data']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: subcontracting
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['processor', 'controller']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+data_processing score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['processor']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['personal data']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['processor', 'controller']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notify']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['processor', 'controller']
+data_protection score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['personal data', 'data breach']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notify']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['assistance']
+support score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['assistance']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['processor', 'controller']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['termination']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['personal data']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['processor', 'controller']
+data_protection score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['personal data', 'data breach']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['compliance']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=29 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 6/15] 06_Executive_Employment_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['executive']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['pay']
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['salary', 'executive']
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['salary']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 7 base= 3 specificity= 0 context+= 4 context-= 0 signals= ['salary', 'bonus', 'executive']
+payment score= 2 base= 0 specificity= 0 context+= 2 context-= 0 signals= []
+equity_compensation score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['restricted stock', 'vesting']
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['salary']
+board_approval score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['board approval']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_convenience score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['without cause']
+employment score= 7 base= 3 specificity= 0 context+= 4 context-= 0 signals= ['employment', 'salary', 'executive']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+payment score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['reimbursement']
+indemnity score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['claims']
+refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['reimbursement']
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['salary']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['exécution']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: non_compete
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['employment', 'executive']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: non_compete
+employment score= 7 base= 3 specificity= 0 context+= 4 context-= 0 signals= ['employee', 'employment', 'executive']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['right, title, and interest']
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['employment', 'executive']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+restrictive_covenants score= 10 base= 5 specificity= 4 context+= 1 context-= 0 signals= ['non-compete']
+non_compete score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['non-compete']
+governing_law score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['governed by the laws of', 'state of']
+employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['executive']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['duration']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=4.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 7/15] 07_Software_Licensing_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['license']
+license score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['license', 'licensed']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licensed']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['pay']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licensed']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['royalty']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+audit_rights score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['to audit']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notice']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['royalty']
+investor_information_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['books and records']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['right, title, and interest']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licensed']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 7 base= 2 specificity= 5 context+= 0 context-= 0 signals= ['warranty', 'warranties']
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['license']
+license score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['license', 'licensed']
+disclaimer score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['as is', 'without warranty']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['pay']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['royalties']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+intellectual_property score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['intellectual property', 'ownership']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liability']
+payment score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['paid', 'paid by']
+indemnity score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['claims']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ownership']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['royalties']
+real_estate score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['property']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=4.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 8/15] 08_Procurement_Supply_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+AI TYPE: delivery
+supply_distribution score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['supplier', 'purchase order', 'delivery']
+delivery score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['delivery', 'deliver']
+acceptance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['accepted']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: delivery
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liable']
+supply_distribution score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['supplier', 'purchase order', 'delivery']
+delivery score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['delivery', 'deliver']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['penalty']
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['costs']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['prices']
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['costs']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['pay']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['supplier', 'delivery']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['delivery']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['supplier', 'delivery']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['delivery']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['period']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['supplier', 'delivery']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['price']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['price']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['delivery']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['performance']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['material breach']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['breach']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+liability score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['liability', 'liable', 'consequential damages']
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['supplier', 'purchase order']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 9/15] 09_Consulting_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['employee', 'benefits']
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['taxes']
+benefits score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['benefits']
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['insurance']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 11 base= 7 specificity= 0 context+= 4 context-= 0 signals= ['pay', 'invoice', 'fees']
+invoice score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['invoice']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['perform']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+work_product score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['work product']
+intellectual_property score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['work product']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['payment']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['ownership']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ownership']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['engagement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['termination', 'terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['fees']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+payment score= 5 base= 4 specificity= 0 context+= 1 context-= 0 signals= ['paid', 'fees', 'paid by']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liability']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 10/15] 10_Outsourcing_Managed_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['period']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+corporate_governance score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['governance committee']
+performance score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['performance', 'perform']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['employment', 'benefits']
+benefits score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['benefits']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 8 base= 6 specificity= 0 context+= 2 context-= 0 signals= ['payment', 'pay', 'fee']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fee']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['security incident']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notify']
+security score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['security', 'safeguards']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['regulatory']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['insurance']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['termination']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['assistance']
+support score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['assistance']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnification']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liability']
+payment score= 4 base= 4 specificity= 0 context+= 1 context-= 1 signals= ['paid', 'fees', 'paid by']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fees']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['compliance']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 11/15] 11_Commercial_Lease_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+lease score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['lease']
+real_estate score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['lease']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['pay']
+lease score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['tenant']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['tenant', 'rent']
+rent score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['rent']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 4 base= 3 specificity= 0 context+= 1 context-= 0 signals= ['pay', 'expenses']
+lease score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['tenant', 'landlord']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['tenant', 'landlord']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+lease score= 7 base= 3 specificity= 0 context+= 4 context-= 0 signals= ['lease', 'tenant', 'landlord']
+real_estate score= 4 base= 4 specificity= 0 context+= 0 context-= 0 signals= ['lease', 'tenant', 'landlord', 'rent']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['pay']
+deposit score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['deposit', 'security deposit']
+performance score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['performance', 'exécution']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+rent score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['rent']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+lease score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['tenant']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['tenant', 'premises']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+maintenance score= 5 base= 3 specificity= 2 context+= 0 context-= 0 signals= ['maintenance', 'repair']
+lease score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['landlord']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['landlord', 'premises']
+repair score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['repair']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+lease score= 7 base= 3 specificity= 0 context+= 4 context-= 0 signals= ['lease', 'tenant', 'landlord']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['assign']
+real_estate score= 4 base= 4 specificity= 0 context+= 0 context-= 0 signals= ['lease', 'tenant', 'landlord', 'premises']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+lease score= 7 base= 3 specificity= 0 context+= 4 context-= 0 signals= ['lease', 'tenant', 'landlord']
+remedies score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['remedies']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+real_estate score= 4 base= 4 specificity= 0 context+= 0 context-= 0 signals= ['lease', 'tenant', 'landlord', 'rent']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['pay']
+rent score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['rent']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: insurance
+indemnity score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['indemnify', 'claims']
+lease score= 6 base= 2 specificity= 0 context+= 4 context-= 0 signals= ['tenant', 'landlord']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['liability']
+real_estate score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['tenant', 'landlord', 'premises']
+insurance score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['insurance', 'insured']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 12/15] 12_Loan_Credit_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 6 base= 2 specificity= 0 context+= 4 context-= 0 signals= ['loan', 'principal']
+payment score= 4 base= 4 specificity= 0 context+= 0 context-= 0 signals= ['interest', 'principal amount']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['rate']
+interest score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['per annum']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['term']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+security_interest score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['security interest']
+collateral score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['collateral']
+loan score= 4 base= 0 specificity= 0 context+= 4 context-= 0 signals= []
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 2 base= 0 specificity= 0 context+= 2 context-= 0 signals= []
+investor_information_rights score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['financial statements', 'fiscal quarter end']
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['fiscal']
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['coverage']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 6 base= 2 specificity= 0 context+= 4 context-= 0 signals= ['loan', 'principal']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['penalty']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+guarantee score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['guarantee']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notice']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['payment']
+default score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['default', 'event of default']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['covenant']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+remedies score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['remedies', 'rights and remedies']
+collateral score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['collateral']
+loan score= 5 base= 1 specificity= 0 context+= 4 context-= 0 signals= ['principal']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+default score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['default', 'event of default']
+acceleration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['immediately due']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['security']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: dispute_resolution
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['dispute']
+governing_law score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['governed by the laws of', 'state of', 'courts']
+jurisdiction score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['courts']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 13/15] 13_Asset_Purchase_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['right, title, and interest']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['interest']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['deliver']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnification']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['price']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['represents and warrants']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['title to']
+investor_information_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['financial statements']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['compensation']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['warranties']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: indemnity
+indemnity score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['indemnify', 'losses']
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['warranties']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: non_compete
+loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['principal']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['period']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 14/15] 14_Shareholders_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['board']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+anti_dilution_preemptive_rights score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['pro rata share', 'new securities issued', 'right to purchase its pro rata']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+share_transfer_rights score= 11 base= 6 specificity= 5 context+= 0 context-= 0 signals= ['drag-along']
+corporate_governance score= 5 base= 3 specificity= 0 context+= 2 context-= 0 signals= ['board', 'consent', 'vote']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+share_transfer_rights score= 13 base= 8 specificity= 5 context+= 0 context-= 0 signals= ['tag-along', 'transfer shares', 'capital stock']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+investor_information_rights score= 5 base= 5 specificity= 0 context+= 0 context-= 0 signals= ['financial statements', 'audited annual', 'unaudited quarterly', 'fiscal year end', 'fiscal quarter end']
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['fiscal']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['deliver']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+share_transfer_rights score= 13 base= 8 specificity= 5 context+= 0 context-= 0 signals= ['right of first refusal', 'capital stock', 'shareholder shall transfer']
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['shareholder']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['compliance']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+amendment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['amend']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=7.1 field=safer_alternative reasons=['PROCEDURAL_STATE_MISMATCH_AUTOMATIC_TO_NOTICE']
+
+========================================================================================
+[EN 15/15] 15_General_Commercial_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['costs']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['expenses']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['intellectual property', 'ownership']
+restrictive_covenants score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['direct competitor']
+ownership score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['ownership', 'owned by']
+real_estate score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['property']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+trademark_branding score= 5 base= 5 specificity= 0 context+= 0 context-= 0 signals= ['trademarks', 'branding', 'publicity', 'press release', 'marketing material']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['approval']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['renewing automatically']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['terminate']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notice', 'written notice']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renewal']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+liability score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['liable', 'consequential damages']
+governing_law score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['governed by the laws of', 'state of']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=14 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=7.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+----------------------------------------------------------------------------------------
+EN SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 339
+TOTAL BLOCKED: 20
+SUMMARY: regression_results_multilang\en\_summary.json
+
+########################################################################################
+LANGUAGE: FR
+########################################################################################
+
+========================================================================================
+[FR 1/15] 01_NDA_Confidentiality_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consentement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['droit applicable']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['garantie']
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['licence']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['propriété']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licence']
+disclaimer score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sans garantie']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+remedies score= 7 base= 3 specificity= 4 context+= 0 context-= 0 signals= ['recours', 'préjudice irréparable', 'dommages-intérêts']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['litige']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['tribunaux']
+jurisdiction score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['tribunaux']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=4.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 2/15] 02_Master_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['intérêt']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['taux']
+invoice score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['facturation']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+pricing_adjustment score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['unilatéralement']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['préavis']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consentement']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renouvellement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+work_product score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['livrables']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['paiement']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['livrables']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['propriété']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['se renouvelant automatiquement']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renouveler']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['manquement substantiel']
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['résilier', 'préavis']
+notice score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['notification', 'préavis']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['manquement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnisation']
+liability score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité', 'responsable', 'dommages indirects']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: dispute_resolution
+arbitration score= 8 base= 5 specificity= 3 context+= 0 context-= 0 signals= ['arbitration', 'arbitrage', 'arbitre']
+dispute_resolution score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['litige', 'règlement']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['défaut']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=10 | receipts=30 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 3/15] 03_SaaS_Cloud_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+remedies score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['recours']
+sla score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['disponibilité', 'crédit de service']
+loan score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['crédit']
+service_level score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['disponibilité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['engagement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['frais']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['frais']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['tarif']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renouveler']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['résiliation']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnisation']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['frais']
+payment score= 2 base= 2 specificity= 0 context+= 1 context-= 1 signals= ['frais']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['résilier', 'préavis']
+payment score= 5 base= 3 specificity= 0 context+= 2 context-= 0 signals= ['frais', 'remboursement']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['frais']
+refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['remboursement']
+repayment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['remboursement']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=1.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 4/15] 04_Cybersecurity_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cybersécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cybersécurité']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['préavis']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['frais']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['frais']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: subcontracting
+termination_for_convenience score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['sans motif']
+data_processing score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['approbation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: indemnity
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+indemnity score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['réclamations']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['coûts']
+loan score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['crédit']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['manquement substantiel']
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['résilier', 'préavis']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['pénalité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['manquement']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 5/15] 05_Data_Processing_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant', 'responsable du traitement']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['données personnelles']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['droit applicable']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+data_processing score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['données personnelles']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: subcontracting
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant', 'responsable du traitement']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: security
+data_processing score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['données personnelles']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant', 'responsable du traitement']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['exécution']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant', 'responsable du traitement']
+data_protection score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['données personnelles', 'violation de données']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notification']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['assistance']
+support score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['assistance']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant', 'responsable du traitement']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['résiliation']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['données personnelles']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+data_processing score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['sous-traitant', 'responsable du traitement']
+data_protection score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['données personnelles', 'violation de données']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['conformité']
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sous-traitant']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 6/15] 06_Executive_Employment_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['salaire']
+payment score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['salaire']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 1 context-= 1 signals= ['conseil']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+change_of_control score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['acquisition']
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['salaire', 'prime']
+payment score= 2 base= 0 specificity= 0 context+= 2 context-= 0 signals= []
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['salaire']
+board_approval score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['approbation du conseil']
+corporate_governance score= 1 base= 2 specificity= 0 context+= 1 context-= 2 signals= ['conseil', 'approbation']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: non_compete
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+term score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['durée', 'durée du contrat']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: non_compete
+employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['emploi']
+term score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['durée', 'durée du contrat']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['invention']
+term score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['durée', 'durée du contrat']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+restrictive_covenants score= 10 base= 5 specificity= 4 context+= 1 context-= 0 signals= ['non-concurrence']
+non_compete score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['non-concurrence']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=22 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=2.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=Clause 4.2 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 7/15] 07_Software_Licensing_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['licence']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licence']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['création']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['droit applicable']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+royalties score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['redevance', 'redevances']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['préavis']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['paiement']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['redevances']
+investor_information_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['livres et registres']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 7 base= 2 specificity= 5 context+= 0 context-= 0 signals= ['garantie', 'garanties']
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['licence']
+disclaimer score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['sans garantie', 'tel quel']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licence']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['résilier']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notification']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['redevances']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['manquement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+intellectual_property score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['propriété intellectuelle']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['propriété']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['redevances']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 8/15] 08_Procurement_Supply_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+AI TYPE: delivery
+supply_distribution score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['fournisseur', 'bon de commande', 'livraison']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['livraison']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: delivery
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+supply_distribution score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['fournisseur', 'bon de commande', 'livraison']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['pénalité']
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['coûts']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['livraison']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+pricing score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['prix']
+payment score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['prix']
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['coûts']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: acceptance
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['frais']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['frais']
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fournisseur', 'livraison']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['livraison']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fournisseur', 'livraison']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['livraison']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+pricing score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['prix']
+payment score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['prix']
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fournisseur', 'livraison']
+delivery score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['livraison']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['performance']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['manquement substantiel']
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['résilier', 'préavis']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['manquement']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+liability score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité', 'responsable', 'dommages indirects']
+supply_distribution score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['fournisseur', 'bon de commande']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=Clause 2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 9/15] 09_Consulting_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['prestations']
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['taxes']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+invoice score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['facturation']
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['paiement']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['propriété']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['propriété']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consentement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+termination score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['résiliation', 'résilier', 'préavis']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['services']
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bon de commande']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=Clause 4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 10/15] 10_Outsourcing_Managed_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+supply_distribution score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['fourniture']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+corporate_governance score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['gouvernance', 'comité de gouvernance']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['services']
+performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['performance']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+employment score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['emploi', 'avantages']
+benefits score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['avantages', 'avantages sociaux']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['paiement']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['incident de sécurité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['assurance']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['résiliation']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['frais']
+services score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['assistance']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['frais']
+duration score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['durée', 'période']
+support score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['assistance']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnisation']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['sécurité']
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['conformité']
+services score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=11 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 11/15] 11_Commercial_Lease_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['résiliation']
+lease score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['bail']
+real_estate score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bail']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+rent score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['loyer']
+lease score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['charges']
+lease score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['bailleur']
+utilities score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['charges']
+real_estate score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['bailleur']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+real_estate score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['locaux']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsable']
+maintenance score= 4 base= 2 specificity= 2 context+= 0 context-= 0 signals= ['réparation', 'entretien']
+lease score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['bailleur']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['bailleur', 'locaux']
+repair score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['réparation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+termination_for_convenience score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['sans motif']
+lease score= 4 base= 2 specificity= 0 context+= 2 context-= 0 signals= ['bail', 'bailleur']
+real_estate score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['bail', 'bailleur', 'locaux']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consentement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: termination
+lease score= 6 base= 2 specificity= 0 context+= 4 context-= 0 signals= ['bail', 'bailleur']
+remedies score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['recours']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['résilier']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notification']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['bail', 'bailleur']
+rent score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['loyer']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: indemnity
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['responsabilité']
+lease score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['bailleur']
+real_estate score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['bailleur', 'locaux']
+insurance score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['assurance', 'assuré']
+indemnity score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['réclamations']
+property_use score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['usage des locaux']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=Clause 4.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 12/15] 12_Loan_Credit_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 6 base= 2 specificity= 0 context+= 4 context-= 0 signals= ['principal', 'prêt']
+payment score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['intérêt']
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['taux']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['durée']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+security_interest score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['sûreté']
+collateral score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['sûreté']
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['garantie']
+loan score= 2 base= 0 specificity= 0 context+= 2 context-= 0 signals= []
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consent']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 2 base= 0 specificity= 0 context+= 2 context-= 0 signals= []
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['fiscal']
+investor_information_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['états financiers']
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['couverture']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 6 base= 2 specificity= 0 context+= 4 context-= 0 signals= ['principal', 'prêt']
+repayment score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['remboursement', 'rembourser']
+payment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['remboursement']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['pénalité']
+refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['remboursement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 7 base= 2 specificity= 5 context+= 0 context-= 0 signals= ['garantie', 'garanties']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: penalty
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['notification']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['paiement']
+default score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['défaut', 'manquement']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['engagement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: penalty
+security_interest score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['sûreté']
+collateral score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['sûreté']
+remedies score= 6 base= 2 specificity= 4 context+= 0 context-= 0 signals= ['recours', 'droits et recours']
+loan score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['principal']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['droit applicable']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['défaut']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['litige']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['tribunaux']
+jurisdiction score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['tribunaux']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 13/15] 13_Asset_Purchase_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+security_interest score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['sûreté']
+collateral score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['sûreté']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['indemnisation']
+pricing score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['prix']
+payment score= 1 base= 2 specificity= 0 context+= 0 context-= 1 signals= ['prix']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['déclare et garantit']
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['litige']
+investor_information_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['états financiers']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['rémunération']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consentement']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['garanties']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['obligation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: indemnity
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['garanties']
+indemnity score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['pertes']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: non_compete
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['période']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=5
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 14/15] 14_Shareholders_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['conseil']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+services score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['conseil']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+share_transfer_rights score= 11 base= 6 specificity= 5 context+= 0 context-= 0 signals= ['cession forcée']
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['cession']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cession']
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['conseil']
+services score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['conseil']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['cession']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cession']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+investor_information_rights score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['états financiers', 'exercice fiscal']
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['fiscal']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+share_transfer_rights score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['droit de préemption']
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['actionnaire']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['capital']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['consentement']
+amendment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['modifier']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['cession']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['cession']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 15/15] 15_General_Commercial_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+fees score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['coûts']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['propriété intellectuelle', 'licence']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['propriété']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['licence']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+trademark_branding score= 3 base= 3 specificity= 0 context+= 0 context-= 0 signals= ['marque', 'marques', 'communiqué de presse']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['support']
+support score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['support']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['approbation']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['se renouvelant automatiquement']
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['résilier', 'préavis']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['préavis']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['renouveler']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: liability
+liability score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['responsable', 'dommages indirects']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=Clause 4.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=Clause 7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+----------------------------------------------------------------------------------------
+FR SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 325
+TOTAL BLOCKED: 21
+SUMMARY: regression_results_multilang\fr\_summary.json
+
+########################################################################################
+LANGUAGE: AR
+########################################################################################
+
+========================================================================================
+[AR 1/15] 01_NDA_Confidentiality_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-7: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: confidentiality
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 2/15] 02_Master_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-9: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+payment score= 4 base= 3 specificity= 0 context+= 1 context-= 0 signals= 
+========================================================================================
+[AR 3/15] 03_SaaS_Cloud_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-4: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 4/15] 04_Cybersecurity_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-6: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: service_level
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 5/15] 05_Data_Processing_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-9: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: data_protection
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 6/15] 06_Executive_Employment_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-5: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= 
+========================================================================================
+[AR 7/15] 07_Software_Licensing_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-6: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: payment
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 8/15] 08_Procurement_Supply_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-6: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: delivery
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: delivery
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 9/15] 09_Consulting_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-8: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 10/15] 10_Outsourcing_Managed_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-5: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 11/15] 11_Commercial_Lease_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-4: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: renewal
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 12/15] 12_Loan_Credit_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-4: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+loan score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= 
+========================================================================================
+[AR 13/15] 13_Asset_Purchase_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-4: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+collateral score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 14/15] 14_Shareholders_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-4: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: governance
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= 
+========================================================================================
+[AR 15/15] 15_General_Commercial_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\run_15_contracts_multilang.py", line 153, in main
+    ).run()
+      ^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4796, in run
+    results = self.run_detection()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 4709, in run_detection
+    return _analyze_contract_clauses_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 3531, in _analyze_contract_clauses_impl
+    analysis = analyze_clause(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_agent.py", line 1661, in analyze_clause
+    print(
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 2-8: character maps to <undefined>
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+AI TYPE: intellectual_property
+intellectual_property score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= 
+----------------------------------------------------------------------------------------
+AR SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 15
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 0
+TOTAL BLOCKED: 0
+SUMMARY: regression_results_multilang\ar\_summary.json
+
+########################################################################################
+FINAL MULTILINGUAL SUMMARY
+########################################################################################
+EXPECTED RUNS: 45
+COMPLETED RUNS: 45
+ERRORS: 15
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 664
+TOTAL BLOCKED: 41
+SUMMARY: regression_results_multilang\_summary_all_languages.json
+FINAL RESULT: FAIL

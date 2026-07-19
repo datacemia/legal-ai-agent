@@ -1,0 +1,35 @@
+[
+  {
+    "fixture_id": "09_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Consultant is an independent contractor and not an employee, agent, joint venturer, or partner of Client. Consultant shall be solely responsible for all applicable taxes, insurance, and benefits.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "employment",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INDEPENDENT_CONTRACTOR"
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+Nombre de clauses (etape 1): 7
+  [0] '1.1 Consultant is an independent contractor and not an emplo'
+  [1] '2.1 Consultant shall perform the Services described in each '
+  [2] '3.1 All work product, reports, analyses, and recommendations'
+  [3] '3.2 Consultant retains ownership of its pre-existing methodo'
+  [4] '4.1 Consultant shall keep confidential all non-public inform'
+  [5] '5.1 This Agreement shall continue until completion of the Se'
+  [6] "6.1 Consultant's aggregate liability arising from this Agree"

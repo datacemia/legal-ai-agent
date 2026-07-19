@@ -1,0 +1,51 @@
+FINANCE_TEXT_PDF_EXTRACTED 4372
+PDF_LINES_DEBUG {'line_count': 74, 'non_empty_line_count': 47, 'max_line_len': 261, 'first_20': ['Relevé de Compte', '', '                                              du 31-05-2021 au 30-06-2021', '', '', '', '', '', "          Relevé d'identité bancaire", '', '          TITULAIRE DU COMPTE', '      M BLANCHARD ARTHUR', '', '          DOMICILIATION', '       ORANGE BANK', '         REFERENCES BANCAIRES                           M BLANCHARD ARTHUR', '          Banque    Agence    Numéro de compte        Clé                        147 RUE DU VIVIER         18370    00001    75002007394        66', '                                                    76530 YVILLE SUR SEINE', '          IDENTIFICATION INTERNATIONALE', '         IBAN : FR76 1837 0000 0175 0020 0739 466']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+1: Relevé de Compte
+3: du 31-05-2021 au 30-06-2021
+9: Relevé d'identité bancaire
+11: TITULAIRE DU COMPTE
+12: M BLANCHARD ARTHUR
+14: DOMICILIATION
+15: ORANGE BANK
+16: REFERENCES BANCAIRES M BLANCHARD ARTHUR
+17: Banque Agence Numéro de compte Clé 147 RUE DU VIVIER 18370 00001 75002007394 66
+18: 76530 YVILLE SUR SEINE
+19: IDENTIFICATION INTERNATIONALE
+20: IBAN : FR76 1837 0000 0175 0020 0739 466
+21: BIC-ADRESSE SWIFT : GPBAFRPPXXX............................................................................................................................................................. " A remettre à tout organisme demandant vos références bancaires
+23: N° client : 58859660
+24: ORANGE BANK RelevéRelevé n°n° 00030003 page 1/ 1
+27: n Des questions ?
+28: Contactez votre conseiller virtuel disponible 24/7 par chat depuis votre espace client.
+29: Si besoin, vous entrez en contact avec un expert. n
+32: COMPTE BANCAIRE n° 750 020 073 94 - EURO M. BLANCHARD ARTHUR
+33: Protégé par la Garantie des Dépôts. www.garantiedesdepots.fr
+35: Date Nature de l'opération Débit Crédit Valeur
+37: Solde précédent au 31-05-2021 0,95
+38: 07-06 Vir reçu de MME VINCENT MARTIN VIREMENT 20,00 07-06
+39: 07-06 Vir reçu de MME VINCENT MARTIN VIREMENT 10,00 07-06
+40: 08-06 06/06 à 13h38-SumUp *sarl fra carte X9832-rouen 9,00 08-06
+41: FR 33588229940
+42: 09-06 06/06 à 11h25-Retrait DAB FR carte X9832-DUCLAIR 10,00 09-06
+43: 33585309700
+44: 09-06 06/06 à 11h26-Retrait DAB FR carte X9832-DUCLAIR 10,00 09-06
+45: 33585324640
+46: 30-06 Vir reçu de MME VINCENT MARTIN VIREMENT 15,00 30-06
+47: Total des mouvements 29,00 45,00
+48: NOUVEAU SOLDE au 30-06-2021 16,95
+51: Montant des frais prélevés du 1er au 30/06/2021 : 0,00 Ç
+53: Facilité de caisse / Autorisation de découvert au 30/06/2021
+54: Montant accordé : 0,00 Ç
+55: TAEG: 8,33% (Taux débiteur de 8%) dans la limite du montant accordé
+56: TAEG: 17,35% (Taux débiteur de 16%) au delà
+60: Suivez-nous sur :
+66: Pour faciliter la lecture de votre relevé, un code visuel ü signale les frais bancaires prélevés sur votre compte, ainsi que leur remboursement.
+68: Des questions ou un mécontentement ? Contactez votre conseiller virtuel disponible 24/7 par chat depuis votre espace client. Il saura répondre à la plupart de vos
+69: questions. Sinon, il vous met en relation avec un expert Orange Bank. La réponse apportée ne vous satisfait pas ? Vous pouvez vous adresser au service
+70: réclamations d'Orange Bank depuis la rubrique « mes demandes » de votre espace client. Vous pouvez aussi écrire par courrier à Orange Bank - Service
+71: réclamations - TSA 10948 - 92896 Nanterre Cedex 9. En dernier recours, vous pouvez saisir le médiateur auprès de la Fédération Bancaire Française. Contactez-le
+72: par internet sur le site : www.lemediateur.fbf.fr ou par courrier : Le médiateur - CS151 - 75422 Paris cedex 9.
+73: Orange Bank - Siège social : 67 rue Robespierre 93107 Montreuil cedex - S.A. au capital de 924 775 712  - 572 043 800 RCS Bobigny - Immatriculée à l'ORIAS sous
+74: le n° 07 006 369 - www.orangebank.fr

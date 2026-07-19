@@ -1,0 +1,3134 @@
+{
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": 0.9429,
+      "fr": 0.7647,
+      "ar": 0.7429,
+      "macro": 0.8168
+    },
+    "mechanism_precision": {
+      "en": 0.5821,
+      "fr": 0.6727,
+      "ar": 0.7018,
+      "macro": 0.6522
+    },
+    "mechanism_recall": {
+      "en": 0.6,
+      "fr": 0.5968,
+      "ar": 0.6154,
+      "macro": 0.6041
+    },
+    "actor_accuracy": {
+      "en": 0.5714,
+      "fr": 0.5926,
+      "ar": 0.6429,
+      "macro": 0.6023
+    },
+    "object_accuracy": {
+      "en": 0.4667,
+      "fr": 0.4286,
+      "ar": 0.4667,
+      "macro": 0.454
+    },
+    "trigger_accuracy": {
+      "en": 0.4,
+      "fr": 0.4,
+      "ar": 0.4,
+      "macro": 0.4
+    },
+    "polarity_accuracy": {
+      "en": 0.5714,
+      "fr": 0.5926,
+      "ar": 0.6429,
+      "macro": 0.6023
+    },
+    "procedural_state_accuracy": {
+      "en": 1.0,
+      "fr": 1.0,
+      "ar": 1.0,
+      "macro": 1.0
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": 1.0,
+      "fr": 1.0,
+      "ar": 1.0,
+      "macro": 1.0
+    }
+  },
+  "per_semantic_family": {
+    "ASSIGNMENT": {
+      "mechanism_precision": 0.6667,
+      "mechanism_recall": 0.6667,
+      "required_mechanisms": 6
+    },
+    "COMPENSATION": {
+      "mechanism_precision": 0.4615,
+      "mechanism_recall": 0.5,
+      "required_mechanisms": 12
+    },
+    "CONFIDENTIALITY": {
+      "mechanism_precision": 0.6429,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 9
+    },
+    "CONSENT": {
+      "mechanism_precision": 0.5,
+      "mechanism_recall": 0.3333,
+      "required_mechanisms": 9
+    },
+    "DATA_OWNERSHIP": {
+      "mechanism_precision": 0.75,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 6
+    },
+    "DATA_PROTECTION": {
+      "mechanism_precision": 0.6,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 6
+    },
+    "FINANCE": {
+      "mechanism_precision": 0.375,
+      "mechanism_recall": 0.25,
+      "required_mechanisms": 12
+    },
+    "FINANCIAL_REPORTING": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 3
+    },
+    "GOVERNANCE": {
+      "mechanism_precision": 0.0,
+      "mechanism_recall": 0.0,
+      "required_mechanisms": 6
+    },
+    "INVESTOR_RIGHTS": {
+      "mechanism_precision": 0.0,
+      "mechanism_recall": 0.0,
+      "required_mechanisms": 3
+    },
+    "LEASE": {
+      "mechanism_precision": 0.4167,
+      "mechanism_recall": 0.4167,
+      "required_mechanisms": 12
+    },
+    "LIABILITY": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 9
+    },
+    "LICENSE": {
+      "mechanism_precision": 0.75,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "M&A": {
+      "mechanism_precision": 0.8182,
+      "mechanism_recall": 0.75,
+      "required_mechanisms": 12
+    },
+    "PROCUREMENT": {
+      "mechanism_precision": 0.9231,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 12
+    },
+    "RESTRICTIVE_COVENANTS": {
+      "mechanism_precision": 0.0,
+      "mechanism_recall": 0.0,
+      "required_mechanisms": 3
+    },
+    "SECURITY": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 15
+    },
+    "SERVICES": {
+      "mechanism_precision": null,
+      "mechanism_recall": 0.0,
+      "required_mechanisms": 3
+    },
+    "SHARE_TRANSFER": {
+      "mechanism_precision": 0.4286,
+      "mechanism_recall": 0.1429,
+      "required_mechanisms": 21
+    },
+    "TERMINATION": {
+      "mechanism_precision": 0.5714,
+      "mechanism_recall": 0.8889,
+      "required_mechanisms": 9
+    },
+    "TRANSITION": {
+      "mechanism_precision": 0.5,
+      "mechanism_recall": 0.25,
+      "required_mechanisms": 12
+    }
+  },
+  "grounding": {
+    "GROUNDED": 50,
+    "UNSUPPORTED": 149
+  },
+  "cross_language_equivalence": {
+    "EN-FR": {
+      "concept_equivalence": 0.6176,
+      "argument_equivalence": 0.9706,
+      "polarity_equivalence": 1.0,
+      "procedural_state_equivalence": 0.9412,
+      "numeric_role_equivalence": 1.0,
+      "pairs": 34
+    },
+    "EN-AR": {
+      "concept_equivalence": 0.5429,
+      "argument_equivalence": 0.9429,
+      "polarity_equivalence": 1.0,
+      "procedural_state_equivalence": 0.9429,
+      "numeric_role_equivalence": 1.0,
+      "pairs": 35
+    },
+    "FR-AR": {
+      "concept_equivalence": 0.7353,
+      "argument_equivalence": 0.9706,
+      "polarity_equivalence": 1.0,
+      "procedural_state_equivalence": 0.9706,
+      "numeric_role_equivalence": 1.0,
+      "pairs": 34
+    }
+  },
+  "observed_failure_regressions": {
+    "LIABILITY → GOVERNING LAW": {
+      "result": "PASS",
+      "expected": [
+        "LIABILITY_CAP"
+      ],
+      "forbidden": [
+        "FORUM_SELECTION",
+        "GOVERNING_LAW"
+      ],
+      "actual_by_language": {
+        "en": [
+          "EXCLUDED_DAMAGES",
+          "LIABILITY_CAP",
+          "LIABILITY_CARVEOUT"
+        ],
+        "fr": [
+          "EXCLUDED_DAMAGES",
+          "LIABILITY_CAP",
+          "LIABILITY_CARVEOUT"
+        ],
+        "ar": [
+          "EXCLUDED_DAMAGES",
+          "LIABILITY_CAP",
+          "LIABILITY_CARVEOUT"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "FINANCIAL REPORTING → BOARD / DEADLOCK": {
+      "result": "PASS",
+      "expected": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "forbidden": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "actual_by_language": {
+        "en": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ],
+        "fr": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ],
+        "ar": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "BOARD → SUBCONTRACTING": {
+      "result": "FAIL",
+      "expected": [
+        "BOARD_COMPOSITION"
+      ],
+      "forbidden": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "actual_by_language": {
+        "en": [
+          "BOARD_COMPOSITION_STRUCTURE"
+        ],
+        "fr": [
+          "BOARD_COMPOSITION_STRUCTURE"
+        ],
+        "ar": [
+          "BOARD_COMPOSITION_STRUCTURE"
+        ]
+      },
+      "pass_by_language": {
+        "en": false,
+        "fr": false,
+        "ar": false
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "DRAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "forbidden": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "actual_by_language": {
+        "en": [],
+        "fr": [],
+        "ar": []
+      },
+      "pass_by_language": {
+        "en": false,
+        "fr": false,
+        "ar": false
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "TAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "PARTICIPATION_OPTION",
+        "TAG_ALONG_RIGHT"
+      ],
+      "forbidden": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "actual_by_language": {
+        "en": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "fr": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "ar": [
+          "TAG_ALONG_RIGHT"
+        ]
+      },
+      "pass_by_language": {
+        "en": false,
+        "fr": false,
+        "ar": false
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "AUTOMATIC TERMINATION": {
+      "result": "FAIL",
+      "expected": [
+        "AUTOMATIC_TERMINATION"
+      ],
+      "forbidden": [
+        "NOTICE_PREREQUISITE"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": []
+    },
+    "INVESTOR PRIOR WRITTEN CONSENT": {
+      "result": "FAIL",
+      "expected": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT"
+      ],
+      "forbidden": [],
+      "actual_by_language": {
+        "en": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION",
+          "RESERVED_MATTERS_CONSENT"
+        ],
+        "fr": [
+          "CONSENT_PREREQUISITE"
+        ],
+        "ar": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION"
+        ]
+      },
+      "pass_by_language": {
+        "en": false,
+        "fr": false,
+        "ar": false
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    },
+    "CONFIDENTIALITY MULTI-MECHANISM": {
+      "result": "PASS",
+      "expected": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "forbidden": [],
+      "actual_by_language": {
+        "en": [
+          "CONFIDENTIALITY_OBLIGATION",
+          "CONSENT_PREREQUISITE",
+          "NON_DISCLOSURE",
+          "PROHIBITION"
+        ],
+        "fr": [
+          "CONFIDENTIALITY_OBLIGATION",
+          "CONSENT_PREREQUISITE",
+          "NON_DISCLOSURE"
+        ],
+        "ar": [
+          "CONFIDENTIALITY_OBLIGATION",
+          "CONSENT_PREREQUISITE",
+          "NON_DISCLOSURE"
+        ]
+      },
+      "pass_by_language": {
+        "en": true,
+        "fr": true,
+        "ar": true
+      },
+      "missing_languages": [],
+      "malformed_or_missing_rows": []
+    }
+  },
+  "critical_failures": [],
+  "high_failures": [
+    {
+      "fixture_id": "02_4_2_en",
+      "language": "en",
+      "source_text": "4.2 Provider may terminate this Agreement or any SOW immediately, for any reason or no reason, upon written notice to Client. Client may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "NOTICE_PREREQUISITE",
+          "TERMINATION_FOR_CAUSE",
+          "TERMINATION_FOR_CONVENIENCE"
+        ],
+        "relations": [
+          {
+            "concept": "TERMINATION_FOR_CONVENIENCE",
+            "right_holder": "PROVIDER",
+            "action": "TERMINATE",
+            "polarity": "RIGHT"
+          },
+          {
+            "concept": "TERMINATION_FOR_CAUSE",
+            "right_holder": "CLIENT",
+            "trigger": "UNCURED_MATERIAL_BREACH",
+            "action": "TERMINATE",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [
+          "MANUAL",
+          "NOTICE_REQUIRED"
+        ],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "termination",
+        "mechanisms": [
+          "NOTICE_PREREQUISITE",
+          "NOTICE_PROCEDURE",
+          "TERMINATION_FOR_CAUSE"
+        ],
+        "states": [
+          "MANUAL",
+          "NOTICE_REQUIRED"
+        ],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "NOTICE_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "NOTICE_PROCEDURE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:TERMINATION_FOR_CONVENIENCE"
+      ]
+    },
+    {
+      "fixture_id": "06_2_2_en",
+      "language": "en",
+      "source_text": "2.2 Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "BONUS",
+          "EQUITY_GRANT"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 40,
+            "unit": "PERCENT",
+            "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+            "related_mechanism": "BONUS"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "compensation",
+        "mechanisms": [
+          "BASE_COMPENSATION",
+          "EQUITY_COMPENSATION_GRANT",
+          "INCENTIVE_COMPENSATION",
+          "VESTING_SCHEDULE"
+        ],
+        "states": [
+          "VESTING_SCHEDULE"
+        ],
+        "numeric_roles": [
+          {
+            "value": 40,
+            "unit": "PERCENT",
+            "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+            "related_mechanism": "BONUS"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "BASE_COMPENSATION",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "INCENTIVE_COMPENSATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "EQUITY_COMPENSATION_GRANT",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "VESTING_SCHEDULE",
+          "verdict": "GROUNDED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:BONUS",
+        "MISSING_MATERIAL_MECHANISM:EQUITY_GRANT"
+      ]
+    },
+    {
+      "fixture_id": "06_2_2_fr",
+      "language": "fr",
+      "source_text": "2.2 La Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "BONUS",
+          "EQUITY_GRANT"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 40,
+            "unit": "PERCENT",
+            "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+            "related_mechanism": "BONUS"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "compensation",
+        "mechanisms": [
+          "INCENTIVE_COMPENSATION"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 40,
+            "unit": "PERCENT",
+            "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+            "related_mechanism": "BONUS"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "INCENTIVE_COMPENSATION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:BONUS",
+        "MISSING_MATERIAL_MECHANISM:EQUITY_GRANT"
+      ]
+    },
+    {
+      "fixture_id": "06_2_2_ar",
+      "language": "ar",
+      "source_text": "2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "BONUS",
+          "EQUITY_GRANT"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 40,
+            "unit": "PERCENT",
+            "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+            "related_mechanism": "BONUS"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "compensation",
+        "mechanisms": [
+          "INCENTIVE_COMPENSATION"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 40,
+            "unit": "PERCENT",
+            "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+            "related_mechanism": "BONUS"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "INCENTIVE_COMPENSATION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:BONUS",
+        "MISSING_MATERIAL_MECHANISM:EQUITY_GRANT"
+      ]
+    },
+    {
+      "fixture_id": "06_4_1_en",
+      "language": "en",
+      "source_text": "4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "NON_COMPETE"
+        ],
+        "relations": [
+          {
+            "concept": "NON_COMPETE",
+            "obligated_actor": "EXECUTIVE",
+            "action": "COMPETE",
+            "polarity": "PROHIBITION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18,
+            "unit": "MONTHS",
+            "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+            "related_mechanism": "NON_COMPETE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "restrictive_covenants",
+        "mechanisms": [
+          "NON_COMPETE_RESTRICTION",
+          "PROHIBITION"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18,
+            "unit": "MONTHS",
+            "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+            "related_mechanism": "NON_COMPETE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "NON_COMPETE_RESTRICTION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PROHIBITION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:NON_COMPETE"
+      ]
+    },
+    {
+      "fixture_id": "06_4_1_fr",
+      "language": "fr",
+      "source_text": "4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "NON_COMPETE"
+        ],
+        "relations": [
+          {
+            "concept": "NON_COMPETE",
+            "obligated_actor": "EXECUTIVE",
+            "action": "COMPETE",
+            "polarity": "PROHIBITION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18,
+            "unit": "MONTHS",
+            "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+            "related_mechanism": "NON_COMPETE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "restrictive_covenants",
+        "mechanisms": [
+          "NON_COMPETE_RESTRICTION"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18,
+            "unit": "MONTHS",
+            "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+            "related_mechanism": "NON_COMPETE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "NON_COMPETE_RESTRICTION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:NON_COMPETE"
+      ]
+    },
+    {
+      "fixture_id": "06_4_1_ar",
+      "language": "ar",
+      "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "NON_COMPETE"
+        ],
+        "relations": [
+          {
+            "concept": "NON_COMPETE",
+            "obligated_actor": "EXECUTIVE",
+            "action": "COMPETE",
+            "polarity": "PROHIBITION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18,
+            "unit": "MONTHS",
+            "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+            "related_mechanism": "NON_COMPETE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "restrictive_covenants",
+        "mechanisms": [
+          "NON_COMPETE_RESTRICTION"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18,
+            "unit": "MONTHS",
+            "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+            "related_mechanism": "NON_COMPETE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "NON_COMPETE_RESTRICTION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:NON_COMPETE"
+      ]
+    },
+    {
+      "fixture_id": "09_1_1_en",
+      "language": "en",
+      "source_text": "1.1 Consultant is an independent contractor and not an employee, agent, joint venturer, or partner of Client. Consultant shall be solely responsible for all applicable taxes, insurance, and benefits.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "INDEPENDENT_CONTRACTOR"
+        ],
+        "relations": [
+          {
+            "concept": "INDEPENDENT_CONTRACTOR",
+            "obligated_actor": "CONSULTANT",
+            "object": "LEGAL_STATUS",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "employment",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INDEPENDENT_CONTRACTOR"
+      ]
+    },
+    {
+      "fixture_id": "09_1_1_fr",
+      "language": "fr",
+      "source_text": "1.1 Le Consultant est un prestataire indépendant et non un salarié, mandataire, coentrepreneur ou associé du Client. Le Consultant sera seul responsable de l'ensemble des taxes, assurances et prestations applicables.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "INDEPENDENT_CONTRACTOR"
+        ],
+        "relations": [
+          {
+            "concept": "INDEPENDENT_CONTRACTOR",
+            "obligated_actor": "CONSULTANT",
+            "object": "LEGAL_STATUS",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "liability",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INDEPENDENT_CONTRACTOR"
+      ]
+    },
+    {
+      "fixture_id": "09_1_1_ar",
+      "language": "ar",
+      "source_text": "1.1 الاستشاري مقاول مستقل وليس موظفاً أو وكيلاً أو شريكاً في مشروع مشترك أو شريكاً للعميل. يتحمل الاستشاري وحده مسؤولية جميع الضرائب والتأمينات والمزايا المعمول بها.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "INDEPENDENT_CONTRACTOR"
+        ],
+        "relations": [
+          {
+            "concept": "INDEPENDENT_CONTRACTOR",
+            "obligated_actor": "CONSULTANT",
+            "object": "LEGAL_STATUS",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "tax",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INDEPENDENT_CONTRACTOR"
+      ]
+    },
+    {
+      "fixture_id": "10_1_1_en",
+      "language": "en",
+      "source_text": "1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred Employees, with minimal disruption to Client's business operations.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_PLAN"
+        ],
+        "relations": [
+          {
+            "concept": "TRANSITION_PLAN",
+            "obligated_actor": "PROVIDER",
+            "action": "IMPLEMENT_TRANSITION_PLAN",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "services",
+        "mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_SERVICE_OBLIGATION"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "TRANSITION_SERVICE_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "SERVICE_SCOPE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:TRANSITION_PLAN"
+      ]
+    },
+    {
+      "fixture_id": "10_1_1_fr",
+      "language": "fr",
+      "source_text": "1.1 Pendant la Période de Transition, le Prestataire mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations du Client.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_PLAN"
+        ],
+        "relations": [
+          {
+            "concept": "TRANSITION_PLAN",
+            "obligated_actor": "PROVIDER",
+            "action": "IMPLEMENT_TRANSITION_PLAN",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "services",
+        "mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_SERVICE_OBLIGATION"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "TRANSITION_SERVICE_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "SERVICE_SCOPE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:TRANSITION_PLAN"
+      ]
+    },
+    {
+      "fixture_id": "10_1_1_ar",
+      "language": "ar",
+      "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_PLAN"
+        ],
+        "relations": [
+          {
+            "concept": "TRANSITION_PLAN",
+            "obligated_actor": "PROVIDER",
+            "action": "IMPLEMENT_TRANSITION_PLAN",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "services",
+        "mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_SERVICE_OBLIGATION"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "TRANSITION_SERVICE_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "SERVICE_SCOPE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:TRANSITION_PLAN"
+      ]
+    },
+    {
+      "fixture_id": "10_6_1_en",
+      "language": "en",
+      "source_text": "6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Client or a successor provider, at Client's request and expense at Provider's then-current rates.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "EXIT_ASSISTANCE",
+          "TERM_DURATION"
+        ],
+        "relations": [
+          {
+            "concept": "EXIT_ASSISTANCE",
+            "obligated_actor": "PROVIDER",
+            "trigger": "EXPIRATION_OR_TERMINATION",
+            "action": "PROVIDE_EXIT_ASSISTANCE",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "termination",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+        "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+      ]
+    },
+    {
+      "fixture_id": "10_6_1_fr",
+      "language": "fr",
+      "source_text": "6.1 Le présent Accord a une durée initiale de cinq (5) ans. À l'expiration ou à la résiliation, le Prestataire fournira une assistance raisonnable à la sortie pendant une période pouvant aller jusqu'à cent quatre-vingts (180) jours pour faciliter la transition vers le Client ou un prestataire successeur, à la demande du Client et à ses frais aux tarifs alors en vigueur du Prestataire.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "EXIT_ASSISTANCE",
+          "TERM_DURATION"
+        ],
+        "relations": [
+          {
+            "concept": "EXIT_ASSISTANCE",
+            "obligated_actor": "PROVIDER",
+            "trigger": "EXPIRATION_OR_TERMINATION",
+            "action": "PROVIDE_EXIT_ASSISTANCE",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "termination",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+        "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+      ]
+    },
+    {
+      "fixture_id": "10_6_1_ar",
+      "language": "ar",
+      "source_text": "6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "EXIT_ASSISTANCE",
+          "TERM_DURATION"
+        ],
+        "relations": [
+          {
+            "concept": "EXIT_ASSISTANCE",
+            "obligated_actor": "PROVIDER",
+            "trigger": "EXPIRATION_OR_TERMINATION",
+            "action": "PROVIDE_EXIT_ASSISTANCE",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "pricing",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+        "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+      ]
+    },
+    {
+      "fixture_id": "11_2_1_en",
+      "language": "en",
+      "source_text": "2.1 Tenant shall pay Base Rent of $18,500 per month, payable in advance on the first day of each month, subject to an annual escalation of three percent (3%) on each anniversary of the commencement date.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAY_FREQUENCY",
+          "RENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:RENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "11_2_1_fr",
+      "language": "fr",
+      "source_text": "2.1 Le Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAY_FREQUENCY",
+          "RENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:RENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "11_2_1_ar",
+      "language": "ar",
+      "source_text": "2.1 يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAY_FREQUENCY",
+          "RENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:RENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "11_2_2_en",
+      "language": "en",
+      "source_text": "2.2 Tenant shall pay its proportionate share of Operating Expenses, estimated monthly and reconciled annually, with any underpayment due within thirty (30) days of Landlord's reconciliation statement.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "OPERATING_EXPENSES",
+          "PAYMENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PAYMENT_DEADLINE",
+          "PAYMENT_OBLIGATION"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "PAYMENT_DEADLINE",
+          "verdict": "GROUNDED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:OPERATING_EXPENSES"
+      ]
+    },
+    {
+      "fixture_id": "11_2_2_fr",
+      "language": "fr",
+      "source_text": "2.2 Le Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "OPERATING_EXPENSES",
+          "PAYMENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "OPERATING_CHARGE_RECONCILIATION",
+          "PAYMENT_DEADLINE",
+          "PAYMENT_OBLIGATION"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "OPERATING_CHARGE_RECONCILIATION",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PAYMENT_DEADLINE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:OPERATING_EXPENSES"
+      ]
+    },
+    {
+      "fixture_id": "11_2_2_ar",
+      "language": "ar",
+      "source_text": "2.2 يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "OPERATING_EXPENSES",
+          "PAYMENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PAYMENT_DEADLINE"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "PAYMENT_DEADLINE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:OPERATING_EXPENSES",
+        "MISSING_MATERIAL_MECHANISM:PAYMENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "11_5_1_en",
+      "language": "en",
+      "source_text": "5.1 Tenant shall not assign this Lease or sublet the Premises, in whole or in part, without Landlord's prior written consent, which shall not be unreasonably withheld, conditioned, or delayed.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "ASSIGNMENT_RESTRICTION",
+          "CONSENT_PREREQUISITE"
+        ],
+        "relations": [
+          {
+            "concept": "ASSIGNMENT_RESTRICTION",
+            "obligated_actor": "TENANT",
+            "object": "LEASE_OR_PREMISES",
+            "action": "ASSIGN_OR_SUBLET",
+            "polarity": "PROHIBITION"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "assignment",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PROHIBITION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:ASSIGNMENT_RESTRICTION"
+      ]
+    },
+    {
+      "fixture_id": "11_5_1_fr",
+      "language": "fr",
+      "source_text": "5.1 Le Preneur ne pourra céder le présent Bail ni sous-louer les Locaux, en tout ou partie, sans le consentement écrit préalable du Bailleur, lequel ne pourra être refusé, conditionné ou retardé sans motif raisonnable.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "ASSIGNMENT_RESTRICTION",
+          "CONSENT_PREREQUISITE"
+        ],
+        "relations": [
+          {
+            "concept": "ASSIGNMENT_RESTRICTION",
+            "obligated_actor": "TENANT",
+            "object": "LEASE_OR_PREMISES",
+            "action": "ASSIGN_OR_SUBLET",
+            "polarity": "PROHIBITION"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "termination_for_convenience",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:ASSIGNMENT_RESTRICTION"
+      ]
+    },
+    {
+      "fixture_id": "12_1_1_en",
+      "language": "en",
+      "source_text": "1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "LOAN_DISBURSEMENT"
+        ],
+        "relations": [
+          {
+            "concept": "LOAN_DISBURSEMENT",
+            "obligated_actor": "LENDER",
+            "beneficiary": "BORROWER",
+            "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "loan",
+        "mechanisms": [
+          "LOAN_PRINCIPAL_DISBURSEMENT",
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "LOAN_PRINCIPAL_DISBURSEMENT",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "GROUNDED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:LOAN_DISBURSEMENT"
+      ]
+    },
+    {
+      "fixture_id": "12_1_1_fr",
+      "language": "fr",
+      "source_text": "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "LOAN_DISBURSEMENT"
+        ],
+        "relations": [
+          {
+            "concept": "LOAN_DISBURSEMENT",
+            "obligated_actor": "LENDER",
+            "beneficiary": "BORROWER",
+            "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "loan",
+        "mechanisms": [
+          "LOAN_PRINCIPAL_DISBURSEMENT",
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "LOAN_PRINCIPAL_DISBURSEMENT",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "GROUNDED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:LOAN_DISBURSEMENT"
+      ]
+    },
+    {
+      "fixture_id": "12_1_1_ar",
+      "language": "ar",
+      "source_text": "1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "LOAN_DISBURSEMENT"
+        ],
+        "relations": [
+          {
+            "concept": "LOAN_DISBURSEMENT",
+            "obligated_actor": "LENDER",
+            "beneficiary": "BORROWER",
+            "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "loan",
+        "mechanisms": [
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:LOAN_DISBURSEMENT"
+      ]
+    },
+    {
+      "fixture_id": "12_2_1_en",
+      "language": "en",
+      "source_text": "2.1 As security for Borrower's obligations under this Agreement, Borrower grants Lender a first-priority security interest in the Collateral, and shall execute all documents reasonably necessary to perfect such security interest, including UCC financing statements.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SECURITY_INTEREST"
+        ],
+        "relations": [
+          {
+            "concept": "SECURITY_INTEREST",
+            "right_holder": "LENDER",
+            "obligated_actor": "BORROWER",
+            "object": "COLLATERAL",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "security_interest",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:SECURITY_INTEREST"
+      ]
+    },
+    {
+      "fixture_id": "12_2_1_fr",
+      "language": "fr",
+      "source_text": "2.1 En garantie des obligations de l'Emprunteur au titre du présent Contrat, l'Emprunteur consent au Prêteur une sûreté de premier rang sur les Sûretés, et signera tous les documents raisonnablement nécessaires à la constitution de cette sûreté, y compris les déclarations de financement UCC.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SECURITY_INTEREST"
+        ],
+        "relations": [
+          {
+            "concept": "SECURITY_INTEREST",
+            "right_holder": "LENDER",
+            "obligated_actor": "BORROWER",
+            "object": "COLLATERAL",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "security_interest",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:SECURITY_INTEREST"
+      ]
+    },
+    {
+      "fixture_id": "12_2_1_ar",
+      "language": "ar",
+      "source_text": "2.1 ضماناً لالتزامات المقترض بموجب هذه الاتفاقية، يمنح المقترض المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SECURITY_INTEREST"
+        ],
+        "relations": [
+          {
+            "concept": "SECURITY_INTEREST",
+            "right_holder": "LENDER",
+            "obligated_actor": "BORROWER",
+            "object": "COLLATERAL",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "loan",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:SECURITY_INTEREST"
+      ]
+    },
+    {
+      "fixture_id": "12_5_1_en",
+      "language": "en",
+      "source_text": "5.1 Borrower's obligations under this Agreement are guaranteed by Trailhead Holdings Inc., the parent company of Borrower, pursuant to a separate Guarantee Agreement executed concurrently herewith.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "GUARANTEE"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "guarantee",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:GUARANTEE"
+      ]
+    },
+    {
+      "fixture_id": "12_5_1_fr",
+      "language": "fr",
+      "source_text": "5.1 Les obligations de l'Emprunteur au titre du présent Contrat sont garanties par Trailhead Holdings Inc., société mère de l'Emprunteur, en vertu d'un Contrat de Garantie distinct conclu concomitamment aux présentes.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "GUARANTEE"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "warranty",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:GUARANTEE"
+      ]
+    },
+    {
+      "fixture_id": "12_5_1_ar",
+      "language": "ar",
+      "source_text": "5.1 التزامات المقترض بموجب هذه الاتفاقية مكفولة من قبل شركة Trailhead Holdings Inc.، الشركة الأم للمقترض، بموجب اتفاقية كفالة منفصلة مبرمة بالتزامن مع هذه الاتفاقية.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "GUARANTEE"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "guarantee",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:GUARANTEE"
+      ]
+    },
+    {
+      "fixture_id": "13_2_1_en",
+      "language": "en",
+      "source_text": "2.1 The aggregate purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing; and (b) $2,000,000 held in escrow for eighteen (18) months to secure Seller's indemnification obligations under Section 6.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PURCHASE_PRICE"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "indemnity",
+        "mechanisms": [
+          "PURCHASE_PRICE",
+          "PURCHASE_PRICE_PAYMENT_SCHEDULE"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          },
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PURCHASE_PRICE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+          "verdict": "GROUNDED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PAYMENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "13_2_1_fr",
+      "language": "fr",
+      "source_text": "2.1 Le prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture ; et (b) 2 000 000 $ déposés sous séquestre pendant dix-huit (18) mois pour garantir les obligations d'indemnisation du Vendeur au titre de l'article 6.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PURCHASE_PRICE"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PURCHASE_PRICE",
+          "PURCHASE_PRICE_PAYMENT_SCHEDULE"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          },
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PURCHASE_PRICE",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PAYMENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "13_2_1_ar",
+      "language": "ar",
+      "source_text": "2.1 يبلغ إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق؛ و(ب) 2,000,000 دولار تُودع في حساب ضمان لمدة ثمانية عشر (18) شهراً لضمان التزامات تعويض البائع بموجب البند 6.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PURCHASE_PRICE"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "indemnity",
+        "mechanisms": [
+          "PURCHASE_PRICE"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 12750000,
+            "unit": "USD",
+            "semantic_role": "PURCHASE_PRICE",
+            "related_mechanism": "PURCHASE_PRICE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PURCHASE_PRICE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PAYMENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "14_3_1_en",
+      "language": "en",
+      "source_text": "3.1 If holders of a majority of the outstanding Preferred Stock and a majority of the board approve a sale of the Company, all other shareholders shall be required to vote in favor of and consent to such transaction (\"Drag-Along Right\"), subject to customary protections regarding consideration and representations.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ],
+        "relations": [
+          {
+            "concept": "DRAG_ALONG_RIGHT",
+            "obligated_actor": "OTHER_SHAREHOLDERS",
+            "action": "VOTE_IN_FAVOR_AND_CONSENT",
+            "polarity": "MANDATORY_PARTICIPATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "share_transfer_rights",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+      ]
+    },
+    {
+      "fixture_id": "14_3_1_fr",
+      "language": "fr",
+      "source_text": "3.1 Si les détenteurs de la majorité des Actions Préférentielles en circulation et une majorité du conseil approuvent une cession de la Société, tous les autres actionnaires seront tenus de voter en faveur de cette opération et d'y consentir (« Droit de Cession Forcée »), sous réserve de protections usuelles concernant la contrepartie et les déclarations.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ],
+        "relations": [
+          {
+            "concept": "DRAG_ALONG_RIGHT",
+            "obligated_actor": "OTHER_SHAREHOLDERS",
+            "action": "VOTE_IN_FAVOR_AND_CONSENT",
+            "polarity": "MANDATORY_PARTICIPATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "share_transfer_rights",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+      ]
+    },
+    {
+      "fixture_id": "14_3_1_ar",
+      "language": "ar",
+      "source_text": "3.1 إذا وافق حاملو أغلبية الأسهم الممتازة القائمة وأغلبية المجلس على بيع الشركة، يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها (\"حق التنازل الإلزامي\")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ],
+        "relations": [
+          {
+            "concept": "DRAG_ALONG_RIGHT",
+            "obligated_actor": "OTHER_SHAREHOLDERS",
+            "action": "VOTE_IN_FAVOR_AND_CONSENT",
+            "polarity": "MANDATORY_PARTICIPATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "assignment",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+      ]
+    },
+    {
+      "fixture_id": "14_3_2_en",
+      "language": "en",
+      "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\").",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "TAG_ALONG_RIGHT",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "RIGHT"
+          },
+          {
+            "concept": "PARTICIPATION_OPTION",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "OPTION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "EXPRESS_RIGHT",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+        "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_3_2_fr",
+      "language": "fr",
+      "source_text": "3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "TAG_ALONG_RIGHT",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "RIGHT"
+          },
+          {
+            "concept": "PARTICIPATION_OPTION",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "OPTION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "EXPRESS_RIGHT",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+        "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_3_2_ar",
+      "language": "ar",
+      "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\").",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "TAG_ALONG_RIGHT",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "RIGHT"
+          },
+          {
+            "concept": "PARTICIPATION_OPTION",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "OPTION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "TAG_ALONG_RIGHT"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "verdict": "GROUNDED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+        "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_2_1_en",
+      "language": "en",
+      "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PREEMPTIVE_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "PREEMPTIVE_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "NEW_SECURITIES",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "anti_dilution_preemptive_rights",
+        "mechanisms": [
+          "EXPRESS_RIGHT"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "EXPRESS_RIGHT",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_2_1_fr",
+      "language": "fr",
+      "source_text": "2.1 L'Investisseur aura le droit d'acquérir sa quote-part proportionnelle de tout nouveau titre émis par la Société, sous réserve des exceptions usuelles pour les émissions au titre des plans d'intéressement, les acquisitions et les émissions liées à une Introduction en Bourse Qualifiée.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PREEMPTIVE_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "PREEMPTIVE_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "NEW_SECURITIES",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "other",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_2_1_ar",
+      "language": "ar",
+      "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PREEMPTIVE_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "PREEMPTIVE_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "NEW_SECURITIES",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "anti_dilution_preemptive_rights",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_1_1_en",
+      "language": "en",
+      "source_text": "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "BOARD_COMPOSITION_STRUCTURE"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "BOARD_COMPOSITION_STRUCTURE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:BOARD_COMPOSITION"
+      ]
+    },
+    {
+      "fixture_id": "14_1_1_fr",
+      "language": "fr",
+      "source_text": "1.1 Le conseil d'administration de la Société sera composé de cinq (5) membres : deux (2) désignés par les fondateurs, un (1) désigné par l'Investisseur tant que celui-ci détiendra au moins 5 % du capital pleinement dilué de la Société, et deux (2) administrateurs indépendants désignés d'un commun accord entre les fondateurs et l'Investisseur.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "BOARD_COMPOSITION_STRUCTURE"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "BOARD_COMPOSITION_STRUCTURE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:BOARD_COMPOSITION"
+      ]
+    },
+    {
+      "fixture_id": "14_1_1_ar",
+      "language": "ar",
+      "source_text": "1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "BOARD_COMPOSITION_STRUCTURE"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "BOARD_COMPOSITION_STRUCTURE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:BOARD_COMPOSITION"
+      ]
+    },
+    {
+      "fixture_id": "14_6_1_en",
+      "language": "en",
+      "source_text": "6.1 For so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, the Company shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebtedness in excess of $2,000,000, other than in the ordinary course of business.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "INVESTOR_CONSENT_RIGHT",
+          "RESERVED_MATTER"
+        ],
+        "relations": [
+          {
+            "concept": "INVESTOR_CONSENT_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "RESERVED_MATTER",
+            "polarity": "CONSENT_RIGHT"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION",
+          "RESERVED_MATTERS_CONSENT"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "RESERVED_MATTERS_CONSENT",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PROHIBITION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+      ]
+    },
+    {
+      "fixture_id": "14_6_1_fr",
+      "language": "fr",
+      "source_text": "6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "INVESTOR_CONSENT_RIGHT",
+          "RESERVED_MATTER"
+        ],
+        "relations": [
+          {
+            "concept": "INVESTOR_CONSENT_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "RESERVED_MATTER",
+            "polarity": "CONSENT_RIGHT"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "loan",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+      ]
+    },
+    {
+      "fixture_id": "14_6_1_ar",
+      "language": "ar",
+      "source_text": "6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "INVESTOR_CONSENT_RIGHT",
+          "RESERVED_MATTER"
+        ],
+        "relations": [
+          {
+            "concept": "INVESTOR_CONSENT_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "RESERVED_MATTER",
+            "polarity": "CONSENT_RIGHT"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PROHIBITION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+      ]
+    }
+  ],
+  "failure_count": 51,
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_clause_count": 105,
+  "gold_clauses_by_language": {
+    "en": 35,
+    "fr": 35,
+    "ar": 35
+  },
+  "publication_baseline_persisted_json_check": {
+    "expected_runs": 45,
+    "completed_runs": 45,
+    "errors": 0,
+    "integrity_failures": 0,
+    "total_receipts_observed_in_json": 0,
+    "total_blocked_observed_in_json": 0,
+    "hash_mismatch_count": 0,
+    "post_gate_mutation_count": 0,
+    "final_result": "PASS",
+    "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts."
+  },
+  "before_after_metric_comparison": {
+    "primary_type_support_rate": {
+      "en": {
+        "baseline": 0.9429,
+        "after_fix": 0.9429,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.7647,
+        "after_fix": 0.7647,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.7429,
+        "after_fix": 0.7429,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.8168,
+        "after_fix": 0.8168,
+        "delta": 0.0
+      }
+    },
+    "mechanism_precision": {
+      "en": {
+        "baseline": 0.5821,
+        "after_fix": 0.5821,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.6727,
+        "after_fix": 0.6727,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.7018,
+        "after_fix": 0.7018,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.6522,
+        "after_fix": 0.6522,
+        "delta": 0.0
+      }
+    },
+    "mechanism_recall": {
+      "en": {
+        "baseline": 0.6,
+        "after_fix": 0.6,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.5968,
+        "after_fix": 0.5968,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.6154,
+        "after_fix": 0.6154,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.6041,
+        "after_fix": 0.6041,
+        "delta": 0.0
+      }
+    },
+    "actor_accuracy": {
+      "en": {
+        "baseline": 0.5714,
+        "after_fix": 0.5714,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.5926,
+        "after_fix": 0.5926,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.6429,
+        "after_fix": 0.6429,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.6023,
+        "after_fix": 0.6023,
+        "delta": 0.0
+      }
+    },
+    "object_accuracy": {
+      "en": {
+        "baseline": 0.4667,
+        "after_fix": 0.4667,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.4286,
+        "after_fix": 0.4286,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.4667,
+        "after_fix": 0.4667,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.454,
+        "after_fix": 0.454,
+        "delta": 0.0
+      }
+    },
+    "trigger_accuracy": {
+      "en": {
+        "baseline": 0.4,
+        "after_fix": 0.4,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.4,
+        "after_fix": 0.4,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.4,
+        "after_fix": 0.4,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.4,
+        "after_fix": 0.4,
+        "delta": 0.0
+      }
+    },
+    "polarity_accuracy": {
+      "en": {
+        "baseline": 0.5714,
+        "after_fix": 0.5714,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 0.5926,
+        "after_fix": 0.5926,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 0.6429,
+        "after_fix": 0.6429,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.6023,
+        "after_fix": 0.6023,
+        "delta": 0.0
+      }
+    },
+    "procedural_state_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    }
+  },
+  "baseline_path": "semantic_audit_lot5_final\\frozen_gold_baseline_metrics.json"
+}

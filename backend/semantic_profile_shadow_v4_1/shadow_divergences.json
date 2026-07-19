@@ -1,0 +1,182 @@
+[
+  {
+    "language": "fr",
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "clause_7",
+    "source_text": "5.1 Chaque Partie reconnaît que la divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution.",
+    "pipeline_clause_type": "remedies",
+    "semantic_profile_version": "shadow-p0-v4.1",
+    "shadow_primary_type": "confidentiality",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9054,
+    "shadow_dominance_margin": 81.987,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "confidentiality",
+        "score": 81.987,
+        "coverage": 0.9054,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "CONFIDENTIALITY_REMEDY"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 35,
+            "end": 370,
+            "text": "divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 35,
+            "end": 370,
+            "text": "divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "73367650b1761b7dc48fb1a673cfcee8cff8158d4eb111acc04db793fe510b43"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 35,
+            "end": 370,
+            "text": "divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "73367650b1761b7dc48fb1a673cfcee8cff8158d4eb111acc04db793fe510b43"
+      }
+    ],
+    "semantic_profile_hash": "410e32fec8746e4ab7ebdcc8477a8febd7dd462e4f5fbb0243db7b5067f9fb6f",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "3.1 تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4.1",
+    "shadow_primary_type": "confidentiality",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9862,
+    "shadow_dominance_margin": 85.5007,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "confidentiality",
+        "score": 85.5007,
+        "coverage": 0.9862,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "CONFIDENTIALITY_SURVIVAL"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 4,
+            "end": 290,
+            "text": "تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 4,
+            "end": 290,
+            "text": "تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "69b80aa4c9f00d9005df4b1f8600161d8e807b12c922553acbcafd56ac2111ad"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 4,
+            "end": 290,
+            "text": "تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "69b80aa4c9f00d9005df4b1f8600161d8e807b12c922553acbcafd56ac2111ad"
+      }
+    ],
+    "semantic_profile_hash": "3ba7c319e34a8f67ff8d4b59ca592f24c70dcd6af1f203f444edd4a6823d1d9f",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

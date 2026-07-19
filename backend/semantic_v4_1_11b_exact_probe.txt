@@ -1,0 +1,121 @@
+====================================================================================================
+INSTALLED ENGINE
+====================================================================================================
+MODULE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\semantic_source_profile.py
+_evidence signature: (source: 'str', pattern: 'str', label: 'str') -> 'Iterable[dict]'
+AR NORMALIZER: False
+
+def _evidence(source: str, pattern: str, label: str) -> Iterable[dict]:
+    for match in re.finditer(pattern, source, re.IGNORECASE | re.DOTALL):
+        yield {"label": label, "start": match.start(), "end": match.end(), "text": match.group(0)}
+
+
+====================================================================================================
+RULES
+====================================================================================================
+FOUND: ['BACKGROUND_IP_RETENTION', 'IP_RIGHTS_RETENTION', 'LICENSE_GRANT', 'LICENSE_RESTRICTION']
+
+RULE: BACKGROUND_IP_RETENTION
+AR PATTERNS:
+1 (?:يحتفظ|تحتفظ).{0,100}(?:بملكية|بكامل\s+الحقوق|بجميع\s+الحقوق).{0,220}(?:السابقة|المسبقة|سابقة).{0,160}(?:منهجيات|أطر|خبرات|ملكية\s+فكرية)
+
+RULE: IP_RIGHTS_RETENTION
+AR PATTERNS:
+1 (?:يحتفظ\s+المرخ[ِّ]?ص|المرخ[ِّ]?ص\s+يحتفظ).{0,120}(?:بكامل\s+الحقوق|بجميع\s+الحقوق).{0,220}(?:البرنامج|التعديلات|التحسينات)
+
+RULE: LICENSE_GRANT
+AR PATTERNS:
+1 (?:يمنح\s+المرخ[ِّ]?ص).{0,60}(?:المرخ[َّ]?ص\s+له).{0,60}(?:ترخيص(?:اً|ًا|ا)).{0,240}
+2 (?:تمنح|يمنح)\s+(?:الشركة|المزود|المالك).{0,60}(?:العميل|المستخدم).{0,60}(?:ترخيص(?:اً|ًا|ا)).{0,240}
+
+RULE: LICENSE_RESTRICTION
+AR PATTERNS:
+1 (?:لا\s+يجوز\s+لل?مرخ[َّ]?ص\s+له).{0,140}(?:هندسة\s+عكسية|فك\s+تجميع|إنشاء\s+مصنفات\s+مشتقة).{0,220}
+
+====================================================================================================
+DIRECT EVIDENCE
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+SOURCE: BACKGROUND_MSA_AR
+LANG: ar
+BACKGROUND_IP_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+BACKGROUND_IP_RETENTION => SPANS: 0
+IP_RIGHTS_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+IP_RIGHTS_RETENTION => SPANS: 0
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => SPANS: 0
+LICENSE_RESTRICTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_RESTRICTION => SPANS: 0
+
+----------------------------------------------------------------------------------------------------
+SOURCE: LICENSE_GRANT_AR
+LANG: ar
+BACKGROUND_IP_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+BACKGROUND_IP_RETENTION => SPANS: 0
+IP_RIGHTS_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+IP_RIGHTS_RETENTION => SPANS: 0
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => SPANS: 0
+LICENSE_RESTRICTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_RESTRICTION => SPANS: 0
+
+----------------------------------------------------------------------------------------------------
+SOURCE: LICENSE_RESTRICTION_AR
+LANG: ar
+BACKGROUND_IP_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+BACKGROUND_IP_RETENTION => SPANS: 0
+IP_RIGHTS_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+IP_RIGHTS_RETENTION => SPANS: 0
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => SPANS: 0
+LICENSE_RESTRICTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_RESTRICTION => SPANS: 0
+
+----------------------------------------------------------------------------------------------------
+SOURCE: IP_RETENTION_AR
+LANG: ar
+BACKGROUND_IP_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+BACKGROUND_IP_RETENTION => SPANS: 0
+IP_RIGHTS_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+IP_RIGHTS_RETENTION => SPANS: 0
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => SPANS: 0
+LICENSE_RESTRICTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_RESTRICTION => SPANS: 0
+
+----------------------------------------------------------------------------------------------------
+SOURCE: BACKGROUND_CONSULTING_AR
+LANG: ar
+BACKGROUND_IP_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+BACKGROUND_IP_RETENTION => SPANS: 0
+IP_RIGHTS_RETENTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+IP_RIGHTS_RETENTION => SPANS: 0
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_GRANT => SPANS: 0
+LICENSE_RESTRICTION => TYPE ERROR: TypeError('_evidence() takes 3 positional arguments but 4 were given')
+LICENSE_RESTRICTION => SPANS: 0
+
+====================================================================================================
+REAL EXTRACT_SOURCE_MECHANISMS
+====================================================================================================
+
+SOURCE: BACKGROUND_MSA_AR
+MECHANISMS: []
+
+SOURCE: LICENSE_GRANT_AR
+MECHANISMS: []
+
+SOURCE: LICENSE_RESTRICTION_AR
+MECHANISMS: []
+
+SOURCE: IP_RETENTION_AR
+MECHANISMS: []
+
+SOURCE: BACKGROUND_CONSULTING_AR
+MECHANISMS: []

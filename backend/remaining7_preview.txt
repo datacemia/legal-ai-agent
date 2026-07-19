@@ -1,0 +1,209 @@
+===== 3.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===== BANQUE POSTALE (2).pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 11
+
+
+
+
+
+
+
+
+
+
+
+
+===== dakar.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 3602
+Libellé Débit Crédit SoldeDate Valeur
+1 7 /
+Solde précédent
+EXTRAIT DE COMPTE
+CORIS BANK INTERNATIONAL SENEGAL: SOCIETE ANONYME AVEC CONSEIL D'ADMINISTRATION AU CAPITAL DE 15 400 000 000 F CFA R.C.C.M: SN DKR 2018 B 
+23040 / LISTE DES BANQUES No: 0166A / CODE SWIFT: CORICIAB / SIEGE SOCIAL: 26 Avenue Jean JAURES X André Peytavin, Daka BP 14310 Dakar – Sénégal / TEl: 
++221 33 829 66 60 / FAX: +221 33 823 88 88 IFU No: CC N°1308853-P / SITE WEB: www.senegal.coris.bank / EMAIL: corissn@coris-bank.sn
+Code SWIFT : CORISNDA
+Code IBAN : SN21 3010 1100 4672 6243 0118
+Code Banque Agence Compte Clé RIB
+SN213 01011 004672624301 18
+ 
+MBAO
+TOUBA TAIF
+DAKARDAKAR
+RELEVE D'IDENTITE BANCAIRE
+TITULAIRE DU COMPTE
+DOMICILIATION
+COMPTES COURANTS 
+FRANC CFA B.C.E.A.O. 
+ 
+COMPTES COURANTS No 004672624301 - 18 
+4 245 528
+300 000 3 945 528 
+100 000 3 845 528
+18 754  3 826 774
+585 931  3 240 843 
+20 000  3 220 843 
+52 345 3 168 498 
+25 000 3 143 498 
+3 939 480 7 082 978 
+30 000 7 052 978 
+50 000 7 002 978 
+100 000 6 902 978 
+9 749 6 893 229 
+2 870 754 9 763 983
+5 877 050 15 641 033 
+2 290 000 17 931 033 
+18 754 17 912 279
+25 000 17 887 279 
+1 791 812 16 095 467 
+1 140 138 14 955 329 
+75 500 14 879 829 
+18 842 14 860 987 
+93 500 14 954 487 
+100 14 954 387
+35 000 14 919 387 
+200 000 14 719 387 
+2 687 500 17 406 887 
+85 000 17 321 887 
+781 320 18 103 207 
+RET. DEPL. CHEQ N°  1458855 
+RET. DEPL. CHEQ N°  1458854 
+AGIOS DU 01/06/24 AU 30/06/24 
+CHEQUE NO  1458853
+RET. DEPL. CHEQ N°  1458857 
+CHEQUE NO  145
+===== EGPTE.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 22763
+                                                                                    PAGE 001
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0                                                                  300002471110003
+     0                 0
+                                                                                24021800165743566
+٤٢-ﻓﺒﺮﺍﻳﺮ-٥١
+15-Feb-24
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+     05/03/24                      10,956.00                         547.80
+     547.80                         547.80                           0.00
+     10,956.00                      10,956.00                        0.00
+     10,956.00                      10,956.00                        0.00
+
+                                                                                    PAGE 002
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0
+     0                 0
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+                                                 0
+                                                 0
+                                                 0
+                                                 0
+                                                 0
+
+                                                                                    PAGE 003
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0
+     0                 0
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+                                         
+===== EJJAMI12.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 4
+
+
+
+
+
+===== habitat.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 1
+
+
+===== x.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

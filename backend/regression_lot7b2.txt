@@ -1,0 +1,440 @@
+DOCX FOUND: 45
+EN: 15
+FR: 15
+AR: 15
+
+########################################################################################
+LANGUAGE: EN
+########################################################################################
+
+========================================================================================
+[EN 1/15] 01_NDA_Confidentiality_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=13 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 2/15] 02_Master_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+PASS | clauses=10 | receipts=26 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 3/15] 03_SaaS_Cloud_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=20 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 4/15] 04_Cybersecurity_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 5/15] 05_Data_Processing_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=28 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 6/15] 06_Executive_Employment_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=28 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=4.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 7/15] 07_Software_Licensing_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=4.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 8/15] 08_Procurement_Supply_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 9/15] 09_Consulting_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=20 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 10/15] 10_Outsourcing_Managed_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[EN 11/15] 11_Commercial_Lease_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 12/15] 12_Loan_Credit_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=6.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 13/15] 13_Asset_Purchase_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 14/15] 14_Shareholders_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 15/15] 15_General_Commercial_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=14 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=2.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=7.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+----------------------------------------------------------------------------------------
+EN SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 335
+TOTAL BLOCKED: 22
+SUMMARY: regression_results_multilang\en\_summary.json
+
+########################################################################################
+LANGUAGE: FR
+########################################################################################
+
+========================================================================================
+[FR 1/15] 01_NDA_Confidentiality_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=20 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=4.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 2/15] 02_Master_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+PASS | clauses=10 | receipts=32 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 3/15] 03_SaaS_Cloud_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 4/15] 04_Cybersecurity_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 5/15] 05_Data_Processing_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 6/15] 06_Executive_Employment_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=2.2 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 7/15] 07_Software_Licensing_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 8/15] 08_Procurement_Supply_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 9/15] 09_Consulting_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=17 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 10/15] 10_Outsourcing_Managed_Services_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=14 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=7.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 11/15] 11_Commercial_Lease_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=20 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=Clause 4.2 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=Clause 4.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 12/15] 12_Loan_Credit_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 13/15] 13_Asset_Purchase_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=5
+  BLOCKED: clause=3.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[FR 14/15] 14_Shareholders_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[FR 15/15] 15_General_Commercial_Agreement_FR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=Clause 4.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=Clause 7.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=Clause 7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+----------------------------------------------------------------------------------------
+FR SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 332
+TOTAL BLOCKED: 23
+SUMMARY: regression_results_multilang\fr\_summary.json
+
+########################################################################################
+LANGUAGE: AR
+########################################################################################
+
+========================================================================================
+[AR 1/15] 01_NDA_Confidentiality_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=17 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=6.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 2/15] 02_Master_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+PASS | clauses=10 | receipts=29 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=2.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 3/15] 03_SaaS_Cloud_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 4/15] 04_Cybersecurity_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=5.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 5/15] 05_Data_Processing_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=8.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 6/15] 06_Executive_Employment_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 7/15] 07_Software_Licensing_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=22 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 8/15] 08_Procurement_Supply_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[AR 9/15] 09_Consulting_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=4.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 10/15] 10_Outsourcing_Managed_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=16 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[AR 11/15] 11_Commercial_Lease_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+PASS | clauses=9 | receipts=20 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=6.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 12/15] 12_Loan_Credit_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=2.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=7.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 13/15] 13_Asset_Purchase_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=17 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=5.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 14/15] 14_Shareholders_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+PASS | clauses=8 | receipts=22 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=5.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=البند 7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 15/15] 15_General_Commercial_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+----------------------------------------------------------------------------------------
+AR SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 331
+TOTAL BLOCKED: 22
+SUMMARY: regression_results_multilang\ar\_summary.json
+
+########################################################################################
+FINAL MULTILINGUAL SUMMARY
+########################################################################################
+EXPECTED RUNS: 45
+COMPLETED RUNS: 45
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 998
+TOTAL BLOCKED: 67
+SUMMARY: regression_results_multilang\_summary_all_languages.json
+FINAL RESULT: PASS

@@ -1,0 +1,64 @@
+========================================================================================================================
+SOURCE
+========================================================================================================================
+3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense.
+
+========================================================================================================================
+MECHANISMS
+========================================================================================================================
+
+KIND: SECURITY_AUDIT_RIGHT
+RANK: 94
+PRIMARY: security
+ROLE: DOMAIN_CORE
+ELIGIBLE: True
+EVIDENCE: "Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense"
+
+========================================================================================================================
+SEMANTIC PROFILE
+========================================================================================================================
+
+PRIMARY_TYPE
+"security"
+
+CONFIDENCE
+0.93
+
+ABSTAINED
+false
+
+ABSTENTION_REASON
+null
+
+CANDIDATE_PRIMARY_TYPE
+null
+
+DOMINANCE_MARGIN
+86.2752
+
+SUPPORTING_MECHANISMS
+[
+  "SECURITY_AUDIT_RIGHT"
+]
+
+RANKED_MATERIAL_MECHANISMS
+[
+  {
+    "kind": "SECURITY_AUDIT_RIGHT",
+    "rank": 94,
+    "candidate_primary_type": "security",
+    "semantic_role": "DOMAIN_CORE",
+    "primary_eligible": true,
+    "source_evidence": [
+      {
+        "label": "SECURITY_AUDIT_RIGHT",
+        "start": 4,
+        "end": 208,
+        "text": "Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense"
+      }
+    ],
+    "grounded": true,
+    "polarity": "RIGHT",
+    "evidence_hash": "53e4c9a087c299cc526806ef7517bc1e2f39d426c1086f5abd110ed43aceb57f"
+  }
+]

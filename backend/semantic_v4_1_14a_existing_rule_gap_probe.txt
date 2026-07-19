@@ -1,0 +1,35 @@
+
+====================================================================================================
+KIND: RESERVED_MATTERS_CONSENT
+PRIMARY: governance
+ROLE: DOMAIN_CORE
+ELIGIBLE: True
+
+EN
+1 \b(?:company|corporation|issuer)\s+shall\s+not\b[^.;!?]{0,180}\bwithout\b[^.;!?]{0,100}\b(?:investor|shareholder|holder)\b[^.;!?]{0,80}\bprior\s+(?:written\s+)?consent\b[^.;!?]{0,420}
+2 \b(?:reserved\s+matters?|protective\s+provisions?)\b[^.;!?]{0,220}\b(?:prior\s+(?:written\s+)?consent|approval)\b[^.;!?]{0,320}
+
+FR
+1 \b(?:soci[eé]t[eé]|[eé]metteur)\s+ne\s+pourra\s+pas\b[^.;!?]{0,180}\bsans\b[^.;!?]{0,100}\b(?:investisseur|actionnaire|titulaire)\b[^.;!?]{0,80}\bconsentement\s+[eé]crit\s+pr[eé]alable\b[^.;!?]{0,420}
+2 \b(?:mati[eè]res\s+r[eé]serv[eé]es?|clauses?\s+de\s+protection)\b[^.;!?]{0,220}\b(?:consentement\s+[eé]crit\s+pr[eé]alable|approbation)\b[^.;!?]{0,320}
+
+AR
+1 (?:لا\s+يجوز\s+للشركة|تمتنع\s+الشركة)[^.;؛!?]{0,180}(?:دون|بدون)[^.;؛!?]{0,100}(?:موافقة\s+المستثمر|موافقة\s+المساهم|الموافقة\s+الخطية\s+المسبقة)[^.;؛!?]{0,420}
+2 (?:المسائل\s+المحجوزة|الأحكام\s+الحمائية)[^.;؛!?]{0,220}(?:الموافقة\s+الخطية\s+المسبقة|موافقة|اعتماد)[^.;؛!?]{0,320}
+
+====================================================================================================
+KIND: NON_COMPETE_RESTRICTION
+PRIMARY: restrictive_covenants
+ROLE: DOMAIN_CORE
+ELIGIBLE: True
+
+EN
+1 \b(?:executive|employee|worker|consultant)\s+shall\s+not\b[^.;!?]{0,180}\b(?:provide|perform|render)\s+services\b[^.;!?]{0,220}\b(?:competes?|competing|competitor)\b[^.;!?]{0,260}
+2 \bshall\s+not\b[^.;!?]{0,180}\b(?:provide|perform|render)\s+services\b[^.;!?]{0,220}\b(?:directly\s+competes?|competing\s+business|competitor)\b[^.;!?]{0,260}
+
+FR
+1 \b(?:dirigeant(?:e)?|salari[eé](?:e)?|employ[eé](?:e)?|consultant(?:e)?)\s+ne\b[^.;!?]{0,100}\b(?:fournira|fournir|exercera|exercer|prestera|prester)\b[^.;!?]{0,120}\bservices\b[^.;!?]{0,220}\b(?:concurren\w*|entreprise\s+concurrente)\b[^.;!?]{0,260}
+2 \bne\b[^.;!?]{0,100}\b(?:fournira|fournir|exercera|exercer|prestera|prester)\b[^.;!?]{0,120}\bservices\b[^.;!?]{0,220}\b(?:concurren\w*|entreprise\s+concurrente)\b[^.;!?]{0,260}
+
+AR
+1 (?:يمتنع|تمتنع|لا\s+يجوز\s+ل)[^.;؛!?]{0,160}(?:تقديم|أداء)\s+خدمات[^.;؛!?]{0,240}(?:تنافس|منافسة|منافس)[^.;؛!?]{0,260}

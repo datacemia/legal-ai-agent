@@ -1,0 +1,67 @@
+====================================================================================================
+CONTRACT HANDLER ARCHITECTURE PROBE
+====================================================================================================
+
+====================================================================================================
+FILE: app\workers\handlers\contract_handler.py
+====================================================================================================
+BYTES: 20718
+SHA256: c5e761db0ee9471eaeeb762baa5a1f9af0feee524d5c137a9df6cacbc9c59b6f
+
+FUNCTIONS:
+- delete_local_file_safely
+- get_job_input
+- legal_progress_message
+- get_default_recommendations
+- handle_contract_ai
+
+CLASSES:
+
+CONTRACT-RELATED IMPORTS:
+- app.services.contract_agent.contract_parser -> extract_text
+- app.services.contract_agent.clause_splitter -> split_into_clauses
+- app.services.contract_agent.contract_agent -> analyze_contract_clauses
+- app.services.contract_agent.pii_redactor -> redact_sensitive_data
+- app.services.contract_agent.unified_report_from_pipeline -> build_unified_report_from_pipeline
+- app.services.contract_agent.summary_service -> calculate_global_risk, generate_summary, generate_simplified_version
+- app.services.contract_agent.jurisdiction_profiles -> detect_jurisdiction, format_jurisdiction_fields
+- app.services.contract_agent.party_role_detector -> get_display_roles, normalize_ai_role_words
+- app.services.contract_agent.validator -> validate_contract_result, is_probably_contract
+
+====================================================================================================
+FILE: app\services\contract_agent\contract_handler.py
+====================================================================================================
+BYTES: 21528
+SHA256: ed36060d27708ca2087b10bc9fee7bf4d410d6c6241fe21a98f64f49dee10430
+
+FUNCTIONS:
+- delete_local_file_safely
+- get_job_input
+- legal_progress_message
+- get_default_recommendations
+- handle_contract_ai
+
+CLASSES:
+
+CONTRACT-RELATED IMPORTS:
+- app.services.contract_agent.contract_parser -> extract_text
+- app.services.contract_agent.clause_splitter -> split_into_clauses
+- app.services.contract_agent.contract_agent -> analyze_contract_clauses
+- app.services.contract_agent.pii_redactor -> redact_sensitive_data
+- app.services.contract_agent.unified_report_from_pipeline -> build_unified_report_from_pipeline, to_legacy_summary_data, to_legacy_simplified_string
+- app.services.contract_agent.summary_service -> calculate_global_risk, render_summary_text
+- app.services.contract_agent.jurisdiction_profiles -> detect_jurisdiction, format_jurisdiction_fields
+- app.services.contract_agent.party_role_detector -> get_display_roles, normalize_ai_role_words
+- app.services.contract_agent.validator -> validate_contract_result, is_probably_contract
+
+====================================================================================================
+REPOSITORY REFERENCES
+====================================================================================================
+app\workers\main_worker.py:13: from app.workers.handlers.contract_handler import (
+app\workers\main_worker.py:13: from app.workers.handlers.contract_handler import (
+
+====================================================================================================
+SAME-NAME IMPORTS
+====================================================================================================
+app\services\contract_agent\unified_report_from_pipeline.py:545: clause_results from contract_handler.py is the FULL pipeline dict
+app\workers\main_worker.py:13: from app.workers.handlers.contract_handler import (

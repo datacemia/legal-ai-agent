@@ -1,0 +1,18 @@
+RULES: 1
+
+====================================================================================================
+KIND: FINANCIAL_REPORTING_OBLIGATION
+RANK: 91
+PRIMARY: financial_reporting
+ROLE: DOMAIN_CORE
+ELIGIBLE: True
+POLARITY: REQUIRED
+EN PATTERNS: 2
+  \bshall\s+(?:deliver|provide|furnish)\b.{0,160}\bfinancial\s+statements\b
+  \bfinancial\s+statements\b.{0,120}\bwithin\b.{0,40}\bdays\b
+FR PATTERNS: 2
+  \bdoit\s+(?:remettre|fournir|livrer)\b.{0,160}\b[eé]tats?\s+financiers\b
+  \b[eé]tats?\s+financiers\b.{0,120}\bdans\s+un\s+d[eé]lai\b
+AR PATTERNS: 2
+  (?:يجب|يتعين).{0,80}(?:تسليم|تقديم|توفير).{0,160}(?:القوائم|البيانات)\s+المالية
+  (?:القوائم|البيانات)\s+المالية.{0,120}(?:خلال|في\s+غضون).{0,50}(?:يوم|أيام)

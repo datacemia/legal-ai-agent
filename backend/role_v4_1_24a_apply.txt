@@ -1,0 +1,13 @@
+================================================================================================
+V4.1.24A ROLE GRAMMAR NORMALIZATION HOTFIX APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\party_role_detector.py
+BACKUP : app\services\contract_agent\party_role_detector.py.before_v4_1_24a_20260715_003511
+A: removed undefined normalize_spaces dependency
+B: added local stdlib-only role-label normalization
+C: FR gender/article/contraction logic unchanged
+D: EN and AR realization unchanged
+UNTOUCHED: PII redactor, family detector, semantic profile,
+           publication gate, scoring, taxonomy, summary, frontend
+AST: OK
+================================================================================================

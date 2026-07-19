@@ -1,0 +1,978 @@
+[
+  {
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+    "primary_type": "restrictive_covenants",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة العمل ولمدة ثمانية عشر (18) شهر",
+            "start": 9,
+            "end": 44
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 202,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "dfcac0dacab4ee630701f352097013368f70d0bce7ee8eaf550b614a1b5d5440",
+        "normalized_concept": "NON_COMPETE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18,
+              "unit": "MONTHS",
+              "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+              "related_mechanism": "NON_COMPETE"
+            }
+          ]
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 202,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "dfcac0dacab4ee630701f352097013368f70d0bce7ee8eaf550b614a1b5d5440",
+        "normalized_concept": "NON_COMPETE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18,
+              "unit": "MONTHS",
+              "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+              "related_mechanism": "NON_COMPETE"
+            }
+          ]
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة العمل ولمدة ثمانية عشر (18) شهر",
+            "start": 9,
+            "end": 44
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "4.2",
+    "source_language": "ar",
+    "source_text": "4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل.",
+    "primary_type": "restrictive_covenants",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة العمل ولمدة أربعة وعشرين (24) شهر",
+            "start": 9,
+            "end": 46
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 121,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الطرف الطرف المتعاقد ب أ للعمل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fa5d04a5b494f56564a13fda43054b1f292d121050a8dc965a2424a1dd74ee30",
+        "normalized_concept": "NON_SOLICITATION_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 121,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الطرف الطرف المتعاقد ب أ للعمل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fa5d04a5b494f56564a13fda43054b1f292d121050a8dc965a2424a1dd74ee30",
+        "normalized_concept": "NON_SOLICITATION_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة العمل ولمدة أربعة وعشرين (24) شهر",
+            "start": 9,
+            "end": 46
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "2.2",
+    "source_language": "ar",
+    "source_text": "2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "فترة استحقاق مدتها أربع (4) سنوات",
+            "start": 158,
+            "end": 191
+          }
+        ]
+      },
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "الراتب الأساسي",
+            "start": 70,
+            "end": 84
+          }
+        ]
+      },
+      {
+        "concept": "BONUS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مكافأة تقديرية سنوية",
+            "start": 34,
+            "end": 54
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BONUS",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BONUS",
+            "start": 27,
+            "end": 191,
+            "text": "مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          },
+          {
+            "label": "BONUS",
+            "start": 34,
+            "end": 66,
+            "text": "مكافأة تقديرية سنوية تصل إلى 40%"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "54621eb9ee2086db813be0cd1b1acde4447218cd16f4bdd302ebfdf53c4a384e",
+        "normalized_concept": "BONUS",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EQUITY_GRANT",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_GRANT",
+            "start": 109,
+            "end": 122,
+            "text": "تحصل على منحة"
+          },
+          {
+            "label": "EQUITY_GRANT",
+            "start": 143,
+            "end": 170,
+            "text": "سهم مقيد يخضع لفترة استحقاق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "00350fdfec6fbbb4f008079896d02b412a0ee0e4da7944d07e33514ee9d92e51",
+        "normalized_concept": "EQUITY_GRANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 191,
+            "text": "تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 34,
+            "end": 191,
+            "text": "مكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "66a1afe07cbff560b8e85f370753f674c27d19aa5006f502f28b6441f4dec683",
+        "normalized_concept": "INCENTIVE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EQUITY_GRANT",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_GRANT",
+            "start": 109,
+            "end": 122,
+            "text": "تحصل على منحة"
+          },
+          {
+            "label": "EQUITY_GRANT",
+            "start": 143,
+            "end": 170,
+            "text": "سهم مقيد يخضع لفترة استحقاق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "00350fdfec6fbbb4f008079896d02b412a0ee0e4da7944d07e33514ee9d92e51",
+        "normalized_concept": "EQUITY_GRANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 191,
+            "text": "تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 34,
+            "end": 191,
+            "text": "مكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "66a1afe07cbff560b8e85f370753f674c27d19aa5006f502f28b6441f4dec683",
+        "normalized_concept": "INCENTIVE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "فترة استحقاق مدتها أربع (4) سنوات",
+            "start": 158,
+            "end": 191
+          }
+        ]
+      },
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "الراتب الأساسي",
+            "start": 70,
+            "end": 84
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 تدفع الشركة للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 34,
+            "end": 157,
+            "text": "راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة"
+          },
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 4,
+            "end": 157,
+            "text": "تدفع الطرف الطرف المتعاقد ب أ للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e94093e5ec0bbd1cc6a710862a21aee1a4b4c603c1cdba108e17f6273b54ddc7",
+        "normalized_concept": "BASE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 410000,
+              "unit": "USD",
+              "semantic_role": "ANNUAL_BASE_COMPENSATION",
+              "related_mechanism": "BASE_COMPENSATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 4,
+            "end": 104,
+            "text": "تدفع الطرف الطرف المتعاقد ب أ للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب"
+          },
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 4,
+            "end": 55,
+            "text": "تدفع الطرف الطرف المتعاقد ب أ للمديرة التنفيذية راتباً أساسياً سنوياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ac905111be7729fa69a54c8285f8cff9063b2725a7d5f94e89e4320f6f5eb85f",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 34,
+            "end": 157,
+            "text": "راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة"
+          },
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 4,
+            "end": 157,
+            "text": "تدفع الطرف الطرف المتعاقد ب أ للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e94093e5ec0bbd1cc6a710862a21aee1a4b4c603c1cdba108e17f6273b54ddc7",
+        "normalized_concept": "BASE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 410000,
+              "unit": "USD",
+              "semantic_role": "ANNUAL_BASE_COMPENSATION",
+              "related_mechanism": "BASE_COMPENSATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 4,
+            "end": 104,
+            "text": "تدفع الطرف الطرف المتعاقد ب أ للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب"
+          },
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 4,
+            "end": 55,
+            "text": "تدفع الطرف الطرف المتعاقد ب أ للمديرة التنفيذية راتباً أساسياً سنوياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ac905111be7729fa69a54c8285f8cff9063b2725a7d5f94e89e4320f6f5eb85f",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يجوز للشركة إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا. في حال الإنهاء دون سبب مشروع أو الاستقالة لسبب وجيه، تحصل المديرة التنفيذية على استمرار دفع راتبها الأساسي لمدة اثني عشر (12) شهراً وسداد أقساط التأمين الصحي لمدة اثني عشر (12) شهراً، رهناً بتوقيع إبراء ذمة.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة اثني عشر (12) شهر",
+            "start": 228,
+            "end": 249
+          },
+          {
+            "text": "مدة اثني عشر (12) شهر",
+            "start": 279,
+            "end": 300
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 4,
+            "end": 118,
+            "text": "يجوز للشركة إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 16,
+            "end": 118,
+            "text": "إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 129,
+            "end": 326,
+            "text": "إنهاء دون سبب مشروع أو الاستقالة لسبب وجيه، تحصل المديرة التنفيذية على استمرار دفع راتبها الأساسي لمدة اثني عشر (12) شهراً وسداد أقساط التأمين الصحي لمدة اثني عشر (12) شهراً، رهناً بتوقيع إبراء ذمة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "0d84194dafcabfd85f3858b463ad32ee4efe21ff6fb0821e7c972fd90397e765",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 4,
+            "end": 118,
+            "text": "يجوز للشركة إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "29d8c0cc2ba37f1a3aa0b1e7f437fa7495b53eed7d04275cd77bd2e78874c1c4",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 4,
+            "end": 118,
+            "text": "يجوز للشركة إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 16,
+            "end": 118,
+            "text": "إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 129,
+            "end": 326,
+            "text": "إنهاء دون سبب مشروع أو الاستقالة لسبب وجيه، تحصل المديرة التنفيذية على استمرار دفع راتبها الأساسي لمدة اثني عشر (12) شهراً وسداد أقساط التأمين الصحي لمدة اثني عشر (12) شهراً، رهناً بتوقيع إبراء ذمة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "0d84194dafcabfd85f3858b463ad32ee4efe21ff6fb0821e7c972fd90397e765",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 4,
+            "end": 118,
+            "text": "يجوز للشركة إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "29d8c0cc2ba37f1a3aa0b1e7f437fa7495b53eed7d04275cd77bd2e78874c1c4",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "COMPANY",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة اثني عشر (12) شهر",
+            "start": 228,
+            "end": 249
+          },
+          {
+            "text": "مدة اثني عشر (12) شهر",
+            "start": 279,
+            "end": 300
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 تتنازل المديرة التنفيذية بموجب هذا العقد للشركة عن كامل الحقوق في أي اختراع أو اكتشاف أو مصنف يُبتكر أثناء مدة العمل، يتعلق بنشاط الشركة أو ينشأ عن استخدام موارد الشركة.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_ASSIGNMENT",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_ASSIGNMENT",
+            "start": 4,
+            "end": 97,
+            "text": "تتنازل المديرة التنفيذية بموجب هذا العقد للشركة عن كامل الحقوق في أي اختراع أو اكتشاف أو مصنف"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0f079f172afa2db021d949cf192c8b3f23ac7066f5e2ae1893be0c16ac7f10d1",
+        "normalized_concept": "IP_ASSIGNMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_ASSIGNMENT",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_ASSIGNMENT",
+            "start": 4,
+            "end": 97,
+            "text": "تتنازل المديرة التنفيذية بموجب هذا العقد للشركة عن كامل الحقوق في أي اختراع أو اكتشاف أو مصنف"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0f079f172afa2db021d949cf192c8b3f23ac7066f5e2ae1893be0c16ac7f10d1",
+        "normalized_concept": "IP_ASSIGNMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

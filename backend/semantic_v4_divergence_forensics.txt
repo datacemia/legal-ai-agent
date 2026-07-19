@@ -1,0 +1,665 @@
+====================================================================================================
+V4 DIVERGENCE FORENSICS
+====================================================================================================
+DIVERGENCES: 32
+
+####################################################################################################
+[1/32]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_5
+PIPELINE: confidentiality
+SHADOW: intellectual_property
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8352
+DOMINANCE MARGIN: 79.8769
+SUPPORT: ['LICENSE_GRANT']
+SOURCE:
+4.1 Nothing in this Agreement grants any license or ownership interest in the Confidential Information. All Confidential Information is provided "as is" without warranty of any kind.
+RANKED MECHANISMS:
+- LICENSE_GRANT | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 90
+  EVIDENCE: 'grants any license or ownership interest in the Confidential Information. All Confidential Information is provided "as is" without warranty of any kind.'
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 79.8769, "coverage": 0.8352, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[2/32]
+LANG: en
+DOC: 02_Master_Services_Agreement.json
+REF: clause_4
+PIPELINE: payment
+SHADOW: intellectual_property
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.9463
+DOMINANCE MARGIN: 84.905
+SUPPORT: ['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+SOURCE:
+3.2 All Deliverables shall be deemed "work made for hire" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees.
+RANKED MECHANISMS:
+- WORK_PRODUCT_OWNERSHIP_TRANSFER | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 93
+  EVIDENCE: 'Deliverables shall be deemed "work made for hire" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees.'
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 84.905, "coverage": 0.9463, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[3/32]
+LANG: en
+DOC: 02_Master_Services_Agreement.json
+REF: clause_9
+PIPELINE: liability
+SHADOW: indemnity
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8234
+DOMINANCE MARGIN: 41.8701
+SUPPORT: ['INDEMNIFICATION_OBLIGATION']
+SOURCE:
+5.1 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.
+RANKED MECHANISMS:
+- INDEMNIFICATION_OBLIGATION | role= DOMAIN_CORE | primary= indemnity | eligible= True | rank= 92
+  EVIDENCE: "INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBI"
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.'
+DOMINANCE SCORES:
+- {"type": "indemnity", "score": 79.6208, "coverage": 0.8234, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+- {"type": "liability", "score": 37.7507, "coverage": 0.1826, "independent_support": 1, "core_count": 0, "secondary_count": 1, "procedural_count": 0}
+
+####################################################################################################
+[4/32]
+LANG: en
+DOC: 03_SaaS_Cloud_Agreement.json
+REF: clause_4
+PIPELINE: security
+SHADOW: data_protection
+CONFIDENCE: 0.96
+ABSTAINED: False
+PRIMARY COVERAGE: 0.6546
+DOMINANCE MARGIN: 117.414
+SUPPORT: ['BREACH_NOTIFICATION', 'SECURITY_SAFEGUARD_OBLIGATION']
+SOURCE:
+5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.
+RANKED MECHANISMS:
+- BREACH_NOTIFICATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 91
+  EVIDENCE: 'notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours'
+- SECURITY_SAFEGUARD_OBLIGATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 90
+  EVIDENCE: 'maintain administrative, physical, and technical safeguards'
+DOMINANCE SCORES:
+- {"type": "data_protection", "score": 117.414, "coverage": 0.6546, "independent_support": 2, "core_count": 2, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[5/32]
+LANG: en
+DOC: 04_Cybersecurity_Services_Agreement.json
+REF: clause_4
+PIPELINE: security
+SHADOW: data_protection
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8325
+DOMINANCE MARGIN: 79.8845
+SUPPORT: ['BREACH_NOTIFICATION']
+SOURCE:
+2.1 Provider shall notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery.
+RANKED MECHANISMS:
+- BREACH_NOTIFICATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 91
+  EVIDENCE: 'notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours'
+DOMINANCE SCORES:
+- {"type": "data_protection", "score": 79.8845, "coverage": 0.8325, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[6/32]
+LANG: en
+DOC: 04_Cybersecurity_Services_Agreement.json
+REF: clause_6
+PIPELINE: cybersecurity
+SHADOW: services
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.5316
+DOMINANCE MARGIN: 67.1263
+SUPPORT: ['SERVICE_PERFORMANCE_OBLIGATION']
+SOURCE:
+1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the NIST Cybersecurity Framework.
+RANKED MECHANISMS:
+- SERVICE_PERFORMANCE_OBLIGATION | role= DOMAIN_CORE | primary= services | eligible= True | rank= 90
+  EVIDENCE: 'Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services'
+DOMINANCE SCORES:
+- {"type": "services", "score": 67.1263, "coverage": 0.5316, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[7/32]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_4
+PIPELINE: security
+SHADOW: data_protection
+CONFIDENCE: 0.9
+ABSTAINED: False
+PRIMARY COVERAGE: 0.2783
+DOMINANCE MARGIN: 56.4887
+SUPPORT: ['SECURITY_SAFEGUARD_OBLIGATION']
+SOURCE:
+4.1 Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate.
+RANKED MECHANISMS:
+- SECURITY_SAFEGUARD_OBLIGATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 90
+  EVIDENCE: 'implement appropriate technical and organizational measures'
+DOMINANCE SCORES:
+- {"type": "data_protection", "score": 56.4887, "coverage": 0.2783, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[8/32]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_2
+PIPELINE: warranty
+SHADOW: intellectual_property
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8315
+DOMINANCE MARGIN: 79.7247
+SUPPORT: ['LICENSE_GRANT']
+SOURCE:
+4.1 Licensor warrants that it has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+RANKED MECHANISMS:
+- EXPRESS_RIGHT | role= CONTROL_MODIFIER | primary= express_right | eligible= False | rank= 90
+  EVIDENCE: 'has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC'
+- LICENSE_GRANT | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 90
+  EVIDENCE: 'grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.'
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 79.7247, "coverage": 0.8315, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[9/32]
+LANG: en
+DOC: 10_Outsourcing_Managed_Services_Agreement.json
+REF: clause_5
+PIPELINE: corporate_governance
+SHADOW: services
+CONFIDENCE: 0.9
+ABSTAINED: False
+PRIMARY COVERAGE: 0.2619
+DOMINANCE MARGIN: 55.8
+SUPPORT: ['SERVICE_PERFORMANCE_OBLIGATION']
+SOURCE:
+2.1 Provider shall perform the Services in accordance with the service levels set forth in Exhibit A. The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives.
+RANKED MECHANISMS:
+- SERVICE_PERFORMANCE_OBLIGATION | role= DOMAIN_CORE | primary= services | eligible= True | rank= 90
+  EVIDENCE: 'Provider shall perform the Services in accordance with the service'
+DOMINANCE SCORES:
+- {"type": "services", "score": 55.8, "coverage": 0.2619, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[10/32]
+LANG: en
+DOC: 11_Commercial_Lease_Agreement.json
+REF: clause_9
+PIPELINE: insurance
+SHADOW: indemnity
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.4488
+DOMINANCE MARGIN: 63.8915
+SUPPORT: ['INDEMNIFICATION_OBLIGATION']
+SOURCE:
+7.1 Tenant shall maintain commercial general liability insurance with limits of not less than $2,000,000 per occurrence, naming Landlord as an additional insured, and shall indemnify Landlord against claims arising from Tenant's use of the Premises, except to the extent caused by Landlord's negligence.
+RANKED MECHANISMS:
+- INDEMNIFICATION_OBLIGATION | role= DOMAIN_CORE | primary= indemnity | eligible= True | rank= 92
+  EVIDENCE: "shall indemnify Landlord against claims arising from Tenant's use of the Premises, except to the extent caused by Landlord's negligence."
+DOMINANCE SCORES:
+- {"type": "indemnity", "score": 63.8915, "coverage": 0.4488, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[11/32]
+LANG: en
+DOC: 12_Loan_Credit_Agreement.json
+REF: clause_1
+PIPELINE: remedies
+SHADOW: loan
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.7197
+DOMINANCE MARGIN: 75.2673
+SUPPORT: ['INTEREST_ACCRUAL']
+SOURCE:
+6.2 Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Collateral.
+RANKED MECHANISMS:
+- INTEREST_ACCRUAL | role= DOMAIN_CORE | primary= loan | eligible= True | rank= 92
+  EVIDENCE: 'principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Co'
+DOMINANCE SCORES:
+- {"type": "loan", "score": 75.2673, "coverage": 0.7197, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[12/32]
+LANG: en
+DOC: 12_Loan_Credit_Agreement.json
+REF: clause_3
+PIPELINE: notice
+SHADOW: payment
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.5461
+DOMINANCE MARGIN: 67.2573
+SUPPORT: ['PAYMENT_DEADLINE']
+SOURCE:
+6.1 An Event of Default shall occur if Borrower fails to make any payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days of notice, or becomes subject to insolvency proceedings.
+RANKED MECHANISMS:
+- PAYMENT_DEADLINE | role= DOMAIN_CORE | primary= payment | eligible= True | rank= 86
+  EVIDENCE: 'payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days'
+DOMINANCE SCORES:
+- {"type": "payment", "score": 67.2573, "coverage": 0.5461, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[13/32]
+LANG: en
+DOC: 15_General_Commercial_Agreement.json
+REF: clause_7
+PIPELINE: renewal
+SHADOW: termination
+CONFIDENCE: 0.9276
+ABSTAINED: False
+PRIMARY COVERAGE: 0.2704
+DOMINANCE MARGIN: 38.2398
+SUPPORT: ['TERMINATION_FOR_CONVENIENCE', 'TERMINATION_RIGHT']
+SOURCE:
+6.1 This Agreement shall continue for two (2) years from the Effective Date, renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice.
+RANKED MECHANISMS:
+- AUTOMATIC_RENEWAL | role= PROCEDURAL_STATE | primary= renewal | eligible= True | rank= 96
+  EVIDENCE: "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+- TERMINATION_FOR_CONVENIENCE | role= DOMAIN_CORE | primary= termination | eligible= True | rank= 92
+  EVIDENCE: "terminate this Agreement for convenience upon ninety (90) days' written notice."
+- TERMINATION_RIGHT | role= DOMAIN_CORE | primary= termination | eligible= True | rank= 91
+  EVIDENCE: "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+- NOTICE_PROCEDURE | role= GENERIC_SECONDARY | primary= notice | eligible= False | rank= 78
+  EVIDENCE: "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+DOMINANCE SCORES:
+- {"type": "termination", "score": 101.395, "coverage": 0.2704, "independent_support": 2, "core_count": 2, "secondary_count": 0, "procedural_count": 0}
+- {"type": "renewal", "score": 63.1552, "coverage": 0.658, "independent_support": 1, "core_count": 0, "secondary_count": 0, "procedural_count": 1}
+
+####################################################################################################
+[14/32]
+LANG: fr
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_6
+PIPELINE: warranty
+SHADOW: intellectual_property
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.844
+DOMINANCE MARGIN: 80.2495
+SUPPORT: ['LICENSE_GRANT']
+SOURCE:
+4.1 Rien dans le présent Accord n'accorde de licence ou de droit de propriété sur les Informations Confidentielles. Toutes les Informations Confidentielles sont fournies « telles quelles » sans garantie d'aucune sorte.
+RANKED MECHANISMS:
+- LICENSE_GRANT | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 90
+  EVIDENCE: "accorde de licence ou de droit de propriété sur les Informations Confidentielles. Toutes les Informations Confidentielles sont fournies « telles quelles » sans garantie d'aucune sorte."
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 80.2495, "coverage": 0.844, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[15/32]
+LANG: fr
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_2
+PIPELINE: work_product
+SHADOW: intellectual_property
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.9395
+DOMINANCE MARGIN: 84.3805
+SUPPORT: ['IP_OWNERSHIP_ALLOCATION']
+SOURCE:
+3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables.
+RANKED MECHANISMS:
+- IP_OWNERSHIP_ALLOCATION | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 91
+  EVIDENCE: "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 84.3805, "coverage": 0.9395, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[16/32]
+LANG: fr
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_4
+PIPELINE: security
+SHADOW: data_protection
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.5171
+DOMINANCE MARGIN: 66.6396
+SUPPORT: ['BREACH_NOTIFICATION']
+SOURCE:
+5.1 Northwind maintiendra des mesures de sauvegarde administratives, physiques et techniques conformes aux normes SOC 2 Type II, et notifiera la Partie contractante A de tout incident de sécurité confirmé affectant les Données de la Partie contractante A dans un délai de soixante-douze (72) heures suivant sa découverte.
+RANKED MECHANISMS:
+- BREACH_NOTIFICATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 91
+  EVIDENCE: 'notifiera la Partie contractante A de tout incident de sécurité confirmé affectant les Données de la Partie contractante A dans un délai de soixante-douze (72) heures'
+DOMINANCE SCORES:
+- {"type": "data_protection", "score": 66.6396, "coverage": 0.5171, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[17/32]
+LANG: fr
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_3
+PIPELINE: security
+SHADOW: data_protection
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.659
+DOMINANCE MARGIN: 72.5982
+SUPPORT: ['BREACH_NOTIFICATION']
+SOURCE:
+2.1 La Partie contractante B notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+RANKED MECHANISMS:
+- BREACH_NOTIFICATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 91
+  EVIDENCE: 'notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans'
+DOMINANCE SCORES:
+- {"type": "data_protection", "score": 72.5982, "coverage": 0.659, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[18/32]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_1
+PIPELINE: change_of_control
+SHADOW: employment
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.6533
+DOMINANCE MARGIN: 72.358
+SUPPORT: ['BASE_COMPENSATION']
+SOURCE:
+2.2 La Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans.
+RANKED MECHANISMS:
+- BASE_COMPENSATION | role= DOMAIN_CORE | primary= employment | eligible= True | rank= 91
+  EVIDENCE: "salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans."
+DOMINANCE SCORES:
+- {"type": "employment", "score": 72.358, "coverage": 0.6533, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[19/32]
+LANG: ar
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_6
+PIPELINE: other
+SHADOW: confidentiality
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.7448
+DOMINANCE MARGIN: 75.3628
+SUPPORT: ['CONFIDENTIALITY_SURVIVAL']
+SOURCE:
+3.1 تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به.
+RANKED MECHANISMS:
+- CONFIDENTIALITY_SURVIVAL | role= DOMAIN_CORE | primary= confidentiality | eligible= True | rank= 84
+  EVIDENCE: 'التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به.'
+DOMINANCE SCORES:
+- {"type": "confidentiality", "score": 75.3628, "coverage": 0.7448, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[20/32]
+LANG: ar
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_6
+PIPELINE: payment
+SHADOW: intellectual_property
+CONFIDENCE: 0.96
+ABSTAINED: False
+PRIMARY COVERAGE: 0.872
+DOMINANCE MARGIN: 126.784
+SUPPORT: ['WORK_PRODUCT_OWNERSHIP_TRANSFER', 'IP_OWNERSHIP_ALLOCATION']
+SOURCE:
+3.2 تُعتبر جميع المخرجات "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية.
+RANKED MECHANISMS:
+- WORK_PRODUCT_OWNERSHIP_TRANSFER | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 93
+  EVIDENCE: 'المخرجات "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية.'
+- IP_OWNERSHIP_ALLOCATION | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 91
+  EVIDENCE: 'المخرجات "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية.'
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 126.784, "coverage": 0.872, "independent_support": 2, "core_count": 2, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[21/32]
+LANG: ar
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_9
+PIPELINE: liability
+SHADOW: indemnity
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8522
+DOMINANCE MARGIN: 44.4033
+SUPPORT: ['INDEMNIFICATION_OBLIGATION']
+SOURCE:
+5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.
+RANKED MECHANISMS:
+- INDEMNIFICATION_OBLIGATION | role= DOMAIN_CORE | primary= indemnity | eligible= True | rank= 92
+  EVIDENCE: 'تعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.'
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'الأضرار غير المباشرة أو التبعية أو العقابية.'
+DOMINANCE SCORES:
+- {"type": "indemnity", "score": 80.8338, "coverage": 0.8522, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+- {"type": "liability", "score": 36.4305, "coverage": 0.1512, "independent_support": 1, "core_count": 0, "secondary_count": 1, "procedural_count": 0}
+
+####################################################################################################
+[22/32]
+LANG: ar
+DOC: 03_SaaS_Cloud_Agreement_AR.json
+REF: clause_6
+PIPELINE: liability
+SHADOW: indemnity
+CONFIDENCE: 0.9
+ABSTAINED: False
+PRIMARY COVERAGE: 0.2562
+DOMINANCE MARGIN: 55.8016
+SUPPORT: ['INDEMNIFICATION_OBLIGATION']
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.
+RANKED MECHANISMS:
+- INDEMNIFICATION_OBLIGATION | role= DOMAIN_CORE | primary= indemnity | eligible= True | rank= 92
+  EVIDENCE: 'تعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.'
+DOMINANCE SCORES:
+- {"type": "indemnity", "score": 55.8016, "coverage": 0.2562, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[23/32]
+LANG: ar
+DOC: 04_Cybersecurity_Services_Agreement_AR.json
+REF: clause_3
+PIPELINE: cybersecurity
+SHADOW: data_protection
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8957
+DOMINANCE MARGIN: 82.5396
+SUPPORT: ['BREACH_NOTIFICATION']
+SOURCE:
+2.1 يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.
+RANKED MECHANISMS:
+- BREACH_NOTIFICATION | role= DOMAIN_CORE | primary= data_protection | eligible= True | rank= 91
+  EVIDENCE: 'يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة'
+DOMINANCE SCORES:
+- {"type": "data_protection", "score": 82.5396, "coverage": 0.8957, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[24/32]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_2
+PIPELINE: services
+SHADOW: restrictive_covenants
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.7285
+DOMINANCE MARGIN: 75.6373
+SUPPORT: ['NON_COMPETE_RESTRICTION']
+SOURCE:
+4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة.
+RANKED MECHANISMS:
+- NON_COMPETE_RESTRICTION | role= DOMAIN_CORE | primary= restrictive_covenants | eligible= True | rank= 92
+  EVIDENCE: 'تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة.'
+DOMINANCE SCORES:
+- {"type": "restrictive_covenants", "score": 75.6373, "coverage": 0.7285, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[25/32]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_3
+PIPELINE: employment
+SHADOW: restrictive_covenants
+CONFIDENCE: 0.905
+ABSTAINED: False
+PRIMARY COVERAGE: 0.3
+DOMINANCE MARGIN: 57.52
+SUPPORT: ['NON_SOLICITATION_RESTRICTION']
+SOURCE:
+4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الطرف الطرف المتعاقد ب أ للعمل.
+RANKED MECHANISMS:
+- NON_SOLICITATION_RESTRICTION | role= DOMAIN_CORE | primary= restrictive_covenants | eligible= True | rank= 91
+  EVIDENCE: 'تمتنع المديرة التنفيذية عن استقطاب أي موظف'
+DOMINANCE SCORES:
+- {"type": "restrictive_covenants", "score": 57.52, "coverage": 0.3, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[26/32]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_5
+PIPELINE: other
+SHADOW: employment
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.6354
+DOMINANCE MARGIN: 71.6075
+SUPPORT: ['BASE_COMPENSATION']
+SOURCE:
+2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.
+RANKED MECHANISMS:
+- BASE_COMPENSATION | role= DOMAIN_CORE | primary= employment | eligible= True | rank= 91
+  EVIDENCE: 'الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.'
+DOMINANCE SCORES:
+- {"type": "employment", "score": 71.6075, "coverage": 0.6354, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[27/32]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_6
+PIPELINE: other
+SHADOW: employment
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.9357
+DOMINANCE MARGIN: 83.86
+SUPPORT: ['EMPLOYMENT_ROLE_DUTY']
+SOURCE:
+1.1 تشغل المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الطرف الطرف المتعاقد ب أ.
+RANKED MECHANISMS:
+- EMPLOYMENT_ROLE_DUTY | role= DOMAIN_CORE | primary= employment | eligible= True | rank= 88
+  EVIDENCE: 'المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الطرف الطرف المتعاقد ب أ.'
+DOMINANCE SCORES:
+- {"type": "employment", "score": 83.86, "coverage": 0.9357, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[28/32]
+LANG: ar
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_4
+PIPELINE: payment
+SHADOW: intellectual_property
+CONFIDENCE: 0.96
+ABSTAINED: False
+PRIMARY COVERAGE: 0.9227
+DOMINANCE MARGIN: 128.9136
+SUPPORT: ['WORK_PRODUCT_OWNERSHIP_TRANSFER', 'IP_OWNERSHIP_ALLOCATION']
+SOURCE:
+3.1 تُعتبر جميع نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل.
+RANKED MECHANISMS:
+- WORK_PRODUCT_OWNERSHIP_TRANSFER | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 93
+  EVIDENCE: 'نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل.'
+- IP_OWNERSHIP_ALLOCATION | role= DOMAIN_CORE | primary= intellectual_property | eligible= True | rank= 91
+  EVIDENCE: 'نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل.'
+DOMINANCE SCORES:
+- {"type": "intellectual_property", "score": 128.9136, "coverage": 0.9227, "independent_support": 2, "core_count": 2, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[29/32]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_7
+PIPELINE: liability
+SHADOW: indemnity
+CONFIDENCE: 0.9
+ABSTAINED: False
+PRIMARY COVERAGE: 0.2586
+DOMINANCE MARGIN: 55.8993
+SUPPORT: ['INDEMNIFICATION_OBLIGATION']
+SOURCE:
+7.1 لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم.
+RANKED MECHANISMS:
+- INDEMNIFICATION_OBLIGATION | role= DOMAIN_CORE | primary= indemnity | eligible= True | rank= 92
+  EVIDENCE: 'تعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم.'
+DOMINANCE SCORES:
+- {"type": "indemnity", "score": 55.8993, "coverage": 0.2586, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[30/32]
+LANG: ar
+DOC: 11_Commercial_Lease_Agreement_AR.json
+REF: clause_9
+PIPELINE: insurance
+SHADOW: indemnity
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.4222
+DOMINANCE MARGIN: 62.7733
+SUPPORT: ['INDEMNIFICATION_OBLIGATION']
+SOURCE:
+7.1 يحافظ المستأجر على تأمين مسؤولية مدنية تجارية عامة بحدود لا تقل عن 2,000,000 دولار لكل حادثة، مع تسمية المؤجر كمؤمَّن إضافي، ويعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر.
+RANKED MECHANISMS:
+- INDEMNIFICATION_OBLIGATION | role= DOMAIN_CORE | primary= indemnity | eligible= True | rank= 92
+  EVIDENCE: 'يعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر.'
+DOMINANCE SCORES:
+- {"type": "indemnity", "score": 62.7733, "coverage": 0.4222, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[31/32]
+LANG: ar
+DOC: 12_Loan_Credit_Agreement_AR.json
+REF: clause_1
+PIPELINE: penalty
+SHADOW: loan
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.8931
+DOMINANCE MARGIN: 82.3094
+SUPPORT: ['PRINCIPAL_REPAYMENT']
+SOURCE:
+4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.
+RANKED MECHANISMS:
+- PRINCIPAL_REPAYMENT | role= DOMAIN_CORE | primary= loan | eligible= True | rank= 90
+  EVIDENCE: 'سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.'
+DOMINANCE SCORES:
+- {"type": "loan", "score": 82.3094, "coverage": 0.8931, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}
+
+####################################################################################################
+[32/32]
+LANG: ar
+DOC: 13_Asset_Purchase_Agreement_AR.json
+REF: clause_3
+PIPELINE: other
+SHADOW: restrictive_covenants
+CONFIDENCE: 0.93
+ABSTAINED: False
+PRIMARY COVERAGE: 0.7237
+DOMINANCE MARGIN: 75.4347
+SUPPORT: ['NON_COMPETE_RESTRICTION']
+SOURCE:
+7.1 لمدة خمس (5) سنوات بعد تاريخ الإغلاق، يمتنع الطرف المتعاقد ب وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية.
+RANKED MECHANISMS:
+- NON_COMPETE_RESTRICTION | role= DOMAIN_CORE | primary= restrictive_covenants | eligible= True | rank= 92
+  EVIDENCE: 'يمتنع الطرف المتعاقد ب وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية.'
+DOMINANCE SCORES:
+- {"type": "restrictive_covenants", "score": 75.4347, "coverage": 0.7237, "independent_support": 1, "core_count": 1, "secondary_count": 0, "procedural_count": 0}

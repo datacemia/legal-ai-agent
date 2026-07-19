@@ -1,0 +1,699 @@
+[
+  {
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Si les détenteurs de la majorité des Actions Préférentielles en circulation et une majorité du conseil approuvent une cession de la Société, tous les autres actionnaires seront tenus de voter en faveur de cette opération et d'y consentir (« Droit de Cession Forcée »), sous réserve de protections usuelles concernant la contrepartie et les déclarations.",
+    "primary_type": "share_transfer_rights",
+    "expected_source_mechanisms": [
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "tenus de voter",
+            "start": 181,
+            "end": 195
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "tenus de voter en faveur",
+            "start": 181,
+            "end": 205
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "tenus de voter en faveur de cette opération et d'y consentir",
+            "start": 181,
+            "end": 241
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "MANDATORY_CONJUNCTION",
+        "rank": 94,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 181,
+            "end": 357,
+            "text": "tenus de voter en faveur de cette opération et d'y consentir (« Droit de Cession Forcée »), sous réserve de protections usuelles concernant la contrepartie et les déclarations."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "arguments": [
+          {
+            "text": "tenus de voter en faveur de cette opération",
+            "tokens": [
+              "tenus",
+              "voter",
+              "faveur",
+              "cette",
+              "opération"
+            ]
+          },
+          {
+            "text": "d'y consentir (« Droit de Cession Forcée »), sous réserve de protections usuelles concernant la contrepartie",
+            "tokens": [
+              "consentir",
+              "droit",
+              "cession",
+              "forcée",
+              "sous",
+              "réserve",
+              "protections",
+              "usuelles",
+              "concernant",
+              "contrepartie"
+            ]
+          },
+          {
+            "text": "les déclarations.",
+            "tokens": [
+              "les",
+              "déclarations"
+            ]
+          }
+        ],
+        "evidence_hash": "bfa990f062c2eac27c8427d6c7a772a1408ae316913d04d598762abea7f482a6",
+        "normalized_concept": "MANDATORY_CONJUNCTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "MANDATORY_PARTICIPATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "tenus de voter",
+            "start": 181,
+            "end": 195
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "tenus de voter en faveur",
+            "start": 181,
+            "end": 205
+          }
+        ]
+      },
+      {
+        "concept": "OBLIGATION_TO_CONSENT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "tenus de voter en faveur de cette opération et d'y consentir",
+            "start": 181,
+            "end": 241
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "3.2",
+    "source_language": "fr",
+    "source_text": "3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).",
+    "primary_type": "governance",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "Droit de Cession Conjointe",
+            "start": 205,
+            "end": 231
+          }
+        ]
+      },
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aura le droit de participer",
+            "start": 137,
+            "end": 164
+          }
+        ]
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aux mêmes conditions",
+            "start": 181,
+            "end": 201
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TAG_ALONG_RIGHT",
+        "rank": 96,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TAG_ALONG_RIGHT",
+            "start": 10,
+            "end": 234,
+            "text": "fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »)"
+          },
+          {
+            "label": "TAG_ALONG_RIGHT",
+            "start": 205,
+            "end": 234,
+            "text": "Droit de Cession Conjointe »)"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "8311f845041cffbc8f47781cf9f425be726979cb21bab175b0eab9d536652929",
+        "normalized_concept": "TAG_ALONG_RIGHT",
+        "normalized_relation": {
+          "right_holder": "INVESTOR",
+          "obligated_actor": null,
+          "counterparty": "COMPANY",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 137,
+            "end": 235,
+            "text": "aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »)."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "df58e11ca37e1ffcb0d0e921bad49bc77906719f25cf649d309f51ddf87964cf",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 31,
+            "end": 210,
+            "text": "céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "ce46fefa8aa0dd0d933629985804aa3265e06ad3eec00a462eda15789b75a199",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 137,
+            "end": 235,
+            "text": "aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »)."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "df58e11ca37e1ffcb0d0e921bad49bc77906719f25cf649d309f51ddf87964cf",
+        "normalized_concept": "EXPRESS_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 31,
+            "end": 210,
+            "text": "céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "ce46fefa8aa0dd0d933629985804aa3265e06ad3eec00a462eda15789b75a199",
+        "normalized_concept": "ASSIGNMENT_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "PARTICIPATION_OPTION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aura le droit de participer",
+            "start": 137,
+            "end": 164
+          }
+        ]
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aux mêmes conditions",
+            "start": 181,
+            "end": 201
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Aucun actionnaire ne pourra céder d'actions du capital social de la Société sauf conformément au présent Pacte, y compris un droit de préemption au profit de la Société puis des autres actionnaires, et dans le respect des lois applicables sur les valeurs mobilières.",
+    "primary_type": "share_transfer_rights",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 32,
+            "end": 134,
+            "text": "céder d'actions du capital social de la Société sauf conformément au présent Pacte, y compris un droit"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5bc571bb353cc8c550cb1753fa6fe3acb73b7ef8a213e81085d277effa3f339f",
+        "normalized_concept": "ASSIGNMENT_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 32,
+            "end": 134,
+            "text": "céder d'actions du capital social de la Société sauf conformément au présent Pacte, y compris un droit"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5bc571bb353cc8c550cb1753fa6fe3acb73b7ef8a213e81085d277effa3f339f",
+        "normalized_concept": "ASSIGNMENT_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Tant que l'Investisseur détiendra au moins 3 % du capital pleinement dilué de la Société, la Société lui remettra des états financiers annuels audités dans un délai de quatre-vingt-dix (90) jours suivant la fin de l'exercice fiscal, et des états financiers trimestriels non audités dans un délai de quarante-cinq (45) jours suivant la fin de chaque trimestre fiscal.",
+    "primary_type": "investor_information_rights",
+    "expected_source_mechanisms": [
+      {
+        "concept": "ANNUAL_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers annuels",
+            "start": 122,
+            "end": 146
+          }
+        ]
+      },
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers trimestriels",
+            "start": 244,
+            "end": 273
+          }
+        ]
+      },
+      {
+        "concept": "AUDITED_REPORTING",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers annuels audités",
+            "start": 122,
+            "end": 154
+          },
+          {
+            "text": "états financiers trimestriels non audités",
+            "start": 244,
+            "end": 285
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 122,
+            "end": 168,
+            "text": "états financiers annuels audités dans un délai"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 244,
+            "end": 299,
+            "text": "états financiers trimestriels non audités dans un délai"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d6d629f989c20bfcd84ec25d898726e2ce384adf45696adc19f63b24bb3fffb1",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": "FINANCIAL_STATEMENTS",
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 122,
+            "end": 168,
+            "text": "états financiers annuels audités dans un délai"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 244,
+            "end": 299,
+            "text": "états financiers trimestriels non audités dans un délai"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d6d629f989c20bfcd84ec25d898726e2ce384adf45696adc19f63b24bb3fffb1",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": "FINANCIAL_STATEMENTS",
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "ANNUAL_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers annuels",
+            "start": 122,
+            "end": 146
+          }
+        ]
+      },
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers trimestriels",
+            "start": 244,
+            "end": 273
+          }
+        ]
+      },
+      {
+        "concept": "AUDITED_REPORTING",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers annuels audités",
+            "start": 122,
+            "end": 154
+          },
+          {
+            "text": "états financiers trimestriels non audités",
+            "start": 244,
+            "end": 285
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

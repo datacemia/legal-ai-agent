@@ -1,0 +1,197 @@
+========================================================================================================================
+V4.1.17C DURATION RUNTIME PROBE
+========================================================================================================================
+
+CONTRACT_DURATION_PATTERNS
+========================================================================================================================
+
+EN
+1 \b(?:this\s+)?(?:agreement|contract)\s+shall\s+remain\s+in\s+effect\s+for\s+([^.;\n]{2,120})
+2 \b(?:this\s+)?(?:agreement|contract)\s+shall\s+continue\s+for\s+([^.;\n]{2,120})
+3 \b(?:this\s+)?(?:agreement|contract)\s+(?:continues?|runs?|lasts?)\s+for\s+([^.;\n]{2,120})
+4 \b(?:this\s+)?(?:agreement|contract)\s+(?:expires?|ends?|terminates?)\s+after\s+([^.;\n]{2,120})
+5 \binitial\s+term\s+(?:shall\s+be|is|of|will\s+be)\s+([^.;\n]{2,120})
+6 \b(?:the\s+)?initial\s+term\s+is\s+([^.;\n]{2,120})
+7 \bterm\s+of\s+(?:this\s+)?(?:agreement|contract)\s+(?:shall\s+be|is|will\s+be)\s+([^.;\n]{2,120})
+8 \b(?:agreement|contract)\s+term\s+(?:shall\s+be|is|of|will\s+be)\s+([^.;\n]{2,120})
+
+FR
+1 \b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+restera\s+en\s+vigueur\s+pendant\s+([^.;\n]{2,120})
+2 \b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+se\s+poursuivra\s+pendant\s+([^.;\n]{2,120})
+3 \b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+(?:est\s+conclu|est\s+convenu)\s+pour\s+(?:une\s+)?(?:durée|duree)\s+de\s+([^.;\n]{2,120})
+4 \b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+(?:prend\s+fin|expire)\s+après\s+([^.;\n]{2,120})
+5 \b(?:durée|duree)\s+initiale\s+(?:sera|est)\s+(?:de|à|a)\s+([^.;\n]{2,120})
+6 \b(?:la\s+)?(?:durée|duree)\s+(?:du\s+|de\s+l['’])?(?:contrat|accord)\s+(?:est|sera)\s+de\s+([^.;\n]{2,120})
+7 \b(?:contrat|accord)\s+(?:d['’]une\s+)?(?:durée|duree)\s+de\s+([^.;\n]{2,120})
+
+AR
+1 (?:تظل|تبقى)\s+(?:هذه\s+)?(?:الاتفاقية|العقد)\s+(?:سارية|نافذة)\s+لمدة\s+([^.;؛!؟\n]{2,120})
+2 (?:يستمر|تستمر|يسري|تسري)\s+(?:هذا|هذه)?\s*(?:العقد|الاتفاقية)\s+لمدة\s+([^.;؛!؟\n]{2,120})
+3 (?:ينتهي|تنتهي)\s+(?:هذا|هذه)?\s*(?:العقد|الاتفاقية)\s+بعد\s+([^.;؛!؟\n]{2,120})
+4 (?:المدة|مدة\s+العقد|مدة\s+الاتفاقية)\s+الأولية\s+(?:هي|تكون|تبلغ)\s+([^.;؛!؟\n]{2,120})
+5 (?:مدة\s+العقد|مدة\s+الاتفاقية)\s+(?:هي|تكون|تبلغ)\s+([^.;؛!؟\n]{2,120})
+6 (?:يبرم|يُبرم|أبرم|أُبرم)\s+(?:هذا\s+)?(?:العقد|الاتفاقية)\s+لمدة\s+([^.;؛!؟\n]{2,120})
+
+========================================================================================================================
+EXTRACT_CONTRACT_DURATION
+========================================================================================================================
+def extract_contract_duration(
+    contract_text: str,
+    language: str = "en",
+) -> str | None:
+    """
+    Conservative document-level term extraction.
+
+    Only agreement/contract-term wording is eligible. Periods attached to
+    confidentiality survival, cure, notice, payment, vesting, non-compete,
+    audit frequency, or data retention are not treated as contract duration.
+    """
+    language = normalize_language(language)
+    text = str(contract_text or "")
+
+    for pattern in CONTRACT_DURATION_PATTERNS[language]:
+        match = re.search(pattern, text, flags=re.IGNORECASE)
+        if not match:
+            continue
+
+        value = " ".join(match.group(1).strip().split())
+
+        # Stop at common clause continuations without interpreting them.
+        value = re.split(
+            r"\b(?:unless|except|provided\s+that|but)\b"
+            r"|\b(?:sauf|à\s+moins\s+que|a\s+moins\s+que|mais)\b"
+            r"|(?:ما\s+لم|باستثناء|ولكن)",
+            value,
+            maxsplit=1,
+            flags=re.IGNORECASE,
+        )[0].strip(" ,،")
+
+        if 2 <= len(value) <= 120:
+            return value
+
+    return None
+
+
+========================================================================================================================
+BUILD_CONTRACT_OVERVIEW
+========================================================================================================================
+def build_contract_overview(
+    pipeline_result: dict,
+    family_detection: dict,
+    contract_text: str = "",
+    party_roles: dict | None = None,
+    language: str = "en",
+) -> dict:
+    """
+    Defensive, family-aware overview with non-destructive fact resolution.
+
+    Structured values already resolved upstream are preserved. Conservative
+    document-level extractors only fill gaps and never overwrite a substantive
+    value with a localized "Not specified" placeholder.
+    """
+    language = normalize_language(language)
+    not_specified = localized_default("not_specified", language)
+    not_applicable = localized_default("not_applicable", language)
+
+    exec_summary = pipeline_result.get("executive_summary", {}) or {}
+    exec_report = pipeline_result.get("executive_report", {}) or {}
+    overview = exec_report.get("contract_overview", {}) or {}
+
+    family = family_detection.get("family", "General")
+    optional_fields = get_optional_fields_for_family(family)
+
+    payment_terms = exec_summary.get("payment_terms")
+    source_duration = extract_contract_duration(
+        contract_text,
+        language,
+    )
+    duration = (
+        source_duration
+        or exec_summary.get("duration")
+        or overview.get("duration")
+    )
+
+    if "payment_terms" in optional_fields and not payment_terms:
+        payment_terms = not_applicable
+
+    if "duration" in optional_fields and not duration:
+        duration = not_applicable
+
+    arbitration_facts = analyze_arbitration(contract_text or "") or {}
+
+    jurisdiction_candidates = [
+        exec_summary.get("jurisdiction_detected"),
+        overview.get("jurisdiction_detected"),
+        extract_document_jurisdiction(contract_text, language),
+        arbitration_facts.get("seat"),
+        arbitration_facts.get("place"),
+        arbitration_facts.get("country"),
+    ]
+
+    jurisdiction_detected = next(
+        (
+            value
+            for value in jurisdiction_candidates
+            if is_substantive_overview_value(value, language)
+        ),
+        not_specified,
+    )
+
+    parties = exec_summary.get("parties") or overview.get("parties")
+
+    if isinstance(party_roles, dict):
+        detected_roles = [
+            str(party_roles.get(key) or "").strip()
+            for key in ("party_a", "party_b")
+            if str(party_roles.get(key) or "").strip()
+        ]
+
+        if len(detected_roles) >= 2:
+            parties = detected_roles
+
+    parties = canonicalize_party_labels(
+        parties,
+        language,
+    )
+
+    return {
+        "contract_type": family,
+        "parties": parties or [not_specified],
+        "duration": duration or not_specified,
+        "payment_terms": payment_terms or not_specified,
+        "jurisdiction_detected": jurisdiction_detected,
+        "jurisdiction_note": (
+            exec_summary.get("jurisdiction_note")
+            or overview.get("jurisdiction_note")
+            or ""
+        ),
+        "contract_complexity": (
+            exec_summary.get("contract_complexity")
+            or overview.get("contract_complexity")
+            or "medium"
+        ),
+        "overall_balance": (
+            exec_summary.get("overall_balance")
+            or overview.get("overall_balance")
+            or not_specified
+        ),
+        "family_hint": build_family_hint(family_detection),
+        "_clauses_analyzed": overview.get("clauses_analyzed"),
+    }
+
+
+========================================================================================================================
+DIRECT TEST
+========================================================================================================================
+
+LANG: en
+TEXT: This Agreement has an initial term of three (3) years.
+RESULT: 'three (3) years'
+
+LANG: fr
+TEXT: Le présent contrat a une durée initiale de trois (3) ans.
+RESULT: None
+
+LANG: ar
+TEXT: تكون مدة هذه الاتفاقية الأولية ثلاث (3) سنوات.
+RESULT: None

@@ -1,0 +1,119 @@
+====================================================================================================
+V4.1.10b IP LICENSING ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 10
+BY LANGUAGE: {'ar': 6, 'en': 2, 'fr': 2}
+BY PIPELINE TYPE: {'intellectual_property': 9, 'ownership': 1}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 8, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 2}
+SIGNAL COUNTS: {'LICENSE_GRANT': 1, 'LICENSE_RESTRICTION': 1, 'IP_RIGHTS_RETENTION': 1}
+NO SIGNAL ROWS: 7
+
+====================================================================================================
+[1/10]
+LANG: ar
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+3.1 يحتفظ المزود بكامل الحقوق في أدواته ومنهجياته وخبراته الفنية السابقة المستخدمة في تقديم الخدمات.
+
+====================================================================================================
+[2/10]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_3
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['LICENSE_GRANT']
+SOURCE:
+1.1 يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج المرخَّص وإعادة إنتاجه وتوزيعه فقط كجزء مدمج في المنتجات المرخَّصة، طوال المدة.
+
+====================================================================================================
+[3/10]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_4
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['LICENSE_RESTRICTION']
+SOURCE:
+1.2 لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.
+
+====================================================================================================
+[4/10]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_6
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+3.1 يحتفظ المرخِّص بكامل الحقوق في البرنامج المرخَّص، بما في ذلك جميع التعديلات والتحسينات، سواء أجراها المرخِّص أو المرخَّص له.
+
+====================================================================================================
+[5/10]
+LANG: ar
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+3.2 يحتفظ الاستشاري بملكية منهجياته وأطر عمله وخبراته العامة السابقة، ويجوز له إعادة استخدام المعارف والمهارات العامة المكتسبة أثناء التكليف في تكليفات مستقبلية مع عملاء آخرين، شريطة عدم الإفصاح عن أي معلومات سرية للعميل.
+
+====================================================================================================
+[6/10]
+LANG: ar
+DOC: 13_Asset_Purchase_Agreement_AR.json
+REF: clause_1
+PIPELINE: ownership
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+3.1 يُقر البائع ويضمن أن: (أ) لديه سند ملكية صحيح وقابل للتداول على الأصول المشتراة؛ (ب) البيانات المالية المقدمة للمشتري تعرض بأمانة الوضع المالي للنشاط؛ و(ج) لا توجد دعاوى قضائية معلقة أو محتملة من شأنها الإضرار الجوهري بالأصول المشتراة.
+
+====================================================================================================
+[7/10]
+LANG: en
+DOC: 03_SaaS_Cloud_Agreement.json
+REF: clause_6
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['IP_RIGHTS_RETENTION']
+SOURCE:
+4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.
+
+====================================================================================================
+[8/10]
+LANG: en
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_5
+PIPELINE: intellectual_property
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+SIGNALS: []
+SOURCE:
+1.1 At the Closing, Seller shall sell, transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right, title, and interest in the Purchased Assets, free and clear of all liens, except Permitted Liens listed in Exhibit C.
+
+====================================================================================================
+[9/10]
+LANG: fr
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_6
+PIPELINE: intellectual_property
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+SIGNALS: []
+SOURCE:
+3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).
+
+====================================================================================================
+[10/10]
+LANG: fr
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_8
+PIPELINE: intellectual_property
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+7.1 Le présent Pacte prendra automatiquement fin à la première des dates suivantes : une Introduction en Bourse Qualifiée ou une cession de la Société approuvée conformément à l'article 3.1.

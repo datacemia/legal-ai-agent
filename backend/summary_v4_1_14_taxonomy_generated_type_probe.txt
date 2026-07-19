@@ -1,0 +1,35 @@
+====================================================================================================
+V4.1.14 TAXONOMY GENERATED-TYPE PROBE
+====================================================================================================
+
+EN_CONF_SOURCE
+TYPE: 'other'
+TEXT: The Receiving Party shall return or destroy all Confidential Information.
+
+EN_TERM_GENERATED
+TYPE: 'notice'
+TEXT: This clause determines when the contract can end and whether notice or an opportunity to cure applies.
+
+FR_CONF_SOURCE
+TYPE: 'other'
+TEXT: La Partie destinataire doit restituer ou détruire toutes les Informations confidentielles.
+
+FR_TERM_GENERATED
+TYPE: 'termination'
+TEXT: Cette clause détermine quand le contrat peut prendre fin et si un préavis ou une période de remède s'applique.
+
+AR_CONF_SOURCE
+TYPE: 'other'
+TEXT: يجب على الطرف المستلم إعادة أو إتلاف جميع المعلومات السرية.
+
+AR_TERM_GENERATED
+TYPE: 'termination'
+TEXT: تحدد هذه المادة متى يمكن إنهاء العقد وما إذا كان الإشعار أو مهلة المعالجة تنطبق.
+
+EN_REMEDIES_SOURCE
+TYPE: 'remedies'
+TEXT: In the event of an actual or threatened breach, the Receiving Party shall be entitled to seek injunctive relief and specific performance.
+
+EN_GENERIC_GENERATED
+TYPE: 'other'
+TEXT: This clause should be reviewed because it may affect legal, financial, or operational obligations.

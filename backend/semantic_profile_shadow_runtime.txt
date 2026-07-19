@@ -1,0 +1,64 @@
+========================================================================================
+SEMANTIC SOURCE PROFILE — SHADOW AUDIT
+========================================================================================
+EXACT FIXTURE FILES: 45
+CLAUSES AUDITED: 355
+FILE ERRORS: 0
+LANGUAGES: {'en': 117, 'fr': 119, 'ar': 119}
+TYPE VERDICTS: {'DIVERGENCE': 53, 'ABSTAINED': 281, 'MATCH': 21}
+EVIDENCE INTEGRITY FAILURES: 0
+TYPE DIVERGENCES: 53
+RANKED MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 21, 'PROHIBITION': 28, 'CONFIDENTIALITY_DUTY': 4, 'AUTOMATIC_RENEWAL': 6, 'EXCLUDED_DAMAGE_CATEGORY': 9, 'LIABILITY_CAP': 8, 'MANDATORY_OBLIGATION': 2, 'EXPRESS_RIGHT': 5, 'FINANCIAL_REPORTING_OBLIGATION': 4, 'MANDATORY_CONJUNCTION': 6, 'BOARD_COMPOSITION_STRUCTURE': 2, 'AUTOMATIC_EVENT_TRANSITION': 2}
+SUMMARY: semantic_profile_shadow\shadow_summary.json
+
+TOP TYPE DIVERGENCES
+EN | 01_NDA_Confidentiality_Agreement.json | clause_1 | pipeline=confidentiality | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION', 'CONFIDENTIALITY_DUTY']
+EN | 03_SaaS_Cloud_Agreement.json | clause_3 | pipeline=liability | shadow=prohibition | mechanisms=['PROHIBITION', 'LIABILITY_CAP']
+EN | 04_Cybersecurity_Services_Agreement.json | clause_1 | pipeline=liability | shadow=prohibition | mechanisms=['PROHIBITION', 'LIABILITY_CAP']
+EN | 04_Cybersecurity_Services_Agreement.json | clause_8 | pipeline=subcontracting | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+EN | 05_Data_Processing_Agreement.json | clause_2 | pipeline=data_protection | shadow=mandatory_obligation | mechanisms=['MANDATORY_OBLIGATION']
+EN | 05_Data_Processing_Agreement.json | clause_3 | pipeline=data_processing | shadow=prohibition | mechanisms=['PROHIBITION']
+EN | 06_Executive_Employment_Agreement.json | clause_1 | pipeline=employment | shadow=prohibition | mechanisms=['PROHIBITION']
+EN | 06_Executive_Employment_Agreement.json | clause_4 | pipeline=employment | shadow=prohibition | mechanisms=['PROHIBITION']
+EN | 07_Software_Licensing_Agreement.json | clause_1 | pipeline=liability | shadow=prohibition | mechanisms=['PROHIBITION', 'LIABILITY_CAP']
+EN | 07_Software_Licensing_Agreement.json | clause_3 | pipeline=warranty | shadow=express_right | mechanisms=['EXPRESS_RIGHT']
+EN | 07_Software_Licensing_Agreement.json | clause_4 | pipeline=license | shadow=prohibition | mechanisms=['PROHIBITION']
+EN | 08_Procurement_Supply_Agreement.json | clause_3 | pipeline=liability | shadow=prohibition | mechanisms=['PROHIBITION', 'LIABILITY_CAP', 'EXCLUDED_DAMAGE_CATEGORY']
+EN | 08_Procurement_Supply_Agreement.json | clause_7 | pipeline=supply_distribution | shadow=express_right | mechanisms=['EXPRESS_RIGHT']
+EN | 09_Consulting_Services_Agreement.json | clause_1 | pipeline=liability | shadow=prohibition | mechanisms=['PROHIBITION', 'LIABILITY_CAP']
+EN | 09_Consulting_Services_Agreement.json | clause_6 | pipeline=services | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION', 'CONFIDENTIALITY_DUTY']
+EN | 10_Outsourcing_Managed_Services_Agreement.json | clause_1 | pipeline=liability | shadow=prohibition | mechanisms=['PROHIBITION', 'LIABILITY_CAP']
+EN | 11_Commercial_Lease_Agreement.json | clause_1 | pipeline=lease | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+EN | 12_Loan_Credit_Agreement.json | clause_4 | pipeline=loan | shadow=financial_reporting | mechanisms=['FINANCIAL_REPORTING_OBLIGATION']
+EN | 13_Asset_Purchase_Agreement.json | clause_1 | pipeline=loan | shadow=prohibition | mechanisms=['PROHIBITION']
+EN | 13_Asset_Purchase_Agreement.json | clause_4 | pipeline=compensation | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+EN | 13_Asset_Purchase_Agreement.json | clause_7 | pipeline=indemnity | shadow=prohibition | mechanisms=['PROHIBITION']
+EN | 14_Shareholders_Agreement.json | clause_1 | pipeline=share_transfer_rights | shadow=mandatory_obligation | mechanisms=['MANDATORY_CONJUNCTION']
+EN | 14_Shareholders_Agreement.json | clause_2 | pipeline=share_transfer_rights | shadow=express_right | mechanisms=['EXPRESS_RIGHT']
+EN | 14_Shareholders_Agreement.json | clause_3 | pipeline=anti_dilution_preemptive_rights | shadow=express_right | mechanisms=['EXPRESS_RIGHT']
+EN | 14_Shareholders_Agreement.json | clause_7 | pipeline=corporate_governance | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+EN | 15_General_Commercial_Agreement.json | clause_5 | pipeline=trademark_branding | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 01_NDA_Confidentiality_Agreement_FR.json | clause_2 | pipeline=confidentiality | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 04_Cybersecurity_Services_Agreement_FR.json | clause_5 | pipeline=subcontracting | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 09_Consulting_Services_Agreement_FR.json | clause_6 | pipeline=services | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 11_Commercial_Lease_Agreement_FR.json | clause_1 | pipeline=termination_for_convenience | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 12_Loan_Credit_Agreement_FR.json | clause_2 | pipeline=loan | shadow=financial_reporting | mechanisms=['FINANCIAL_REPORTING_OBLIGATION']
+FR | 13_Asset_Purchase_Agreement_FR.json | clause_3 | pipeline=compensation | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 14_Shareholders_Agreement_FR.json | clause_1 | pipeline=share_transfer_rights | shadow=mandatory_obligation | mechanisms=['MANDATORY_CONJUNCTION']
+FR | 14_Shareholders_Agreement_FR.json | clause_2 | pipeline=loan | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+FR | 14_Shareholders_Agreement_FR.json | clause_6 | pipeline=intellectual_property | shadow=express_right | mechanisms=['EXPRESS_RIGHT']
+FR | 15_General_Commercial_Agreement_FR.json | clause_4 | pipeline=trademark_branding | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+AR | 01_NDA_Confidentiality_Agreement_AR.json | clause_3 | pipeline=confidentiality | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'MANDATORY_CONJUNCTION', 'CONFIDENTIALITY_DUTY']
+AR | 01_NDA_Confidentiality_Agreement_AR.json | clause_4 | pipeline=confidentiality | shadow=mandatory_obligation | mechanisms=['MANDATORY_OBLIGATION']
+AR | 02_Master_Services_Agreement_AR.json | clause_2 | pipeline=other | shadow=mandatory_obligation | mechanisms=['MANDATORY_CONJUNCTION']
+AR | 02_Master_Services_Agreement_AR.json | clause_4 | pipeline=payment | shadow=mandatory_obligation | mechanisms=['MANDATORY_CONJUNCTION']
+AR | 02_Master_Services_Agreement_AR.json | clause_8 | pipeline=termination | shadow=prohibition | mechanisms=['PROHIBITION']
+AR | 03_SaaS_Cloud_Agreement_AR.json | clause_7 | pipeline=termination | shadow=prohibition | mechanisms=['PROHIBITION']
+AR | 04_Cybersecurity_Services_Agreement_AR.json | clause_5 | pipeline=subcontracting | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+AR | 05_Data_Processing_Agreement_AR.json | clause_3 | pipeline=subcontracting | shadow=prohibition | mechanisms=['PROHIBITION']
+AR | 07_Software_Licensing_Agreement_AR.json | clause_5 | pipeline=intellectual_property | shadow=prohibition | mechanisms=['PROHIBITION']
+AR | 09_Consulting_Services_Agreement_AR.json | clause_6 | pipeline=corporate_governance | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE']
+AR | 11_Commercial_Lease_Agreement_AR.json | clause_1 | pipeline=assignment | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+AR | 13_Asset_Purchase_Agreement_AR.json | clause_6 | pipeline=indemnity | shadow=consent_control | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+AR | 14_Shareholders_Agreement_AR.json | clause_1 | pipeline=assignment | shadow=mandatory_obligation | mechanisms=['MANDATORY_CONJUNCTION']
+AR | 14_Shareholders_Agreement_AR.json | clause_3 | pipeline=assignment | shadow=prohibition | mechanisms=['PROHIBITION']

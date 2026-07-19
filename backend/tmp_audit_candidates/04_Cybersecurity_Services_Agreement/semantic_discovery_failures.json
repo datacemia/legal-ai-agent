@@ -1,0 +1,931 @@
+[
+  {
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Client, and shall be uncapped in the event of Provider's gross negligence or willful misconduct.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 15,
+            "end": 280,
+            "text": "aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Contracting Party A, and shall be uncapped in the event of Provider's gross negligence or willful misconduct"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8459c5c88a94b5870dcd93a5d20639c4fdf9c5e236a6dd8641cfdb68615ec3ce",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 128,
+            "end": 281,
+            "text": "shall not exceed three (3) times the annual fees paid by Contracting Party A, and shall be uncapped in the event of Provider's gross negligence or willful misconduct."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "89675e87a290640ecdddf458a45871cec177bf40879460e22e327f7190e07f7e",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 15,
+            "end": 280,
+            "text": "aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Contracting Party A, and shall be uncapped in the event of Provider's gross negligence or willful misconduct"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8459c5c88a94b5870dcd93a5d20639c4fdf9c5e236a6dd8641cfdb68615ec3ce",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 128,
+            "end": 281,
+            "text": "shall not exceed three (3) times the annual fees paid by Contracting Party A, and shall be uncapped in the event of Provider's gross negligence or willful misconduct."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "89675e87a290640ecdddf458a45871cec177bf40879460e22e327f7190e07f7e",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 This Agreement has an initial term of three (3) years. Either Party may terminate for the other's uncured material breach following thirty (30) days' written notice. Client may terminate immediately, without penalty, if Provider suffers a Security Incident affecting Client data caused by Provider's gross negligence.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of three (3) years",
+            "start": 26,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 72,
+            "end": 168,
+            "text": "may terminate for the other's uncured material breach following thirty (30) days' written notice"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 76,
+            "end": 168,
+            "text": "terminate for the other's uncured material breach following thirty (30) days' written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "49037190ed39912f786155385d340ebcbbf30667eb384ffd708df457cf9b93df",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 177,
+            "end": 320,
+            "text": "may terminate immediately, without penalty, if Provider suffers a Security Incident affecting Contracting Party A data caused by Provider's gross negligence"
+          },
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 181,
+            "end": 320,
+            "text": "terminate immediately, without penalty, if Provider suffers a Security Incident affecting Contracting Party A data caused by Provider's gross negligence"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "048ccee83890cbf055848353c9f9937cf3a35967ef600e5d9ada26df0aebdd02",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 72,
+            "end": 168,
+            "text": "may terminate for the other's uncured material breach following thirty (30) days' written notice"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 76,
+            "end": 168,
+            "text": "terminate for the other's uncured material breach following thirty (30) days' written notice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "49037190ed39912f786155385d340ebcbbf30667eb384ffd708df457cf9b93df",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 177,
+            "end": 320,
+            "text": "may terminate immediately, without penalty, if Provider suffers a Security Incident affecting Contracting Party A data caused by Provider's gross negligence"
+          },
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 181,
+            "end": 320,
+            "text": "terminate immediately, without penalty, if Provider suffers a Security Incident affecting Contracting Party A data caused by Provider's gross negligence"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "048ccee83890cbf055848353c9f9937cf3a35967ef600e5d9ada26df0aebdd02",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of three (3) years",
+            "start": 26,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "3.2",
+    "source_language": "en",
+    "source_text": "3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 208,
+            "text": "Contracting Party A shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Contracting Party A's expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "53e4c9a087c299cc526806ef7517bc1e2f39d426c1086f5abd110ed43aceb57f",
+        "normalized_concept": "SECURITY_AUDIT_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 208,
+            "text": "Contracting Party A shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Contracting Party A's expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "53e4c9a087c299cc526806ef7517bc1e2f39d426c1086f5abd110ed43aceb57f",
+        "normalized_concept": "SECURITY_AUDIT_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Provider shall notify Client of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 13,
+            "end": 140,
+            "text": "shall notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 19,
+            "end": 126,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "806d54ee199d2f381f5c268fb3ca36ff77772db05a112dba83da6577bb3e8f29",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 183,
+            "text": "Provider shall notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery"
+          },
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 19,
+            "end": 183,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7aca67eb3ad588770038b8cd2aaf059b4853c1d67494e349c802d25fa4226130",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 4,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            },
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 13,
+            "end": 140,
+            "text": "shall notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 19,
+            "end": 126,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "806d54ee199d2f381f5c268fb3ca36ff77772db05a112dba83da6577bb3e8f29",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 183,
+            "text": "Provider shall notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery"
+          },
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 19,
+            "end": 183,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7aca67eb3ad588770038b8cd2aaf059b4853c1d67494e349c802d25fa4226130",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 4,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            },
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Provider shall not engage a new subcontractor with access to Client systems or data without Client's prior written approval, which shall not be unreasonably withheld.",
+    "primary_type": "subcontracting",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "without Client's prior written approval",
+            "start": 88,
+            "end": 127
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 88,
+            "end": 127,
+            "text": "without Contracting Party A's prior written approval"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 105,
+            "end": 127,
+            "text": "prior written approval"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "184d1b297d4fc750b5f459b7c3a71dca4392accbb55c8f4f8b796f7c3193eaa7",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 105,
+            "end": 127,
+            "text": "prior written approval"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "60680b98fa87d56892843c94afaee0f730a4f618c4a5ca38940e374ca75398dd",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 170,
+            "text": "shall not engage a new subcontractor with access to Contracting Party A systems or data without Contracting Party A's prior written approval, which shall not be unreasonably withheld."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "aeebf8231b462ae8f677874e03a6bf67ade5ac86cde4307a6631cc36832b20ca",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 13,
+            "end": 170,
+            "text": "shall not engage a new subcontractor with access to Contracting Party A systems or data without Contracting Party A's prior written approval, which shall not be unreasonably withheld."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "aeebf8231b462ae8f677874e03a6bf67ade5ac86cde4307a6631cc36832b20ca",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports to Client upon request, no more than once per year.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 4,
+            "end": 59,
+            "text": "Provider shall maintain SOC 2 Type II and ISO/IEC 27001"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ef2e24dc4dadaaf7893b1c11ef5c597c08f329185abe8612243a260f4d39a2e1",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 148,
+            "text": "Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7ce62295f66a7e41b5a4d7006775fbbe73505a160bca3cfa6c3f84caffae8c1a",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": null,
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 4,
+            "end": 59,
+            "text": "Provider shall maintain SOC 2 Type II and ISO/IEC 27001"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ef2e24dc4dadaaf7893b1c11ef5c597c08f329185abe8612243a260f4d39a2e1",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 4,
+            "end": 148,
+            "text": "Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7ce62295f66a7e41b5a4d7006775fbbe73505a160bca3cfa6c3f84caffae8c1a",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": null,
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

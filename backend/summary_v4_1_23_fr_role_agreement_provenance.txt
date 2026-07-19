@@ -1,0 +1,1082 @@
+========================================================================================================================
+V4.1.23 FR ROLE AGREEMENT PROVENANCE
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].reasoning_evidence
+HITS: ['la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas tro
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].explanation_simple
+HITS: ['la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire est limitée à trois fois les honoraires annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].why_it_matters
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+Cette limitation de responsabilité protège la Prestataire contre des réclamations excessives, mais expose la Client à un risque financier en cas d'incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].red_flag_reason
+HITS: ['la Client']
+VALUE:
+La responsabilité illimitée en cas de négligence grave ou de faute intentionnelle pourrait entraîner des conséquences financières imprévues pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].safer_alternative
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[0].validation_receipts.safer_alternative.text_before_validation
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[1].original_text
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[1].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'a
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[1].quoted_text
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[1].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+La Prestataire doit maintenir des certifications spécifiques et fournir des rapports d'audit à la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[1].why_it_matters
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Cela garantit que la Prestataire respecte des normes de sécurité reconnues, ce qui est important pour la confiance de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[1].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[2].original_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[2].reasoning_evidence
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabili
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[2].quoted_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[2].explanation_simple
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire doit informer la Client rapidement des incidents de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[2].why_it_matters
+HITS: ['la Client', 'à la Client']
+VALUE:
+Une notification rapide permet à la Client de prendre des mesures appropriées pour atténuer les risques.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[2].section_path[0]
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[3].original_text
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[3].reasoning_evidence
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité cl
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[3].quoted_text
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[3].explanation_simple
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire doit fournir une analyse écrite dans un délai spécifique après un incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[3].section_path[0]
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].original_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].reasoning_evidence
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].quoted_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].explanation_simple
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire est responsable d'indemniser la Client pour certaines pertes liées à des incidents de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].why_it_matters
+HITS: ['la Prestataire']
+VALUE:
+Cette clause expose la Prestataire à des coûts potentiellement élevés en cas de violation de l'accord, ce qui pourrait affecter sa rentabilité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].safer_alternative
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].section_path[0]
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[4].validation_receipts.safer_alternative.text_before_validation
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[5].original_text
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[5].reasoning_evidence
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, te
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[5].quoted_text
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[5].explanation_simple
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire s'engage à fournir des services de sécurité continus.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[5].section_path[0]
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[6].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[6].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[6].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[6].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La Client peut auditer les installations de la Prestataire une fois par an avec un préavis de 30 jours.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[6].why_it_matters
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire', 'à la Client']
+VALUE:
+Cela permet à la Client de s'assurer que les installations de la Prestataire respectent les normes de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[6].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[7].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[7].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquell
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[7].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[7].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+La Prestataire doit obtenir l'approbation écrite de la Client avant d'engager un sous-traitant.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[7].why_it_matters
+HITS: ['la Client', 'de la Client']
+VALUE:
+Cela protège les données et systèmes de la Client en garantissant qu'aucun sous-traitant non approuvé n'aura accès à ceux-ci.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[7].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[8].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[8].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[8].market_comparison
+HITS: ['la Client']
+VALUE:
+Cette clause est relativement standard dans les contrats de services, mais la résiliation immédiate pour négligence grave est un point favorable pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[8].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clauses.results[8].validation_receipts.market_comparison.text_before_validation
+HITS: ['la Client']
+VALUE:
+Cette clause est relativement standard dans les contrats de services, mais la résiliation immédiate pour négligence grave est un point favorable pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].reasoning_evidence
+HITS: ['la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas tro
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].explanation_simple
+HITS: ['la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire est limitée à trois fois les honoraires annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].why_it_matters
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+Cette limitation de responsabilité protège la Prestataire contre des réclamations excessives, mais expose la Client à un risque financier en cas d'incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].red_flag_reason
+HITS: ['la Client']
+VALUE:
+La responsabilité illimitée en cas de négligence grave ou de faute intentionnelle pourrait entraîner des conséquences financières imprévues pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].safer_alternative
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].original_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].reasoning_evidence
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].quoted_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].explanation_simple
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire est responsable d'indemniser la Client pour certaines pertes liées à des incidents de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].why_it_matters
+HITS: ['la Prestataire']
+VALUE:
+Cette clause expose la Prestataire à des coûts potentiellement élevés en cas de violation de l'accord, ce qui pourrait affecter sa rentabilité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].safer_alternative
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[0].clauses[1].section_path[0]
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[0].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'a
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[0].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+La Prestataire doit maintenir des certifications spécifiques et fournir des rapports d'audit à la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[0].why_it_matters
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Cela garantit que la Prestataire respecte des normes de sécurité reconnues, ce qui est important pour la confiance de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[1].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[1].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[1].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[1].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La Client peut auditer les installations de la Prestataire une fois par an avec un préavis de 30 jours.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[1].why_it_matters
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire', 'à la Client']
+VALUE:
+Cela permet à la Client de s'assurer que les installations de la Prestataire respectent les normes de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[1].clauses[1].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[0].reasoning_evidence
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabili
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[0].explanation_simple
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire doit informer la Client rapidement des incidents de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[0].why_it_matters
+HITS: ['la Client', 'à la Client']
+VALUE:
+Une notification rapide permet à la Client de prendre des mesures appropriées pour atténuer les risques.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[1].original_text
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[1].reasoning_evidence
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité cl
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[1].quoted_text
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[1].explanation_simple
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire doit fournir une analyse écrite dans un délai spécifique après un incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[1].section_path[0]
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[2].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[2].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquell
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[2].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[2].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+La Prestataire doit obtenir l'approbation écrite de la Client avant d'engager un sous-traitant.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[2].why_it_matters
+HITS: ['la Client', 'de la Client']
+VALUE:
+Cela protège les données et systèmes de la Client en garantissant qu'aucun sous-traitant non approuvé n'aura accès à ceux-ci.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[2].clauses[2].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[3].clauses[0].original_text
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[3].clauses[0].reasoning_evidence
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, te
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[3].clauses[0].quoted_text
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[3].clauses[0].explanation_simple
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire s'engage à fournir des services de sécurité continus.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[3].clauses[0].section_path[0]
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[4].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[4].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[4].clauses[0].market_comparison
+HITS: ['la Client']
+VALUE:
+Cette clause est relativement standard dans les contrats de services, mais la résiliation immédiate pour négligence grave est un point favorable pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.clause_groups.groups[4].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_summary.top_risks[0].legal_insight
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+Cette limitation de responsabilité protège la Prestataire contre des réclamations excessives, mais expose la Client à un risque financier en cas d'incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_summary.top_risks[1].legal_insight
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Cela garantit que la Prestataire respecte des normes de sécurité reconnues, ce qui est important pour la confiance de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_summary.top_risks[2].legal_insight
+HITS: ['la Client', 'à la Client']
+VALUE:
+Une notification rapide permet à la Client de prendre des mesures appropriées pour atténuer les risques.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_summary.top_risks[4].legal_insight
+HITS: ['la Prestataire']
+VALUE:
+Cette clause expose la Prestataire à des coûts potentiellement élevés en cas de violation de l'accord, ce qui pourrait affecter sa rentabilité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_summary.negotiation_priorities[0].safer_alternative
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_summary.negotiation_priorities[3].safer_alternative
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.top_risks[0].legal_insight
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+Cette limitation de responsabilité protège la Prestataire contre des réclamations excessives, mais expose la Client à un risque financier en cas d'incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.top_risks[1].legal_insight
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Cela garantit que la Prestataire respecte des normes de sécurité reconnues, ce qui est important pour la confiance de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.top_risks[2].legal_insight
+HITS: ['la Client', 'à la Client']
+VALUE:
+Une notification rapide permet à la Client de prendre des mesures appropriées pour atténuer les risques.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.top_risks[4].legal_insight
+HITS: ['la Prestataire']
+VALUE:
+Cette clause expose la Prestataire à des coûts potentiellement élevés en cas de violation de l'accord, ce qui pourrait affecter sa rentabilité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.negotiation_priorities[0].safer_alternative
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.negotiation_priorities[3].safer_alternative
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].reasoning_evidence
+HITS: ['la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas tro
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].explanation_simple
+HITS: ['la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire est limitée à trois fois les honoraires annuels, sauf en cas de négligence grave ou de faute intentionnelle.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].why_it_matters
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+Cette limitation de responsabilité protège la Prestataire contre des réclamations excessives, mais expose la Client à un risque financier en cas d'incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].red_flag_reason
+HITS: ['la Client']
+VALUE:
+La responsabilité illimitée en cas de négligence grave ou de faute intentionnelle pourrait entraîner des conséquences financières imprévues pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].safer_alternative
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+5.1 La responsabilité globale de la Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].original_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].reasoning_evidence
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].quoted_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].explanation_simple
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire est responsable d'indemniser la Client pour certaines pertes liées à des incidents de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].why_it_matters
+HITS: ['la Prestataire']
+VALUE:
+Cette clause expose la Prestataire à des coûts potentiellement élevés en cas de violation de l'accord, ce qui pourrait affecter sa rentabilité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].safer_alternative
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses[1].section_path[0]
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+5.2 La Prestataire indemnisera la Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Prestataire.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[0].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'a
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[0].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+La Prestataire doit maintenir des certifications spécifiques et fournir des rapports d'audit à la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[0].why_it_matters
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Cela garantit que la Prestataire respecte des normes de sécurité reconnues, ce qui est important pour la confiance de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'à la Client']
+VALUE:
+3.1 La Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[1].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[1].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[1].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[1].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La Client peut auditer les installations de la Prestataire une fois par an avec un préavis de 30 jours.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[1].why_it_matters
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire', 'à la Client']
+VALUE:
+Cela permet à la Client de s'assurer que les installations de la Prestataire respectent les normes de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses[1].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client', 'de la Prestataire']
+VALUE:
+3.2 La Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[0].reasoning_evidence
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabili
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[0].explanation_simple
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire doit informer la Client rapidement des incidents de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[0].why_it_matters
+HITS: ['la Client', 'à la Client']
+VALUE:
+Une notification rapide permet à la Client de prendre des mesures appropriées pour atténuer les risques.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+2.1 La Prestataire notifiera la Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[1].original_text
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[1].reasoning_evidence
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité cl
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[1].quoted_text
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[1].explanation_simple
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire doit fournir une analyse écrite dans un délai spécifique après un incident de sécurité.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[1].section_path[0]
+HITS: ['la Prestataire']
+VALUE:
+2.2 La Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[2].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[2].reasoning_evidence
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquell
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[2].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[2].explanation_simple
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+La Prestataire doit obtenir l'approbation écrite de la Client avant d'engager un sous-traitant.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[2].why_it_matters
+HITS: ['la Client', 'de la Client']
+VALUE:
+Cela protège les données et systèmes de la Client en garantissant qu'aucun sous-traitant non approuvé n'aura accès à ceux-ci.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses[2].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+4.1 La Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données de la Client sans l'approbation écrite préalable de la Client, laquelle ne pourra être refusée sans motif raisonnable.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[3].clauses[0].original_text
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[3].clauses[0].reasoning_evidence
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, te
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[3].clauses[0].quoted_text
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[3].clauses[0].explanation_simple
+HITS: ['la Prestataire']
+VALUE:
+La Prestataire s'engage à fournir des services de sécurité continus.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[3].clauses[0].section_path[0]
+HITS: ['la Prestataire']
+VALUE:
+1.1 La Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[4].clauses[0].original_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[4].clauses[0].quoted_text
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[4].clauses[0].market_comparison
+HITS: ['la Client']
+VALUE:
+Cette clause est relativement standard dans les contrats de services, mais la résiliation immédiate pour négligence grave est un point favorable pour la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.clauses.executive_report.clause_groups.groups[4].clauses[0].section_path[0]
+HITS: ['la Client', 'la Prestataire', 'de la Client']
+VALUE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. La Client pourra résilier immédiatement, sans pénalité, si la Prestataire subit un Incident de Sécurité affectant les données de la Client résultant de sa négligence grave.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.unified_report.suggested_wording[0].preferred_wording
+HITS: ['la Client', 'la Prestataire', 'de la Prestataire']
+VALUE:
+La responsabilité de la Prestataire pour négligence grave ou faute intentionnelle ne doit pas dépasser le montant total des honoraires annuels payés par la Client.
+
+------------------------------------------------------------------------------------------------------------------------
+PATH: $.unified_report.suggested_wording[1].preferred_wording
+HITS: ['la Client', 'la Prestataire']
+VALUE:
+La Prestataire indemnisera la Client uniquement pour les réclamations de tiers et les coûts raisonnables de surveillance de crédit résultant d'un Incident de Sécurité, à l'exclusion des amendes réglementaires.
+
+========================================================================================================================
+TOP-LEVEL KEYS
+========================================================================================================================
+['clauses', 'clauses_analyzed', 'clauses_truncated', 'contract_complexity', 'contract_quality_score', 'created_at', 'document_id', 'id', 'jurisdiction_detected', 'overall_balance', 'quality_check', 'recommendations', 'risk_level', 'risk_score', 'simplified_version', 'summary', 'total_clauses_detected', 'unified_report']
+
+CLAUSES ROOT KEYS:
+['clause_groups', 'clauses', 'contract_timeline', 'contradictions', 'dependency_graph', 'executive_report', 'executive_risk_narrative', 'executive_summary', 'legal_relation_graph']
+
+========================================================================================================================
+EXECUTIVE_SUMMARY
+========================================================================================================================
+KEYS: ['dependency_summary', 'jurisdiction', 'jurisdiction_summary', 'language', 'negotiation_priorities', 'privacy_first', 'recommended_actions', 'risk_overview', 'top_risks']
+
+========================================================================================================================
+EXECUTIVE_REPORT
+========================================================================================================================
+KEYS: ['clause_groups', 'contract_overview', 'contradictions', 'dependency_graph', 'dependency_insights', 'executive_narrative', 'language', 'negotiation_priorities', 'privacy_first', 'recommended_actions', 'report_type', 'risk_overview', 'top_risks']
+
+========================================================================================================================
+UNIFIED REPORT
+========================================================================================================================
+KEYS: ['action_checklist', 'confidence_notes', 'confidence_score', 'contract_family', 'contract_overview', 'executive_summary', 'fallback_position', 'key_clauses', 'missing_clauses', 'negotiation_priorities', 'risk_score', 'risks_identified', 'suggested_wording']

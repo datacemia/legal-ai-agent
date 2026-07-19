@@ -1,0 +1,24 @@
+========================================================================================
+SEMANTIC SOURCE PROFILE — SHADOW AUDIT
+========================================================================================
+EXACT FIXTURE FILES: 45
+CLAUSES AUDITED: 355
+FILE ERRORS: 0
+LANGUAGES: {'en': 117, 'fr': 119, 'ar': 119}
+TYPE VERDICTS: {'MATCH': 75, 'ABSTAINED': 271, 'DIVERGENCE': 9}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 250, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 19, 'COMPETING_DOMAIN_MECHANISMS': 2}
+EVIDENCE INTEGRITY FAILURES: 0
+TYPE DIVERGENCES: 9
+RANKED MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 21, 'PROHIBITION': 28, 'CONFIDENTIALITY_DUTY': 4, 'CONFIDENTIAL_USE_RESTRICTION': 2, 'CONFIDENTIALITY_EXCLUSION': 3, 'CONFIDENTIALITY_SURVIVAL': 3, 'LICENSE_GRANT': 4, 'CONFIDENTIALITY_REMEDY': 2, 'GOVERNING_LAW_SELECTION': 8, 'TERMINATION_RIGHT': 17, 'NOTICE_PROCEDURE': 3, 'AUTOMATIC_RENEWAL': 9, 'WORK_PRODUCT_OWNERSHIP_TRANSFER': 6, 'PAYMENT_OBLIGATION': 11, 'BACKGROUND_IP_RETENTION': 4, 'EXCLUDED_DAMAGE_CATEGORY': 9, 'SERVICE_LEVEL_COMMITMENT': 2, 'LIABILITY_CAP': 8, 'MANDATORY_OBLIGATION': 2, 'IP_ASSIGNMENT': 3, 'EXPRESS_RIGHT': 5, 'LICENSE_RESTRICTION': 2, 'IP_RIGHTS_RETENTION': 2, 'FINANCIAL_REPORTING_OBLIGATION': 4, 'ASSIGNMENT_TRANSFER': 6, 'MANDATORY_CONJUNCTION': 6, 'BOARD_COMPOSITION_STRUCTURE': 2, 'AUTOMATIC_EVENT_TRANSITION': 2, 'IP_OWNERSHIP_ALLOCATION': 3}
+SUMMARY: semantic_profile_shadow_v4_1_2_ip\shadow_summary.json
+
+TOP TYPE DIVERGENCES
+EN | 01_NDA_Confidentiality_Agreement.json | clause_5 | pipeline=confidentiality | shadow=intellectual_property | mechanisms=['LICENSE_GRANT']
+EN | 02_Master_Services_Agreement.json | clause_4 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+EN | 07_Software_Licensing_Agreement.json | clause_2 | pipeline=warranty | shadow=intellectual_property | mechanisms=['EXPRESS_RIGHT', 'LICENSE_GRANT']
+EN | 07_Software_Licensing_Agreement.json | clause_4 | pipeline=license | shadow=intellectual_property | mechanisms=['PROHIBITION', 'LICENSE_RESTRICTION']
+FR | 02_Master_Services_Agreement_FR.json | clause_2 | pipeline=work_product | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+FR | 09_Consulting_Services_Agreement_FR.json | clause_2 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+FR | 09_Consulting_Services_Agreement_FR.json | clause_5 | pipeline=ownership | shadow=intellectual_property | mechanisms=['BACKGROUND_IP_RETENTION']
+AR | 02_Master_Services_Agreement_AR.json | clause_7 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+AR | 09_Consulting_Services_Agreement_AR.json | clause_4 | pipeline=payment | shadow=intellectual_property | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']

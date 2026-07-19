@@ -1,0 +1,28 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 23208
+PDF_LINES_DEBUG {'line_count': 413, 'non_empty_line_count': 277, 'max_line_len': 255, 'first_20': ['Your Statement', '                                                                Statement 15              (Page 1 of 6)', '', '                                                              Account Number    06 3010 13274026', '                                      027', '                                                                Statement', '                                                                    Period        1 Jul 2023 - 14 Jul 2023      MS W N ABD KADIR', '        UNIT 4 23-25 HILLCREST GR', '                                                                    Closing Balance         $12,567.82 CR', '       SPRINGVALE VIC 3171', '                                                                       Enquiries                   13 2221', '', '', '', '', '    Smart Access', '', '         Enjoy the convenience and security of withdrawing what you need, when you need it. Plus you can have your', '         monthly account fee waived if you deposit at least $2,000 each calendar month.', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 96, 'income_total': 23114.2, 'expense_total': 13079.43}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+WESTPAC_GUARD_DEBUG2 {'has_date_transaction_debit_credit_balance': True, 'has_date_transaction_description_debit_credit_balance': False, 'has_total_credits': True, 'has_total_debits': True, 'has_closing_balance': True, 'has_opening_formula': True, 'has_westpac_layout': True}
+WESTPAC_AU_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 101, 'income_total': 35792.61, 'expense_total': 44067.89}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'date_description_debit_credit_balance', 'count': 96, 'income_total': 23114.2, 'expense_total': 13079.43, 'income_gap': 12928.41, 'expense_gap': 10551.61, 'ledger_total': 36193.63, 'max_tx_abs': 8871.0, 'score': 23480.02}, {'parser': 'westpac_au_debit_credit_balance', 'count': 101, 'income_total': 35792.61, 'expense_total': 44067.89, 'income_gap': 250.0, 'expense_gap': 20436.85, 'ledger_total': 79860.5, 'max_tx_abs': 22103.81, 'score': 21186.85}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'westpac_au_debit_credit_balance', 'income_gap': 250.0, 'expense_gap': 20436.85, 'score': 21186.85}]
+NO_EXACT_OFFICIAL_FINANCE_CANDIDATE [{'parser': 'westpac_au_debit_credit_balance', 'income_gap': 250.0, 'expense_gap': 20436.85, 'score': 21186.85}]
+STATEMENT_LAYOUT_DETECTED westpac_au_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'westpac_au_debit_credit_balance', 'transactions': 101, 'income_total': 35792.61, 'expense_total': 44067.89, 'income_gap': 250.0, 'expense_gap': 20436.85, 'score': 21186.85}
+SUSPICIOUS t60.pdf | tx=101 income=35792.61 expenses=44067.89 expected_income=36042.61 expected_expenses=23631.04 summary_ok=False real_ok=False opening=156.25 ending=12567.82 gap=20686.85 reason=SUMMARY_GAP income=250.0 expense=20436.85; REAL_BALANCE_GAP=20686.85

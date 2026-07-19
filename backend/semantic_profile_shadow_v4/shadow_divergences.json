@@ -1,0 +1,3429 @@
+[
+  {
+    "language": "en",
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "clause_5",
+    "source_text": "4.1 Nothing in this Agreement grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind.",
+    "pipeline_clause_type": "confidentiality",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8352,
+    "shadow_dominance_margin": 79.8769,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 79.8769,
+        "coverage": 0.8352,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 30,
+            "end": 182,
+            "text": "grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 30,
+            "end": 182,
+            "text": "grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f873da4c42e76157584cf8072812297c440482598c65f647b02421e7de680671"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 30,
+            "end": 182,
+            "text": "grants any license or ownership interest in the Confidential Information. All Confidential Information is provided \"as is\" without warranty of any kind."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f873da4c42e76157584cf8072812297c440482598c65f647b02421e7de680671"
+      }
+    ],
+    "semantic_profile_hash": "6d4325dda0528a8de26845babb65254400400eca56f3837ee6ff84d7ac8156f4",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "3.2 All Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9463,
+    "shadow_dominance_margin": 84.905,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 84.905,
+        "coverage": 0.9463,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 149,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 149,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7d93eec77c02c1478dc432a8dfebda62bf25289bc961f7a30b34041e53b090a9"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 149,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7d93eec77c02c1478dc432a8dfebda62bf25289bc961f7a30b34041e53b090a9"
+      }
+    ],
+    "semantic_profile_hash": "77902848a4d102b293cd29f37e53906b87e9d37ab32a5bfcab1ea98f9854be77",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "clause_9",
+    "source_text": "5.1 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.",
+    "pipeline_clause_type": "liability",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "indemnity",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8234,
+    "shadow_dominance_margin": 41.8701,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "indemnity",
+        "score": 79.6208,
+        "coverage": 0.8234,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "liability",
+        "score": 37.7507,
+        "coverage": 0.1826,
+        "independent_support": 1,
+        "core_count": 0,
+        "secondary_count": 1,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INDEMNIFICATION_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 84,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 273,
+            "end": 334,
+            "text": "PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF."
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED"
+      },
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 46,
+            "end": 321,
+            "text": "INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBI"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 84,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 273,
+            "end": 334,
+            "text": "PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF."
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "0183efc645ba29f07a7d1faca2104629631326d3c77efe9f5d05d3e7da5f0891"
+      },
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 46,
+            "end": 321,
+            "text": "INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBI"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2f740d4b7821dfd463d084f156cf43a131debba1d4bf53f9be814986454625e0"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 46,
+            "end": 321,
+            "text": "INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBI"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2f740d4b7821dfd463d084f156cf43a131debba1d4bf53f9be814986454625e0"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 84,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 273,
+            "end": 334,
+            "text": "PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF."
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "0183efc645ba29f07a7d1faca2104629631326d3c77efe9f5d05d3e7da5f0891"
+      }
+    ],
+    "semantic_profile_hash": "5fd396c9ed089821a6a66802a2f2fad9265170f4a1f9e7c4ffc30751db8b2d8d",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.96,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.6546,
+    "shadow_dominance_margin": 117.414,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 117.414,
+        "coverage": 0.6546,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BREACH_NOTIFICATION",
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 20,
+            "end": 79,
+            "text": "maintain administrative, physical, and technical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      },
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 131,
+            "end": 235,
+            "text": "notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 20,
+            "end": 79,
+            "text": "maintain administrative, physical, and technical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1fee9eb39833870ef292ac0d43c16a047c5f6af1cd7f5e0bacaa8ac3d208d166"
+      },
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 131,
+            "end": 235,
+            "text": "notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8d5f485df1580d7ffcd8b9377718b13a4072089c01c277714c3e5de92b86724e"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 131,
+            "end": 235,
+            "text": "notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8d5f485df1580d7ffcd8b9377718b13a4072089c01c277714c3e5de92b86724e"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 20,
+            "end": 79,
+            "text": "maintain administrative, physical, and technical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1fee9eb39833870ef292ac0d43c16a047c5f6af1cd7f5e0bacaa8ac3d208d166"
+      }
+    ],
+    "semantic_profile_hash": "5b8e099300864fcee192dce6820008f5de70d85d72b31bbb8a7193ad951782e2",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "2.1 Provider shall notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8325,
+    "shadow_dominance_margin": 79.8845,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 79.8845,
+        "coverage": 0.8325,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BREACH_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 19,
+            "end": 183,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 19,
+            "end": 183,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "50ec3dfea9b5b995d1c3434a92b2e8c77f534ea7fce92a5b428854ef95b6d1a2"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 19,
+            "end": 183,
+            "text": "notify Contracting Party A of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "50ec3dfea9b5b995d1c3434a92b2e8c77f534ea7fce92a5b428854ef95b6d1a2"
+      }
+    ],
+    "semantic_profile_hash": "cc38774f77b5d0c3ba780e93cc48154c31d86e0bbf3aa8a5ed460517b65e2932",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "clause_6",
+    "source_text": "1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the NIST Cybersecurity Framework.",
+    "pipeline_clause_type": "cybersecurity",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "services",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5316,
+    "shadow_dominance_margin": 67.1263,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "services",
+        "score": 67.1263,
+        "coverage": 0.5316,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SERVICE_PERFORMANCE_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 105,
+            "text": "Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 105,
+            "text": "Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d2726841c432488b0f9a1ee862cf0ad30a8bd5d4b45e51d61ae1111c66f9190a"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 105,
+            "text": "Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d2726841c432488b0f9a1ee862cf0ad30a8bd5d4b45e51d61ae1111c66f9190a"
+      }
+    ],
+    "semantic_profile_hash": "c207b0f0f6235a77fa263fd68a7653f62b52f20e6cd627210ee5e04817d9b4cd",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "4.1 Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.9,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2783,
+    "shadow_dominance_margin": 56.4887,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 56.4887,
+        "coverage": 0.2783,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 20,
+            "end": 79,
+            "text": "implement appropriate technical and organizational measures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 20,
+            "end": 79,
+            "text": "implement appropriate technical and organizational measures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "08a8796e36b8fa6a4d7db350c90ffd4067e3e63d31b66af2e4e98a296ed400e9"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 20,
+            "end": 79,
+            "text": "implement appropriate technical and organizational measures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "08a8796e36b8fa6a4d7db350c90ffd4067e3e63d31b66af2e4e98a296ed400e9"
+      }
+    ],
+    "semantic_profile_hash": "1e8c059191227ebc4c9c8a10935582d41093b8f5e1658eb9d2112444049ec6be",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "clause_2",
+    "source_text": "4.1 Licensor warrants that it has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.",
+    "pipeline_clause_type": "warranty",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8315,
+    "shadow_dominance_margin": 79.7247,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 79.7247,
+        "coverage": 0.8315,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 47,
+            "end": 279,
+            "text": "grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4be6b4676a574b8207ee3e2aaf6e94eda6a54a9b163854735a83af10f81d9e9d"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 47,
+            "end": 279,
+            "text": "grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "cf4885264d6a957556af622796151e058d7c72441473fd4cb1eb997fd28ebd1b"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "EXPRESS_RIGHT",
+        "rank": 90,
+        "candidate_primary_type": "express_right",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "EXPRESS_RIGHT",
+            "start": 30,
+            "end": 266,
+            "text": "has the right to grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTIC"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "4be6b4676a574b8207ee3e2aaf6e94eda6a54a9b163854735a83af10f81d9e9d"
+      },
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 47,
+            "end": 279,
+            "text": "grant the license herein. EXCEPT AS EXPRESSLY SET FORTH HEREIN, THE LICENSED SOFTWARE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "cf4885264d6a957556af622796151e058d7c72441473fd4cb1eb997fd28ebd1b"
+      }
+    ],
+    "semantic_profile_hash": "7fb5bda195ffb67ade644c40b08694a2a17f2fd0dafa827de31777328be027c7",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "clause_5",
+    "source_text": "2.1 Provider shall perform the Services in accordance with the service levels set forth in Exhibit A. The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives.",
+    "pipeline_clause_type": "corporate_governance",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "services",
+    "shadow_primary_type_confidence": 0.9,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2619,
+    "shadow_dominance_margin": 55.8,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "services",
+        "score": 55.8,
+        "coverage": 0.2619,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SERVICE_PERFORMANCE_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 70,
+            "text": "Provider shall perform the Services in accordance with the service"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 70,
+            "text": "Provider shall perform the Services in accordance with the service"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "573a78733870b18f28134af19af6b01187e2123c6e015a6e3fb0f241110fbe48"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 70,
+            "text": "Provider shall perform the Services in accordance with the service"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "573a78733870b18f28134af19af6b01187e2123c6e015a6e3fb0f241110fbe48"
+      }
+    ],
+    "semantic_profile_hash": "9a87757019ffda444b093238abb926d50f56700abb758a289b1159e3e010898f",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "11_Commercial_Lease_Agreement.json",
+    "reference": "clause_9",
+    "source_text": "7.1 Tenant shall maintain commercial general liability insurance with limits of not less than $2,000,000 per occurrence, naming Landlord as an additional insured, and shall indemnify Landlord against claims arising from Tenant's use of the Premises, except to the extent caused by Landlord's negligence.",
+    "pipeline_clause_type": "insurance",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "indemnity",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.4488,
+    "shadow_dominance_margin": 63.8915,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "indemnity",
+        "score": 63.8915,
+        "coverage": 0.4488,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INDEMNIFICATION_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 167,
+            "end": 303,
+            "text": "shall indemnify Landlord against claims arising from Tenant's use of the Premises, except to the extent caused by Landlord's negligence."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 167,
+            "end": 303,
+            "text": "shall indemnify Landlord against claims arising from Tenant's use of the Premises, except to the extent caused by Landlord's negligence."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "db0e6911e47f3412c820e37109b4f305ac105861c115f6ea0e97adf71c6325c1"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 167,
+            "end": 303,
+            "text": "shall indemnify Landlord against claims arising from Tenant's use of the Premises, except to the extent caused by Landlord's negligence."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "db0e6911e47f3412c820e37109b4f305ac105861c115f6ea0e97adf71c6325c1"
+      }
+    ],
+    "semantic_profile_hash": "e1b9718f176acd278cb27a84036c663421c296d361fda76ae0fa1aa3b410eaed",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "clause_1",
+    "source_text": "6.2 Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Collateral.",
+    "pipeline_clause_type": "remedies",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "loan",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.7197,
+    "shadow_dominance_margin": 75.2673,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "loan",
+        "score": 75.2673,
+        "coverage": 0.7197,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INTEREST_ACCRUAL"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INTEREST_ACCRUAL",
+        "rank": 92,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INTEREST_ACCRUAL",
+            "start": 65,
+            "end": 255,
+            "text": "principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Co"
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INTEREST_ACCRUAL",
+        "rank": 92,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INTEREST_ACCRUAL",
+            "start": 65,
+            "end": 255,
+            "text": "principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Co"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c6f0b76f6ba3af02c05225a9d1036aa9f4dbd1ce27ad295f488a911445452580"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INTEREST_ACCRUAL",
+        "rank": 92,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INTEREST_ACCRUAL",
+            "start": 65,
+            "end": 255,
+            "text": "principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Co"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c6f0b76f6ba3af02c05225a9d1036aa9f4dbd1ce27ad295f488a911445452580"
+      }
+    ],
+    "semantic_profile_hash": "ad3800e4d78f15712e3dd0d93eebf17fc0d342ab213fa5f64692f640ed853ecf",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "clause_3",
+    "source_text": "6.1 An Event of Default shall occur if Borrower fails to make any payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days of notice, or becomes subject to insolvency proceedings.",
+    "pipeline_clause_type": "notice",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "payment",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5461,
+    "shadow_dominance_margin": 67.2573,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "payment",
+        "score": 67.2573,
+        "coverage": 0.5461,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "PAYMENT_DEADLINE"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 86,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 66,
+            "end": 214,
+            "text": "payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days"
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 86,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 66,
+            "end": 214,
+            "text": "payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "eee41f542e0ff344da055acf5955e1c748c649245c02f5dd5afe91dd9fe37188"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 86,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 66,
+            "end": 214,
+            "text": "payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "eee41f542e0ff344da055acf5955e1c748c649245c02f5dd5afe91dd9fe37188"
+      }
+    ],
+    "semantic_profile_hash": "3103bf297f46f7292c2b63d09ab89f18ddfb5196670077b5e216c137339a2689",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "15_General_Commercial_Agreement.json",
+    "reference": "clause_7",
+    "source_text": "6.1 This Agreement shall continue for two (2) years from the Effective Date, renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice.",
+    "pipeline_clause_type": "renewal",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "termination",
+    "shadow_primary_type_confidence": 0.9276,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2704,
+    "shadow_dominance_margin": 38.2398,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "termination",
+        "score": 101.395,
+        "coverage": 0.2704,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "renewal",
+        "score": 63.1552,
+        "coverage": 0.658,
+        "independent_support": 1,
+        "core_count": 0,
+        "secondary_count": 0,
+        "procedural_count": 1
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "TERMINATION_FOR_CONVENIENCE",
+      "TERMINATION_RIGHT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 77,
+            "end": 279,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 224,
+            "end": 307,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 228,
+            "end": 307,
+            "text": "terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 188,
+            "end": 307,
+            "text": "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 77,
+            "end": 279,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "e219797e9f73a6c7ac7db8b4f139d4ec34b27e1b97d3c2da36c15e8707eff1a4"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 224,
+            "end": 307,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fead9d9c10ef88c003f09d82738ddb4090663ae5fd993a81d8100dad014242d0"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 228,
+            "end": 307,
+            "text": "terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "191ce9d3da001248b7bd86794bbe256ee30feab5aa260fcc56421861c171e56c"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 188,
+            "end": 307,
+            "text": "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d3091a106bb6b7f5acb10bb43412307837e508b1903fda5b0cb5ddc88d72ed41"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 77,
+            "end": 279,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides sixty (60) days' written notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninet"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "e219797e9f73a6c7ac7db8b4f139d4ec34b27e1b97d3c2da36c15e8707eff1a4"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 228,
+            "end": 307,
+            "text": "terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "191ce9d3da001248b7bd86794bbe256ee30feab5aa260fcc56421861c171e56c"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 224,
+            "end": 307,
+            "text": "may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fead9d9c10ef88c003f09d82738ddb4090663ae5fd993a81d8100dad014242d0"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 188,
+            "end": 307,
+            "text": "notice of non-renewal. Either Party may terminate this Agreement for convenience upon ninety (90) days' written notice."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d3091a106bb6b7f5acb10bb43412307837e508b1903fda5b0cb5ddc88d72ed41"
+      }
+    ],
+    "semantic_profile_hash": "355a9229babc0d6287f8dc843499194704365aa510ded60cea70aa6948d015c5",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "clause_6",
+    "source_text": "4.1 Rien dans le présent Accord n'accorde de licence ou de droit de propriété sur les Informations Confidentielles. Toutes les Informations Confidentielles sont fournies « telles quelles » sans garantie d'aucune sorte.",
+    "pipeline_clause_type": "warranty",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.844,
+    "shadow_dominance_margin": 80.2495,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 80.2495,
+        "coverage": 0.844,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 34,
+            "end": 218,
+            "text": "accorde de licence ou de droit de propriété sur les Informations Confidentielles. Toutes les Informations Confidentielles sont fournies « telles quelles » sans garantie d'aucune sorte."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 34,
+            "end": 218,
+            "text": "accorde de licence ou de droit de propriété sur les Informations Confidentielles. Toutes les Informations Confidentielles sont fournies « telles quelles » sans garantie d'aucune sorte."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "63d6a257d647d495641aa6b4880f9f3c1629a2e8402e11886862d29d4f3301da"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 90,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 34,
+            "end": 218,
+            "text": "accorde de licence ou de droit de propriété sur les Informations Confidentielles. Toutes les Informations Confidentielles sont fournies « telles quelles » sans garantie d'aucune sorte."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "63d6a257d647d495641aa6b4880f9f3c1629a2e8402e11886862d29d4f3301da"
+      }
+    ],
+    "semantic_profile_hash": "447a1849824be34017fd74abe0d43edaf6547019ee54e978588865e2acc5140f",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "clause_2",
+    "source_text": "3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables.",
+    "pipeline_clause_type": "work_product",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9395,
+    "shadow_dominance_margin": 84.3805,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 84.3805,
+        "coverage": 0.9395,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "IP_OWNERSHIP_ALLOCATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 13,
+            "end": 215,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 13,
+            "end": 215,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "da61f042914bc395cdbb640cf0637968ad399e6ee023f152bfb880228f1592ae"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 13,
+            "end": 215,
+            "text": "Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "da61f042914bc395cdbb640cf0637968ad399e6ee023f152bfb880228f1592ae"
+      }
+    ],
+    "semantic_profile_hash": "e3a7e372ad7797e402136450eba1ec711c7b61ade2b12a9cf91440f33afbdf85",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "03_SaaS_Cloud_Agreement_FR.json",
+    "reference": "clause_4",
+    "source_text": "5.1 Northwind maintiendra des mesures de sauvegarde administratives, physiques et techniques conformes aux normes SOC 2 Type II, et notifiera la Partie contractante A de tout incident de sécurité confirmé affectant les Données de la Partie contractante A dans un délai de soixante-douze (72) heures suivant sa découverte.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5171,
+    "shadow_dominance_margin": 66.6396,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 66.6396,
+        "coverage": 0.5171,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BREACH_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 132,
+            "end": 298,
+            "text": "notifiera la Partie contractante A de tout incident de sécurité confirmé affectant les Données de la Partie contractante A dans un délai de soixante-douze (72) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 132,
+            "end": 298,
+            "text": "notifiera la Partie contractante A de tout incident de sécurité confirmé affectant les Données de la Partie contractante A dans un délai de soixante-douze (72) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "98c4a273dddf8e6c173d85ca1f2ba238906122782dbb65e23760eb8579208d47"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 132,
+            "end": 298,
+            "text": "notifiera la Partie contractante A de tout incident de sécurité confirmé affectant les Données de la Partie contractante A dans un délai de soixante-douze (72) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "98c4a273dddf8e6c173d85ca1f2ba238906122782dbb65e23760eb8579208d47"
+      }
+    ],
+    "semantic_profile_hash": "841fc907e7eb330e3734b7c2a33b8c364cbb5e5d3ced136d86a9f03a07988ddf",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "04_Cybersecurity_Services_Agreement_FR.json",
+    "reference": "clause_3",
+    "source_text": "2.1 La Partie contractante B notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.659,
+    "shadow_dominance_margin": 72.5982,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 72.5982,
+        "coverage": 0.659,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BREACH_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 29,
+            "end": 201,
+            "text": "notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 29,
+            "end": 201,
+            "text": "notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "01eda64999cd6cbb6bed83b7ae5776ef499ed6d9f728d28c4d3d102eb9f49369"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 29,
+            "end": 201,
+            "text": "notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "01eda64999cd6cbb6bed83b7ae5776ef499ed6d9f728d28c4d3d102eb9f49369"
+      }
+    ],
+    "semantic_profile_hash": "cf29a50e35ffd46a7e4c5eb9df9327e99b46f768296174825289e1685d9c7f44",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "clause_1",
+    "source_text": "2.2 La Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans.",
+    "pipeline_clause_type": "change_of_control",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "employment",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.6533,
+    "shadow_dominance_margin": 72.358,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "employment",
+        "score": 72.358,
+        "coverage": 0.6533,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BASE_COMPENSATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 95,
+            "end": 274,
+            "text": "salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 95,
+            "end": 274,
+            "text": "salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "a7dcd8134c923c3304c9855caf399b180d6d4e30d015bc237ea756bc158b39ef"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 95,
+            "end": 274,
+            "text": "salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "a7dcd8134c923c3304c9855caf399b180d6d4e30d015bc237ea756bc158b39ef"
+      }
+    ],
+    "semantic_profile_hash": "a43f00ea78b1ad16aabf89cec6e96dd6df3fc080530282ff3ffadb9f4aafbb7d",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "3.1 تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "confidentiality",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.7448,
+    "shadow_dominance_margin": 75.3628,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "confidentiality",
+        "score": 75.3628,
+        "coverage": 0.7448,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "CONFIDENTIALITY_SURVIVAL"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 74,
+            "end": 290,
+            "text": "التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 74,
+            "end": 290,
+            "text": "التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7b6ae3052a1e80284f605c6f25eb18296d06fdbc128085809d253901b837d8bc"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 74,
+            "end": 290,
+            "text": "التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "7b6ae3052a1e80284f605c6f25eb18296d06fdbc128085809d253901b837d8bc"
+      }
+    ],
+    "semantic_profile_hash": "ba357dfe45255920a72fa0237683d21ccf598545381ea8b9782dd29895ed5bfa",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "3.2 تُعتبر جميع المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.96,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.872,
+    "shadow_dominance_margin": 126.784,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 126.784,
+        "coverage": 0.872,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+      "IP_OWNERSHIP_ALLOCATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true
+      },
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "285f3264a355ba486a2cf4df71c1a709d2204f14100b925c625269b7c516fa12"
+      },
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "38b71aa99f02960ce15980bf5410640f96bb275e43ed42cf1e1eec2b14a34b86"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "38b71aa99f02960ce15980bf5410640f96bb275e43ed42cf1e1eec2b14a34b86"
+      },
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 16,
+            "end": 125,
+            "text": "المخرجات \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "285f3264a355ba486a2cf4df71c1a709d2204f14100b925c625269b7c516fa12"
+      }
+    ],
+    "semantic_profile_hash": "dbbda69799276d75ce95c050ed31ecf98d0d38500e871c9a927bdd1e70eb93b6",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "clause_9",
+    "source_text": "5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.",
+    "pipeline_clause_type": "liability",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "indemnity",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8522,
+    "shadow_dominance_margin": 44.4033,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "indemnity",
+        "score": 80.8338,
+        "coverage": 0.8522,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "liability",
+        "score": 36.4305,
+        "coverage": 0.1512,
+        "independent_support": 1,
+        "core_count": 0,
+        "secondary_count": 1,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INDEMNIFICATION_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 84,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 247,
+            "end": 291,
+            "text": "الأضرار غير المباشرة أو التبعية أو العقابية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED"
+      },
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 43,
+            "end": 291,
+            "text": "تعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 84,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 247,
+            "end": 291,
+            "text": "الأضرار غير المباشرة أو التبعية أو العقابية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "014a6743bceda85498c755ffd8a1bc76c2f20e3eb18e588b916a90af283d0270"
+      },
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 43,
+            "end": 291,
+            "text": "تعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2d7c80b5b3c57623f88db2c847872bd4c24528cc69f128e287c6896941ffe62"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 43,
+            "end": 291,
+            "text": "تعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2d7c80b5b3c57623f88db2c847872bd4c24528cc69f128e287c6896941ffe62"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 84,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 247,
+            "end": 291,
+            "text": "الأضرار غير المباشرة أو التبعية أو العقابية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "014a6743bceda85498c755ffd8a1bc76c2f20e3eb18e588b916a90af283d0270"
+      }
+    ],
+    "semantic_profile_hash": "51127c397eac8c5e5824bb9bfbbb439ff987706cd2a14b578ad56918e24287cc",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "6.1 لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.",
+    "pipeline_clause_type": "liability",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "indemnity",
+    "shadow_primary_type_confidence": 0.9,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2562,
+    "shadow_dominance_margin": 55.8016,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "indemnity",
+        "score": 55.8016,
+        "coverage": 0.2562,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INDEMNIFICATION_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 209,
+            "end": 281,
+            "text": "تعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 209,
+            "end": 281,
+            "text": "تعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "073b40c19a7eea8582a29a89c29a009acdff64322f34955c77c5059426c373ce"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 209,
+            "end": 281,
+            "text": "تعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "073b40c19a7eea8582a29a89c29a009acdff64322f34955c77c5059426c373ce"
+      }
+    ],
+    "semantic_profile_hash": "453684dfd129d4752e59c4a56a8afe2f87fdd2750c839ebcb3b0852253a4c82e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "clause_3",
+    "source_text": "2.1 يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.",
+    "pipeline_clause_type": "cybersecurity",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8957,
+    "shadow_dominance_margin": 82.5396,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 82.5396,
+        "coverage": 0.8957,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BREACH_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 150,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 150,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0124a795f69ac99c13ab35803af9703f0b6f5af824bea3bae76fec7103ee6a0f"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 4,
+            "end": 150,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0124a795f69ac99c13ab35803af9703f0b6f5af824bea3bae76fec7103ee6a0f"
+      }
+    ],
+    "semantic_profile_hash": "83dbab0197ff60041610f6f49ce0ad1ea6a6c75ffbd32503ae4a509639552562",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_2",
+    "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.7285,
+    "shadow_dominance_margin": 75.6373,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 75.6373,
+        "coverage": 0.7285,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_COMPETE_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 221,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 221,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "7f052438cbc2ad9e8e40641cf5266c8cb97102a9353c61601c4e54917e10096b"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 221,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "7f052438cbc2ad9e8e40641cf5266c8cb97102a9353c61601c4e54917e10096b"
+      }
+    ],
+    "semantic_profile_hash": "3a5419cd39284b93c920a14cb01a911a635f8a5cd8b7844c42e1504b37437b05",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_3",
+    "source_text": "4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الطرف الطرف المتعاقد ب أ للعمل.",
+    "pipeline_clause_type": "employment",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.905,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.3,
+    "shadow_dominance_margin": 57.52,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 57.52,
+        "coverage": 0.3,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_SOLICITATION_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 91,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 104,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 91,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 104,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "ef0f2fa5ccecf0cf01c199c91901a361d94da110df7fffbbe13878c80726cc5a"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 91,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 104,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "ef0f2fa5ccecf0cf01c199c91901a361d94da110df7fffbbe13878c80726cc5a"
+      }
+    ],
+    "semantic_profile_hash": "9c9a87d21e2d32eaef386bdd7c3d8861822565375cd463abc3ae4b26cd748adc",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_5",
+    "source_text": "2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "employment",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.6354,
+    "shadow_dominance_margin": 71.6075,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "employment",
+        "score": 71.6075,
+        "coverage": 0.6354,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BASE_COMPENSATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 70,
+            "end": 192,
+            "text": "الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 70,
+            "end": 192,
+            "text": "الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "3e0c7e2c76deafc1e65f753adddf682725f8e8e3d301e6f15c47e6ac811c4bb5"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 70,
+            "end": 192,
+            "text": "الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "3e0c7e2c76deafc1e65f753adddf682725f8e8e3d301e6f15c47e6ac811c4bb5"
+      }
+    ],
+    "semantic_profile_hash": "e9ff0df687870cb453b918613fc325f5f791edec502a90d5b283e72517011119",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "1.1 تشغل المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الطرف الطرف المتعاقد ب أ.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "employment",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9357,
+    "shadow_dominance_margin": 83.86,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "employment",
+        "score": 83.86,
+        "coverage": 0.9357,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "EMPLOYMENT_ROLE_DUTY"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 9,
+            "end": 140,
+            "text": "المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الطرف الطرف المتعاقد ب أ."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 9,
+            "end": 140,
+            "text": "المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الطرف الطرف المتعاقد ب أ."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5e481cb0eb96b5f64c7744c5e7777bbbe438aa4a3e00bcac27593b6409f2d2df"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 9,
+            "end": 140,
+            "text": "المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الطرف الطرف المتعاقد ب أ."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "5e481cb0eb96b5f64c7744c5e7777bbbe438aa4a3e00bcac27593b6409f2d2df"
+      }
+    ],
+    "semantic_profile_hash": "32d9a468b6cc07e3a6c46ecd75cf0ebdd3b468413706757baf585c12b543f779",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "clause_4",
+    "source_text": "3.1 تُعتبر جميع نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل.",
+    "pipeline_clause_type": "payment",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "intellectual_property",
+    "shadow_primary_type_confidence": 0.96,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9227,
+    "shadow_dominance_margin": 128.9136,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "intellectual_property",
+        "score": 128.9136,
+        "coverage": 0.9227,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+      "IP_OWNERSHIP_ALLOCATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 16,
+            "end": 207,
+            "text": "نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true
+      },
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 207,
+            "text": "نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 16,
+            "end": 207,
+            "text": "نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d5a0b3256e8f4026ceb480dfbfec4c417ebc02cd56198c57435982b3ec9877eb"
+      },
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 207,
+            "text": "نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0cb469abbc1d07c894b4343a31486379af2f0c1c8530d4a214f7be417aa7dea5"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 16,
+            "end": 207,
+            "text": "نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0cb469abbc1d07c894b4343a31486379af2f0c1c8530d4a214f7be417aa7dea5"
+      },
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 16,
+            "end": 207,
+            "text": "نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d5a0b3256e8f4026ceb480dfbfec4c417ebc02cd56198c57435982b3ec9877eb"
+      }
+    ],
+    "semantic_profile_hash": "3303546d79a549c9f1b3b5dbd68973076150c47fc531a08e161b3e19a5476057",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "clause_7",
+    "source_text": "7.1 لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم.",
+    "pipeline_clause_type": "liability",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "indemnity",
+    "shadow_primary_type_confidence": 0.9,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.2586,
+    "shadow_dominance_margin": 55.8993,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "indemnity",
+        "score": 55.8993,
+        "coverage": 0.2586,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INDEMNIFICATION_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 195,
+            "end": 263,
+            "text": "تعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 195,
+            "end": 263,
+            "text": "تعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "bdb97fe7180f026065ff9128812d20596f89e35a657a90747c03c99cfeed7a11"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 195,
+            "end": 263,
+            "text": "تعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "bdb97fe7180f026065ff9128812d20596f89e35a657a90747c03c99cfeed7a11"
+      }
+    ],
+    "semantic_profile_hash": "8a1a66690bf9d81877b92d2219163edd8d299c4b9c05ac217269b7c6b831f6ba",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "clause_9",
+    "source_text": "7.1 يحافظ المستأجر على تأمين مسؤولية مدنية تجارية عامة بحدود لا تقل عن 2,000,000 دولار لكل حادثة، مع تسمية المؤجر كمؤمَّن إضافي، ويعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر.",
+    "pipeline_clause_type": "insurance",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "indemnity",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.4222,
+    "shadow_dominance_margin": 62.7733,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "indemnity",
+        "score": 62.7733,
+        "coverage": 0.4222,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INDEMNIFICATION_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 130,
+            "end": 225,
+            "text": "يعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 130,
+            "end": 225,
+            "text": "يعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "350a90145218de6e7526f01b5cba45ac684cc16101bd5a16f8a62f87de65d0f6"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INDEMNIFICATION_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "indemnity",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INDEMNIFICATION_OBLIGATION",
+            "start": 130,
+            "end": 225,
+            "text": "يعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "350a90145218de6e7526f01b5cba45ac684cc16101bd5a16f8a62f87de65d0f6"
+      }
+    ],
+    "semantic_profile_hash": "587d8f248ed6bb3a391c9f0cab8326854fe8a3dd2ce97bcbae4046846e48458f",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "clause_1",
+    "source_text": "4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.",
+    "pipeline_clause_type": "penalty",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "loan",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.8931,
+    "shadow_dominance_margin": 82.3094,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "loan",
+        "score": 82.3094,
+        "coverage": 0.8931,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "PRINCIPAL_REPAYMENT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRINCIPAL_REPAYMENT",
+        "rank": 90,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRINCIPAL_REPAYMENT",
+            "start": 17,
+            "end": 159,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي."
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PRINCIPAL_REPAYMENT",
+        "rank": 90,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRINCIPAL_REPAYMENT",
+            "start": 17,
+            "end": 159,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "be6e4a7cf7b05f5c0f70f647bcbe32c7dcc7fced74addbcdc970c08b99c6f39c"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "PRINCIPAL_REPAYMENT",
+        "rank": 90,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRINCIPAL_REPAYMENT",
+            "start": 17,
+            "end": 159,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "be6e4a7cf7b05f5c0f70f647bcbe32c7dcc7fced74addbcdc970c08b99c6f39c"
+      }
+    ],
+    "semantic_profile_hash": "e66c5f021434d5fb1cabf2d10aa8f8d4b67c286ce0443962583737974b871f8f",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "clause_3",
+    "source_text": "7.1 لمدة خمس (5) سنوات بعد تاريخ الإغلاق، يمتنع الطرف المتعاقد ب وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.7237,
+    "shadow_dominance_margin": 75.4347,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 75.4347,
+        "coverage": 0.7237,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_COMPETE_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 42,
+            "end": 152,
+            "text": "يمتنع الطرف المتعاقد ب وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 42,
+            "end": 152,
+            "text": "يمتنع الطرف المتعاقد ب وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "52d9c131e2d7970b3e0d2cc5bc307fe1e770509e4f6bd15cbdf57024a00d1393"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 42,
+            "end": 152,
+            "text": "يمتنع الطرف المتعاقد ب وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "52d9c131e2d7970b3e0d2cc5bc307fe1e770509e4f6bd15cbdf57024a00d1393"
+      }
+    ],
+    "semantic_profile_hash": "d8c3b0c1ba376d04d65c73dabedaa1570b91011176b862f28c082aa01821f265",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

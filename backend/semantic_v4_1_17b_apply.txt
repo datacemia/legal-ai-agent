@@ -1,0 +1,18 @@
+================================================================================================
+V4.1.17B CONTEXTUAL AUDIT RIGHTS APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\semantic_source_profile.py
+BACKUP : app\services\contract_agent\semantic_source_profile.py.before_v4_1_17b_20260714_201209
+SHA256 : 5a17b6a5148dc2d5b58b86c70b4373d7ab2d3cebc588e64aa26b04ebdcf98588
+ADDED  :
+- SECURITY_AUDIT_RIGHT
+- DATA_PROTECTION_AUDIT_RIGHT
+- FINANCIAL_RECORDS_AUDIT_RIGHT
+- COMPLIANCE_AUDIT_RIGHT
+INVARIANT: audit object/context selects domain; notice remains procedural
+UNKNOWN AUDIT CONTEXT: no generic primary type added; profiler may abstain
+UNTOUCHED: NOTICE_PROCEDURE, TERMINATION_NOTICE_PERIOD,
+           DATA_PROTECTION_AUDIT_COOPERATION, dominance thresholds,
+           evidence engine, publication gate, risk scoring, frontend
+AST: OK
+================================================================================================

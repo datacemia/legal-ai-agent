@@ -1,0 +1,3 @@
+./diagnose_all_blocked_multilang.py
+./run_15_contracts_multilang.py
+./run_45_contracts_multilang.py

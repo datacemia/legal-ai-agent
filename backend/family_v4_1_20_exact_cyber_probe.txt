@@ -1,0 +1,115 @@
+
+========================================================================================================================
+04_Cybersecurity_Services_Agreement.docx
+========================================================================================================================
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED:
+[
+  [
+    "Cybersecurity",
+    173
+  ],
+  [
+    "MSA",
+    123
+  ],
+  [
+    "Manufacturing",
+    16
+  ],
+  [
+    "Construction",
+    6
+  ],
+  [
+    "Outsourcing",
+    1
+  ],
+  [
+    "Corporate Resolution",
+    1
+  ]
+]
+
+========================================================================================================================
+04_Cybersecurity_Services_Agreement_FR.docx
+========================================================================================================================
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED:
+[
+  [
+    "Cybersecurity",
+    140
+  ],
+  [
+    "MSA",
+    134
+  ],
+  [
+    "Manufacturing",
+    24
+  ],
+  [
+    "Construction",
+    6
+  ],
+  [
+    "Data Processing",
+    3
+  ],
+  [
+    "Outsourcing",
+    1
+  ],
+  [
+    "Corporate Resolution",
+    1
+  ]
+]
+
+========================================================================================================================
+04_Cybersecurity_Services_Agreement_AR.docx
+========================================================================================================================
+FAMILY: Cybersecurity
+CONFIDENCE: high
+RANKED:
+[
+  [
+    "Cybersecurity",
+    141
+  ],
+  [
+    "MSA",
+    30
+  ],
+  [
+    "Construction",
+    9
+  ],
+  [
+    "Manufacturing",
+    8
+  ],
+  [
+    "Insurance",
+    6
+  ],
+  [
+    "Outsourcing",
+    1
+  ],
+  [
+    "Real Estate",
+    1
+  ],
+  [
+    "Power of Attorney",
+    1
+  ],
+  [
+    "Corporate Resolution",
+    1
+  ]
+]

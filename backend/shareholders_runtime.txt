@@ -1,0 +1,100 @@
+FILE: regression_docs\14_Shareholders_Agreement(1).docx
+CLAUSES: 8
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.", 'text': "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.", 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. BOARD COMPOSITION', 'section_path': ['1. BOARD COMPOSITION', "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor."], 'lineage': ['1. BOARD COMPOSITION'], 'children': [], 'confidence': 0.85}
+RAW CLAUSE: Board of Directors Composition governance
+NORMALIZED: Board of Directors Composition governance
+
+DEBUG FINAL INSIGHT
+TITLE: Board of Directors Composition
+TYPE: corporate_governance
+HAS_CONTEXT: None
+LEGAL: The requirement for the Investor to hold at least 5% of the Company's fully-diluted capitalization to maintain a designated board member creates a potential risk of losing influence if the Investor's stake decreases. Additionally, the mutual agreement for independent directors may lead to negotiation challenges between the founders and the Investor.
+RAW CLAUSE: Investor's Right to Purchase other
+NORMALIZED: Investor's Right to Purchase other
+
+DEBUG FINAL INSIGHT
+TITLE: Investor's Right to Purchase
+TYPE: anti_dilution_preemptive_rights
+HAS_CONTEXT: None
+LEGAL: The clause includes customary exceptions, which may limit the Investor's rights in certain scenarios, such as equity incentive plans or acquisitions. This could lead to dilution of the Investor's ownership if not carefully managed.
+RAW CLAUSE: Drag-Along Right other
+NORMALIZED: Drag-Along Right other
+
+DEBUG FINAL INSIGHT
+TITLE: Drag-Along Right
+TYPE: share_transfer_rights
+HAS_CONTEXT: None
+LEGAL: The clause creates a situation where minority shareholders have limited control over significant corporate decisions, which could lead to disputes if they feel their interests are not adequately protected.
+RAW CLAUSE: Tag-Along Right other
+NORMALIZED: Tag-Along Right other
+
+DEBUG FINAL INSIGHT
+TITLE: Tag-Along Right
+TYPE: share_transfer_rights
+HAS_CONTEXT: None
+LEGAL: The Tag-Along Right ensures that the Investor is not left behind in significant share transactions, which could dilute their ownership and influence in the Company. This clause creates a balance of power between the founders and the Investor, but it may limit the founders' flexibility in selling shares.
+RAW CLAUSE: Financial Reporting Obligations governance
+NORMALIZED: Financial Reporting Obligations governance
+
+DEBUG FINAL INSIGHT
+TITLE: Financial Reporting Obligations
+TYPE: investor_information_rights
+HAS_CONTEXT: None
+LEGAL: The requirement for both audited and unaudited financial statements provides transparency and allows the Investor to assess the Company's financial health regularly. The 3% ownership threshold ensures that only significant stakeholders receive these reports, which is a common practice in investment agreements.
+RAW CLAUSE: Shareholder Transfer Restrictions other
+NORMALIZED: Shareholder Transfer Restrictions other
+
+DEBUG FINAL INSIGHT
+TITLE: Shareholder Transfer Restrictions
+TYPE: share_transfer_rights
+HAS_CONTEXT: None
+LEGAL: The clause imposes a right of first refusal, which may limit shareholders' ability to sell their shares freely, potentially impacting their investment liquidity. This could lead to disputes if shareholders feel their rights are being unduly restricted.
+RAW CLAUSE: Investor Rights other
+NORMALIZED: Investor Rights other
+
+DEBUG FINAL INSIGHT
+TITLE: Investor Rights
+TYPE: corporate_governance
+HAS_CONTEXT: None
+LEGAL: The clause creates a level of control for the Investor over critical corporate decisions, which could limit the Company's operational flexibility. If the Company needs to make changes that require consent, it may face delays or complications in decision-making.
+RAW CLAUSE: Termination termination
+NORMALIZED: Termination termination
+
+DEBUG FINAL INSIGHT
+TITLE: Termination
+TYPE: termination
+HAS_CONTEXT: None
+LEGAL: The clause creates a potential risk of sudden termination, which may leave parties without recourse if the conditions are met unexpectedly. The reliance on a 'Qualified IPO' or a sale approved under another section could create uncertainty regarding the timing and implications of termination.
+
+CLAUSE: 3.1
+TYPE: share_transfer_rights
+FIELD: safer_alternative
+GATE: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['SEMANTIC_ARGUMENT_COVERAGE_LOSS', 'RIGHT_POLARITY_OR_SCOPE_WEAKENING']
+BEFORE: Specify that minority shareholders will receive fair consideration and adequate representations in any sale transaction.
+FINAL: Manual review required: generated text did not pass source-fidelity validation.
+
+CLAUSE: 6.1
+TYPE: corporate_governance
+FIELD: legal_insight
+GATE: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['UNKNOWN_IS_NOT_SAFE_POSITIVE_CONCLUSION']
+BEFORE: No significant legal imbalance detected.
+FINAL: Manual review required: generated text did not pass source-fidelity validation.
+
+CLAUSE: 6.1
+TYPE: corporate_governance
+FIELD: recommendation
+GATE: BLOCK_AND_REPLACE_REVALIDATED
+REASONS: ['FINAL_TEXT_SOURCE_CONTAMINATION']
+BEFORE: Check approval rights, assignment limits, audit scope, compliance obligations, subcontracting controls, and consequences of breach.
+FINAL: Manual review required: generated text did not pass source-fidelity validation.
+
+RESULTS: 8
+RECEIPTS: 22
+UNSUCCESSFUL: 0
+HASH MISMATCHES: 0
+POST GATE MUTATIONS: 0
+DONE

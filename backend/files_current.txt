@@ -1,0 +1,99 @@
+NEEDS_PARSER_FIX   16.pdf 
+NEEDS_PARSER_FIX   17.pdf 
+NEEDS_PARSER_FIX   arabie saudite.pdf 
+NEEDS_PARSER_FIX   t1.pdf 
+NEEDS_PARSER_FIX   t12.pdf 
+NEEDS_PARSER_FIX   t31.pdf 
+NEEDS_PARSER_FIX   t33.pdf 
+NEEDS_PARSER_FIX   t36.pdf 
+NEEDS_PARSER_FIX   t37.pdf 
+NEEDS_PARSER_FIX   t40.pdf 
+NEEDS_PARSER_FIX   t42.pdf 
+NEEDS_PARSER_FIX   t43.pdf 
+NEEDS_PARSER_FIX   t44.pdf 
+NEEDS_PARSER_FIX   t45.pdf 
+NEEDS_PARSER_FIX   t46.pdf 
+NEEDS_PARSER_FIX   t48.pdf 
+NEEDS_PARSER_FIX   t49.pdf 
+NEEDS_PARSER_FIX   t52.pdf 
+NEEDS_PARSER_FIX   t7.pdf 
+NEEDS_PARSER_FIX   t9.pdf 
+NO_TRANSACTIONS    t10.pdf 
+NO_TRANSACTIONS    t11.pdf 
+NO_TRANSACTIONS    t13.pdf 
+NO_TRANSACTIONS    t38.pdf 
+NO_TRANSACTIONS    t51.pdf 
+OK                 1.pdf 
+OK                 15.pdf 
+OK                 18.pdf 
+OK                 19.pdf 
+OK                 1v.pdf 
+OK                 2.pdf 
+OK                 20.pdf 
+OK                 21.pdf 
+OK                 3.pdf 
+OK                 772605810-كشف-حساب-بنكي (2).pdf 
+OK                 820869074-كشف-حساب-جديد.pdf 
+OK                 ARABE 4.pdf 
+OK                 ARABE1.pdf 
+OK                 ARABE2.pdf 
+OK                 ARABE3.pdf 
+OK                 BANCORP.pdf 
+OK                 BANK CHAABI.pdf 
+OK                 BANQUE POSTALE (2).pdf 
+OK                 BMCE.pdf 
+OK                 EGPTE.pdf 
+OK                 EJJAMI10.pdf 
+OK                 EJJAMI11.pdf 
+OK                 EJJAMI12.pdf 
+OK                 EJJAMI2.pdf 
+OK                 EJJAMI3.pdf 
+OK                 EJJAMI5.pdf 
+OK                 EJJAMI6.pdf 
+OK                 EJJAMI9.pdf 
+OK                 G3.pdf 
+OK                 ISLAMIQE.pdf 
+OK                 OMAR1.pdf 
+OK                 OMAR2.pdf 
+OK                 OMAR3.pdf 
+OK                 Relevés compte 3.pdf 
+OK                 arabe5.pdf 
+OK                 bank of america.pdf 
+OK                 banque d'epagne.pdf 
+OK                 banque populare 1 france.pdf 
+OK                 banque postale.pdf 
+OK                 belfis.pdf 
+OK                 bnb 1.pdf 
+OK                 chase.pdf 
+OK                 cic.pdf 
+OK                 city bank.pdf 
+OK                 credit mutuel.pdf 
+OK                 dakar.pdf 
+OK                 ejjami7.pdf 
+OK                 ejjami8.pdf 
+OK                 emirate.pdf 
+OK                 g1.pdf 
+OK                 g2.pdf 
+OK                 general1.pdf 
+OK                 habitat.pdf 
+OK                 llc.pdf 
+OK                 mercury.pdf 
+OK                 n26 .1.pdf 
+OK                 revolut france.pdf 
+OK                 soc general.pdf 
+OK                 t14.pdf 
+OK                 t2.pdf 
+OK                 t3 special.pdf 
+OK                 t32.pdf 
+OK                 t34.pdf 
+OK                 t35.pdf 
+OK                 t39.pdf 
+OK                 t4.pdf 
+OK                 t41.pdf 
+OK                 t47.pdf 
+OK                 t5.pdf 
+OK                 t50.pdf 
+OK                 t6.pdf 
+OK                 t8.pdf 
+OK                 well fargo.pdf 
+OK                 x.pdf 

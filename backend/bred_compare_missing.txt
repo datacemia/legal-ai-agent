@@ -1,0 +1,101 @@
+BRED TX
+BRED_POSITION_TX 2025-02-04 income 2168.34 EUR Virement Sociéte EDIMARK 0240205 page=1
+BRED_POSITION_TX 2025-02-05 expense -69.95 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -43.88 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -20.00 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -17.98 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -64.90 EUR Prelevement echeance 022 de votre page=1
+BRED_POSITION_TX 2025-02-05 expense -86.40 EUR Prélèvement SEPA 2385861 page=2
+BRED_POSITION_TX 2025-02-06 expense -23.00 EUR Carte 0000069 page=2
+BRED_POSITION_TX 2025-02-06 expense -22.00 EUR Carte 0000077 page=2
+BRED_POSITION_TX 2025-02-06 expense -3.00 EUR Frais CB paiement en trois fois i 0216832 page=2
+BRED_POSITION_TX 2025-02-07 expense -99.90 EUR Carte 8819882 page=2
+BRED_POSITION_TX 2025-02-07 expense -14.04 EUR Carte 3036180 page=2
+BRED_POSITION_TX 2025-02-07 expense -10.17 EUR Carte 9200315 page=2
+BRED_POSITION_TX 2025-02-07 income 69.95 EUR Facture CB crédit 0024113 page=2
+BRED_POSITION_TX 2025-02-07 expense -24.96 EUR Prélèvement SEPA 2388187 page=2
+BRED_POSITION_TX 2025-02-08 expense -8.12 EUR Carte 1610575 page=2
+BRED_POSITION_TX 2025-02-08 expense -5.70 EUR Carte 1810682 page=2
+BRED_POSITION_TX 2025-02-08 expense -549.99 EUR Carte 3171037 page=2
+BRED_POSITION_TX 2025-02-09 income 423.50 EUR Virement instantané reçu 0240209 page=2
+BRED_POSITION_TX 2025-02-09 expense -11.00 EUR Carte 0000137 page=2
+BRED_POSITION_TX 2025-02-09 expense -3.00 EUR Carte 0018002 page=2
+BRED_POSITION_TX 2025-02-09 income 23.00 EUR Facture CB crédit 0000018 page=2
+BRED_POSITION_TX 2025-02-09 expense -12.00 EUR Virement instantané émis e930577 page=2
+BRED_POSITION_TX 2025-02-12 income 2400.00 EUR Virement SEPA reçu 9010214 page=3
+BRED_POSITION_TX 2025-02-12 income 2500.00 EUR Virement 9935325 page=3
+BRED_POSITION_TX 2025-02-12 expense -60.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -40.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -14.82 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -11.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -11.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -10.99 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -10.80 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -9.99 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -9.25 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -4.30 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -2.26 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -2500.00 EUR Virement émis page=3
+BRED_POSITION_TX 2025-02-13 expense -3.50 EUR Carte 0013622 page=3
+BRED_POSITION_TX 2025-02-13 expense -85.00 EUR Virement instantané émis d27cb82 page=3
+BRED_POSITION_TX 2025-02-14 expense -16.00 EUR Carte 3044235 page=3
+BRED_POSITION_TX 2025-02-14 expense -10.00 EUR Carte 0000154 page=3
+BRED_POSITION_TX 2025-02-15 expense -7.95 EUR Carte 8810342 page=3
+BRED_POSITION_TX 2025-02-28 expense -14.70 EUR Carte 3057372 page=4
+BRED_POSITION_TX 2025-02-28 expense -500.00 EUR Virement SEPA émis 9011234 page=4
+BRED_POSITION_TX 2025-02-28 expense -20.00 EUR Virement instantané émis 0939de6 page=4
+BRED_POSITION_TX 2025-02-28 expense -701.00 EUR Virement instantané émis bb1ef37 page=4
+BRED_POSITION_TX 2025-02-28 expense -1.00 EUR Commission virement instantané émis bb1ef37 page=4
+BRED_POSITION_TX 2025-02-28 expense -36.96 EUR Prélèvement page=4
+BRED_POSITION_TX 2025-02-28 expense -30.18 EUR Carte 3058758 page=4
+BRED_POSITION_TX 2025-03-01 expense -57.00 EUR Carte 6413583 page=4
+
+TEXT DATE MONEY LINES
+51 04.02   Virement Sociéte EDIMARK                             0240205                                         2168,34  05.02.25
+58 05.02   Carte                                                 0025612                    69,95                            05.02.25
+61 05.02   Carte                                                 9917628                    43,88                            05.02.25
+64 05.02   Carte                                                 3036746                    20,00                            05.02.25
+67 05.02   Carte                                                 3036383                    17,98                            05.02.25
+70 05.02   Prelevement echeance 022 de votre                                               64,90                            05.02.25
+91 05.02   Prélèvement SEPA                                     2385861                    86,40                            05.02.25
+97 06.02   Carte                                                 0000069                    23,00                            06.02.25
+100 06.02   Carte                                                 0000077                    22,00                            06.02.25
+103 06.02    Frais CB paiement en trois fois  i                   0216832                     3,00                            06.02.25
+108 07.02   Carte                                                 3036180                    14,04                            07.02.25
+111 07.02   Carte                                                 9200315                    10,17                            07.02.25
+114 07.02   Facture CB crédit                                     0024113                                             69,95   07.02.25
+117 07.02   Prélèvement SEPA                                     2388187                    24,96                            07.02.25
+123 08.02   Carte                                                 1610575                     8,12                            08.02.25
+126 08.02   Carte                                                 1810682                     5,70                            08.02.25
+129 08.02   Carte                                                 3171037                  549,99                            08.02.24
+132 09.02   Virement instantané reçu                              0240209                                          423,50  09.02.24
+137 09.02   Carte                                                 0000137                    11,00                            09.02.25
+140 09.02   Carte                                                 0018002                     3,00                            09.02.25
+143 09.02   Facture CB crédit                                     0000018                                             23,00   09.02.25
+146 09.02   Virement instantané émis                              e930577                    12,00                            09.02.25
+171 12.02   Virement SEPA reçu                                   9010214                                           2.400,00  12.02.25
+175 12.02   Virement                                             9935325                                           2.500,00   30.01.25
+177 12.02   Carte                                                 1197324                    60,00                            12.02.25
+180 12.02   Carte                                                 8819092                    40,00                            12.02.25
+183 12.02   Carte                                                 3040797                    14,82                            12.02.25
+186 12.02   Carte                                                 0000120                    11,00                            12.02.25
+189 12.02   Carte                                                 1813642                    11,00                            12.02.25
+192 12.02   Carte                                                 1011689                    10,99                            12.02.25
+195 12.02   Carte                                                 3310462                    10,80                            12.02.25
+198 12.02   Carte                                                 1007406                     9,99                            12.02.25
+201 12.02   Carte                                                 3040764                     9,25                            12.02.25
+204 12.02   Carte                                                 1814152                     4,30                            12.02.25
+207 12.02   Carte                                                 3039169                     2,26                            12.02.25
+210 12.02   Virement SEPA émis                                   9001179                 2.500,00                            12.02.25
+214 13.02   Carte                                                 0013622                     3,50                            13.02.25
+217 13.02   Virement instantané émis                              d27cb82                    85,00                            13.02.25
+223 14.02   Carte                                                 3044235                    16,00                            14.02.25
+226 14.02   Carte                                                 0000154                    10,00                            14.02.25
+229 15.02   Carte                                                 8810342                     7,95                            15.02.25
+251 28.02   Carte                                                 3057372                    14,70                            28.02.25
+254 28.02   Virement SEPA émis                                   9011234                  500,00                            28.02.25
+258 28.02   Virement instantané émis                              0939de6                    20,00                            28.02.25
+264 28.02   Virement instantané émis                                 bb1ef37                  701,00                            28.02.25
+269 28.02   Commission virement instantané émis                    bb1ef37                     1,00                            28.02.25 28.02   Prélèvement SEPA                                     2400770                    36,96                            28.02.25
+275 28.02   Carte                                                 3058758                    30,18                            28.02.25
+278 01.03   Carte                                                 6413583                    57,00                            01.03.25

@@ -1,0 +1,468 @@
+FINANCE_TEXT_PDF_EXTRACTED 42246
+PDF_LINES_DEBUG {'line_count': 841, 'non_empty_line_count': 464, 'max_line_len': 204, 'first_20': ['ﺣﺴﺎﺏ ﻛﺸﻒ', '', '          Statement of Account', '', '', 'Account Information                                                  [SA] Account Information', '', 'Name                             [SA] Name   Address                         [SA] Address', '', '           MOHD GHAZI MOHD MOHIUDDIN                            King Khalid, 6915, AL KHUBAR, Eastern, 34427', '', '', 'Statement Information                                              [SA] Statement Information', '', 'Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ      Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ', '', '  From     2024-02-04     To     2024-04-29', '                                                    11100336445010                       Current Account', '  From     1445-07-24     To     1445-10-20', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+1: ﺣﺴﺎﺏ ﻛﺸﻒ
+3: Statement of Account
+6: Account Information [SA] Account Information
+8: Name [SA] Name Address [SA] Address
+10: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+13: Statement Information [SA] Statement Information
+15: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+17: From 2024-02-04 To 2024-04-29
+18: 11100336445010 Current Account
+19: From 1445-07-24 To 1445-10-20
+22: [SA]
+23: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+24: Amount
+26: POS purchase - Mada Pay ﻣﻐﻼﻱMUGHLAIﻣﻄﻌﻢ RESTURA
+27: 29/04/2024 CITY:JEDH682016JED KHOBAR MADA ***1312 VAT CHRG: -2.00 SAR 258.10 SAR
+28: 0.00 Charges: 0.00 The National Commercial Bank
+30: Outgoing internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+31: 28/04/2024 -500.00 SAR 260.10 SAR
+32: 06971974000100
+34: Cash withdrawal - Local ATM CITY:KHOBAR INMA BANK
+35: 28/04/2024 KHOBAR 11432328 11:21:03 1312*** ﻣﺪﻯKHOBAR -500.00 SAR 760.10 SAR
+36: 11:21:03
+37: POS purchase - Mada Pay ﺍﻟﺦGULFﻣﺸﻮﻳﺎﺕ ﻣﻄﻌﻢ GRILL REST
+38: 27/04/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -11.50 SAR 1,260.10 SAR
+39: 0.00 Charges: 0.00 Arab National Bank
+40: POS Purchase Mada Atheer ﻋﺒﺪﺍﻟﺮﺣﻢABDULRAHMANﻣﺆﺳﺴﺔ
+41: 25/04/2024 M A CITY:0000682016SAM DAMMAM MADA ***1312 VAT -562.00 SAR 1,271.60 SAR
+42: CHRG: 0.00 Charges: 0.00 Riyad Bank
+44: Outgoing internal transfer PA:Transfer to family and friends
+45: 24/04/2024 -200.00 SAR 1,833.60 SAR
+46: 11100367809706
+49: 24/04/2024 Deposit from credit card 2 62001012920703 1,101.00 SAR 2,033.60 SAR
+52: 24/04/2024 Credit card payment CARD:524197******7682 PAYMENT -1,562.29 SAR 932.60 SAR
+55: 24/04/2024 Deposit from credit card 2 62001012920703 2,000.00 SAR 2,494.89 SAR
+58: 24/04/2024 Credit card payment CARD:524197******7682 PAYMENT -2,100.00 SAR 494.89 SAR
+61: 24/04/2024 Deposit from credit card 2 62001012920703 2,000.00 SAR 2,594.89 SAR
+64: 24/04/2024 Credit card payment CARD:524197******7682 PAYMENT -2,000.00 SAR 594.89 SAR
+67: 24/04/2024 Deposit from credit card 2 62001012920703 2,000.00 SAR 2,594.89 SAR
+70: 24/04/2024 Credit card payment CARD:524197******7682 PAYMENT -1,500.00 SAR 594.89 SAR
+73: 24/04/2024 Credit card payment CARD:524197******7682 PAYMENT -500.00 SAR 2,094.89 SAR
+76: 23/04/2024 Deposit from credit card 2 62001012920703 399.00 SAR 2,594.89 SAR
+81: Page 1
+85: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+87: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+91: The Saudi National Bank | [SA] The Saudi National Bank
+94: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+98: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+99: ﺣﺴﺎﺏ ﻛﺸﻒ
+101: Statement of Account
+104: Account Information [SA] Account Information
+106: Name [SA] Name Address [SA] Address
+108: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+111: Statement Information [SA] Statement Information
+113: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+115: From 2024-02-04 To 2024-04-29
+116: 11100336445010 Current Account
+117: From 1445-07-24 To 1445-10-20
+120: [SA]
+121: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+122: Amount
+125: 23/04/2024 Credit card payment CARD:524197******7682 PAYMENT -1,400.00 SAR 2,195.89 SAR
+127: POS Purchase Mada Atheer ﻟﻠﺬﻩMALABARﻣﻠﺒﺎﺭ ﺷﺮﻛﺔ GOLD
+128: 03/04/2024 &D CITY:0000682016SAM KHOBAR MADA ***1312 VAT -5,800.00 SAR 3,595.89 SAR
+129: CHRG: 0.00 Charges: 0.00 Riyad Bank
+130: POS Purchase Mada Atheer ﻣﺎﺭﻛﺖLULUﻫﻴﺒﺮ ﻟﻮﻟﻮ HYPER AL K
+131: 03/04/2024 CITY:JEDH682016JED KHOBAR MADA ***1312 VAT CHRG: -65.85 SAR 9,395.89 SAR
+132: 0.00 Charges: 0.00 The National Commercial Bank
+133: POS Purchase Mada Atheer ﺍﻟﺲAmazonﺍﻣﺎﺯﻭﻥ ﺷﺮﻛﺔ Saudi
+134: 03/04/2024 Ar CITY:0000682016SAM KHOBAR MADA ***1312 VAT -46.00 SAR 9,461.74 SAR
+135: CHRG: 0.00 Charges: 0.00 Al Rajhi Bank
+136: Local Internet purchase SAIB-VIRGIN CITY:0000682016SAM
+137: 03/04/2024 Riyadh MADA ***1312 VAT CHRG: 0.00 Charges: -1,500.00 SAR 9,507.74 SAR
+138: 0.00 The Saudi Investment Bank Saudi Investment Bank
+140: Incoming internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+141: 03/04/2024 1,000.00 SAR 11,007.74 SAR
+142: 11100443171205 DEP ID:2537784056
+144: Cash deposit - SNB ATM CITY:KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+145: 03/04/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 KHOBAR 5,000.00 SAR 10,007.74 SAR
+146: 21:21:40 The National Commercial Bank
+147: Cash deposit - SNB ATM CITY:KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+148: 03/04/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 KHOBAR 4,500.00 SAR 5,007.74 SAR
+149: 21:20:20 The National Commercial Bank
+151: 03/04/2024 Deposit from credit card 2 62001012920703 480.99 SAR 507.74 SAR
+153: Cash withdrawal - Local ATM CITY:AL-JUBEAL AL RAJHI BANK
+154: 01/04/2024 AL-JUBEA 11588847 00:28:08 1312*** ﻣﺪﻯAL-JUBEAL -3,500.00 SAR 26.75 SAR
+155: 00:28:08 Rajhi Bank
+156: Cash withdrawal - Local ATM CITY:AL-JUBEAL AL RAJHI BANK
+157: 01/04/2024 AL-JUBEA 11588847 00:27:01 1312*** ﻣﺪﻯAL-JUBEAL -500.00 SAR 3,526.75 SAR
+158: 00:27:01 Rajhi Bank
+159: Cash withdrawal - Local ATM CITY:AL-JUBEAL AL RAJHI BANK
+160: 01/04/2024 AL-JUBEA 11588847 17:14:33 1312*** ﻣﺪﻯAL-JUBEAL -5,000.00 SAR 4,026.75 SAR
+161: 17:14:33 Rajhi Bank
+163: 01/04/2024 Deposit from credit card 2 62001012920703 2,500.00 SAR 9,026.75 SAR
+166: 01/04/2024 Credit card payment CARD:524197******7682 PAYMENT -6,000.00 SAR 6,526.75 SAR
+169: 01/04/2024 Deposit from credit card 2 62001012920703 5,000.00 SAR 12,526.75 SAR
+172: 01/04/2024 Credit card payment CARD:524197******7682 PAYMENT -5,000.00 SAR 7,526.75 SAR
+177: Page 2
+181: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+183: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+187: The Saudi National Bank | [SA] The Saudi National Bank
+190: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+194: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+195: ﺣﺴﺎﺏ ﻛﺸﻒ
+197: Statement of Account
+200: Account Information [SA] Account Information
+202: Name [SA] Name Address [SA] Address
+204: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+207: Statement Information [SA] Statement Information
+209: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+211: From 2024-02-04 To 2024-04-29
+212: 11100336445010 Current Account
+213: From 1445-07-24 To 1445-10-20
+216: [SA]
+217: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+218: Amount
+220: Cash Withdrawal SAR - SNB ATM CITY:DAMMAM 11588850
+221: 31/03/2024 04:40:06 1312*** ﻣﺪﻯDAMMAM 04:40:06 The National -5,000.00 SAR 12,526.75 SAR
+222: Commercial Bank
+224: 30/03/2024 Credit card payment CARD:524197******7682 PAYMENT -1,000.00 SAR 17,526.75 SAR
+227: Incoming internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+228: 30/03/2024 17,500.00 SAR 18,526.75 SAR
+229: 60600000536609 DEP ID:2537784056 Loan
+231: Incoming internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+232: 28/03/2024 1,000.00 SAR 1,026.75 SAR
+233: 11100346048207 DEP ID:2537784056
+236: 28/03/2024 SADAD Payment 090-Residents Services-2372828497 -700.00 SAR 26.75 SAR
+238: Incoming IPS local transfer CITY:Jeddah
+239: 27/03/2024 20240327SASABBSABB2BMOB12241611595 *****SAUDI 700.00 SAR 726.75 SAR
+240: ARABIA HAMDAN AASIM SASABB AASIM NAYEEMUDDIN
+241: HAMDAN
+243: 26/03/2024 VAT Charge CITY:Digital Channel CITY:Digital Channel -0.15 SAR 26.75 SAR
+246: 26/03/2024 Transfer Fees CITY:Digital Channel -1.00 SAR 26.90 SAR
+248: Outgoing IPS local transfer CITY:Digital Channel ﻣﺼﺎﺭﻳﻒ
+249: 26/03/2024 ﺍﻟﺴﻔﺮTravel Expenses -5,000.00 SAR 27.90 SAR
+250: 20240326SANCBKNCBK2B82812144462319 Charges:
+251: 1.00 20240326SANCBKNCBK2B8281214446 SAUDI ARABIA
+252: NIJAS SIYAD
+253: Cash deposit - SNB ATM CITY:KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+254: 26/03/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 KHOBAR 5,000.00 SAR 5,027.90 SAR
+255: 21:22:46 The National Commercial Bank
+256: Cash Withdrawal SAR - SNB ATM CITY:KHOBAR 11588850
+257: 26/03/2024 16:55:59 1312*** ﻣﺪﻯKHOBAR 16:55:59 The National -300.00 SAR 27.90 SAR
+258: Commercial Bank
+259: Cash Withdrawal SAR - SNB ATM CITY:KHOBAR 11588850
+260: 26/03/2024 16:52:23 1312*** ﻣﺪﻯKHOBAR 16:52:23 The National -200.00 SAR 327.90 SAR
+261: Commercial Bank
+263: 26/03/2024 SADAD Payment 090-Residents Services-2372828497 -4,720.00 SAR 527.90 SAR
+266: 26/03/2024 Deposit from credit card 2 62001012920703 1,600.00 SAR 5,247.90 SAR
+268: Cash deposit - SNB ATM CITY:KHOBAR ﺩﺭﺍﺳﻴﺔMOHDﻣﺼﺎﺭﻳﻒ
+269: 26/03/2024 GHAZI 06010000111003364450 KHOBAR 16:40:43 3,200.00 SAR 3,647.90 SAR
+270: The National Commercial Bank
+274: Page 3
+278: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+280: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+284: The Saudi National Bank | [SA] The Saudi National Bank
+287: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+291: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+292: ﺣﺴﺎﺏ ﻛﺸﻒ
+294: Statement of Account
+297: Account Information [SA] Account Information
+299: Name [SA] Name Address [SA] Address
+301: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+304: Statement Information [SA] Statement Information
+306: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+308: From 2024-02-04 To 2024-04-29
+309: 11100336445010 Current Account
+310: From 1445-07-24 To 1445-10-20
+313: [SA]
+314: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+315: Amount
+318: 26/03/2024 Credit card payment CARD:524197******7682 PAYMENT -1,600.00 SAR 447.90 SAR
+321: 26/03/2024 Deposit from credit card 2 62001012920703 2,000.00 SAR 2,047.90 SAR
+324: 26/03/2024 VAT Charge CITY:Digital Channel CITY:Digital Channel -0.15 SAR 47.90 SAR
+327: 26/03/2024 Transfer Fees CITY:Digital Channel -1.00 SAR 48.05 SAR
+329: Outgoing IPS local transfer CITY:Digital Channel ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+330: 26/03/2024 ﻭﺍﻻﺻﺪﻗﺎﺀTransferﺍﻻﻫﻞ to Family or Friends -3,000.00 SAR 49.05 SAR
+331: 20240326SANCBKNCBK2B82811438836150 Charges:
+332: 1.00 20240326SANCBKNCBK2B8281143883 SAUDI ARABIA
+333: NAYEEM MOHAMMED HAMEED
+334: POS Purchase Mada Atheer ﺍﻟﺬﻫﺒﻲGOLDENﻛﺮﻙ TEA
+335: 24/03/2024 CITY:JEDH682016JED KHOBAR MADA ***1312 VAT CHRG: -3.50 SAR 3,049.05 SAR
+336: 0.00 Charges: 0.00 The National Commercial Bank
+337: POS Purchase Mada Atheer ﺍﻻﺱWORLDﻋﺎﻟﻢ ﺷﺮﻛﺔ PRICE
+338: 24/03/2024 TRA CITY:0000682016SAM KHOBAR MADA ***1312 VAT -57.25 SAR 3,052.55 SAR
+339: CHRG: 0.00 Charges: 0.00 Bank AlBilad
+341: 24/03/2024 Credit card payment CARD:524197******7682 PAYMENT -2,000.00 SAR 3,109.80 SAR
+344: Incoming internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+345: 24/03/2024 1,600.00 SAR 5,109.80 SAR
+346: 11100443171205 DEP ID:2537784056
+348: Cash deposit - SNB ATM CITY:KHOBAR ﺩﺭﺍﺳﻴﺔMOHDﻣﺼﺎﺭﻳﻒ
+349: 24/03/2024 GHAZI 06010000111003364450 KHOBAR 11:13:46 2,500.00 SAR 3,509.80 SAR
+350: The National Commercial Bank
+352: 22/03/2024 Deposit from credit card 2 62001012920703 997.00 SAR 1,009.80 SAR
+355: 22/03/2024 VAT Charge -0.15 SAR 12.80 SAR
+358: 22/03/2024 QPAY INTL transfer fee -1.00 SAR 12.95 SAR
+361: QPAY outgoing INTL transfer ﻭﺍﻻﺻﺪﻗﺎﺀREF:ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+362: 22/03/2024 -10,000.00 SAR 13.95 SAR
+363: QPAY828240826788 218040.09 INR
+366: 22/03/2024 VAT Charge CITY:Digital Channel CITY:Digital Channel -0.15 SAR 10,013.95 SAR
+369: 22/03/2024 Transfer Fees CITY:Digital Channel -1.00 SAR 10,014.10 SAR
+372: Page 4
+376: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+378: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+382: The Saudi National Bank | [SA] The Saudi National Bank
+385: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+389: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+390: ﺣﺴﺎﺏ ﻛﺸﻒ
+392: Statement of Account
+395: Account Information [SA] Account Information
+397: Name [SA] Name Address [SA] Address
+399: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+402: Statement Information [SA] Statement Information
+404: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+406: From 2024-02-04 To 2024-04-29
+407: 11100336445010 Current Account
+408: From 1445-07-24 To 1445-10-20
+411: [SA]
+412: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+413: Amount
+415: Outgoing IPS local transfer CITY:Digital Channel ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+416: 22/03/2024 ﻭﺍﻻﺻﺪﻗﺎﺀTransferﺍﻻﻫﻞ to Family or Friends -3,000.00 SAR 10,015.10 SAR
+417: 20240322SANCBKNCBK2B82811901907362 Charges:
+418: 1.00 20240322SANCBKNCBK2B8281190190 SAUDI ARABIA
+419: NAYEEM MOHAMMED HAMEED
+421: Outgoing internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+422: 22/03/2024 -7,000.00 SAR 13,015.10 SAR
+423: 02200001194006
+425: Incoming internal transfer 11100367809706 ﺗﺸﻐﻴﻞ ﻣﺼﺎﺭﻳﻒ
+426: 22/03/2024 5,000.00 SAR 20,015.10 SAR
+427: DEP ID:2537784056 cmtn 50000
+429: Incoming internal transfer 11100367809706 ﺗﺸﻐﻴﻞ ﻣﺼﺎﺭﻳﻒ
+430: 22/03/2024 5,000.00 SAR 15,015.10 SAR
+431: DEP ID:2537784056 cmtn 50000
+434: 20/03/2024 Deposit from credit card 2 62001012920703 3,200.00 SAR 10,015.10 SAR
+437: 17/03/2024 Deposit from credit card 2 62001012920703 1,900.00 SAR 6,815.10 SAR
+439: POS Purchase Mada Atheer ﻣﺸﻮﺍZAWEAHﺯﺍﻭﻳﺔ ﺷﺮﻛﺔ
+440: 17/03/2024 MSHWAR C CITY:0000682016SAM KHOBAR MADA ***1312 -4.60 SAR 4,915.10 SAR
+441: VAT CHRG: 0.00 Charges: 0.00 Al Rajhi Bank
+442: POS Purchase Mada Atheer ﻣﺸﻮﺍZAWEAHﺯﺍﻭﻳﺔ ﺷﺮﻛﺔ
+443: 17/03/2024 MSHWAR C CITY:0000682016SAM KHOBAR MADA ***1312 -68.10 SAR 4,919.70 SAR
+444: VAT CHRG: 0.00 Charges: 0.00 Al Rajhi Bank
+445: POS Purchase Mada Atheer ﺍﻻﺳﻊWorldﻋﺎﻟﻢ ﺷﺮﻛﺔ Trade Pri
+446: 17/03/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -17.25 SAR 4,987.80 SAR
+447: 0.00 Charges: 0.00 Bank AlBilad
+449: 16/03/2024 Deposit from credit card 2 62001012920703 4,500.00 SAR 5,005.05 SAR
+452: 16/03/2024 Deposit from credit card 2 62001012920703 500.00 SAR 505.05 SAR
+455: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -400.00 SAR 5.05 SAR
+458: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -1,500.00 SAR 405.05 SAR
+460: Cash deposit - SNB ATM CITY:KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+461: 15/03/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 KHOBAR 1,700.00 SAR 1,905.05 SAR
+462: 23:43:16 The National Commercial Bank
+464: 15/03/2024 Deposit from credit card 2 62001012920703 100.00 SAR 205.05 SAR
+467: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -1,100.00 SAR 105.05 SAR
+470: Page 5
+474: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+476: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+480: The Saudi National Bank | [SA] The Saudi National Bank
+483: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+487: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+488: ﺣﺴﺎﺏ ﻛﺸﻒ
+490: Statement of Account
+493: Account Information [SA] Account Information
+495: Name [SA] Name Address [SA] Address
+497: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+500: Statement Information [SA] Statement Information
+502: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+504: From 2024-02-04 To 2024-04-29
+505: 11100336445010 Current Account
+506: From 1445-07-24 To 1445-10-20
+509: [SA]
+510: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+511: Amount
+514: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -850.00 SAR 1,205.05 SAR
+517: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -900.00 SAR 2,055.05 SAR
+520: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -600.00 SAR 2,955.05 SAR
+523: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -450.00 SAR 3,555.05 SAR
+526: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -500.00 SAR 4,005.05 SAR
+529: 15/03/2024 Credit card payment CARD:524197******7682 PAYMENT -1,750.00 SAR 4,505.05 SAR
+532: 14/03/2024 Credit card payment CARD:524197******7682 PAYMENT -6,000.00 SAR 6,255.05 SAR
+534: Cash deposit - SNB ATM CITY:KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+535: 14/03/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 KHOBAR 100.00 SAR 12,255.05 SAR
+536: 16:18:39 The National Commercial Bank
+537: Cash deposit - SNB ATM CITY:KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+538: 14/03/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 KHOBAR 11,500.00 SAR 12,155.05 SAR
+539: 16:16:05 The National Commercial Bank
+540: POS Purchase Mada Atheer ﺍﻟﺲAmazonﺍﻣﺎﺯﻭﻥ ﺷﺮﻛﺔ Saudi
+541: 13/03/2024 Ar CITY:0000682016SAM KHOBAR MADA ***1312 VAT -132.25 SAR 655.05 SAR
+542: CHRG: 0.00 Charges: 0.00 Al Rajhi Bank
+543: POS Purchase Mada Atheer ﺍﻟﺲAmazonﺍﻣﺎﺯﻭﻥ ﺷﺮﻛﺔ Saudi
+544: 13/03/2024 Ar CITY:0000682016SAM KHOBAR MADA ***1312 VAT -80.50 SAR 787.30 SAR
+545: CHRG: 0.00 Charges: 0.00 Al Rajhi Bank
+546: POS Purchase Mada Atheer ﺍﻻﻭﻟﻰCompanyﻫﺎﻝ ﺷﺮﻛﺔ HAL AL-
+547: 13/03/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -100.00 SAR 867.80 SAR
+548: 0.00 Charges: 0.00 Al Rajhi Bank
+549: POS Purchase Mada Atheer ﺍﻟﺰﻋﻴﻢALﺭﻛﻦ ﻣﺤﻞ ZAEEM
+550: 13/03/2024 CORNER CITY:JEDH682016JED KHOBAR MADA ***1312 VAT -12.00 SAR 967.80 SAR
+551: CHRG: 0.00 Charges: 0.00 The National
+552: Commercial Bank
+553: POS Purchase Mada Atheer ﺍﻟﺖ101ﺇﺱS101ﺃﺳﻮﺍﻕ TAMIMI
+554: 12/03/2024 MAR CITY:JEDH682016JED KHOBAR MADA ***1312 VAT -18.40 SAR 979.80 SAR
+555: CHRG: 0.00 Charges: 0.00 The National
+556: Commercial Bank Saudi Hollandi Bank
+557: POS Purchase Mada Atheer ﻣﺎﺭﻙNESTOﻫﺎﻳﺒﺮ ﻧﺴﺘﻮ HYPER
+558: 10/03/2024 MAR CITY:0000682016SAM KHOBAR MADA ***1312 VAT -147.57 SAR 998.20 SAR
+559: CHRG: 0.00 Charges: 0.00 Saudi British Bank
+561: POS Purchase Mada Atheer ﺍﻟﺶAlrawaqﺍﻟﺮﻭﺍﻕ ﻣﻄﻌﻢ Alshabi
+562: 10/03/2024 -25.00 SAR 1,145.77 SAR
+563: CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG:
+565: Page 6
+569: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+571: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+575: The Saudi National Bank | [SA] The Saudi National Bank
+578: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+582: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+583: ﺣﺴﺎﺏ ﻛﺸﻒ
+585: Statement of Account
+588: Account Information [SA] Account Information
+590: Name [SA] Name Address [SA] Address
+592: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+595: Statement Information [SA] Statement Information
+597: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+599: From 2024-02-04 To 2024-04-29
+600: 11100336445010 Current Account
+601: From 1445-07-24 To 1445-10-20
+604: [SA]
+605: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+606: Amount
+609: 0.00 Charges: 0.00 Al Rajhi Bank
+612: Outgoing internal transfer ﻭﺍﻻﺻﺪﻗﺎﺀ ﺍﻻﻫﻞ ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+613: 07/03/2024 -126.00 SAR 1,170.77 SAR
+614: 05400000330010
+617: 07/03/2024 VAT Charge CITY:Digital Channel CITY:Digital Channel -0.15 SAR 1,296.77 SAR
+620: 07/03/2024 Transfer Fees CITY:Digital Channel -1.00 SAR 1,296.92 SAR
+622: Outgoing IPS local transfer CITY:Digital Channel ﺍﻟﻰ ﺗﺤﻮﻳﻞ
+623: 07/03/2024 ﻭﺍﻻﺻﺪﻗﺎﺀTransferﺍﻻﻫﻞ to Family or Friends -1,272.00 SAR 1,297.92 SAR
+624: 20240307SANCBKNCBK2B82811023294125 Charges:
+625: 1.00 20240307SANCBKNCBK2B8281102329 SAUDI ARABIA
+626: MOHAMMED ABDULBASITH
+627: Cash withdrawal - Local ATM CITY:KHOBAR INMA BANK
+628: 05/03/2024 KHOBAR 11432328 10:07:49 1312*** ﻣﺪﻯKHOBAR -400.00 SAR 2,569.92 SAR
+629: 10:07:49
+630: POS purchase ﻟﺘﺄareejalkhaleejnﺍﻟﺨﻠﻴﺞ ﺍﺭﻳﺞ
+631: 04/03/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -1,000.00 SAR 2,969.92 SAR
+632: 0.00 Charges: 0.00 Riyad Bank
+633: POS Purchase Mada Atheer ﺍﻟﺶAlrawaqﺍﻟﺮﻭﺍﻕ ﻣﻄﻌﻢ Alshabi
+634: 04/03/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -15.00 SAR 3,969.92 SAR
+635: 0.00 Charges: 0.00 Al Rajhi Bank
+636: POS Purchase Mada Atheer ﺍﻟﺬﻫﺒﻲGOLDENﻛﺮﻙ TEA
+637: 03/03/2024 CITY:JEDH682016JED KHOBAR MADA ***1312 VAT CHRG: -6.00 SAR 3,984.92 SAR
+638: 0.00 Charges: 0.00 The National Commercial Bank
+639: POS Purchase Mada Atheer ﺍﻟﺴﻌﻮﺩﻳﺔSaudiﺍﻣﺎﺯﻭﻥ Amazon
+640: 01/03/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -74.75 SAR 3,990.92 SAR
+641: 0.00 Charges: 0.00 Al Rajhi Bank
+643: 01/03/2024 Deposit from credit card 2 62001012920703 4,000.00 SAR 4,065.67 SAR
+645: POS Purchase Mada Atheer ﺍﻟﺸﻪBoofiaﺩﻭﻟﻪ ﺑﻮﻓﻴﺔ Dawlah A
+646: 27/02/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -10.00 SAR 65.67 SAR
+647: 0.00 Charges: 0.00 Riyad Bank
+648: Local Internet purchase SAIB-VIRGIN CITY:0000682016SAM
+649: 25/02/2024 Riyadh MADA ***1312 VAT CHRG: 0.00 Charges: -1,500.00 SAR 75.67 SAR
+650: 0.00 The Saudi Investment Bank Saudi Investment Bank
+652: 25/02/2024 Deposit from credit card 2 62001012920703 1,000.00 SAR 1,575.67 SAR
+654: POS Purchase Mada Atheer ﺍﻟﺒﻴﻚalbaik
+655: 24/02/2024 CITY:0000682016SAM BURAIDAH MADA ***1312 VAT -8.00 SAR 575.67 SAR
+656: CHRG: 0.00 Charges: 0.00 Bank AlBilad
+657: POS Purchase Mada Atheer ﺍﻟﺒﻴﻚalbaik
+658: 24/02/2024 CITY:0000682016SAM BURAIDAH MADA ***1312 VAT -83.00 SAR 583.67 SAR
+659: CHRG: 0.00 Charges: 0.00 Bank AlBilad
+661: Page 7
+665: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+667: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+671: The Saudi National Bank | [SA] The Saudi National Bank
+674: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+678: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+679: ﺣﺴﺎﺏ ﻛﺸﻒ
+681: Statement of Account
+684: Account Information [SA] Account Information
+686: Name [SA] Name Address [SA] Address
+688: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+691: Statement Information [SA] Statement Information
+693: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+695: From 2024-02-04 To 2024-04-29
+696: 11100336445010 Current Account
+697: From 1445-07-24 To 1445-10-20
+700: [SA]
+701: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+702: Amount
+704: POS Purchase Mada Atheer ﺍﻟﺒﺨﺎKAYANﻛﻴﺎﻥ ﻣﻄﻌﻢ BUKHARI R
+705: 22/02/2024 CITY:JEDH682016JED MAKKAH MADA ***1312 VAT CHRG: -48.00 SAR 666.67 SAR
+706: 0.00 Charges: 0.00 The National Commercial Bank
+707: POS Purchase Mada Atheer ﺩﺭﺏDARBﺷﺮﻛﺔ CO
+708: 22/02/2024 CITY:0000682016SAM MAKKAH MADA ***1312 VAT CHRG: -136.00 SAR 714.67 SAR
+709: 0.00 Charges: 0.00 Al Rajhi Bank The National
+710: Commercial Bank
+711: POS Purchase Mada Atheer ﺫﺍﺉHIKAYAﺣﻜﺎﻳﺔ ﻣﻄﺎﻋﻢ THAEQH
+712: 22/02/2024 R CITY:0000682016SAM TAIF MADA ***1312 VAT CHRG: -27.00 SAR 850.67 SAR
+713: 0.00 Charges: 0.00 Al Rajhi Bank
+714: POS Purchase Mada Atheer ﺍﻟﻘﺮﺵmoslimﻣﺴﻢ ﻣﺆﺳﺴﺔ al
+715: 22/02/2024 quras CITY:0000682016SAM TAIF MADA ***1312 VAT -130.00 SAR 877.67 SAR
+716: CHRG: 0.00 Charges: 0.00 Al Rajhi Bank
+717: Cash Withdrawal SAR - SNB ATM CITY:DAMMAM 11588850
+718: 20/02/2024 19:53:43 1312*** ﻣﺪﻯDAMMAM 19:53:43 The National -1,500.00 SAR 1,007.67 SAR
+719: Commercial Bank
+721: 20/02/2024 Deposit from credit card 2 62001012920703 2,500.00 SAR 2,507.67 SAR
+723: POS Purchase Mada Atheer ﺍﻟﺴﺮﻋﺔTHREEﻓﻦ ﻣﺆﺳﺴﺔ ART
+724: 20/02/2024 SPEED CITY:JEDH682016JED KHOBAR MADA ***1312 VAT -6.50 SAR 7.67 SAR
+725: CHRG: 0.00 Charges: 0.00 The National
+726: Commercial Bank
+727: POS Purchase Mada Atheer ﻋﺒﺪMUJTABAﻣﺠﺘﺒﻰ ﻣﺤﻼﺕ GAZ
+728: 15/02/2024 CITY:0000682016SAM KHOBAR MADA ***1312 VAT CHRG: -22.00 SAR 14.17 SAR
+729: 0.00 Charges: 0.00 Al Rajhi Bank
+731: 13/02/2024 VAT Charge CITY:Digital Channel CITY:Digital Channel -0.08 SAR 36.17 SAR
+734: 13/02/2024 Transfer Fees CITY:Digital Channel -0.50 SAR 36.25 SAR
+736: Outgoing IPS local transfer CITY:Digital Channel ﻣﺼﺎﺭﻳﻒ
+737: 13/02/2024 ﺍﻟﺴﻔﺮTravel Expenses -500.00 SAR 36.75 SAR
+738: 20240213SANCBKNCBK2B82810616208724 Charges:
+739: 0.50 20240213SANCBKNCBK2B8281061620 SAUDI ARABIA
+740: MOHD QAISAR ALAM
+742: 12/02/2024 Deposit from credit card 2 62001012920703 500.00 SAR 536.75 SAR
+744: Cash withdrawal - Local ATM CITY:DAMMAM AL RAJHI BANK
+745: 08/02/2024 DAMMAM 11588847 00:53:27 1312*** ﻣﺪﻯDAMMAM -400.00 SAR 36.75 SAR
+746: 00:53:27 Rajhi Bank
+747: POS Purchase Mada Atheer ﺍﻟﻤﺖRENEWABLEﺍﻟﻨﻔﻂ ﺷﺮﻛﺔ OIL
+748: 08/02/2024 C CITY:0000682016SAM DAMMAM MADA ***1312 VAT -100.00 SAR 436.75 SAR
+749: CHRG: 0.00 Charges: 0.00 Alinma Bank
+751: 08/02/2024 Deposit from credit card 2 62001012920703 500.00 SAR 536.75 SAR
+755: Page 8
+759: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+761: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+765: The Saudi National Bank | [SA] The Saudi National Bank
+768: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+772: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com
+773: ﺣﺴﺎﺏ ﻛﺸﻒ
+775: Statement of Account
+778: Account Information [SA] Account Information
+780: Name [SA] Name Address [SA] Address
+782: MOHD GHAZI MOHD MOHIUDDIN King Khalid, 6915, AL KHUBAR, Eastern, 34427
+785: Statement Information [SA] Statement Information
+787: Date of StatementﺗﺎﺭﻳﺦﺍﻟﻜﺸﻒAccount No.ﺭﻗﻢﺍﻟﺤﺴﺎﺏ Account Typeﻧﻮﻉﺍﻟﺤﺴﺎﺏ
+789: From 2024-02-04 To 2024-04-29
+790: 11100336445010 Current Account
+791: From 1445-07-24 To 1445-10-20
+794: [SA]
+795: DescriptionﺍﻟﺒﻴﺎﻧﺎﺕDateﺍﻟﺘﺎﺭﻳﺦ BalanceﺍﻟﺮﺻﻴﺪAmount
+796: Amount
+798: POS Purchase Mada Atheer ﺍﻟﺸﺎﻱTeaﺯﻣﻦ ﻣﻘﻬﻰ time cafe t
+799: 07/02/2024 CITY:0000682016SAM DAMMAM MADA ***1312 VAT CHRG: -7.00 SAR 36.75 SAR
+800: 0.00 Charges: 0.00 Alinma Bank
+802: 04/02/2024 Credit card payment CARD:524197******7682 PAYMENT -4,000.00 SAR 43.75 SAR
+804: Cash deposit - SNB ATM CITY:AL KHOBAR ﻭ ﺍﻻﻫﻞ ﺍﻟﻰ ﺍﻳﺪﺍﻉ
+805: 04/02/2024 ﺍﻻﺻﺪﻗﺎﺀMOHD GHAZI 06010000111003364450 AL KHOBAR 4,000.00 SAR 4,043.75 SAR
+806: 13:37:03 The National Commercial Bank
+808: Statement Movements
+811: ﺍﻟﺤﺮﻛﺎﺕ ﺇﺟﻤﺎﻟﻲ
+812: 214.35
+813: TOTAL MOVEMENTS
+816: ﺍﻟﺤﺮﻛﺎﺕ ﻋﺪﺩ
+817: 128
+818: NUMBER OF MOVEMENTS
+824: Page 9
+828: This statement would be considered correct if no objection or dispute is received with 15 days from the date of statement via and of dedicated channels. The balance of your account as evident by this
+830: statement may include credit or cheques which are subject to clearance. Saudi National Bank reserves the right not to honour drawings against the uncleared element of account balances.
+834: The Saudi National Bank | [SA] The Saudi National Bank
+837: 300002471110003 ﺍﻟﻀﺮﻳﺒﻲ-ﺍﻟﺮﻗﻢ www.alahli.com – 4030001588 .ﺱ.ﺕ- ﺑﺎﻟﻜﺎﻣﻞ30,000ﻣﺪﻓﻮﻉ ﺳﻌﻮﺩﻱ ﺭﻳﺎﻝ ﻣﻠﻴﻮﻥ ﺍﻟﻤﺎﻝ-ﺭﺃﺱ ﺳﻌﻮﺩﻳﺔ ﻣﺴﺎﻫﻤﺔ ﺷﺮﻛﺔ ﺍﻟﺘﺠﺎﺭﻱ ﺍﻷﻫﻠﻲ ﺍﻟﺒﻨﻚ
+841: The Saudi National Bank A Saudi Joint Stock Company - Paid-up Capital SAR 44,780,000,000 - C.R. 4030001588 - www.alahli.com

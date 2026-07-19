@@ -1,0 +1,63 @@
+
+========================================================================================================================
+EXECUTIVE SUMMARY TOP RISKS
+========================================================================================================================
+
+[1]
+TITLE: Limitation de responsabilité
+LEVEL: high
+INSIGHT: Cette clause expose la Client à un risque financier important en cas de négligence grave ou de mauvaise conduite intentionnelle du Provider, car il n'y a pas de limite de responsabilité dans ces cas.
+
+[2]
+TITLE: Durée et résiliation
+LEVEL: high
+INSIGHT: La possibilité de résiliation immédiate par la Client en cas d'incident de sécurité crée une protection importante pour la Client.
+
+[3]
+TITLE: Notification des incidents de sécurité
+LEVEL: high
+INSIGHT: Cela garantit que la Client est rapidement informé des problèmes de sécurité, ce qui est essentiel pour la gestion des risques.
+
+[4]
+TITLE: Analyse des causes profondes
+LEVEL: high
+INSIGHT: Cela garantit que les incidents de sécurité graves sont examinés et documentés, ce qui peut aider à prévenir des incidents futurs.
+
+[5]
+TITLE: Indemnisation
+LEVEL: high
+INSIGHT: Cette clause impose à la Prestataire une responsabilité financière pour des réclamations tierces et des amendes réglementaires, ce qui peut avoir un impact significatif sur ses finances.
+
+========================================================================================================================
+EXECUTIVE REPORT TOP RISKS
+========================================================================================================================
+
+[1]
+TITLE: Limitation de responsabilité
+LEVEL: high
+INSIGHT: Cette clause expose la Client à un risque financier important en cas de négligence grave ou de mauvaise conduite intentionnelle du Provider, car il n'y a pas de limite de responsabilité dans ces cas.
+
+[2]
+TITLE: Durée et résiliation
+LEVEL: high
+INSIGHT: La possibilité de résiliation immédiate par la Client en cas d'incident de sécurité crée une protection importante pour la Client.
+
+[3]
+TITLE: Notification des incidents de sécurité
+LEVEL: high
+INSIGHT: Cela garantit que la Client est rapidement informé des problèmes de sécurité, ce qui est essentiel pour la gestion des risques.
+
+[4]
+TITLE: Analyse des causes profondes
+LEVEL: high
+INSIGHT: Cela garantit que les incidents de sécurité graves sont examinés et documentés, ce qui peut aider à prévenir des incidents futurs.
+
+[5]
+TITLE: Indemnisation
+LEVEL: high
+INSIGHT: Cette clause impose à la Prestataire une responsabilité financière pour des réclamations tierces et des amendes réglementaires, ce qui peut avoir un impact significatif sur ses finances.
+
+========================================================================================================================
+FORBIDDEN TOP-RISK DIAGNOSTICS
+========================================================================================================================
+NONE

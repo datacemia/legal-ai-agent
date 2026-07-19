@@ -1,0 +1,40 @@
+FAMILY BEFORE:
+FAMILY AFTER:
+CHANGE: 1
+TAG: replace
+BEFORE:
+AFTER:
+CHANGE: 2
+TAG: replace
+BEFORE:
+AFTER:
+CHANGE: 3
+TAG: replace
+BEFORE:
+AFTER:
+CHANGE: 4
+TAG: replace
+BEFORE:
+AFTER:
+TAG: replace
+BEFORE: ["Obsidian", "Threat", "Defense", "LLC,"]
+AFTER: ["[PARTY_1],"]
+TAG: replace
+BEFORE: ["Delaware"]
+AFTER: ["[LOCATION]"]
+TAG: replace
+BEFORE: ["Cascadia", "Regional", "Bank,"]
+AFTER: ["[PARTY_2],"]
+TAG: replace
+BEFORE: ["Cadre", "de", "Cybersécurité", "du", "NIST."]
+AFTER: ["[ORGANIZATION]."]
+TAG: replace
+BEFORE: ["Pour", "Obsidian", "Threat", "Defense", "LLC"]
+AFTER: ["[ORGANIZATION]"]
+TAG: replace
+BEFORE: ["Pour", "Cascadia", "Regional", "Bank"]
+AFTER: ["[ORGANIZATION]"]
+FAMILY: Cybersecurity
+WEIGHT: 3 | TERM: 'cybersécurité' | BEFORE: 3 | AFTER: 2 | DELTA: -1
+WEIGHT: 1 | TERM: 'sécurité' | BEFORE: 11 | AFTER: 10 | DELTA: -1
+FAMILY: MSA

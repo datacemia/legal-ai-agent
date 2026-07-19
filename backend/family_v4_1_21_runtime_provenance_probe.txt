@@ -1,0 +1,684 @@
+========================================================================================================================
+V4.1.21 FAMILY RUNTIME PROVENANCE PROBE
+========================================================================================================================
+
+========================================================================================================================
+FILE: app\services\contract_agent\contract_family_detector.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: detect_contract_family
+LINES: 1329 - 1393
+
+MATCH LINE: 1329
+>>>  1329: def detect_contract_family(contract_text: str) -> dict:
+     1330:     """
+     1331:     Returns:
+     1332:         {
+     1333:             "family": str,
+     1334:             "confidence": "high" | "medium" | "low",
+     1335:             "co_occurring_families": list[str],
+     1336:             "scores": {family: weighted_score, ...},
+     1337:             "evidence": {family: [{term, count, weight, points}, ...]},
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_family_hint
+LINES: 1396 - 1432
+
+MATCH LINE: 1401
+     1397:     family = detection.get("family", "General")
+     1398:     confidence = detection.get("confidence", "low")
+     1399: 
+     1400:     hint = (
+>>>  1401:         f'Detected contract_family: "{family}" '
+     1402:         f"(confidence: {confidence})."
+     1403:     )
+     1404: 
+     1405:     if detection.get("co_occurring_families"):
+     1406:         hint += (
+     1407:             " This contract also shows strong signals for: "
+     1408:             + ", ".join(detection["co_occurring_families"])
+     1409:             + ". Apply reasoning from ALL relevant families where clauses overlap. "
+
+========================================================================================================================
+FILE: app\services\contract_agent\contract_taxonomy.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: normalize_taxonomy_role_context
+LINES: 2153 - 2185
+
+MATCH LINE: 2155
+     2153: def normalize_taxonomy_role_context(
+     2154:     clause_type: str,
+>>>  2155:     contract_family: str = "generic",
+     2156: ) -> str:
+     2157:     """
+     2158:     Standard international taxonomy guard.
+     2159: 
+     2160:     Restrictive covenants such as non-compete and non-solicitation are not
+     2161:     automatically Employment & HR. They remain Restrictive Covenants unless
+     2162:     the whole contract family is employment.
+     2163:     """
+
+MATCH LINE: 2164
+     2160:     Restrictive covenants such as non-compete and non-solicitation are not
+     2161:     automatically Employment & HR. They remain Restrictive Covenants unless
+     2162:     the whole contract family is employment.
+     2163:     """
+>>>  2164:     family = str(contract_family or "generic").lower().replace(" ", "_")
+     2165:     ctype = str(clause_type or "other").lower().strip()
+     2166: 
+     2167:     if family != "employment" and ctype in {
+     2168:         "non_compete",
+     2169:         "non_solicitation",
+     2170:         "restrictive_covenants",
+     2171:         "post_termination_obligations",
+     2172:         "conflict_of_interest",
+
+========================================================================================================================
+FILE: app\services\contract_agent\party_role_detector.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: normalize_ai_role_words
+LINES: 743 - 881
+
+MATCH LINE: 798
+      794:         return value
+      795: 
+      796:     family = normalize_role_family_key(
+      797:         roles.get("family")
+>>>   798:         or roles.get("contract_family")
+      799:         or "generic"
+      800:     )
+      801: 
+      802:     # Real employment contracts should keep employment terminology.
+      803:     if family == "employment":
+      804:         return value
+      805:     # For non-employment contracts, never allow hallucinated Employer/Employee
+      806: # labels to survive. This is universal across EN / FR / AR and all domains.
+
+========================================================================================================================
+FILE: app\services\contract_agent\summary_service.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: is_employment_contract_context
+LINES: 104 - 145
+
+MATCH LINE: 118
+      114: 
+      115:     text = " ".join(
+      116:         str(party_roles.get(key) or "")
+      117:         for key in [
+>>>   118:             "contract_family",
+      119:             "contract_type",
+      120:             "party_a",
+      121:             "party_b",
+      122:             "party_a_role",
+      123:             "party_b_role",
+      124:         ]
+      125:     ).lower()
+      126: 
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_party_registry_prompt
+LINES: 148 - 207
+
+MATCH LINE: 177
+      173:         party_roles.get("party_b")
+      174:         or party_roles.get("party_b_role")
+      175:         or ""
+      176:     ).strip()
+>>>   177:     contract_family = str(
+      178:         party_roles.get("contract_family")
+      179:         or party_roles.get("contract_type")
+      180:         or ""
+      181:     ).strip()
+      182: 
+      183:     lines = [
+      184:         "PARTY REGISTRY - STRICT:",
+      185:     ]
+
+MATCH LINE: 178
+      174:         or party_roles.get("party_b_role")
+      175:         or ""
+      176:     ).strip()
+      177:     contract_family = str(
+>>>   178:         party_roles.get("contract_family")
+      179:         or party_roles.get("contract_type")
+      180:         or ""
+      181:     ).strip()
+      182: 
+      183:     lines = [
+      184:         "PARTY REGISTRY - STRICT:",
+      185:     ]
+      186: 
+
+MATCH LINE: 191
+      187:     if party_a:
+      188:         lines.append(f"- Party A role: {party_a}")
+      189:     if party_b:
+      190:         lines.append(f"- Party B role: {party_b}")
+>>>   191:     if contract_family:
+      192:         lines.append(f"- Detected contract family/type: {contract_family}")
+      193: 
+      194:     if not party_a and not party_b:
+      195:         lines.append("- No reliable party role was detected; use neutral Party A / Party B labels only.")
+      196: 
+      197:     lines.extend([
+      198:         "",
+      199:         "MANDATORY PARTY RULES:",
+
+MATCH LINE: 192
+      188:         lines.append(f"- Party A role: {party_a}")
+      189:     if party_b:
+      190:         lines.append(f"- Party B role: {party_b}")
+      191:     if contract_family:
+>>>   192:         lines.append(f"- Detected contract family/type: {contract_family}")
+      193: 
+      194:     if not party_a and not party_b:
+      195:         lines.append("- No reliable party role was detected; use neutral Party A / Party B labels only.")
+      196: 
+      197:     lines.extend([
+      198:         "",
+      199:         "MANDATORY PARTY RULES:",
+      200:         "1. Use only the roles listed in this Party Registry or neutral Party A / Party B labels.",
+
+========================================================================================================================
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_contract_overview
+LINES: 990 - 1092
+
+MATCH LINE: 990
+>>>   990: def build_contract_overview(
+      991:     pipeline_result: dict,
+      992:     family_detection: dict,
+      993:     contract_text: str = "",
+      994:     party_roles: dict | None = None,
+      995:     language: str = "en",
+      996: ) -> dict:
+      997:     """
+      998:     Defensive, family-aware overview with non-destructive fact resolution.
+
+MATCH LINE: 992
+      990: def build_contract_overview(
+      991:     pipeline_result: dict,
+>>>   992:     family_detection: dict,
+      993:     contract_text: str = "",
+      994:     party_roles: dict | None = None,
+      995:     language: str = "en",
+      996: ) -> dict:
+      997:     """
+      998:     Defensive, family-aware overview with non-destructive fact resolution.
+      999: 
+     1000:     Structured values already resolved upstream are preserved. Conservative
+
+MATCH LINE: 1012
+     1008:     exec_summary = pipeline_result.get("executive_summary", {}) or {}
+     1009:     exec_report = pipeline_result.get("executive_report", {}) or {}
+     1010:     overview = exec_report.get("contract_overview", {}) or {}
+     1011: 
+>>>  1012:     family = family_detection.get("family", "General")
+     1013:     optional_fields = get_optional_fields_for_family(family)
+     1014: 
+     1015:     payment_terms = exec_summary.get("payment_terms")
+     1016:     source_duration = extract_contract_duration(
+     1017:         contract_text,
+     1018:         language,
+     1019:     )
+     1020:     duration = (
+
+MATCH LINE: 1090
+     1086:             exec_summary.get("overall_balance")
+     1087:             or overview.get("overall_balance")
+     1088:             or not_specified
+     1089:         ),
+>>>  1090:         "family_hint": build_family_hint(family_detection),
+     1091:         "_clauses_analyzed": overview.get("clauses_analyzed"),
+     1092:     }
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_unified_report_from_pipeline
+LINES: 1881 - 1944
+
+MATCH LINE: 1881
+>>>  1881: def build_unified_report_from_pipeline(
+     1882:     pipeline_result: dict,
+     1883:     contract_text: str,
+     1884:     language: str = "en",
+     1885:     party_roles: dict | None = None,
+     1886: ) -> dict:
+     1887:     language = normalize_language(language)
+     1888:     """
+     1889:     Main entrypoint. Aggregates the report from one clause-analysis truth.
+
+MATCH LINE: 1894
+     1890:     The only small AI call is limited to genuinely absent family-core clauses
+     1891:     and confidence notes.
+     1892:     """
+     1893:     clauses = _get_clause_list(pipeline_result)
+>>>  1894:     family_detection = detect_contract_family(contract_text)
+     1895: 
+     1896:     key_clauses = build_key_clauses(clauses, language)
+     1897:     risks = build_risks_identified(clauses, language)
+     1898:     negotiation_priorities = build_negotiation_priorities(clauses, language)
+     1899:     suggested_wording = build_suggested_wording(clauses)
+     1900:     action_checklist = build_action_checklist(clauses, language)
+     1901:     risk_score = build_risk_score(pipeline_result, risks)
+     1902:     contract_overview = build_contract_overview(
+
+MATCH LINE: 1902
+     1898:     negotiation_priorities = build_negotiation_priorities(clauses, language)
+     1899:     suggested_wording = build_suggested_wording(clauses)
+     1900:     action_checklist = build_action_checklist(clauses, language)
+     1901:     risk_score = build_risk_score(pipeline_result, risks)
+>>>  1902:     contract_overview = build_contract_overview(
+     1903:         pipeline_result,
+     1904:         family_detection,
+     1905:         contract_text,
+     1906:         party_roles,
+     1907:         language,
+     1908:     )
+     1909: 
+     1910:     executive_summary_text = (
+
+MATCH LINE: 1904
+     1900:     action_checklist = build_action_checklist(clauses, language)
+     1901:     risk_score = build_risk_score(pipeline_result, risks)
+     1902:     contract_overview = build_contract_overview(
+     1903:         pipeline_result,
+>>>  1904:         family_detection,
+     1905:         contract_text,
+     1906:         party_roles,
+     1907:         language,
+     1908:     )
+     1909: 
+     1910:     executive_summary_text = (
+     1911:         pipeline_result.get("executive_risk_narrative")
+     1912:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+
+MATCH LINE: 1919
+     1915: 
+     1916:     missing_clauses, confidence_notes, fallback_position = (
+     1917:         _generate_missing_clauses_and_notes(
+     1918:             contract_text,
+>>>  1919:             family_detection,
+     1920:             clauses,
+     1921:             language,
+     1922:         )
+     1923:     )
+     1924: 
+     1925:     quality_score = build_contract_quality_score(
+     1926:         pipeline_result,
+     1927:         clauses,
+
+MATCH LINE: 1931
+     1927:         clauses,
+     1928:     )
+     1929: 
+     1930:     return {
+>>>  1931:         "contract_family": family_detection.get("family", "General"),
+     1932:         "contract_overview": contract_overview,
+     1933:         "executive_summary": executive_summary_text,
+     1934:         "key_clauses": key_clauses,
+     1935:         "risks_identified": risks,
+     1936:         "negotiation_priorities": negotiation_priorities,
+     1937:         "suggested_wording": suggested_wording,
+     1938:         "fallback_position": fallback_position,
+     1939:         "action_checklist": action_checklist,
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: to_legacy_summary_data
+LINES: 2219 - 2453
+
+MATCH LINE: 2242
+     2238:         report.get("risks_identified", [])
+     2239:         or []
+     2240:     )
+     2241: 
+>>>  2242:     contract_family = (
+     2243:         report.get("contract_family")
+     2244:         or overview.get("contract_type")
+     2245:         or ""
+     2246:     )
+     2247:     optional_fields = get_optional_fields_for_family(
+     2248:         contract_family
+     2249:     )
+     2250: 
+
+MATCH LINE: 2243
+     2239:         or []
+     2240:     )
+     2241: 
+     2242:     contract_family = (
+>>>  2243:         report.get("contract_family")
+     2244:         or overview.get("contract_type")
+     2245:         or ""
+     2246:     )
+     2247:     optional_fields = get_optional_fields_for_family(
+     2248:         contract_family
+     2249:     )
+     2250: 
+     2251:     parties = canonicalize_party_labels(
+
+MATCH LINE: 2248
+     2244:         or overview.get("contract_type")
+     2245:         or ""
+     2246:     )
+     2247:     optional_fields = get_optional_fields_for_family(
+>>>  2248:         contract_family
+     2249:     )
+     2250: 
+     2251:     parties = canonicalize_party_labels(
+     2252:         overview.get("parties"),
+     2253:         language,
+     2254:     )
+     2255: 
+     2256:     payment_terms = overview.get("payment_terms")
+
+MATCH LINE: 2366
+     2362: 
+     2363:     return {
+     2364:         "contract_type": (
+     2365:             overview.get("contract_type")
+>>>  2366:             or report.get("contract_family")
+     2367:             or not_specified
+     2368:         ),
+     2369:         "parties": parties,
+     2370:         "duration": (
+     2371:             overview.get("duration")
+     2372:             or not_specified
+     2373:         ),
+     2374:         "payment_terms": payment_terms,
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: to_legacy_simplified_string
+LINES: 2455 - 2572
+
+MATCH LINE: 2464
+     2460: 
+     2461:     overview = report.get("contract_overview", {}) or {}
+     2462:     contract_type = (
+     2463:         overview.get("contract_type")
+>>>  2464:         or report.get("contract_family")
+     2465:         or localized_default("not_specified", language)
+     2466:     )
+     2467: 
+     2468:     parties = canonicalize_party_labels(
+     2469:         overview.get("parties"),
+     2470:         language,
+     2471:     )
+     2472:     parties_text = ", ".join(parties)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: _generate_missing_clauses_and_notes
+LINES: 2640 - 2712
+
+MATCH LINE: 2642
+     2640: def _generate_missing_clauses_and_notes(
+     2641:     contract_text: str,
+>>>  2642:     family_detection: dict,
+     2643:     clauses: list,
+     2644:     language: str,
+     2645: ) -> tuple[list, list, str]:
+     2646:     detected_types = sorted({
+     2647:         c.get("clause_type", "other")
+     2648:         for c in clauses
+     2649:         if isinstance(c, dict)
+     2650:     })
+
+MATCH LINE: 2654
+     2650:     })
+     2651:     definitions = extract_definitions(contract_text)
+     2652:     arbitration_facts = analyze_arbitration(contract_text) or {}
+     2653: 
+>>>  2654:     family = family_detection.get("family", "General")
+     2655: 
+     2656:     prompt = MISSING_CLAUSES_PROMPT.format(
+     2657:         detected_types=", ".join(detected_types) or "none detected",
+     2658:         family=family,
+     2659:         definitions_block=build_definitions_block(definitions),
+     2660:         arbitration_hint=build_arbitration_hint(arbitration_facts),
+     2661:         contract_text=contract_text[:14000],
+     2662:     )
+
+========================================================================================================================
+FILE: app\services\contract_agent\unified_summary_service.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_empty_unified_report
+LINES: 189 - 231
+
+MATCH LINE: 195
+      191: 
+      192:     not_specified = localized_default("not_specified", language)
+      193: 
+      194:     return {
+>>>   195:         "contract_family": "unknown",
+      196:         "contract_overview": {
+      197:             "contract_type": not_specified,
+      198:             "parties": [not_specified],
+      199:             "duration": not_specified,
+      200:             "payment_terms": not_specified,
+      201:             "jurisdiction_detected": not_specified,
+      202:             "jurisdiction_note": "",
+      203:             "contract_complexity": "medium",
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: _build_prompt
+LINES: 403 - 439
+
+MATCH LINE: 408
+      404:     language = normalize_language(language)
+      405:     prompt_template = load_prompt("unified_report_prompt.txt")
+      406: 
+      407:     definitions = extract_definitions(contract_text)
+>>>   408:     family_detection = detect_contract_family(contract_text)
+      409:     arbitration_facts = analyze_arbitration(contract_text)
+      410: 
+      411:     filled = (
+      412:         prompt_template
+      413:         .replace("{definitions_block}", build_definitions_block(definitions))
+      414:         .replace("{family_hint}", build_family_hint(family_detection))
+      415:         .replace("{arbitration_hint}", build_arbitration_hint(arbitration_facts))
+      416:         .replace("{contract_text}", contract_text)
+
+MATCH LINE: 414
+      410: 
+      411:     filled = (
+      412:         prompt_template
+      413:         .replace("{definitions_block}", build_definitions_block(definitions))
+>>>   414:         .replace("{family_hint}", build_family_hint(family_detection))
+      415:         .replace("{arbitration_hint}", build_arbitration_hint(arbitration_facts))
+      416:         .replace("{contract_text}", contract_text)
+      417:     )
+      418: 
+      419:     prompt = f"""
+      420: {filled}
+      421: 
+      422: Output language: {language}
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: generate_unified_report
+LINES: 442 - 472
+
+MATCH LINE: 458
+      454:         return enrich_report_metadata(build_empty_unified_report(language), language)
+      455: 
+      456:     data = _fill_missing_keys(data)
+      457: 
+>>>   458:     family_key = normalize_family_key(data.get("contract_family", ""))
+      459:     overview = data.get("contract_overview", {}) or {}
+      460: 
+      461:     if is_payment_optional_family(family_key):
+      462:         payment_terms = overview.get("payment_terms")
+      463:         if not payment_terms or str(payment_terms).lower() in {"not specified", "non spécifié", "غير محدد"}:
+      464:             overview["payment_terms"] = localized_default("not_applicable", language)
+      465:             data["contract_overview"] = overview
+      466: 
+
+========================================================================================================================
+DIRECT CALL SITES
+========================================================================================================================
+
+app\services\contract_agent\contract_family_detector.py:35
+       27: # Weighted indicators
+       28: # ---------------------------------------------------------------------
+       29: # Weight guidance:
+       30: # - 5 = title / highly distinctive contract-family signal
+       31: # - 3 = strongly specific family signal
+       32: # - 1 = generic or contextual signal
+       33: #
+       34: # The old API shape is preserved:
+>>>    35: # detect_contract_family(text) -> {
+       36: #   "family": str,
+       37: #   "confidence": "high" | "medium" | "low",
+       38: #   "co_occurring_families": list[str],
+       39: #   "scores": dict[str, int],
+       40: # }
+       41: # Additional keys are included but do not break existing callers.
+       42: 
+       43: FAMILY_INDICATORS = {
+       44:     "NDA": {
+       45:         5: [
+       46:             "non-disclosure agreement",
+       47:             "confidentiality agreement",
+       48:             "accord de confidentialité",
+       49:             "accord de non-divulgation",
+       50:             "اتفاقية عدم إفصاح",
+
+app\services\contract_agent\contract_family_detector.py:1329
+     1321:         and legacy_is_generic_dependent
+     1322:         and raw_is_materially_competitive
+     1323:     ):
+     1324:         return raw_winner
+     1325: 
+     1326:     return legacy_choice
+     1327: 
+     1328: 
+>>>  1329: def detect_contract_family(contract_text: str) -> dict:
+     1330:     """
+     1331:     Returns:
+     1332:         {
+     1333:             "family": str,
+     1334:             "confidence": "high" | "medium" | "low",
+     1335:             "co_occurring_families": list[str],
+     1336:             "scores": {family: weighted_score, ...},
+     1337:             "evidence": {family: [{term, count, weight, points}, ...]},
+     1338:         }
+     1339:     """
+     1340:     if not contract_text or not str(contract_text).strip():
+     1341:         return {
+     1342:             "family": "General",
+     1343:             "confidence": "low",
+     1344:             "co_occurring_families": [],
+
+app\services\contract_agent\unified_report_from_pipeline.py:1881
+     1873:         "confidence": "high" if clauses else "low",
+     1874:         "coverage": round(len(clauses) / max(len(clauses), 1), 2),
+     1875:         "missing_clause_penalty": 0,
+     1876:     }
+     1877: 
+     1878: 
+     1879: 
+     1880: 
+>>>  1881: def build_unified_report_from_pipeline(
+     1882:     pipeline_result: dict,
+     1883:     contract_text: str,
+     1884:     language: str = "en",
+     1885:     party_roles: dict | None = None,
+     1886: ) -> dict:
+     1887:     language = normalize_language(language)
+     1888:     """
+     1889:     Main entrypoint. Aggregates the report from one clause-analysis truth.
+     1890:     The only small AI call is limited to genuinely absent family-core clauses
+     1891:     and confidence notes.
+     1892:     """
+     1893:     clauses = _get_clause_list(pipeline_result)
+     1894:     family_detection = detect_contract_family(contract_text)
+     1895: 
+     1896:     key_clauses = build_key_clauses(clauses, language)
+
+app\services\contract_agent\unified_report_from_pipeline.py:1894
+     1886: ) -> dict:
+     1887:     language = normalize_language(language)
+     1888:     """
+     1889:     Main entrypoint. Aggregates the report from one clause-analysis truth.
+     1890:     The only small AI call is limited to genuinely absent family-core clauses
+     1891:     and confidence notes.
+     1892:     """
+     1893:     clauses = _get_clause_list(pipeline_result)
+>>>  1894:     family_detection = detect_contract_family(contract_text)
+     1895: 
+     1896:     key_clauses = build_key_clauses(clauses, language)
+     1897:     risks = build_risks_identified(clauses, language)
+     1898:     negotiation_priorities = build_negotiation_priorities(clauses, language)
+     1899:     suggested_wording = build_suggested_wording(clauses)
+     1900:     action_checklist = build_action_checklist(clauses, language)
+     1901:     risk_score = build_risk_score(pipeline_result, risks)
+     1902:     contract_overview = build_contract_overview(
+     1903:         pipeline_result,
+     1904:         family_detection,
+     1905:         contract_text,
+     1906:         party_roles,
+     1907:         language,
+     1908:     )
+     1909: 
+
+app\services\contract_agent\unified_summary_service.py:408
+      400: 
+      401: 
+      402: 
+      403: def _build_prompt(contract_text: str, language: str) -> tuple[str, dict | None]:
+      404:     language = normalize_language(language)
+      405:     prompt_template = load_prompt("unified_report_prompt.txt")
+      406: 
+      407:     definitions = extract_definitions(contract_text)
+>>>   408:     family_detection = detect_contract_family(contract_text)
+      409:     arbitration_facts = analyze_arbitration(contract_text)
+      410: 
+      411:     filled = (
+      412:         prompt_template
+      413:         .replace("{definitions_block}", build_definitions_block(definitions))
+      414:         .replace("{family_hint}", build_family_hint(family_detection))
+      415:         .replace("{arbitration_hint}", build_arbitration_hint(arbitration_facts))
+      416:         .replace("{contract_text}", contract_text)
+      417:     )
+      418: 
+      419:     prompt = f"""
+      420: {filled}
+      421: 
+      422: Output language: {language}
+      423: 
+
+app\workers\handlers\contract_handler.py:300
+      292:             clauses_list = clauses_obj or []
+      293: 
+      294:         clause_results = normalize_ai_role_words(
+      295:             clause_results,
+      296:             party_roles,
+      297:             output_language,
+      298:         )
+      299: 
+>>>   300:         unified_report = build_unified_report_from_pipeline(
+      301:             clause_results,
+      302:             cleaned_text,
+      303:             output_language,
+      304:             party_roles=party_roles,
+      305:         )
+      306: 
+      307:         risk_score = unified_report.get("risk_score", {})
+      308: 
+      309:         if isinstance(risk_score, dict):
+      310:             explanation = risk_score.get("explanation", "")
+      311: 
+      312:             if (
+      313:                 "risk_node_" in explanation
+      314:                 or "Score reflects" in explanation
+      315:                 or "The score is mainly influenced" in explanation

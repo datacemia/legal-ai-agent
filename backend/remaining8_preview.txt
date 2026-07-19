@@ -1,0 +1,223 @@
+===== 3.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===== arabe5.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 860
+RELEVÉ BANCAIRE
+Titulaire du compte : ENTREPRISE DE FORMATION
+Banque : BANQUE COMMERCIALE DE CÔTE D'IVOIRE
+N° de compte : CI110010012345678901234567
+Période : 01/04/2025 au 30/04/2025
+Date Référence Libellé Débit (FCFA) Crédit (FCFA)
+13/04/2025 OP1000 Frais bancaires 911 522
+22/04/2025 OP1001 Paiement 
+fournisseur
+600 560
+09/04/2025 OP1002 Versement 
+espèces
+1 114 890
+29/04/2025 OP1003 Loyer versé 642 392
+29/04/2025 OP1004 Frais bancaires 969 885
+26/04/2025 OP1005 Versement 
+espèces
+1 498 169
+19/04/2025 OP1006 Salaire avril 414 388
+09/04/2025 OP1007 TVA payée 981 966
+16/04/2025 OP1008 Loyer versé 972 535
+15/04/2025 OP1009 TVA payée 834 561
+04/04/2025 OP1010 Loyer versé 429 114
+27/04/2025 OP1011 Paiement 
+fournisseur
+596 852
+30/04/2025 OP1012 Versement 
+espèces
+554 379
+19/04/2025 OP1013 Retrait chèque 211 539
+22/04/2025 OP1014 Retrait chèque 458 950
+===== BANQUE POSTALE (2).pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 11
+
+
+
+
+
+
+
+
+
+
+
+
+===== dakar.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 3602
+Libellé Débit Crédit SoldeDate Valeur
+1 7 /
+Solde précédent
+EXTRAIT DE COMPTE
+CORIS BANK INTERNATIONAL SENEGAL: SOCIETE ANONYME AVEC CONSEIL D'ADMINISTRATION AU CAPITAL DE 15 400 000 000 F CFA R.C.C.M: SN DKR 2018 B 
+23040 / LISTE DES BANQUES No: 0166A / CODE SWIFT: CORICIAB / SIEGE SOCIAL: 26 Avenue Jean JAURES X André Peytavin, Daka BP 14310 Dakar – Sénégal / TEl: 
++221 33 829 66 60 / FAX: +221 33 823 88 88 IFU No: CC N°1308853-P / SITE WEB: www.senegal.coris.bank / EMAIL: corissn@coris-bank.sn
+Code SWIFT : CORISNDA
+Code IBAN : SN21 3010 1100 4672 6243 0118
+Code Banque Agence Compte Clé RIB
+SN213 01011 004672624301 18
+ 
+MBAO
+TOUBA TAIF
+DAKARDAKAR
+RELEVE D'IDENTITE BANCAIRE
+TITULAIRE DU COMPTE
+DOMICILIATION
+COMPTES COURANTS 
+FRANC CFA B.C.E.A.O. 
+ 
+COMPTES COURANTS No 004672624301 - 18 
+4 245 528
+300 000 3 945 528 
+100 000 3 845 528
+18 754  3 826 774
+585 931  3 240 843 
+20 000  3 220 843 
+52 345 3 168 498 
+25 000 3 143 498 
+3 939 480 7 082 978 
+30 000 7 052 978 
+50 000 7 002 978 
+100 000 6 902 978 
+9 749 6 893 229 
+2 870 754 9 763 983
+5 877 050 15 641 033 
+2 290 000 17 931 033 
+18 754 17 912 279
+25 000 17 887 279 
+1 791 812 16 095 467 
+1 140 138 14 955 329 
+75 500 14 879 829 
+18 8
+===== EGPTE.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 22763
+                                                                                    PAGE 001
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0                                                                  300002471110003
+     0                 0
+                                                                                24021800165743566
+٤٢-ﻓﺒﺮﺍﻳﺮ-٥١
+15-Feb-24
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+     05/03/24                      10,956.00                         547.80
+     547.80                         547.80                           0.00
+     10,956.00                      10,956.00                        0.00
+     10,956.00                      10,956.00                        0.00
+
+                                                                                    PAGE 002
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0
+     0                 0
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+                                                 0
+                                                 0
+                                                 0
+                                                 0
+                           
+===== EJJAMI12.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 4
+
+
+
+
+
+===== habitat.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 1
+
+
+===== x.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,457 @@
+--- a/app/services/contract_agent/contract_agent.py
++++ b/app/services/contract_agent/contract_agent.py
+@@ -39,6 +39,10 @@
+ )
+ from app.services.contract_agent.legal_reasoning_templates import (
+     get_reasoning_for_text,
++)
++from app.services.contract_agent.publication_gate import (
++    enforce_final_publication_gate,
++    assert_final_serialization,
+ )
+ from app.services.contract_agent.negotiation_intelligence import (
+     detect_negotiation_inconsistency,
+@@ -6690,6 +6694,7 @@
+ 
+         result_item = {
+             "title": title,
++            "_source_text_exact": clause,
+             "original_text": clause[:1000],
+             "reasoning_evidence": extract_reasoning_evidence(
+                 clause_text
+@@ -7118,6 +7123,11 @@
+             for item in results
+         ]
+ 
++        # Fail closed before any derived summaries/graphs can copy unsafe text.
++        results = enforce_final_publication_gate(
++            results, self.language, final_pass=False
++        )
++
+         contract_timeline = extract_contract_timeline(
+             results,
+             language=self.language,
+@@ -7221,8 +7231,14 @@
+             self.party_roles or {},
+             self.language,
+         )
+-        
+-
++
++        # Revalidate exact final clause text after every downstream mutator.
++        final_result["clauses"]["results"] = enforce_final_publication_gate(
++            final_result["clauses"]["results"],
++            self.language,
++            final_pass=True,
++        )
++        assert_final_serialization(final_result["clauses"]["results"])
+ 
+         return final_result
+ 
+--- /dev/null
++++ b/app/services/contract_agent/publication_gate.py
+@@ -0,0 +1,404 @@
++"""Fail-closed final publication enforcement for source-grounded clause text.
++
++Contract-family agnostic. The validator derives a compact semantic profile from
++exact clause source text, validates protected generated fields, records receipts
++for the exact published value, and asserts those receipts at serialization.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++import re
++from typing import Any
++
++from app.services.contract_agent.contract_taxonomy import detect_clause_type_from_taxonomy
++
++PROTECTED_FIELDS = (
++    "legal_insight",
++    "recommendation",
++    "negotiation_advice",
++    "fallback_wording",
++    "acceptable_compromise",
++    "safer_alternative",
++    "never_accept",
++    "negotiation_boundary",
++)
++
++_FIDELITY_FIELDS = {"fallback_wording", "acceptable_compromise", "safer_alternative"}
++_POSITIVE_SAFE = (
++    "no significant legal imbalance detected",
++    "aucun déséquilibre juridique significatif détecté",
++    "لم يتم رصد اختلال قانوني جوهري",
++)
++_ABSTENTION_MARKERS = (
++    "manual review required",
++    "manual review is required",
++    "revue manuelle requise",
++    "مراجعة يدوية مطلوبة",
++)
++_STOP = {
++    "the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "with",
++    "without", "by", "from", "at", "as", "is", "are", "be", "been", "being",
++    "this", "that", "such", "its", "their", "any", "all", "other", "shall",
++    "should", "may", "must", "would", "could", "agreement", "section",
++}
++
++
++def _hash(text: str) -> str:
++    return hashlib.sha256(str(text or "").encode("utf-8")).hexdigest()
++
++
++def _tokens(text: str) -> set[str]:
++    words = re.findall(r"[A-Za-z]{4,}", str(text or "").lower())
++    result: set[str] = set()
++    for word in words:
++        if word in _STOP:
++            continue
++        if word.endswith("ies") and len(word) > 6:
++            word = word[:-3] + "y"
++        elif word.endswith("s") and len(word) > 5:
++            word = word[:-1]
++        result.add(word)
++    return result
++
++
++def _argument_signature(text: str) -> list[str]:
++    """Return the first content predicate token for a conjunctive argument."""
++    words = re.findall(r"[A-Za-z]{4,}", str(text or "").lower())
++    for word in words:
++        if word not in _STOP:
++            return [word]
++    return []
++
++
++def _span(text: str, pattern: str, label: str) -> dict | None:
++    match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
++    if not match:
++        return None
++    return {
++        "label": label,
++        "start": match.start(),
++        "end": match.end(),
++        "text": match.group(0),
++    }
++
++
++def build_source_evidence_model(source_text: str) -> dict:
++    """Build a generic source profile from exact clause text."""
++    source = str(source_text or "")
++    spans: list[dict] = []
++    mechanisms: list[dict] = []
++
++    mandatory = re.search(
++        r"\b(?:required|obliged|obligated)\s+to\s+(.{1,220}?)(?:,\s*subject\s+to|[.;]|$)",
++        source,
++        re.IGNORECASE | re.DOTALL,
++    )
++    if mandatory:
++        body = mandatory.group(1)
++        arguments = [part.strip() for part in re.split(r"\s+and\s+", body, flags=re.IGNORECASE) if part.strip()]
++        if len(arguments) >= 2:
++            spans.append({
++                "label": "MANDATORY_CONJUNCTION",
++                "start": mandatory.start(),
++                "end": mandatory.end(),
++                "text": mandatory.group(0),
++            })
++            mechanisms.append({
++                "kind": "MANDATORY_CONJUNCTION",
++                "polarity": "REQUIRED",
++                "arguments": [
++                    {"tokens": sorted(_tokens(arg)), "signature": _argument_signature(arg)}
++                    for arg in arguments
++                ],
++            })
++
++    automatic = _span(
++        source,
++        r"\b(?:terminate|expire|end)\w*\s+automatically\s+(?:upon|on)\b.{0,260}",
++        "AUTOMATIC_EVENT_TRANSITION",
++    )
++    if automatic:
++        spans.append(automatic)
++        mechanisms.append({
++            "kind": "PROCEDURAL_STATE",
++            "state": "AUTOMATIC_EVENT",
++            "notice_prerequisite": False,
++        })
++
++    prior_consent = _span(
++        source,
++        r"\bwithout\b.{0,100}\bprior\s+(?:written\s+)?(?:consent|approval)\b|"
++        r"\bprior\s+written\s+(?:consent|approval)\b",
++        "PRIOR_CONSENT_PREREQUISITE",
++    )
++    if prior_consent:
++        spans.append(prior_consent)
++        mechanisms.append({
++            "kind": "PREREQUISITE",
++            "state": "PRIOR_CONSENT",
++        })
++
++    source_type = detect_clause_type_from_taxonomy(source)
++    mechanisms.append({
++        "kind": "SOURCE_PROFILE",
++        "primary_type": source_type,
++        "anchors": sorted(_tokens(source)),
++    })
++
++    canonical = json.dumps(mechanisms, sort_keys=True, ensure_ascii=False)
++    return {
++        "evidence_spans": spans,
++        "mechanisms": mechanisms,
++        "semantic_profile_hash": _hash(canonical),
++    }
++
++
++def rank_grounded_mechanisms(profile: dict) -> list[dict]:
++    rank = {
++        "PREREQUISITE": 100,
++        "PROCEDURAL_STATE": 95,
++        "MANDATORY_CONJUNCTION": 90,
++        "SOURCE_PROFILE": 10,
++    }
++    return sorted(
++        profile.get("mechanisms", []),
++        key=lambda item: rank.get(item.get("kind"), 0),
++        reverse=True,
++    )
++
++
++def _semantic_coverage(source_text: str, generated_text: str) -> float | None:
++    source_tokens = _tokens(source_text)
++    generated_tokens = _tokens(generated_text)
++    if not source_tokens or not generated_tokens:
++        return None
++    denominator = max(1, min(len(source_tokens), 12))
++    return round(len(source_tokens & generated_tokens) / denominator, 4)
++
++
++def _is_abstention(text: str) -> bool:
++    low = str(text or "").lower()
++    return any(marker in low for marker in _ABSTENTION_MARKERS)
++
++
++def validate_source_grounding(
++    source_text: str,
++    generated_text: str,
++    field: str,
++    profile: dict,
++) -> tuple[list[str], float | None]:
++    reasons: list[str] = []
++    generated = str(generated_text or "")
++    low = generated.lower()
++    generated_tokens = _tokens(generated)
++    coverage = _semantic_coverage(source_text, generated)
++
++    if _is_abstention(generated):
++        return reasons, coverage
++
++    for mechanism in rank_grounded_mechanisms(profile):
++        kind = mechanism.get("kind")
++
++        if kind == "MANDATORY_CONJUNCTION" and field in _FIDELITY_FIELDS:
++            missing_arguments = []
++            for argument in mechanism.get("arguments", []):
++                argument_tokens = set(argument.get("tokens", []))
++                signature_tokens = set(argument.get("signature", []))
++                if signature_tokens:
++                    covered = bool(signature_tokens & generated_tokens)
++                else:
++                    covered = bool(argument_tokens & generated_tokens)
++                if argument_tokens and not covered:
++                    missing_arguments.append(argument)
++            if missing_arguments:
++                reasons.extend([
++                    "SEMANTIC_ARGUMENT_COVERAGE_LOSS",
++                    "RIGHT_POLARITY_OR_SCOPE_WEAKENING",
++                ])
++
++        elif kind == "PROCEDURAL_STATE" and field in _FIDELITY_FIELDS:
++            if mechanism.get("state") == "AUTOMATIC_EVENT":
++                introduces_notice = bool(re.search(
++                    r"\b(?:prior|advance)\s+(?:written\s+)?notice\b|"
++                    r"\bnotice\s+period\b|"
++                    r"\b\d+\s*\)?\s*(?:calendar\s+|business\s+)?days?\b.{0,35}\bnotice\b",
++                    low,
++                    re.IGNORECASE,
++                ))
++                if introduces_notice:
++                    reasons.append("PROCEDURAL_STATE_MISMATCH_AUTOMATIC_TO_NOTICE")
++
++        elif kind == "PREREQUISITE" and field in _FIDELITY_FIELDS:
++            if mechanism.get("state") == "PRIOR_CONSENT":
++                has_consent = bool(re.search(r"\b(?:consent|approval)\b", low))
++                has_notice = bool(re.search(r"\b(?:notice|notify|notification)\b", low))
++                if has_notice and not has_consent:
++                    reasons.append("CONSENT_PREREQUISITE_WEAKENED_TO_NOTICE")
++
++    if field in {"legal_insight", "recommendation", "negotiation_advice"}:
++        source_type = detect_clause_type_from_taxonomy(source_text)
++        generated_type = detect_clause_type_from_taxonomy(generated)
++        weak_types = {"", "other", "general", None}
++        if (
++            source_type not in weak_types
++            and generated_type not in weak_types
++            and source_type != generated_type
++            and coverage == 0.0
++        ):
++            reasons.append("FINAL_TEXT_SOURCE_CONTAMINATION")
++
++    return list(dict.fromkeys(reasons)), coverage
++
++
++def _blocked_text(language: str) -> str:
++    return {
++        "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
++        "ar": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.",
++    }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
++
++
++def _issue(field: str, reason: str) -> dict:
++    high_markers = ("POLARITY", "PROCEDURAL", "CONSENT", "CONTAMINATION")
++    return {
++        "kind": reason.lower(),
++        "field": field,
++        "severity": "high" if any(marker in reason for marker in high_markers) else "medium",
++        "note": reason,
++    }
++
++
++def enforce_final_publication_gate(
++    results: list[dict],
++    language: str = "en",
++    *,
++    final_pass: bool = False,
++) -> list[dict]:
++    """Validate and fail closed. A final pass emits exact-text receipts."""
++    for item in results:
++        if not isinstance(item, dict):
++            continue
++
++        source = str(
++            item.get("_source_text_exact")
++            or item.get("original_text")
++            or item.get("clause_text")
++            or item.get("quoted_text")
++            or ""
++        )
++        profile = build_source_evidence_model(source)
++        history = item.setdefault("_publication_validation_history", {})
++        emitted: list[dict] = []
++        current_failures: list[str] = []
++
++        for field in PROTECTED_FIELDS:
++            text = str(item.get(field) or "")
++            if not text.strip():
++                continue
++
++            reasons, coverage = validate_source_grounding(source, text, field, profile)
++            if reasons:
++                history[field] = {
++                    "input_text": text,
++                    "input_text_hash": _hash(text),
++                    "validation_reasons": reasons,
++                    "semantic_coverage": coverage,
++                }
++                item[field] = _blocked_text(language)
++                current_failures.extend(reasons)
++                emitted.extend(_issue(field, reason) for reason in reasons)
++
++        positive_field = str(item.get("legal_insight") or "")
++        positive_low = positive_field.lower()
++        prior_failures = [
++            reason
++            for entry in history.values()
++            for reason in entry.get("validation_reasons", [])
++        ]
++        if any(marker in positive_low for marker in _POSITIVE_SAFE) and (current_failures or prior_failures):
++            reason = "UNKNOWN_IS_NOT_SAFE_POSITIVE_CONCLUSION"
++            history["legal_insight"] = {
++                "input_text": positive_field,
++                "input_text_hash": _hash(positive_field),
++                "validation_reasons": [reason],
++                "semantic_coverage": _semantic_coverage(source, positive_field),
++            }
++            item["legal_insight"] = _blocked_text(language)
++            emitted.append(_issue("legal_insight", reason))
++
++        if emitted:
++            existing = item.setdefault("fidelity_issues", [])
++            existing.extend(emitted)
++            item["negotiation_fidelity_warning"] = True
++            item["negotiation_fidelity_note"] = emitted[0]["note"]
++
++        item["source_evidence_model"] = profile
++
++        if final_pass:
++            receipts: dict[str, dict] = {}
++            for field in PROTECTED_FIELDS:
++                final_text = str(item.get(field) or "")
++                if not final_text.strip():
++                    continue
++
++                final_reasons, final_coverage = validate_source_grounding(
++                    source, final_text, field, profile
++                )
++                if final_reasons:
++                    raise AssertionError(
++                        f"final publication field failed validation: {field}: {final_reasons}"
++                    )
++
++                prior = history.get(field, {})
++                prior_reasons = list(prior.get("validation_reasons", []))
++                receipts[field] = {
++                    "field": field,
++                    "publication_gate_called": True,
++                    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
++                    "validation_reasons": prior_reasons,
++                    "semantic_coverage": final_coverage,
++                    "semantic_profile_hash": profile["semantic_profile_hash"],
++                    "validated_text_hash": _hash(final_text),
++                    "final_text_hash": _hash(final_text),
++                    "source_text_hash": _hash(source),
++                    "input_text_hash": prior.get("input_text_hash", _hash(final_text)),
++                    "text_before_validation": prior.get("input_text", final_text),
++                    "successful": True,
++                    "post_gate_mutators": [],
++                }
++            item["validation_receipts"] = receipts
++
++    return results
++
++
++def assert_final_serialization(results: list[dict]) -> None:
++    """Assert exact final-text and semantic-profile receipt integrity."""
++    for item in results:
++        if not isinstance(item, dict):
++            continue
++        source = str(
++            item.get("_source_text_exact")
++            or item.get("original_text")
++            or item.get("clause_text")
++            or item.get("quoted_text")
++            or ""
++        )
++        profile_hash = build_source_evidence_model(source)["semantic_profile_hash"]
++        receipts = item.get("validation_receipts") or {}
++
++        for field in PROTECTED_FIELDS:
++            text = str(item.get(field) or "")
++            if not text.strip():
++                continue
++            receipt = receipts.get(field)
++            if not receipt or receipt.get("successful") is not True:
++                raise AssertionError(f"missing successful validation receipt for {field}")
++            final_hash = _hash(text)
++            if receipt.get("validated_text_hash") != final_hash:
++                raise AssertionError(f"validated text hash mismatch for {field}")
++            if receipt.get("final_text_hash") != final_hash:
++                raise AssertionError(f"final text hash mismatch for {field}")
++            if receipt.get("semantic_profile_hash") != profile_hash:
++                raise AssertionError(f"semantic profile hash mismatch for {field}")
++            if receipt.get("post_gate_mutators"):
++                raise AssertionError(f"post-gate mutation recorded for {field}")

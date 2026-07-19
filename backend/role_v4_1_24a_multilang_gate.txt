@@ -1,0 +1,65 @@
+
+========================================================================================================================
+EN SERVICES
+========================================================================================================================
+INPUT : The [PARTY_1] shall pay the [PARTY_2].
+OUTPUT: The Client shall pay the Service Provider.
+
+INPUT : The [SERVICE_PROVIDER] shall notify the [CLIENT].
+OUTPUT: The Service Provider shall notify the Client.
+
+
+========================================================================================================================
+FR SERVICES
+========================================================================================================================
+INPUT : La [PARTY_1] paie la [PARTY_2].
+OUTPUT: Le Client paie le Prestataire.
+
+INPUT : La responsabilité de la [PARTY_2] est limitée.
+OUTPUT: La responsabilité du Prestataire est limitée.
+
+INPUT : Les frais sont payés par la [PARTY_1].
+OUTPUT: Les frais sont payés par le Client.
+
+INPUT : Le rapport est fourni à la [PARTY_1].
+OUTPUT: Le rapport est fourni au Client.
+
+INPUT : La [SERVICE_PROVIDER] notifiera la [CLIENT].
+OUTPUT: Le Prestataire notifiera le Client.
+
+
+========================================================================================================================
+FR NDA FEMININE ROLES
+========================================================================================================================
+INPUT : La [PARTY_1] communique les informations à la [PARTY_2].
+OUTPUT: La Partie divulgatrice communique les informations à la Partie réceptrice.
+
+INPUT : Les obligations de la [PARTY_2] survivent.
+OUTPUT: Les obligations de la Partie réceptrice survivent.
+
+
+========================================================================================================================
+AR SERVICES
+========================================================================================================================
+INPUT : يلتزم [PARTY_2] بإخطار [PARTY_1].
+OUTPUT: يلتزم مقدم الخدمة بإخطار العميل.
+
+INPUT : يقدم [SERVICE_PROVIDER] التقارير إلى [CLIENT].
+OUTPUT: يقدم مقدم الخدمة التقارير إلى العميل.
+
+========================================================================================================================
+FORBIDDEN FR FORMS
+========================================================================================================================
+'la Client' => 0
+'la Prestataire' => 0
+'de le Client' => 0
+'de le Prestataire' => 0
+'à le Client' => 0
+'à le Prestataire' => 0
+'de la Client' => 0
+'de la Prestataire' => 0
+'à la Client' => 0
+'à la Prestataire' => 0
+
+========================================================================================================================
+V4.1.24A MULTILANG ROLE GATE: PASS

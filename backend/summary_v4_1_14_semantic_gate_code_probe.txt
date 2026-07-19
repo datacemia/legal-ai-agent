@@ -1,0 +1,19 @@
+app/services/contract_agent/publication_gate.py:563:        "kind": "SOURCE_PROFILE",
+app/services/contract_agent/publication_gate.py:577:        "semantic_profile_hash": _hash(canonical),
+app/services/contract_agent/publication_gate.py:586:        "SOURCE_PROFILE": 10,
+app/services/contract_agent/publication_gate.py:595:def _semantic_coverage(source_text: str, generated_text: str) -> float | None:
+app/services/contract_agent/publication_gate.py:649:    coverage = _semantic_coverage(source_text, generated)
+app/services/contract_agent/publication_gate.py:760:            reasons.append("FINAL_TEXT_SOURCE_CONTAMINATION")
+app/services/contract_agent/publication_gate.py:816:                    "semantic_coverage": coverage,
+app/services/contract_agent/publication_gate.py:835:                "semantic_coverage": _semantic_coverage(source, positive_field),
+app/services/contract_agent/publication_gate.py:867:                    "field_policy": _FIELD_POLICIES.get(field, "relevance"),
+app/services/contract_agent/publication_gate.py:868:                    "publication_gate_called": True,
+app/services/contract_agent/publication_gate.py:869:                    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
+app/services/contract_agent/publication_gate.py:871:                    "semantic_coverage": final_coverage,
+app/services/contract_agent/publication_gate.py:872:                    "semantic_profile_hash": profile["semantic_profile_hash"],
+app/services/contract_agent/publication_gate.py:898:        profile_hash = build_source_evidence_model(source)["semantic_profile_hash"]
+app/services/contract_agent/publication_gate.py:913:            if receipt.get("semantic_profile_hash") != profile_hash:
+app/services/contract_agent/semantic_source_profile.py:1098:    profile["semantic_profile_hash"] = _hash_json({
+app/services/contract_agent/semantic_source_profile.py.before_v3:435:    profile["semantic_profile_hash"] = _hash_json({
+app/services/contract_agent/semantic_source_profile.py.before_v4_1_11c_exact_engine.bak:1050:    profile["semantic_profile_hash"] = _hash_json({
+app/services/contract_agent/semantic_source_profile.py.shadow_v1:417:    profile["semantic_profile_hash"] = _hash_json({

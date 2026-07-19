@@ -1,0 +1,585 @@
+========================================================================================================================
+V4.1.17 FAMILY DETECTOR RUNTIME PROBE
+========================================================================================================================
+
+========================================================================================================================
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: infer_exposure_dimensions
+LINES: 415 - 461
+TOKENS: ['cybersecurity']
+
+MATCH LINE: 443
+00431:         exposure["legal"] = base
+00432:         exposure["operational"] = base
+00433: 
+00434:     if any(k in text for k in ["payment", "fees", "price", "rent", "salary", "invoice", "paiement", "loyer", "فاتورة", "الدفع"]):
+00435:         exposure["financial"] = base
+00436: 
+00437:     if any(k in text for k in ["liability", "indemn", "damages", "responsabilité", "indemnisation", "مسؤولية", "تعويض"]):
+00438:         exposure["financial"] = base
+00439:         exposure["legal"] = base
+00440: 
+00441:     if any(k in text for k in ["data", "privacy", "security incident", "personal data", "données", "vie privée", "البيانات", "الخصوصية"]):
+00442:         exposure["privacy"] = base
+00443:         exposure["cybersecurity"] = base
+00444:         exposure["regulatory"] = base
+00445:         exposure["compliance"] = base
+00446: 
+00447:     if any(k in text for k in ["intellectual property", "copyright", "license", "licence", "propriété intellectuelle", "الملكية الفكرية"]):
+00448:         exposure["ip"] = base
+00449:         exposure["legal"] = base
+00450: 
+00451:     if any(k in text for k in ["tax", "withholding", "vat", "tva", "impôt", "ضريبة"]):
+00452:         exposure["tax"] = base
+00453:         exposure["financial"] = base
+00454: 
+00455:     if any(k in text for k in ["employment", "employee", "employer", "salary", "emploi", "salarié", "employeur", "موظف", "صاحب العمل"]):
+00456:         exposure["employment"] = base
+00457: 
+00458:     if any(k in text for k in ["public", "reputation", "brand", "media", "réputation", "سمعة"]):
+00459:         exposure["reputation"] = base
+00460: 
+00461:     return exposure
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_contract_overview
+LINES: 990 - 1092
+TOKENS: ['family_detection', 'family_hint', 'family =']
+
+MATCH LINE: 992
+00990: def build_contract_overview(
+00991:     pipeline_result: dict,
+00992:     family_detection: dict,
+00993:     contract_text: str = "",
+00994:     party_roles: dict | None = None,
+00995:     language: str = "en",
+00996: ) -> dict:
+00997:     """
+00998:     Defensive, family-aware overview with non-destructive fact resolution.
+00999: 
+01000:     Structured values already resolved upstream are preserved. Conservative
+01001:     document-level extractors only fill gaps and never overwrite a substantive
+01002:     value with a localized "Not specified" placeholder.
+01003:     """
+01004:     language = normalize_language(language)
+01005:     not_specified = localized_default("not_specified", language)
+01006:     not_applicable = localized_default("not_applicable", language)
+01007: 
+01008:     exec_summary = pipeline_result.get("executive_summary", {}) or {}
+01009:     exec_report = pipeline_result.get("executive_report", {}) or {}
+01010:     overview = exec_report.get("contract_overview", {}) or {}
+01011: 
+01012:     family = family_detection.get("family", "General")
+
+MATCH LINE: 1012
+01000:     Structured values already resolved upstream are preserved. Conservative
+01001:     document-level extractors only fill gaps and never overwrite a substantive
+01002:     value with a localized "Not specified" placeholder.
+01003:     """
+01004:     language = normalize_language(language)
+01005:     not_specified = localized_default("not_specified", language)
+01006:     not_applicable = localized_default("not_applicable", language)
+01007: 
+01008:     exec_summary = pipeline_result.get("executive_summary", {}) or {}
+01009:     exec_report = pipeline_result.get("executive_report", {}) or {}
+01010:     overview = exec_report.get("contract_overview", {}) or {}
+01011: 
+01012:     family = family_detection.get("family", "General")
+01013:     optional_fields = get_optional_fields_for_family(family)
+01014: 
+01015:     payment_terms = exec_summary.get("payment_terms")
+01016:     source_duration = extract_contract_duration(
+01017:         contract_text,
+01018:         language,
+01019:     )
+01020:     duration = (
+01021:         source_duration
+01022:         or exec_summary.get("duration")
+01023:         or overview.get("duration")
+01024:     )
+01025: 
+01026:     if "payment_terms" in optional_fields and not payment_terms:
+01027:         payment_terms = not_applicable
+01028: 
+01029:     if "duration" in optional_fields and not duration:
+01030:         duration = not_applicable
+01031: 
+01032:     arbitration_facts = analyze_arbitration(contract_text or "") or {}
+
+MATCH LINE: 1090
+01078:             or ""
+01079:         ),
+01080:         "contract_complexity": (
+01081:             exec_summary.get("contract_complexity")
+01082:             or overview.get("contract_complexity")
+01083:             or "medium"
+01084:         ),
+01085:         "overall_balance": (
+01086:             exec_summary.get("overall_balance")
+01087:             or overview.get("overall_balance")
+01088:             or not_specified
+01089:         ),
+01090:         "family_hint": build_family_hint(family_detection),
+01091:         "_clauses_analyzed": overview.get("clauses_analyzed"),
+01092:     }
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: _canonical_report_type
+LINES: 1207 - 1222
+TOKENS: ['cybersecurity']
+
+MATCH LINE: 1213
+01207: def _canonical_report_type(value: str) -> str:
+01208:     value = normalize_family_name_for_optional_fields(
+01209:         value,
+01210:     )
+01211: 
+01212:     aliases = {
+01213:         "cybersecurity": "security",
+01214:         "cyber_security": "security",
+01215:         "information_security": "security",
+01216:         "data_processing": "data_protection",
+01217:         "privacy": "data_protection",
+01218:         "non_compete": "restrictive_covenants",
+01219:         "non_solicitation": "restrictive_covenants",
+01220:     }
+01221: 
+01222:     return aliases.get(value, value)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_unified_report_from_pipeline
+LINES: 1881 - 1944
+TOKENS: ['family_detection', 'detect_contract_family', 'contract_family']
+
+MATCH LINE: 1894
+01882:     pipeline_result: dict,
+01883:     contract_text: str,
+01884:     language: str = "en",
+01885:     party_roles: dict | None = None,
+01886: ) -> dict:
+01887:     language = normalize_language(language)
+01888:     """
+01889:     Main entrypoint. Aggregates the report from one clause-analysis truth.
+01890:     The only small AI call is limited to genuinely absent family-core clauses
+01891:     and confidence notes.
+01892:     """
+01893:     clauses = _get_clause_list(pipeline_result)
+01894:     family_detection = detect_contract_family(contract_text)
+01895: 
+01896:     key_clauses = build_key_clauses(clauses, language)
+01897:     risks = build_risks_identified(clauses, language)
+01898:     negotiation_priorities = build_negotiation_priorities(clauses, language)
+01899:     suggested_wording = build_suggested_wording(clauses)
+01900:     action_checklist = build_action_checklist(clauses, language)
+01901:     risk_score = build_risk_score(pipeline_result, risks)
+01902:     contract_overview = build_contract_overview(
+01903:         pipeline_result,
+01904:         family_detection,
+01905:         contract_text,
+01906:         party_roles,
+01907:         language,
+01908:     )
+01909: 
+01910:     executive_summary_text = (
+01911:         pipeline_result.get("executive_risk_narrative")
+01912:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01913:         or ""
+01914:     )
+
+MATCH LINE: 1904
+01892:     """
+01893:     clauses = _get_clause_list(pipeline_result)
+01894:     family_detection = detect_contract_family(contract_text)
+01895: 
+01896:     key_clauses = build_key_clauses(clauses, language)
+01897:     risks = build_risks_identified(clauses, language)
+01898:     negotiation_priorities = build_negotiation_priorities(clauses, language)
+01899:     suggested_wording = build_suggested_wording(clauses)
+01900:     action_checklist = build_action_checklist(clauses, language)
+01901:     risk_score = build_risk_score(pipeline_result, risks)
+01902:     contract_overview = build_contract_overview(
+01903:         pipeline_result,
+01904:         family_detection,
+01905:         contract_text,
+01906:         party_roles,
+01907:         language,
+01908:     )
+01909: 
+01910:     executive_summary_text = (
+01911:         pipeline_result.get("executive_risk_narrative")
+01912:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01913:         or ""
+01914:     )
+01915: 
+01916:     missing_clauses, confidence_notes, fallback_position = (
+01917:         _generate_missing_clauses_and_notes(
+01918:             contract_text,
+01919:             family_detection,
+01920:             clauses,
+01921:             language,
+01922:         )
+01923:     )
+01924: 
+
+MATCH LINE: 1919
+01907:         language,
+01908:     )
+01909: 
+01910:     executive_summary_text = (
+01911:         pipeline_result.get("executive_risk_narrative")
+01912:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01913:         or ""
+01914:     )
+01915: 
+01916:     missing_clauses, confidence_notes, fallback_position = (
+01917:         _generate_missing_clauses_and_notes(
+01918:             contract_text,
+01919:             family_detection,
+01920:             clauses,
+01921:             language,
+01922:         )
+01923:     )
+01924: 
+01925:     quality_score = build_contract_quality_score(
+01926:         pipeline_result,
+01927:         clauses,
+01928:     )
+01929: 
+01930:     return {
+01931:         "contract_family": family_detection.get("family", "General"),
+01932:         "contract_overview": contract_overview,
+01933:         "executive_summary": executive_summary_text,
+01934:         "key_clauses": key_clauses,
+01935:         "risks_identified": risks,
+01936:         "negotiation_priorities": negotiation_priorities,
+01937:         "suggested_wording": suggested_wording,
+01938:         "fallback_position": fallback_position,
+01939:         "action_checklist": action_checklist,
+
+MATCH LINE: 1931
+01919:             family_detection,
+01920:             clauses,
+01921:             language,
+01922:         )
+01923:     )
+01924: 
+01925:     quality_score = build_contract_quality_score(
+01926:         pipeline_result,
+01927:         clauses,
+01928:     )
+01929: 
+01930:     return {
+01931:         "contract_family": family_detection.get("family", "General"),
+01932:         "contract_overview": contract_overview,
+01933:         "executive_summary": executive_summary_text,
+01934:         "key_clauses": key_clauses,
+01935:         "risks_identified": risks,
+01936:         "negotiation_priorities": negotiation_priorities,
+01937:         "suggested_wording": suggested_wording,
+01938:         "fallback_position": fallback_position,
+01939:         "action_checklist": action_checklist,
+01940:         "risk_score": risk_score,
+01941:         "confidence_score": quality_score,
+01942:         "missing_clauses": missing_clauses,
+01943:         "confidence_notes": confidence_notes,
+01944:     }
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: english_indefinite_article
+LINES: 2204 - 2216
+TOKENS: ['"MSA"']
+
+MATCH LINE: 2213
+02204: def english_indefinite_article(value: str) -> str:
+02205:     word = normalize_report_text(value)
+02206:     if not word:
+02207:         return "a"
+02208: 
+02209:     # Adequate for legal family labels such as NDA, Agreement, Employment,
+02210:     # Outsourcing, IP Assignment, etc. Acronym vowel-sound exceptions are
+02211:     # handled explicitly.
+02212:     upper = word.upper()
+02213:     if upper.startswith(("NDA", "MSA", "SLA", "SPA", "LLC", "FCA")):
+02214:         return "an"
+02215: 
+02216:     return "an" if word[0].lower() in "aeiou" else "a"
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: to_legacy_summary_data
+LINES: 2219 - 2453
+TOKENS: ['contract_family', 'family =']
+
+MATCH LINE: 2242
+02230:         report.get("contract_overview", {})
+02231:         or {}
+02232:     )
+02233:     negotiation = (
+02234:         report.get("negotiation_priorities", [])
+02235:         or []
+02236:     )
+02237:     risks = (
+02238:         report.get("risks_identified", [])
+02239:         or []
+02240:     )
+02241: 
+02242:     contract_family = (
+02243:         report.get("contract_family")
+02244:         or overview.get("contract_type")
+02245:         or ""
+02246:     )
+02247:     optional_fields = get_optional_fields_for_family(
+02248:         contract_family
+02249:     )
+02250: 
+02251:     parties = canonicalize_party_labels(
+02252:         overview.get("parties"),
+02253:         language,
+02254:     )
+02255: 
+02256:     payment_terms = overview.get("payment_terms")
+02257:     if not payment_terms:
+02258:         payment_terms = (
+02259:             localized_default(
+02260:                 "not_applicable",
+02261:                 language,
+02262:             )
+
+MATCH LINE: 2243
+02231:         or {}
+02232:     )
+02233:     negotiation = (
+02234:         report.get("negotiation_priorities", [])
+02235:         or []
+02236:     )
+02237:     risks = (
+02238:         report.get("risks_identified", [])
+02239:         or []
+02240:     )
+02241: 
+02242:     contract_family = (
+02243:         report.get("contract_family")
+02244:         or overview.get("contract_type")
+02245:         or ""
+02246:     )
+02247:     optional_fields = get_optional_fields_for_family(
+02248:         contract_family
+02249:     )
+02250: 
+02251:     parties = canonicalize_party_labels(
+02252:         overview.get("parties"),
+02253:         language,
+02254:     )
+02255: 
+02256:     payment_terms = overview.get("payment_terms")
+02257:     if not payment_terms:
+02258:         payment_terms = (
+02259:             localized_default(
+02260:                 "not_applicable",
+02261:                 language,
+02262:             )
+02263:             if "payment_terms" in optional_fields
+
+MATCH LINE: 2248
+02236:     )
+02237:     risks = (
+02238:         report.get("risks_identified", [])
+02239:         or []
+02240:     )
+02241: 
+02242:     contract_family = (
+02243:         report.get("contract_family")
+02244:         or overview.get("contract_type")
+02245:         or ""
+02246:     )
+02247:     optional_fields = get_optional_fields_for_family(
+02248:         contract_family
+02249:     )
+02250: 
+02251:     parties = canonicalize_party_labels(
+02252:         overview.get("parties"),
+02253:         language,
+02254:     )
+02255: 
+02256:     payment_terms = overview.get("payment_terms")
+02257:     if not payment_terms:
+02258:         payment_terms = (
+02259:             localized_default(
+02260:                 "not_applicable",
+02261:                 language,
+02262:             )
+02263:             if "payment_terms" in optional_fields
+02264:             else not_specified
+02265:         )
+02266: 
+02267:     main_obligations, important_points = (
+02268:         build_legacy_clause_sections(
+
+MATCH LINE: 2366
+02354:             language,
+02355:         )
+02356:         for item in report.get(
+02357:             "missing_clauses",
+02358:             [],
+02359:         )
+02360:         if isinstance(item, dict)
+02361:     ]
+02362: 
+02363:     return {
+02364:         "contract_type": (
+02365:             overview.get("contract_type")
+02366:             or report.get("contract_family")
+02367:             or not_specified
+02368:         ),
+02369:         "parties": parties,
+02370:         "duration": (
+02371:             overview.get("duration")
+02372:             or not_specified
+02373:         ),
+02374:         "payment_terms": payment_terms,
+02375:         "main_obligations": compact_unique_texts(
+02376:             [
+02377:                 finalize_published_text(
+02378:                     item,
+02379:                     language,
+02380:                 )
+02381:                 for item in main_obligations
+02382:             ],
+02383:             language,
+02384:             limit=8,
+02385:         ),
+02386:         "global_summary": finalize_published_text(
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: to_legacy_simplified_string
+LINES: 2455 - 2572
+TOKENS: ['contract_family']
+
+MATCH LINE: 2464
+02455: def to_legacy_simplified_string(
+02456:     report: dict,
+02457:     language: str = "en",
+02458: ) -> str:
+02459:     language = normalize_language(language)
+02460: 
+02461:     overview = report.get("contract_overview", {}) or {}
+02462:     contract_type = (
+02463:         overview.get("contract_type")
+02464:         or report.get("contract_family")
+02465:         or localized_default("not_specified", language)
+02466:     )
+02467: 
+02468:     parties = canonicalize_party_labels(
+02469:         overview.get("parties"),
+02470:         language,
+02471:     )
+02472:     parties_text = ", ".join(parties)
+02473: 
+02474:     duration = overview.get("duration")
+02475:     payment_terms = overview.get("payment_terms")
+02476: 
+02477:     key_topics = compact_unique_texts(
+02478:         [
+02479:             clause_display_title(kc, language)
+02480:             for kc in report.get("key_clauses", [])
+02481:             if isinstance(kc, dict)
+02482:         ],
+02483:         language,
+02484:         limit=4,
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: _generate_missing_clauses_and_notes
+LINES: 2640 - 2712
+TOKENS: ['family_detection', 'family =']
+
+MATCH LINE: 2642
+02640: def _generate_missing_clauses_and_notes(
+02641:     contract_text: str,
+02642:     family_detection: dict,
+02643:     clauses: list,
+02644:     language: str,
+02645: ) -> tuple[list, list, str]:
+02646:     detected_types = sorted({
+02647:         c.get("clause_type", "other")
+02648:         for c in clauses
+02649:         if isinstance(c, dict)
+02650:     })
+02651:     definitions = extract_definitions(contract_text)
+02652:     arbitration_facts = analyze_arbitration(contract_text) or {}
+02653: 
+02654:     family = family_detection.get("family", "General")
+02655: 
+02656:     prompt = MISSING_CLAUSES_PROMPT.format(
+02657:         detected_types=", ".join(detected_types) or "none detected",
+02658:         family=family,
+02659:         definitions_block=build_definitions_block(definitions),
+02660:         arbitration_hint=build_arbitration_hint(arbitration_facts),
+02661:         contract_text=contract_text[:14000],
+02662:     )
+
+MATCH LINE: 2654
+02642:     family_detection: dict,
+02643:     clauses: list,
+02644:     language: str,
+02645: ) -> tuple[list, list, str]:
+02646:     detected_types = sorted({
+02647:         c.get("clause_type", "other")
+02648:         for c in clauses
+02649:         if isinstance(c, dict)
+02650:     })
+02651:     definitions = extract_definitions(contract_text)
+02652:     arbitration_facts = analyze_arbitration(contract_text) or {}
+02653: 
+02654:     family = family_detection.get("family", "General")
+02655: 
+02656:     prompt = MISSING_CLAUSES_PROMPT.format(
+02657:         detected_types=", ".join(detected_types) or "none detected",
+02658:         family=family,
+02659:         definitions_block=build_definitions_block(definitions),
+02660:         arbitration_hint=build_arbitration_hint(arbitration_facts),
+02661:         contract_text=contract_text[:14000],
+02662:     )
+02663:     prompt += (
+02664:         f"\n\nOutput language: {language}. Translate all generated text into {language}."
+02665:         "\nPrivacy-first: preserve anonymized placeholders exactly and never output personal data."
+02666:     )
+02667: 
+02668:     try:
+02669:         data = call_json_ai(prompt, temperature=0.0)
+02670:     except Exception as e:
+02671:         logger.exception("Missing clauses AI error: %s", e)
+02672:         fallback_notes = {
+02673:             "en": ["Could not generate missing-clause analysis."],
+02674:             "fr": ["Impossible de générer l'analyse des clauses manquantes."],
+
+========================================================================================================================
+FILE: app\services\contract_agent\contract_agent.py
+========================================================================================================================
+
+========================================================================================================================
+FILE: app\workers\handlers\contract_handler.py
+========================================================================================================================
+
+========================================================================================================================
+IMPORT / FUNCTION ORIGIN
+========================================================================================================================
+
+NAME: detect_contract_family
+FOUND: True
+MODULE: app.services.contract_agent.contract_family_detector
+FILE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_family_detector.py
+
+NAME: detect_family
+FOUND: False
+
+NAME: build_unified_report_from_pipeline
+FOUND: True
+MODULE: app.services.contract_agent.unified_report_from_pipeline
+FILE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\unified_report_from_pipeline.py
+
+NAME: build_contract_overview
+FOUND: True
+MODULE: app.services.contract_agent.unified_report_from_pipeline
+FILE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\unified_report_from_pipeline.py

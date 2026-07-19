@@ -1,0 +1,899 @@
+[
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "2.2",
+    "source_language": "fr",
+    "source_text": "2.2 La Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "salaire de base",
+            "start": 95,
+            "end": 110
+          }
+        ]
+      },
+      {
+        "concept": "BONUS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "prime discrétionnaire",
+            "start": 38,
+            "end": 59
+          }
+        ]
+      },
+      {
+        "concept": "EQUITY_GRANT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "attribution initiale de 150 000 actions",
+            "start": 169,
+            "end": 208
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BONUS",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BONUS",
+            "start": 7,
+            "end": 223,
+            "text": "Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soum"
+          },
+          {
+            "label": "BONUS",
+            "start": 23,
+            "end": 239,
+            "text": "éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une pério"
+          },
+          {
+            "label": "BONUS",
+            "start": 38,
+            "end": 91,
+            "text": "prime discrétionnaire annuelle pouvant atteindre 40 %"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "394025453b08d3632b45430090fa209422159bd61a041685e2c47a81435c7bc3",
+        "normalized_concept": "BONUS",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "EQUITY_GRANT",
+        "rank": 97,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_GRANT",
+            "start": 169,
+            "end": 208,
+            "text": "attribution initiale de 150 000 actions"
+          },
+          {
+            "label": "EQUITY_GRANT",
+            "start": 157,
+            "end": 218,
+            "text": "recevra une attribution initiale de 150 000 actions gratuites"
+          },
+          {
+            "label": "EQUITY_GRANT",
+            "start": 201,
+            "end": 255,
+            "text": "actions gratuites soumises à une période d'acquisition"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "ecbb2f3c54c4bca836657bddce252ba086879e101f98c7f8740f1080b03dbbca",
+        "normalized_concept": "EQUITY_GRANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 7,
+            "end": 273,
+            "text": "Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 38,
+            "end": 273,
+            "text": "prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "8224c4263ce5cdc57aa7882942c5e586859b8536b9a3ec16c1176e27b87b90bf",
+        "normalized_concept": "INCENTIVE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 7,
+            "end": 273,
+            "text": "Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 38,
+            "end": 273,
+            "text": "prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "8224c4263ce5cdc57aa7882942c5e586859b8536b9a3ec16c1176e27b87b90bf",
+        "normalized_concept": "INCENTIVE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 40,
+              "unit": "PERCENT",
+              "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+              "related_mechanism": "BONUS"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "salaire de base",
+            "start": 95,
+            "end": 110
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Le présent Contrat est régi par le droit de l'État du Delaware. La Dirigeante reconnaît que les dispositions de non-concurrence prévues aux présentes sont assorties d'une contrepartie adéquate et sont raisonnables quant à leur portée et leur durée.",
+    "primary_type": "governing_law",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 27,
+            "end": 204,
+            "text": "régi par le droit de l'État du Delaware. La Dirigeante reconnaît que les dispositions de non-concurrence prévues aux présentes sont assorties d'une contrepartie adéquate et sont"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "b6abbf6346f865badb95863009822665b95c834274cd21c9affb7c8a08b3bd3b",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 27,
+            "end": 204,
+            "text": "régi par le droit de l'État du Delaware. La Dirigeante reconnaît que les dispositions de non-concurrence prévues aux présentes sont assorties d'une contrepartie adéquate et sont"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "b6abbf6346f865badb95863009822665b95c834274cd21c9affb7c8a08b3bd3b",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 La Dirigeante exercera les fonctions de Directrice Scientifique, sous l'autorité du Directeur Général, et consacrera l'essentiel de son temps de travail aux affaires de la Société.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 93,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 7,
+            "end": 183,
+            "text": "Dirigeante exercera les fonctions de Directrice Scientifique, sous l'autorité du Directeur Général, et consacrera l'essentiel de son temps de travail aux affaires de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3d144e28414d7e1a2739761234ae94f44835d3e28c21747b8016602284a354a6",
+        "normalized_concept": "EMPLOYMENT_ROLE_DUTY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "EMPLOYMENT_ROLE_DUTY",
+        "rank": 93,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EMPLOYMENT_ROLE_DUTY",
+            "start": 7,
+            "end": 183,
+            "text": "Dirigeante exercera les fonctions de Directrice Scientifique, sous l'autorité du Directeur Général, et consacrera l'essentiel de son temps de travail aux affaires de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3d144e28414d7e1a2739761234ae94f44835d3e28c21747b8016602284a354a6",
+        "normalized_concept": "EMPLOYMENT_ROLE_DUTY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 La Société versera à la Dirigeante un salaire de base annuel de 410 000 $, payable selon les pratiques de paie standard de la Société, sous réserve d'un examen annuel par le Conseil d'Administration.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "salaire de base",
+            "start": 42,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BASE_COMPENSATION",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 42,
+            "end": 202,
+            "text": "salaire de base annuel de 410 000 $, payable selon les pratiques de paie standard de la Société, sous réserve d'un examen annuel par le Conseil d'Administration"
+          },
+          {
+            "label": "BASE_COMPENSATION",
+            "start": 7,
+            "end": 202,
+            "text": "Société versera à la Dirigeante un salaire de base annuel de 410 000 $, payable selon les pratiques de paie standard de la Société, sous réserve d'un examen annuel par le Conseil d'Administration"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c1b491dd85bcdfdcc5285083d52c5fe9d19210974bf1ce7e655b233fd55a34b8",
+        "normalized_concept": "BASE_COMPENSATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 410000,
+              "unit": "USD",
+              "semantic_role": "ANNUAL_BASE_COMPENSATION",
+              "related_mechanism": "BASE_COMPENSATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 79,
+            "end": 114,
+            "text": "payable selon les pratiques de paie"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "786497e2f4d6106fe20a5b22c21d478127242b343683a78c21bcd2198f7acdfa",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 79,
+            "end": 114,
+            "text": "payable selon les pratiques de paie"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "786497e2f4d6106fe20a5b22c21d478127242b343683a78c21bcd2198f7acdfa",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.",
+    "primary_type": "restrictive_covenants",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du contrat et pendant dix-huit (18) mois",
+            "start": 15,
+            "end": 61
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 85,
+            "end": 272,
+            "text": "Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 96,
+            "end": 272,
+            "text": "ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "da09e7d78441cf47494d64ad3663ae336160390478a01363d27e9e8d8b05746a",
+        "normalized_concept": "NON_COMPETE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18,
+              "unit": "MONTHS",
+              "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+              "related_mechanism": "NON_COMPETE"
+            }
+          ]
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 85,
+            "end": 272,
+            "text": "Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 96,
+            "end": 272,
+            "text": "ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "da09e7d78441cf47494d64ad3663ae336160390478a01363d27e9e8d8b05746a",
+        "normalized_concept": "NON_COMPETE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18,
+              "unit": "MONTHS",
+              "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+              "related_mechanism": "NON_COMPETE"
+            }
+          ]
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du contrat et pendant dix-huit (18) mois",
+            "start": 15,
+            "end": 61
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "Clause 4.2",
+    "source_language": "fr",
+    "source_text": "4.2 Pendant la durée du contrat et pendant vingt-quatre (24) mois après sa cessation, la Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société.",
+    "primary_type": "restrictive_covenants",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du contrat et pendant vingt-quatre (24) mois",
+            "start": 15,
+            "end": 65
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 89,
+            "end": 164,
+            "text": "Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 100,
+            "end": 164,
+            "text": "ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "bc566d456ea3b4556e0a816dc191acfa64eef5f615b4628745da53d69de997a7",
+        "normalized_concept": "NON_SOLICITATION_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 89,
+            "end": 164,
+            "text": "Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 100,
+            "end": 164,
+            "text": "ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "bc566d456ea3b4556e0a816dc191acfa64eef5f615b4628745da53d69de997a7",
+        "normalized_concept": "NON_SOLICITATION_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du contrat et pendant vingt-quatre (24) mois",
+            "start": 15,
+            "end": 65
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "Clause 5.1",
+    "source_language": "fr",
+    "source_text": "5.1 La Dirigeante cède par les présentes à la Société l'intégralité des droits sur toute invention, découverte et œuvre créées pendant la durée du contrat, se rapportant à l'activité de la Société ou résultant de l'utilisation des ressources de la Société.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du contrat, se rapportan",
+            "start": 138,
+            "end": 168
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_ASSIGNMENT",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_ASSIGNMENT",
+            "start": 18,
+            "end": 119,
+            "text": "cède par les présentes à la Société l'intégralité des droits sur toute invention, découverte et œuvre"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "02623bce7fd0b28a9136a65bfc8ae1a4ce0feb78e4908fcbfda214f4dad22cce",
+        "normalized_concept": "IP_ASSIGNMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_ASSIGNMENT",
+        "rank": 93,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_ASSIGNMENT",
+            "start": 18,
+            "end": 119,
+            "text": "cède par les présentes à la Société l'intégralité des droits sur toute invention, découverte et œuvre"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "02623bce7fd0b28a9136a65bfc8ae1a4ce0feb78e4908fcbfda214f4dad22cce",
+        "normalized_concept": "IP_ASSIGNMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée du contrat, se rapportan",
+            "start": 138,
+            "end": 168
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

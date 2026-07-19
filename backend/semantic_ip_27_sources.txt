@@ -1,0 +1,186 @@
+ROWS: 27
+
+====================================================================================================
+[1/27]
+LANG: en
+DOC: 02_Master_Services_Agreement.json
+REF: clause_8
+PIPELINE: intellectual_property
+SOURCE:
+3.1 Provider retains all right, title, and interest in its pre-existing tools, methodologies, and know-how used to deliver the services.
+
+====================================================================================================
+[2/27]
+LANG: en
+DOC: 03_SaaS_Cloud_Agreement.json
+REF: clause_6
+PIPELINE: intellectual_property
+SOURCE:
+4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.
+
+====================================================================================================
+[3/27]
+LANG: en
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_8
+PIPELINE: intellectual_property
+SOURCE:
+5.1 Executive hereby assigns to Contracting Party A all right, title, and interest in any inventions, discoveries, and works of authorship conceived or developed during employment that relate to Contracting Party A's business or arise from the use of Contracting Party A resources.
+
+====================================================================================================
+[4/27]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_4
+PIPELINE: license
+SOURCE:
+1.2 Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.
+
+====================================================================================================
+[5/27]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_5
+PIPELINE: intellectual_property
+SOURCE:
+1.1 Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term.
+
+====================================================================================================
+[6/27]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_7
+PIPELINE: intellectual_property
+SOURCE:
+3.1 Licensor retains all right, title, and interest in and to the Licensed Software, including all modifications and improvements, whether made by Licensor or Licensee.
+
+====================================================================================================
+[7/27]
+LANG: en
+DOC: 09_Consulting_Services_Agreement.json
+REF: clause_2
+PIPELINE: intellectual_property
+SOURCE:
+3.1 All work product, reports, analyses, and recommendations developed by Contracting Party B specifically for Contracting Party A under this Agreement shall be deemed "work made for hire" and shall be owned exclusively by Contracting Party A upon payment in full.
+
+====================================================================================================
+[8/27]
+LANG: en
+DOC: 09_Consulting_Services_Agreement.json
+REF: clause_5
+PIPELINE: intellectual_property
+SOURCE:
+3.2 Contracting Party B retains ownership of its pre-existing methodologies, frameworks, and general know-how, and may reuse general knowledge and skills gained during the engagement in future engagements with other clients, provided no Contracting Party A Confidential Information is disclosed.
+
+====================================================================================================
+[9/27]
+LANG: en
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_6
+PIPELINE: intellectual_property
+SOURCE:
+1.1 At the Closing, Seller shall sell, transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right, title, and interest in the Purchased Assets, free and clear of all liens, except Permitted Liens listed in Exhibit C.
+
+====================================================================================================
+[10/27]
+LANG: en
+DOC: 15_General_Commercial_Agreement.json
+REF: clause_4
+PIPELINE: intellectual_property
+SOURCE:
+3.1 Each Party retains ownership of its pre-existing intellectual property. Joint IP shall be jointly owned by the Parties in equal, undivided shares, with each Party entitled to exploit the Joint IP without accounting to the other, subject to a right of first negotiation before licensing Joint IP to a direct competitor of the other Party.
+
+====================================================================================================
+[11/27]
+LANG: fr
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_2
+PIPELINE: work_product
+SOURCE:
+3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables.
+
+====================================================================================================
+[12/27]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_7
+PIPELINE: intellectual_property
+SOURCE:
+5.1 La Dirigeante cède par les présentes à la Société l'intégralité des droits sur toute invention, découverte et œuvre créées pendant la durée du contrat, se rapportant à l'activité de la Société ou résultant de l'utilisation des ressources de la Société.
+
+====================================================================================================
+[13/27]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_3
+PIPELINE: intellectual_property
+SOURCE:
+1.1 Le Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée.
+
+====================================================================================================
+[14/27]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_4
+PIPELINE: intellectual_property
+SOURCE:
+1.2 Le Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable.
+
+====================================================================================================
+[15/27]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_7
+PIPELINE: intellectual_property
+SOURCE:
+3.1 Le Concédant conserve l'intégralité des droits sur le Logiciel Concédé, y compris toutes modifications et améliorations, qu'elles soient réalisées par le Concédant ou le Licencié.
+
+====================================================================================================
+[16/27]
+LANG: fr
+DOC: 09_Consulting_Services_Agreement_FR.json
+REF: clause_5
+PIPELINE: ownership
+SOURCE:
+3.2 Le Consultant conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre de missions futures avec d'autres clients, à condition de ne divulguer aucune Information Confidentielle de la Partie contractante A.
+
+====================================================================================================
+[17/27]
+LANG: fr
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_6
+PIPELINE: intellectual_property
+SOURCE:
+3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).
+
+====================================================================================================
+[18/27]
+LANG: fr
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_8
+PIPELINE: intellectual_property
+SOURCE:
+7.1 Le présent Pacte prendra automatiquement fin à la première des dates suivantes : une Introduction en Bourse Qualifiée ou une cession de la Société approuvée conformément à l'article 3.1.
+
+====================================================================================================
+[19/27]
+LANG: fr
+DOC: 15_General_Commercial_Agreement_FR.json
+REF: clause_3
+PIPELINE: intellectual_property
+SOURCE:
+3.1 Chaque Partie conserve la propriété de sa propriété intellectuelle préexistante. La PI Conjointe sera détenue conjointement par les Parties en parts égales et indivises, chaque Partie étant en droit de l'exploiter sans avoir à rendre de comptes à l'autre, sous réserve d'un droit de première négociation avant toute concession de licence de PI Conjointe à un concurrent direct de l'autre Partie.
+
+====================================================================================================
+[20/27]
+LANG: ar
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+SOURCE:
+Traceback (most recent call last):
+  File "<stdin>", line 40, in <module>
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 4-8: character maps to <undefined>

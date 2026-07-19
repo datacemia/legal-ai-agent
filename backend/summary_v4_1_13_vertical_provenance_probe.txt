@@ -1,0 +1,2657 @@
+########################################################################################################################
+A. CANONICAL CLAUSE ANALYSES
+########################################################################################################################
+CLAUSES: 109
+
+SELECTED: 21
+
+========================================================================================================================
+CANONICAL [1]
+========================================================================================================================
+clause_id:
+node_50
+
+clause_reference:
+9.2
+
+clause_title:
+Confidential Information Rights
+
+title:
+Confidential Information Rights
+
+clause_type:
+intellectual_property
+
+risk_level:
+high
+
+risk_baseline:
+broad_ip_assignment
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+90
+
+materiality_level:
+medium
+
+original_text:
+9.2 Each Party retains all right, title, and interest in and to its own Confidential Information, including all intellectual property rights therein, and no transfer of such rights shall occur by virtue of this Agreement.
+
+quoted_text:
+Each Party retains all right, title, and interest in and to its own Confidential Information, including all intellectual property rights therein, and no transfer of such rights shall occur by virtue of this Agreement.
+
+_source_text_exact:
+9.2 Each Party retains all right, title, and interest in and to its own Confidential Information, including all intellectual property rights therein, and no transfer of such rights shall occur by virtue of this Agreement.
+
+explanation_simple:
+Each Party maintains ownership of its own Confidential Information and related intellectual property.
+
+why_it_matters:
+This clause ensures that neither Party loses ownership of its Confidential Information or intellectual property through the Agreement.
+
+legal_insight:
+This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+
+red_flag_reason:
+all intellectual property
+
+risk_reasons:
+["Confidentiality obligations may continue beyond contract termination.", "Intellectual property provisions may affect ownership or usage rights."]
+
+reasoning_evidence:
+9.2 Each Party retains all right, title, and interest in and to its own Confidential Information, including all intellectual property rights therein, and no tra
+
+recommendation:
+Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.
+
+negotiation_advice:
+Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.
+
+negotiation_priority:
+high
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["confidential", "each", "including", "information", "intellectual", "interest", "no", "occur", "own", "party", "property", "retain", "right", "therein", "title", "transfer", "virtue"], "kind": "SOURCE_PROFILE", "primary_type": "intellectual_property"}], "semantic_profile_hash": "fbd1fec678241d310f9898ba7f66ecdeaa1da674ad406214acc1cec2be1838b3"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389", "gate_result": "PASS", "input_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.25, "semantic_profile_hash": "fbd1fec678241d310f9898ba7f66ecdeaa1da674ad406214acc1cec2be1838b3", "source_text_hash": "5a48e29fc983d1bb9462e67f378037d24c755abd8e67a83206484fb93c6fb2ad", "successful": true, "text_before_validation": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.", "validated_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "9de260abb5ac6ff11e27f9f043a5b47baafd182aefa14d365b78efc4a1d7490b", " ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [2]
+========================================================================================================================
+clause_id:
+node_59
+
+clause_reference:
+11.2
+
+clause_title:
+Injunctive Relief and Specific Performance
+
+title:
+Injunctive Relief and Specific Performance
+
+clause_type:
+remedies
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+51
+
+materiality_level:
+low
+
+original_text:
+11.2 In the event of an actual or threatened breach of this Agreement, the Receiving Party shall be entitled to seek injunctive relief and specific performance, in addition to any other remedies available at law or in equity, without the necessity of posting bond or proving actual damages.
+
+quoted_text:
+the Receiving Party shall be entitled to seek injunctive relief and specific performance, in addition to any other remedies available at law or in equity, without the necessity of posting bond or proving actual damages.
+
+_source_text_exact:
+11.2 In the event of an actual or threatened breach of this Agreement, the [PERSON] shall be entitled to seek injunctive relief and specific performance, in addition to any other remedies available at law or in equity, without the necessity of posting bond or proving actual damages.
+
+explanation_simple:
+The clause allows the Receiving Party to seek immediate legal remedies without the usual requirements.
+
+why_it_matters:
+This provision can expedite legal relief for the Receiving Party, potentially increasing their leverage in disputes.
+
+legal_insight:
+This clause should be reviewed because it may affect legal, financial, or operational obligations.
+
+red_flag_reason:
+The clause allows for injunctive relief without the usual requirements, which could lead to unilateral advantages for the Receiving Party.
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+11.2 In the event of an actual or threatened breach of this Agreement, the Receiving Party shall be entitled to seek injunctive relief and specific performance, in add
+
+recommendation:
+Consider adding a requirement for a preliminary hearing before granting injunctive relief to ensure fairness.
+
+negotiation_advice:
+Negotiate to include a requirement for a hearing before injunctive relief is granted.
+
+negotiation_priority:
+high
+
+safer_alternative:
+Injunctive relief may be sought only after a preliminary hearing to assess the merits of the claim.
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["actual", "addition", "available", "bond", "breach", "damage", "entitled", "equity", "event", "injunctive", "law", "necessity", "performance", "person", "posting", "proving", "relief", "remedy", "seek", "specific", "threatened"], "kind": "SOURCE_PROFILE", "primary_type": "remedies"}], "semantic_profile_hash": "ceddbded1850664873367f19ca94e7e117c54aa2c03c2badb535b9b8b6dc1f69"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "06f4f8e9bad94e5abc7f9044fdad45a79a69455e326d7bf2e77d9b1266a06348", "gate_result": "PASS", "input_text_hash": "06f4f8e9bad94e5abc7f9044fdad45a79a69455e326d7bf2e77d9b1266a06348", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0, "semantic_profile_hash": "ceddbded1850664873367f19ca94e7e117c54aa2c03c2badb535b9b8b6dc1f69", "source_text_hash": "d8c5cdd5c73de8c6c8f2b1f23ca309bb86b097813fcc3401870e0c15c3407397", "successful": true, "text_before_validation": "This clause should be reviewed because it may affect legal, financial, or operational obligations.", "validated_text_hash": "06f4f8e9bad94e5abc7f9044fdad45a79a69455e326d7bf2e77d9b1266a06348", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "a00a69533c83b8c0c40aadaafc9e14a47df0eda0e936a9751b379a9ee29b2e40", "gate_result": "PASS", "input ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [3]
+========================================================================================================================
+clause_id:
+node_62
+
+clause_reference:
+11.5
+
+clause_title:
+Attorney's Fees
+
+title:
+Attorney's Fees
+
+clause_type:
+fees
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+51
+
+materiality_level:
+low
+
+original_text:
+11.5 The Receiving Party in any action to enforce this Agreement shall be entitled to recover its reasonable attorneys' fees and costs incurred in connection with such action, in addition to any other relief awarded.
+
+quoted_text:
+The Receiving Party in any action to enforce this Agreement shall be entitled to recover its reasonable attorneys' fees and costs incurred in connection with such action, in addition to any other relief awarded.
+
+_source_text_exact:
+11.5 The [PERSON] in any action to enforce this Agreement shall be entitled to recover its reasonable attorneys' fees and costs incurred in connection with such action, in addition to any other relief awarded.
+
+explanation_simple:
+This clause allows the Receiving Party to recover legal fees in enforcement actions.
+
+why_it_matters:
+Recovering attorneys' fees can significantly impact the financial burden of enforcing the agreement.
+
+legal_insight:
+This clause creates a potential financial exposure for the opposing party, as they may be liable for the Receiving Party's legal costs if enforcement actions arise. This could deter parties from pursuing legitimate claims due to the risk of incurring additional costs.
+
+red_flag_reason:
+The clause may create a financial disincentive for the opposing party to contest enforcement due to the risk of incurring substantial legal fees.
+
+risk_reasons:
+["Payment provisions may affect cash flow or performance rights."]
+
+reasoning_evidence:
+11.5 The Receiving Party in any action to enforce this Agreement shall be entitled to recover its reasonable attorneys' fees and costs incurred in connection with such
+
+recommendation:
+
+
+negotiation_advice:
+
+
+negotiation_priority:
+medium
+
+safer_alternative:
+Both parties shall be entitled to recover reasonable attorneys' fees and costs incurred in connection with enforcement actions.
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["action", "addition", "attorney", "awarded", "connection", "costs", "enforce", "entitled", "fees", "incurred", "person", "reasonable", "recover", "relief"], "kind": "SOURCE_PROFILE", "primary_type": "fees"}], "semantic_profile_hash": "2f1cf200240ba12be074acd281a393ebf6e0624b680e5f4fa3c6c28d1050dcf9"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "f089f9787666fc39f61640f142ef2a83e4e6175dae080283b663d32c760f32cf", "gate_result": "PASS", "input_text_hash": "f089f9787666fc39f61640f142ef2a83e4e6175dae080283b663d32c760f32cf", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.1667, "semantic_profile_hash": "2f1cf200240ba12be074acd281a393ebf6e0624b680e5f4fa3c6c28d1050dcf9", "source_text_hash": "d812e55148b26d004e425c350316f43d01c01b86e97627b838bb53c169f75c27", "successful": true, "text_before_validation": "This clause creates a potential financial exposure for the opposing party, as they may be liable for the Receiving Party's legal costs if enforcement actions arise. This could deter parties from pursuing legitimate claims due to the risk of incurring additional costs.", "validated_text_hash": "f089f9787666fc39f61640f142ef2a83e4e6175dae080283b663d32c760f32cf", "validation_reasons": []}, "market_comparison": {"f ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [4]
+========================================================================================================================
+clause_id:
+node_66
+
+clause_reference:
+12.3
+
+clause_title:
+Indemnification Notice and Cooperation
+
+title:
+Indemnification Notice and Cooperation
+
+clause_type:
+indemnity
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+34
+
+materiality_level:
+medium
+
+original_text:
+12.3 The Disclosing Party shall provide the Disclosing Party with prompt written notice of any claim for which indemnification is sought, and shall reasonably cooperate with the Disclosing Party's defense of such claim.
+
+quoted_text:
+The Disclosing Party shall provide the Disclosing Party with prompt written notice of any claim for which indemnification is sought, and shall reasonably cooperate with the Disclosing Party's defense of such claim.
+
+_source_text_exact:
+12.3 The [ORGANIZATION] shall provide the [ORGANIZATION] with prompt written notice of any claim for which indemnification is sought, and shall reasonably cooperate with the [ORGANIZATION]'s defense of such claim.
+
+explanation_simple:
+The clause requires prompt notice and cooperation regarding indemnification claims.
+
+why_it_matters:
+Timely notice and cooperation are essential for effective defense against claims.
+
+legal_insight:
+This clause allocates responsibility for third-party claims, defense costs, damages, or losses.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Liability allocation may affect financial exposure or available remedies."]
+
+reasoning_evidence:
+12.3 The Disclosing Party shall provide the Disclosing Party with prompt written notice of any claim for which indemnification is sought, and shall reasonably coope
+
+recommendation:
+Confirm which claims are covered, who controls the defense, whether notice is required, and whether liability limits apply.
+
+negotiation_advice:
+
+
+negotiation_priority:
+medium
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["claim", "cooperate", "defense", "indemnification", "notice", "organization", "prompt", "provide", "reasonably", "sought", "which", "written"], "kind": "SOURCE_PROFILE", "primary_type": "indemnity"}], "semantic_profile_hash": "a2334138ed0e1f9f2eb85cec8d7fd9231f290cf8c633a730b379244ab19f3a56"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "ef1081783f515d51987428fe71d8df1bb22ba1cf7e567bc4511bfa35f4548146", "gate_result": "PASS", "input_text_hash": "ef1081783f515d51987428fe71d8df1bb22ba1cf7e567bc4511bfa35f4548146", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.1667, "semantic_profile_hash": "a2334138ed0e1f9f2eb85cec8d7fd9231f290cf8c633a730b379244ab19f3a56", "source_text_hash": "3346e67889e341bb28194cef842dca7cd4d61a2b98f262551a9f4f2a46673b9b", "successful": true, "text_before_validation": "This clause allocates responsibility for third-party claims, defense costs, damages, or losses.", "validated_text_hash": "ef1081783f515d51987428fe71d8df1bb22ba1cf7e567bc4511bfa35f4548146", "validation_reasons": []}, "recommendation": {"field": "recommendation", "field_policy": "relevance", "final_text_hash": "38f17df67869a26d6626d62fc14d2e309213326257ac512d56054a95aa10223b", "gate_result": "PASS", "input_text_ ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [5]
+========================================================================================================================
+clause_id:
+node_44
+
+clause_reference:
+8.1
+
+clause_title:
+Return or Destruction of Confidential Information
+
+title:
+Return or Destruction of Confidential Information
+
+clause_type:
+confidentiality
+
+risk_level:
+medium
+
+risk_baseline:
+broad_confidentiality
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+32
+
+materiality_level:
+high
+
+original_text:
+8.1 Upon the written request of the Receiving Party, or upon termination or expiration of this Agreement, the Receiving Party shall promptly, and in any event within thirty (30) days, return or destroy all Confidential Information of the Disclosing Party in its possession or control, including all copies, extracts, and summaries thereof.
+
+quoted_text:
+the Receiving Party shall promptly, and in any event within thirty (30) days, return or destroy all Confidential Information of the Disclosing Party in its possession or control
+
+_source_text_exact:
+8.1 Upon the written request of the [PERSON], or upon termination or expiration of this Agreement, the [PERSON] shall promptly, and in any event within thirty (30) days, return or destroy all Confidential Information of the [ORGANIZATION] in its possession or control, including all copies, extracts, and summaries thereof.
+
+explanation_simple:
+The clause mandates the return or destruction of Confidential Information upon request or termination.
+
+why_it_matters:
+This ensures that sensitive information is not retained by the Receiving Party after the agreement ends.
+
+legal_insight:
+This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Termination provisions may affect operational continuity or legal remedies.", "Confidentiality obligations may continue beyond contract termination."]
+
+reasoning_evidence:
+8.1 Upon the written request of the Receiving Party, or upon termination or expiration of this Agreement, the Receiving Party shall promptly, and in any event within thirty (
+
+recommendation:
+Review the termination triggers, notice requirements, cure periods, and post-termination obligations.
+
+negotiation_advice:
+Consider narrowing the scope of confidential information, adding standard disclosure exceptions, clarifying permitted recipients, and limiting the duration of post-termination confidentiality obligations based on the sensitivity of the information.
+
+negotiation_priority:
+medium
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["confidential", "control", "copie", "days", "destroy", "event", "expiration", "extract", "including", "information", "organization", "person", "possession", "promptly", "request", "return", "summary", "terminate", "thereof", "thirty", "upon", "within", "written"], "kind": "SOURCE_PROFILE", "primary_type": "termination"}], "semantic_profile_hash": "e2f9bf1190d7df7eb97ddee985bc1d912197b6fd902072b9cca67bc3be1dca94"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3", "gate_result": "PASS", "input_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0833, "semantic_profile_hash": "e2f9bf1190d7df7eb97ddee985bc1d912197b6fd902072b9cca67bc3be1dca94", "source_text_hash": "ccdf2837ef7957a7622bfc64627b1476f62628a4804b571c9d944aa03559c4ae", "successful": true, "text_before_validation": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.", "validated_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3", "validation_reasons": []}, "negotiation_advice": {"field": "negotiation_advice", "field_policy": "relevance", "final_text_hash": "1829add8639e6ad002bda25df425a8443455c541b3141ca28edcf1b93f17c823", "gate ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [6]
+========================================================================================================================
+clause_id:
+node_54
+
+clause_reference:
+10.2
+
+clause_title:
+Representations and Warranties
+
+title:
+Representations and Warranties
+
+clause_type:
+warranty
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+26
+
+materiality_level:
+low
+
+original_text:
+10.2 Each Party represents and warrants that its exécution and performance of this Agreement does not and will not conflict with or violate any other agreement to which it is a party.
+
+quoted_text:
+10.2 Each Party represents and warrants that its exécution and performance of this Agreement does not and will not conflict with or violate any other agreement to which it is a party.
+
+_source_text_exact:
+10.2 Each Party represents and warrants that its exécution and performance of this Agreement does not and will not conflict with or violate any other agreement to which it is a party.
+
+explanation_simple:
+Each Party assures that fulfilling this Agreement won't breach other agreements.
+
+why_it_matters:
+
+
+legal_insight:
+This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.
+
+red_flag_reason:
+
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+10.2 Each Party represents and warrants that its exécution and performance of this Agreement does not and will not conflict with or violate any other agreement
+
+recommendation:
+Check the accuracy of representations, warranty scope, exclusions, remedy periods, disclaimers, reliance limits, and interaction with liability caps.
+
+negotiation_advice:
+Manual review required: generated text did not pass source-fidelity validation.
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["conflict", "does", "each", "exécution", "it", "not", "party", "performance", "represent", "violate", "warrant", "which", "will"], "kind": "SOURCE_PROFILE", "primary_type": "warranty"}], "semantic_profile_hash": "e6aeba30b14632975dbccd30ba8c9dc861903fc5480c121ad4e81758d5df50d7"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "370d8788b163b25c254ff1dc193408bd0e47e09d3cba881f67e81e7fc227b7f3", "gate_result": "PASS", "input_text_hash": "370d8788b163b25c254ff1dc193408bd0e47e09d3cba881f67e81e7fc227b7f3", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.1667, "semantic_profile_hash": "e6aeba30b14632975dbccd30ba8c9dc861903fc5480c121ad4e81758d5df50d7", "source_text_hash": "30472453beebda37332384e6ff14ca6421587e6ad1f8d630254d967d124f9eb0", "successful": true, "text_before_validation": "This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.", "validated_text_hash": "370d8788b163b25c254ff1dc193408bd0e47e09d3cba881f67e81e7fc227b7f3", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "83110f83d319c84eefb2810f6819151515032682fa21eb410006be62c8e7014f",  ...[TRUNCATED]
+
+fidelity_issues:
+[{"field": "negotiation_advice", "kind": "final_text_source_contamination", "note": "FINAL_TEXT_SOURCE_CONTAMINATION", "severity": "high"}]
+
+_publication_validation_history:
+{"negotiation_advice": {"input_text": "Consider clarifying representations and warranties, quality standards, disclaimers, exclusions, remedy periods, reliance limitations, and how warranty remedies interact with limitation of liability.", "input_text_hash": "30b2323c1817c4ab1a79136a27bd507b6468bf5454219d0ca82a89563a4846ba", "semantic_coverage": 0.0, "validation_reasons": ["FINAL_TEXT_SOURCE_CONTAMINATION"]}}
+
+========================================================================================================================
+CANONICAL [7]
+========================================================================================================================
+clause_id:
+node_60
+
+clause_reference:
+Section 11.3
+
+clause_title:
+Cumulative Remedies
+
+title:
+Cumulative Remedies
+
+clause_type:
+remedies
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+26
+
+materiality_level:
+low
+
+original_text:
+11.3 The remedies set forth in this Section 11 are cumulative and not exclusive of any other remedy available to either Party under this Agreement, at law, or in equity.
+
+quoted_text:
+The remedies set forth in this Section 11 are cumulative and not exclusive of any other remedy available to either Party under this Agreement, at law, or in equity.
+
+_source_text_exact:
+11.3 The remedies set forth in this Section 11 are cumulative and not exclusive of any other remedy available to either Party under this Agreement, at law, or in equity.
+
+explanation_simple:
+This clause allows both parties to pursue multiple remedies.
+
+why_it_matters:
+It ensures that neither party is limited to a single remedy, which can enhance their ability to seek redress.
+
+legal_insight:
+The cumulative nature of remedies provides flexibility for both parties to address breaches or disputes effectively, potentially reducing litigation risks by allowing for a broader range of responses.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Restrictive commitments may reduce commercial or operational flexibility."]
+
+reasoning_evidence:
+11.3 The remedies set forth in this Section 11 are cumulative and not exclusive of any other remedy available to either Party under this Agreement, at law, or i
+
+recommendation:
+The clause's terms are reasonable as they provide both parties with multiple avenues for remedy.
+
+negotiation_advice:
+
+
+negotiation_priority:
+medium
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["available", "cumulative", "either", "equity", "exclusive", "forth", "law", "not", "party", "remedy", "set", "under"], "kind": "SOURCE_PROFILE", "primary_type": "remedies"}], "semantic_profile_hash": "7c5d4090e6383b72c995dd74263cd50ff7ac54b8d122ee8128e15f7bc597b4d7"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "b5218ceeed119980ff9e04929ffab8be70c4b384a8ed20850370916e01241ac1", "gate_result": "PASS", "input_text_hash": "b5218ceeed119980ff9e04929ffab8be70c4b384a8ed20850370916e01241ac1", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.25, "semantic_profile_hash": "7c5d4090e6383b72c995dd74263cd50ff7ac54b8d122ee8128e15f7bc597b4d7", "source_text_hash": "b97a37a23e7dd86373e9a88115da44369eb4f993b7c0315e7d3c8f556483861a", "successful": true, "text_before_validation": "The cumulative nature of remedies provides flexibility for both parties to address breaches or disputes effectively, potentially reducing litigation risks by allowing for a broader range of responses.", "validated_text_hash": "b5218ceeed119980ff9e04929ffab8be70c4b384a8ed20850370916e01241ac1", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_h ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [8]
+========================================================================================================================
+clause_id:
+node_76
+
+clause_reference:
+15.1
+
+clause_title:
+Data Protection Obligations
+
+title:
+Data Protection Obligations
+
+clause_type:
+data_protection
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+26
+
+materiality_level:
+low
+
+original_text:
+15.1 To the extent either Party discloses Personal Data to the other Party under this Agreement, each Party shall comply with its respective obligations under applicable data protection law with respect to such Personal Data.
+
+quoted_text:
+each Party shall comply with its respective obligations under applicable data protection law with respect to such Personal Data.
+
+_source_text_exact:
+15.1 To the extent either Party discloses Personal Data to the other Party under this Agreement, each Party shall comply with its respective obligations under applicable data protection law with respect to such Personal Data.
+
+explanation_simple:
+Both Parties must adhere to data protection laws when handling Personal Data.
+
+why_it_matters:
+
+
+legal_insight:
+This clause governs data handling, privacy obligations, security controls, or incident response responsibilities.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Data protection obligations may require ongoing compliance measures."]
+
+reasoning_evidence:
+15.1 To the extent either Party discloses Personal Data to the other Party under this Agreement, each Party shall comply with its respective obligations under a
+
+recommendation:
+Manual review required: generated text did not pass source-fidelity validation.
+
+negotiation_advice:
+Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.
+
+negotiation_priority:
+medium
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["applicable", "comply", "data", "disclose", "each", "either", "extent", "law", "obligation", "party", "personal", "protection", "respect", "respective", "under"], "kind": "SOURCE_PROFILE", "primary_type": "data_protection"}], "semantic_profile_hash": "5c8456d9b15f2e04cad2a4ca86a094e09fbf1d158ef5615568a85111f4cb3448"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "10d5049ba008f126d54251f1c6817dba884572cd2036922c1548da78c3fa24a5", "gate_result": "PASS", "input_text_hash": "10d5049ba008f126d54251f1c6817dba884572cd2036922c1548da78c3fa24a5", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.1667, "semantic_profile_hash": "5c8456d9b15f2e04cad2a4ca86a094e09fbf1d158ef5615568a85111f4cb3448", "source_text_hash": "2def96705c56c76c639f60208c36aa00847aa90cf9fb443581e7904b152c192b", "successful": true, "text_before_validation": "This clause governs data handling, privacy obligations, security controls, or incident response responsibilities.", "validated_text_hash": "10d5049ba008f126d54251f1c6817dba884572cd2036922c1548da78c3fa24a5", "validation_reasons": []}, "negotiation_advice": {"field": "negotiation_advice", "field_policy": "relevance", "final_text_hash": "a4e75c71ff7aad767d8f4e90553a655cbec928fe50111d6873f473d2c07edcc2", "gate_res ...[TRUNCATED]
+
+fidelity_issues:
+[{"field": "recommendation", "kind": "final_text_source_contamination", "note": "FINAL_TEXT_SOURCE_CONTAMINATION", "severity": "high"}]
+
+_publication_validation_history:
+{"recommendation": {"input_text": "Check processing instructions, security standards, subprocessor controls, breach notification timing, audit rights, deletion or return duties, and regulatory allocation.", "input_text_hash": "09e4e6f6c68235741337955ce114ae06a17cfc4c4866c3f7372a8812a66169f3", "semantic_coverage": 0.0, "validation_reasons": ["FINAL_TEXT_SOURCE_CONTAMINATION"]}}
+
+========================================================================================================================
+CANONICAL [9]
+========================================================================================================================
+clause_id:
+node_79
+
+clause_reference:
+15.4
+
+clause_title:
+Personal Data Breach Notification
+
+title:
+Personal Data Breach Notification
+
+clause_type:
+data_protection
+
+risk_level:
+high
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+26
+
+materiality_level:
+low
+
+original_text:
+15.4 In the event of a Personal Data breach affecting Personal Data disclosed under this Agreement, the Receiving Party shall notify the other Party without undue delay and shall provide reasonable cooperation in connection with any resulting regulatory notification obligations.
+
+quoted_text:
+In the event of a Personal Data breach affecting Personal Data disclosed under this Agreement, the Receiving Party shall notify the other Party without undue delay and shall provide reasonable cooperation in connection with any resulting regulatory notification obligations.
+
+_source_text_exact:
+15.4 In the event of a Personal Data breach affecting Personal Data disclosed under this Agreement, the [PERSON] shall notify the other Party without undue delay and shall provide reasonable cooperation in connection with any resulting regulatory notification obligations.
+
+explanation_simple:
+The clause requires notification of a personal data breach and cooperation with regulatory obligations.
+
+why_it_matters:
+Timely notification is crucial for compliance with data protection regulations and to mitigate potential damages.
+
+legal_insight:
+This clause sets the timeline and content for breach notification, which drives the controller's own regulatory notification deadlines (often 72 hours under GDPR).
+
+red_flag_reason:
+
+
+risk_reasons:
+["Data protection obligations may require ongoing compliance measures."]
+
+reasoning_evidence:
+15.4 In the event of a Personal Data breach affecting Personal Data disclosed under this Agreement, the Receiving Party shall notify the other Party without undue dela
+
+recommendation:
+Confirm the notification clock starts from becoming aware (not confirming) the breach, and that a minimum content is specified.
+
+negotiation_advice:
+Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["affecting", "breach", "connection", "cooperation", "data", "delay", "disclosed", "event", "notice", "obligation", "party", "person", "personal", "provide", "reasonable", "regulatory", "resulting", "under", "undue"], "kind": "SOURCE_PROFILE", "primary_type": "data_protection"}], "semantic_profile_hash": "2bc9ad26f47d25ec65ea87a5e06ca126d148b29d320f53552f8b7af07a2abb92"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "c6f40e1739e8f1fb608ccd09f0490681bdf736a7853270c186f0d802e2c6d4fb", "gate_result": "PASS", "input_text_hash": "c6f40e1739e8f1fb608ccd09f0490681bdf736a7853270c186f0d802e2c6d4fb", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.3333, "semantic_profile_hash": "2bc9ad26f47d25ec65ea87a5e06ca126d148b29d320f53552f8b7af07a2abb92", "source_text_hash": "6f9deeaf2224ff668bc5483d812d8b8c69b0b269281daaf977718a74aa5c3715", "successful": true, "text_before_validation": "This clause sets the timeline and content for breach notification, which drives the controller's own regulatory notification deadlines (often 72 hours under GDPR).", "validated_text_hash": "c6f40e1739e8f1fb608ccd09f0490681bdf736a7853270c186f0d802e2c6d4fb", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "7eaa75b9487449f866a50776f779 ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [10]
+========================================================================================================================
+clause_id:
+node_91
+
+clause_reference:
+Section 18.3
+
+clause_title:
+Injunctive Relief
+
+title:
+Injunctive Relief
+
+clause_type:
+dispute_resolution
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+26
+
+materiality_level:
+low
+
+original_text:
+18.3 Nothing in this Section 18 shall preclude either Party from seeking injunctive or other equitable relief at any time, including prior to or during the negotiation or mediation process described in Sections 18.1 and 18.2, where such relief is necessary to prevent irreparable harm.
+
+quoted_text:
+Nothing in this Section 18 shall preclude either Party from seeking injunctive or other equitable relief at any time, including prior to or during the negotiation or mediation process described in Sections 18.1 and 18.2, where such relief is necessary to prevent irreparable harm.
+
+_source_text_exact:
+18.3 Nothing in this Section 18 shall preclude either Party from seeking injunctive or other equitable relief at any time, including prior to or during the negotiation or mediation process described in Sections 18.1 and 18.2, where such relief is necessary to prevent irreparable harm.
+
+explanation_simple:
+This clause allows either party to seek injunctive relief to prevent irreparable harm.
+
+why_it_matters:
+The ability to seek injunctive relief can significantly impact the parties' rights and remedies in case of a dispute.
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Dispute resolution provisions determine how disagreements are resolved."]
+
+reasoning_evidence:
+18.3 Nothing in this Section 18 shall preclude either Party from seeking injunctive or other equitable relief at any time, including prior to or during the nego
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["described", "during", "either", "equitable", "harm", "including", "injunctive", "irreparable", "mediation", "necessary", "negotiation", "nothing", "party", "preclude", "prevent", "prior", "proces", "relief", "seeking", "time", "where"], "kind": "SOURCE_PROFILE", "primary_type": "remedies"}], "semantic_profile_hash": "575c80efbe39174fe4a240ffc11a3f550ae1e7468ff8520b55f659e4cce317d4"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "gate_result": "PASS", "input_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0, "semantic_profile_hash": "575c80efbe39174fe4a240ffc11a3f550ae1e7468ff8520b55f659e4cce317d4", "source_text_hash": "21e0b55ac48d2eca4b1c3354bbb751838a463af678c5a821c56dcae98f8b2f3b", "successful": true, "text_before_validation": "This clause sets the procedure and forum for resolving disputes.", "validated_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "bcbaeea12d17e7285a92c46f5ed29e9a925fa9d13ac9239a1fa1a5bd0a2d91b0", "gate_result": "PASS", "input_text_hash": "bcbaeea12d17e7285a92 ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [11]
+========================================================================================================================
+clause_id:
+node_69
+
+clause_reference:
+13.2
+
+clause_title:
+Limitation of Liability
+
+title:
+Limitation of Liability
+
+clause_type:
+liability
+
+risk_level:
+medium
+
+risk_baseline:
+limited_liability
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+22
+
+materiality_level:
+high
+
+original_text:
+13.2 IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING TO THIS AGREEMENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+quoted_text:
+IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING TO THIS AGREEMENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+_source_text_exact:
+13.2 IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING TO THIS AGREEMENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+explanation_simple:
+The clause limits liability for indirect and consequential damages.
+
+why_it_matters:
+This limitation can protect both parties from significant financial exposure due to unforeseen damages.
+
+legal_insight:
+This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.
+
+red_flag_reason:
+
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+13.2 IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING
+
+recommendation:
+Manual review required: generated text did not pass source-fidelity validation.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["advised", "arising", "consequential", "damage", "either", "even", "event", "if", "incidental", "indirect", "liable", "no", "out", "party", "possibility", "punitive", "relating", "special"], "kind": "SOURCE_PROFILE", "primary_type": "liability"}], "semantic_profile_hash": "543b62e7e192c7469f62d9b77b4d0d8678667ed3a52a9182c47240666a75bfbc"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e", "gate_result": "PASS", "input_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0833, "semantic_profile_hash": "543b62e7e192c7469f62d9b77b4d0d8678667ed3a52a9182c47240666a75bfbc", "source_text_hash": "b9626ef9eecaddda8ab4da69cb478a1b642b210277c054f8e5c6d7e42eae00db", "successful": true, "text_before_validation": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.", "validated_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "dfe7264f6d0df013ed64d9df178e6b74c7f05caca70441c04233cbabfc0b3799", "gate_result": "PASS", "i ...[TRUNCATED]
+
+fidelity_issues:
+[{"field": "recommendation", "kind": "final_text_source_contamination", "note": "FINAL_TEXT_SOURCE_CONTAMINATION", "severity": "high"}]
+
+_publication_validation_history:
+{"recommendation": {"input_text": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.", "input_text_hash": "d3830c801e1fce9b0168a4a9e571ae4171111d807647d284f5bdae60e413f712", "semantic_coverage": 0.0, "validation_reasons": ["FINAL_TEXT_SOURCE_CONTAMINATION"]}}
+
+========================================================================================================================
+CANONICAL [12]
+========================================================================================================================
+clause_id:
+node_39
+
+clause_reference:
+7.1
+
+clause_title:
+Term and Termination
+
+title:
+Term and Termination
+
+clause_type:
+notice
+
+risk_level:
+medium
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+16
+
+materiality_level:
+medium
+
+original_text:
+7.1 This Agreement shall remain in effect for a term of three (3) years from the Effective Date, unless earlier terminated by either Party upon thirty (30) days' prior written notice to the other Party.
+
+quoted_text:
+This Agreement shall remain in effect for a term of three (3) years from the Effective Date, unless earlier terminated by either Party upon thirty (30) days' prior written notice to the other Party.
+
+_source_text_exact:
+7.1 This Agreement shall remain in effect for a term of three (3) years from the Effective Date, unless earlier terminated by either Party upon thirty (30) days' prior written notice to the other Party.
+
+explanation_simple:
+The clause specifies a fixed term of three years and allows for termination with notice.
+
+why_it_matters:
+It provides clarity on the duration of the agreement and the process for termination.
+
+legal_insight:
+This clause may create legal or operational exposure.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Termination provisions may affect operational continuity or legal remedies."]
+
+reasoning_evidence:
+7.1 This Agreement shall remain in effect for a term of three (3) years from the Effective Date, unless earlier terminated by either Party upon thirty (30) days
+
+recommendation:
+Manual review required: generated text did not pass source-fidelity validation.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["date", "days", "earlier", "effect", "effective", "either", "notice", "party", "prior", "remain", "term", "terminated", "thirty", "three", "unles", "upon", "written", "years"], "kind": "SOURCE_PROFILE", "primary_type": "notice"}], "semantic_profile_hash": "6fe355107cd753bb7753fb144ab9925f3c9e1cdc6c1fd4914d50596c34af1a8c"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "ff5fc864ef1d8615904ef469ae0ff6e2986963a279253cb02161de75dafbe2e6", "gate_result": "PASS", "input_text_hash": "ff5fc864ef1d8615904ef469ae0ff6e2986963a279253cb02161de75dafbe2e6", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0, "semantic_profile_hash": "6fe355107cd753bb7753fb144ab9925f3c9e1cdc6c1fd4914d50596c34af1a8c", "source_text_hash": "f04ec58b546f9bce14bd17636af706ed633a261e809324e7b303a76089f2b49f", "successful": true, "text_before_validation": "This clause may create legal or operational exposure.", "validated_text_hash": "ff5fc864ef1d8615904ef469ae0ff6e2986963a279253cb02161de75dafbe2e6", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "e3b4d819baddb2fbee0dacb8b2fff65f8f79a6dd06b3108ddfb01a6d7191a36b", "gate_result": "PASS", "input_text_hash": "e3b4d819baddb2fbee0dacb8b2fff65 ...[TRUNCATED]
+
+fidelity_issues:
+[{"field": "recommendation", "kind": "final_text_source_contamination", "note": "FINAL_TEXT_SOURCE_CONTAMINATION", "severity": "high"}]
+
+_publication_validation_history:
+{"recommendation": {"input_text": "The clause's terms are reasonable, providing a clear duration and termination process.", "input_text_hash": "e3b7be303433e6dc66f97c0be04f116a0229175e03d88f434b2856855432eae3", "semantic_coverage": 0.0, "validation_reasons": ["FINAL_TEXT_SOURCE_CONTAMINATION"]}}
+
+========================================================================================================================
+CANONICAL [13]
+========================================================================================================================
+clause_id:
+node_89
+
+clause_reference:
+18.1
+
+clause_title:
+Dispute Resolution
+
+title:
+Dispute Resolution
+
+clause_type:
+dispute_resolution
+
+risk_level:
+low
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+16
+
+materiality_level:
+medium
+
+original_text:
+18.1 In the event of any dispute arising out of or relating to this Agreement, the Parties shall first attempt to resolve such dispute through good-faith negotiation between Receiving Party of each Party for a period of thirty (30) days following written notice of the dispute.
+
+quoted_text:
+the Parties shall first attempt to resolve such dispute through good-faith negotiation between Receiving Party of each Party for a period of thirty (30) days following written notice of the dispute.
+
+_source_text_exact:
+18.1 In the event of any dispute arising out of or relating to this Agreement, the Parties shall first attempt to resolve such dispute through good-faith negotiation between [PERSON] of each Party for a period of thirty (30) days following written notice of the dispute.
+
+explanation_simple:
+The clause outlines a process for resolving disputes through negotiation.
+
+why_it_matters:
+It establishes a clear initial step for dispute resolution, potentially reducing litigation costs.
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+red_flag_reason:
+
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+18.1 In the event of any dispute arising out of or relating to this Agreement, the Parties shall first attempt to resolve such dispute through good-faith negoti
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["arising", "attempt", "between", "days", "dispute", "each", "event", "faith", "first", "following", "good", "negotiation", "notice", "out", "party", "period", "person", "relating", "resolve", "thirty", "through", "written"], "kind": "SOURCE_PROFILE", "primary_type": "dispute_resolution"}], "semantic_profile_hash": "8367aa2558ce55c66bf1415464981b9acaf90d2ba44868d7a5cc68b49919870d"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "gate_result": "PASS", "input_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0833, "semantic_profile_hash": "8367aa2558ce55c66bf1415464981b9acaf90d2ba44868d7a5cc68b49919870d", "source_text_hash": "187c5a1151303be8e2c757a7c8849d53a80f6a2d41443ffdd9325ec8d356df15", "successful": true, "text_before_validation": "This clause sets the procedure and forum for resolving disputes.", "validated_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "6d91aefdf61883f6dd2585e7901b2657d5f20c253f92a86a49a30eb8cb38501c", "gate_result": "PASS", "input_text_hash": "6d91aefdf61883f6d ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [14]
+========================================================================================================================
+clause_id:
+node_49
+
+clause_reference:
+9.1
+
+clause_title:
+Confidential Information Rights
+
+title:
+Confidential Information Rights
+
+clause_type:
+confidentiality
+
+risk_level:
+low
+
+risk_baseline:
+standard_confidentiality
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+9.1 Nothing in this Agreement shall be construed as granting any license, ownership interest, or other right in or to the Confidential Information, other than the limited right to use such information solely for the Purpose as set out in this Agreement.
+
+quoted_text:
+Nothing in this Agreement shall be construed as granting any license, ownership interest, or other right in or to the Confidential Information, other than the limited right to use such information solely for the Purpose as set out in this Agreement.
+
+_source_text_exact:
+9.1 Nothing in this Agreement shall be construed as granting any license, ownership interest, or other right in or to the Confidential Information, other than the limited right to use such information solely for the Purpose as set out in this Agreement.
+
+explanation_simple:
+The clause restricts the use of Confidential Information to a specific purpose.
+
+why_it_matters:
+It clarifies that no ownership or broader rights are granted over the Confidential Information.
+
+legal_insight:
+This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+
+red_flag_reason:
+
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+9.1 Nothing in this Agreement shall be construed as granting any license, ownership interest, or other right in or to the Confidential Information, other than t
+
+recommendation:
+
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["confidential", "construed", "granting", "information", "interest", "license", "limited", "nothing", "out", "ownership", "purpose", "right", "set", "solely", "than", "use"], "kind": "SOURCE_PROFILE", "primary_type": "intellectual_property"}], "semantic_profile_hash": "55e80316712912a56e0dc5f060c31e6cc7b8dd0cea7d1d16b185b80853efbf9f"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389", "gate_result": "PASS", "input_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.25, "semantic_profile_hash": "55e80316712912a56e0dc5f060c31e6cc7b8dd0cea7d1d16b185b80853efbf9f", "source_text_hash": "028f61c432b7bef75dd480092269b1c9f6083d2673148ff2d8f45e6a2d5186d8", "successful": true, "text_before_validation": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.", "validated_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389", "validation_reasons": []}}
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [15]
+========================================================================================================================
+clause_id:
+node_56
+
+clause_reference:
+Section 10.4
+
+clause_title:
+Limitations on Representations and Warranties
+
+title:
+Limitations on Representations and Warranties
+
+clause_type:
+confidentiality
+
+risk_level:
+low
+
+risk_baseline:
+standard_confidentiality
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+10.4 Except as expressly set forth in this Section 10, neither Party makes any representation or warranty, express or implied, regarding the accuracy or completeness of any Confidential Information disclosed under this Agreement.
+
+quoted_text:
+Except as expressly set forth in this Section 10, neither Party makes any representation or warranty, express or implied, regarding the accuracy or completeness of any Confidential Information disclosed under this Agreement.
+
+_source_text_exact:
+10.4 Except as expressly set forth in this Section 10, neither Party makes any representation or warranty, express or implied, regarding the accuracy or completeness of any Confidential Information disclosed under this Agreement.
+
+explanation_simple:
+This clause limits the representations and warranties regarding the accuracy of Confidential Information.
+
+why_it_matters:
+It reduces liability for inaccuracies in Confidential Information, which could impact trust and reliance on such information.
+
+legal_insight:
+Manual review required: generated text did not pass source-fidelity validation.
+
+red_flag_reason:
+
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+10.4 Except as expressly set forth in this Section 10, neither Party makes any representation or warranty, express or implied, regarding the accuracy or complet
+
+recommendation:
+Check the accuracy of representations, warranty scope, exclusions, remedy periods, disclaimers, reliance limits, and interaction with liability caps.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["accuracy", "completenes", "confidential", "disclosed", "except", "expres", "expressly", "forth", "implied", "information", "makes", "neither", "party", "regarding", "representation", "set", "under", "warranty"], "kind": "SOURCE_PROFILE", "primary_type": "warranty"}], "semantic_profile_hash": "df809578c9d2b6c26e041724ff86953ccd59673358afa343147aafc5ffc20fc4"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "2a526fe86800939d499d33902864690316dcf2040429b1938a4a1e4a2c1c8076", "gate_result": "BLOCK_AND_REPLACE_REVALIDATED", "input_text_hash": "370d8788b163b25c254ff1dc193408bd0e47e09d3cba881f67e81e7fc227b7f3", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0, "semantic_profile_hash": "df809578c9d2b6c26e041724ff86953ccd59673358afa343147aafc5ffc20fc4", "source_text_hash": "8c4baa3b856922a86d8b1704e5ef326c9a07d4918636e279bb38f8ef5dc5789d", "successful": true, "text_before_validation": "This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.", "validated_text_hash": "2a526fe86800939d499d33902864690316dcf2040429b1938a4a1e4a2c1c8076", "validation_reasons": ["FINAL_TEXT_SOURCE_CONTAMINATION"]}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "94dd8c8cc30a ...[TRUNCATED]
+
+fidelity_issues:
+[{"field": "legal_insight", "kind": "final_text_source_contamination", "note": "FINAL_TEXT_SOURCE_CONTAMINATION", "severity": "high"}]
+
+_publication_validation_history:
+{"legal_insight": {"input_text": "This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.", "input_text_hash": "370d8788b163b25c254ff1dc193408bd0e47e09d3cba881f67e81e7fc227b7f3", "semantic_coverage": 0.0, "validation_reasons": ["FINAL_TEXT_SOURCE_CONTAMINATION"]}}
+
+========================================================================================================================
+CANONICAL [16]
+========================================================================================================================
+clause_id:
+node_61
+
+clause_reference:
+11.4
+
+clause_title:
+Injunctive Relief
+
+title:
+Injunctive Relief
+
+clause_type:
+confidentiality
+
+risk_level:
+medium
+
+risk_baseline:
+standard_confidentiality
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+11.4 Neither Party shall be required to prove actual damages as a condition to seeking injunctive relief for breach or threatened breach of the confidentiality obligations set out in this Agreement.
+
+quoted_text:
+Neither Party shall be required to prove actual damages as a condition to seeking injunctive relief for breach or threatened breach of the confidentiality obligations set out in this Agreement.
+
+_source_text_exact:
+11.4 Neither Party shall be required to prove actual damages as a condition to seeking injunctive relief for breach or threatened breach of the confidentiality obligations set out in this Agreement.
+
+explanation_simple:
+This clause allows either party to seek injunctive relief without proving actual damages.
+
+why_it_matters:
+It enables swift legal action to prevent breaches of confidentiality, which can be critical in protecting sensitive information.
+
+legal_insight:
+This clause may create legal or operational exposure.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Confidentiality obligations may continue beyond contract termination."]
+
+reasoning_evidence:
+11.4 Neither Party shall be required to prove actual damages as a condition to seeking injunctive relief for breach or threatened breach of the confidentiality
+
+recommendation:
+The clause appropriately balances the interests of both parties by allowing for injunctive relief without the burden of proving damages.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["actual", "breach", "condition", "confidentiality", "damage", "injunctive", "neither", "obligation", "out", "party", "prove", "relief", "required", "seeking", "set", "threatened"], "kind": "SOURCE_PROFILE", "primary_type": "remedies"}], "semantic_profile_hash": "d721eee32b21bd65042ce759a5af99e34688c691744863678097a79e7f32f053"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "ff5fc864ef1d8615904ef469ae0ff6e2986963a279253cb02161de75dafbe2e6", "gate_result": "PASS", "input_text_hash": "ff5fc864ef1d8615904ef469ae0ff6e2986963a279253cb02161de75dafbe2e6", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0, "semantic_profile_hash": "d721eee32b21bd65042ce759a5af99e34688c691744863678097a79e7f32f053", "source_text_hash": "cdbe37dd688fa567e93c738ea1c2d055158a9b4436f4d20bf394423a0a05f385", "successful": true, "text_before_validation": "This clause may create legal or operational exposure.", "validated_text_hash": "ff5fc864ef1d8615904ef469ae0ff6e2986963a279253cb02161de75dafbe2e6", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "8517f72df249b58dc15b8e65ae86dbb7f5a591ec1e78f05367fae15ad1be2d04", "gate_result": "PASS", "input_text_hash": "8517f72df249b58dc15b8e65ae86dbb ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [17]
+========================================================================================================================
+clause_id:
+node_68
+
+clause_reference:
+13.1
+
+clause_title:
+Limitation of Liability
+
+title:
+Limitation of Liability
+
+clause_type:
+liability
+
+risk_level:
+medium
+
+risk_baseline:
+standard_confidentiality
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+13.1 EXCEPT FOR BREACHES OF THE CONFIDENTIALITY OBLIGATIONS UNDER SECTION 3, OR EITHER PARTY'S INDEMNIFICATION OBLIGATIONS UNDER SECTION 12, IN NO EVENT SHALL EITHER PARTY'S AGGREGATE LIABILITY UNDER THIS AGREEMENT EXCEED FIVE HUNDRED THOUSAND DOLLARS ($500,000).
+
+quoted_text:
+IN NO EVENT SHALL EITHER PARTY'S AGGREGATE LIABILITY UNDER THIS AGREEMENT EXCEED FIVE HUNDRED THOUSAND DOLLARS ($500,000).
+
+_source_text_exact:
+13.1 EXCEPT FOR BREACHES OF THE CONFIDENTIALITY OBLIGATIONS UNDER SECTION 3, OR EITHER PARTY'S INDEMNIFICATION OBLIGATIONS UNDER SECTION 12, IN NO EVENT SHALL EITHER PARTY'S AGGREGATE LIABILITY UNDER THIS AGREEMENT EXCEED FIVE HUNDRED THOUSAND DOLLARS ($500,000).
+
+explanation_simple:
+The clause limits liability to $500,000, excluding certain obligations.
+
+why_it_matters:
+This limitation caps potential financial exposure for both parties, which is significant in case of disputes.
+
+legal_insight:
+This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Liability allocation may affect financial exposure or available remedies.", "Confidentiality obligations may continue beyond contract termination."]
+
+reasoning_evidence:
+13.1 EXCEPT FOR BREACHES OF THE CONFIDENTIALITY OBLIGATIONS UNDER SECTION 3, OR EITHER PARTY'S INDEMNIFICATION OBLIGATIONS UNDER SECTION 12, IN NO EVENT SHALL E
+
+recommendation:
+Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["aggregate", "breache", "confidentiality", "dollar", "either", "event", "exceed", "except", "five", "hundred", "indemnification", "liability", "no", "obligation", "party", "thousand", "under"], "kind": "SOURCE_PROFILE", "primary_type": "indemnity"}], "semantic_profile_hash": "3d187e5ffd197f0fe80e4d0b67fc7a6271c9b10b6674b0333262ba290bdc47de"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e", "gate_result": "PASS", "input_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0, "semantic_profile_hash": "3d187e5ffd197f0fe80e4d0b67fc7a6271c9b10b6674b0333262ba290bdc47de", "source_text_hash": "71c636eab603abb7765295da7464795c1d5cddb46d91ede9ee5881b5be04d48b", "successful": true, "text_before_validation": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.", "validated_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "5ffb915f2d8f09e035532dc2b2e80611308e54ab17ec982bdfab8a6c7412817e", "gate_result": "PASS", "inpu ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [18]
+========================================================================================================================
+clause_id:
+node_88
+
+clause_reference:
+Section 17.4
+
+clause_title:
+Return or Destruction of Confidential Information
+
+title:
+Return or Destruction of Confidential Information
+
+clause_type:
+confidentiality
+
+risk_level:
+medium
+
+risk_baseline:
+standard_confidentiality
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+17.4 Upon termination of this Agreement, each Party shall comply with its obligations under Section 8 (Return or Destruction of Confidential Information) within the timeframe specified therein.
+
+quoted_text:
+Upon termination of this Agreement, each Party shall comply with its obligations under Section 8 (Return or Destruction of Confidential Information) within the timeframe specified therein.
+
+_source_text_exact:
+17.4 Upon termination of this Agreement, each Party shall comply with its obligations under Section 8 (Return or Destruction of Confidential Information) within the timeframe specified therein.
+
+explanation_simple:
+This clause mandates compliance with confidentiality obligations upon termination.
+
+why_it_matters:
+Ensures that confidential information is handled appropriately after the agreement ends.
+
+legal_insight:
+This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Termination provisions may affect operational continuity or legal remedies.", "Confidentiality obligations may continue beyond contract termination."]
+
+reasoning_evidence:
+17.4 Upon termination of this Agreement, each Party shall comply with its obligations under Section 8 (Return or Destruction of Confidential Information) within
+
+recommendation:
+Review the termination triggers, notice requirements, cure periods, and post-termination obligations.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["comply", "confidential", "destruction", "each", "information", "obligation", "party", "return", "specified", "terminate", "therein", "timeframe", "under", "upon", "within"], "kind": "SOURCE_PROFILE", "primary_type": "termination"}], "semantic_profile_hash": "3096804ab270cabedd53c0be7df988e4d9763657e11e9dc15b00194f88435f0b"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3", "gate_result": "PASS", "input_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.1667, "semantic_profile_hash": "3096804ab270cabedd53c0be7df988e4d9763657e11e9dc15b00194f88435f0b", "source_text_hash": "f1fa8b45cc16f93e6dab6e6424bdfc4fa607fd09a808a68263087d532974bf66", "successful": true, "text_before_validation": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.", "validated_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3", "validation_reasons": []}, "recommendation": {"field": "recommendation", "field_policy": "relevance", "final_text_hash": "1aed7c6224c05151c6e709137f7b5be45f6e08774fb2d82737aeb82d645d45c2", "gate_result" ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [19]
+========================================================================================================================
+clause_id:
+node_90
+
+clause_reference:
+Section 18.2
+
+clause_title:
+Dispute Resolution
+
+title:
+Dispute Resolution
+
+clause_type:
+dispute_resolution
+
+risk_level:
+low
+
+risk_baseline:
+other
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+low
+
+original_text:
+18.2 If the dispute is not resolved through negotiation under Section 18.1, either Party may refer the dispute to non-binding mediation administered by a Receiving Party prior to commencing formal legal proceedings.
+
+quoted_text:
+If the dispute is not resolved through negotiation under Section 18.1, either Party may refer the dispute to non-binding mediation administered by a Receiving Party prior to commencing formal legal proceedings.
+
+_source_text_exact:
+18.2 If the dispute is not resolved through negotiation under Section 18.1, either Party may refer the dispute to non-binding mediation administered by a [PERSON] prior to commencing formal legal proceedings.
+
+explanation_simple:
+The clause outlines a process for resolving disputes through non-binding mediation before legal action.
+
+why_it_matters:
+This clause encourages parties to resolve disputes amicably, potentially saving time and costs associated with litigation.
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+red_flag_reason:
+
+
+risk_reasons:
+[]
+
+reasoning_evidence:
+18.2 If the dispute is not resolved through negotiation under Section 18.1, either Party may refer the dispute to non-binding mediation administered by a [PERSO
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["administered", "binding", "commencing", "dispute", "either", "formal", "if", "legal", "mediation", "negotiation", "non", "not", "party", "person", "prior", "proceeding", "refer", "resolved", "through", "under"], "kind": "SOURCE_PROFILE", "primary_type": "dispute_resolution"}], "semantic_profile_hash": "337b31f422397020747457b2c0790fd9bff50801b4223e1a14a54abd595490b0"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "gate_result": "PASS", "input_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0833, "semantic_profile_hash": "337b31f422397020747457b2c0790fd9bff50801b4223e1a14a54abd595490b0", "source_text_hash": "eb7325705e3b6b46eb7a03d9616b5579b64e260380af4b04bf19a1ecee8e346f", "successful": true, "text_before_validation": "This clause sets the procedure and forum for resolving disputes.", "validated_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "491fdb39f4806dd88359e21d10879755788b655ba64fe309644ef3838fc58543", "gate_result": "PASS", "input_text_hash": "491fdb39f4806dd88 ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [20]
+========================================================================================================================
+clause_id:
+node_92
+
+clause_reference:
+Section 18.4
+
+clause_title:
+Dispute Resolution
+
+title:
+Dispute Resolution
+
+clause_type:
+dispute_resolution
+
+risk_level:
+high
+
+risk_baseline:
+venue
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+18.4 Any dispute not resolved through negotiation or mediation shall be subject to the exclusive jurisdiction of the Disclosing Party specified in Section 19.2.
+
+quoted_text:
+Any dispute not resolved through negotiation or mediation shall be subject to the exclusive jurisdiction of the Disclosing Party specified in Section 19.2.
+
+_source_text_exact:
+18.4 Any dispute not resolved through negotiation or mediation shall be subject to the exclusive jurisdiction of the [ORGANIZATION] specified in Section 19.2.
+
+explanation_simple:
+This clause establishes that disputes must be resolved in a specific jurisdiction if negotiation or mediation fails.
+
+why_it_matters:
+The exclusive jurisdiction can limit the options for legal recourse and may impose additional costs or logistical challenges for the parties involved.
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Dispute resolution provisions determine how disagreements are resolved.", "Restrictive commitments may reduce commercial or operational flexibility."]
+
+reasoning_evidence:
+18.4 Any dispute not resolved through negotiation or mediation shall be subject to the exclusive jurisdiction of the Disclosing Party specified in Section 19.2.
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["dispute", "exclusive", "jurisdiction", "mediation", "negotiation", "not", "organization", "resolved", "specified", "subject", "through"], "kind": "SOURCE_PROFILE", "primary_type": "dispute_resolution"}], "semantic_profile_hash": "09ad07d90d82240a67f9c64cd363473954996eaebae8b0cd58a23bda47171126"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "gate_result": "PASS", "input_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0909, "semantic_profile_hash": "09ad07d90d82240a67f9c64cd363473954996eaebae8b0cd58a23bda47171126", "source_text_hash": "458a5685711c468a57c7698f250b516f6cf839ca6be92357b4021163c340ea45", "successful": true, "text_before_validation": "This clause sets the procedure and forum for resolving disputes.", "validated_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "1cdf38699a1426f7318f3a5eb0ba60b88deba5f97508d85b51c9c4b7f53c65ed", "gate_result": "PASS", "input_text_hash": "1cdf38699a1426f73 ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+========================================================================================================================
+CANONICAL [21]
+========================================================================================================================
+clause_id:
+node_96
+
+clause_reference:
+Section 19.2
+
+clause_title:
+Exclusive Jurisdiction
+
+title:
+Exclusive Jurisdiction
+
+clause_type:
+dispute_resolution
+
+risk_level:
+high
+
+risk_baseline:
+venue
+
+risk_escalated:
+false
+
+risk_reduced:
+false
+
+importance_score:
+15
+
+materiality_level:
+medium
+
+original_text:
+19.2 Subject to Section 18, the Parties irrevocably submit to the exclusive jurisdiction of the Disclosing Party located in Wilmington, Delaware, for the resolution of any dispute arising out of or relating to this Agreement.
+
+quoted_text:
+the Parties irrevocably submit to the exclusive jurisdiction of the Disclosing Party located in Wilmington, Delaware, for the resolution of any dispute arising out of or relating to this Agreement.
+
+_source_text_exact:
+19.2 Subject to Section 18, the Parties irrevocably submit to the exclusive jurisdiction of the [ORGANIZATION] located in Wilmington, Delaware, for the resolution of any dispute arising out of or relating to this Agreement.
+
+explanation_simple:
+The clause establishes exclusive jurisdiction in Wilmington, Delaware for disputes.
+
+why_it_matters:
+This limits the parties' options for dispute resolution to a specific location, which may be inconvenient for one party.
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+red_flag_reason:
+
+
+risk_reasons:
+["Dispute resolution provisions determine how disagreements are resolved.", "Restrictive commitments may reduce commercial or operational flexibility."]
+
+reasoning_evidence:
+19.2 Subject to Section 18, the Parties irrevocably submit to the exclusive jurisdiction of the Disclosing Party located in Wilmington, Delaware, for the resoluti
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+negotiation_priority:
+low
+
+safer_alternative:
+The Parties may submit to the jurisdiction of any court where either party is located for the resolution of disputes.
+
+source_evidence_model:
+{"evidence_spans": [], "mechanisms": [{"anchors": ["arising", "delaware", "dispute", "exclusive", "irrevocably", "jurisdiction", "located", "organization", "out", "party", "relating", "resolution", "subject", "submit", "wilmington"], "kind": "SOURCE_PROFILE", "primary_type": "dispute_resolution"}], "semantic_profile_hash": "18a1146618703e9212b41691eb855e5d752597cea2b30d5b5d4f498cab80e8b7"}
+
+validation_receipts:
+{"legal_insight": {"field": "legal_insight", "field_policy": "relevance", "final_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "gate_result": "PASS", "input_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "post_gate_mutators": [], "publication_gate_called": true, "semantic_coverage": 0.0833, "semantic_profile_hash": "18a1146618703e9212b41691eb855e5d752597cea2b30d5b5d4f498cab80e8b7", "source_text_hash": "71baa3e6d07e94f7fdd630fce668ef674adce0d749efe48a7bae6d7d5ae1a1b5", "successful": true, "text_before_validation": "This clause sets the procedure and forum for resolving disputes.", "validated_text_hash": "adf9e72fd35d6ad0fa034412311235d54d330618f47cc23557dd8c67226cec41", "validation_reasons": []}, "market_comparison": {"field": "market_comparison", "field_policy": "relevance", "final_text_hash": "5adddb5aa2cac5acd06abc9904d8c82b74efd18c2eafa43f7226e8eb0d150463", "gate_result": "PASS", "input_text_hash": "5adddb5aa2cac5acd ...[TRUNCATED]
+
+_publication_validation_history:
+{}
+
+########################################################################################################################
+B1. EXECUTIVE SUMMARY TOP RISKS
+########################################################################################################################
+COUNT: 5
+
+SELECTED: 4
+
+========================================================================================================================
+B1. EXECUTIVE SUMMARY TOP RISKS [1]
+========================================================================================================================
+title:
+Confidential Information Rights
+
+risk_level:
+high
+
+importance_score:
+90
+
+legal_insight:
+This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+
+========================================================================================================================
+B1. EXECUTIVE SUMMARY TOP RISKS [2]
+========================================================================================================================
+title:
+Personal Data Breach Notification
+
+risk_level:
+high
+
+importance_score:
+26
+
+legal_insight:
+This clause sets the timeline and content for breach notification, which drives the controller's own regulatory notification deadlines (often 72 hours under GDPR).
+
+========================================================================================================================
+B1. EXECUTIVE SUMMARY TOP RISKS [3]
+========================================================================================================================
+title:
+Dispute Resolution
+
+risk_level:
+high
+
+importance_score:
+15
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+========================================================================================================================
+B1. EXECUTIVE SUMMARY TOP RISKS [4]
+========================================================================================================================
+title:
+Exclusive Jurisdiction
+
+risk_level:
+high
+
+importance_score:
+15
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+########################################################################################################################
+B2. EXECUTIVE SUMMARY NEGOTIATION PRIORITIES
+########################################################################################################################
+COUNT: 5
+
+SELECTED: 4
+
+========================================================================================================================
+B2. EXECUTIVE SUMMARY NEGOTIATION PRIORITIES [1]
+========================================================================================================================
+title:
+Confidential Information Rights
+
+risk_level:
+high
+
+recommendation:
+Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.
+
+negotiation_advice:
+Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.
+
+safer_alternative:
+
+
+========================================================================================================================
+B2. EXECUTIVE SUMMARY NEGOTIATION PRIORITIES [2]
+========================================================================================================================
+title:
+Personal Data Breach Notification
+
+risk_level:
+high
+
+recommendation:
+Confirm the notification clock starts from becoming aware (not confirming) the breach, and that a minimum content is specified.
+
+negotiation_advice:
+Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.
+
+safer_alternative:
+
+
+========================================================================================================================
+B2. EXECUTIVE SUMMARY NEGOTIATION PRIORITIES [3]
+========================================================================================================================
+title:
+Dispute Resolution
+
+risk_level:
+high
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+safer_alternative:
+
+
+========================================================================================================================
+B2. EXECUTIVE SUMMARY NEGOTIATION PRIORITIES [4]
+========================================================================================================================
+title:
+Exclusive Jurisdiction
+
+risk_level:
+high
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+safer_alternative:
+The Parties may submit to the jurisdiction of any court where either party is located for the resolution of disputes.
+
+########################################################################################################################
+B3. EXECUTIVE SUMMARY RECOMMENDED ACTIONS
+########################################################################################################################
+COUNT: 5
+
+SELECTED: 4
+
+========================================================================================================================
+B3. EXECUTIVE SUMMARY RECOMMENDED ACTIONS [1]
+========================================================================================================================
+title:
+Confidential Information Rights
+
+risk_level:
+high
+
+========================================================================================================================
+B3. EXECUTIVE SUMMARY RECOMMENDED ACTIONS [2]
+========================================================================================================================
+title:
+Personal Data Breach Notification
+
+risk_level:
+high
+
+========================================================================================================================
+B3. EXECUTIVE SUMMARY RECOMMENDED ACTIONS [3]
+========================================================================================================================
+title:
+Dispute Resolution
+
+risk_level:
+high
+
+========================================================================================================================
+B3. EXECUTIVE SUMMARY RECOMMENDED ACTIONS [4]
+========================================================================================================================
+title:
+Exclusive Jurisdiction
+
+risk_level:
+high
+
+########################################################################################################################
+C1. EXECUTIVE REPORT TOP RISKS
+########################################################################################################################
+COUNT: 5
+
+SELECTED: 4
+
+========================================================================================================================
+C1. EXECUTIVE REPORT TOP RISKS [1]
+========================================================================================================================
+title:
+Confidential Information Rights
+
+risk_level:
+high
+
+importance_score:
+90
+
+legal_insight:
+This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+
+========================================================================================================================
+C1. EXECUTIVE REPORT TOP RISKS [2]
+========================================================================================================================
+title:
+Personal Data Breach Notification
+
+risk_level:
+high
+
+importance_score:
+26
+
+legal_insight:
+This clause sets the timeline and content for breach notification, which drives the controller's own regulatory notification deadlines (often 72 hours under GDPR).
+
+========================================================================================================================
+C1. EXECUTIVE REPORT TOP RISKS [3]
+========================================================================================================================
+title:
+Dispute Resolution
+
+risk_level:
+high
+
+importance_score:
+15
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+========================================================================================================================
+C1. EXECUTIVE REPORT TOP RISKS [4]
+========================================================================================================================
+title:
+Exclusive Jurisdiction
+
+risk_level:
+high
+
+importance_score:
+15
+
+legal_insight:
+This clause sets the procedure and forum for resolving disputes.
+
+########################################################################################################################
+C2. EXECUTIVE REPORT NEGOTIATION PRIORITIES
+########################################################################################################################
+COUNT: 5
+
+SELECTED: 4
+
+========================================================================================================================
+C2. EXECUTIVE REPORT NEGOTIATION PRIORITIES [1]
+========================================================================================================================
+title:
+Confidential Information Rights
+
+risk_level:
+high
+
+recommendation:
+Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.
+
+negotiation_advice:
+Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.
+
+safer_alternative:
+
+
+========================================================================================================================
+C2. EXECUTIVE REPORT NEGOTIATION PRIORITIES [2]
+========================================================================================================================
+title:
+Personal Data Breach Notification
+
+risk_level:
+high
+
+recommendation:
+Confirm the notification clock starts from becoming aware (not confirming) the breach, and that a minimum content is specified.
+
+negotiation_advice:
+Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.
+
+safer_alternative:
+
+
+========================================================================================================================
+C2. EXECUTIVE REPORT NEGOTIATION PRIORITIES [3]
+========================================================================================================================
+title:
+Dispute Resolution
+
+risk_level:
+high
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+safer_alternative:
+
+
+========================================================================================================================
+C2. EXECUTIVE REPORT NEGOTIATION PRIORITIES [4]
+========================================================================================================================
+title:
+Exclusive Jurisdiction
+
+risk_level:
+high
+
+recommendation:
+Check the dispute steps, deadlines, forum, seat or venue, rules, language, and interim-relief mechanism expressly stated.
+
+negotiation_advice:
+
+
+safer_alternative:
+The Parties may submit to the jurisdiction of any court where either party is located for the resolution of disputes.
+
+########################################################################################################################
+C3. EXECUTIVE REPORT RECOMMENDED ACTIONS
+########################################################################################################################
+COUNT: 5
+
+SELECTED: 4
+
+========================================================================================================================
+C3. EXECUTIVE REPORT RECOMMENDED ACTIONS [1]
+========================================================================================================================
+title:
+Confidential Information Rights
+
+risk_level:
+high
+
+========================================================================================================================
+C3. EXECUTIVE REPORT RECOMMENDED ACTIONS [2]
+========================================================================================================================
+title:
+Personal Data Breach Notification
+
+risk_level:
+high
+
+========================================================================================================================
+C3. EXECUTIVE REPORT RECOMMENDED ACTIONS [3]
+========================================================================================================================
+title:
+Dispute Resolution
+
+risk_level:
+high
+
+========================================================================================================================
+C3. EXECUTIVE REPORT RECOMMENDED ACTIONS [4]
+========================================================================================================================
+title:
+Exclusive Jurisdiction
+
+risk_level:
+high
+
+########################################################################################################################
+D1. UNIFIED RISKS IDENTIFIED
+########################################################################################################################
+COUNT: 56
+
+========================================================================================================================
+UNIFIED RISK [1]
+========================================================================================================================
+id:
+risk_node_50
+
+clause_ref:
+node_50
+
+risk_level:
+high
+
+SOURCE CANONICAL TITLE: Confidential Information Rights
+SOURCE CANONICAL TYPE: intellectual_property
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+
+========================================================================================================================
+UNIFIED RISK [3]
+========================================================================================================================
+id:
+risk_node_59
+
+clause_ref:
+node_59
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Injunctive Relief and Specific Performance
+SOURCE CANONICAL TYPE: remedies
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause should be reviewed because it may affect legal, financial, or operational obligations.
+
+========================================================================================================================
+UNIFIED RISK [4]
+========================================================================================================================
+id:
+risk_node_62
+
+clause_ref:
+node_62
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Attorney's Fees
+SOURCE CANONICAL TYPE: fees
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause creates a potential financial exposure for the opposing party, as they may be liable for the Receiving Party's legal costs if enforcement actions arise. This could deter parties from pursuing legitimate claims due to the risk of incurring additional costs.
+
+========================================================================================================================
+UNIFIED RISK [5]
+========================================================================================================================
+id:
+risk_node_66
+
+clause_ref:
+node_66
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Indemnification Notice and Cooperation
+SOURCE CANONICAL TYPE: indemnity
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause allocates responsibility for third-party claims, defense costs, damages, or losses.
+
+========================================================================================================================
+UNIFIED RISK [6]
+========================================================================================================================
+id:
+risk_node_44
+
+clause_ref:
+node_44
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Return or Destruction of Confidential Information
+SOURCE CANONICAL TYPE: confidentiality
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.
+
+========================================================================================================================
+UNIFIED RISK [9]
+========================================================================================================================
+id:
+risk_node_54
+
+clause_ref:
+node_54
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Representations and Warranties
+SOURCE CANONICAL TYPE: warranty
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.
+
+========================================================================================================================
+UNIFIED RISK [10]
+========================================================================================================================
+id:
+risk_node_60
+
+clause_ref:
+node_60
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Cumulative Remedies
+SOURCE CANONICAL TYPE: remedies
+SOURCE CANONICAL LEGAL INSIGHT:
+The cumulative nature of remedies provides flexibility for both parties to address breaches or disputes effectively, potentially reducing litigation risks by allowing for a broader range of responses.
+
+========================================================================================================================
+UNIFIED RISK [12]
+========================================================================================================================
+id:
+risk_node_76
+
+clause_ref:
+node_76
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Data Protection Obligations
+SOURCE CANONICAL TYPE: data_protection
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause governs data handling, privacy obligations, security controls, or incident response responsibilities.
+
+========================================================================================================================
+UNIFIED RISK [14]
+========================================================================================================================
+id:
+risk_node_79
+
+clause_ref:
+node_79
+
+risk_level:
+high
+
+SOURCE CANONICAL TITLE: Personal Data Breach Notification
+SOURCE CANONICAL TYPE: data_protection
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause sets the timeline and content for breach notification, which drives the controller's own regulatory notification deadlines (often 72 hours under GDPR).
+
+========================================================================================================================
+UNIFIED RISK [16]
+========================================================================================================================
+id:
+risk_node_91
+
+clause_ref:
+node_91
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Injunctive Relief
+SOURCE CANONICAL TYPE: dispute_resolution
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause sets the procedure and forum for resolving disputes.
+
+========================================================================================================================
+UNIFIED RISK [19]
+========================================================================================================================
+id:
+risk_node_69
+
+clause_ref:
+node_69
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Limitation of Liability
+SOURCE CANONICAL TYPE: liability
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.
+
+========================================================================================================================
+UNIFIED RISK [21]
+========================================================================================================================
+id:
+risk_node_39
+
+clause_ref:
+node_39
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Term and Termination
+SOURCE CANONICAL TYPE: notice
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause may create legal or operational exposure.
+
+========================================================================================================================
+UNIFIED RISK [41]
+========================================================================================================================
+id:
+risk_node_61
+
+clause_ref:
+node_61
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Injunctive Relief
+SOURCE CANONICAL TYPE: confidentiality
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause may create legal or operational exposure.
+
+========================================================================================================================
+UNIFIED RISK [43]
+========================================================================================================================
+id:
+risk_node_68
+
+clause_ref:
+node_68
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Limitation of Liability
+SOURCE CANONICAL TYPE: liability
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.
+
+========================================================================================================================
+UNIFIED RISK [51]
+========================================================================================================================
+id:
+risk_node_88
+
+clause_ref:
+node_88
+
+risk_level:
+medium
+
+SOURCE CANONICAL TITLE: Return or Destruction of Confidential Information
+SOURCE CANONICAL TYPE: confidentiality
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.
+
+========================================================================================================================
+UNIFIED RISK [52]
+========================================================================================================================
+id:
+risk_node_92
+
+clause_ref:
+node_92
+
+risk_level:
+high
+
+SOURCE CANONICAL TITLE: Dispute Resolution
+SOURCE CANONICAL TYPE: dispute_resolution
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause sets the procedure and forum for resolving disputes.
+
+========================================================================================================================
+UNIFIED RISK [54]
+========================================================================================================================
+id:
+risk_node_96
+
+clause_ref:
+node_96
+
+risk_level:
+high
+
+SOURCE CANONICAL TITLE: Exclusive Jurisdiction
+SOURCE CANONICAL TYPE: dispute_resolution
+SOURCE CANONICAL LEGAL INSIGHT:
+This clause sets the procedure and forum for resolving disputes.
+
+########################################################################################################################
+D2. UNIFIED NEGOTIATION PRIORITIES
+########################################################################################################################
+COUNT: 7
+
+========================================================================================================================
+UNIFIED PRIORITY [1]
+========================================================================================================================
+RESOLVED RISK:
+{"clause_ref": "node_50", "explanation": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.", "exposure": {"compliance": "low", "cybersecurity": "low", "employment": "low", "financial": "low", "ip": "high", "legal": "high", "operational": "high", "privacy": "low", "regulatory": "low", "reputation": "low", "tax": "low"}, "id": "risk_node_50", "market_practice": "market_standard", "market_practice_score": null, "red_flag": true, "risk_level": "high"}
+
+RESOLVED CANONICAL TITLE: Confidential Information Rights
+RESOLVED CANONICAL TYPE: intellectual_property
+
+========================================================================================================================
+UNIFIED PRIORITY [2]
+========================================================================================================================
+RESOLVED RISK:
+{"clause_ref": "node_59", "explanation": "This clause should be reviewed because it may affect legal, financial, or operational obligations.", "exposure": {"compliance": "low", "cybersecurity": "low", "employment": "low", "financial": "medium", "ip": "low", "legal": "medium", "operational": "medium", "privacy": "low", "regulatory": "low", "reputation": "medium", "tax": "low"}, "id": "risk_node_59", "market_practice": "market_aggressive", "market_practice_score": null, "red_flag": true, "risk_level": "medium"}
+
+RESOLVED CANONICAL TITLE: Injunctive Relief and Specific Performance
+RESOLVED CANONICAL TYPE: remedies
+
+========================================================================================================================
+UNIFIED PRIORITY [3]
+========================================================================================================================
+RESOLVED RISK:
+{"clause_ref": "node_44", "explanation": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.", "exposure": {"compliance": "low", "cybersecurity": "low", "employment": "low", "financial": "low", "ip": "low", "legal": "medium", "operational": "medium", "privacy": "low", "regulatory": "low", "reputation": "low", "tax": "low"}, "id": "risk_node_44", "market_practice": "market_standard", "market_practice_score": null, "red_flag": false, "risk_level": "medium"}
+
+RESOLVED CANONICAL TITLE: Return or Destruction of Confidential Information
+RESOLVED CANONICAL TYPE: confidentiality
+
+========================================================================================================================
+UNIFIED PRIORITY [5]
+========================================================================================================================
+RESOLVED RISK:
+{"clause_ref": "node_76", "explanation": "This clause governs data handling, privacy obligations, security controls, or incident response responsibilities.", "exposure": {"compliance": "medium", "cybersecurity": "medium", "employment": "low", "financial": "low", "ip": "low", "legal": "medium", "operational": "medium", "privacy": "medium", "regulatory": "medium", "reputation": "low", "tax": "low"}, "id": "risk_node_76", "market_practice": "market_standard", "market_practice_score": null, "red_flag": false, "risk_level": "medium"}
+
+RESOLVED CANONICAL TITLE: Data Protection Obligations
+RESOLVED CANONICAL TYPE: data_protection
+
+########################################################################################################################
+D3. UNIFIED ACTION CHECKLIST
+########################################################################################################################
+COUNT: 13
+
+========================================================================================================================
+UNIFIED ACTION [1]
+========================================================================================================================
+clause_ref:
+node_50
+
+SOURCE CANONICAL TITLE: Confidential Information Rights
+SOURCE CANONICAL TYPE: intellectual_property
+
+========================================================================================================================
+UNIFIED ACTION [3]
+========================================================================================================================
+clause_ref:
+node_59
+
+SOURCE CANONICAL TITLE: Injunctive Relief and Specific Performance
+SOURCE CANONICAL TYPE: remedies
+
+========================================================================================================================
+UNIFIED ACTION [4]
+========================================================================================================================
+clause_ref:
+node_62
+
+SOURCE CANONICAL TITLE: Attorney's Fees
+SOURCE CANONICAL TYPE: fees
+
+========================================================================================================================
+UNIFIED ACTION [5]
+========================================================================================================================
+clause_ref:
+node_66
+
+SOURCE CANONICAL TITLE: Indemnification Notice and Cooperation
+SOURCE CANONICAL TYPE: indemnity
+
+========================================================================================================================
+UNIFIED ACTION [6]
+========================================================================================================================
+clause_ref:
+node_44
+
+SOURCE CANONICAL TITLE: Return or Destruction of Confidential Information
+SOURCE CANONICAL TYPE: confidentiality
+
+========================================================================================================================
+UNIFIED ACTION [8]
+========================================================================================================================
+clause_ref:
+node_60
+
+SOURCE CANONICAL TITLE: Cumulative Remedies
+SOURCE CANONICAL TYPE: remedies
+
+========================================================================================================================
+UNIFIED ACTION [10]
+========================================================================================================================
+clause_ref:
+node_76
+
+SOURCE CANONICAL TITLE: Data Protection Obligations
+SOURCE CANONICAL TYPE: data_protection
+
+########################################################################################################################
+E. ROOT / LEGACY SUMMARY-LIKE FIELDS
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+FIELD: dangerous_patterns
+
+
+------------------------------------------------------------------------------------------------------------------------
+FIELD: key_risks
+
+
+------------------------------------------------------------------------------------------------------------------------
+FIELD: main_obligations
+
+
+------------------------------------------------------------------------------------------------------------------------
+FIELD: negotiation_priorities
+
+
+------------------------------------------------------------------------------------------------------------------------
+FIELD: recommended_actions
+
+
+------------------------------------------------------------------------------------------------------------------------
+FIELD: simplified_version
+This is an NDA involving Contracting Party A, Contracting Party B. It sets out the parties' main rights, obligations, and risk allocation. The stated contract duration is a term of three (3) years from the Effective Date. Key topics include: Confidential Information Rights, Confidential Information Disclaimer, Injunctive Relief and Specific Performance, Attorney's Fees.
+
+Things to watch:
+- Confidential Information Rights — Allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+- Confidential Information Disclaimer — May create legal or operational exposure.
+- Injunctive Relief and Specific Performance — Should be reviewed because it may affect legal, financial, or operational obligations.
+- Attorney's Fees — Creates a potential financial exposure for the opposing party, as they may be liable for the Receiving Party's legal costs if enforcement actions arise. This could deter parties from pursuing legitimate claims due to the risk of incurring additional costs.
+
+------------------------------------------------------------------------------------------------------------------------
+FIELD: summary
+Type: NDA
+Parties: Disclosing Party, Receiving Party
+Duration: a term of three (3) years from the Effective Date
+Payment: Not applicable
+
+Contract Quality: 93/100
+Contract Complexity: Medium
+Overall Balance: Not specified
+Jurisdiction: the State of Delaware
+
+Main obligations:
+- Confidential Information Disclaimer — May create legal or operational exposure.
+- Injunctive Relief and Specific Performance — Should be reviewed because it may affect legal, financial, or operational obligations.
+- Attorney's Fees — Creates a potential financial exposure for the opposing party, as they may be liable for the Receiving Party's legal costs if enforcement actions arise. This could deter parties from pursuing legitimate claims due to the risk of incurring additional costs.
+- Indemnification Notice and Cooperation — Allocates responsibility for third-party claims, defense costs, damages, or losses.
+- Return or Destruction of Confidential Information — Determines when the contract can end and whether the affected party has notice or an opportunity to cure.
+- Representations and Warranties — Defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.
+- Cumulative Remedies — The cumulative nature of remedies provides flexibility for both parties to address breaches or disputes effectively, potentially reducing litigation risks by allowing for a broader range of responses.
+- Data Protection Obligations — Governs data handling, privacy obligations, security controls, or incident response responsibilities.
+
+Key points:
+- Confidential Information Rights — Allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+- Definition of Personal Data — May create legal or operational exposure.
+- Evidence Requirement for Exclusion — Should be reviewed because it may affect legal, financial, or operational obligations.
+- Indemnification Limitations — Allocates responsibility for third-party claims, defense costs, damages, or losses.
+- Injunctive Relief — Sets the procedure and forum for resolving disputes.
+- Assignment — May create legal or operational exposure.
+- Limitation of Liability — Affects how financial responsibility is allocated if losses, claims, or disputes arise.
+- Term and Termination — May create legal or operational exposure.
+
+Dangerous Patterns:
+- This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+- This clause sets the timeline and content for breach notification, which drives the controller's own regulatory notification deadlines (often 72 hours under GDPR).
+- This clause sets the procedure and forum for resolving disputes.
+
+Key Risks:
+- This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.
+- This clause creates a potential financial exposure for the opposing party, as they may be liable for the Receiving Party's legal costs if enforcement actions arise. This could deter parties from pursuing legitimate claims due to the risk of incurring additional costs.
+- This clause allocates responsibility for third-party claims, defense costs, damages, or losses.
+- This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.
+- This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.
+
+Negotiation Priorities:
+- Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.
+- Negotiate to include a requirement for a hearing before injunctive relief is granted.
+- Consider narrowing the scope of confidential information, adding standard disclosure exceptions, clarifying permitted recipients, and limiting the duration of post-termination confidentiality obligations based on the sensitivity of the information.
+- Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.
+
+Recommended Actions:
+- all intellectual property
+- The clause limits liability for the accuracy of information, which could lead to significant risks for the receiving party.
+- The clause allows for injunctive relief without the usual requirements, which could lead to unilateral advantages for the Receiving Party.
+- The clause may create a financial disincentive for the opposing party to contest enforcement due to the risk of incurring substantial legal fees.
+- Confirm which claims are covered, who controls the defense, whether notice is required, and whether liability limits apply.
+

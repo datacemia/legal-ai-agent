@@ -1,0 +1,333 @@
+========================================================================================================================
+V4.1.14 REMAINING ABSTENTIONS BY DOMAIN
+========================================================================================================================
+TOTAL: 171
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: other
+ROWS: 14
+LANGUAGES: {'en': 1, 'fr': 2, 'ar': 11}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 14}
+MECHANISMS: {'CONFIDENTIALITY_SURVIVAL': 1, 'MANDATORY_CONJUNCTION': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: loan
+ROWS: 12
+LANGUAGES: {'en': 4, 'fr': 4, 'ar': 4}
+REASONS: {'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 2, 'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 10}
+MECHANISMS: {'FINANCIAL_REPORTING_OBLIGATION': 2, 'PROHIBITION': 1, 'PRIOR_CONSENT_PREREQUISITE': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: intellectual_property
+ROWS: 9
+LANGUAGES: {'en': 2, 'fr': 2, 'ar': 5}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 7, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 2}
+MECHANISMS: {'CUSTOMER_DATA_LIFECYCLE': 1, 'ASSIGNMENT_TRANSFER': 2, 'EXPRESS_RIGHT': 1, 'PROHIBITION': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: indemnity
+ROWS: 9
+LANGUAGES: {'en': 2, 'fr': 3, 'ar': 4}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 9}
+MECHANISMS: {'PROHIBITION': 2, 'PRIOR_CONSENT_PREREQUISITE': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: warranty
+ROWS: 8
+LANGUAGES: {'en': 3, 'fr': 5}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 8}
+MECHANISMS: {'EXPRESS_RIGHT': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: termination
+ROWS: 7
+LANGUAGES: {'fr': 6, 'en': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 7}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: payment
+ROWS: 7
+LANGUAGES: {'en': 1, 'fr': 2, 'ar': 4}
+REASONS: {'COMPETING_DOMAIN_MECHANISMS': 1, 'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 6}
+MECHANISMS: {'PROFESSIONAL_STANDARD_OF_CARE': 1, 'SERVICE_PERFORMANCE_OBLIGATION': 1, 'PAYMENT_OBLIGATION': 1, 'PAYMENT_DEADLINE': 1, 'PRIOR_CONSENT_PREREQUISITE': 1, 'PROHIBITION': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: confidentiality
+ROWS: 6
+LANGUAGES: {'en': 3, 'fr': 1, 'ar': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 5, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 1}
+MECHANISMS: {'CONFIDENTIALITY_SURVIVAL': 2, 'CONFIDENTIALITY_REMEDY': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: delivery
+ROWS: 6
+LANGUAGES: {'en': 2, 'fr': 2, 'ar': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 6}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: dispute_resolution
+ROWS: 5
+LANGUAGES: {'en': 1, 'fr': 1, 'ar': 3}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 5}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: supply_distribution
+ROWS: 5
+LANGUAGES: {'en': 3, 'fr': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 5}
+MECHANISMS: {'EXPRESS_RIGHT': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: assignment
+ROWS: 5
+LANGUAGES: {'en': 1, 'ar': 4}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 4, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 1}
+MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 2, 'PROHIBITION': 3, 'ASSIGNMENT_TRANSFER': 1, 'MANDATORY_CONJUNCTION': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: share_transfer_rights
+ROWS: 5
+LANGUAGES: {'en': 3, 'fr': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 3}
+MECHANISMS: {'MANDATORY_CONJUNCTION': 2, 'EXPRESS_RIGHT': 1, 'ASSIGNMENT_TRANSFER': 3}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: liability
+ROWS: 5
+LANGUAGES: {'en': 1, 'fr': 4}
+REASONS: {'COMPETING_DOMAIN_MECHANISMS': 2, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 1, 'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {'EXCLUDED_DAMAGE_CATEGORY': 3, 'GOVERNING_LAW_SELECTION': 2}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: cybersecurity
+ROWS: 5
+LANGUAGES: {'fr': 2, 'ar': 3}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 5}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: renewal
+ROWS: 4
+LANGUAGES: {'en': 2, 'fr': 1, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 3, 'COMPETING_DOMAIN_MECHANISMS': 1}
+MECHANISMS: {'AUTOMATIC_RENEWAL': 1, 'PAYMENT_OBLIGATION': 1, 'TERMINATION_NOTICE_PERIOD': 3, 'NOTICE_PROCEDURE': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: term
+ROWS: 4
+LANGUAGES: {'en': 1, 'ar': 3}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 4}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: services
+ROWS: 4
+LANGUAGES: {'en': 1, 'fr': 3}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 4}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: subcontracting
+ROWS: 4
+LANGUAGES: {'en': 1, 'fr': 2, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 4}
+MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 3, 'PROHIBITION': 2}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: security_interest
+ROWS: 4
+LANGUAGES: {'en': 1, 'fr': 3}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 4}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: maintenance
+ROWS: 3
+LANGUAGES: {'en': 1, 'ar': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 3}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: trademark_branding
+ROWS: 3
+LANGUAGES: {'en': 1, 'fr': 1, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 3}
+MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 3, 'PROHIBITION': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: pricing
+ROWS: 3
+LANGUAGES: {'fr': 1, 'ar': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 3}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: notice
+ROWS: 2
+LANGUAGES: {'en': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {'TERMINATION_CURE_PERIOD': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: security
+ROWS: 2
+LANGUAGES: {'en': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: lease
+ROWS: 2
+LANGUAGES: {'en': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: insurance
+ROWS: 2
+LANGUAGES: {'en': 1, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: remedies
+ROWS: 2
+LANGUAGES: {'en': 1, 'fr': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 1}
+MECHANISMS: {'CONFIDENTIALITY_REMEDY': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: guarantee
+ROWS: 2
+LANGUAGES: {'en': 1, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: compensation
+ROWS: 2
+LANGUAGES: {'en': 1, 'fr': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 2, 'PROHIBITION': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: anti_dilution_preemptive_rights
+ROWS: 2
+LANGUAGES: {'en': 1, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {'EXPRESS_RIGHT': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: royalties
+ROWS: 2
+LANGUAGES: {'fr': 1, 'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: penalty
+ROWS: 2
+LANGUAGES: {'ar': 2}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 2}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: governance
+ROWS: 1
+LANGUAGES: {'en': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: audit_rights
+ROWS: 1
+LANGUAGES: {'en': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: employment
+ROWS: 1
+LANGUAGES: {'en': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: real_estate
+ROWS: 1
+LANGUAGES: {'fr': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: termination_for_convenience
+ROWS: 1
+LANGUAGES: {'fr': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: duration
+ROWS: 1
+LANGUAGES: {'fr': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: data_protection
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {'CUSTOMER_DATA_LIFECYCLE': 1}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: restrictive_covenants
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: corporate_governance
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: deposit
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: tax
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: ownership
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: covenant
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}
+
+------------------------------------------------------------------------------------------------------------------------
+TYPE: collateral
+ROWS: 1
+LANGUAGES: {'ar': 1}
+REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1}
+MECHANISMS: {}

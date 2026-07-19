@@ -1,0 +1,413 @@
+====================================================================================================
+SUMMARY BUCKET ORIGIN PROBE
+====================================================================================================
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+
+====================================================================================================
+FUNCTION: build_unified_report_from_pipeline
+LINES: 1372 - 1435
+TARGETS: ['negotiation_priorities']
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1389
+----------------------------------------------------------------------------------------------------
+01377: ) -> dict:
+01378:     language = normalize_language(language)
+01379:     """
+01380:     Main entrypoint. Aggregates the report from one clause-analysis truth.
+01381:     The only small AI call is limited to genuinely absent family-core clauses
+01382:     and confidence notes.
+01383:     """
+01384:     clauses = _get_clause_list(pipeline_result)
+01385:     family_detection = detect_contract_family(contract_text)
+01386: 
+01387:     key_clauses = build_key_clauses(clauses)
+01388:     risks = build_risks_identified(clauses)
+01389:     negotiation_priorities = build_negotiation_priorities(clauses)
+01390:     suggested_wording = build_suggested_wording(clauses)
+01391:     action_checklist = build_action_checklist(clauses)
+01392:     risk_score = build_risk_score(pipeline_result, risks)
+01393:     contract_overview = build_contract_overview(
+01394:         pipeline_result,
+01395:         family_detection,
+01396:         contract_text,
+01397:         party_roles,
+01398:         language,
+01399:     )
+01400: 
+01401:     executive_summary_text = (
+01402:         pipeline_result.get("executive_risk_narrative")
+01403:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01404:         or ""
+01405:     )
+01406: 
+01407:     missing_clauses, confidence_notes, fallback_position = (
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1427
+----------------------------------------------------------------------------------------------------
+01415: 
+01416:     quality_score = build_contract_quality_score(
+01417:         pipeline_result,
+01418:         clauses,
+01419:     )
+01420: 
+01421:     return {
+01422:         "contract_family": family_detection.get("family", "General"),
+01423:         "contract_overview": contract_overview,
+01424:         "executive_summary": executive_summary_text,
+01425:         "key_clauses": key_clauses,
+01426:         "risks_identified": risks,
+01427:         "negotiation_priorities": negotiation_priorities,
+01428:         "suggested_wording": suggested_wording,
+01429:         "fallback_position": fallback_position,
+01430:         "action_checklist": action_checklist,
+01431:         "risk_score": risk_score,
+01432:         "confidence_score": quality_score,
+01433:         "missing_clauses": missing_clauses,
+01434:         "confidence_notes": confidence_notes,
+01435:     }
+
+====================================================================================================
+FUNCTION: to_legacy_summary_data
+LINES: 1710 - 1841
+TARGETS: ['dangerous_patterns', 'key_risks', 'main_obligations', 'negotiation_priorities', 'recommended_actions']
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1718
+----------------------------------------------------------------------------------------------------
+01710: def to_legacy_summary_data(
+01711:     report: dict,
+01712:     language: str = "en",
+01713: ) -> dict:
+01714:     language = normalize_language(language)
+01715:     not_specified = localized_default("not_specified", language)
+01716: 
+01717:     overview = report.get("contract_overview", {}) or {}
+01718:     negotiation = report.get("negotiation_priorities", []) or []
+01719:     risks = report.get("risks_identified", []) or []
+01720: 
+01721:     contract_family = (
+01722:         report.get("contract_family")
+01723:         or overview.get("contract_type")
+01724:         or ""
+01725:     )
+01726:     optional_fields = get_optional_fields_for_family(contract_family)
+01727: 
+01728:     parties = canonicalize_party_labels(
+01729:         overview.get("parties"),
+01730:         language,
+01731:     )
+01732: 
+01733:     payment_terms = overview.get("payment_terms")
+01734:     if not payment_terms:
+01735:         payment_terms = (
+01736:             localized_default("not_applicable", language)
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1741
+----------------------------------------------------------------------------------------------------
+01729:         overview.get("parties"),
+01730:         language,
+01731:     )
+01732: 
+01733:     payment_terms = overview.get("payment_terms")
+01734:     if not payment_terms:
+01735:         payment_terms = (
+01736:             localized_default("not_applicable", language)
+01737:             if "payment_terms" in optional_fields
+01738:             else not_specified
+01739:         )
+01740: 
+01741:     main_obligations, important_points = build_legacy_clause_sections(
+01742:         report,
+01743:         language,
+01744:     )
+01745: 
+01746:     action_texts = [
+01747:         action.get("action", "")
+01748:         for action in report.get("action_checklist", [])
+01749:         if isinstance(action, dict)
+01750:     ]
+01751: 
+01752:     high_risk_texts = [
+01753:         risk.get("explanation", "")
+01754:         for risk in risks
+01755:         if isinstance(risk, dict)
+01756:         and risk.get("risk_level") == "high"
+01757:     ]
+01758: 
+01759:     all_risk_texts = [
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1753
+----------------------------------------------------------------------------------------------------
+01741:     main_obligations, important_points = build_legacy_clause_sections(
+01742:         report,
+01743:         language,
+01744:     )
+01745: 
+01746:     action_texts = [
+01747:         action.get("action", "")
+01748:         for action in report.get("action_checklist", [])
+01749:         if isinstance(action, dict)
+01750:     ]
+01751: 
+01752:     high_risk_texts = [
+01753:         risk.get("explanation", "")
+01754:         for risk in risks
+01755:         if isinstance(risk, dict)
+01756:         and risk.get("risk_level") == "high"
+01757:     ]
+01758: 
+01759:     all_risk_texts = [
+01760:         risk.get("explanation", "")
+01761:         for risk in risks
+01762:         if isinstance(risk, dict)
+01763:     ]
+01764: 
+01765:     negotiation_texts = [
+01766:         item.get("what_should_change", "")
+01767:         for item in negotiation
+01768:         if isinstance(item, dict)
+01769:     ]
+01770: 
+01771:     missing_texts = [
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1760
+----------------------------------------------------------------------------------------------------
+01748:         for action in report.get("action_checklist", [])
+01749:         if isinstance(action, dict)
+01750:     ]
+01751: 
+01752:     high_risk_texts = [
+01753:         risk.get("explanation", "")
+01754:         for risk in risks
+01755:         if isinstance(risk, dict)
+01756:         and risk.get("risk_level") == "high"
+01757:     ]
+01758: 
+01759:     all_risk_texts = [
+01760:         risk.get("explanation", "")
+01761:         for risk in risks
+01762:         if isinstance(risk, dict)
+01763:     ]
+01764: 
+01765:     negotiation_texts = [
+01766:         item.get("what_should_change", "")
+01767:         for item in negotiation
+01768:         if isinstance(item, dict)
+01769:     ]
+01770: 
+01771:     missing_texts = [
+01772:         (
+01773:             f"{item.get('clause_type', 'unknown')}: "
+01774:             f"{item.get('business_reason') or item.get('risk_if_missing') or item.get('why_missing') or ''}"
+01775:         ).strip()
+01776:         for item in report.get("missing_clauses", [])
+01777:         if isinstance(item, dict)
+01778:     ]
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1774
+----------------------------------------------------------------------------------------------------
+01762:         if isinstance(risk, dict)
+01763:     ]
+01764: 
+01765:     negotiation_texts = [
+01766:         item.get("what_should_change", "")
+01767:         for item in negotiation
+01768:         if isinstance(item, dict)
+01769:     ]
+01770: 
+01771:     missing_texts = [
+01772:         (
+01773:             f"{item.get('clause_type', 'unknown')}: "
+01774:             f"{item.get('business_reason') or item.get('risk_if_missing') or item.get('why_missing') or ''}"
+01775:         ).strip()
+01776:         for item in report.get("missing_clauses", [])
+01777:         if isinstance(item, dict)
+01778:     ]
+01779: 
+01780:     return {
+01781:         "contract_type": (
+01782:             overview.get("contract_type")
+01783:             or report.get("contract_family")
+01784:             or not_specified
+01785:         ),
+01786:         "parties": parties,
+01787:         "duration": overview.get("duration") or not_specified,
+01788:         "payment_terms": payment_terms,
+01789:         "main_obligations": main_obligations,
+01790:         "global_summary": normalize_report_text(
+01791:             report.get("executive_summary", "")
+01792:         ),
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1789
+----------------------------------------------------------------------------------------------------
+01777:         if isinstance(item, dict)
+01778:     ]
+01779: 
+01780:     return {
+01781:         "contract_type": (
+01782:             overview.get("contract_type")
+01783:             or report.get("contract_family")
+01784:             or not_specified
+01785:         ),
+01786:         "parties": parties,
+01787:         "duration": overview.get("duration") or not_specified,
+01788:         "payment_terms": payment_terms,
+01789:         "main_obligations": main_obligations,
+01790:         "global_summary": normalize_report_text(
+01791:             report.get("executive_summary", "")
+01792:         ),
+01793:         "important_points": important_points,
+01794:         "missing_clauses": compact_unique_texts(
+01795:             missing_texts,
+01796:             language,
+01797:             limit=5,
+01798:             drop_generic=False,
+01799:         ),
+01800:         "dangerous_patterns": compact_unique_texts(
+01801:             high_risk_texts,
+01802:             language,
+01803:             limit=5,
+01804:         ),
+01805:         "contract_quality_score": int(
+01806:             report.get("confidence_score")
+01807:             if report.get("confidence_score") is not None
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1800
+----------------------------------------------------------------------------------------------------
+01788:         "payment_terms": payment_terms,
+01789:         "main_obligations": main_obligations,
+01790:         "global_summary": normalize_report_text(
+01791:             report.get("executive_summary", "")
+01792:         ),
+01793:         "important_points": important_points,
+01794:         "missing_clauses": compact_unique_texts(
+01795:             missing_texts,
+01796:             language,
+01797:             limit=5,
+01798:             drop_generic=False,
+01799:         ),
+01800:         "dangerous_patterns": compact_unique_texts(
+01801:             high_risk_texts,
+01802:             language,
+01803:             limit=5,
+01804:         ),
+01805:         "contract_quality_score": int(
+01806:             report.get("confidence_score")
+01807:             if report.get("confidence_score") is not None
+01808:             else 0
+01809:         ),
+01810:         "overall_balance": (
+01811:             overview.get("overall_balance")
+01812:             or not_specified
+01813:         ),
+01814:         "negotiation_priorities": compact_unique_texts(
+01815:             negotiation_texts,
+01816:             language,
+01817:             limit=5,
+01818:         ),
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1814
+----------------------------------------------------------------------------------------------------
+01802:             language,
+01803:             limit=5,
+01804:         ),
+01805:         "contract_quality_score": int(
+01806:             report.get("confidence_score")
+01807:             if report.get("confidence_score") is not None
+01808:             else 0
+01809:         ),
+01810:         "overall_balance": (
+01811:             overview.get("overall_balance")
+01812:             or not_specified
+01813:         ),
+01814:         "negotiation_priorities": compact_unique_texts(
+01815:             negotiation_texts,
+01816:             language,
+01817:             limit=5,
+01818:         ),
+01819:         "key_risks": compact_unique_texts(
+01820:             all_risk_texts,
+01821:             language,
+01822:             limit=5,
+01823:         ),
+01824:         "practical_decision": normalize_report_text(
+01825:             report.get("fallback_position", "")
+01826:         ),
+01827:         "jurisdiction_detected": (
+01828:             overview.get("jurisdiction_detected")
+01829:             or not_specified
+01830:         ),
+01831:         "jurisdiction_note": overview.get("jurisdiction_note", ""),
+01832:         "recommended_actions": compact_unique_texts(
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1819
+----------------------------------------------------------------------------------------------------
+01807:             if report.get("confidence_score") is not None
+01808:             else 0
+01809:         ),
+01810:         "overall_balance": (
+01811:             overview.get("overall_balance")
+01812:             or not_specified
+01813:         ),
+01814:         "negotiation_priorities": compact_unique_texts(
+01815:             negotiation_texts,
+01816:             language,
+01817:             limit=5,
+01818:         ),
+01819:         "key_risks": compact_unique_texts(
+01820:             all_risk_texts,
+01821:             language,
+01822:             limit=5,
+01823:         ),
+01824:         "practical_decision": normalize_report_text(
+01825:             report.get("fallback_position", "")
+01826:         ),
+01827:         "jurisdiction_detected": (
+01828:             overview.get("jurisdiction_detected")
+01829:             or not_specified
+01830:         ),
+01831:         "jurisdiction_note": overview.get("jurisdiction_note", ""),
+01832:         "recommended_actions": compact_unique_texts(
+01833:             action_texts,
+01834:             language,
+01835:             limit=5,
+01836:         ),
+01837:         "contract_complexity": overview.get(
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1832
+----------------------------------------------------------------------------------------------------
+01820:             all_risk_texts,
+01821:             language,
+01822:             limit=5,
+01823:         ),
+01824:         "practical_decision": normalize_report_text(
+01825:             report.get("fallback_position", "")
+01826:         ),
+01827:         "jurisdiction_detected": (
+01828:             overview.get("jurisdiction_detected")
+01829:             or not_specified
+01830:         ),
+01831:         "jurisdiction_note": overview.get("jurisdiction_note", ""),
+01832:         "recommended_actions": compact_unique_texts(
+01833:             action_texts,
+01834:             language,
+01835:             limit=5,
+01836:         ),
+01837:         "contract_complexity": overview.get(
+01838:             "contract_complexity",
+01839:             "medium",
+01840:         ),
+01841:     }

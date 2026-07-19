@@ -1,0 +1,74 @@
+========== PII_REDACTOR V2 LOADED ==========
+C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\huggingface_hub\utils\_validators.py:189: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+  warnings.warn(
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<?, ?it/s]
+
+========================================================================================================================
+EN NIST
+BEFORE: The Provider shall comply with the NIST Cybersecurity Framework.
+AFTER : The Provider shall comply with the NIST Cybersecurity Framework.
+
+========================================================================================================================
+EN UNKNOWN FRAMEWORK
+BEFORE: The Provider shall comply with the Orion Resilience Framework.
+AFTER : The Provider shall comply with the Orion Resilience Framework.
+
+========================================================================================================================
+EN REAL ORG SUFFIX
+BEFORE: Acme Technology Holdings LLC shall provide the Services.
+AFTER : [PARTY_1] shall provide the Services.
+
+========================================================================================================================
+EN REAL ORG DEFINED
+BEFORE: Acme Technology Holdings ("Provider") shall provide the Services.
+AFTER : [SERVICE_PROVIDER] ("Provider") shall provide the Services.
+
+========================================================================================================================
+EN REAL ORG ACTOR
+BEFORE: Acme Technology Holdings shall provide the Services.
+AFTER : [PARTY_1] shall provide the Services.
+
+========================================================================================================================
+FR NIST
+BEFORE: Le Prestataire respecte le Cadre de Cybersécurité du NIST.
+AFTER : Le Prestataire respecte le Cadre de Cybersécurité du NIST.
+
+========================================================================================================================
+FR UNKNOWN FRAMEWORK
+BEFORE: Le Prestataire respecte le Référentiel Orion de Résilience.
+AFTER : Le Prestataire respecte le Référentiel Orion de Résilience.
+
+========================================================================================================================
+FR REAL ORG SUFFIX
+BEFORE: Technologies Atlantique SAS fournit les Services.
+AFTER : [PARTY_1] fournit les Services.
+
+========================================================================================================================
+FR REAL ORG ACTOR
+BEFORE: Technologies Atlantique fournit les Services.
+AFTER : [PARTY_1] fournit les Services.
+
+========================================================================================================================
+AR NIST
+BEFORE: يلتزم مقدم الخدمة بإطار الأمن السيبراني الصادر عن NIST.
+AFTER : يلتزم مقدم الخدمة بإطار الأمن السيبراني الصادر عن NIST.
+
+========================================================================================================================
+AR DOMAIN NOUN
+BEFORE: تعد القوائم المالية وفقاً لمعايير IFRS.
+AFTER : تعد القوائم المالية وفقاً لمعايير IFRS.
+
+========================================================================================================================
+AR UNKNOWN FRAMEWORK
+BEFORE: يلتزم مقدم الخدمة بإطار أوريون للمرونة التشغيلية.
+AFTER : يلتزم مقدم الخدمة بإطار أوريون للمرونة التشغيلية.
+
+========================================================================================================================
+AR REAL ORG SUFFIX
+BEFORE: تقدم شركة الأطلس للتقنيات ذ.م.م الخدمات.
+AFTER : تقدم [PARTY_1] الخدمات.
+
+========================================================================================================================
+AR REAL ORG ACTOR
+BEFORE: تقدم شركة الأطلس للتقنيات الخدمات.
+AFTER : تقدم شركة الأطلس للتقنيات الخدمات.

@@ -1,0 +1,387 @@
+========================================================================================================================
+V4.1.23 PLACEHOLDER REALIZATION PROBE
+========================================================================================================================
+
+========================================================================================================================
+FUNCTION: _build_replacements
+FOUND: True
+========================================================================================================================
+def _build_replacements(roles: dict, language: str) -> dict[str, str]:
+    language = normalize_language(language)
+
+    a = str(roles.get("party_a") or ROLE_LABELS["generic"][language][0])
+    b = str(roles.get("party_b") or ROLE_LABELS["generic"][language][1])
+
+    return {
+        "en": {
+            "Contracting Party A": a,
+            "Contracting Party B": b,
+            "Party A": a,
+            "Party B": b,
+            "[PARTY_1]": a,
+            "[PARTY_2]": b,
+            "[PARTY_A]": a,
+            "[PARTY_B]": b,
+        },
+        "fr": {
+            "Partie contractante A": a,
+            "Partie contractante B": b,
+            "Partie A": a,
+            "Partie B": b,
+            "[PARTY_1]": a,
+            "[PARTY_2]": b,
+            "[PARTY_A]": a,
+            "[PARTY_B]": b,
+        },
+        "ar": {
+            "الطرف المتعاقد أ": a,
+            "الطرف المتعاقد ب": b,
+            "الطرف أ": a,
+            "الطرف ب": b,
+            "[PARTY_1]": a,
+            "[PARTY_2]": b,
+            "[PARTY_A]": a,
+            "[PARTY_B]": b,
+        },
+    }[language]
+
+
+========================================================================================================================
+FUNCTION: _normalize_generated_role_text_fr
+FOUND: True
+========================================================================================================================
+def _normalize_generated_role_text_fr(
+    text: str,
+    party_a: str,
+    party_b: str,
+) -> str:
+    output = text
+
+    replacements = [
+        ("de l’Employeur", f"de {party_a}"),
+        ("de l'Employeur", f"de {party_a}"),
+        ("à l’Employeur", f"à {party_a}"),
+        ("à l'Employeur", f"à {party_a}"),
+        ("l’Employeur", party_a),
+        ("l'Employeur", party_a),
+        ("Employeur", party_a),
+        ("Employeurs", party_a),
+        ("Employé", party_b),
+        ("Employée", party_b),
+        ("Salarié", party_b),
+        ("Salariée", party_b),
+        ("Employés", "personnel"),
+        ("Employées", "personnel"),
+        ("Salariés", "personnel"),
+        ("Salariées", "personnel"),
+    ]
+
+    for source, target in replacements:
+        output = _replace_role_word(output, source, target)
+
+    return _fix_french_articles(output)
+
+
+========================================================================================================================
+FUNCTION: normalize_anonymized_placeholders_to_roles
+FOUND: True
+========================================================================================================================
+def normalize_anonymized_placeholders_to_roles(text: str, roles: dict, language: str = "en") -> str:
+    language = normalize_language(language)
+    family = normalize_role_family_key(roles.get("family") if isinstance(roles, dict) else "generic")
+
+    if not isinstance(roles, dict):
+        return text
+
+    party_a = str(roles.get("party_a") or ROLE_LABELS["generic"][language][0])
+    party_b = str(roles.get("party_b") or ROLE_LABELS["generic"][language][1])
+
+    replacements = {
+        "[PARTY_1]": party_a,
+        "[PARTY_A]": party_a,
+        "[CLIENT]": party_a,
+        "[CUSTOMER]": party_a,
+        "[BUYER]": party_a,
+        "[LESSOR]": party_a,
+        "[LANDLORD]": party_a,
+        "[LENDER]": party_a,
+        "[LICENSOR]": party_a,
+        "[CONTROLLER]": party_a,
+        "[EMPLOYER]": party_a if family == "employment" else party_a,
+        "[PARTY_2]": party_b,
+        "[PARTY_B]": party_b,
+        "[SERVICE_PROVIDER]": party_b,
+        "[PROVIDER]": party_b,
+        "[SUPPLIER]": party_b,
+        "[VENDOR]": party_b,
+        "[SELLER]": party_b,
+        "[LESSEE]": party_b,
+        "[TENANT]": party_b,
+        "[BORROWER]": party_b,
+        "[LICENSEE]": party_b,
+        "[PROCESSOR]": party_b,
+        "[EMPLOYEE]": party_b if family == "employment" else party_b,
+    }
+
+    output = text
+    for source, target in sorted(replacements.items(), key=lambda item: len(item[0]), reverse=True):
+        output = output.replace(source, target)
+
+    return output
+
+
+========================================================================================================================
+FUNCTION: normalize_ai_role_words
+FOUND: True
+========================================================================================================================
+def normalize_ai_role_words(value, roles: dict, language: str = "en"):
+    """
+    Recursively normalize AI-generated role labels for any contract family.
+
+    International standard:
+    - works for any supported contract family / industry;
+    - supports EN / FR / AR;
+    - keeps Employer / Employee only for real employment contracts;
+    - maps generic role wording to ROLE_LABELS[family][language];
+    - preserves privacy-first architecture;
+    - does not reconstruct, infer, or expose personal data.
+
+    Important:
+    This function is NOT a party identity resolver. It only corrects generic
+    role words generated by the AI so a services, sale, lease, finance,
+    licensing, NDA, insurance, construction, or other contract is not displayed
+    as if it were an employment contract.
+    """
+    language = normalize_language(language)
+
+    if isinstance(value, list):
+        return [
+            normalize_ai_role_words(item, roles, language)
+            for item in value
+        ]
+
+    if isinstance(value, dict):
+        protected_keys = {
+            "original_text",
+            "original_clause",
+            "quoted_text",
+            "excerpt",
+            "clause_text",
+            "text",
+            "source_text",
+            "raw_text",
+        }
+
+        return {
+            key: (
+                item
+                if str(key).lower() in protected_keys
+                else normalize_ai_role_words(item, roles, language)
+            )
+            for key, item in value.items()
+        }
+
+    if not isinstance(value, str):
+        return value
+
+    if not isinstance(roles, dict):
+        return value
+
+    family = normalize_role_family_key(
+        roles.get("family")
+        or roles.get("contract_family")
+        or "generic"
+    )
+
+    # Real employment contracts should keep employment terminology.
+    if family == "employment":
+        return value
+    # For non-employment contracts, never allow hallucinated Employer/Employee
+# labels to survive. This is universal across EN / FR / AR and all domains.
+    if family != "employment":
+        neutral = {
+            "en": "the relevant party",
+            "fr": "la partie concernée",
+            "ar": "الطرف المعني",
+        }.get(language, "the relevant party")
+
+        neutral_possessive = {
+            "en": "the relevant party's",
+            "fr": "de la partie concernée",
+            "ar": "الخاصة بالطرف المعني",
+        }.get(language, "the relevant party's")
+
+        replacements = {
+            "Employer's": neutral_possessive,
+            "Employer’s": neutral_possessive,
+            "Employers'": neutral_possessive,
+            "Employer": neutral,
+            "Employee's": neutral_possessive,
+            "Employee’s": neutral_possessive,
+            "Employees'": neutral_possessive,
+            "Employee": "personnel",
+            "Employees": "personnel",
+            "Employeur": neutral,
+            "Salarié": "personnel",
+            "Salariés": "personnel",
+            "Employé": "personnel",
+            "Employés": "personnel",
+            "صاحب العمل": neutral,
+            "الموظف": "الموظفين",
+            "الموظفون": "الموظفين",
+        }
+
+        for old, new in sorted(
+            replacements.items(),
+            key=lambda item: len(item[0]),
+            reverse=True,
+        ):
+            value = value.replace(old, new)
+
+    party_a = str(
+        roles.get("party_a")
+        or ROLE_LABELS["generic"][language][0]
+    )
+
+    party_b = str(
+        roles.get("party_b")
+        or ROLE_LABELS["generic"][language][1]
+    )
+
+    value = normalize_anonymized_placeholders_to_roles(
+        value,
+        roles,
+        language,
+    )
+
+    if language == "fr":
+        return _normalize_generated_role_text_fr(
+            value,
+            party_a,
+            party_b,
+        )
+
+    if language == "ar":
+        return _normalize_generated_role_text_ar(
+            value,
+            party_a,
+            party_b,
+        )
+    
+    return _normalize_generated_role_text_en(
+        value,
+        party_a,
+        party_b,
+    )
+
+
+========================================================================================================================
+FUNCTION: get_display_roles
+FOUND: True
+========================================================================================================================
+def get_display_roles(
+    contract_type: str = "",
+    text: str = "",
+    language: str = "en",
+    anonymized: bool = False,
+) -> dict:
+    """
+    Return display-role suggestions.
+
+    By default anonymized=False to prevent accidental replacement.
+    Set anonymized=True only when the caller confirms the text uses
+    anonymized placeholders and role mapping is safe.
+    """
+    language = normalize_language(language)
+    family = normalize_role_family_key(
+        detect_role_family(contract_type, text)
+    )
+    party_a, party_b = ROLE_LABELS.get(
+        family,
+        ROLE_LABELS["generic"],
+    )[language]
+
+    return {
+        "party_a": party_a,
+        "party_b": party_b,
+        "family": family,
+        "anonymized": bool(anonymized),
+    }
+
+
+========================================================================================================================
+ROLE LABELS
+========================================================================================================================
+
+FAMILY: generic
+{'en': ('Party A', 'Party B'), 'fr': ('Partie A', 'Partie B'), 'ar': ('الطرف أ', 'الطرف ب')}
+
+FAMILY: employment
+{'en': ('Employer', 'Employee'), 'fr': ('Employeur', 'Salarié'), 'ar': ('صاحب العمل', 'الموظف')}
+
+FAMILY: services
+{'en': ('Client', 'Service Provider'), 'fr': ('Client', 'Prestataire'), 'ar': ('العميل', 'مقدم الخدمة')}
+
+FAMILY: sale
+{'en': ('Buyer', 'Seller'), 'fr': ('Acheteur', 'Vendeur'), 'ar': ('المشتري', 'البائع')}
+
+FAMILY: lease
+{'en': ('Lessor', 'Lessee'), 'fr': ('Bailleur', 'Locataire'), 'ar': ('المؤجر', 'المستأجر')}
+
+FAMILY: loan
+{'en': ('Lender', 'Borrower'), 'fr': ('Prêteur', 'Emprunteur'), 'ar': ('المقرض', 'المقترض')}
+
+FAMILY: license
+{'en': ('Licensor', 'Licensee'), 'fr': ('Concédant', 'Licencié'), 'ar': ('المرخِّص', 'المرخَّص له')}
+
+FAMILY: nda
+{'en': ('Disclosing Party', 'Receiving Party'), 'fr': ('Partie divulgatrice', 'Partie réceptrice'), 'ar': ('الطرف المفصح', 'الطرف المتلقي')}
+
+FAMILY: franchise
+{'en': ('Franchisor', 'Franchisee'), 'fr': ('Franchiseur', 'Franchisé'), 'ar': ('مانح الامتياز', 'صاحب الامتياز')}
+
+FAMILY: distribution
+{'en': ('Supplier', 'Distributor'), 'fr': ('Fournisseur', 'Distributeur'), 'ar': ('المورّد', 'الموزع')}
+
+FAMILY: insurance
+{'en': ('Insurer', 'Insured'), 'fr': ('Assureur', 'Assuré'), 'ar': ('المؤمّن', 'المؤمّن له')}
+
+FAMILY: construction
+{'en': ('Owner', 'Contractor'), 'fr': ('Maître d’ouvrage', 'Entrepreneur'), 'ar': ('صاحب المشروع', 'المقاول')}
+
+FAMILY: transport
+{'en': ('Shipper', 'Carrier'), 'fr': ('Expéditeur', 'Transporteur'), 'ar': ('الشاحن', 'الناقل')}
+
+FAMILY: data_processing
+{'en': ('Controller', 'Processor'), 'fr': ('Responsable du traitement', 'Sous-traitant'), 'ar': ('المتحكم بالبيانات', 'معالج البيانات')}
+
+FAMILY: shareholder
+{'en': ('Company', 'Shareholder'), 'fr': ('Société', 'Actionnaire'), 'ar': ('الشركة', 'المساهم')}
+
+FAMILY: agency
+{'en': ('Principal', 'Agent'), 'fr': ('Mandant', 'Mandataire'), 'ar': ('الموكل', 'الوكيل')}
+
+FAMILY: escrow
+{'en': ('Depositor', 'Escrow Agent'), 'fr': ('Déposant', 'Agent séquestre'), 'ar': ('المودع', 'وكيل الضمان')}
+
+========================================================================================================================
+DIRECT FR PLACEHOLDER CASES
+========================================================================================================================
+
+INPUT : La [PARTY_1] paie la [PARTY_2].
+OUTPUT: La Client paie la Prestataire.
+
+INPUT : La responsabilité de la [PARTY_2] est limitée.
+OUTPUT: La responsabilité de la Prestataire est limitée.
+
+INPUT : Les frais sont payés par la [PARTY_1].
+OUTPUT: Les frais sont payés par la Client.
+
+INPUT : Le rapport est fourni à la [PARTY_1].
+OUTPUT: Le rapport est fourni à la Client.
+
+INPUT : Les installations de la [PARTY_2] sont auditées.
+OUTPUT: Les installations de la Prestataire sont auditées.
+
+INPUT : La [SERVICE_PROVIDER] notifiera la [CLIENT].
+OUTPUT: La Prestataire notifiera la Client.

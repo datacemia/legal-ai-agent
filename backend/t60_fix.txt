@@ -1,0 +1,79 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 23208
+PDF_LINES_DEBUG {'line_count': 413, 'non_empty_line_count': 277, 'max_line_len': 255, 'first_20': ['Your Statement', '                                                                Statement 15              (Page 1 of 6)', '', '                                                              Account Number    06 3010 13274026', '                                      027', '                                                                Statement', '                                                                    Period        1 Jul 2023 - 14 Jul 2023      MS W N ABD KADIR', '        UNIT 4 23-25 HILLCREST GR', '                                                                    Closing Balance         $12,567.82 CR', '       SPRINGVALE VIC 3171', '                                                                       Enquiries                   13 2221', '', '', '', '', '    Smart Access', '', '         Enjoy the convenience and security of withdrawing what you need, when you need it. Plus you can have your', '         monthly account fee waived if you deposit at least $2,000 each calendar month.', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}
+DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+STATEMENT_SUMMARY_REJECTED_AS_SUSPICIOUS {'summary': {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}, 'best_candidate_parser': 'date_description_debit_credit_balance', 'ledger_income': 83692.57, 'ledger_expense': 71251.7, 'ledger_total': 154944.27000000002, 'expected_total': 162.25}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'date_description_debit_credit_balance', 'count': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': None, 'expense_gap': None, 'ledger_total': 154944.27, 'max_tx_abs': 36042.61, 'score': -140}]
+STATEMENT_LAYOUT_DETECTED date_description_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'date_description_debit_credit_balance', 'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': None, 'expense_gap': None, 'score': -140}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 156.25, 'deposits': 83692.57, 'withdrawals': 71251.7, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 83692.57, 'withdrawals': 71251.7, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}
+DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+STATEMENT_SUMMARY_REJECTED_AS_SUSPICIOUS {'summary': {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}, 'best_candidate_parser': 'date_description_debit_credit_balance', 'ledger_income': 83692.57, 'ledger_expense': 71251.7, 'ledger_total': 154944.27000000002, 'expected_total': 162.25}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'date_description_debit_credit_balance', 'count': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': None, 'expense_gap': None, 'ledger_total': 154944.27, 'max_tx_abs': 36042.61, 'score': -140}]
+STATEMENT_LAYOUT_DETECTED date_description_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'date_description_debit_credit_balance', 'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': None, 'expense_gap': None, 'score': -140}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 156.25, 'deposits': 83692.57, 'withdrawals': 71251.7, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 83692.57, 'withdrawals': 71251.7, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}
+DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+STATEMENT_SUMMARY_REJECTED_AS_SUSPICIOUS {'summary': {'opening_balance': 156.25, 'deposits': 156.25, 'withdrawals': 6.0, 'ending_balance': 12567.82}, 'best_candidate_parser': 'date_description_debit_credit_balance', 'ledger_income': 83692.57, 'ledger_expense': 71251.7, 'ledger_total': 154944.27000000002, 'expected_total': 162.25}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'date_description_debit_credit_balance', 'count': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': None, 'expense_gap': None, 'ledger_total': 154944.27, 'max_tx_abs': 36042.61, 'score': -140}]
+STATEMENT_LAYOUT_DETECTED date_description_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'date_description_debit_credit_balance', 'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': None, 'expense_gap': None, 'score': -140}
+STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE {'opening_balance': 156.25, 'deposits': 83692.57, 'withdrawals': 71251.7, 'ending_balance': 12567.82}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'deposits': 83692.57, 'withdrawals': 71251.7, 'ending_balance': 12567.82}
+DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'date_description_debit_credit_balance', 'count': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 154944.27, 'max_tx_abs': 36042.61, 'score': 0.0}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'date_description_debit_credit_balance', 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}]
+STATEMENT_LAYOUT_DETECTED date_description_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'date_description_debit_credit_balance', 'transactions': 112, 'income_total': 83692.57, 'expense_total': 71251.7, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}
+OK_REAL t60.pdf | tx=112 income=83692.57 expenses=71251.7 expected_income=83692.57 expected_expenses=71251.7 summary_ok=True real_ok=None opening=156.25 ending=12567.82 gap=None reason=MATCHES_REAL_STATEMENT_VALUES

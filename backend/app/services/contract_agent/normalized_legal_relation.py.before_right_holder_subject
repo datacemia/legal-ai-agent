@@ -1,0 +1,563 @@
+"""Language-neutral normalized legal relation materialization.
+
+This module projects already-grounded canonical source mechanisms into a
+stable relation schema. It does not classify clauses or generate legal text.
+"""
+
+from __future__ import annotations
+
+import re
+from typing import Any
+
+
+UNKNOWN = "UNKNOWN"
+
+
+_CONCEPT_NORMALIZATION = {
+    "CONFIDENTIALITY_DUTY": "CONFIDENTIALITY_OBLIGATION",
+    "CONFIDENTIAL_USE_RESTRICTION": "PURPOSE_LIMITATION",
+    "SECURITY_INCIDENT_NOTIFICATION": "DATA_BREACH_NOTICE",
+    "PERSONAL_DATA_BREACH_NOTIFICATION": "DATA_BREACH_NOTICE",
+    "VOLUNTARY_PREPAYMENT_RIGHT": "PREPAYMENT_RIGHT",
+}
+
+
+_POLARITY_NORMALIZATION = {
+    "REQUIRED": "OBLIGATION",
+    "MANDATORY": "OBLIGATION",
+    "RESTRICTED": "PROHIBITION",
+    "PROHIBITED": "PROHIBITION",
+    "RIGHT": "RIGHT",
+    "OPTIONAL": "OPTION",
+    "EXCLUDED": "PROHIBITION",
+}
+
+
+_ROLE_PATTERNS: dict[str, tuple[str, ...]] = {
+    "RECEIVING_PARTY": (
+        r"\breceiving party\b",
+        r"\bpartie destinataire\b",
+        r"(?:الطرف\s+المتلقي|طرف\s+متلق)",
+    ),
+    "DISCLOSING_PARTY": (
+        r"\bdisclosing party\b",
+        r"\bpartie divulgatrice\b",
+        r"(?:الطرف\s+المفصح|طرف\s+مفصح)",
+    ),
+    "PROVIDER": (
+        r"\bprovider\b",
+        r"\bprestataire\b",
+        r"(?:مقدم\s+الخدمة|المزود)",
+    ),
+    "CLIENT": (
+        r"\bclient\b",
+        r"\bclient\b",
+        r"(?:العميل)",
+    ),
+    "CUSTOMER": (
+        r"\bcustomer\b",
+        r"\bclient\b",
+        r"(?:العميل)",
+    ),
+    "LICENSOR": (
+        r"\blicensor\b",
+        r"\bconc[eé]dant\b",
+        r"(?:المرخ[ِّ]?ص)",
+    ),
+    "LICENSEE": (
+        r"\blicensee\b",
+        r"\bcessionnaire de licence\b",
+        r"(?:المرخ[َّ]?ص\s+له)",
+    ),
+    "BORROWER": (
+        r"\bborrower\b",
+        r"\bemprunteur\b",
+        r"(?:المقترض)",
+    ),
+    "LENDER": (
+        r"\blender\b",
+        r"\bpr[eê]teur\b",
+        r"(?:المقرض)",
+    ),
+    "TENANT": (
+        r"\btenant\b",
+        r"\bpreneur\b|\blocataire\b",
+        r"(?:المستأجر)",
+    ),
+    "LANDLORD": (
+        r"\blandlord\b",
+        r"\bbailleur\b",
+        r"(?:المؤجر)",
+    ),
+    "COMPANY": (
+        r"\bcompany\b",
+        r"\bsoci[eé]t[eé]\b",
+        r"(?:الشركة)",
+    ),
+    "INVESTOR": (
+        r"\binvestor\b",
+        r"\binvestisseur\b",
+        r"(?:المستثمر)",
+    ),
+}
+
+
+_OBJECT_PATTERNS: dict[str, tuple[str, ...]] = {
+    "CONFIDENTIAL_INFORMATION": (
+        r"\bconfidential information\b",
+        r"\binformations? confidentielles?\b",
+        r"(?:المعلومات\s+السرية)",
+    ),
+    "LICENSED_SOFTWARE": (
+        r"\blicensed software\b",
+        r"\blogiciel sous licence\b|\blogiciel conc[eé]d[eé]\b",
+        r"(?:البرنامج\s+المرخص)",
+    ),
+    "LOAN": (
+        r"\bloan\b",
+        r"\bpr[eê]t\b",
+        r"(?:القرض)",
+    ),
+    "SECURITY_INCIDENT": (
+        r"\bsecurity incident\b",
+        r"\bincident de s[eé]curit[eé]\b",
+        r"(?:حادث\s+أمني)",
+    ),
+    "FINANCIAL_STATEMENTS": (
+        r"\bfinancial statements?\b",
+        r"\b[eé]tats? financiers?\b",
+        r"(?:القوائم\s+المالية|البيانات\s+المالية)",
+    ),
+    "LEASE": (
+        r"\blease\b",
+        r"\bbail\b|\bcontrat de location\b",
+        r"(?:عقد\s+الإيجار|هذا\s+العقد)",
+    ),
+    "PREMISES": (
+        r"\bpremises\b",
+        r"\blocaux\b",
+        r"(?:المباني|العقار)",
+    ),
+    "AGREEMENT": (
+        r"\bagreement\b",
+        r"\baccord\b|\bcontrat\b",
+        r"(?:الاتفاقية)",
+    ),
+    "SOW": (
+        r"\bstatement of work\b|\bSOW\b",
+        r"\b[eé]nonc[eé] des travaux\b",
+        r"(?:بيان\s+عمل)",
+    ),
+}
+
+
+_ACTION_BY_CONCEPT = {
+    "CONFIDENTIALITY_OBLIGATION": "MAINTAIN_CONFIDENTIALITY",
+    "PURPOSE_LIMITATION": "USE_FOR_DEFINED_PURPOSE",
+    "DATA_BREACH_NOTICE": "NOTIFY",
+    "TERMINATION_FOR_CAUSE": "TERMINATE",
+    "TERMINATION_FOR_CONVENIENCE": "TERMINATE",
+    "IMMEDIATE_TERMINATION": "TERMINATE",
+    "NON_PAYMENT_TERMINATION": "TERMINATE",
+    "LICENSE_GRANT": "GRANT_LICENSE",
+    "LICENSE_RESTRICTION": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+    "PREPAYMENT_RIGHT": "PREPAY",
+    "FINANCIAL_REPORTING_OBLIGATION": "DELIVER",
+}
+
+
+def normalize_concept(kind: str | None) -> str:
+    value = str(kind or "").strip().upper()
+    return _CONCEPT_NORMALIZATION.get(value, value or UNKNOWN)
+
+
+def normalize_polarity(value: str | None) -> str:
+    raw = str(value or "").strip().upper()
+    return _POLARITY_NORMALIZATION.get(raw, UNKNOWN)
+
+
+def _relation_context(
+    mechanism: dict[str, Any],
+    source_text: str,
+    *,
+    left_context: int = 120,
+    right_context: int = 80,
+) -> str:
+    """Return source-derived local context around validated evidence spans.
+
+    Relation arguments such as the grammatical subject may occur immediately
+    before a regex evidence span. The context is still taken exclusively from
+    the original source clause.
+    """
+    source = str(source_text or "")
+    spans = [
+        span
+        for span in mechanism.get("source_evidence") or []
+        if isinstance(span, dict)
+    ]
+
+    if not spans:
+        return ""
+
+    valid_spans = []
+
+    for span in spans:
+        try:
+            start = int(span.get("start"))
+            end = int(span.get("end"))
+        except (TypeError, ValueError):
+            continue
+
+        if start < 0 or end <= start or end > len(source):
+            continue
+
+        if source[start:end] != str(span.get("text") or ""):
+            continue
+
+        valid_spans.append((start, end))
+
+    if not valid_spans:
+        return " ".join(
+            str(span.get("text") or "")
+            for span in spans
+        )
+
+    start = max(
+        0,
+        min(item[0] for item in valid_spans) - left_context,
+    )
+    end = min(
+        len(source),
+        max(item[1] for item in valid_spans) + right_context,
+    )
+
+    return source[start:end]
+
+
+def _normalize_arabic_role_context(text: str) -> str:
+    """Normalize attached Arabic prepositions for legal-role matching.
+
+    The original evidence is never modified. This creates only a temporary
+    matching view.
+
+    Examples:
+    للطرف -> الطرف
+    للمستثمر -> المستثمر
+    للعميل -> العميل
+    بالمقرض -> المقرض
+    بالشركة -> الشركة
+    """
+    normalized = str(text or "")
+
+    role_stems = (
+        "طرف",
+        "مستثمر",
+        "عميل",
+        "مقرض",
+        "مؤجر",
+        "مستأجر",
+        "شركة",
+        "مزود",
+        "مقدم",
+        "معالج",
+        "متحكم",
+    )
+
+    stems = "|".join(
+        re.escape(stem)
+        for stem in role_stems
+    )
+
+    # Arabic contraction: لـ + الـ -> لل
+    # Example: للطرف is represented as للطرف / للطرف depending on spelling.
+    normalized = re.sub(
+        rf"(?<!\\w)لل(?=(?:{stems}))",
+        "ال",
+        normalized,
+    )
+
+    # Attached preposition followed by explicit definite article.
+    # Examples: بالطرف, كالمستثمر.
+    normalized = re.sub(
+        rf"(?<!\\w)[لبك](?=ال(?:{stems}))",
+        "",
+        normalized,
+    )
+
+    return normalized
+
+def _primary_evidence_sentence(
+    mechanism: dict[str, Any],
+    source_text: str,
+) -> str:
+    """Return the sentence/subclause containing the first validated evidence span."""
+    source = str(source_text or "")
+
+    spans = [
+        span
+        for span in mechanism.get("source_evidence") or []
+        if isinstance(span, dict)
+    ]
+
+    if not spans:
+        return ""
+
+    first = spans[0]
+
+    try:
+        start = int(first.get("start"))
+        end = int(first.get("end"))
+    except (TypeError, ValueError):
+        return str(first.get("text") or "")
+
+    if start < 0 or end <= start or end > len(source):
+        return str(first.get("text") or "")
+
+    sentence_start = start
+
+    while sentence_start > 0:
+        char = source[sentence_start - 1]
+
+        if char in ".;!?؟؛\n":
+            break
+
+        sentence_start -= 1
+
+    sentence_end = end
+
+    while sentence_end < len(source):
+        char = source[sentence_end]
+
+        if char in ".;!?؟؛\n":
+            break
+
+        sentence_end += 1
+
+    return source[sentence_start:sentence_end].strip()
+
+
+def _matched_roles(text: str) -> list[str]:
+    roles: list[str] = []
+
+    matching_text = _normalize_arabic_role_context(text)
+
+    for role, patterns in _ROLE_PATTERNS.items():
+        if any(
+            re.search(
+                pattern,
+                matching_text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in patterns
+        ):
+            roles.append(role)
+
+    return roles
+
+
+def _matched_objects(text: str) -> list[str]:
+    objects: list[str] = []
+
+    for obj, patterns in _OBJECT_PATTERNS.items():
+        if any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns):
+            objects.append(obj)
+
+    return objects
+
+
+def _normalized_procedural_states(mechanism: dict[str, Any]) -> list[str]:
+    raw = str(mechanism.get("procedural_state") or "").strip().upper()
+
+    mapping = {
+        "PRIOR_CONSENT": ["CONSENT_REQUIRED", "PRIOR_APPROVAL"],
+        "AUTOMATIC_EVENT": ["AUTOMATIC"],
+        "AUTOMATIC_RENEWAL": ["AUTOMATIC", "OPT_OUT"],
+        "TERMINATION_FOR_CONVENIENCE": [],
+        "CURE_PERIOD": [],
+        "NOTICE_PERIOD": ["NOTICE_REQUIRED"],
+    }
+
+    return list(mapping.get(raw, []))
+
+
+def _normalized_trigger(
+    normalized_concept: str,
+    local_text: str,
+) -> str | None:
+    text = str(local_text or "")
+
+    if normalized_concept == "TERMINATION_FOR_CAUSE":
+        patterns = (
+            r"\buncured\s+material\s+breach\b",
+            r"\bmaterial\s+breach\b.{0,80}\buncured\b",
+            r"\bmanquement\s+(?:substantiel|grave)\s+non\s+corrig[eé]\b",
+            r"(?:إخلال\s+جوهري).{0,40}(?:غير\s+معالج|غير\s+مصحح)",
+        )
+
+        if any(
+            re.search(
+                pattern,
+                text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in patterns
+        ):
+            return "UNCURED_MATERIAL_BREACH"
+
+    return None
+
+
+def _relation_roles(
+    normalized_concept: str,
+    roles: list[str],
+) -> tuple[str | None, str | None, str | None, str | None]:
+    right_holder = None
+    obligated_actor = None
+    counterparty = None
+    beneficiary = None
+
+    role_set = set(roles)
+
+    if normalized_concept in {
+        "CONFIDENTIALITY_OBLIGATION",
+        "PURPOSE_LIMITATION",
+    }:
+        if "RECEIVING_PARTY" in role_set:
+            obligated_actor = "RECEIVING_PARTY"
+        if "DISCLOSING_PARTY" in role_set:
+            counterparty = "DISCLOSING_PARTY"
+            beneficiary = "DISCLOSING_PARTY"
+
+    elif normalized_concept in {
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE",
+        "IMMEDIATE_TERMINATION",
+        "NON_PAYMENT_TERMINATION",
+    }:
+        for candidate in (
+            "PROVIDER",
+            "CLIENT",
+            "CUSTOMER",
+            "BORROWER",
+            "LENDER",
+            "TENANT",
+            "LANDLORD",
+            "COMPANY",
+            "INVESTOR",
+        ):
+            if candidate in role_set:
+                right_holder = candidate
+                break
+
+    elif normalized_concept == "PREPAYMENT_RIGHT":
+        if "BORROWER" in role_set:
+            right_holder = "BORROWER"
+
+    elif normalized_concept == "LICENSE_GRANT":
+        if "LICENSEE" in role_set:
+            right_holder = "LICENSEE"
+        if "LICENSOR" in role_set:
+            counterparty = "LICENSOR"
+
+    elif normalized_concept == "LICENSE_RESTRICTION":
+        if "LICENSEE" in role_set:
+            obligated_actor = "LICENSEE"
+
+    elif normalized_concept == "DATA_BREACH_NOTICE":
+        for candidate in ("PROVIDER", "COMPANY"):
+            if candidate in role_set:
+                obligated_actor = candidate
+                break
+
+        for candidate in ("CLIENT", "CUSTOMER", "INVESTOR"):
+            if candidate in role_set:
+                beneficiary = candidate
+                break
+
+    elif normalized_concept == "FINANCIAL_REPORTING_OBLIGATION":
+        if "COMPANY" in role_set:
+            obligated_actor = "COMPANY"
+        if "INVESTOR" in role_set:
+            beneficiary = "INVESTOR"
+
+    return right_holder, obligated_actor, counterparty, beneficiary
+
+
+def materialize_normalized_relation(
+    mechanism: dict[str, Any],
+    source_text: str,
+) -> dict[str, Any]:
+    item = dict(mechanism)
+
+    normalized_concept = normalize_concept(item.get("kind"))
+    text = _relation_context(
+        item,
+        source_text,
+    )
+
+    local_text = _primary_evidence_sentence(
+        item,
+        source_text,
+    )
+
+    role_text = (
+        local_text
+        if normalized_concept in {
+            "TERMINATION_FOR_CAUSE",
+            "TERMINATION_FOR_CONVENIENCE",
+            "IMMEDIATE_TERMINATION",
+            "NON_PAYMENT_TERMINATION",
+        }
+        else text
+    )
+
+    roles = _matched_roles(role_text)
+    objects = _matched_objects(text)
+
+    (
+        right_holder,
+        obligated_actor,
+        counterparty,
+        beneficiary,
+    ) = _relation_roles(normalized_concept, roles)
+
+    normalized_polarity = normalize_polarity(item.get("polarity"))
+
+    relation = {
+        "right_holder": right_holder,
+        "obligated_actor": obligated_actor,
+        "counterparty": counterparty,
+        "beneficiary": beneficiary,
+        "object": objects[0] if len(objects) == 1 else None,
+        "trigger": (
+            item.get("trigger")
+            or _normalized_trigger(
+                normalized_concept,
+                local_text,
+            )
+        ),
+        "action": _ACTION_BY_CONCEPT.get(normalized_concept),
+        "polarity": normalized_polarity,
+        "procedural_states": _normalized_procedural_states(item),
+        "numeric_semantic_roles": [],
+    }
+
+    item["normalized_concept"] = normalized_concept
+    item["normalized_relation"] = relation
+    item["normalized_polarity"] = normalized_polarity
+
+    return item
+
+
+def materialize_normalized_relations(
+    mechanisms: list[dict[str, Any]],
+    source_text: str,
+) -> list[dict[str, Any]]:
+    return [
+        materialize_normalized_relation(
+            mechanism,
+            source_text,
+        )
+        for mechanism in mechanisms
+    ]
+

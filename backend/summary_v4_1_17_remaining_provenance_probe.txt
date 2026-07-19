@@ -1,0 +1,814 @@
+========================================================================================================================
+V4.1.17 REMAINING PUBLICATION PROVENANCE
+========================================================================================================================
+CANONICAL CLAUSES: 9
+
+########################################################################################################################
+A. MANUAL REVIEW DIAGNOSTIC PROVENANCE
+########################################################################################################################
+
+########################################################################################################################
+B. TARGET CLAUSES
+########################################################################################################################
+
+========================================================================================================================
+TARGET CLAUSE [1]
+========================================================================================================================
+
+CLAUSE_ID
+"node_7"
+
+CLAUSE_REFERENCE
+"5.1"
+
+CLAUSE_TITLE
+"Limitation de responsabilité"
+
+TITLE
+"Limitation de responsabilité"
+
+CLAUSE_TYPE
+"liability"
+
+RISK_LEVEL
+"high"
+
+RED_FLAG
+true
+
+ORIGINAL_TEXT
+"5.1 Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Client, and shall be uncapped in the event of Provider's gross negligence or willful misconduct."
+
+QUOTED_TEXT
+"Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Client, and shall be uncapped in the event of Provider's gross negligence or willful misconduct."
+
+_SOURCE_TEXT_EXACT
+"5.1 Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Client, and shall be uncapped in the event of Provider's gross negligence or willful misconduct."
+
+EXPLANATION_SIMPLE
+"La responsabilité du Provider est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle."
+
+WHY_IT_MATTERS
+"Cette clause expose la Client à un risque financier important en cas d'incident de sécurité, car la responsabilité du Provider est illimitée en cas de négligence grave."
+
+LEGAL_INSIGHT
+"Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+
+RED_FLAG_REASON
+"La responsabilité illimitée en cas de négligence grave ou de faute intentionnelle crée un déséquilibre significatif et expose la Client à des risques financiers importants."
+
+RECOMMENDATION
+"Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+
+NEGOTIATION_ADVICE
+""
+
+SAFER_ALTERNATIVE
+"La responsabilité du Provider pour un incident de sécurité ne dépassera pas trois fois les frais annuels, sauf en cas de négligence grave, où un plafond de responsabilité sera appliqué."
+
+SOURCE_EVIDENCE_MODEL
+{
+  "evidence_spans": [],
+  "mechanisms": [
+    {
+      "kind": "SOURCE_PROFILE",
+      "primary_type": "payment",
+      "anchors": [
+        "aggregate",
+        "annual",
+        "caused",
+        "client",
+        "event",
+        "exceed",
+        "exhibit",
+        "failure",
+        "fees",
+        "gross",
+        "incident",
+        "level",
+        "liability",
+        "meet",
+        "misconduct",
+        "negligence",
+        "not",
+        "paid",
+        "provider",
+        "security",
+        "service",
+        "three",
+        "times",
+        "uncapped",
+        "willful"
+      ]
+    }
+  ],
+  "semantic_profile_hash": "4103e5ce4ec9b995ba938da70ba1854472f78adb8e2ee176d31ceafc95ae0737"
+}
+
+REASONING_EVIDENCE
+"5.1 Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times"
+
+VALIDATION_RECEIPTS
+{
+  "legal_insight": {
+    "field": "legal_insight",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0,
+    "semantic_profile_hash": "4103e5ce4ec9b995ba938da70ba1854472f78adb8e2ee176d31ceafc95ae0737",
+    "validated_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "final_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "source_text_hash": "6b4eed449f7e2266c8106349589791af0407cccd08864e1de8c86b56c1d046b7",
+    "input_text_hash": "90ad683cd1e857b4e2cac2adde072c1667287725a39e1379edd7a5f5a7f763e4",
+    "text_before_validation": "Cette clause détermine la répartition de la responsabilité financière en cas de pertes, de réclamations ou de litiges.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "market_comparison": {
+    "field": "market_comparison",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0833,
+    "semantic_profile_hash": "4103e5ce4ec9b995ba938da70ba1854472f78adb8e2ee176d31ceafc95ae0737",
+    "validated_text_hash": "5e48f75286a672ae78e26a8bef02b9ec598fae18994e1bd15a34f4f1fdfc3040",
+    "final_text_hash": "5e48f75286a672ae78e26a8bef02b9ec598fae18994e1bd15a34f4f1fdfc3040",
+    "source_text_hash": "6b4eed449f7e2266c8106349589791af0407cccd08864e1de8c86b56c1d046b7",
+    "input_text_hash": "5e48f75286a672ae78e26a8bef02b9ec598fae18994e1bd15a34f4f1fdfc3040",
+    "text_before_validation": "Cette clause est plus favorable au Provider, car elle limite sa responsabilité tout en laissant une exposition illimitée en cas de négligence grave.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "safer_alternative": {
+    "field": "safer_alternative",
+    "field_policy": "fidelity",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.1667,
+    "semantic_profile_hash": "4103e5ce4ec9b995ba938da70ba1854472f78adb8e2ee176d31ceafc95ae0737",
+    "validated_text_hash": "fc7773cb97f5743183ceada5be8ea2871260f863db86d4816992a63fd2979c4d",
+    "final_text_hash": "fc7773cb97f5743183ceada5be8ea2871260f863db86d4816992a63fd2979c4d",
+    "source_text_hash": "6b4eed449f7e2266c8106349589791af0407cccd08864e1de8c86b56c1d046b7",
+    "input_text_hash": "fc7773cb97f5743183ceada5be8ea2871260f863db86d4816992a63fd2979c4d",
+    "text_before_validation": "La responsabilité du Provider pour un incident de sécurité ne dépassera pas trois fois les frais annuels, sauf en cas de négligence grave, où un plafond de responsabilité sera appliqué.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "recommendation": {
+    "field": "recommendation",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0,
+    "semantic_profile_hash": "4103e5ce4ec9b995ba938da70ba1854472f78adb8e2ee176d31ceafc95ae0737",
+    "validated_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "final_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "source_text_hash": "6b4eed449f7e2266c8106349589791af0407cccd08864e1de8c86b56c1d046b7",
+    "input_text_hash": "b84911b0b10fc8edbfb067a85e3692f0c332c1a8b65842f3394969f890b1ff20",
+    "text_before_validation": "Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.",
+    "successful": true,
+    "post_gate_mutators": []
+  }
+}
+
+_PUBLICATION_VALIDATION_HISTORY
+{
+  "legal_insight": {
+    "input_text": "Cette clause détermine la répartition de la responsabilité financière en cas de pertes, de réclamations ou de litiges.",
+    "input_text_hash": "90ad683cd1e857b4e2cac2adde072c1667287725a39e1379edd7a5f5a7f763e4",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0
+  },
+  "recommendation": {
+    "input_text": "Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.",
+    "input_text_hash": "b84911b0b10fc8edbfb067a85e3692f0c332c1a8b65842f3394969f890b1ff20",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0
+  }
+}
+
+========================================================================================================================
+TARGET CLAUSE [2]
+========================================================================================================================
+
+CLAUSE_ID
+"node_5"
+
+CLAUSE_REFERENCE
+"3.2"
+
+CLAUSE_TITLE
+"Droit d'audit de sécurité"
+
+TITLE
+"Droit d'audit de sécurité"
+
+CLAUSE_TYPE
+"notice"
+
+RISK_LEVEL
+"medium"
+
+RED_FLAG
+false
+
+ORIGINAL_TEXT
+"3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense."
+
+QUOTED_TEXT
+"Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense."
+
+_SOURCE_TEXT_EXACT
+"3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense."
+
+EXPLANATION_SIMPLE
+"La Client a le droit de réaliser un audit de sécurité sur site des installations de la Prestataire."
+
+WHY_IT_MATTERS
+"Cela permet à la Client de s'assurer que les installations de la Prestataire respectent les normes de sécurité requises."
+
+LEGAL_INSIGHT
+"Cette clause crée des obligations contractuelles ou opérationnelles qui doivent être examinées dans le contexte global du contrat."
+
+RED_FLAG_REASON
+""
+
+RECOMMENDATION
+"Vérifier que cette clause est cohérente avec l'objectif commercial, les processus opérationnels et la répartition globale des risques."
+
+NEGOTIATION_ADVICE
+"Envisager de définir les modes de notification, les adresses requises, la réception réputée, la notification électronique, les exigences linguistiques, les notifications urgentes et les procédures de changement d'adresse."
+
+SAFER_ALTERNATIVE
+""
+
+SOURCE_EVIDENCE_MODEL
+{
+  "evidence_spans": [],
+  "mechanisms": [
+    {
+      "kind": "SOURCE_PROFILE",
+      "primary_type": "notice",
+      "anchors": [
+        "annually",
+        "audit",
+        "client",
+        "conduct",
+        "days",
+        "directly",
+        "expense",
+        "facility",
+        "have",
+        "more",
+        "no",
+        "notice",
+        "once",
+        "provider",
+        "relevant",
+        "right",
+        "security",
+        "service",
+        "site",
+        "than",
+        "thirty",
+        "upon"
+      ]
+    }
+  ],
+  "semantic_profile_hash": "bf9f0511aed872e3e1004a580a838f3ef5ea08fc459e91f2a41196b3a8583da7"
+}
+
+REASONING_EVIDENCE
+"3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services,"
+
+VALIDATION_RECEIPTS
+{
+  "legal_insight": {
+    "field": "legal_insight",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0,
+    "semantic_profile_hash": "bf9f0511aed872e3e1004a580a838f3ef5ea08fc459e91f2a41196b3a8583da7",
+    "validated_text_hash": "f3537cf9228ab80676e22b95a2572a927b4ed15b5daa81b29a114908d59ea8de",
+    "final_text_hash": "f3537cf9228ab80676e22b95a2572a927b4ed15b5daa81b29a114908d59ea8de",
+    "source_text_hash": "6e374aae8166d202a4efed71605111b0916eb667516dbfe0b2c4e2ce42f7cfbb",
+    "input_text_hash": "f3537cf9228ab80676e22b95a2572a927b4ed15b5daa81b29a114908d59ea8de",
+    "text_before_validation": "Cette clause crée des obligations contractuelles ou opérationnelles qui doivent être examinées dans le contexte global du contrat.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "market_comparison": {
+    "field": "market_comparison",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0833,
+    "semantic_profile_hash": "bf9f0511aed872e3e1004a580a838f3ef5ea08fc459e91f2a41196b3a8583da7",
+    "validated_text_hash": "1d62cbc56743c69d3b32633a19e8a265a323d739f44e1051d7ba51914e0f9c46",
+    "final_text_hash": "1d62cbc56743c69d3b32633a19e8a265a323d739f44e1051d7ba51914e0f9c46",
+    "source_text_hash": "6e374aae8166d202a4efed71605111b0916eb667516dbfe0b2c4e2ce42f7cfbb",
+    "input_text_hash": "1d62cbc56743c69d3b32633a19e8a265a323d739f44e1051d7ba51914e0f9c46",
+    "text_before_validation": "Cette clause est courante dans les contrats de services où la sécurité est une préoccupation.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "recommendation": {
+    "field": "recommendation",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0,
+    "semantic_profile_hash": "bf9f0511aed872e3e1004a580a838f3ef5ea08fc459e91f2a41196b3a8583da7",
+    "validated_text_hash": "bd7e162d36a28e69baccfed7ffa4c18de45cec21f6ff9e7fe23db437dedbf3f4",
+    "final_text_hash": "bd7e162d36a28e69baccfed7ffa4c18de45cec21f6ff9e7fe23db437dedbf3f4",
+    "source_text_hash": "6e374aae8166d202a4efed71605111b0916eb667516dbfe0b2c4e2ce42f7cfbb",
+    "input_text_hash": "bd7e162d36a28e69baccfed7ffa4c18de45cec21f6ff9e7fe23db437dedbf3f4",
+    "text_before_validation": "Vérifier que cette clause est cohérente avec l'objectif commercial, les processus opérationnels et la répartition globale des risques.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "negotiation_advice": {
+    "field": "negotiation_advice",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0833,
+    "semantic_profile_hash": "bf9f0511aed872e3e1004a580a838f3ef5ea08fc459e91f2a41196b3a8583da7",
+    "validated_text_hash": "d04e780a0b3c58fd8775924f410455a19df7defc540aca1d6ac6c1f06f8b1db3",
+    "final_text_hash": "d04e780a0b3c58fd8775924f410455a19df7defc540aca1d6ac6c1f06f8b1db3",
+    "source_text_hash": "6e374aae8166d202a4efed71605111b0916eb667516dbfe0b2c4e2ce42f7cfbb",
+    "input_text_hash": "d04e780a0b3c58fd8775924f410455a19df7defc540aca1d6ac6c1f06f8b1db3",
+    "text_before_validation": "Envisager de définir les modes de notification, les adresses requises, la réception réputée, la notification électronique, les exigences linguistiques, les notifications urgentes et les procédures de changement d'adresse.",
+    "successful": true,
+    "post_gate_mutators": []
+  }
+}
+
+_PUBLICATION_VALIDATION_HISTORY
+{}
+
+========================================================================================================================
+TARGET CLAUSE [3]
+========================================================================================================================
+
+CLAUSE_ID
+"node_8"
+
+CLAUSE_REFERENCE
+"5.2"
+
+CLAUSE_TITLE
+"Indemnisation"
+
+TITLE
+"Indemnisation"
+
+CLAUSE_TYPE
+"indemnity"
+
+RISK_LEVEL
+"high"
+
+RED_FLAG
+false
+
+ORIGINAL_TEXT
+"5.2 Provider shall indemnify Client for third-party claims, regulatory fines, and reasonable costs of credit monitoring and forensic investigation arising from a Security Incident attributable to Provider's breach of this Agreement."
+
+QUOTED_TEXT
+"Provider shall indemnify Client for third-party claims, regulatory fines, and reasonable costs of credit monitoring and forensic investigation arising from a Security Incident attributable to Provider's breach of this Agreement."
+
+_SOURCE_TEXT_EXACT
+"5.2 Provider shall indemnify Client for third-party claims, regulatory fines, and reasonable costs of credit monitoring and forensic investigation arising from a Security Incident attributable to Provider's breach of this Agreement."
+
+EXPLANATION_SIMPLE
+"La Prestataire doit indemniser la Client pour certains coûts liés à des incidents de sécurité."
+
+WHY_IT_MATTERS
+"Cette clause expose la Prestataire à des coûts potentiellement élevés en cas de violation de l'accord, ce qui pourrait affecter sa situation financière."
+
+LEGAL_INSIGHT
+"Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+
+RED_FLAG_REASON
+""
+
+RECOMMENDATION
+"Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+
+NEGOTIATION_ADVICE
+""
+
+SAFER_ALTERNATIVE
+"L'indemnisation de la Client par la Prestataire se limite aux réclamations directement causées par la négligence ou la faute de la Prestataire."
+
+SOURCE_EVIDENCE_MODEL
+{
+  "evidence_spans": [],
+  "mechanisms": [
+    {
+      "kind": "SOURCE_PROFILE",
+      "primary_type": "indemnity",
+      "anchors": [
+        "arising",
+        "attributable",
+        "breach",
+        "claim",
+        "client",
+        "costs",
+        "credit",
+        "fines",
+        "forensic",
+        "incident",
+        "indemnify",
+        "investigation",
+        "monitoring",
+        "party",
+        "provider",
+        "reasonable",
+        "regulatory",
+        "security",
+        "third"
+      ]
+    }
+  ],
+  "semantic_profile_hash": "c6ad75c40948132c9f82e58ad9b567896074045bee95b5be7d63aefaafaa852a"
+}
+
+REASONING_EVIDENCE
+"5.2 Provider shall indemnify Client for third-party claims, regulatory fines, and reasonable costs of credit monitoring and forensic investigation arising from "
+
+VALIDATION_RECEIPTS
+{
+  "legal_insight": {
+    "field": "legal_insight",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0,
+    "semantic_profile_hash": "c6ad75c40948132c9f82e58ad9b567896074045bee95b5be7d63aefaafaa852a",
+    "validated_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "final_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "source_text_hash": "dd970b49f24072c30463dac3d0b5dbde0f3b5f595366ab0123657edc2bc65e35",
+    "input_text_hash": "86774d65536e4f3ef5ec00c1b66ff6f5e2af0ce0ea84674b60a59676c29325b8",
+    "text_before_validation": "Cette clause répartit la responsabilité liée aux réclamations de tiers, aux frais de défense, aux dommages ou aux pertes.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "market_comparison": {
+    "field": "market_comparison",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0833,
+    "semantic_profile_hash": "c6ad75c40948132c9f82e58ad9b567896074045bee95b5be7d63aefaafaa852a",
+    "validated_text_hash": "3bd5d269c192bcb9a836935226d6bf81f73a7d81bfc9d293f5112842931bbc22",
+    "final_text_hash": "3bd5d269c192bcb9a836935226d6bf81f73a7d81bfc9d293f5112842931bbc22",
+    "source_text_hash": "dd970b49f24072c30463dac3d0b5dbde0f3b5f595366ab0123657edc2bc65e35",
+    "input_text_hash": "3bd5d269c192bcb9a836935226d6bf81f73a7d81bfc9d293f5112842931bbc22",
+    "text_before_validation": "Cette clause est relativement standard dans les contrats impliquant des incidents de sécurité, mais elle peut être considérée comme désavantageuse pour la Prestataire en raison de l'étendue de l'indemnisation.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "safer_alternative": {
+    "field": "safer_alternative",
+    "field_policy": "fidelity",
+    "publication_gate_called": true,
+    "gate_result": "PASS",
+    "validation_reasons": [],
+    "semantic_coverage": 0.0833,
+    "semantic_profile_hash": "c6ad75c40948132c9f82e58ad9b567896074045bee95b5be7d63aefaafaa852a",
+    "validated_text_hash": "3502dc46e42548f1b674fc4392c3ce32b274c9ecf3f5d2abe18c94a7033adfb4",
+    "final_text_hash": "3502dc46e42548f1b674fc4392c3ce32b274c9ecf3f5d2abe18c94a7033adfb4",
+    "source_text_hash": "dd970b49f24072c30463dac3d0b5dbde0f3b5f595366ab0123657edc2bc65e35",
+    "input_text_hash": "3502dc46e42548f1b674fc4392c3ce32b274c9ecf3f5d2abe18c94a7033adfb4",
+    "text_before_validation": "L'indemnisation de la Client par la Prestataire se limite aux réclamations directement causées par la négligence ou la faute de la Prestataire.",
+    "successful": true,
+    "post_gate_mutators": []
+  },
+  "recommendation": {
+    "field": "recommendation",
+    "field_policy": "relevance",
+    "publication_gate_called": true,
+    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0,
+    "semantic_profile_hash": "c6ad75c40948132c9f82e58ad9b567896074045bee95b5be7d63aefaafaa852a",
+    "validated_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "final_text_hash": "198a3a981728905b19e34fb3955ee0bcae44d41b8431d1ec4eed8cae4f0b409b",
+    "source_text_hash": "dd970b49f24072c30463dac3d0b5dbde0f3b5f595366ab0123657edc2bc65e35",
+    "input_text_hash": "cc6119ca2432af59b605d3ec4bd39ec36810dcafb76106444633ea97a866e65a",
+    "text_before_validation": "Vérifier quelles réclamations sont couvertes, qui contrôle la défense, si une notification est requise et si les limites de responsabilité s'appliquent.",
+    "successful": true,
+    "post_gate_mutators": []
+  }
+}
+
+_PUBLICATION_VALIDATION_HISTORY
+{
+  "legal_insight": {
+    "input_text": "Cette clause répartit la responsabilité liée aux réclamations de tiers, aux frais de défense, aux dommages ou aux pertes.",
+    "input_text_hash": "86774d65536e4f3ef5ec00c1b66ff6f5e2af0ce0ea84674b60a59676c29325b8",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0
+  },
+  "recommendation": {
+    "input_text": "Vérifier quelles réclamations sont couvertes, qui contrôle la défense, si une notification est requise et si les limites de responsabilité s'appliquent.",
+    "input_text_hash": "cc6119ca2432af59b605d3ec4bd39ec36810dcafb76106444633ea97a866e65a",
+    "validation_reasons": [
+      "FINAL_TEXT_SOURCE_CONTAMINATION"
+    ],
+    "semantic_coverage": 0.0
+  }
+}
+
+========================================================================================================================
+C1. EXECUTIVE SUMMARY TOP RISKS
+========================================================================================================================
+[
+  {
+    "title": "Limitation de responsabilité",
+    "risk_level": "high",
+    "importance_score": 72,
+    "legal_insight": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+  },
+  {
+    "title": "Durée et résiliation",
+    "risk_level": "high",
+    "importance_score": 47,
+    "legal_insight": "Cette clause détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation."
+  },
+  {
+    "title": "Notification des incidents de sécurité",
+    "risk_level": "high",
+    "importance_score": 26,
+    "legal_insight": "Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident."
+  },
+  {
+    "title": "Analyse des causes profondes",
+    "risk_level": "high",
+    "importance_score": 26,
+    "legal_insight": "Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident."
+  },
+  {
+    "title": "Indemnisation",
+    "risk_level": "high",
+    "importance_score": 15,
+    "legal_insight": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+  }
+]
+
+========================================================================================================================
+C2. EXECUTIVE REPORT TOP RISKS
+========================================================================================================================
+[
+  {
+    "title": "Limitation de responsabilité",
+    "risk_level": "high",
+    "importance_score": 72,
+    "legal_insight": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+  },
+  {
+    "title": "Durée et résiliation",
+    "risk_level": "high",
+    "importance_score": 47,
+    "legal_insight": "Cette clause détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation."
+  },
+  {
+    "title": "Notification des incidents de sécurité",
+    "risk_level": "high",
+    "importance_score": 26,
+    "legal_insight": "Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident."
+  },
+  {
+    "title": "Analyse des causes profondes",
+    "risk_level": "high",
+    "importance_score": 26,
+    "legal_insight": "Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident."
+  },
+  {
+    "title": "Indemnisation",
+    "risk_level": "high",
+    "importance_score": 15,
+    "legal_insight": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+  }
+]
+
+========================================================================================================================
+C3. UNIFIED RISKS IDENTIFIED
+========================================================================================================================
+[
+  {
+    "id": "risk_node_7",
+    "clause_ref": "node_7",
+    "title": "Limitation de responsabilité",
+    "clause_type": "liability",
+    "risk_level": "high",
+    "market_practice": "market_favorable",
+    "market_practice_score": null,
+    "exposure": {
+      "financial": "high",
+      "operational": "high",
+      "legal": "high",
+      "regulatory": "high",
+      "compliance": "high",
+      "privacy": "high",
+      "tax": "low",
+      "employment": "low",
+      "ip": "low",
+      "reputation": "low",
+      "cybersecurity": "high"
+    },
+    "explanation": "La responsabilité du Prestataire est limitée à trois fois les frais annuels, sauf en cas de négligence grave ou de faute intentionnelle.",
+    "risk_reason": "",
+    "red_flag_reason": "La responsabilité illimitée en cas de négligence grave ou de faute intentionnelle crée un déséquilibre significatif et expose le Client à des risques financiers importants.",
+    "red_flag": true
+  },
+  {
+    "id": "risk_node_9",
+    "clause_ref": "node_9",
+    "title": "Durée et résiliation",
+    "clause_type": "termination",
+    "risk_level": "high",
+    "market_practice": "market_standard",
+    "market_practice_score": null,
+    "exposure": {
+      "financial": "low",
+      "operational": "high",
+      "legal": "high",
+      "regulatory": "high",
+      "compliance": "high",
+      "privacy": "high",
+      "tax": "low",
+      "employment": "low",
+      "ip": "low",
+      "reputation": "high",
+      "cybersecurity": "high"
+    },
+    "explanation": "Cette clause détermine les conditions de fin du contrat et si la partie concernée bénéficie d'un préavis ou d'une possibilité de régularisation.",
+    "risk_reason": "",
+    "red_flag_reason": "",
+    "red_flag": false
+  },
+  {
+    "id": "risk_node_5",
+    "clause_ref": "node_5",
+    "title": "Droit d'audit de sécurité",
+    "clause_type": "notice",
+    "risk_level": "medium",
+    "market_practice": "market_unknown",
+    "market_practice_score": null,
+    "exposure": {
+      "financial": "low",
+      "operational": "medium",
+      "legal": "medium",
+      "regulatory": "low",
+      "compliance": "low",
+      "privacy": "low",
+      "tax": "low",
+      "employment": "low",
+      "ip": "low",
+      "reputation": "low",
+      "cybersecurity": "low"
+    },
+    "explanation": "Cette clause crée des obligations contractuelles ou opérationnelles qui doivent être examinées dans le contexte global du contrat.",
+    "risk_reason": "",
+    "red_flag_reason": "",
+    "red_flag": false
+  },
+  {
+    "id": "risk_node_2",
+    "clause_ref": "node_2",
+    "title": "Notification des incidents de sécurité",
+    "clause_type": "security",
+    "risk_level": "high",
+    "market_practice": "market_unknown",
+    "market_practice_score": null,
+    "exposure": {
+      "financial": "high",
+      "operational": "high",
+      "legal": "high",
+      "regulatory": "high",
+      "compliance": "high",
+      "privacy": "high",
+      "tax": "low",
+      "employment": "low",
+      "ip": "low",
+      "reputation": "low",
+      "cybersecurity": "high"
+    },
+    "explanation": "Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.",
+    "risk_reason": "",
+    "red_flag_reason": "",
+    "red_flag": false
+  },
+  {
+    "id": "risk_node_3",
+    "clause_ref": "node_3",
+    "title": "Analyse des causes profondes",
+    "clause_type": "security",
+    "risk_level": "high",
+    "market_practice": "market_unknown",
+    "market_practice_score": null,
+    "exposure": {
+      "financial": "high",
+      "operational": "high",
+      "legal": "high",
+      "regulatory": "high",
+      "compliance": "high",
+      "privacy": "high",
+      "tax": "low",
+      "employment": "low",
+      "ip": "low",
+      "reputation": "low",
+      "cybersecurity": "high"
+    },
+    "explanation": "Cette clause régit le traitement des données, les obligations de confidentialité, les contrôles de sécurité ou les responsabilités en cas d'incident.",
+    "risk_reason": "",
+    "red_flag_reason": "",
+    "red_flag": false
+  },
+  {
+    "id": "risk_node_8",
+    "clause_ref": "node_8",
+    "title": "Indemnisation",
+    "clause_type": "indemnity",
+    "risk_level": "high",
+    "market_practice": "market_standard",
+    "market_practice_score": null,
+    "exposure": {
+      "financial": "high",
+      "operational": "high",
+      "legal": "high",
+      "regulatory": "high",
+      "compliance": "high",
+      "privacy": "high",
+      "tax": "low",
+      "employment": "low",
+      "ip": "low",
+      "reputation": "low",
+      "cybersecurity": "high"
+    },
+    "explanation": "le Prestataire doit indemniser le Client pour certains coûts liés à des incidents de sécurité.",
+    "risk_reason": "",
+    "red_flag_reason": "",
+    "red_flag": false
+  }
+]
+
+========================================================================================================================
+C4. ROOT TOP RISKS
+========================================================================================================================
+[]
+
+########################################################################################################################
+D. DURATION SOURCE FORENSIC
+########################################################################################################################
+
+------------------------------------------------------------------------------------------------------------------------
+00001: 5.1 Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Client, and shall be uncapped in the event of Provider's gross negligence or willful misconduct.
+00002: 
+00003: 6.1 This Agreement has an initial term of three (3) years. Either Party may terminate for the other's uncured material breach following thirty (30) days' written notice. Client may terminate immediately, without penalty, if Provider suffers a Security Incident affecting Client data caused by Provider's gross negligence.
+00004: 
+00005: 3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense.
+
+------------------------------------------------------------------------------------------------------------------------
+00011: 1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the Client Cybersecurity Framework.
+00012: 
+00013: 3.1 Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports to Client upon request, no more than once per year.
+00014: 
+00015: 4.1 Provider shall not engage a new subcontractor with access to Client systems or data without Client's prior written approval, which shall not be unreasonably withheld.
+
+########################################################################################################################
+E. OVERVIEW DURATION INPUTS
+########################################################################################################################
+CLAUSE EXEC SUMMARY DURATION: None
+EXEC REPORT DURATION: None
+UNIFIED OVERVIEW DURATION: 'Non spécifié'
+ROOT DURATION: None

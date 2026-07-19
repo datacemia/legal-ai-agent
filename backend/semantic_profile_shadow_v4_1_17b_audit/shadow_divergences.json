@@ -1,0 +1,188 @@
+[
+  {
+    "language": "en",
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "clause_3",
+    "source_text": "3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense.",
+    "pipeline_clause_type": "notice",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9761,
+    "shadow_dominance_margin": 86.2752,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 86.2752,
+        "coverage": 0.9761,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_AUDIT_RIGHT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 208,
+            "text": "Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 208,
+            "text": "Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "53e4c9a087c299cc526806ef7517bc1e2f39d426c1086f5abd110ed43aceb57f"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 208,
+            "text": "Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "53e4c9a087c299cc526806ef7517bc1e2f39d426c1086f5abd110ed43aceb57f"
+      }
+    ],
+    "semantic_profile_hash": "a08859d0c7156bebdf794998c5ac517f6fcb049808f998341fe563f130a7dc57",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "clause_8",
+    "source_text": "3.2 يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9682,
+    "shadow_dominance_margin": 85.9424,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 85.9424,
+        "coverage": 0.9682,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_AUDIT_RIGHT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "5e70c70b1d8f4401fde34302374da1322c7cd5984c098ca37f17bb852e187785"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "5e70c70b1d8f4401fde34302374da1322c7cd5984c098ca37f17bb852e187785"
+      }
+    ],
+    "semantic_profile_hash": "d7f2ef37495b3bd15929f308f4425dd9a0a056592095b489a36d6790b224b4a0",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

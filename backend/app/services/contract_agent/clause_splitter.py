@@ -1,3 +1,4 @@
+import hashlib
 import re
 from typing import List
 
@@ -10,6 +11,16 @@ from app.services.contract_agent.document_structure_builder import (
     build_document_structure,
     flatten_structure_to_clauses,
 )
+
+try:
+    from app.services.contract_agent.clause_title_extractor import extract_clause_title
+except Exception:
+    def extract_clause_title(clause_text: str, language: str = "en") -> str:
+        text = str(clause_text or "").strip()
+        if not text:
+            return ""
+        first_line = text.splitlines()[0].strip() if text.splitlines() else ""
+        return first_line[:120] if first_line else "Untitled Clause"
 
 
 def normalize_arabic_title(title: str) -> str:
@@ -37,6 +48,15 @@ def normalize_arabic_title(title: str) -> str:
         "توزيع عقد": "عقد توزيع",
         "سحابية برمجية خدمات عقد": "عقد خدمات برمجية سحابية",
         "القرض مبلغ": "مبلغ القرض",
+        "القاهرة القوة": "القوة القاهرة",
+        "النزاعات تسوية": "تسوية النزاعات",
+        "التحكيم مقر": "مقر التحكيم",
+        "المعلومات سرية": "سرية المعلومات",
+        "الشخصية البيانات": "البيانات الشخصية",
+        "الأعمال نطاق": "نطاق الأعمال",
+        "العمل بيان": "بيان العمل",
+        "الأمن جدول": "جدول الأمن",
+        "الأسعار جدول": "جدول الأسعار",
     }
 
     return replacements.get(title, title)
@@ -49,6 +69,21 @@ def normalize_line(line: str) -> str:
     """
 
     line = line.strip()
+
+    # Strip a leading markdown heading marker ("#", "##", ...) before
+    # further normalization. Every contract test document in this
+    # pipeline uses markdown-style section headers ("# 1. POSITION AND
+    # DUTIES"), but is_clause_heading()'s numbered-heading patterns all
+    # anchor on a digit at the very start of the line. This is the
+    # THIRD, independent copy of the same fix already applied to
+    # legal_document_engine.py and document_structure_builder.py -- this
+    # file has its own separate normalize_line() with no shared code, so
+    # each had to be fixed individually. Confirmed as the root cause of
+    # a first-section-specific bug: "# 1. POSITION AND DUTIES" was
+    # invisible to is_clause_heading() and merged into whatever preceded
+    # it (the document preamble/definitions), corrupting the clause
+    # reference for the section immediately following it.
+    line = re.sub(r"^#+\s*", "", line)
 
     # Normalize spaces
     line = re.sub(r"\s+", " ", line)
@@ -95,21 +130,28 @@ def is_structural_attachment_heading(line: str) -> bool:
         # ENGLISH
         # -------------------------
 
-        r"^(exhibit|schedule|annex|appendix)\s+[a-z0-9\-]+",
+        r"^(exhibit|schedule|annex|appendix|attachment)\s+[a-z0-9\-]+",
+        r"^(technical appendix|pricing schedule|pricing annex|security schedule)",
+        r"^(data processing addendum|dpa|statement of work|sow)",
+        r"^(order form|purchase order|service description|specifications)",
         r"^(form of)\s+",
 
         # -------------------------
         # FRENCH
         # -------------------------
 
-        r"^(annexe|appendice)\s+[a-z0-9\-]+",
+        r"^(annexe|appendice|pièce jointe)\s+[a-z0-9\-]+",
+        r"^(annexe technique|annexe tarifaire|annexe de sécurité)",
+        r"^(avenant de traitement des données|description des services)",
+        r"^(bon de commande|cahier des charges)",
         r"^(modèle de|formulaire de)\s+",
 
         # -------------------------
         # ARABIC
         # -------------------------
 
-        r"^(ملحق|مرفق)\s*[\w\d\-]*",
+        r"^(ملحق|مرفق|الملحق|المرفق|ملاحق|المرفقات|الجدول)\s*[\w\d\-]*",
+        r"^(جدول الأسعار|جدول الأمن|ملحق معالجة البيانات|بيان العمل)",
         r"^(نموذج)\s+",
     ]
 
@@ -151,7 +193,19 @@ def is_clause_heading(line: str) -> bool:
         # 2.4.1
         # -----------------------------------
 
-        r"^\d+(\.\d+)*[\)\.\-]?\s+[A-ZÀ-ÿ\u0600-\u06FF]",
+        # Allows a PII-redaction placeholder bracket ("[") as the first
+        # character after the number, alongside an uppercase letter.
+        # Without this, a clause whose very first word happens to be a
+        # redacted entity (e.g. "Executive" -> "[EMPLOYEE]", common for
+        # employment agreements where the first sentence names a role)
+        # became completely invisible to this pattern -- confirmed in
+        # testing: "1.1 [EMPLOYEE] shall serve..." silently merged into
+        # the preceding section header, losing its own clause number,
+        # while sibling clauses starting with an ordinary word ("The
+        # Company shall...") were unaffected. This affects any language,
+        # since redaction placeholders are always this same bracket
+        # format regardless of the surrounding text's language.
+        r"^\d+(\.\d+)*[\)\.\-]?\s+[A-ZÀ-ÿ\u0600-\u06FF\[]",
 
         # -----------------------------------
         # ARABIC
@@ -171,7 +225,7 @@ def is_clause_heading(line: str) -> bool:
         # CONFIDENTIALITY
         # -----------------------------------
 
-        r"^[A-Z][A-Z\s&/,()\-]{3,}$",
+        r"^[A-Z0-9][A-Z0-9\s&/,()\-]{3,}$",
 
         # -----------------------------------
         # ROMAN NUMERALS
@@ -319,6 +373,100 @@ def is_low_value_clause(clause: str) -> bool:
     return any(pattern in text for pattern in low_value_patterns)
 
 
+
+
+def is_document_preamble_or_cover(text: str) -> bool:
+    normalized = re.sub(r"\s+", " ", str(text or "")).strip()
+    lowered = normalized.lower()
+
+    if not normalized:
+        return True
+
+    has_numbered_clause = bool(
+        re.search(r"\b\d+(\.\d+)*\b", normalized)
+    )
+
+    has_operational_language = bool(
+        re.search(
+            r"\b(shall|must|may|means|includes|entitled|liable|terminate|pay|notify|process|"
+            r"doit|peut|signifie|comprend|résilier|payer|notifier|traiter|"
+            r"يلتزم|يجب|يجوز|يعني|يشمل|إنهاء|دفع|إخطار|معالجة)\b",
+            lowered,
+        )
+    )
+
+    looks_like_intro = bool(
+        re.search(
+            r"(entered into|effective date|by and between|each a party|collectively the parties|"
+            r"conclu|date d'effet|entre les|les parties|"
+            r"تم إبرام|تاريخ السريان|بين|الأطراف)",
+            lowered,
+        )
+    )
+
+    if looks_like_intro and not has_numbered_clause:
+        return True
+
+    if lowered.startswith("document preamble"):
+        return True
+
+    if (
+        len(normalized.split()) <= 14
+        and not has_operational_language
+        and not has_numbered_clause
+    ):
+        return True
+
+    return False
+
+
+def is_non_clause_document_block(text: str) -> bool:
+    normalized = re.sub(r"\s+", " ", str(text or "")).strip()
+    lowered = normalized.lower()
+
+    if not normalized:
+        return True
+
+    if is_document_preamble_or_cover(text):
+        return True
+
+    words = normalized.split()
+
+    # Document title / cover heading: short, uppercase, no operative language.
+    if (
+        len(words) <= 12
+        and normalized.isupper()
+        and not re.search(
+            r"\b(shall|must|may|means|includes|agree|entitled|liable|terminate|pay|notify|process)\b",
+            lowered,
+        )
+    ):
+        return True
+
+    # Signature block.
+    if re.search(
+        r"\b(signature|signatures|in witness whereof|name / title|nom / titre|التوقيع|التوقيعات)\b",
+        lowered,
+        re.IGNORECASE,
+    ):
+        return True
+
+    # Very short structural headings.
+    structural_only_patterns = [
+        r"^(definitions|general provisions|services and service levels)$",
+        r"^(définitions|dispositions générales)$",
+        r"^(التعاريف|الأحكام العامة)$",
+    ]
+
+    if len(words) <= 6 and any(
+        re.match(pattern, lowered, re.IGNORECASE)
+        for pattern in structural_only_patterns
+    ):
+        return True
+
+    return False
+
+
 def split_into_clauses(text: str) -> List[str]:
     """
     Split a contract into logical clauses.
@@ -335,15 +483,34 @@ def split_into_clauses(text: str) -> List[str]:
     if not text or not text.strip():
         return []
 
-    engine_clauses = parse_legal_document(text)
+    try:
+        engine_clauses = parse_legal_document(text)
+    except (ValueError, KeyError, RecursionError, MemoryError, TimeoutError, Exception):
+        engine_clauses = []
 
-    if len(engine_clauses) >= 3:
+    engine_clauses = [
+        c for c in engine_clauses
+        if not is_low_value_clause(c)
+        and not is_non_clause_document_block(c)
+    ]
+
+    # Accept parser result only when document segmentation is sufficiently rich
+    if len(engine_clauses) >= 5:
         return engine_clauses
 
-    structure = build_document_structure(text)
-    structured_clauses = flatten_structure_to_clauses(structure)
+    try:
+        structure = build_document_structure(text)
+        structured_clauses = flatten_structure_to_clauses(structure)
+    except (ValueError, KeyError, RecursionError, MemoryError, TimeoutError, Exception):
+        structured_clauses = []
 
-    if len(structured_clauses) >= 3:
+    structured_clauses = [
+        c for c in structured_clauses
+        if not is_low_value_clause(c)
+        and not is_non_clause_document_block(c)
+    ]
+
+    if len(structured_clauses) >= 5:
         return structured_clauses
 
     lines = [
@@ -361,6 +528,14 @@ def split_into_clauses(text: str) -> List[str]:
             continue
 
         if is_structural_attachment_heading(line):
+            # Annexes / schedules / exhibits may contain legally binding
+            # provisions (pricing, SLA, DPA, specifications, etc.).
+            # Start a new clause instead of discarding them.
+            if current_clause:
+                clause_text = clean_clause_text("\n".join(current_clause))
+                if len(clause_text) > 30:
+                    clauses.append(clause_text)
+            current_clause = [line]
             continue
 
         # New heading detected
@@ -420,13 +595,20 @@ def split_into_clauses(text: str) -> List[str]:
         if len(normalized) < 30:
             continue
 
-        # Skip duplicates
-        if normalized in seen:
+        # Skip duplicates using stable hash signature for large contracts
+        signature = hashlib.sha1(
+            normalized.encode("utf-8", errors="ignore")
+        ).hexdigest()
+
+        if signature in seen:
             continue
 
-        seen.add(normalized)
+        seen.add(signature)
 
-        if not is_low_value_clause(clause):
+        if (
+            not is_low_value_clause(clause)
+            and not is_non_clause_document_block(clause)
+        ):
             cleaned_clauses.append(clause)
 
     if not cleaned_clauses:
@@ -475,7 +657,10 @@ def split_into_clauses(text: str) -> List[str]:
                     fallback_clauses.append(clause_text)
 
             if len(fallback_clauses) > len(cleaned_clauses):
-                cleaned_clauses = fallback_clauses
+                cleaned_clauses = [
+                    c for c in fallback_clauses
+                    if not is_non_clause_document_block(c)
+                ]
 
     # Fallback semantic splitter for weak PDFs
     if len(cleaned_clauses) <= 1:
@@ -520,13 +705,37 @@ def split_into_clauses(text: str) -> List[str]:
                 fallback_clauses.append(clause_text)
 
         if len(fallback_clauses) > len(cleaned_clauses):
-            cleaned_clauses = fallback_clauses
+            cleaned_clauses = [
+                c for c in fallback_clauses
+                if not is_non_clause_document_block(c)
+            ]
 
     return cleaned_clauses
 
 
+def extract_leading_clause_number(clause_text: str) -> str:
+    """
+    Extracts the leading numbered-clause reference (e.g. "1.1", "3.1.2")
+    from the start of a clause's own text, if present. Script-agnostic:
+    section numbering in this pipeline is always plain digits, in any of
+    the three supported languages.
+
+    Used to populate the "number" field in the fallback wrapping paths
+    below, which previously omitted it entirely -- downstream code
+    (contract_agent.py's attach_clause_object_metadata()) relies on this
+    field as the authoritative source for clause_reference, and a
+    clause object with no "number" field at all silently fell back to
+    whatever the LLM itself inferred (or nothing), producing an
+    incorrect or missing reference for any clause routed through this
+    fallback path instead of the primary tree-based engine.
+    """
+    match = re.match(r"\s*(\d+(?:\.\d+)+)", str(clause_text or ""))
+    return match.group(1) if match else ""
+
+
 def split_into_clause_objects(
     text: str,
+    language: str = "en",
 ) -> list[dict]:
     """
     Return structured clause objects while preserving hierarchy metadata.
@@ -554,12 +763,17 @@ def split_into_clause_objects(
             if p.strip().startswith("المادة")
         ]
 
-        if len(parts) >= 3:
+        if len(parts) >= 5:
             return [
                 {
                     "id": f"ar_article_{i}",
-                    "title": part.split("\n")[0][:120],
+                    "title": extract_clause_title(part, language=language),
                     "text": part,
+                    "number": (
+                        re.match(r"المادة\s+([0-9٠-٩]+)", part).group(1)
+                        if re.match(r"المادة\s+([0-9٠-٩]+)", part)
+                        else ""
+                    ),
                     "level": 1,
                     "depth": 1,
                     "parent_id": None,
@@ -569,18 +783,39 @@ def split_into_clause_objects(
                     "children": [],
                     "confidence": 0.8,
                 }
-                for i, part in enumerate(parts)
+                for i, part in enumerate(
+                    [
+                        p for p in parts
+                        if not is_non_clause_document_block(p)
+                    ]
+                )
             ]
 
-    objects = parse_legal_document_objects(text)
-    fallback_clauses = split_into_clauses(text)
+    try:
+        objects = parse_legal_document_objects(text)
+    except (ValueError, KeyError, RecursionError, MemoryError, TimeoutError, Exception):
+        objects = []
+
+    objects = [
+        obj for obj in objects
+        if isinstance(obj, dict)
+        and not is_non_clause_document_block(
+            obj.get("text") or obj.get("title") or ""
+        )
+    ]
+
+    fallback_clauses = [
+        c for c in split_into_clauses(text)
+        if not is_non_clause_document_block(c)
+    ]
 
     if len(fallback_clauses) > len(objects):
         return [
             {
                 "id": f"fallback_{i}",
-                "title": clause.split("\n")[0][:120],
+                "title": extract_clause_title(clause, language=language),
                 "text": clause,
+                "number": extract_leading_clause_number(clause),
                 "level": 1,
                 "depth": 1,
                 "parent_id": None,
@@ -593,14 +828,15 @@ def split_into_clause_objects(
             for i, clause in enumerate(fallback_clauses)
         ]
 
-    if len(objects) >= 3:
+    if len(objects) >= 5:
         return objects
 
     return [
         {
             "id": f"fallback_{i}",
-            "title": clause.split("\n")[0][:120],
+            "title": extract_clause_title(clause, language=language),
             "text": clause,
+            "number": extract_leading_clause_number(clause),
             "level": 1,
             "depth": 1,
             "parent_id": None,

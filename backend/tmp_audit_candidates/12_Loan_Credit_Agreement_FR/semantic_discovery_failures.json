@@ -1,0 +1,639 @@
+[
+  {
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PAY_FREQUENCY",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "payable mensuellement",
+            "start": 210,
+            "end": 231
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LOAN_PRINCIPAL_DISBURSEMENT",
+        "rank": 96,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 7,
+            "end": 130,
+            "text": "Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables"
+          },
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 15,
+            "end": 130,
+            "text": "décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b1486b251bf87c94598240c488011102da671e582555d54b4b80519a9d9857d8",
+        "normalized_concept": "LOAN_DISBURSEMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 210,
+            "end": 231,
+            "text": "payable mensuellement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c250f5c1bf77e7eeed6abe3bb63c8b4b3b8eb50479bdd5529391726d1cb815ca",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LOAN_PRINCIPAL_DISBURSEMENT",
+        "rank": 96,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 7,
+            "end": 130,
+            "text": "Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables"
+          },
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 15,
+            "end": 130,
+            "text": "décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b1486b251bf87c94598240c488011102da671e582555d54b4b80519a9d9857d8",
+        "normalized_concept": "LOAN_DISBURSEMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 L'Emprunteur déclare être dûment constitué, en règle, et disposer du pouvoir de conclure le présent Contrat. L'Emprunteur s'engage à maintenir un ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers trimestriels dans un délai de quarante-cinq (45) jours suivant la fin de chaque trimestre fiscal.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers trimestriels",
+            "start": 265,
+            "end": 294
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_COVENANT",
+        "rank": 94,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 6,
+            "end": 335,
+            "text": "Emprunteur déclare être dûment constitué, en règle, et disposer du pouvoir de conclure le présent Contrat. L'Emprunteur s'engage à maintenir un ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers trimestriels dans un délai de quarante-cinq (45) jour"
+          },
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 150,
+            "end": 283,
+            "text": "ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers t"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b47d37bf32a763c80682c4b2f10906c1ab84ed03ba0a79a8211a251bbbed78bd",
+        "normalized_concept": "FINANCIAL_COVENANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 265,
+            "end": 308,
+            "text": "états financiers trimestriels dans un délai"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "907cf5cb5821080e954c4b5c6afb48d5b5c1de36436d8b19bb704d36e4e06194",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_COVENANT",
+        "rank": 94,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 6,
+            "end": 335,
+            "text": "Emprunteur déclare être dûment constitué, en règle, et disposer du pouvoir de conclure le présent Contrat. L'Emprunteur s'engage à maintenir un ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers trimestriels dans un délai de quarante-cinq (45) jour"
+          },
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 150,
+            "end": 283,
+            "text": "ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers t"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b47d37bf32a763c80682c4b2f10906c1ab84ed03ba0a79a8211a251bbbed78bd",
+        "normalized_concept": "FINANCIAL_COVENANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 265,
+            "end": 308,
+            "text": "états financiers trimestriels dans un délai"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "907cf5cb5821080e954c4b5c6afb48d5b5c1de36436d8b19bb704d36e4e06194",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "états financiers trimestriels",
+            "start": 265,
+            "end": 294
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "Clause 4.1",
+    "source_language": "fr",
+    "source_text": "4.1 L'Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité, tout remboursement partiel étant imputé en premier lieu sur les intérêts courus puis sur le principal restant dû.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 6,
+            "end": 107,
+            "text": "Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "e5b46abaf7342e94929923b7ec5a2ec8f42bf8d9ffa189e6e5a6ef677fd47460",
+        "normalized_concept": "PREPAYMENT_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BORROWER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PREPAY",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 6,
+            "end": 107,
+            "text": "Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "e5b46abaf7342e94929923b7ec5a2ec8f42bf8d9ffa189e6e5a6ef677fd47460",
+        "normalized_concept": "PREPAYMENT_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BORROWER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PREPAY",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Un Cas de Défaut surviendra si l'Emprunteur ne procède pas à un paiement à son échéance et que ce manquement se poursuit pendant dix (10) jours ouvrés, manque à tout engagement de l'article 3 sans y remédier dans un délai de trente (30) jours suivant notification, ou fait l'objet d'une procédure d'insolvabilité.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 68,
+            "end": 316,
+            "text": "paiement à son échéance et que ce manquement se poursuit pendant dix (10) jours ouvrés, manque à tout engagement de l'article 3 sans y remédier dans un délai de trente (30) jours suivant notification, ou fait l'objet d'une procédure d'insolvabilité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "36cda0fe0fd8f64f18b6f8a845f3b9c13bcad75693295e198d269dcd7cb6608d",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 203,
+            "end": 316,
+            "text": "remédier dans un délai de trente (30) jours suivant notification, ou fait l'objet d'une procédure d'insolvabilité"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "20696e1593f39054370cedb817fa4d84b821ded845beb1cbc420821bb7208797",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 68,
+            "end": 316,
+            "text": "paiement à son échéance et que ce manquement se poursuit pendant dix (10) jours ouvrés, manque à tout engagement de l'article 3 sans y remédier dans un délai de trente (30) jours suivant notification, ou fait l'objet d'une procédure d'insolvabilité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "36cda0fe0fd8f64f18b6f8a845f3b9c13bcad75693295e198d269dcd7cb6608d",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 203,
+            "end": 316,
+            "text": "remédier dans un délai de trente (30) jours suivant notification, ou fait l'objet d'une procédure d'insolvabilité"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "20696e1593f39054370cedb817fa4d84b821ded845beb1cbc420821bb7208797",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "Clause 7.1",
+    "source_language": "fr",
+    "source_text": "7.1 Le présent Contrat est régi par le droit de l'État du Delaware. Tout litige découlant du présent Contrat sera résolu devant les tribunaux étatiques ou fédéraux situés à Wilmington, Delaware, et chaque Partie renonce irrévocablement à tout droit à un procès devant jury.",
+    "primary_type": "governing_law",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 27,
+            "end": 204,
+            "text": "régi par le droit de l'État du Delaware. Tout litige découlant du présent Contrat sera résolu devant les tribunaux étatiques ou fédéraux situés à Wilmington, Delaware, et chaque"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "54d292dca0540dd00f82566385d747667f1307d83a3be26b328e1e5338728d42",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 27,
+            "end": 204,
+            "text": "régi par le droit de l'État du Delaware. Tout litige découlant du présent Contrat sera résolu devant les tribunaux étatiques ou fédéraux situés à Wilmington, Delaware, et chaque"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "54d292dca0540dd00f82566385d747667f1307d83a3be26b328e1e5338728d42",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

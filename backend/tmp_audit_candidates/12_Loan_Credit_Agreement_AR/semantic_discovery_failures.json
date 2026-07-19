@@ -1,0 +1,440 @@
+[
+  {
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يُقر المقترض بأنه مؤسس حسب الأصول، وفي وضع قانوني سليم، ويملك الصلاحية لإبرام هذه الاتفاقية. يتعهد المقترض بالحفاظ على نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_COVENANT",
+        "rank": 94,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 97,
+            "end": 277,
+            "text": "يتعهد الطرف المتعاقد ب بالحفاظ على نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية."
+          },
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 123,
+            "end": 234,
+            "text": "نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "abae37f2bac72eee2187ddeeefa63c2164c8c8f4e868a59c9c570ae333404af5",
+        "normalized_concept": "FINANCIAL_COVENANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 199,
+            "end": 248,
+            "text": "بيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e552784de41a8b35f4771e61742f978f1df8cc17b9f4d2c473255b71c24fad38",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_COVENANT",
+        "rank": 94,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 97,
+            "end": 277,
+            "text": "يتعهد الطرف المتعاقد ب بالحفاظ على نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية."
+          },
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 123,
+            "end": 234,
+            "text": "نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "abae37f2bac72eee2187ddeeefa63c2164c8c8f4e868a59c9c570ae333404af5",
+        "normalized_concept": "FINANCIAL_COVENANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 199,
+            "end": 248,
+            "text": "بيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e552784de41a8b35f4771e61742f978f1df8cc17b9f4d2c473255b71c24fad38",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 147,
+            "end": 159,
+            "text": "تُدفع شهرياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1b9ca79d2e234100c810b990492e767b55ef94bf7e6219b818353e962778c8a0",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 147,
+            "end": 159,
+            "text": "تُدفع شهرياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1b9ca79d2e234100c810b990492e767b55ef94bf7e6219b818353e962778c8a0",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 72,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "0735d24360e4b6508ed75ecd7a3f25672c7daab98e2f13f4797ac1976128be9f",
+        "normalized_concept": "PREPAYMENT_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BORROWER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PREPAY",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 72,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "0735d24360e4b6508ed75ecd7a3f25672c7daab98e2f13f4797ac1976128be9f",
+        "normalized_concept": "PREPAYMENT_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BORROWER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PREPAY",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 تنشأ حالة تعثر إذا لم يسدد المقترض أي دفعة عند استحقاقها واستمر هذا التقصير لمدة عشرة (10) أيام عمل، أو أخل بأي تعهد في البند 3 ولم يعالج ذلك خلال ثلاثين (30) يوماً من الإخطار، أو خضع لإجراءات إعسار.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة عشرة (10) أيام",
+            "start": 81,
+            "end": 99
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 26,
+            "end": 202,
+            "text": "يسدد الطرف المتعاقد ب أي دفعة عند استحقاقها واستمر هذا التقصير لمدة عشرة (10) أيام عمل، أو أخل بأي تعهد في البند 3 ولم يعالج ذلك خلال ثلاثين (30) يوماً من الإخطار، أو خضع لإجراءات إعسار"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "65ef146adabd42549ddc053fa60dfef16d8c13e094be548cd3a524917f7172f4",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 26,
+            "end": 202,
+            "text": "يسدد الطرف المتعاقد ب أي دفعة عند استحقاقها واستمر هذا التقصير لمدة عشرة (10) أيام عمل، أو أخل بأي تعهد في البند 3 ولم يعالج ذلك خلال ثلاثين (30) يوماً من الإخطار، أو خضع لإجراءات إعسار"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "65ef146adabd42549ddc053fa60dfef16d8c13e094be548cd3a524917f7172f4",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة عشرة (10) أيام",
+            "start": 81,
+            "end": 99
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "BROAD_COMPATIBLE",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

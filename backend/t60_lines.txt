@@ -1,0 +1,281 @@
+FINANCE_TEXT_PDF_EXTRACTED 23208
+PDF_LINES_DEBUG {'line_count': 413, 'non_empty_line_count': 277, 'max_line_len': 255, 'first_20': ['Your Statement', '                                                                Statement 15              (Page 1 of 6)', '', '                                                              Account Number    06 3010 13274026', '                                      027', '                                                                Statement', '                                                                    Period        1 Jul 2023 - 14 Jul 2023      MS W N ABD KADIR', '        UNIT 4 23-25 HILLCREST GR', '                                                                    Closing Balance         $12,567.82 CR', '       SPRINGVALE VIC 3171', '                                                                       Enquiries                   13 2221', '', '', '', '', '    Smart Access', '', '         Enjoy the convenience and security of withdrawing what you need, when you need it. Plus you can have your', '         monthly account fee waived if you deposit at least $2,000 each calendar month.', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+1: Your Statement
+2: Statement 15 (Page 1 of 6)
+4: Account Number 06 3010 13274026
+5: 027
+6: Statement
+7: Period 1 Jul 2023 - 14 Jul 2023 MS W N ABD KADIR
+8: UNIT 4 23-25 HILLCREST GR
+9: Closing Balance $12,567.82 CR
+10: SPRINGVALE VIC 3171
+11: Enquiries 13 2221
+16: Smart Access
+18: Enjoy the convenience and security of withdrawing what you need, when you need it. Plus you can have your
+19: monthly account fee waived if you deposit at least $2,000 each calendar month.
+21: Name: WAN NORASIMA ABD KADIR
+23: Note: Have you checked your statement today? It's easy to find out more information about each of your
+24: transactions by logging on to the CommBank App or NetBank. Should you have any questions on
+25: fees or see an error please contact us on the details above. Cheque proceeds are available when
+26: cleared.
+29: The date of transactions shown here may be different on your other transaction lists (for example, the transaction list that
+30: V06.00.36 appears on the CommBank app). Date Transaction Debit Credit Balance
+32: 01 Jul 2023 OPENING BALANCE $156.25 CR
+34: 01 Jul DEBIT INTEREST CHARGED on this account
+35: to June 30, 2023 is $0.01 $SL.R3.S951.D195.O 01 Jul CocaColaEPP Keysborough AUS
+36: 0303 CardValue xx9855Date: 29/06/2023 4.50 $ $151.75 CR
+38: 01 Jul Transfer from xx9133 CommBank app $100.00 $251.75 CRZZ258R3 01 Jul SQ *WARUNG TEPI JALAN Springvale AU 33.00 $ $218.75 CR
+40: 01 Jul SI & BE PTY LTD SPRINGVALE AU
+41: Card xx9855 50.16 $ $168.59 CR
+43: 01 Jul Transfer from xx9133 CommBank app $50.00 $218.59 CR7351.17963.1.3
+44: 02 Jul Transfer from xx9133 CommBank app $20.00 $238.59 CR
+45: *#* 02 Jul Transfer To MR MUHAMMAD ERMANZUKRI BIN A
+46: PayID Phone from CommBank App
+47: sima 32.00 $ $206.59 CR
+49: 02 Jul Transfer from xx9133 CommBank app $10.00 $216.59 CR
+51: 03 Jul Transfer from xx9133 CommBank app $30.00 $246.59 CR
+53: 03 Jul Transfer from xx9133 CommBank app
+54: makan $130.00 $376.59 CR
+56: 03 Jul Wdl ATM CBA ATM SPRINGVALE SC1 VIC 3171 130.00 $ $246.59 CR
+58: 04 Jul SMP*H and T Poultry Noble Park AU AUS
+59: Card xx9855
+60: Value Date: 02/07/2023 8.20 $ $238.39 CR
+62: 04 Jul UBER *EATS Sydney AU AUS
+63: Card xx9855
+64: Value Date: 01/07/2023 49.90 $ $188.49 CR
+65: Statement 15 (Page 2 of 6)
+67: Account Number 06 3010 13274026
+73: Date Transaction Debit Credit Balance
+75: 04 Jul BESTEA SPRINGVALE PTY SPRINGVALE AUS
+76: Card xx9855
+77: Value Date: 01/07/2023 7.47 $ $181.02 CR
+79: 04 Jul CocaColaEPP Keysborough AUS
+80: Card xx9855
+81: Value Date: 30/06/2023 3.00 $ $178.02 CR
+83: 04 Jul SPORTSBET PTY LTD DARWIN NT AUS
+84: Card xx9855
+85: Value Date: 30/06/2023 15.00 $ $163.02 CR
+87: 04 Jul ZipPay P419426798 Sydney AU AUS
+88: Card xx9855
+89: Value Date: 30/06/2023 100.00 $ $63.02 CR
+91: 04 Jul Optus PrePaid MELBOURNE AU AUS
+92: Card xx9855
+93: Value Date: 30/06/2023 30.00 $ $33.02 CR
+95: 04 Jul Salary TOLL PERSONNEL P
+96: 500079051 $906.60 $939.62 CR
+98: 04 Jul StepPay Repayment 45.24 $ $894.38 CR
+100: 04 Jul StepPay Repayment 36.25 $ $858.13 CR
+102: 04 Jul Transfer to xx9133 CommBank app 830.00 $ $28.13 CR
+104: 04 Jul Fast Transfer From HAMZAN SUYUK
+105: I love you too muchhhhhhh $2,900.00 $2,928.13 CR
+107: 04 Jul Transfer To ISELL CDG RENTALS TRUST
+108: CommBank App 0413573963 1,738.00 $ $1,190.13 CRSL.R3.S951.D195.OV06.00.36
+109: To Astro 30303 04 Jul Transfer CommBank App hamzan 312.48 $ $877.65 CR
+111: 04 Jul Transfer to xx6620 CommBank app 840.00 $ $37.65 CRZZ258R3 04 Jul Direct Debit 507533 SOUTH EAST WATER
+112: DT.1w219v 44885185 23.00 $ $14.65 CR
+114: 04 Jul Transfer from xx9133 CommBank app $15.00 $29.65 CR
+116: 05 Jul UBER *EATS Sydney AU AUS7351.17963.1.3 Card xx9855
+117: Value Date: 03/07/2023 28.11 $ $1.54 CR
+119: 05 Jul Transfer from xx9133 CommBank app
+120: ubat abah $170.00 $171.54 CR
+122: 05 Jul Transfer To W ABD KADIR
+123: PayID Phone from CommBank App
+124: ubat abah 170.00 $ $1.54 CR
+126: 05 Jul Transfer from xx9133 CommBank app $50.00 $51.54 CR
+128: 05 Jul Wdl ATM NAB NAB ATM 45 DOUGLA 50.00 $ $1.54 CR
+130: 05 Jul Transfer from xx9133 CommBank app $100.00 $101.54 CR
+132: 06 Jul Fast Transfer From HAMZAN SUYUK
+133: I love you too muchhhhhhh $2,000.00 $2,101.54 CR
+134: Statement 15 (Page 3 of 6)
+136: Account Number 06 3010 13274026
+141: Date Transaction Debit Credit Balance
+143: 06 Jul Fast Transfer From HAMZAN SUYUK
+144: Bob $200.00 $2,301.54 CR
+146: 06 Jul Fast Transfer From MR NASIR BIN ERIWINSY
+147: to PayID Phone
+148: CREDIT TO ACCOUNT $300.00 $2,601.54 CR
+150: 06 Jul Fast Transfer From HAMZAN SUYUK
+151: Hery $200.00 $2,801.54 CR
+153: 06 Jul Transfer to xx9133 CommBank app 2,700.00 $ $101.54 CR
+155: 06 Jul Fast Transfer From HAMZAN SUYUK
+156: Alim $1,000.00 $1,101.54 CR
+158: 06 Jul Transfer to xx9133 CommBank app 1,000.00 $ $101.54 CR
+160: 06 Jul Transfer from xx9133 CommBank app
+161: ruma $3,738.00 $3,839.54 CR
+163: 06 Jul L.J. Hooker NP CommBank app BPAY 1
+164: 102000718 1 rent and bond 3,738.00 $ $101.54 CR
+166: 07 Jul REA GROUP LTD RICHMOND VI AUS
+167: Card xx9855
+168: Value Date: 05/07/2023 29.00 $ $72.54 CR
+170: 07 Jul 7-ELEVEN 1078 COBURG VI AUS
+171: Card xx9855
+172: Value Date: 05/07/2023 36.02 $ $36.52 CR
+174: 07 Jul Transfer from xx9133 CommBank app $20.00 $56.52 CR
+176: 07 Jul Transfer To MISS DOROTHY JOHN
+177: PayID Phone from CommBank App
+178: bulu 18.00 $ $38.52 CRV06.00.36 07 Jul Fast Transfer From WAN NORAIN ABD KADIR
+179: to PayID Phone
+180: Shop $10.00 $48.52 CR
+182: 07 Jul Fast Transfer From NURASHIKIN NORDIN
+183: to PayID Phone
+184: Karipapku $30.00 $78.52 CRSL.R3.S951.D195.O
+185: 0303 07 Jul TransferPayID PhoneTo WfromABDCommBankKADIR App
+186: karipap 30.00 $ $48.52 CR
+188: 07 Jul Transfer from xx9133 CommBank app $100.00 $148.52 CRZZ258R3
+189: 08 Jul StepPay Repayment 28.26 $ $120.26 CR
+191: 08 Jul UBER *EATS Sydney AU AUS
+192: Card xx9855
+193: Value Date: 06/07/2023 28.77 $ $91.49 CR7351.17964.2.3
+194: 08 Jul Transfer from xx9133 CommBank app
+195: kete $175.00 $266.49 CR
+197: 08 Jul Transfer To W ABD KADIR
+198: PayID Phone from CommBank App
+199: kete 175.00 $ $91.49 CR
+201: 08 Jul Transfer from xx9133 CommBank app
+202: snow $120.00 $211.49 CR
+204: 08 Jul Transfer To W ABD KADIR
+205: PayID Phone from CommBank App
+206: snow 120.00 $ $91.49 CR
+208: 09 Jul Transfer from xx6620 CommBank app $400.00 $491.49 CR
+210: 09 Jul StepPay Repayment 25.36 $ $466.13 CR
+212: 09 Jul StepPay Repayment 28.89 $ $437.24 CR
+214: 09 Jul Transfer from xx9133 CommBank app $40.00 $477.24 CR
+215: Statement 15 (Page 4 of 6)
+217: Account Number 06 3010 13274026
+222: Date Transaction Debit Credit Balance
+224: 09 Jul Transfer To MISS DOROTHY JOHN
+225: PayID Phone from CommBank App
+226: bill 70.00 $ $407.24 CR
+228: 09 Jul Fast Transfer From MISS DOROTHY JOHN
+229: to PayID Phone
+230: terlebih $12.00 $419.24 CR
+232: 10 Jul Fast Transfer From WAN NORAIN ABD KADIR
+233: to PayID Phone
+234: Shop $195.00 $614.24 CR
+236: 10 Jul Transfer from xx6620 CommBank app
+237: pinjam $195.00 $809.24 CR
+239: 10 Jul Transfer To Astro 3
+240: CommBank App sima 390.00 $ $419.24 CR
+242: 10 Jul Fast Transfer From E AYUB
+243: to PayID Phone
+244: Karipap $35.00 $454.24 CR
+246: 11 Jul Afterpay afterpay.com AU AUS
+247: Card xx9855
+248: Value Date: 09/07/2023 14.75 $ $439.49 CR
+250: 11 Jul Afterpay afterpay.com AU AUS
+251: Card xx9855
+252: Value Date: 09/07/2023 11.50 $ $427.99 CR
+254: 11 Jul Afterpay afterpay.com AU AUS
+255: Card xx9855
+256: Value Date: 09/07/2023 52.24 $ $375.75 CR
+258: 11 Jul Lake Mountain Resort Marysville VI AUSV06.00.36 Card xx9855
+259: Value Date: 09/07/2023 17.00 $ $358.75 CR
+261: 11 Jul Marrybrown Burwood Burwood East VI AUS
+262: Card xx9855
+263: Value Date: 07/07/2023 69.80 $ $288.95 CR
+265: 11 Jul WOOLWORTHS 3742 DANDENONG N AU AUSSL.R3.S951.D195.O Card xx9855
+266: 0303 Value Date: 07/07/2023 17.50 $ $271.45 CR
+267: 11 Jul Salary TOLL PERSONNEL P
+268: 500079051 $820.01 $1,091.46 CRZZ258R3
+269: 11 Jul Transfer To MISS DOROTHY JOHN
+270: PayID Phone from CommBank App
+271: burgermbira 27.00 $ $1,064.46 CR
+273: 12 Jul StepPay Repayment 89.83 $ $974.63 CR7351.17964.2.3
+274: 12 Jul SEAFOOD SMART SPRINGVALE AUS
+275: Card xx9855
+276: Value Date: 10/07/2023 8.12 $ $966.51 CR
+278: 12 Jul BESTEA SPRINGVALE PTY SPRINGVALE AUS
+279: Card xx9855
+280: Value Date: 10/07/2023 7.47 $ $959.04 CR
+282: 12 Jul SMP*Toppings and Tea Springvale AU AUS
+283: Card xx9855
+284: Value Date: 10/07/2023 6.81 $ $952.23 CR
+286: 12 Jul CROSSCOUNTRY SKIHIRE ASCOT VALEVIC VI AU
+287: Card xx9855
+288: Value Date: 09/07/2023 199.97 $ $752.26 CR
+290: 12 Jul Transfer To W ABD KADIR
+291: PayID Phone from CommBank App
+292: hutang 52.00 $ $700.26 CR
+293: Statement 15 (Page 5 of 6)
+295: Account Number 06 3010 13274026
+300: Date Transaction Debit Credit Balance
+302: 13 Jul ENERGYAUSTRALIA PTY LT MELBOURNE AUS
+303: Card xx9855
+304: Value Date: 11/07/2023 50.00 $ $650.26 CR
+306: 13 Jul ENERGYAUSTRALIA PTY LT MELBOURNE AUS
+307: Card xx9855
+308: Value Date: 11/07/2023 50.00 $ $600.26 CR
+310: 13 Jul BESTEA SPRINGVALE PTY SPRINGVALE AUS
+311: Card xx9855
+312: Value Date: 11/07/2023 7.47 $ $592.79 CR
+314: 13 Jul CocaColaEPP Keysborough AUS
+315: Card xx9855
+316: Value Date: 11/07/2023 3.00 $ $589.79 CR
+318: 13 Jul MCDONALDS SPRNGVALE 2 SPRINGVALE AUS
+319: Card xx9855
+320: Value Date: 10/07/2023 4.85 $ $584.94 CR
+322: 13 Jul Wise Sydney AU AUS
+323: Card xx9855
+324: Value Date: 11/07/2023 100.00 $ $484.94 CR
+326: 13 Jul Century Nails Hair Springvale VI AUS
+327: Card xx9855
+328: Value Date: 11/07/2023 25.41 $ $459.53 CR
+330: 13 Jul StepPay Repayment 30.20 $ $429.33 CR
+332: 13 Jul StepPay Repayment 26.78 $ $402.55 CR
+334: 14 Jul Direct Credit 012721 ATO
+335: ATO001000018501019 $8,871.00 $9,273.55 CR
+337: 14 Jul Fast Transfer From HAMZAN SUYUKV06.00.36 I love you too muchhhhhhh $13,000.00 $22,273.55 CR
+339: 14 Jul StepPay Repayment 35.25 $ $22,238.30 CR
+341: 14 Jul StepPay Repayment 44.00 $ $22,194.30 CR
+343: 14 Jul StepPay Repayment 25.36 $ $22,168.94 CR
+345: 14 Jul StepPay Repayment 36.25 $ $22,132.69 CRSL.R3.S951.D195.O
+346: $ $22,103.81 CR0303 14 Jul StepPay Repayment 28.88
+347: 14 Jul StepPay Repayment 25.34 $ $22,078.47 CR
+349: 14 Jul StepPay Repayment 36.25 $ $22,042.22 CRZZ258R3
+350: 14 Jul StepPay Repayment 36.25 $ $22,005.97 CR
+352: 14 Jul CocaColaEPP Keysborough AUS
+353: Card xx9855
+354: Value Date: 12/07/2023 3.00 $ $22,002.97 CR7351.17965.3.3
+355: 14 Jul Sushi Shien Parkmore Keysborough VI AUS
+356: Card xx9855
+357: Value Date: 12/07/2023 10.66 $ $21,992.31 CR
+359: 14 Jul WOOLWORTHS 3371 KEYSBOROUGH AU AUS
+360: Card xx9855
+361: Value Date: 12/07/2023 23.50 $ $21,968.81 CR
+363: 14 Jul WOOLWORTHS 3371 KEYSBOROUGH AU AUS
+364: Card xx9855
+365: Value Date: 12/07/2023 0.99 $ $21,967.82 CR
+367: 14 Jul Transfer To C YUGARANG
+368: PayID Phone from CommBank App
+369: tq kakak 1,800.00 $ $20,167.82 CR
+371: 14 Jul Transfer To My Love
+372: CommBank App i love u 2,700.00 $ $17,467.82 CR
+373: Statement 15 (Page 6 of 6)
+375: Account Number 06 3010 13274026
+380: Date Transaction Debit Credit Balance
+382: 14 Jul Fast Transfer From WAN NORAIN ABD KADIR
+383: to PayID Phone
+384: Shop $100.00 $17,567.82 CR
+386: 14 Jul Transfer to xx6620 CommBank app
+387: simpan 5,000.00 $ $12,567.82 CR
+389: 14 Jul 2023 CLOSING BALANCE $12,567.82 CR
+392: Opening balance - Total debits + Total credits = Closing balance
+394: $156.25 CR $23,631.04 $36,042.61 $12,567.82 CR
+397: Important Information:
+398: We try to get things right the first time – but if we don’t, we’ll do what we can to fix it.
+399: You can fix most problems simply by contacting us.
+400: Write to: CBA Group Customer Relations, Reply Paid 41, Sydney NSW 2001
+401: Tell us online: commbank.com.au/support/compliments-and-complaints.html
+402: Call: 1800 805 605 (free call)
+404: You can also contact the Australian Financial Complaints Authority, AFCA, an independent external dispute
+405: resolution body approved by ASIC - time limits may apply, visit AFCA, afca.org.au, website for more information.
+406: Write to: Australian Financial Complaints Authority, GPO Box 3, Melbourne VIC 3001
+407: Email: info@afca.org.au
+408: Call: 1800 931 678, free call Monday to Friday 9am– 5pm, AEST
+409: V06.00.36
+410: SL.R3.S951.D195.O
+411: 0303
+412: ZZ258R3
+413: 7351.17965.3.3

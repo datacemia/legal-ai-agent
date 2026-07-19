@@ -1,0 +1,1113 @@
+========================================================================================================================
+V4.1.19 EXACT CYBER FIXTURE DETECTOR PROBE
+========================================================================================================================
+
+DETECTOR
+========================================================================================================================
+C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_family_detector.py
+
+DOCX INVENTORY
+========================================================================================================================
+
+04_Cybersecurity_Services_Agreement.docx
+  regression_docs\04_Cybersecurity_Services_Agreement.docx
+
+04_Cybersecurity_Services_Agreement_FR.docx
+  regression_docs\04_Cybersecurity_Services_Agreement_FR.docx
+
+04_Cybersecurity_Services_Agreement_AR.docx
+  regression_docs\04_Cybersecurity_Services_Agreement_AR.docx
+
+========================================================================================================================
+DOCX TEXT EXTRACTOR INVENTORY
+========================================================================================================================
+========== PII_REDACTOR V2 LOADED ==========
+
+MODULE: app.workers.handlers.contract_handler
+  Document (**kwargs)
+  clean_text (text: str) -> str
+  extract_text (file_path: str, file_type: Optional[str]) -> str
+  render_summary_text (data: dict, language: str = 'en', party_roles: dict | None = None) -> str
+
+MODULE: app.services.contract_agent.contract_agent
+  extract_clause_title (clause_text: str, language: str = 'en') -> str
+  extract_contract_timeline (clauses: list[dict], language: str = 'en') -> list[dict]
+  extract_reasoning_evidence (clause_text: str, max_length: int = 160) -> str
+  get_reasoning_for_text (text: str, language: str = 'en', title: str = '', sector: str = None, clause_type: str | None = None) -> dict
+  validate_quoted_text (analysis: dict, clause_text: str) -> dict
+
+========================================================================================================================
+DIRECT DOCX PARAGRAPH PROBE
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FILE: regression_docs\04_Cybersecurity_Services_Agreement.docx
+PARAGRAPHS: 25
+TEXT LENGTH: 3156
+------------------------------------------------------------------------------------------------------------------------
+
+FIRST 20 PARAGRAPHS
+------------------------------------------------------------------------------------------------------------------------
+[01] 'MANAGED CYBERSECURITY SERVICES AGREEMENT'
+[02] 'This Managed Cybersecurity Services Agreement (the "Agreement") is entered into as of July 6, 2026, between Obsidian Threat Defense LLC, a Delaware limited liability company ("Provider"), and Cascadia Regional Bank, a Washington state-chartered bank ("Client"), for the provision of managed detection and response, vulnerability management, and incident response services (the "Services").'
+[03] '"Security Incident" means any confirmed unauthorized access to, or acquisition, disclosure, alteration, or destruction of, Client\'s systems or data.'
+[04] '"Critical Vulnerability" means a vulnerability with a CVSS score of 9.0 or higher affecting Client\'s production environment.'
+[05] '1. SCOPE OF SERVICES'
+[06] '1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the NIST Cybersecurity Framework.'
+[07] '2. INCIDENT RESPONSE AND NOTIFICATION'
+[08] '2.1 Provider shall notify Client of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery.'
+[09] '2.2 Provider shall provide a written root-cause analysis within five (5) business days following resolution of any Security Incident classified as high or critical severity.'
+[10] '3. COMPLIANCE AND AUDIT'
+[11] '3.1 Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports to Client upon request, no more than once per year.'
+[12] "3.2 Client shall have the right, upon thirty (30) days' notice, to conduct an on-site security audit of Provider's facilities directly relevant to the Services, no more than once annually, at Client's expense."
+[13] '4. SUBCONTRACTORS AND SUBPROCESSORS'
+[14] "4.1 Provider shall not engage a new subcontractor with access to Client systems or data without Client's prior written approval, which shall not be unreasonably withheld."
+[15] '5. LIABILITY AND INDEMNIFICATION'
+[16] "5.1 Provider's aggregate liability for a Security Incident caused by Provider's failure to meet the service levels in Exhibit A shall not exceed three (3) times the annual fees paid by Client, and shall be uncapped in the event of Provider's gross negligence or willful misconduct."
+[17] "5.2 Provider shall indemnify Client for third-party claims, regulatory fines, and reasonable costs of credit monitoring and forensic investigation arising from a Security Incident attributable to Provider's breach of this Agreement."
+[18] '6. TERM AND TERMINATION'
+[19] "6.1 This Agreement has an initial term of three (3) years. Either Party may terminate for the other's uncured material breach following thirty (30) days' written notice. Client may terminate immediately, without penalty, if Provider suffers a Security Incident affecting Client data caused by Provider's gross negligence."
+[20] 'SIGNATURES'
+
+TITLE ZONE
+------------------------------------------------------------------------------------------------------------------------
+LENGTH: 1200
+'managed cybersecurity services agreement this managed cybersecurity services agreement (the "agreement") is entered into as of july 6, 2026, between obsidian threat defense llc, a delaware limited liability company ("provider"), and cascadia regional bank, a washington state-chartered bank ("client"), for the provision of managed detection and response, vulnerability management, and incident response services (the "services"). "security incident" means any confirmed unauthorized access to, or acquisition, disclosure, alteration, or destruction of, client\'s systems or data. "critical vulnerability" means a vulnerability with a cvss score of 9.0 or higher affecting client\'s production environment. 1. scope of services 1.1 provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in exhibit a, consistent with the nist cybersecurity framework. 2. incident response and notification 2.1 provider shall notify client of any confirmed security incident within four (4) hours of confirmation, and of any critical vulnerability within twenty-four (24) hours of discovery. 2.2 provider shall provide a written root-cause analysis wit'
+
+DETECTOR RESULT
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "Cybersecurity",
+  "confidence": "medium",
+  "co_occurring_families": [
+    "MSA"
+  ],
+  "scores": {
+    "MSA": 123,
+    "Cybersecurity": 173,
+    "Outsourcing": 1,
+    "Construction": 6,
+    "Manufacturing": 16,
+    "Corporate Resolution": 1
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "services agreement",
+        "count": 2,
+        "weight": 3,
+        "points": 6
+      },
+      {
+        "term": "services agreement",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      },
+      {
+        "term": "client",
+        "count": 13,
+        "weight": 1,
+        "points": 13
+      },
+      {
+        "term": "client",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "cybersecurity services agreement",
+        "count": 2,
+        "weight": 5,
+        "points": 10
+      },
+      {
+        "term": "cybersecurity services agreement",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "cybersecurity",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "cybersecurity",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "security incident",
+        "count": 6,
+        "weight": 3,
+        "points": 18
+      },
+      {
+        "term": "security incident",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "threat detection",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "threat detection",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "vulnerability",
+        "count": 4,
+        "weight": 3,
+        "points": 12
+      },
+      {
+        "term": "vulnerability",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "incident response",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "incident response",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "security monitoring",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "security monitoring",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "iso/iec 27001",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "soc 2",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "security",
+        "count": 8,
+        "weight": 1,
+        "points": 8
+      },
+      {
+        "term": "security",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      }
+    ],
+    "Outsourcing": [
+      {
+        "term": "service levels",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Construction": [
+      {
+        "term": "subcontractor",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "site",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Manufacturing": [
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Corporate Resolution": [
+      {
+        "term": "approval",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "Cybersecurity",
+      173
+    ],
+    [
+      "MSA",
+      123
+    ],
+    [
+      "Manufacturing",
+      16
+    ],
+    [
+      "Construction",
+      6
+    ],
+    [
+      "Outsourcing",
+      1
+    ],
+    [
+      "Corporate Resolution",
+      1
+    ]
+  ]
+}
+
+RANKED SUMMARY
+------------------------------------------------------------------------------------------------------------------------
+Cybersecurity: 173
+MSA: 123
+Manufacturing: 16
+Construction: 6
+Outsourcing: 1
+Corporate Resolution: 1
+
+TOP FAMILY EVIDENCE
+------------------------------------------------------------------------------------------------------------------------
+
+FAMILY: Cybersecurity
+{"term": "cybersecurity services agreement", "count": 2, "weight": 5, "points": 10}
+{"term": "cybersecurity services agreement", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "cybersecurity", "count": 3, "weight": 3, "points": 9}
+{"term": "cybersecurity", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+{"term": "security incident", "count": 6, "weight": 3, "points": 18}
+{"term": "security incident", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "threat detection", "count": 1, "weight": 3, "points": 3}
+{"term": "threat detection", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "vulnerability", "count": 4, "weight": 3, "points": 12}
+{"term": "vulnerability", "count": 4, "weight": 5, "points": 20, "zone": "title"}
+{"term": "incident response", "count": 3, "weight": 3, "points": 9}
+{"term": "incident response", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+{"term": "security monitoring", "count": 1, "weight": 3, "points": 3}
+{"term": "security monitoring", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "iso/iec 27001", "count": 1, "weight": 3, "points": 3}
+{"term": "soc 2", "count": 1, "weight": 3, "points": 3}
+{"term": "security", "count": 8, "weight": 1, "points": 8}
+{"term": "security", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+
+FAMILY: MSA
+{"term": "services agreement", "count": 2, "weight": 3, "points": 6}
+{"term": "services agreement", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "services", "count": 7, "weight": 1, "points": 7}
+{"term": "services", "count": 6, "weight": 5, "points": 30, "zone": "title"}
+{"term": "client", "count": 13, "weight": 1, "points": 13}
+{"term": "client", "count": 4, "weight": 5, "points": 20, "zone": "title"}
+{"term": "services", "count": 7, "weight": 1, "points": 7}
+{"term": "services", "count": 6, "weight": 5, "points": 30, "zone": "title"}
+
+FAMILY: Manufacturing
+{"term": "production", "count": 1, "weight": 3, "points": 3}
+{"term": "production", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "production", "count": 1, "weight": 3, "points": 3}
+{"term": "production", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+
+FAMILY: Construction
+{"term": "subcontractor", "count": 1, "weight": 3, "points": 3}
+{"term": "site", "count": 1, "weight": 3, "points": 3}
+
+FAMILY: Outsourcing
+{"term": "service levels", "count": 1, "weight": 1, "points": 1}
+
+------------------------------------------------------------------------------------------------------------------------
+FILE: regression_docs\04_Cybersecurity_Services_Agreement_FR.docx
+PARAGRAPHS: 25
+TEXT LENGTH: 3583
+------------------------------------------------------------------------------------------------------------------------
+
+FIRST 20 PARAGRAPHS
+------------------------------------------------------------------------------------------------------------------------
+[01] 'ACCORD DE SERVICES DE CYBERSÉCURITÉ GÉRÉS'
+[02] "Le présent Accord de Services de Cybersécurité Gérés (l'« Accord ») est conclu à la date du 6 juillet 2026, entre Obsidian Threat Defense LLC, une société à responsabilité limitée du Delaware (le « Prestataire »), et Cascadia Regional Bank, une banque agréée par l'État de Washington (le « Client »), pour la fourniture de services de détection et de réponse gérées, de gestion des vulnérabilités et de réponse aux incidents (les « Services »)."
+[03] '« Incident de Sécurité » désigne tout accès non autorisé confirmé, ou toute acquisition, divulgation, altération ou destruction non autorisée, des systèmes ou données du Client.'
+[04] "« Vulnérabilité Critique » désigne une vulnérabilité avec un score CVSS de 9,0 ou supérieur affectant l'environnement de production du Client."
+[05] '1. ÉTENDUE DES SERVICES'
+[06] "1.1 Le Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST."
+[07] '2. RÉPONSE AUX INCIDENTS ET NOTIFICATION'
+[08] '2.1 Le Prestataire notifiera le Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.'
+[09] '2.2 Le Prestataire fournira une analyse écrite des causes profondes dans un délai de cinq (5) jours ouvrés suivant la résolution de tout Incident de Sécurité classé comme grave ou critique.'
+[10] '3. CONFORMITÉ ET AUDIT'
+[11] "3.1 Le Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira au Client les rapports d'audit en vigueur sur demande, au maximum une fois par an."
+[12] '3.2 Le Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations du Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais du Client.'
+[13] '4. SOUS-TRAITANTS ET SOUS-TRAITANTS ULTÉRIEURS'
+[14] "4.1 Le Prestataire ne fera appel à un nouveau sous-traitant ayant accès aux systèmes ou données du Client sans l'approbation écrite préalable du Client, laquelle ne pourra être refusée sans motif raisonnable."
+[15] '5. RESPONSABILITÉ ET INDEMNISATION'
+[16] "5.1 La responsabilité globale du Prestataire pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par le Client, et sera illimitée en cas de négligence grave ou de faute intentionnelle du Prestataire."
+[17] "5.2 Le Prestataire indemnisera le Client au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par le Prestataire."
+[18] '6. DURÉE ET RÉSILIATION'
+[19] "6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. Le Client pourra résilier immédiatement, sans pénalité, si le Prestataire subit un Incident de Sécurité affectant les données du Client résultant de sa négligence grave."
+[20] 'SIGNATURES'
+
+TITLE ZONE
+------------------------------------------------------------------------------------------------------------------------
+LENGTH: 1200
+"accord de services de cybersécurité gérés le présent accord de services de cybersécurité gérés (l'« accord ») est conclu à la date du 6 juillet 2026, entre obsidian threat defense llc, une société à responsabilité limitée du delaware (le « prestataire »), et cascadia regional bank, une banque agréée par l'état de washington (le « client »), pour la fourniture de services de détection et de réponse gérées, de gestion des vulnérabilités et de réponse aux incidents (les « services »). « incident de sécurité » désigne tout accès non autorisé confirmé, ou toute acquisition, divulgation, altération ou destruction non autorisée, des systèmes ou données du client. « vulnérabilité critique » désigne une vulnérabilité avec un score cvss de 9,0 ou supérieur affectant l'environnement de production du client. 1. étendue des services 1.1 le prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'annexe a, conformément au cadre de cybersécurité du nist. 2. réponse aux incidents et notification 2.1 le prestataire notifiera le client de tout incident de sécurité confirmé dans un délai"
+
+DETECTOR RESULT
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "MSA",
+  "confidence": "medium",
+  "co_occurring_families": [
+    "Cybersecurity"
+  ],
+  "scores": {
+    "MSA": 134,
+    "Cybersecurity": 140,
+    "Data Processing": 3,
+    "Outsourcing": 1,
+    "Construction": 6,
+    "Manufacturing": 24,
+    "Corporate Resolution": 1
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      },
+      {
+        "term": "client",
+        "count": 13,
+        "weight": 1,
+        "points": 13
+      },
+      {
+        "term": "client",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "prestataire",
+        "count": 12,
+        "weight": 1,
+        "points": 12
+      },
+      {
+        "term": "prestataire",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "iso/iec 27001",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "soc 2",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "cybersécurité",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "cybersécurité",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 6,
+        "weight": 3,
+        "points": 18
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "vulnérabilité",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "vulnérabilité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "sécurité",
+        "count": 8,
+        "weight": 1,
+        "points": 8
+      },
+      {
+        "term": "sécurité",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      }
+    ],
+    "Data Processing": [
+      {
+        "term": "sous-traitant",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Outsourcing": [
+      {
+        "term": "niveaux de service",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Construction": [
+      {
+        "term": "site",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "sous-traitant",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Manufacturing": [
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "délai",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "délai",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Corporate Resolution": [
+      {
+        "term": "approbation",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "Cybersecurity",
+      140
+    ],
+    [
+      "MSA",
+      134
+    ],
+    [
+      "Manufacturing",
+      24
+    ],
+    [
+      "Construction",
+      6
+    ],
+    [
+      "Data Processing",
+      3
+    ],
+    [
+      "Outsourcing",
+      1
+    ],
+    [
+      "Corporate Resolution",
+      1
+    ]
+  ]
+}
+
+RANKED SUMMARY
+------------------------------------------------------------------------------------------------------------------------
+Cybersecurity: 140
+MSA: 134
+Manufacturing: 24
+Construction: 6
+Data Processing: 3
+Outsourcing: 1
+Corporate Resolution: 1
+
+TOP FAMILY EVIDENCE
+------------------------------------------------------------------------------------------------------------------------
+
+FAMILY: Cybersecurity
+{"term": "iso/iec 27001", "count": 1, "weight": 3, "points": 3}
+{"term": "soc 2", "count": 1, "weight": 3, "points": 3}
+{"term": "cybersécurité", "count": 3, "weight": 3, "points": 9}
+{"term": "cybersécurité", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+{"term": "incident de sécurité", "count": 6, "weight": 3, "points": 18}
+{"term": "incident de sécurité", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "détection des menaces", "count": 1, "weight": 3, "points": 3}
+{"term": "détection des menaces", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "vulnérabilité", "count": 3, "weight": 3, "points": 9}
+{"term": "vulnérabilité", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "réponse aux incidents", "count": 3, "weight": 3, "points": 9}
+{"term": "réponse aux incidents", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+{"term": "surveillance de sécurité", "count": 1, "weight": 3, "points": 3}
+{"term": "surveillance de sécurité", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "sécurité", "count": 8, "weight": 1, "points": 8}
+{"term": "sécurité", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+
+FAMILY: MSA
+{"term": "services", "count": 7, "weight": 1, "points": 7}
+{"term": "services", "count": 6, "weight": 5, "points": 30, "zone": "title"}
+{"term": "client", "count": 13, "weight": 1, "points": 13}
+{"term": "client", "count": 4, "weight": 5, "points": 20, "zone": "title"}
+{"term": "prestataire", "count": 12, "weight": 1, "points": 12}
+{"term": "prestataire", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+{"term": "services", "count": 7, "weight": 1, "points": 7}
+{"term": "services", "count": 6, "weight": 5, "points": 30, "zone": "title"}
+
+FAMILY: Manufacturing
+{"term": "production", "count": 1, "weight": 3, "points": 3}
+{"term": "production", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "production", "count": 1, "weight": 3, "points": 3}
+{"term": "production", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "délai", "count": 3, "weight": 1, "points": 3}
+{"term": "délai", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+
+FAMILY: Construction
+{"term": "site", "count": 1, "weight": 3, "points": 3}
+{"term": "sous-traitant", "count": 1, "weight": 3, "points": 3}
+
+FAMILY: Data Processing
+{"term": "sous-traitant", "count": 1, "weight": 3, "points": 3}
+
+------------------------------------------------------------------------------------------------------------------------
+FILE: regression_docs\04_Cybersecurity_Services_Agreement_AR.docx
+PARAGRAPHS: 25
+TEXT LENGTH: 2608
+------------------------------------------------------------------------------------------------------------------------
+
+FIRST 20 PARAGRAPHS
+------------------------------------------------------------------------------------------------------------------------
+[01] 'اتفاقية خدمات الأمن السيبراني المُدارة'
+[02] 'أُبرمت اتفاقية خدمات الأمن السيبراني المُدارة هذه ("الاتفاقية") بتاريخ 6 يوليو 2026، بين شركة Obsidian Threat Defense LLC، وهي شركة ذات مسؤولية محدودة بموجب قوانين ولاية ديلاوير ("المزود")، وبنك Cascadia Regional Bank، وهو بنك مرخص من ولاية واشنطن ("العميل")، لتقديم خدمات الكشف والاستجابة المُدارة وإدارة الثغرات والاستجابة للحوادث ("الخدمات").'
+[03] '"الحادث الأمني" يعني أي وصول غير مصرح به مؤكد، أو اكتساب أو إفصاح أو تعديل أو إتلاف غير مصرح به، لأنظمة العميل أو بياناته.'
+[04] '"الثغرة الحرجة" تعني ثغرة أمنية بدرجة CVSS تبلغ 9.0 أو أعلى تؤثر على بيئة الإنتاج لدى العميل.'
+[05] '1. نطاق الخدمات'
+[06] '1.1 يقدم المزود خدمات مراقبة أمنية وكشف تهديدات واستجابة للحوادث على مدار الساعة طوال أيام الأسبوع، على النحو الموصوف في الملحق أ، بما يتوافق مع إطار عمل الأمن السيبراني الصادر عن NIST.'
+[07] '2. الاستجابة للحوادث والإخطار'
+[08] '2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.'
+[09] '2.2 يقدم المزود تحليلاً خطياً للأسباب الجذرية خلال خمسة (5) أيام عمل من حل أي حادث أمني مصنف كخطير أو حرج.'
+[10] '3. الامتثال والتدقيق'
+[11] '3.1 يحافظ المزود على شهادتي SOC 2 Type II وISO/IEC 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق السارية عند الطلب، بحد أقصى مرة واحدة سنوياً.'
+[12] '3.2 يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل.'
+[13] '4. المقاولون من الباطن والمعالجون الفرعيون'
+[14] '4.1 لا يجوز للمزود التعاقد مع مقاول من الباطن جديد له إمكانية الوصول إلى أنظمة العميل أو بياناته دون موافقة خطية مسبقة من العميل، والتي لا يجوز حجبها دون سبب معقول.'
+[15] '5. المسؤولية والتعويض'
+[16] '5.1 لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من العميل، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من المزود.'
+[17] '5.2 يعوض المزود العميل عن مطالبات الأطراف الثالثة والغرامات التنظيمية والتكاليف المعقولة لمراقبة الائتمان والتحقيق الجنائي الناشئة عن حادث أمني يُعزى إلى إخلال المزود بهذه الاتفاقية.'
+[18] '6. المدة والإنهاء'
+[19] '6.1 مدة هذه الاتفاقية الأولية ثلاث (3) سنوات. يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً. يجوز للعميل الإنهاء فوراً، دون غرامة، إذا تعرض المزود لحادث أمني يؤثر على بيانات العميل نتيجة إهماله الجسيم.'
+[20] 'التوقيعات'
+
+TITLE ZONE
+------------------------------------------------------------------------------------------------------------------------
+LENGTH: 1200
+'اتفاقية خدمات الأمن السيبراني المُدارة أُبرمت اتفاقية خدمات الأمن السيبراني المُدارة هذه ("الاتفاقية") بتاريخ 6 يوليو 2026، بين شركة obsidian threat defense llc، وهي شركة ذات مسؤولية محدودة بموجب قوانين ولاية ديلاوير ("المزود")، وبنك cascadia regional bank، وهو بنك مرخص من ولاية واشنطن ("العميل")، لتقديم خدمات الكشف والاستجابة المُدارة وإدارة الثغرات والاستجابة للحوادث ("الخدمات"). "الحادث الأمني" يعني أي وصول غير مصرح به مؤكد، أو اكتساب أو إفصاح أو تعديل أو إتلاف غير مصرح به، لأنظمة العميل أو بياناته. "الثغرة الحرجة" تعني ثغرة أمنية بدرجة cvss تبلغ 9.0 أو أعلى تؤثر على بيئة الإنتاج لدى العميل. 1. نطاق الخدمات 1.1 يقدم المزود خدمات مراقبة أمنية وكشف تهديدات واستجابة للحوادث على مدار الساعة طوال أيام الأسبوع، على النحو الموصوف في الملحق أ، بما يتوافق مع إطار عمل الأمن السيبراني الصادر عن nist. 2. الاستجابة للحوادث والإخطار 2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها. 2.2 يقدم المزود تحليلاً خطياً للأسباب الجذرية خلال خمسة (5) أيام عمل من حل أي حادث أمني مصنف كخطير أو حرج. 3. الامتثال والتدقيق 3.1 يحافظ المزود على شهادتي soc 2 type ii وiso/iec 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق ا'
+
+DETECTOR RESULT
+------------------------------------------------------------------------------------------------------------------------
+{
+  "family": "Cybersecurity",
+  "confidence": "high",
+  "co_occurring_families": [],
+  "scores": {
+    "MSA": 30,
+    "Cybersecurity": 141,
+    "Outsourcing": 1,
+    "Real Estate": 1,
+    "Insurance": 6,
+    "Construction": 9,
+    "Manufacturing": 8,
+    "Power of Attorney": 1,
+    "Corporate Resolution": 1
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "العميل",
+        "count": 10,
+        "weight": 1,
+        "points": 10
+      },
+      {
+        "term": "العميل",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "soc 2",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "soc 2",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "الأمن السيبراني",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "الأمن السيبراني",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "حادث أمني",
+        "count": 5,
+        "weight": 3,
+        "points": 15
+      },
+      {
+        "term": "حادث أمني",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "ثغرة أمنية",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "ثغرة أمنية",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "الاستجابة للحوادث",
+        "count": 2,
+        "weight": 3,
+        "points": 6
+      },
+      {
+        "term": "الاستجابة للحوادث",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "مراقبة أمنية",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "مراقبة أمنية",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "أمن",
+        "count": 12,
+        "weight": 1,
+        "points": 12
+      },
+      {
+        "term": "أمن",
+        "count": 8,
+        "weight": 5,
+        "points": 40,
+        "zone": "title"
+      }
+    ],
+    "Outsourcing": [
+      {
+        "term": "مستويات الخدمة",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Real Estate": [
+      {
+        "term": "مرافق",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Insurance": [
+      {
+        "term": "خطر",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      },
+      {
+        "term": "خطر",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Construction": [
+      {
+        "term": "مقاول",
+        "count": 2,
+        "weight": 3,
+        "points": 6
+      },
+      {
+        "term": "مقاول من الباطن",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Manufacturing": [
+      {
+        "term": "إنتاج",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "إنتاج",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Power of Attorney": [
+      {
+        "term": "توقيع",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Corporate Resolution": [
+      {
+        "term": "موافقة",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "Cybersecurity",
+      141
+    ],
+    [
+      "MSA",
+      30
+    ],
+    [
+      "Construction",
+      9
+    ],
+    [
+      "Manufacturing",
+      8
+    ],
+    [
+      "Insurance",
+      6
+    ],
+    [
+      "Outsourcing",
+      1
+    ],
+    [
+      "Real Estate",
+      1
+    ],
+    [
+      "Power of Attorney",
+      1
+    ],
+    [
+      "Corporate Resolution",
+      1
+    ]
+  ]
+}
+
+RANKED SUMMARY
+------------------------------------------------------------------------------------------------------------------------
+Cybersecurity: 141
+MSA: 30
+Construction: 9
+Manufacturing: 8
+Insurance: 6
+Outsourcing: 1
+Real Estate: 1
+Power of Attorney: 1
+Corporate Resolution: 1
+
+TOP FAMILY EVIDENCE
+------------------------------------------------------------------------------------------------------------------------
+
+FAMILY: Cybersecurity
+{"term": "soc 2", "count": 1, "weight": 3, "points": 3}
+{"term": "soc 2", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "الأمن السيبراني", "count": 3, "weight": 3, "points": 9}
+{"term": "الأمن السيبراني", "count": 3, "weight": 5, "points": 15, "zone": "title"}
+{"term": "حادث أمني", "count": 5, "weight": 3, "points": 15}
+{"term": "حادث أمني", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "ثغرة أمنية", "count": 1, "weight": 3, "points": 3}
+{"term": "ثغرة أمنية", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "الاستجابة للحوادث", "count": 2, "weight": 3, "points": 6}
+{"term": "الاستجابة للحوادث", "count": 2, "weight": 5, "points": 10, "zone": "title"}
+{"term": "مراقبة أمنية", "count": 1, "weight": 3, "points": 3}
+{"term": "مراقبة أمنية", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+{"term": "أمن", "count": 12, "weight": 1, "points": 12}
+{"term": "أمن", "count": 8, "weight": 5, "points": 40, "zone": "title"}
+
+FAMILY: MSA
+{"term": "العميل", "count": 10, "weight": 1, "points": 10}
+{"term": "العميل", "count": 4, "weight": 5, "points": 20, "zone": "title"}
+
+FAMILY: Construction
+{"term": "مقاول", "count": 2, "weight": 3, "points": 6}
+{"term": "مقاول من الباطن", "count": 1, "weight": 3, "points": 3}
+
+FAMILY: Manufacturing
+{"term": "إنتاج", "count": 1, "weight": 3, "points": 3}
+{"term": "إنتاج", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+
+FAMILY: Insurance
+{"term": "خطر", "count": 1, "weight": 1, "points": 1}
+{"term": "خطر", "count": 1, "weight": 5, "points": 5, "zone": "title"}
+
+========================================================================================================================
+END
+========================================================================================================================

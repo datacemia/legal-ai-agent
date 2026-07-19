@@ -1,0 +1,982 @@
+{
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": 0.8333,
+      "fr": null,
+      "ar": null,
+      "macro": 0.8333
+    },
+    "mechanism_precision": {
+      "en": 0.4444,
+      "fr": null,
+      "ar": null,
+      "macro": 0.4444
+    },
+    "mechanism_recall": {
+      "en": 0.2857,
+      "fr": null,
+      "ar": null,
+      "macro": 0.2857
+    },
+    "actor_accuracy": {
+      "en": 0.3333,
+      "fr": null,
+      "ar": null,
+      "macro": 0.3333
+    },
+    "object_accuracy": {
+      "en": 0.0,
+      "fr": null,
+      "ar": null,
+      "macro": 0.0
+    },
+    "trigger_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "polarity_accuracy": {
+      "en": 0.3333,
+      "fr": null,
+      "ar": null,
+      "macro": 0.3333
+    },
+    "procedural_state_accuracy": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    }
+  },
+  "per_semantic_family": {
+    "CONSENT": {
+      "mechanism_precision": 0.3333,
+      "mechanism_recall": 0.3333,
+      "required_mechanisms": 3
+    },
+    "FINANCIAL_REPORTING": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 1
+    },
+    "GOVERNANCE": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 0.5,
+      "required_mechanisms": 2
+    },
+    "INVESTOR_RIGHTS": {
+      "mechanism_precision": 0.0,
+      "mechanism_recall": 0.0,
+      "required_mechanisms": 1
+    },
+    "SHARE_TRANSFER": {
+      "mechanism_precision": 0.3333,
+      "mechanism_recall": 0.1429,
+      "required_mechanisms": 7
+    }
+  },
+  "grounding": {
+    "GROUNDED": 3,
+    "UNSUPPORTED": 7
+  },
+  "cross_language_equivalence": {
+    "EN-FR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "EN-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "FR-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    }
+  },
+  "observed_failure_regressions": {
+    "LIABILITY → GOVERNING LAW": {
+      "result": "FAIL",
+      "expected": [
+        "LIABILITY_CAP"
+      ],
+      "forbidden": [
+        "FORUM_SELECTION",
+        "GOVERNING_LAW"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "02_5_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "FINANCIAL REPORTING → BOARD / DEADLOCK": {
+      "result": "FAIL",
+      "expected": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "forbidden": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "actual_by_language": {
+        "en": [
+          "FINANCIAL_REPORTING_OBLIGATION"
+        ]
+      },
+      "pass_by_language": {
+        "en": true
+      },
+      "missing_languages": [
+        "ar",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_4_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "BOARD → SUBCONTRACTING": {
+      "result": "FAIL",
+      "expected": [
+        "BOARD_COMPOSITION"
+      ],
+      "forbidden": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "actual_by_language": {
+        "en": [
+          "BOARD_COMPOSITION"
+        ]
+      },
+      "pass_by_language": {
+        "en": true
+      },
+      "missing_languages": [
+        "ar",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "DRAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "forbidden": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "actual_by_language": {
+        "en": []
+      },
+      "pass_by_language": {
+        "en": false
+      },
+      "missing_languages": [
+        "ar",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "TAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "PARTICIPATION_OPTION",
+        "TAG_ALONG_RIGHT"
+      ],
+      "forbidden": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "actual_by_language": {
+        "en": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ]
+      },
+      "pass_by_language": {
+        "en": false
+      },
+      "missing_languages": [
+        "ar",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_2_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "AUTOMATIC TERMINATION": {
+      "result": "FAIL",
+      "expected": [
+        "AUTOMATIC_TERMINATION"
+      ],
+      "forbidden": [
+        "NOTICE_PREREQUISITE"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": []
+    },
+    "INVESTOR PRIOR WRITTEN CONSENT": {
+      "result": "FAIL",
+      "expected": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT"
+      ],
+      "forbidden": [],
+      "actual_by_language": {
+        "en": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION",
+          "RESERVED_MATTERS_CONSENT"
+        ]
+      },
+      "pass_by_language": {
+        "en": false
+      },
+      "missing_languages": [
+        "ar",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_6_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "CONFIDENTIALITY MULTI-MECHANISM": {
+      "result": "FAIL",
+      "expected": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "01_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    }
+  },
+  "critical_failures": [],
+  "high_failures": [
+    {
+      "fixture_id": "14_3_1_en",
+      "language": "en",
+      "source_text": "3.1 If holders of a majority of the outstanding Preferred Stock and a majority of the board approve a sale of the Company, all other shareholders shall be required to vote in favor of and consent to such transaction (\"Drag-Along Right\"), subject to customary protections regarding consideration and representations.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "DRAG_ALONG_RIGHT",
+          "MANDATORY_PARTICIPATION",
+          "OBLIGATION_TO_CONSENT",
+          "OBLIGATION_TO_VOTE_IN_FAVOR"
+        ],
+        "relations": [
+          {
+            "concept": "DRAG_ALONG_RIGHT",
+            "obligated_actor": "OTHER_SHAREHOLDERS",
+            "action": "VOTE_IN_FAVOR_AND_CONSENT",
+            "polarity": "MANDATORY_PARTICIPATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "share_transfer_rights",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+        "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+      ]
+    },
+    {
+      "fixture_id": "14_3_2_en",
+      "language": "en",
+      "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\").",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PARTICIPATION_OPTION",
+          "SAME_TERMS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "TAG_ALONG_RIGHT",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "RIGHT"
+          },
+          {
+            "concept": "PARTICIPATION_OPTION",
+            "right_holder": "INVESTOR",
+            "action": "PARTICIPATE_IN_SALE",
+            "polarity": "OPTION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "ASSIGNMENT_RESTRICTION",
+          "EXPRESS_RIGHT",
+          "TAG_ALONG_RIGHT"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "SHARE_TRANSFER_TRIGGER",
+            "related_mechanism": "TAG_ALONG_RIGHT"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "EXPRESS_RIGHT",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+        "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_2_1_en",
+      "language": "en",
+      "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PREEMPTIVE_RIGHT"
+        ],
+        "relations": [
+          {
+            "concept": "PREEMPTIVE_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "NEW_SECURITIES",
+            "polarity": "RIGHT"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "anti_dilution_preemptive_rights",
+        "mechanisms": [
+          "EXPRESS_RIGHT"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "EXPRESS_RIGHT",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_1_1_en",
+      "language": "en",
+      "source_text": "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "APPOINTMENT_RIGHT",
+          "BOARD_COMPOSITION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "BOARD_COMPOSITION"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "MEMBERS",
+            "semantic_role": "BOARD_SIZE",
+            "related_mechanism": "BOARD_COMPOSITION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "BOARD_COMPOSITION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT"
+      ]
+    },
+    {
+      "fixture_id": "14_6_1_en",
+      "language": "en",
+      "source_text": "6.1 For so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, the Company shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebtedness in excess of $2,000,000, other than in the ordinary course of business.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "INVESTOR_CONSENT_RIGHT",
+          "RESERVED_MATTER"
+        ],
+        "relations": [
+          {
+            "concept": "INVESTOR_CONSENT_RIGHT",
+            "right_holder": "INVESTOR",
+            "object": "RESERVED_MATTER",
+            "polarity": "CONSENT_RIGHT"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "governance",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE",
+          "PROHIBITION",
+          "RESERVED_MATTERS_CONSENT"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": [
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          },
+          {
+            "value": 5,
+            "unit": "PERCENT",
+            "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+            "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+          },
+          {
+            "value": 2000000,
+            "unit": "USD",
+            "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+            "related_mechanism": "CONSENT_PREREQUISITE"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "RESERVED_MATTERS_CONSENT",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PROHIBITION",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+        "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+      ]
+    }
+  ],
+  "failure_count": 5,
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_clause_count": 105,
+  "gold_clauses_by_language": {
+    "en": 35,
+    "fr": 35,
+    "ar": 35
+  },
+  "publication_baseline_persisted_json_check": {
+    "expected_runs": 45,
+    "completed_runs": 0,
+    "errors": 0,
+    "integrity_failures": 0,
+    "total_receipts_observed_in_json": 0,
+    "total_blocked_observed_in_json": 0,
+    "hash_mismatch_count": 0,
+    "post_gate_mutation_count": 0,
+    "final_result": "FAIL",
+    "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts."
+  },
+  "before_after_metric_comparison": {
+    "primary_type_support_rate": {
+      "en": {
+        "baseline": 0.8333,
+        "after_fix": 0.8333,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.8333,
+        "after_fix": 0.8333,
+        "delta": 0.0
+      }
+    },
+    "mechanism_precision": {
+      "en": {
+        "baseline": 0.4444,
+        "after_fix": 0.4444,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.4444,
+        "after_fix": 0.4444,
+        "delta": 0.0
+      }
+    },
+    "mechanism_recall": {
+      "en": {
+        "baseline": 0.2857,
+        "after_fix": 0.2857,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.2857,
+        "after_fix": 0.2857,
+        "delta": 0.0
+      }
+    },
+    "actor_accuracy": {
+      "en": {
+        "baseline": 0.3333,
+        "after_fix": 0.3333,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.3333,
+        "after_fix": 0.3333,
+        "delta": 0.0
+      }
+    },
+    "object_accuracy": {
+      "en": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      }
+    },
+    "trigger_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    },
+    "polarity_accuracy": {
+      "en": {
+        "baseline": 0.3333,
+        "after_fix": 0.3333,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.3333,
+        "after_fix": 0.3333,
+        "delta": 0.0
+      }
+    },
+    "procedural_state_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    }
+  },
+  "baseline_path": "tmp_audit_candidates\\14_Shareholders_Agreement\\frozen_gold_baseline_metrics.json"
+}

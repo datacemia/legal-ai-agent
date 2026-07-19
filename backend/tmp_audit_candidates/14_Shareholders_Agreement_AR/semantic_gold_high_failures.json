@@ -1,0 +1,282 @@
+[
+  {
+    "fixture_id": "14_3_1_ar",
+    "language": "ar",
+    "source_text": "3.1 إذا وافق حاملو أغلبية الأسهم الممتازة القائمة وأغلبية المجلس على بيع الشركة، يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها (\"حق التنازل الإلزامي\")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_CONSENT",
+        "OBLIGATION_TO_VOTE_IN_FAVOR"
+      ],
+      "relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "assignment",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "language": "ar",
+    "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\").",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_2_1_ar",
+    "language": "ar",
+    "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "anti_dilution_preemptive_rights",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "APPOINTMENT_RIGHT",
+        "BOARD_COMPOSITION"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "BOARD_COMPOSITION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "BOARD_COMPOSITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_6_1_ar",
+    "language": "ar",
+    "source_text": "6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT",
+        "RESERVED_MATTER"
+      ],
+      "relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "payment",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+    ]
+  }
+]

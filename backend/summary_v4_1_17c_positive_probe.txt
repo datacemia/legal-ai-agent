@@ -1,0 +1,12 @@
+
+LANG: en
+TEXT: This Agreement has an initial term of three (3) years.
+RESULT: 'three (3) years'
+
+LANG: fr
+TEXT: Le présent contrat a une durée initiale de trois (3) ans.
+RESULT: 'trois (3) ans'
+
+LANG: ar
+TEXT: تكون مدة هذه الاتفاقية الأولية ثلاث (3) سنوات.
+RESULT: 'ثلاث (3) سنوات'

@@ -1,0 +1,62 @@
+[
+  {
+    "fixture_id": "12_2_1_en",
+    "language": "en",
+    "source_text": "2.1 As security for Borrower's obligations under this Agreement, Borrower grants Lender a first-priority security interest in the Collateral, and shall execute all documents reasonably necessary to perfect such security interest, including UCC financing statements.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "security_interest",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:SECURITY_INTEREST"
+    ]
+  },
+  {
+    "fixture_id": "12_5_1_en",
+    "language": "en",
+    "source_text": "5.1 Borrower's obligations under this Agreement are guaranteed by Trailhead Holdings Inc., the parent company of Borrower, pursuant to a separate Guarantee Agreement executed concurrently herewith.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "GUARANTEE"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "guarantee",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:GUARANTEE"
+    ]
+  }
+]

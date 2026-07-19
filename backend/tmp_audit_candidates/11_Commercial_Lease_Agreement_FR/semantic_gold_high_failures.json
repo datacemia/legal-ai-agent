@@ -1,0 +1,118 @@
+[
+  {
+    "fixture_id": "11_2_1_fr",
+    "language": "fr",
+    "source_text": "2.1 Le Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PAY_FREQUENCY",
+        "RENT_OBLIGATION"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "payment",
+      "mechanisms": [
+        "PAYMENT_OBLIGATION",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        },
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:RENT_OBLIGATION"
+    ]
+  },
+  {
+    "fixture_id": "11_5_1_fr",
+    "language": "fr",
+    "source_text": "5.1 Le Preneur ne pourra céder le présent Bail ni sous-louer les Locaux, en tout ou partie, sans le consentement écrit préalable du Bailleur, lequel ne pourra être refusé, conditionné ou retardé sans motif raisonnable.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination_for_convenience",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:ASSIGNMENT_RESTRICTION"
+    ]
+  }
+]

@@ -309,6 +309,7 @@ _ACTION_BY_CONCEPT = {
     "PURCHASE_ORDER_SUBMISSION": "SUBMIT_PURCHASE_ORDER",
     "INSPECTION_RIGHT": "INSPECT",
     "TAG_ALONG_RIGHT": "PARTICIPATE_IN_SALE",
+    "DRAG_ALONG_RIGHT": "VOTE_IN_FAVOR_AND_CONSENT",
 
     # Governance
     "RESERVED_MATTER": "OBTAIN_REQUIRED_CONSENT",
@@ -327,6 +328,9 @@ _ACTION_BY_CONCEPT = {
     "EXCLUDED_DAMAGES": "EXCLUDE_DAMAGE_CATEGORY",
     "NON_COMPETE": "COMPETE",
     "TRANSITION_PLAN": "IMPLEMENT_TRANSITION_PLAN",
+    "PREEMPTIVE_RIGHT": "PURCHASE_NEW_SECURITIES",
+    "PARTICIPATION_OPTION": "PARTICIPATE_IN_FINANCING",
+    "INVESTOR_CONSENT_RIGHT": "REQUIRE_INVESTOR_CONSENT",
 }
 
 
@@ -345,6 +349,14 @@ def normalize_relation_polarity(
     raw_polarity: str | None,
 ) -> str:
     """Normalize polarity using concept semantics after source grounding."""
+    if normalized_concept in {
+        "PREEMPTIVE_RIGHT",
+        "INVESTOR_CONSENT_RIGHT",
+    }:
+        return "RIGHT"
+
+    if normalized_concept == "PARTICIPATION_OPTION":
+        return "OPTION"
     if normalized_concept == "PURPOSE_LIMITATION":
         return "OBLIGATION"
 
@@ -392,6 +404,9 @@ def normalize_relation_polarity(
         "PURCHASE_ORDER_SUBMISSION",
     }:
         return "OBLIGATION"
+
+    if normalized_concept == "DRAG_ALONG_RIGHT":
+        return "MANDATORY_PARTICIPATION"
 
     if normalized_concept in {
         "INSPECTION_RIGHT",
@@ -2066,6 +2081,396 @@ def _explicit_right_holder(
     return None
 
 
+_PATCH4B2_INVESTOR_RIGHTS_V1 = True
+
+
+def _patch4b2_matches_any(
+    text: str,
+    patterns: tuple[str, ...],
+) -> bool:
+    return any(
+        re.search(
+            pattern,
+            text,
+            flags=re.IGNORECASE,
+        )
+        for pattern in patterns
+    )
+
+
+def _patch4b2_detect_investor_right(
+    local_text: str,
+) -> str | None:
+    """Detect three investor-right concepts from EN/FR/AR semantics.
+
+    Each result requires several converging legal indicators. An isolated
+    occurrence of investor, securities, participation, or consent is never
+    sufficient.
+    """
+    text = _normalize_arabic_role_context(
+        str(local_text or "")
+    )
+
+    if not text.strip():
+        return None
+
+    has_investor = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\binvestor\b",
+            r"\bshareholder\b",
+
+            # French
+            r"\binvestisseur\b",
+            r"\bactionnaire\b",
+
+            # Arabic
+            r"(?:المستثمر|المساهم)",
+        ),
+    )
+
+    if not has_investor:
+        return None
+
+    has_right = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\bshall\s+have\s+the\s+right\s+to\b",
+            r"\bhas\s+the\s+right\s+to\b",
+            r"\bis\s+entitled\s+to\b",
+            r"\bright\s+to\b",
+
+            # French
+            r"\baura\s+le\s+droit\s+de\b",
+            r"\ba\s+le\s+droit\s+de\b",
+            r"\best\s+en\s+droit\s+de\b",
+            r"\bdroit\s+de\b",
+
+            # Arabic
+            r"(?:يحق\s+ل|له\s+الحق\s+في|للمستثمر\s+الحق\s+في)",
+        ),
+    )
+
+    has_acquisition = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\b(?:purchase|acquire|buy|subscribe\s+for)\b",
+
+            # French
+            r"\b(?:acheter|acqu[eé]rir|souscrire\s+[àa])\b",
+
+            # Arabic
+            r"(?:شراء|اقتناء|الاكتتاب\s+في)",
+        ),
+    )
+
+    has_proportionality = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\bpro[\s-]?rata\b",
+            r"\bproportionate\s+share\b",
+            r"\bproportional\s+share\b",
+
+            # French
+            r"\bquote-part\s+proportionnelle\b",
+            r"\bau\s+prorata\b",
+            r"\bproportionnellement\b",
+
+            # Arabic
+            r"(?:حصته\s+التناسبية|حصتها\s+التناسبية|"
+            r"حصتهم\s+التناسبية|بالتناسب|حصة\s+نسبية)",
+        ),
+    )
+
+    has_new_securities = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\b(?:new|additional|newly\s+issued)\s+"
+            r"(?:securities|shares|stock|equity|instruments?)\b",
+            r"\b(?:securities|shares|stock)\s+"
+            r"(?:issued|offered)\s+by\s+(?:the\s+)?company\b",
+
+            # French
+            r"\b(?:nouveaux?|nouvelles?|additionnels?)\s+"
+            r"(?:titres?|actions?|valeurs?\s+mobili[eè]res?)\b",
+            r"\b(?:titres?|actions?)\s+[eé]mis(?:es)?\s+"
+            r"par\s+(?:la\s+)?soci[eé]t[eé]\b",
+
+            # Arabic
+            r"(?:أوراق\s+مالية\s+جديدة|أسهم\s+جديدة|"
+            r"حصص\s+جديدة|أدوات\s+مالية\s+جديدة)",
+            r"(?:أوراق\s+مالية|أسهم).{0,50}"
+            r"(?:تصدرها|تطرحها)\s+الشركة",
+        ),
+    )
+
+    # Legal structure:
+    # investor + legal right + acquisition + proportional allocation
+    # + newly issued securities.
+    if (
+        has_right
+        and has_acquisition
+        and has_proportionality
+        and has_new_securities
+    ):
+        return "PREEMPTIVE_RIGHT"
+
+    has_optionality = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\bmay\s+(?:elect|choose)\s+to\b",
+            r"\boption\s+to\b",
+            r"\bmay\s+participate\b",
+            r"\bentitled\s+to\s+participate\b",
+
+            # French
+            r"\b(?:peut|pourra)\s+choisir\s+de\b",
+            r"\bfacult[eé]\s+de\b",
+            r"\boption\s+de\b",
+            r"\b(?:peut|pourra)\s+participer\b",
+            r"\bdroit\s+de\s+participer\b",
+
+            # Arabic
+            r"(?:يجوز\s+له\s+اختيار|يحق\s+له\s+اختيار|"
+            r"يحق\s+للمستثمر\s+اختيار|خيار\s+المشاركة|"
+            r"يجوز\s+للمستثمر\s+المشاركة|"
+            r"يحق\s+للمستثمر\s+المشاركة)",
+        ),
+    )
+
+    has_participation = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\b(?:participate|co-invest|subscribe|invest)\b",
+
+            # French
+            r"\b(?:participer|co-investir|souscrire|investir)\b",
+
+            # Arabic
+            r"(?:المشاركة|يشارك|الاستثمار|يستثمر|الاكتتاب)",
+        ),
+    )
+
+    has_financing_event = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\b(?:future|subsequent|next)\s+"
+            r"(?:financing|financing\s+round|equity\s+financing)\b",
+            r"\b(?:capital\s+raising|new\s+issuance)\b",
+
+            # French
+            r"\b(?:financement|tour\s+de\s+financement)\s+"
+            r"(?:futur|ult[eé]rieur|suivant)\b",
+            r"\b(?:lev[eé]e\s+de\s+fonds|"
+            r"augmentation\s+de\s+capital|nouvelle\s+[eé]mission)\b",
+
+            # Arabic
+            r"(?:جولة\s+تمويل\s+مستقبلية|"
+            r"جولة\s+التمويل\s+القادمة|تمويل\s+مستقبلي|"
+            r"تمويل\s+لاحق|زيادة\s+رأس\s+المال|إصدار\s+جديد)",
+        ),
+    )
+
+    # Legal structure:
+    # investor + optional choice + participation/investment action
+    # + defined future financing event.
+    if (
+        has_optionality
+        and has_participation
+        and has_financing_event
+    ):
+        return "PARTICIPATION_OPTION"
+
+    has_prior_investor_consent = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\bwithout\s+(?:the\s+)?investor['’]s\s+"
+            r"prior\s+written\s+consent\b",
+            r"\bprior\s+written\s+consent\s+of\s+"
+            r"(?:the\s+)?investor\b",
+
+            # French
+            r"\bsans\s+le\s+consentement\s+[eé]crit\s+"
+            r"pr[eé]alable\s+de\s+l['’]investisseur\b",
+            r"\bconsentement\s+[eé]crit\s+pr[eé]alable\s+"
+            r"de\s+l['’]investisseur\b",
+
+            # Arabic
+            r"(?:دون\s+موافقة\s+خطية\s+مسبقة\s+من\s+المستثمر)",
+            r"(?:الموافقة\s+الخطية\s+المسبقة\s+للمستثمر)",
+        ),
+    )
+
+    has_company_prohibition = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\b(?:the\s+)?company\s+shall\s+not\b",
+            r"\b(?:the\s+)?company\s+may\s+not\b",
+            r"\bno\s+action\s+shall\s+be\s+taken\b",
+
+            # French
+            r"\b(?:la\s+)?soci[eé]t[eé]\s+ne\s+"
+            r"(?:pourra|peut|doit)\s+pas\b",
+            r"\baucune\s+d[eé]cision\s+ne\s+pourra\b",
+
+            # Arabic
+            r"(?:لا\s+يجوز\s+للشركة|لا\s+يحق\s+للشركة|"
+            r"لا\s+تتخذ\s+الشركة)",
+        ),
+    )
+
+    has_reserved_action = _patch4b2_matches_any(
+        text,
+        (
+            # English
+            r"\b(?:amend|modify)\b.{0,100}"
+            r"\b(?:charter|articles|certificate\s+of\s+incorporation|"
+            r"constitutional\s+documents?)\b",
+            r"\b(?:authorize|create|issue)\b.{0,100}"
+            r"\b(?:new\s+class|senior|preferred)\b.{0,60}"
+            r"\b(?:stock|shares|securities)\b",
+            r"\b(?:incur|assume)\b.{0,60}\bindebtedness\b",
+            r"\b(?:merger|liquidation|dissolution|"
+            r"sale\s+of\s+(?:all\s+or\s+substantially\s+all\s+)?assets)\b",
+
+            # French
+            r"\b(?:modifier|amender)\b.{0,100}"
+            r"\b(?:statuts?|acte\s+constitutif|"
+            r"documents?\s+constitutifs?)\b",
+            r"\b(?:autoriser|cr[eé]er|[eé]mettre)\b.{0,100}"
+            r"\b(?:nouvelle\s+cat[eé]gorie|rang\s+sup[eé]rieur|"
+            r"actions?\s+pr[eé]f[eé]rentielles?)\b",
+            r"\b(?:contracter|assumer)\b.{0,60}"
+            r"\b(?:endettement|dette)\b",
+            r"\b(?:fusion|liquidation|dissolution|"
+            r"cession\s+d['’]actifs)\b",
+
+            # Arabic
+            r"(?:تعديل).{0,100}"
+            r"(?:عقد\s+التأسيس|النظام\s+الأساسي|"
+            r"الوثائق\s+التأسيسية)",
+            r"(?:إصدار|إنشاء|اعتماد).{0,100}"
+            r"(?:فئة\s+جديدة|أسهم\s+ممتازة|ذات\s+أولوية)",
+            r"(?:تحمل|إنشاء).{0,60}(?:مديونية|دين)",
+            r"(?:اندماج|تصفية|حل\s+الشركة|بيع\s+الأصول)",
+        ),
+    )
+
+    # Legal structure:
+    # company prohibition + investor's prior written consent
+    # + substantive reserved corporate action.
+    if (
+        has_prior_investor_consent
+        and has_company_prohibition
+        and has_reserved_action
+    ):
+        return "INVESTOR_CONSENT_RIGHT"
+
+
+    # PATCH 4B.2 ARABIC INVESTOR CONSENT FALLBACK
+    #
+    # Conservative detection of reserved matters requiring an investor's
+    # prior consent. All four semantic conditions are required to prevent
+    # generic consent clauses from being classified as investor rights.
+    arabic_consent_text = _normalize_arabic_role_context(
+        str(text or "")
+    )
+
+    arabic_controlled_entity = re.search(
+        r"(?:"
+        r"الشركة|"
+        r"المؤسسة|"
+        r"الكيان|"
+        r"الشركة\s+التابعة|"
+        r"مجلس\s+الإدارة"
+        r")",
+        arabic_consent_text,
+        flags=re.IGNORECASE,
+    )
+
+    arabic_prior_restriction = re.search(
+        r"(?:"
+        r"لا\s+يجوز|"
+        r"لا\s+يحق|"
+        r"يحظر|"
+        r"يشترط|"
+        r"يتطلب"
+        r")",
+        arabic_consent_text,
+        flags=re.IGNORECASE,
+    )
+
+    arabic_investor_consent = re.search(
+        r"(?:"
+        r"(?:دون|من\s+دون|بدون)\s+"
+        r"موافقة"
+        r"(?:\s+خطية)?"
+        r"(?:\s+مسبقة)?"
+        r"(?:\s+صريحة)?"
+        r"\s+(?:من\s+)?"
+        r"(?:المستثمر|المستثمرين|المساهم|المساهمين)"
+        r"|"
+        r"موافقة"
+        r"(?:\s+خطية)?"
+        r"(?:\s+مسبقة)?"
+        r"(?:\s+صريحة)?"
+        r"\s+(?:للمستثمر|للمستثمرين|للمساهم|للمساهمين)"
+        r")",
+        arabic_consent_text,
+        flags=re.IGNORECASE,
+    )
+
+    arabic_reserved_matter = re.search(
+        r"(?:"
+        r"تعديل|"
+        r"تغيير|"
+        r"استبدال|"
+        r"إلغاء|"
+        r"اصدار|"
+        r"إصدار|"
+        r"زيادة|"
+        r"تخفيض|"
+        r"تحمل\s+(?:أي\s+)?مديونية|"
+        r"المديونية|"
+        r"الاقتراض|"
+        r"اقتراض|"
+        r"بيع|"
+        r"التصرف|"
+        r"نقل|"
+        r"اندماج|"
+        r"استحواذ|"
+        r"حل|"
+        r"تصفية|"
+        r"توزيع\s+أرباح|"
+        r"عقد\s+التأسيس|"
+        r"النظام\s+الأساسي|"
+        r"رأس\s+المال"
+        r")",
+        arabic_consent_text,
+        flags=re.IGNORECASE,
+    )
+
+    if (
+        arabic_controlled_entity is not None
+        and arabic_prior_restriction is not None
+        and arabic_investor_consent is not None
+        and arabic_reserved_matter is not None
+    ):
+        return "INVESTOR_CONSENT_RIGHT"
+
+    return None
+
+
 def _contextual_normalized_concept(
     raw_kind: str | None,
     normalized_concept: str,
@@ -2074,6 +2479,36 @@ def _contextual_normalized_concept(
     """Refine a broad canonical mechanism using source-grounded local semantics."""
     kind = str(raw_kind or "").strip().upper()
 
+    # Refine only broad or ambiguous concepts. Precise concepts already
+    # validated by the existing pipeline are preserved unchanged.
+    detected_investor_right = (
+        _patch4b2_detect_investor_right(
+            local_text
+        )
+    )
+
+    refinable_concepts = {
+        "",
+        UNKNOWN,
+        "OTHER",
+        "RIGHT",
+        "OPTION",
+        "OPTIONAL_RIGHT",
+        "PARTICIPATION_RIGHT",
+        "EQUITY_RIGHT",
+        "SHARE_PURCHASE_RIGHT",
+        "CONSENT_PREREQUISITE",
+        "RESERVED_MATTER",
+        "GOVERNANCE_RIGHT",
+    }
+
+    if (
+        detected_investor_right is not None
+        and normalized_concept in refinable_concepts
+    ):
+        return detected_investor_right
+
+    # Preserve the pre-existing assignment-transfer refinement.
     if kind != "ASSIGNMENT_TRANSFER":
         return normalized_concept
 
@@ -2108,44 +2543,274 @@ def _contextual_normalized_concept(
     return normalized_concept
 
 
+def _normalized_object(
+    normalized_concept: str,
+    local_text: str,
+    relation_text: str,
+) -> str | None:
+    """Resolve legal objects using conservative concept-local evidence.
+
+    Rules are multilingual and based on combinations of legal-semantic
+    indicators. A generic isolated word should not be sufficient for the
+    new service, lease, or premises classifications.
+    """
+    if normalized_concept == "PREEMPTIVE_RIGHT":
+        return "NEW_SECURITIES"
+
+    if normalized_concept == "INVESTOR_CONSENT_RIGHT":
+        return "RESERVED_MATTER"
+    text = str(
+        local_text
+        or relation_text
+        or ""
+    )
+
+    def matches_any(
+        value: str,
+        patterns: tuple[str, ...],
+    ) -> bool:
+        return any(
+            re.search(
+                pattern,
+                value,
+                flags=re.IGNORECASE,
+            )
+            for pattern in patterns
+        )
+
+    # Existing high-confidence object resolutions.
+    concept_patterns: dict[
+        str,
+        tuple[
+            str,
+            tuple[str, ...],
+        ],
+    ] = {
+        "CONFIDENTIALITY_OBLIGATION": (
+            "CONFIDENTIAL_INFORMATION",
+            (
+                r"\bconfidential\s+information\b",
+                r"\binformations?\s+confidentielles?\b",
+                r"(?:المعلومات\s+السرية)",
+            ),
+        ),
+        "SECURITY_INTEREST": (
+            "COLLATERAL",
+            (
+                r"\b(?:collateral|security\s+interest)\b",
+                r"\b(?:s[uû]ret[eé]|garantie|"
+                r"bien\s+donn[eé]\s+en\s+garantie)s?\b",
+                r"(?:الضمانات|الضمان|الأصول\s+المرهونة)",
+            ),
+        ),
+    }
+
+    if normalized_concept == "LICENSE_GRANT":
+        # Software wording is independently strong and preserves the
+        # previously validated LICENSED_SOFTWARE behavior.
+        software_patterns = (
+            r"\blicensed\s+software\b",
+            r"\bsoftware\b",
+            r"\bcomputer\s+programs?\b",
+            r"\blogiciel\s+sous\s+licence\b",
+            r"\blogiciel\s+conc[eé]d[eé]\b",
+            r"\blogiciels?\b",
+            r"(?:البرنامج\s+المرخ[\u064B-\u065F\u0670]*ص)",
+            r"(?:البرمجيات\s+المرخ[\u064B-\u065F\u0670]*صة)",
+            r"(?:البرنامج|البرمجيات)",
+        )
+
+        if matches_any(
+            text,
+            software_patterns,
+        ):
+            return "LICENSED_SOFTWARE"
+
+        # A hosted service requires converging semantic slots:
+        # 1. grant/right language;
+        # 2. access/use language;
+        # 3. a hosted digital service object.
+        #
+        # The normalized concept already establishes that this is a
+        # LICENSE_GRANT candidate, but we still require contextual evidence
+        # before classifying the object as SERVICE.
+        grant_or_right_patterns = (
+            # English
+            r"\b(?:grant|grants|granted|license|licensed)\b",
+            r"\b(?:right|rights|entitlement)\b",
+
+            # French
+            r"\b(?:accorde|accorder|conc[eè]de|conc[eé]der|licence)\b",
+            r"\b(?:droit|droits|autorisation)\b",
+
+            # Arabic
+            r"(?:يمنح|تمنح|منح|ترخيص|مرخص)",
+            r"(?:حق|حقوق|صلاحية)",
+        )
+
+        access_or_use_patterns = (
+            # English
+            r"\baccess\b",
+            r"\buse\b",
+            r"\baccess\s+(?:to|and)\b.{0,80}\buse\b",
+            r"\buse\b.{0,80}\baccess\b",
+
+            # French
+            r"\bacc[eè]s\b",
+            r"\bacc[eé]der\b",
+            r"\butilis(?:er|ation)\b",
+            r"\bacc[eé]der\b.{0,80}\butilis(?:er|ation)\b",
+
+            # Arabic
+            r"(?:الوصول|الدخول)",
+            r"(?:استخدام|استعمال|يستخدم|استخدامها)",
+            r"(?:الوصول|الدخول).{0,80}"
+            r"(?:استخدام|استعمال|استخدامها)",
+        )
+
+        hosted_object_patterns = (
+            # English
+            r"\b(?:hosted\s+service|cloud\s+service|"
+            r"online\s+service|subscription\s+service)\b",
+            r"\b(?:platform|portal|application|api)\b",
+            r"\bservices?\b",
+
+            # French
+            r"\b(?:service\s+h[eé]berg[eé]|service\s+cloud|"
+            r"service\s+en\s+ligne|service\s+par\s+abonnement)\b",
+            r"\b(?:plateforme|portail|application|api)\b",
+            r"\bservices?\b",
+
+            # Arabic
+            r"(?:خدمة\s+مستضافة|خدمة\s+سحابية|"
+            r"خدمة\s+عبر\s+الإنترنت)",
+            r"(?:المنصة|البوابة|التطبيق|واجهة\s+برمجة)",
+            r"(?:الخدمة|الخدمات)",
+        )
+
+        has_grant_or_right = matches_any(
+            text,
+            grant_or_right_patterns,
+        )
+        has_access_or_use = matches_any(
+            text,
+            access_or_use_patterns,
+        )
+        has_hosted_object = matches_any(
+            text,
+            hosted_object_patterns,
+        )
+
+        if (
+            has_grant_or_right
+            and has_access_or_use
+            and has_hosted_object
+        ):
+            return "SERVICE"
+
+        return None
+
+    if normalized_concept == "ASSIGNMENT_RESTRICTION":
+        # Resolve to lease/premises only when the assignment restriction
+        # includes genuine leasing context. Generic references to "this
+        # agreement" or "this contract" are deliberately insufficient.
+        lease_context_patterns = (
+            # English
+            r"\b(?:lease|leased\s+premises|premises)\b",
+            r"\b(?:tenant|landlord|lessor|lessee)\b",
+            r"\b(?:sublease|sublet|subletting)\b",
+            r"\bassign\b.{0,100}\b(?:lease|premises)\b",
+
+            # French
+            r"\b(?:bail|locaux\s+lou[eé]s?|locaux)\b",
+            r"\b(?:locataire|bailleur|preneur)\b",
+            r"\b(?:sous-location|sous-louer)\b",
+            r"\bc[eé]der\b.{0,100}\b(?:bail|locaux)\b",
+
+            # Arabic
+            r"(?:عقد\s+الإيجار|العين\s+المؤجرة|"
+            r"المباني\s+المؤجرة)",
+            r"(?:المستأجر|المؤجر)",
+            r"(?:تأجير\s+من\s+الباطن|"
+            r"تأجير\s+المباني\s+من\s+الباطن)",
+            r"(?:التنازل).{0,100}"
+            r"(?:الإيجار|المباني|العين\s+المؤجرة)",
+        )
+
+        if matches_any(
+            text,
+            lease_context_patterns,
+        ):
+            return "LEASE_OR_PREMISES"
+
+        return None
+
+    expected = concept_patterns.get(
+        normalized_concept
+    )
+
+    if expected is None:
+        return None
+
+    object_value, patterns = expected
+
+    if matches_any(
+        text,
+        patterns,
+    ):
+        return object_value
+
+    return None
+
+
 def _normalized_trigger(
     normalized_concept: str,
     local_text: str,
 ) -> str | None:
+    """Resolve high-confidence multilingual legal triggers."""
     text = str(local_text or "")
+
+    def matches_any(
+        value: str,
+        patterns: tuple[str, ...],
+    ) -> bool:
+        return any(
+            re.search(
+                pattern,
+                value,
+                flags=re.IGNORECASE,
+            )
+            for pattern in patterns
+        )
 
     if normalized_concept == "TERMINATION_FOR_CAUSE":
         patterns = (
             r"\buncured\s+material\s+breach\b",
             r"\bmaterial\s+breach\b.{0,80}\buncured\b",
-            r"\bmanquement\s+(?:substantiel|grave)\s+non\s+corrig[eé]\b",
-            r"(?:إخلال\s+جوهري).{0,40}(?:غير\s+معالج|غير\s+مصحح)",
+            r"\bmanquement\s+(?:substantiel|grave)\s+"
+            r"non\s+corrig[eé]\b",
+            r"(?:إخلال\s+جوهري).{0,40}"
+            r"(?:غير\s+معالج|غير\s+مصحح)",
         )
 
-        if any(
-            re.search(
-                pattern,
-                text,
-                flags=re.IGNORECASE,
-            )
-            for pattern in patterns
+        if matches_any(
+            text,
+            patterns,
         ):
             return "UNCURED_MATERIAL_BREACH"
 
     if normalized_concept == "PURPOSE_LIMITATION":
         instruction_patterns = (
-            r"\bdocumented\s+instructions?\s+from\s+(?:the\s+)?controller\b",
-            r"\binstructions?\s+document[eé]es?\s+du\s+responsable\s+du\s+traitement\b",
+            r"\bdocumented\s+instructions?\s+from\s+"
+            r"(?:the\s+)?controller\b",
+            r"\binstructions?\s+document[eé]es?\s+du\s+"
+            r"responsable\s+du\s+traitement\b",
             r"(?:تعليمات\s+موثقة).{0,60}(?:المتحكم)",
         )
 
-        if any(
-            re.search(
-                pattern,
-                text,
-                flags=re.IGNORECASE,
-            )
-            for pattern in instruction_patterns
+        if matches_any(
+            text,
+            instruction_patterns,
         ):
             return "DOCUMENTED_CONTROLLER_INSTRUCTIONS"
 
@@ -2159,15 +2824,124 @@ def _normalized_trigger(
             r"(?:عند\s+الإنهاء|عند\s+انتهاء\s+الاتفاقية)",
         )
 
-        if any(
-            re.search(
-                pattern,
-                text,
-                flags=re.IGNORECASE,
-            )
-            for pattern in lifecycle_patterns
+        if matches_any(
+            text,
+            lifecycle_patterns,
         ):
             return "CONTRACT_TERMINATION_OR_EXPIRATION"
+
+    if normalized_concept == "DATA_BREACH_NOTICE":
+        incident_patterns = (
+            r"\bconfirmed\s+security\s+incident\b",
+            r"\bsecurity\s+incident\b.{0,100}\bconfirmed\b",
+            r"\bincident\s+de\s+s[eé]curit[eé]\s+confirm[eé]\b",
+            r"\bincident\s+de\s+s[eé]curit[eé]\b.{0,100}"
+            r"\bconfirm[eé]\b",
+            r"(?:حادث\s+أمني\s+مؤكد)",
+            r"(?:تأكيد).{0,80}(?:حادث\s+أمني)",
+        )
+
+        if matches_any(
+            text,
+            incident_patterns,
+        ):
+            return "CONFIRMED_SECURITY_INCIDENT"
+
+    if normalized_concept == "EXIT_ASSISTANCE":
+        # The concept establishes an exit/transition assistance mechanism.
+        # The trigger is materialized only when the text also contains an
+        # explicit contractual lifecycle event.
+        lifecycle_event_patterns = (
+            # English
+            r"\b(?:upon|on|after|following)\s+"
+            r"(?:the\s+)?(?:expiration|termination)\b",
+            r"\b(?:expiration|termination)\s+of\s+"
+            r"(?:this|the)\s+(?:agreement|contract)\b",
+            r"\b(?:expiration|termination)\b.{0,50}"
+            r"\b(?:expiration|termination)\b",
+
+            # French
+            r"\b(?:[àa]|apr[eè]s|suivant|lors\s+de)\s+"
+            r"(?:l['’])?(?:expiration|r[eé]siliation)\b",
+            r"\b(?:expiration|r[eé]siliation)\s+"
+            r"(?:du|de\s+ce|du\s+pr[eé]sent)\s+"
+            r"(?:contrat|accord)\b",
+            r"\b(?:expiration|r[eé]siliation)\b.{0,50}"
+            r"\b(?:expiration|r[eé]siliation)\b",
+
+            # Arabic
+            r"(?:عند|بعد|عقب)\s+"
+            r"(?:انتهاء|الانتهاء|إنهاء|الإنهاء)",
+            r"(?:انتهاء|إنهاء)\s+"
+            r"(?:هذه\s+الاتفاقية|هذا\s+العقد|الاتفاقية|العقد)",
+            r"(?:الانتهاء|الإنهاء).{0,50}"
+            r"(?:الانتهاء|الإنهاء)",
+        )
+
+        if matches_any(
+            text,
+            lifecycle_event_patterns,
+        ):
+            return "EXPIRATION_OR_TERMINATION"
+
+    if normalized_concept == "LOAN_DISBURSEMENT":
+        # Require both a conditions-precedent expression and a genuine
+        # conditional/satisfaction relationship. Merely listing conditions
+        # precedent elsewhere in the clause is not enough.
+        conditions_precedent_patterns = (
+            # English
+            r"\bconditions?\s+precedent\b",
+            r"\bpre-disbursement\s+conditions?\b",
+
+            # French
+            r"\bconditions?\s+pr[eé]alables?\b",
+            r"\bconditions?\s+suspensives?\b",
+
+            # Arabic
+            r"(?:الشروط\s+المسبقة|الشروط\s+السابقة|"
+            r"الشروط\s+التمهيدية)",
+        )
+
+        conditional_link_patterns = (
+            # English
+            r"\b(?:upon|after|following|subject\s+to|"
+            r"conditional\s+upon)\b.{0,100}"
+            r"\b(?:satisfaction|fulfilment|fulfillment|"
+            r"satisfied|fulfilled)\b",
+            r"\b(?:satisfaction|fulfilment|fulfillment)\s+of\b",
+            r"\bonce\b.{0,80}\b(?:satisfied|fulfilled)\b",
+
+            # French
+            r"\b(?:sous\s+r[eé]serve\s+de|apr[eè]s|"
+            r"suivant|conditionn[eé]\s+[àa])\b.{0,100}"
+            r"\b(?:satisfaction|r[eé]alisation|"
+            r"accomplissement)\b",
+            r"\b(?:satisfaction|r[eé]alisation|"
+            r"accomplissement)\s+des?\b",
+            r"\bune\s+fois\b.{0,80}"
+            r"\b(?:satisfaites?|r[eé]alis[eé]es?)\b",
+
+            # Arabic
+            r"(?:رهناً|شريطة|بعد|عند).{0,100}"
+            r"(?:استيفاء|تحقق|إتمام)",
+            r"(?:استيفاء|تحقق|إتمام).{0,50}"
+            r"(?:الشروط)",
+        )
+
+        has_conditions_precedent = matches_any(
+            text,
+            conditions_precedent_patterns,
+        )
+        has_conditional_link = matches_any(
+            text,
+            conditional_link_patterns,
+        )
+
+        if (
+            has_conditions_precedent
+            and has_conditional_link
+        ):
+            return "CONDITIONS_PRECEDENT_SATISFIED"
 
     return None
 
@@ -2176,6 +2950,27 @@ def _relation_roles(
     normalized_concept: str,
     roles: list[str],
 ) -> tuple[str | None, str | None, str | None, str | None]:
+    if normalized_concept in {
+        "PREEMPTIVE_RIGHT",
+        "PARTICIPATION_OPTION",
+        "INVESTOR_CONSENT_RIGHT",
+    }:
+        role_set = set(roles)
+
+        right_holder = "INVESTOR"
+
+        counterparty = (
+            "COMPANY"
+            if "COMPANY" in role_set
+            else None
+        )
+
+        return (
+            right_holder,
+            None,
+            counterparty,
+            None,
+        )
     right_holder = None
     obligated_actor = None
     counterparty = None
@@ -2319,6 +3114,9 @@ def _relation_roles(
 
         if "COMPANY" in role_set:
             counterparty = "COMPANY"
+
+    elif normalized_concept == "DRAG_ALONG_RIGHT":
+        obligated_actor = "OTHER_SHAREHOLDERS"
 
     elif normalized_concept == "NON_DISCLOSURE":
         if "RECEIVING_PARTY" in role_set:
@@ -2492,6 +3290,15 @@ def materialize_normalized_relation(
 
     objects = _matched_objects(text)
 
+    normalized_object = _normalized_object(
+        normalized_concept,
+        local_text,
+        text,
+    )
+
+    if normalized_object is None and len(objects) == 1:
+        normalized_object = objects[0]
+
     (
         right_holder,
         obligated_actor,
@@ -2521,7 +3328,7 @@ def materialize_normalized_relation(
         "obligated_actor": obligated_actor,
         "counterparty": counterparty,
         "beneficiary": beneficiary,
-        "object": objects[0] if len(objects) == 1 else None,
+        "object": normalized_object,
         "trigger": (
             item.get("trigger")
             or _normalized_trigger(
@@ -2550,6 +3357,43 @@ def materialize_normalized_relation(
     item["normalized_relation"] = relation
     item["normalized_polarity"] = normalized_polarity
 
+    # Temporary normalized-relation diagnostic.
+    # Disabled unless LEGAL_AI_TRACE_NORMALIZED_RELATION=1.
+    if __import__("os").environ.get(
+        "LEGAL_AI_TRACE_NORMALIZED_RELATION"
+    ) == "1":
+        traced_concepts = {
+            "PARTICIPATION_OPTION",
+            "PREEMPTIVE_RIGHT",
+            "INVESTOR_CONSENT_RIGHT",
+        }
+
+        if normalized_concept in traced_concepts:
+            print(
+                "[NORMALIZED_RELATION_TRACE]",
+                __import__("json").dumps(
+                    {
+                        "raw_kind": item.get("kind"),
+                        "normalized_concept": normalized_concept,
+                        "roles": roles,
+                        "explicit_right_holder": (
+                            explicit_right_holder
+                        ),
+                        "right_holder": right_holder,
+                        "obligated_actor": obligated_actor,
+                        "counterparty": counterparty,
+                        "beneficiary": beneficiary,
+                        "normalized_object": normalized_object,
+                        "action": relation.get("action"),
+                        "polarity": relation.get("polarity"),
+                        "normalized_relation": relation,
+                        "local_text": local_text,
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
     return item
 
 

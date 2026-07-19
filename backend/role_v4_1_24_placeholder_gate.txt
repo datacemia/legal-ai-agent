@@ -1,0 +1,18 @@
+
+INPUT : La [PARTY_1] paie la [PARTY_2].
+OUTPUT: Le Client paie le Prestataire.
+
+INPUT : La responsabilité de la [PARTY_2] est limitée.
+OUTPUT: La responsabilité du Prestataire est limitée.
+
+INPUT : Les frais sont payés par la [PARTY_1].
+OUTPUT: Les frais sont payés par le Client.
+
+INPUT : Le rapport est fourni à la [PARTY_1].
+OUTPUT: Le rapport est fourni au Client.
+
+INPUT : Les installations de la [PARTY_2] sont auditées.
+OUTPUT: Les installations du Prestataire sont auditées.
+
+INPUT : La [SERVICE_PROVIDER] notifiera la [CLIENT].
+OUTPUT: Le Prestataire notifiera le Client.

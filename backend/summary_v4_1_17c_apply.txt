@@ -1,0 +1,15 @@
+================================================================================================
+V4.1.17C CONTRACT DURATION FORM COVERAGE APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\unified_report_from_pipeline.py
+BACKUP : app\services\contract_agent\unified_report_from_pipeline.py.before_v4_1_17c_20260714_212554
+SHA256 : 18a163e20fa80e40a8f10f30dd44030d9e7a5e588cc1e22f36a42bc49ae9bcc0
+EN: existing validated forms preserved
+FR: added contract/agreement + initial-duration forms
+AR: added agreement/contract + initial-duration forms
+INVARIANT: only contract/agreement term wording is eligible
+UNTOUCHED: semantic profile, RULES, dominance thresholds,
+           evidence engine, publication gate, risk scoring,
+           taxonomy, frontend
+AST: OK
+================================================================================================

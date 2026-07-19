@@ -1,0 +1,55 @@
+[
+  {
+    "fixture_id": "11_2_1_ar",
+    "language": "ar",
+    "source_text": "2.1 يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PAY_FREQUENCY",
+        "RENT_OBLIGATION"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "payment",
+      "mechanisms": [
+        "PAYMENT_OBLIGATION",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:RENT_OBLIGATION"
+    ]
+  }
+]

@@ -1,0 +1,1460 @@
+{
+  "exact_fixture_files": 45,
+  "file_errors": [],
+  "files": [
+    {
+      "file": "regression_results_multilang\\en\\01_NDA_Confidentiality_Agreement.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\en\\02_Master_Services_Agreement.json",
+      "clauses": 10
+    },
+    {
+      "file": "regression_results_multilang\\en\\03_SaaS_Cloud_Agreement.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\en\\04_Cybersecurity_Services_Agreement.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\en\\05_Data_Processing_Agreement.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\en\\06_Executive_Employment_Agreement.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\en\\07_Software_Licensing_Agreement.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\en\\08_Procurement_Supply_Agreement.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\en\\09_Consulting_Services_Agreement.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\en\\10_Outsourcing_Managed_Services_Agreement.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\en\\11_Commercial_Lease_Agreement.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\en\\12_Loan_Credit_Agreement.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\en\\13_Asset_Purchase_Agreement.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\en\\14_Shareholders_Agreement.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\en\\15_General_Commercial_Agreement.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\01_NDA_Confidentiality_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\02_Master_Services_Agreement_FR.json",
+      "clauses": 10
+    },
+    {
+      "file": "regression_results_multilang\\fr\\03_SaaS_Cloud_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\04_Cybersecurity_Services_Agreement_FR.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\fr\\05_Data_Processing_Agreement_FR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\fr\\06_Executive_Employment_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\07_Software_Licensing_Agreement_FR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\fr\\08_Procurement_Supply_Agreement_FR.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\fr\\09_Consulting_Services_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\10_Outsourcing_Managed_Services_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\11_Commercial_Lease_Agreement_FR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\fr\\12_Loan_Credit_Agreement_FR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\fr\\13_Asset_Purchase_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\fr\\14_Shareholders_Agreement_FR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\fr\\15_General_Commercial_Agreement_FR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\ar\\01_NDA_Confidentiality_Agreement_AR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\ar\\02_Master_Services_Agreement_AR.json",
+      "clauses": 10
+    },
+    {
+      "file": "regression_results_multilang\\ar\\03_SaaS_Cloud_Agreement_AR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\ar\\04_Cybersecurity_Services_Agreement_AR.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\ar\\05_Data_Processing_Agreement_AR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\ar\\06_Executive_Employment_Agreement_AR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\ar\\07_Software_Licensing_Agreement_AR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\ar\\08_Procurement_Supply_Agreement_AR.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\ar\\09_Consulting_Services_Agreement_AR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\ar\\10_Outsourcing_Managed_Services_Agreement_AR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\ar\\11_Commercial_Lease_Agreement_AR.json",
+      "clauses": 9
+    },
+    {
+      "file": "regression_results_multilang\\ar\\12_Loan_Credit_Agreement_AR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\ar\\13_Asset_Purchase_Agreement_AR.json",
+      "clauses": 7
+    },
+    {
+      "file": "regression_results_multilang\\ar\\14_Shareholders_Agreement_AR.json",
+      "clauses": 8
+    },
+    {
+      "file": "regression_results_multilang\\ar\\15_General_Commercial_Agreement_AR.json",
+      "clauses": 7
+    }
+  ],
+  "top_level_clause_keys": {
+    "title": 355,
+    "_source_text_exact": 355,
+    "original_text": 355,
+    "reasoning_evidence": 355,
+    "clause_title": 355,
+    "clause_reference": 355,
+    "quoted_text": 355,
+    "clause_type": 355,
+    "risk_level": 355,
+    "explanation_simple": 355,
+    "why_it_matters": 355,
+    "legal_insight": 355,
+    "favours": 355,
+    "market_comparison": 355,
+    "red_flag": 355,
+    "red_flag_reason": 355,
+    "recommendation": 355,
+    "confidence": 355,
+    "safer_alternative": 355,
+    "negotiation_advice": 355,
+    "negotiation_priority": 355,
+    "_meta": 355,
+    "trigger": 355,
+    "clause_id": 355,
+    "parent_id": 355,
+    "parent_clause_id": 355,
+    "depth": 355,
+    "level": 355,
+    "section_path": 355,
+    "children": 355,
+    "semantic_parent": 355,
+    "confidence_score": 355,
+    "lineage": 355,
+    "risk_baseline": 355,
+    "risk_escalated": 355,
+    "risk_reduced": 355,
+    "has_details": 355,
+    "has_reasoning": 355,
+    "has_negotiation": 355,
+    "has_semantic_signal": 355,
+    "has_legal_signal": 355,
+    "evidence_strength": 355,
+    "materiality_level": 355,
+    "importance_score": 355,
+    "risk_reasons": 355,
+    "normalized_contract_score": 355,
+    "_publication_validation_history": 355,
+    "source_evidence_model": 355,
+    "validation_receipts": 355,
+    "fidelity_issues": 61,
+    "negotiation_fidelity_warning": 61,
+    "negotiation_fidelity_note": 61,
+    "has_contextual_reasoning": 13
+  },
+  "semantic_paths": [
+    {
+      "path": "source_evidence_model.mechanisms[].kind",
+      "occurrences": 382,
+      "types": {
+        "str": 382
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "PREREQUISITE"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "SOURCE_PROFILE"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "SOURCE_PROFILE"
+        }
+      ]
+    },
+    {
+      "path": "reasoning_evidence",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without pr"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "1.2 Each Receiving Party shall use the Confidential Information solely for the Purpose."
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "2.1 Confidential Information does not include information that: (a) is or becomes publicly available through no fault of the Receiving Party; (b) was rightfully"
+        }
+      ]
+    },
+    {
+      "path": "clause_type",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "confidentiality"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "confidentiality"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "confidentiality"
+        }
+      ]
+    },
+    {
+      "path": "confidence",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "high"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "high"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "high"
+        }
+      ]
+    },
+    {
+      "path": "trigger",
+      "occurrences": 355,
+      "types": {
+        "str": 161,
+        "NoneType": 194
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "confidentiality"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": null
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "confidentiality"
+        }
+      ]
+    },
+    {
+      "path": "semantic_parent",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "1. OBLIGATIONS OF CONFIDENTIALITY"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "1. OBLIGATIONS OF CONFIDENTIALITY"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "2. EXCLUSIONS"
+        }
+      ]
+    },
+    {
+      "path": "confidence_score",
+      "occurrences": 355,
+      "types": {
+        "float": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": 0.85
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": 0.85
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": 0.85
+        }
+      ]
+    },
+    {
+      "path": "has_semantic_signal",
+      "occurrences": 355,
+      "types": {
+        "bool": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": true
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": false
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": true
+        }
+      ]
+    },
+    {
+      "path": "evidence_strength",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "medium"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "low"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "medium"
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model",
+      "occurrences": 355,
+      "types": {
+        "dict": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": {
+            "evidence_spans": [
+              {
+                "label": "PRIOR_CONSENT_PREREQUISITE",
+                "start": 150,
+                "end": 179,
+                "text": "without prior written consent"
+              }
+            ],
+            "mechanisms": [
+              {
+                "kind": "PREREQUISITE",
+                "state": "PRIOR_CONSENT"
+              },
+              {
+                "kind": "SOURCE_PROFILE",
+                "primary_type": "corporate_governance",
+                "anchors": [
+                  "bound",
+                  "confidence",
+                  "confidential",
+                  "confidentiality",
+                  "consent"
+                ]
+              }
+            ],
+            "semantic_profile_hash": "2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+          }
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": {
+            "evidence_spans": [],
+            "mechanisms": [
+              {
+                "kind": "SOURCE_PROFILE",
+                "primary_type": "other",
+                "anchors": [
+                  "confidential",
+                  "each",
+                  "information",
+                  "party",
+                  "purpose"
+                ]
+              }
+            ],
+            "semantic_profile_hash": "3dedca93fac022929116c7d72bc2962b596b52f920d2ab3aa73e4157d69976bf"
+          }
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": {
+            "evidence_spans": [],
+            "mechanisms": [
+              {
+                "kind": "SOURCE_PROFILE",
+                "primary_type": "other",
+                "anchors": [
+                  "available",
+                  "become",
+                  "confidential",
+                  "confidentiality",
+                  "developed"
+                ]
+              }
+            ],
+            "semantic_profile_hash": "469bb04a9ae39641b6dc2c89fc4673d38121c85bf851c002d0354eff16f62080"
+          }
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.evidence_spans",
+      "occurrences": 355,
+      "types": {
+        "list": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            {
+              "label": "PRIOR_CONSENT_PREREQUISITE",
+              "start": 150,
+              "end": 179,
+              "text": "without prior written consent"
+            }
+          ]
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": []
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": []
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms",
+      "occurrences": 355,
+      "types": {
+        "list": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            {
+              "kind": "PREREQUISITE",
+              "state": "PRIOR_CONSENT"
+            },
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "corporate_governance",
+              "anchors": [
+                "bound",
+                "confidence",
+                "confidential",
+                "confidentiality",
+                "consent"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "other",
+              "anchors": [
+                "confidential",
+                "each",
+                "information",
+                "party",
+                "purpose"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "other",
+              "anchors": [
+                "available",
+                "become",
+                "confidential",
+                "confidentiality",
+                "developed"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].primary_type",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "corporate_governance"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "other"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "other"
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].anchors",
+      "occurrences": 355,
+      "types": {
+        "list": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            "bound",
+            "confidence",
+            "confidential",
+            "confidentiality",
+            "consent"
+          ]
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": [
+            "confidential",
+            "each",
+            "information",
+            "party",
+            "purpose"
+          ]
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": [
+            "available",
+            "become",
+            "confidential",
+            "confidentiality",
+            "developed"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.semantic_profile_hash",
+      "occurrences": 355,
+      "types": {
+        "str": 355
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "3dedca93fac022929116c7d72bc2962b596b52f920d2ab3aa73e4157d69976bf"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "469bb04a9ae39641b6dc2c89fc4673d38121c85bf851c002d0354eff16f62080"
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.recommendation.semantic_coverage",
+      "occurrences": 304,
+      "types": {
+        "float": 304
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": 0.1667
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": 0.5833
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 4,
+          "value": 0.4167
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.recommendation.semantic_profile_hash",
+      "occurrences": 304,
+      "types": {
+        "str": 304
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "469bb04a9ae39641b6dc2c89fc4673d38121c85bf851c002d0354eff16f62080"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 4,
+          "value": "2093379b49f4ce1ab34ab2369446d1b04c9e4642146825b6bd9c302e395c768b"
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.legal_insight.semantic_coverage",
+      "occurrences": 303,
+      "types": {
+        "float": 303
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": 0.0833
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": 0.5
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": 0.25
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.legal_insight.semantic_profile_hash",
+      "occurrences": 303,
+      "types": {
+        "str": 303
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "2329f99edb6c44634b6f18d4d8949b58875f20489665c3ad0cbcc722f1d00b11"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 2,
+          "value": "3dedca93fac022929116c7d72bc2962b596b52f920d2ab3aa73e4157d69976bf"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 3,
+          "value": "469bb04a9ae39641b6dc2c89fc4673d38121c85bf851c002d0354eff16f62080"
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.market_comparison.semantic_coverage",
+      "occurrences": 250,
+      "types": {
+        "float": 250
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 6,
+          "value": 0.1667
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 7,
+          "value": 0.0833
+        },
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 1,
+          "value": 0.1667
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.market_comparison.semantic_profile_hash",
+      "occurrences": 250,
+      "types": {
+        "str": 250
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 6,
+          "value": "04d059783d9b8dc4cb4c4f5793d0b5c7daa68f462f74f559f57215f030559262"
+        },
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 7,
+          "value": "dee917927917228c01e4150b98b7d2d009bc5f399eda7990c6b2979b11acddd3"
+        },
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 1,
+          "value": "45280107edfcdbf4bdff991c5f8449a8e1a9d3bee352385a276043b278253ac7"
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.safer_alternative.semantic_coverage",
+      "occurrences": 92,
+      "types": {
+        "float": 92
+      },
+      "samples": [
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 1,
+          "value": 0.3333
+        },
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 3,
+          "value": 1.9167
+        },
+        {
+          "file": "03_SaaS_Cloud_Agreement.json",
+          "clause_index": 1,
+          "value": 1.5833
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.safer_alternative.semantic_profile_hash",
+      "occurrences": 92,
+      "types": {
+        "str": 92
+      },
+      "samples": [
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 1,
+          "value": "45280107edfcdbf4bdff991c5f8449a8e1a9d3bee352385a276043b278253ac7"
+        },
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 3,
+          "value": "316e32aaca8f5a8acd724a7048282b0df6ae1f1a29dd371f87a9ef34103ddba0"
+        },
+        {
+          "file": "03_SaaS_Cloud_Agreement.json",
+          "clause_index": 1,
+          "value": "e499cf6004a7fc0d4a0f98bdef1c4162bf6a8a1f1b97c4f884ca4d326019d7b3"
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.negotiation_advice.semantic_coverage",
+      "occurrences": 79,
+      "types": {
+        "float": 79
+      },
+      "samples": [
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 2,
+          "value": 0.1667
+        },
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 3,
+          "value": 0.25
+        },
+        {
+          "file": "03_SaaS_Cloud_Agreement.json",
+          "clause_index": 1,
+          "value": 0.4167
+        }
+      ]
+    },
+    {
+      "path": "validation_receipts.negotiation_advice.semantic_profile_hash",
+      "occurrences": 79,
+      "types": {
+        "str": 79
+      },
+      "samples": [
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 2,
+          "value": "221c4838460ab933416e7e6e4d1238fd997f751b77b54dd06aaefb44729e5a3d"
+        },
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 3,
+          "value": "316e32aaca8f5a8acd724a7048282b0df6ae1f1a29dd371f87a9ef34103ddba0"
+        },
+        {
+          "file": "03_SaaS_Cloud_Agreement.json",
+          "clause_index": 1,
+          "value": "e499cf6004a7fc0d4a0f98bdef1c4162bf6a8a1f1b97c4f884ca4d326019d7b3"
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.evidence_spans[].label",
+      "occurrences": 39,
+      "types": {
+        "str": 39
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "PRIOR_CONSENT_PREREQUISITE"
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "PRIOR_CONSENT_PREREQUISITE"
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "CONSENT_HOLDER"
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.evidence_spans[].start",
+      "occurrences": 39,
+      "types": {
+        "int": 39
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": 150
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": 101
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": 61
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.evidence_spans[].end",
+      "occurrences": 39,
+      "types": {
+        "int": 39
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": 179
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": 153
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": 128
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.evidence_spans[].text",
+      "occurrences": 39,
+      "types": {
+        "str": 39
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "without prior written consent"
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "without Contracting Party A's prior written approval"
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "to Contracting Party A systems or data without Contracting Party A"
+        }
+      ]
+    },
+    {
+      "path": "_publication_validation_history.recommendation.semantic_coverage",
+      "occurrences": 27,
+      "types": {
+        "float": 27
+      },
+      "samples": [
+        {
+          "file": "07_Software_Licensing_Agreement.json",
+          "clause_index": 4,
+          "value": 0.0
+        },
+        {
+          "file": "08_Procurement_Supply_Agreement.json",
+          "clause_index": 8,
+          "value": 0.0
+        },
+        {
+          "file": "09_Consulting_Services_Agreement.json",
+          "clause_index": 2,
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].state",
+      "occurrences": 23,
+      "types": {
+        "str": 23
+      },
+      "samples": [
+        {
+          "file": "01_NDA_Confidentiality_Agreement.json",
+          "clause_index": 1,
+          "value": "PRIOR_CONSENT"
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "PRIOR_CONSENT"
+        },
+        {
+          "file": "09_Consulting_Services_Agreement.json",
+          "clause_index": 6,
+          "value": "PRIOR_CONSENT"
+        }
+      ]
+    },
+    {
+      "path": "_publication_validation_history.negotiation_advice.semantic_coverage",
+      "occurrences": 15,
+      "types": {
+        "float": 15
+      },
+      "samples": [
+        {
+          "file": "06_Executive_Employment_Agreement.json",
+          "clause_index": 4,
+          "value": 0.0
+        },
+        {
+          "file": "13_Asset_Purchase_Agreement.json",
+          "clause_index": 3,
+          "value": 0.0
+        },
+        {
+          "file": "13_Asset_Purchase_Agreement_FR.json",
+          "clause_index": 2,
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "path": "_publication_validation_history.market_comparison.semantic_coverage",
+      "occurrences": 14,
+      "types": {
+        "float": 14
+      },
+      "samples": [
+        {
+          "file": "02_Master_Services_Agreement.json",
+          "clause_index": 7,
+          "value": 0.0
+        },
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 7,
+          "value": 0.0
+        },
+        {
+          "file": "11_Commercial_Lease_Agreement.json",
+          "clause_index": 6,
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].consent_holder",
+      "occurrences": 12,
+      "types": {
+        "str": 12
+      },
+      "samples": [
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "contracting party a"
+        },
+        {
+          "file": "09_Consulting_Services_Agreement.json",
+          "clause_index": 6,
+          "value": "contracting party a"
+        },
+        {
+          "file": "11_Commercial_Lease_Agreement.json",
+          "clause_index": 1,
+          "value": "ndlord"
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].consent_holder_text",
+      "occurrences": 12,
+      "types": {
+        "str": 12
+      },
+      "samples": [
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 8,
+          "value": "to Contracting Party A systems or data without Contracting Party A"
+        },
+        {
+          "file": "09_Consulting_Services_Agreement.json",
+          "clause_index": 6,
+          "value": "disclose such information to third parties without Contracting Party A"
+        },
+        {
+          "file": "11_Commercial_Lease_Agreement.json",
+          "clause_index": 1,
+          "value": "Landlord"
+        }
+      ]
+    },
+    {
+      "path": "_publication_validation_history.legal_insight.semantic_coverage",
+      "occurrences": 11,
+      "types": {
+        "float": 11
+      },
+      "samples": [
+        {
+          "file": "04_Cybersecurity_Services_Agreement.json",
+          "clause_index": 1,
+          "value": 0.0
+        },
+        {
+          "file": "07_Software_Licensing_Agreement.json",
+          "clause_index": 3,
+          "value": 0.0
+        },
+        {
+          "file": "09_Consulting_Services_Agreement.json",
+          "clause_index": 2,
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].arguments[].tokens",
+      "occurrences": 8,
+      "types": {
+        "list": 8
+      },
+      "samples": [
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            "favor",
+            "vote"
+          ]
+        },
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            "along",
+            "consent",
+            "drag",
+            "right",
+            "transaction"
+          ]
+        },
+        {
+          "file": "14_Shareholders_Agreement_FR.json",
+          "clause_index": 1,
+          "value": [
+            "en",
+            "faveur",
+            "opération",
+            "vote"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].arguments[].signature",
+      "occurrences": 8,
+      "types": {
+        "list": 8
+      },
+      "samples": [
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            "vote"
+          ]
+        },
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            "consent"
+          ]
+        },
+        {
+          "file": "14_Shareholders_Agreement_FR.json",
+          "clause_index": 1,
+          "value": [
+            "vote"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].polarity",
+      "occurrences": 4,
+      "types": {
+        "str": 4
+      },
+      "samples": [
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 1,
+          "value": "REQUIRED"
+        },
+        {
+          "file": "14_Shareholders_Agreement_FR.json",
+          "clause_index": 1,
+          "value": "REQUIRED"
+        },
+        {
+          "file": "02_Master_Services_Agreement_AR.json",
+          "clause_index": 4,
+          "value": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].arguments",
+      "occurrences": 4,
+      "types": {
+        "list": 4
+      },
+      "samples": [
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 1,
+          "value": [
+            {
+              "tokens": [
+                "favor",
+                "vote"
+              ],
+              "signature": [
+                "vote"
+              ]
+            },
+            {
+              "tokens": [
+                "along",
+                "consent",
+                "drag",
+                "right",
+                "transaction"
+              ],
+              "signature": [
+                "consent"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "14_Shareholders_Agreement_FR.json",
+          "clause_index": 1,
+          "value": [
+            {
+              "tokens": [
+                "en",
+                "faveur",
+                "opération",
+                "vote"
+              ],
+              "signature": [
+                "vote"
+              ]
+            },
+            {
+              "tokens": [
+                "cession",
+                "consent",
+                "droit",
+                "forcée"
+              ],
+              "signature": [
+                "consent"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "02_Master_Services_Agreement_AR.json",
+          "clause_index": 4,
+          "value": [
+            {
+              "tokens": [
+                "الرسوم",
+                "الطرف",
+                "المتعاقد",
+                "المحددة",
+                "بدفع"
+              ],
+              "signature": [
+                "الطرف"
+              ]
+            },
+            {
+              "tokens": [
+                "أربعين",
+                "الفاتورة",
+                "تاريخ",
+                "يوما"
+              ],
+              "signature": [
+                "أربعين"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "_publication_validation_history.safer_alternative.semantic_coverage",
+      "occurrences": 3,
+      "types": {
+        "float": 3
+      },
+      "samples": [
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 8,
+          "value": 1.0
+        },
+        {
+          "file": "14_Shareholders_Agreement_FR.json",
+          "clause_index": 1,
+          "value": 0.1667
+        },
+        {
+          "file": "14_Shareholders_Agreement_AR.json",
+          "clause_index": 1,
+          "value": 0.1667
+        }
+      ]
+    },
+    {
+      "path": "source_evidence_model.mechanisms[].notice_prerequisite",
+      "occurrences": 2,
+      "types": {
+        "bool": 2
+      },
+      "samples": [
+        {
+          "file": "14_Shareholders_Agreement.json",
+          "clause_index": 8,
+          "value": false
+        },
+        {
+          "file": "14_Shareholders_Agreement_AR.json",
+          "clause_index": 8,
+          "value": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+====================================================================================================
+CLAUSE LIST CANDIDATES
+====================================================================================================
+CANDIDATES: 27
+
+----------------------------------------------------------------------------------------------------
+[1]
+PATH: $.clauses.clauses.results
+COUNT: 109
+SCORE: 180
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'validation_receipts', 'why_it_matters']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: intellectual_property
+
+----------------------------------------------------------------------------------------------------
+[2]
+PATH: $.clauses.clause_groups.groups[0].clauses
+COUNT: 32
+SCORE: 180
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: intellectual_property
+
+----------------------------------------------------------------------------------------------------
+[3]
+PATH: $.clauses.executive_report.clause_groups.groups[0].clauses
+COUNT: 32
+SCORE: 180
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: intellectual_property
+
+----------------------------------------------------------------------------------------------------
+[4]
+PATH: $.clauses.legal_relation_graph.nodes
+COUNT: 109
+SCORE: 60
+FIRST KEYS: ['clause_type', 'concepts', 'domains', 'id', 'relation_consequences', 'relation_triggers', 'risk_level', 'roles', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: intellectual_property
+
+----------------------------------------------------------------------------------------------------
+[5]
+PATH: $.unified_report.key_clauses
+COUNT: 109
+SCORE: 60
+FIRST KEYS: ['clause_type', 'id', 'risk_level', 'title', 'why_it_matters']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: intellectual_property
+
+----------------------------------------------------------------------------------------------------
+[6]
+PATH: $.clauses.dependency_graph.nodes
+COUNT: 109
+SCORE: 40
+FIRST KEYS: ['id', 'reference', 'risk_level', 'title', 'type']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[7]
+PATH: $.clauses.executive_report.dependency_graph.nodes
+COUNT: 109
+SCORE: 40
+FIRST KEYS: ['id', 'reference', 'risk_level', 'title', 'type']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[8]
+PATH: $.clauses.clause_groups.groups[1].clauses
+COUNT: 4
+SCORE: 36
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+FIRST TITLE: Injunctive Relief and Specific Performance
+FIRST TYPE: remedies
+
+----------------------------------------------------------------------------------------------------
+[9]
+PATH: $.clauses.executive_report.clause_groups.groups[1].clauses
+COUNT: 4
+SCORE: 36
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+FIRST TITLE: Injunctive Relief and Specific Performance
+FIRST TYPE: remedies
+
+----------------------------------------------------------------------------------------------------
+[10]
+PATH: $.unified_report.risks_identified
+COUNT: 56
+SCORE: 20
+FIRST KEYS: ['clause_ref', 'explanation', 'exposure', 'id', 'market_practice', 'market_practice_score', 'red_flag', 'risk_level']
+FIRST TITLE: None
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[11]
+PATH: $.clauses.executive_summary.top_risks
+COUNT: 5
+SCORE: 15
+FIRST KEYS: ['importance_score', 'legal_insight', 'risk_level', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[12]
+PATH: $.clauses.executive_summary.negotiation_priorities
+COUNT: 5
+SCORE: 15
+FIRST KEYS: ['fallback_position', 'negotiation_advice', 'recommendation', 'risk_level', 'safer_alternative', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[13]
+PATH: $.clauses.executive_report.top_risks
+COUNT: 5
+SCORE: 15
+FIRST KEYS: ['importance_score', 'legal_insight', 'risk_level', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[14]
+PATH: $.clauses.executive_report.negotiation_priorities
+COUNT: 5
+SCORE: 15
+FIRST KEYS: ['fallback_position', 'negotiation_advice', 'recommendation', 'risk_level', 'safer_alternative', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[15]
+PATH: $.clauses.executive_summary.recommended_actions
+COUNT: 5
+SCORE: 10
+FIRST KEYS: ['action', 'risk_level', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[16]
+PATH: $.clauses.executive_report.recommended_actions
+COUNT: 5
+SCORE: 10
+FIRST KEYS: ['action', 'risk_level', 'title']
+FIRST TITLE: Confidential Information Rights
+FIRST TYPE: None
+
+----------------------------------------------------------------------------------------------------
+[17]
+PATH: $.clauses.contradictions[2].clauses
+COUNT: 3
+SCORE: 9
+FIRST KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+FIRST TITLE: Return or Destruction of Confidential Information
+FIRST TYPE: confidentiality
+
+----------------------------------------------------------------------------------------------------
+[18]
+PATH: $.clauses.executive_report.contradictions[2].clauses
+COUNT: 3
+SCORE: 9
+FIRST KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+FIRST TITLE: Return or Destruction of Confidential Information
+FIRST TYPE: confidentiality
+
+----------------------------------------------------------------------------------------------------
+[19]
+PATH: $.clauses.clause_groups.groups[2].clauses
+COUNT: 1
+SCORE: 9
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+FIRST TITLE: Attorney's Fees
+FIRST TYPE: fees
+
+----------------------------------------------------------------------------------------------------
+[20]
+PATH: $.clauses.executive_report.clause_groups.groups[2].clauses
+COUNT: 1
+SCORE: 9
+FIRST KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+FIRST TITLE: Attorney's Fees
+FIRST TYPE: fees

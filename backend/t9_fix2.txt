@@ -1,0 +1,27 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 28355
+PDF_LINES_DEBUG {'line_count': 606, 'non_empty_line_count': 317, 'max_line_len': 187, 'first_20': ['Customer Care: 0860 123 000', '                                                                                                               Website: www.standardbank.co.za', '                          STANDARD BANK                               3 month statement', '', '                                                                                                                      From: 13 Aug 21', '                                   JUBILEE MALL', '                                                                                                                                  To: 11 Nov 21', '                                   11 Nov 2021', '', 'Account number: 10 12 225 214 2                 051001                                                               Address:', 'Account holder:  MR. VHONANI MATUMBA                                GUMBU 1 THOHOYANDOU', '', 'Product name:  ELITEACC                                                 THOHOYANDOU', '', '                                                                  THOHOYANDOU', '', '                                                                                               0950', '', '                                                                                 ZA', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3.42, 'withdrawals': -1283.68}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18406.57, 'deposits': 18410.48, 'source': 'statement_summary_payments_deposits'}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3.42, 'withdrawals': -1283.68}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18406.57, 'deposits': 18410.48, 'source': 'statement_summary_payments_deposits'}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3.42, 'withdrawals': -1283.68}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18406.57, 'deposits': 18410.48, 'source': 'statement_summary_payments_deposits'}
+STANDARD_BANK_ZA_EXTRACTED {'transactions': 107, 'income_total': 18410.48, 'expense_total': 18406.57}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 14, 'dep_line': 'Date           Description                                  Payments       Deposits         Balance', 'wd_i': 40, 'wd_line': 'AUTOBANK CASH WITHDRAWAL AT', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_DATE_BOUNDARY_LEDGER_RECON {'transactions': 0, 'income_total': 0, 'expense_total': 0, 'official_income': 18410.48, 'official_expense': 18406.57, 'income_gap': 18410.48, 'expense_gap': 18406.57}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'standard_bank_za', 'count': 107, 'income_total': 18410.48, 'expense_total': 18406.57, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 36817.05, 'max_tx_abs': 6477.5, 'score': 8000.0}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'standard_bank_za', 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 8000.0}]
+STATEMENT_LAYOUT_DETECTED standard_bank_za
+FINANCE_CANDIDATE_SELECTED {'parser': 'standard_bank_za', 'transactions': 107, 'income_total': 18410.48, 'expense_total': 18406.57, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 8000.0}
+OK_REAL t9.pdf | tx=107 income=18410.48 expenses=18406.57 expected_income=18410.48 expected_expenses=18406.57 summary_ok=True real_ok=None opening=None ending=None gap=None reason=MATCHES_REAL_STATEMENT_VALUES

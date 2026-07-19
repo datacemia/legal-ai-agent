@@ -1,0 +1,1223 @@
+[
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Pendant la Période de Transition, le Prestataire mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations du Client.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 41,
+            "end": 289,
+            "text": "Partie contractante B mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations de la Partie contractante A"
+          },
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 72,
+            "end": 289,
+            "text": "plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations de la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "53456ac02631920ca071ea391b2c02c034a74c1b426de5aecab7027acdf3f9f2",
+        "normalized_concept": "TRANSITION_PLAN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 41,
+            "end": 90,
+            "text": "Partie contractante B mettra en œuvre le plan de transition"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "003947dfa8e969ccc1db8f59c58ad549e17a948ce5ef5d4f0d50e40764a93def",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 41,
+            "end": 289,
+            "text": "Partie contractante B mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations de la Partie contractante A"
+          },
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 72,
+            "end": 289,
+            "text": "plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations de la Partie contractante A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "53456ac02631920ca071ea391b2c02c034a74c1b426de5aecab7027acdf3f9f2",
+        "normalized_concept": "TRANSITION_PLAN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 41,
+            "end": 90,
+            "text": "Partie contractante B mettra en œuvre le plan de transition"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "003947dfa8e969ccc1db8f59c58ad549e17a948ce5ef5d4f0d50e40764a93def",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "Clause 2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A. Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 99,
+            "end": 279,
+            "text": "Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 279,
+            "text": "comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "procedural_state": "JOINT_GOVERNANCE_COMMITTEE",
+        "evidence_hash": "d2e39dfaa475195f5dac3c2694dd3e6bcb938a3b2a4168b108e136b8d2fa8838",
+        "normalized_concept": "JOINT_GOVERNANCE_COMMITTEE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Partie contractante B exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "334a13807fce84f79b3c6b7fadf957de92a23762db903f90f8157677d2c31f3f",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 99,
+            "end": 279,
+            "text": "Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 279,
+            "text": "comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "procedural_state": "JOINT_GOVERNANCE_COMMITTEE",
+        "evidence_hash": "d2e39dfaa475195f5dac3c2694dd3e6bcb938a3b2a4168b108e136b8d2fa8838",
+        "normalized_concept": "JOINT_GOVERNANCE_COMMITTEE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Partie contractante B exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "334a13807fce84f79b3c6b7fadf957de92a23762db903f90f8157677d2c31f3f",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Le Prestataire proposera un emploi aux Salariés Transférés à des conditions substantiellement comparables à leurs conditions actuelles auprès du Client, et reconnaîtra leur ancienneté auprès du Client aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages du Prestataire.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSFERRED_EMPLOYEE_OFFER",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSFERRED_EMPLOYEE_OFFER",
+            "start": 7,
+            "end": 316,
+            "text": "Partie contractante B proposera un emploi aux Salariés Transférés à des conditions substantiellement comparables à leurs conditions actuelles auprès de la Partie contractante A, et reconnaîtra leur ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8c04a8016c663e71037b006a09fcdec774c31b2ee18f71086944c0f37ad82589",
+        "normalized_concept": "TRANSFERRED_EMPLOYEE_OFFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PRIOR_SERVICE_RECOGNITION",
+        "rank": 92,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRIOR_SERVICE_RECOGNITION",
+            "start": 160,
+            "end": 316,
+            "text": "reconnaîtra leur ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4e0276a4bf9882694daeb9abb9fe13cef8c99fc5f224e5506e513e2eb10b5ce9",
+        "normalized_concept": "PRIOR_SERVICE_RECOGNITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BENEFITS_ELIGIBILITY_CONTINUITY",
+            "start": 177,
+            "end": 316,
+            "text": "ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "154afe519460119cf413d3618e21058576002c06a7f4f54c64649164b4cb493d",
+        "normalized_concept": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TRANSFERRED_EMPLOYEE_OFFER",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSFERRED_EMPLOYEE_OFFER",
+            "start": 7,
+            "end": 316,
+            "text": "Partie contractante B proposera un emploi aux Salariés Transférés à des conditions substantiellement comparables à leurs conditions actuelles auprès de la Partie contractante A, et reconnaîtra leur ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8c04a8016c663e71037b006a09fcdec774c31b2ee18f71086944c0f37ad82589",
+        "normalized_concept": "TRANSFERRED_EMPLOYEE_OFFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PRIOR_SERVICE_RECOGNITION",
+        "rank": 92,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRIOR_SERVICE_RECOGNITION",
+            "start": 160,
+            "end": 316,
+            "text": "reconnaîtra leur ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4e0276a4bf9882694daeb9abb9fe13cef8c99fc5f224e5506e513e2eb10b5ce9",
+        "normalized_concept": "PRIOR_SERVICE_RECOGNITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BENEFITS_ELIGIBILITY_CONTINUITY",
+            "start": 177,
+            "end": 316,
+            "text": "ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "154afe519460119cf413d3618e21058576002c06a7f4f54c64649164b4cb493d",
+        "normalized_concept": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "Clause 4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Le Client paiera au Prestataire des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 266,
+            "text": "Partie contractante A paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "116470ea2c6fdb032b77028cefa572ab9fdee7e1dd5ed48435c37f58242a7352",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 220,
+            "end": 267,
+            "text": "paiement dû dans un délai de trente (30) jours."
+          },
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 266,
+            "text": "Partie contractante A paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6eb8db2a9ad51e540a2ff9e280e3403fd4dd0ad0ad86b361db26d34d44b18090",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 14,
+            "end": 266,
+            "text": "paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1f93d614eef320380defab6e04e566f131d803f825a9d89c0dca75c3e0837c2c",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 266,
+            "text": "Partie contractante A paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "116470ea2c6fdb032b77028cefa572ab9fdee7e1dd5ed48435c37f58242a7352",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 220,
+            "end": 267,
+            "text": "paiement dû dans un délai de trente (30) jours."
+          },
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 7,
+            "end": 266,
+            "text": "Partie contractante A paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6eb8db2a9ad51e540a2ff9e280e3403fd4dd0ad0ad86b361db26d34d44b18090",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 14,
+            "end": 266,
+            "text": "paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1f93d614eef320380defab6e04e566f131d803f825a9d89c0dca75c3e0837c2c",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Le Prestataire maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données du Client conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera le Client de tout incident de sécurité dans un délai de vingt-quatre (24) heures.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 264,
+            "end": 300,
+            "text": "notifiera la Partie contractante A de tout incident"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e3e9037432d721c6950d49f2086305d6521837af4c12b45ca095255350310a9e",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 19,
+            "end": 97,
+            "text": "maintiendra des mesures de sauvegarde administratives, techniques et physiques"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5179f603bac823b7c55941fc0e60ba4d00a7ba75ecc328bd332708c1610cc11f",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 264,
+            "end": 354,
+            "text": "notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1af2b07b0d10d1009b58f20655afd5db3844a0b441e4eb6ca4ede559c0eb4ecc",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 264,
+            "end": 300,
+            "text": "notifiera la Partie contractante A de tout incident"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e3e9037432d721c6950d49f2086305d6521837af4c12b45ca095255350310a9e",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 19,
+            "end": 97,
+            "text": "maintiendra des mesures de sauvegarde administratives, techniques et physiques"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5179f603bac823b7c55941fc0e60ba4d00a7ba75ecc328bd332708c1610cc11f",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 264,
+            "end": 354,
+            "text": "notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1af2b07b0d10d1009b58f20655afd5db3844a0b441e4eb6ca4ede559c0eb4ecc",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Le présent Accord a une durée initiale de cinq (5) ans. À l'expiration ou à la résiliation, le Prestataire fournira une assistance raisonnable à la sortie pendant une période pouvant aller jusqu'à cent quatre-vingts (180) jours pour faciliter la transition vers le Client ou un prestataire successeur, à la demande du Client et à ses frais aux tarifs alors en vigueur du Prestataire.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée initiale de cinq (5) an",
+            "start": 28,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "termination",
+        "anchors": [
+          "aller",
+          "alors",
+          "ans",
+          "assistance",
+          "aux",
+          "cent",
+          "cinq",
+          "client",
+          "demande",
+          "durée",
+          "en",
+          "expiration",
+          "faciliter",
+          "fournira",
+          "frais",
+          "initiale",
+          "jours",
+          "jusqu",
+          "pendant",
+          "pouvant",
+          "prestataire",
+          "présent",
+          "période",
+          "quatre",
+          "raisonnable",
+          "sortie",
+          "successeur",
+          "tarif",
+          "terminate",
+          "transition",
+          "vers",
+          "vigueur",
+          "vingt"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée initiale de cinq (5) an",
+            "start": 28,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "7.1",
+    "source_language": "fr",
+    "source_text": "7.1 La responsabilité globale du Prestataire n'excédera pas les honoraires payés par le Client au cours des douze (12) mois précédant la réclamation, sauf en cas de violation de l'article 5 (Sécurité des Données et Conformité) ou des obligations d'indemnisation du Prestataire, lesquelles seront plafonnées à deux (2) fois ces honoraires.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 150,
+            "end": 261,
+            "text": "sauf en cas de violation de l'article 5 (Sécurité des Données et Conformité) ou des obligations d'indemnisation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "3cc34966f0b5ab237638b573716b2a3ff385ef6d49bde2c130e9ceda84615bcb",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 7,
+            "end": 279,
+            "text": "responsabilité globale de la Partie contractante B n'excédera pas les honoraires payés par la Partie contractante A au cours des douze (12) mois précédant la réclamation, sauf en cas de violation de l'article 5 (Sécurité des Données et Conformité) ou des obligations d'indemnisation de la Partie contractante B, l"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8f90069c34945634552a7d2b1acdbbdea5d89fc5a1b545a2b337b12d6b9424ff",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 5,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 150,
+            "end": 261,
+            "text": "sauf en cas de violation de l'article 5 (Sécurité des Données et Conformité) ou des obligations d'indemnisation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "3cc34966f0b5ab237638b573716b2a3ff385ef6d49bde2c130e9ceda84615bcb",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 7,
+            "end": 279,
+            "text": "responsabilité globale de la Partie contractante B n'excédera pas les honoraires payés par la Partie contractante A au cours des douze (12) mois précédant la réclamation, sauf en cas de violation de l'article 5 (Sécurité des Données et Conformité) ou des obligations d'indemnisation de la Partie contractante B, l"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8f90069c34945634552a7d2b1acdbbdea5d89fc5a1b545a2b337b12d6b9424ff",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 5,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

@@ -1,0 +1,83 @@
+====================================================================================================
+V4.1.14 GENERATED SEMANTIC PROFILE PROBE
+====================================================================================================
+
+====================================================================================================
+EN_CONF_SOURCE
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: The Receiving Party shall return or destroy all Confidential Information.
+
+====================================================================================================
+EN_TERM_GENERATED
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: This clause determines when the contract can end and whether notice or an opportunity to cure applies.
+
+====================================================================================================
+FR_CONF_SOURCE
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: La Partie destinataire doit restituer ou détruire toutes les Informations confidentielles.
+
+====================================================================================================
+FR_TERM_GENERATED
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: Cette clause détermine quand le contrat peut prendre fin et si un préavis ou une période de remède s'applique.
+
+====================================================================================================
+AR_CONF_SOURCE
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: ['MANDATORY_OBLIGATION']
+TEXT: يجب على الطرف المستلم إعادة أو إتلاف جميع المعلومات السرية.
+
+====================================================================================================
+AR_TERM_GENERATED
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: تحدد هذه المادة متى يمكن إنهاء العقد وما إذا كان الإشعار أو مهلة المعالجة تنطبق.
+
+====================================================================================================
+EN_REMEDIES_SOURCE
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: In the event of an actual or threatened breach, the Receiving Party shall be entitled to seek injunctive relief and specific performance.
+
+====================================================================================================
+EN_GENERIC_GENERATED
+PRIMARY: UNKNOWN
+CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SUPPORT: []
+RANKED: []
+TEXT: This clause should be reviewed because it may affect legal, financial, or operational obligations.

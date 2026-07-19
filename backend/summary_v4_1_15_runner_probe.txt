@@ -1,0 +1,53 @@
+====================================================================================================
+V4.1.15 RUNNER PROBE
+====================================================================================================
+
+FILE: audit_negotiation_consistency.py
+HITS: ['analyze_contract_clauses']
+
+FILE: diagnose_all_11_fields_ar.py
+HITS: ['regression_results_multilang']
+
+FILE: diagnose_all_blocked_ar.py
+HITS: ['regression_results_multilang']
+
+FILE: diagnose_all_blocked_multilang.py
+HITS: ['regression_results_multilang']
+
+FILE: inspect_semantic_runtime_shape.py
+HITS: ['regression_results_multilang']
+
+FILE: python audit_negotiation_consistency.py
+HITS: ['analyze_contract_clauses']
+
+FILE: run_15_contracts_multilang.py
+HITS: ['regression_results_multilang']
+
+FILE: run_45_contracts_multilang.py
+HITS: ['regression_results_multilang']
+
+FILE: run_ar_only.py
+HITS: ['regression_results_multilang']
+
+FILE: summary_v4_1_15_deterministic_hardening_patcher.py
+HITS: ['frontend']
+
+FILE: test_contract_quality.py
+HITS: ['analyze_contract_clauses']
+
+FILE: test_isolation_full_chain.py
+HITS: ['analyze_contract_clauses']
+
+FILE: test_isolation_full_chain_v2.py
+HITS: ['analyze_contract_clauses']
+
+====================================================================================================
+RECENT FRONTEND / CONTRACT OUTPUTS
+====================================================================================================
+last_analysis.json | DIR= False
+last_analysis_clause_candidates.txt | DIR= False
+last_analysis_structure_probe.txt | DIR= False
+cybersecurity_fr_v4_1_15.txt | DIR= False
+result_Kaur et al. - 2023 - Artificial intelligence for cybersecurity Literat.json | DIR= False
+semantic_profile_shadow_v4_1_12_cybersecurity | DIR= True
+semantic_profile_shadow_v4_1_12_cybersecurity_runtime.txt | DIR= False

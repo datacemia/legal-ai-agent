@@ -1,0 +1,672 @@
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+BNB_TEXT_PREVIEW
+92000 NANTERRE
+8 RUE DU 8 MAI 1945
+MME CECILIA JOLY
+03304 02075
+RUEIL MAIR FOCH
+Tél. Agence : 01 55 47 92 56
+(numéro non surtaxé)
+Service Client
+R
+ELEVE DE COMPTE CHEQUES
+du 9 septembre 2024 au 9 octobre 2024
+RIB
+: 30004 02075 00001019787 85
+IBAN
+: FR76 3000 4020 7500 0010 1978 785
+BIC
+: BNPAFRPPXXX
+Les sommes déposées sur ce compte sont éligibles à la garantie des dépôts du Fonds de Garantie des
+Dépôts et de Résolution, sauf exclusions réglementaires en raison de la nature des personnes et/ou des
+dépôts.
+www.garantiedesdepots.fr
+Monnaie du compte : Euro
+D
+ate
+N
+ature des opérations
+V
+aleur
+D
+ébit
+C
+rédit
+SOLDE CREDITEUR AU 09.09.2024 1 966,58
+10.09 10.09 10,00PRLV SEPA FAE ECH/100924 ID
+EMETTEUR/FR12ZZZ394002
+MDT/MVE20190327004523824001000000011515
+REF/PREL FAE 11999 DU 2024-09-10
+LIB/ACTION ENFANCE
+10.09 10.09 15,00PRLV SEPA SOCIETE PROTECTRICE DES
+ANIMAUX ECH/100924 ID
+EMETTEUR/FR12SPA420774 MDT/SLMP022154377
+REF/PRLVT SPA 231545 DU 2024-09-10
+LIB/SPA
+10.09 10.09 1 080,00VIR SCT INST EMIS /MOTIF FORFAIT TALENTS
+BOOST /BEN CATHERINE DUVAL /REFDO
+CF43CD2BF4C642CDB49D2C1CE36A2571 /REFBEN
+NOTPROVIDED
+11.09 11.09 861,58CHANGEMENT D AGENCE BNP PARIBAS
+TOTAL DES OPERATIONS 1 966,58 0,00
+SOLDE CREDITEUR AU 09.10.2024 0,00
+Montant de votre autorisation de débit en compte au 09.10.2024 : 100,00 euros au taux nominal de 15,90 %, soit un
+TAEG de 16,9 % (le TAEG effectif résultera de l'utilisation de débit en compte dans la limite du taux de l'usure et
+sera communiqué lors de l'arrêté trimestriel).
+BNP PARIBAS SA au capital de 2 261 621 342 € - Siège social : 16 bd des Italiens, 75009 Paris - RCS Paris n° 662 042 449 - Id. CE FR76 662042449 - ORIAS n° 07 022 735
+3477 (service gratuit + prix appel) - mabanque.bnpparibas - Réclamations/Exécution du contrat : Conseiller en agence (ligne directe n° non surtaxé)
+V o t r e s a t i s f a c t i o n e s t n o t r e p r i o r i t é . T o u t e f o i s , s i v o u s s o u h a i t e z f a i r e u n e r é c l a m a t i o n :
+- A d r e s s e z - v o u s à v o t r e i n t e r l o c u t e u r h a b i t u e l , v o t r e C o n s e i l l e r o u v o t r e é q u i p e d e C o n s e i l l e r s , d e v i v e v o i x , p a r é c r i t o u v i a l e f o r m u l a i r e e n
+l i g n e a c c e s s i b l e s u r n o t r e s i t e o u s u r v o t r e a p p l i c a t i o n m o b i l e
+( 1 )
+. V o u s p o u v e z a u s s i c o n t a c t e r l e S e r v i c e C l i e n t ( c o o r d o n n é e s e n e n - t ê t e
+d u c o u r r i e r ) .
+- S i v o
+[
+  {
+    "file": "1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "1v.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "772605810-كشف-حساب-بنكي (2).pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "820869074-كشف-حساب-جديد.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ARABE 4.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ARABE1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ARABE2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ARABE3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "arabe5.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "arabie saudite.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "BANCORP.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "BANK CHAABI.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "bank of america.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "banque d'epagne.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "banque populare 1 france.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "BANQUE POSTALE (2).pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "banque postale.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "belfis.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "BMCE.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "bnb 1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "chase.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "cic.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "city bank.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "credit mutuel.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "dakar.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EGPTE.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI10.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI11.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI12.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI5.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI6.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ejjami7.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ejjami8.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "EJJAMI9.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "emirate.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "g1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "g2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "G3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "general1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "habitat.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "ISLAMIQE.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "llc.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "mercury.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "n26 .1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "OMAR1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "OMAR2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "OMAR3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "Relevés compte 3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "revolut france.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "soc general.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "well fargo.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  },
+  {
+    "file": "x.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "error": "name 'parse_global_value_date_debit_credit_statement' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 163, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 87, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 19186, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16049, in _runexa_core_extract_transactions\n    (\"global_value_date_debit_credit\", parse_global_value_date_debit_credit_statement, 2),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nNameError: name 'parse_global_value_date_debit_credit_statement' is not defined\n"
+  }
+]
+
+SUMMARY
+TOTAL=56
+VALIDATED=0
+NOT_VALIDATED=56
+
+VALIDATED FILES
+
+NOT VALIDATED FILES
+ERROR 1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR 1v.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR 2.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR 3.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR 772605810-كشف-حساب-بنكي (2).pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR 820869074-كشف-حساب-جديد.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ARABE 4.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ARABE1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ARABE2.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ARABE3.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR arabe5.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR arabie saudite.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR BANCORP.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR BANK CHAABI.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR bank of america.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR banque d'epagne.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR banque populare 1 france.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR BANQUE POSTALE (2).pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR banque postale.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR belfis.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR BMCE.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR bnb 1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR chase.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR cic.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR city bank.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR credit mutuel.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR dakar.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EGPTE.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI10.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI11.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI12.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI2.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI3.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI5.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI6.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ejjami7.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ejjami8.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR EJJAMI9.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR emirate.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR g1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR g2.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR G3.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR general1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR habitat.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR ISLAMIQE.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR llc.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR mercury.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR n26 .1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR OMAR1.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR OMAR2.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR OMAR3.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR Relevés compte 3.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR revolut france.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR soc general.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR well fargo.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR x.pdf -> name 'parse_global_value_date_debit_credit_statement' is not defined
+
+DETAIL
+ERROR              1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              1v.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              772605810-كشف-حساب-بنكي (2).pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              820869074-كشف-حساب-جديد.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ARABE 4.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ARABE1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ARABE2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ARABE3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              arabe5.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              arabie saudite.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              BANCORP.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              BANK CHAABI.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              bank of america.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              banque d'epagne.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              banque populare 1 france.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              BANQUE POSTALE (2).pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              banque postale.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              belfis.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              BMCE.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              bnb 1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              chase.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              cic.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              city bank.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              credit mutuel.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              dakar.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EGPTE.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI10.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI11.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI12.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI5.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI6.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ejjami7.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ejjami8.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              EJJAMI9.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              emirate.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              g1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              g2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              G3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              general1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              habitat.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              ISLAMIQE.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              llc.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              mercury.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              n26 .1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              OMAR1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              OMAR2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              OMAR3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              Relevés compte 3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              revolut france.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              soc general.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              well fargo.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined
+ERROR              x.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=name 'parse_global_value_date_debit_credit_statement' is not defined

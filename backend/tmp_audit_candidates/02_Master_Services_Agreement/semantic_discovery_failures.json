@@ -1,0 +1,1118 @@
+[
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "2.2",
+    "source_language": "en",
+    "source_text": "2.2 Provider reserves the right to unilaterally increase fees for any renewal term by up to fifteen percent (15%) upon thirty (30) days' written notice, without requiring Client's consent.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "term by up to fifteen percent (15%) upon thirty (30) days",
+            "start": 78,
+            "end": 135
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "pricing_adjustment",
+        "anchors": [
+          "client",
+          "consent",
+          "days",
+          "fees",
+          "fifteen",
+          "increase",
+          "notice",
+          "percent",
+          "provider",
+          "renewal",
+          "requiring",
+          "reserve",
+          "right",
+          "term",
+          "thirty",
+          "unilaterally",
+          "up",
+          "upon",
+          "written"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "term by up to fifteen percent (15%) upon thirty (30) days",
+            "start": 78,
+            "end": 135
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "4.2",
+    "source_language": "en",
+    "source_text": "4.2 Provider may terminate this Agreement or any SOW immediately, for any reason or no reason, upon written notice to Client. Client may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 95,
+            "end": 114,
+            "text": "upon written notice"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 218,
+            "end": 256,
+            "text": "written notice and opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e31eaae6e51a4a586488b53e89aef6ee6bcaf8c187f93cdcfb1ed5b105af47fc",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 133,
+            "end": 256,
+            "text": "may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 137,
+            "end": 256,
+            "text": "terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "c0454db3857e2e3fb7be4eb936eb717e8bd72b2c57509875294b495d8d520b86",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 108,
+            "end": 257,
+            "text": "notice to Contracting Party A. Contracting Party A may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e21072e08b6449321c75d9ed2647801df50c19a494a82f347a2df8f4d0ce7131",
+        "normalized_concept": "NOTICE_PROCEDURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 95,
+            "end": 114,
+            "text": "upon written notice"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 218,
+            "end": 256,
+            "text": "written notice and opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e31eaae6e51a4a586488b53e89aef6ee6bcaf8c187f93cdcfb1ed5b105af47fc",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 133,
+            "end": 256,
+            "text": "may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 137,
+            "end": 256,
+            "text": "terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "c0454db3857e2e3fb7be4eb936eb717e8bd72b2c57509875294b495d8d520b86",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 108,
+            "end": 257,
+            "text": "notice to Contracting Party A. Contracting Party A may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e21072e08b6449321c75d9ed2647801df50c19a494a82f347a2df8f4d0ce7131",
+        "normalized_concept": "NOTICE_PROCEDURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 This Agreement shall commence on the Effective Date and continue for an initial term of two (2) years, renewing automatically for successive one (1) year terms unless either Party provides ninety (90) days' written notice of non-renewal.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of two (2) years",
+            "start": 76,
+            "end": 105
+          },
+          {
+            "text": "terms unless either Party provides ninety (90) days",
+            "start": 158,
+            "end": 209
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 107,
+            "end": 241,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides ninety (90) days' written notice of non-renewal."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "0715ae9171ed61ce62fcd96164e74d7f993765568cad45b584b2bd2217792eb2",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 107,
+            "end": 241,
+            "text": "renewing automatically for successive one (1) year terms unless either Party provides ninety (90) days' written notice of non-renewal."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "0715ae9171ed61ce62fcd96164e74d7f993765568cad45b584b2bd2217792eb2",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of two (2) years",
+            "start": 76,
+            "end": 105
+          },
+          {
+            "text": "terms unless either Party provides ninety (90) days",
+            "start": 158,
+            "end": 209
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "3.2",
+    "source_language": "en",
+    "source_text": "3.2 All Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Client upon full payment of the applicable fees.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 136,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d84c5142f01e59ecd0ba322c97872b6236eede29264cf36d85ed625477ed0f2c",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 136,
+            "text": "Deliverables shall be deemed \"work made for hire\" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d84c5142f01e59ecd0ba322c97872b6236eede29264cf36d85ed625477ed0f2c",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 19,
+            "end": 156,
+            "text": "perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards"
+          },
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 31,
+            "end": 156,
+            "text": "services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e679b6099a483802d3d3ec64c7ef2056c5cd610711d08d99bc3c76cfc3b732ac",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 156,
+            "text": "Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "87dbf33f987c7c60e2804a60c6f3ca9ee6418fe369d441fb2a9f041fdf7b26af",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 19,
+            "end": 156,
+            "text": "perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards"
+          },
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 31,
+            "end": 156,
+            "text": "services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e679b6099a483802d3d3ec64c7ef2056c5cd610711d08d99bc3c76cfc3b732ac",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 156,
+            "text": "Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "87dbf33f987c7c60e2804a60c6f3ca9ee6418fe369d441fb2a9f041fdf7b26af",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Client shall pay all fees set forth in each SOW within forty-five (45) days of the invoice date. Any amount unpaid after sixty (60) days shall accrue interest at 1% per month.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 99,
+            "text": "Contracting Party A shall pay all fees set forth in each SOW within forty-five (45) days of the invoice date"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "112fc1c1b5b8cea7fcc3b7b58be26dad1cff85f9fd20e9917de4e1497d31dc97",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 11,
+            "end": 99,
+            "text": "shall pay all fees set forth in each SOW within forty-five (45) days of the invoice date"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9d7bc3781c9209391a2c0d2410c146ed63931a3521ba876c93ec2fc9cc3e8493",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 99,
+            "text": "Contracting Party A shall pay all fees set forth in each SOW within forty-five (45) days of the invoice date"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "112fc1c1b5b8cea7fcc3b7b58be26dad1cff85f9fd20e9917de4e1497d31dc97",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 11,
+            "end": 99,
+            "text": "shall pay all fees set forth in each SOW within forty-five (45) days of the invoice date"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9d7bc3781c9209391a2c0d2410c146ed63931a3521ba876c93ec2fc9cc3e8493",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Provider retains all right, title, and interest in its pre-existing tools, methodologies, and know-how used to deliver the services.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 13,
+            "end": 106,
+            "text": "retains all right, title, and interest in its pre-existing tools, methodologies, and know-how"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d5155994cc6cf54bbf0180ea3fe162bd3fffcf1bb6c97201672b14140db2eae7",
+        "normalized_concept": "BACKGROUND_IP_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 13,
+            "end": 106,
+            "text": "retains all right, title, and interest in its pre-existing tools, methodologies, and know-how"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "d5155994cc6cf54bbf0180ea3fe162bd3fffcf1bb6c97201672b14140db2eae7",
+        "normalized_concept": "BACKGROUND_IP_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES",
+            "start": 245,
+            "end": 289
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 4,
+            "end": 73,
+            "text": "EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "1afd09bf8a100420733a4b415e67ac32e8d3197c5eaf60201997881d7ae933a9",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 200,
+            "end": 289,
+            "text": "IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "0c0233c3d96412ce1dcb7e1e2728f5d184808b3df1578a32b56fb3e51ef19454",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 273,
+            "end": 333,
+            "text": "PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "656f0c5b160e51ac9bf3d2d7e437a36eb963b974fb4855733a9b430b6f9b295e",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 75,
+            "end": 198,
+            "text": "IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "279fd28125fff31535b5385298349659d8d1e8e6c63e8b814669201bf7274121",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 4,
+            "end": 73,
+            "text": "EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "1afd09bf8a100420733a4b415e67ac32e8d3197c5eaf60201997881d7ae933a9",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 75,
+            "end": 198,
+            "text": "IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "279fd28125fff31535b5385298349659d8d1e8e6c63e8b814669201bf7274121",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

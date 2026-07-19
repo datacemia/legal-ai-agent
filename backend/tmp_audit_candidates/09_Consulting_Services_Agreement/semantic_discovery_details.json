@@ -1,0 +1,1089 @@
+[
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 Consultant's aggregate liability arising from this Agreement shall not exceed the fees paid by Client under the applicable Statement of Work in the six (6) months preceding the claim.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aggregate liability arising from this Agreement shall not exceed",
+            "start": 17,
+            "end": 81
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 17,
+            "end": 186,
+            "text": "aggregate liability arising from this Agreement shall not exceed the fees paid by Contracting Party A under the applicable Statement of Work in the six (6) months preceding the claim"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "136fdfea1e5f57089a4df9c5e631739bc19f3f4ce0fdb2844340295aeb16cb56",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 65,
+            "end": 187,
+            "text": "shall not exceed the fees paid by Contracting Party A under the applicable Statement of Work in the six (6) months preceding the claim."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "cbbcc5c214f6216f98eba6f12821fb57fd67e92d4ac7c64a2e8a1574755defa3",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 65,
+            "end": 187,
+            "text": "shall not exceed the fees paid by Contracting Party A under the applicable Statement of Work in the six (6) months preceding the claim."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "cbbcc5c214f6216f98eba6f12821fb57fd67e92d4ac7c64a2e8a1574755defa3",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 All work product, reports, analyses, and recommendations developed by Consultant specifically for Client under this Agreement shall be deemed \"work made for hire\" and shall be owned exclusively by Client upon payment in full.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 229,
+            "text": "work product, reports, analyses, and recommendations developed by Contracting Party B specifically for Contracting Party A under this Agreement shall be deemed \"work made for hire\" and shall be owned exclusively by Contracting Party A upon payment in full."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "232ab641b850113176deab157adbe46142b27ea7db68aba50e3520a922a1a637",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 8,
+            "end": 229,
+            "text": "work product, reports, analyses, and recommendations developed by Contracting Party B specifically for Contracting Party A under this Agreement shall be deemed \"work made for hire\" and shall be owned exclusively by Contracting Party A upon payment in full."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "232ab641b850113176deab157adbe46142b27ea7db68aba50e3520a922a1a637",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Consultant is an independent contractor and not an employee, agent, joint venturer, or partner of Client. Consultant shall be solely responsible for all applicable taxes, insurance, and benefits.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "employment",
+        "anchors": [
+          "agent",
+          "applicable",
+          "benefit",
+          "client",
+          "consultant",
+          "contractor",
+          "employee",
+          "independent",
+          "insurance",
+          "joint",
+          "not",
+          "partner",
+          "responsible",
+          "solely",
+          "taxes",
+          "venturer"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Consultant shall perform the Services described in each Statement of Work in a professional manner. Client shall pay Consultant's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 104,
+            "end": 222,
+            "text": "Contracting Party A shall pay Contracting Party B's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "02734c33bbd5d7f122ca08e5fd576c56c39be675cb3a58a76e35b5b9ad54a284",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 21,
+            "end": 102,
+            "text": "perform the Services described in each Statement of Work in a professional manner"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4e70faa1db4ef2d804d3bb647d71b1006e2e0331f25f4cbd59bc71ea9c11740e",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 102,
+            "text": "Contracting Party B shall perform the Services described in each Statement of Work in a professional manner"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1449296d14e53d34abfe25c982f23044e69fc9d23b2d6ae04001af7d1104ab1c",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 111,
+            "end": 222,
+            "text": "shall pay Contracting Party B's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "39624b74831d02d217d4ec9b6afc47b66924b4ac1b0854019c75a68a42aec867",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 111,
+            "end": 222,
+            "text": "shall pay Contracting Party B's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8b9d03c198abad608596eb97382fa437f4f4120ad7a1ea0532f8802d852f20d5",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 104,
+            "end": 222,
+            "text": "Contracting Party A shall pay Contracting Party B's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "02734c33bbd5d7f122ca08e5fd576c56c39be675cb3a58a76e35b5b9ad54a284",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 21,
+            "end": 102,
+            "text": "perform the Services described in each Statement of Work in a professional manner"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4e70faa1db4ef2d804d3bb647d71b1006e2e0331f25f4cbd59bc71ea9c11740e",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 102,
+            "text": "Contracting Party B shall perform the Services described in each Statement of Work in a professional manner"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1449296d14e53d34abfe25c982f23044e69fc9d23b2d6ae04001af7d1104ab1c",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 111,
+            "end": 222,
+            "text": "shall pay Contracting Party B's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "39624b74831d02d217d4ec9b6afc47b66924b4ac1b0854019c75a68a42aec867",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 111,
+            "end": 222,
+            "text": "shall pay Contracting Party B's fees as set forth in the applicable Statement of Work within thirty (30) days of invoice"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8b9d03c198abad608596eb97382fa437f4f4120ad7a1ea0532f8802d852f20d5",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SOW",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "3.2",
+    "source_language": "en",
+    "source_text": "3.2 Consultant retains ownership of its pre-existing methodologies, frameworks, and general know-how, and may reuse general knowledge and skills gained during the engagement in future engagements with other clients, provided no Client Confidential Information is disclosed.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 15,
+            "end": 100,
+            "text": "retains ownership of its pre-existing methodologies, frameworks, and general know-how"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "ea5a8d8955365812252c9976f08df06eff43c572369a7a776c9587fd27eb197b",
+        "normalized_concept": "BACKGROUND_IP_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 15,
+            "end": 100,
+            "text": "retains ownership of its pre-existing methodologies, frameworks, and general know-how"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "ea5a8d8955365812252c9976f08df06eff43c572369a7a776c9587fd27eb197b",
+        "normalized_concept": "BACKGROUND_IP_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Consultant shall keep confidential all non-public information of Client disclosed in connection with the Services, and shall not disclose such information to third parties without Client's prior written consent.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "keep confiden",
+            "start": 21,
+            "end": 34
+          }
+        ]
+      },
+      {
+        "concept": "NON_DISCLOSURE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "shall not disclos",
+            "start": 123,
+            "end": 140
+          }
+        ]
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "without Client's prior written consent",
+            "start": 176,
+            "end": 214
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 176,
+            "end": 214,
+            "text": "without Contracting Party A's prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 193,
+            "end": 214,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "ef9fc4bc0dd30fdadc0bef0e78719400ccfcafefe055e1a13310c5f6cfa747c2",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 193,
+            "end": 214,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "20cd296bbb4df4c45759dac41cd93b6d410c18a8dc2628862d1fa2dd2ced4acc",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 123,
+            "end": 215,
+            "text": "shall not disclose such information to third parties without Contracting Party A's prior written consent."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3a8b0c17de8d1f21fc1c0537a559c0ed97c36676d81a869d89da266754cde827",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 15,
+            "end": 215,
+            "text": "shall keep confidential all non-public information of Contracting Party A disclosed in connection with the Services, and shall not disclose such information to third parties without Contracting Party A's prior written consent."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8899c1bb7839ca635825306825f27d083642a49a40879cdc436cff773d765760",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 123,
+            "end": 215,
+            "text": "shall not disclose such information to third parties without Contracting Party A's prior written consent."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3a8b0c17de8d1f21fc1c0537a559c0ed97c36676d81a869d89da266754cde827",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "NON_DISCLOSURE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "shall not disclos",
+            "start": 123,
+            "end": 140
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 This Agreement shall continue until completion of the Services described in the applicable Statement of Work, unless earlier terminated. Either Party may terminate this Agreement for convenience upon thirty (30) days' written notice, with Client responsible for fees earned through the effective date of termination.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "terminate this Agreement for convenience upon thirty (30) days",
+            "start": 158,
+            "end": 220
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 222,
+            "end": 319,
+            "text": "written notice, with Contracting Party A responsible for fees earned through the effective date of termination"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c4e84b9f89870f536b9d35675361c92df33c79d15e57aa9eadf5f91201d99b56",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 154,
+            "end": 319,
+            "text": "may terminate this Agreement for convenience upon thirty (30) days' written notice, with Contracting Party A responsible for fees earned through the effective date of termination"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 158,
+            "end": 319,
+            "text": "terminate this Agreement for convenience upon thirty (30) days' written notice, with Contracting Party A responsible for fees earned through the effective date of termination"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "ea26b096b41383a4bb76f28739d512077b37fd3d3b59a8e7ec35332e749edf49",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 222,
+            "end": 319,
+            "text": "written notice, with Contracting Party A responsible for fees earned through the effective date of termination"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c4e84b9f89870f536b9d35675361c92df33c79d15e57aa9eadf5f91201d99b56",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 154,
+            "end": 319,
+            "text": "may terminate this Agreement for convenience upon thirty (30) days' written notice, with Contracting Party A responsible for fees earned through the effective date of termination"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 158,
+            "end": 319,
+            "text": "terminate this Agreement for convenience upon thirty (30) days' written notice, with Contracting Party A responsible for fees earned through the effective date of termination"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "ea26b096b41383a4bb76f28739d512077b37fd3d3b59a8e7ec35332e749edf49",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "terminate this Agreement for convenience upon thirty (30) days",
+            "start": 158,
+            "end": 220
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

@@ -1,0 +1,1129 @@
+[
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.",
+    "primary_type": "pricing",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذه الاتفاقية الأولية خمس (5) سنوات",
+            "start": 4,
+            "end": 43
+          },
+          {
+            "text": "مدة تصل إلى مائة وثمانين (180) يوم",
+            "start": 104,
+            "end": 138
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "pricing",
+        "anchors": [
+          "الأسعار",
+          "الأولية",
+          "الإنهاء",
+          "الانتقال",
+          "الانتهاء",
+          "السائدة",
+          "العميل",
+          "المزود",
+          "بناء",
+          "تصل",
+          "حينذاك",
+          "خلف",
+          "خمس",
+          "سنوات",
+          "طلب",
+          "عند",
+          "لتسهيل",
+          "لدى",
+          "للخروج",
+          "لمدة",
+          "مائة",
+          "مدة",
+          "مزود",
+          "مساعدة",
+          "معقولة",
+          "نفقته",
+          "وثمانين",
+          "وعلى",
+          "وفق",
+          "يقدم",
+          "يوما"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذه الاتفاقية الأولية خمس (5) سنوات",
+            "start": 4,
+            "end": 43
+          },
+          {
+            "text": "مدة تصل إلى مائة وثمانين (180) يوم",
+            "start": 104,
+            "end": 138
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 36,
+            "end": 180,
+            "text": "خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الطرف الطرف المتعاقد ب بين المنقولين، بأقل قدر من التعطيل لعمليات الطرف الطرف المتعاقد ب أ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2a2f81e1989fb5bbf75714e1e19427358755f30ffe86dd72422410a6fcff273",
+        "normalized_concept": "TRANSITION_PLAN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 24,
+            "end": 134,
+            "text": "ينفذ الطرف الطرف المتعاقد ب ب خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الطرف الطرف المتعاقد ب بين"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "841241b96955aadbbe572557b25d8793c5f5a41dd547960cde6856dc20662cb2",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 36,
+            "end": 180,
+            "text": "خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الطرف الطرف المتعاقد ب بين المنقولين، بأقل قدر من التعطيل لعمليات الطرف الطرف المتعاقد ب أ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2a2f81e1989fb5bbf75714e1e19427358755f30ffe86dd72422410a6fcff273",
+        "normalized_concept": "TRANSITION_PLAN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 90,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 24,
+            "end": 134,
+            "text": "ينفذ الطرف الطرف المتعاقد ب ب خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الطرف الطرف المتعاقد ب بين"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "841241b96955aadbbe572557b25d8793c5f5a41dd547960cde6856dc20662cb2",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 ينفذ المزود الخدمات وفقاً لمستويات الخدمة المحددة في الملحق أ. ينشئ الطرفان لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 67,
+            "end": 163,
+            "text": "ينشئ الطرفان لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 80,
+            "end": 163,
+            "text": "لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "procedural_state": "JOINT_GOVERNANCE_COMMITTEE",
+        "evidence_hash": "69f545e46ac83cd943586f1b84a7f61581a585174ecfad5d4c36e51b695495f6",
+        "normalized_concept": "JOINT_GOVERNANCE_COMMITTEE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 65,
+            "text": "ينفذ الطرف الطرف المتعاقد ب ب الخدمات وفقاً لمستويات الخدمة المحددة في الملحق أ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "57278e7f100b70be9ff42a0dc5ac34950db81133f3d16ccb35be125990e230fc",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 67,
+            "end": 163,
+            "text": "ينشئ الطرفان لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 80,
+            "end": 163,
+            "text": "لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "procedural_state": "JOINT_GOVERNANCE_COMMITTEE",
+        "evidence_hash": "69f545e46ac83cd943586f1b84a7f61581a585174ecfad5d4c36e51b695495f6",
+        "normalized_concept": "JOINT_GOVERNANCE_COMMITTEE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 65,
+            "text": "ينفذ الطرف الطرف المتعاقد ب ب الخدمات وفقاً لمستويات الخدمة المحددة في الملحق أ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "57278e7f100b70be9ff42a0dc5ac34950db81133f3d16ccb35be125990e230fc",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يعرض المزود على الموظفين المنقولين عملاً بشروط مماثلة إلى حد كبير لشروطهم الحالية لدى العميل، ويعترف بأقدميتهم لدى العميل لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا المزود.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSFERRED_EMPLOYEE_OFFER",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSFERRED_EMPLOYEE_OFFER",
+            "start": 4,
+            "end": 186,
+            "text": "يعرض الطرف الطرف المتعاقد ب ب على الطرف الطرف المتعاقد ب بين المنقولين عملاً بشروط مماثلة إلى حد كبير لشروطهم الحالية لدى الطرف الطرف المتعاقد ب أ، ويعترف بأقدميتهم لدى الطرف الطرف المتعاقد ب أ لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "80be8ce43573622412402d506f5cdfbd7d4170474211c6069aac0a0db488ef26",
+        "normalized_concept": "TRANSFERRED_EMPLOYEE_OFFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PRIOR_SERVICE_RECOGNITION",
+        "rank": 92,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRIOR_SERVICE_RECOGNITION",
+            "start": 99,
+            "end": 186,
+            "text": "يعترف بأقدميتهم لدى الطرف الطرف المتعاقد ب أ لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "486884dfe4ac92ab140a6cea2d7259858f5595de5582202931d2e3d9c0d67a3f",
+        "normalized_concept": "PRIOR_SERVICE_RECOGNITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TRANSFERRED_EMPLOYEE_OFFER",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSFERRED_EMPLOYEE_OFFER",
+            "start": 4,
+            "end": 186,
+            "text": "يعرض الطرف الطرف المتعاقد ب ب على الطرف الطرف المتعاقد ب بين المنقولين عملاً بشروط مماثلة إلى حد كبير لشروطهم الحالية لدى الطرف الطرف المتعاقد ب أ، ويعترف بأقدميتهم لدى الطرف الطرف المتعاقد ب أ لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "80be8ce43573622412402d506f5cdfbd7d4170474211c6069aac0a0db488ef26",
+        "normalized_concept": "TRANSFERRED_EMPLOYEE_OFFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PRIOR_SERVICE_RECOGNITION",
+        "rank": 92,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRIOR_SERVICE_RECOGNITION",
+            "start": 99,
+            "end": 186,
+            "text": "يعترف بأقدميتهم لدى الطرف الطرف المتعاقد ب أ لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "486884dfe4ac92ab140a6cea2d7259858f5595de5582202931d2e3d9c0d67a3f",
+        "normalized_concept": "PRIOR_SERVICE_RECOGNITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 يسدد العميل للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 192,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8b6ef8c0d9743fe50aacd60ac70511b7e4f67fa968d787573fe099ef04ad5b7c",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 192,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "89f0e9c713140ca461fea8b70dd2df3866cc623fa12091156449ffd6cdc62247",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 192,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8b6ef8c0d9743fe50aacd60ac70511b7e4f67fa968d787573fe099ef04ad5b7c",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 192,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "89f0e9c713140ca461fea8b70dd2df3866cc623fa12091156449ffd6cdc62247",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 يحافظ المزود على ضمانات إدارية وتقنية ومادية لبيانات العميل متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر العميل بأي حادث أمني خلال أربع وعشرين (24) ساعة.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 176,
+            "end": 196,
+            "text": "يخطر الطرف الطرف المتعاقد ب أ بأي حادث"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f0c72df8de9638e51556b769eb0c8adc0f00fb26cda12de0c7602447898af2a",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 228,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2c6be80446d66fab304339b9097c3ce08b84356c3a739225df609b75b68045d5",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 175,
+            "end": 228,
+            "text": "ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          },
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 176,
+            "end": 228,
+            "text": "يخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8033b93d69c71111204f1c15c84e844e3e6209f4ae8063c7f8d613cde52e4fe9",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 176,
+            "end": 196,
+            "text": "يخطر الطرف الطرف المتعاقد ب أ بأي حادث"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f0c72df8de9638e51556b769eb0c8adc0f00fb26cda12de0c7602447898af2a",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 228,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "2c6be80446d66fab304339b9097c3ce08b84356c3a739225df609b75b68045d5",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 175,
+            "end": 228,
+            "text": "ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          },
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 176,
+            "end": 228,
+            "text": "يخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8033b93d69c71111204f1c15c84e844e3e6209f4ae8063c7f8d613cde52e4fe9",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "البند 7.1",
+    "source_language": "ar",
+    "source_text": "7.1 لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من العميل خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالمزود، والتي تُحدد بضعف تلك الرسوم.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 112,
+            "end": 182,
+            "text": "باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "fb299fc5b1a847083aadfdb44b97fe5ef17e44f5efefb6da6e3d725d9cfa134a",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 226,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "27b34b3c58fe20f8884f8842115679bfcdf0086058d8755b504470d5131e4f0e",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 226,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "27b34b3c58fe20f8884f8842115679bfcdf0086058d8755b504470d5131e4f0e",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 112,
+            "end": 182,
+            "text": "باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "fb299fc5b1a847083aadfdb44b97fe5ef17e44f5efefb6da6e3d725d9cfa134a",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 226,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "27b34b3c58fe20f8884f8842115679bfcdf0086058d8755b504470d5131e4f0e",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 226,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "27b34b3c58fe20f8884f8842115679bfcdf0086058d8755b504470d5131e4f0e",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

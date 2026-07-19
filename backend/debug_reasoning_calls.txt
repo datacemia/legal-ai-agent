@@ -1,0 +1,7 @@
+clause_type='confidentiality' | clause_ref='1.1' | text_debut='1.1 Chaque Partie Réceptrice conservera les Informations Con'
+clause_type='confidentiality' | clause_ref='1.2' | text_debut="1.2 [PERSON] n'utilisera les Informations Confidentielles qu"
+clause_type='confidentiality' | clause_ref='2.1' | text_debut="2.1 Les Informations Confidentielles n'incluent pas les info"
+clause_type='confidentiality' | clause_ref='3.1' | text_debut='3.1 Le présent Accord restera en vigueur pendant deux (2) an'
+clause_type='warranty' | clause_ref='4.1' | text_debut="4.1 Rien dans le présent Accord n'accorde de licence ou de d"
+clause_type='remedies' | clause_ref='5.1' | text_debut='5.1 Chaque Partie reconnaît que la divulgation non autorisée'
+clause_type='dispute_resolution' | clause_ref='6.1' | text_debut="6.1 Le présent Accord est régi par le droit de l'État du Del"

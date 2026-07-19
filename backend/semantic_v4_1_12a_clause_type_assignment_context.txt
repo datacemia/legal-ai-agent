@@ -1,0 +1,166 @@
+                    analysis[field] = ""
+
+                    break
+
+    return analysis
+
+
+def should_force_red_flag_false(
+    clause_title: str,
+    clause_text: str,
+) -> bool:
+
+    text = (
+        f"{clause_title} {clause_text}"
+    ).lower()
+
+    safe_patterns = [
+
+        # Universal contract intro / boilerplate only
+        "effective as of",
+        "entered into by and between",
+        "desires to enter into",
+        "whereas",
+        "now therefore",
+        "mutual promises",
+        "good and valuable consideration",
+        "receipt and sufficiency",
+        "for reference only",
+
+        # French boilerplate
+        "conclu entre",
+        "considérant que",
+        "en foi de quoi",
+        "à titre indicatif",
+        "les titres sont fournis",
+
+        # Arabic boilerplate
+        "تم إبرام هذا العقد بين",
+        "حيث إن",
+        "بناء على ما سبق",
+        "وعليه",
+        "مقابل الوعود المتبادلة",
+        "لأغراض مرجعية فقط",
+    ]
+
+    return any(
+        pattern in text
+        for pattern in safe_patterns
+    )
+
+
+
+def validate_clause_type(
+    analysis: dict,
+    clause_text: str,
+    language: str = "en",
+) -> dict:
+
+    text = clause_text.lower()
+
+    clause_type = analysis.get("clause_type")
+
+    explicit_patterns = {
+
+        "non_compete": [
+            "non-compete",
+            "non compete",
+            "shall not compete",
+            "may not compete",
+            "cannot compete",
+            "restriction on competition",
+            "restrictive covenant",
+
+            "non-concurrence",
+            "clause de non-concurrence",
+
+            "عدم المنافسة",
+        ],
+
+        "exclusivity": [
+            "exclusive",
+            "exclusivity",
+            "sole provider",
+            "exclusive rights",
+
+            "exclusivité",
+            "exclusif",
+
+            "حصري",
+            "حصرية",
+        ],
+
+        "penalty": [
+            "penalty",
+            "liquidated damages",
+            "fine",
+
+            "pénalité",
+            "amende",
+
+            "غرامة",
+        ],
+    }
+
+    # No validation needed
+    if clause_type not in explicit_patterns:
+        return analysis
+
+    matched = any(
+        pattern in text
+        for pattern in explicit_patterns[clause_type]
+    )
+
+    # HARD RESET if unsupported
+    if not matched:
+
+        analysis["clause_type"] = "other"
+
+        analysis["red_flag"] = False
+
+        analysis["red_flag_reason"] = ""
+
+        analysis["risk_level"] = "low"
+
+        analysis["confidence"] = "low"
+
+        analysis["recommendation"] = ""
+
+        analysis["negotiation_advice"] = ""
+
+        analysis["safer_alternative"] = ""
+
+        unsupported_messages = {
+            "en": (
+                "The clause does not explicitly contain "
+                "a legally identifiable "
+                f"{clause_type.replace('_', ' ')} provision."
+            ),
+            "fr": (
+                "La clause ne contient pas explicitement "
+                "une disposition juridiquement identifiable de type "
+                f"{clause_type.replace('_', ' ')}."
+            ),
+            "ar": (
+                "لا يتضمن هذا البند صراحةً حكماً قانونياً "
+                f"يمكن تصنيفه على أنه {clause_type.replace('_', ' ')}."
+            ),
+        }
+
+        analysis["legal_insight"] = unsupported_messages.get(
+            language,
+            unsupported_messages["en"],
+        )
+
+    return analysis
+
+
+
+def validate_protective_clause(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    protective_patterns = [

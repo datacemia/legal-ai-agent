@@ -1,0 +1,116 @@
+
+
+def fallback_clause_result(
+    language: str = "en"
+) -> dict:
+
+    fallback_text = {
+        "en": {
+            "parse": "Could not parse AI response.",
+            "missing": "Not specified",
+            "review": (
+                "Review this clause manually because "
+                "the automated analysis failed."
+            ),
+        },
+
+        "fr": {
+            "parse": (
+                "Impossible d’analyser correctement "
+                "la réponse de l’IA."
+            ),
+            "missing": "Non spécifié",
+            "review": (
+                "Vérifiez cette clause manuellement "
+                "car l’analyse automatique a échoué."
+            ),
+        },
+
+        "ar": {
+            "parse": (
+                "تعذر تحليل رد الذكاء الاصطناعي "
+                "بشكل صحيح."
+            ),
+            "missing": "غير محدد",
+            "review": (
+                "راجع هذا البند يدويًا لأن "
+                "التحليل التلقائي فشل."
+            ),
+        },
+    }
+
+    t = fallback_text.get(
+        language,
+        fallback_text["en"]
+    )
+
+    return {
+        "clause_title": "",
+        "clause_reference": "",
+        "quoted_text": "",
+        "clause_type": "other",
+        "risk_level": "low",
+        "explanation_simple": t["parse"],
+        "why_it_matters": t["missing"],
+        "legal_insight": "",
+        "favours": "unclear",
+        "market_comparison": "",
+        "red_flag": False,
+        "red_flag_reason": "",
+        "recommendation": t["review"],
+        "confidence": "low",
+        "safer_alternative": "",
+        "negotiation_advice": t["review"],
+        "negotiation_priority": "medium",
+    }
+
+
+def normalize_clause_result(
+    ai_result: dict
+) -> dict:
+
+    return {
+        "clause_title": safe_str(
+            ai_result.get("clause_title")
+        ),
+
+        "clause_reference": localize_clause_reference(
+            safe_str(
+                ai_result.get("clause_reference")
+            ),
+            ai_result.get("language", "en"),
+        ),
+
+        "quoted_text": safe_str(
+            ai_result.get("quoted_text")
+        )[:600],
+
+        "clause_type": clamp_enum(
+            ai_result.get("clause_type"),
+            ALLOWED_CLAUSE_TYPES,
+            "other",
+        ),
+
+        "risk_level": clamp_enum(
+            ai_result.get("risk_level"),
+            ALLOWED_RISK_LEVELS,
+            "low",
+        ),
+
+        "explanation_simple": safe_str(
+            ai_result.get("explanation_simple")
+        ),
+
+        "why_it_matters": safe_str(
+            ai_result.get("why_it_matters")
+        ),
+
+        "legal_insight": safe_str(
+            ai_result.get("legal_insight")
+        ),
+
+        "favours": clamp_enum(
+            ai_result.get("favours"),
+            ALLOWED_FAVOURS,
+            "unclear",
+        ),

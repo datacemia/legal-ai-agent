@@ -1,0 +1,382 @@
+DOCX FOUND: 15
+
+================================================================================
+[1/15] 01_NDA_Confidentiality_Agreement.docx
+================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement.", 'text': "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement.", 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. OBLIGATIONS OF CONFIDENTIALITY', 'section_path': ['1. OBLIGATIONS OF CONFIDENTIALITY', "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement."], 'lineage': ['1. OBLIGATIONS OF CONFIDENTIALITY'], 'children': [], 'confidence': 0.85}
+RAW CLAUSE: Confidentiality Obligations confidentiality
+NORMALIZED: Confidentiality Obligations confidentiality
+
+DEBUG FINAL INSIGHT
+TITLE: Confidentiality Obligations
+TYPE: confidentiality
+HAS_CONTEXT: None
+LEGAL: The clause establishes a clear obligation for the Receiving Party to maintain confidentiality, limiting disclosure to third parties without consent, which is a standard practice in confidentiality agreements.
+RAW CLAUSE: Use of Confidential Information confidentiality
+NORMALIZED: Use of Confidential Information confidentiality
+
+DEBUG FINAL INSIGHT
+TITLE: Use of Confidential Information
+TYPE: confidentiality
+HAS_CONTEXT: None
+LEGAL: The clause clearly defines the scope of use for Confidential Information, which is essential for maintaining confidentiality and preventing unauthorized use.
+RAW CLAUSE: Confidential Information Exclusions confidentiality
+NORMALIZED: Confidential Information Exclusions confidentiality
+
+DEBUG FINAL INSIGHT
+TITLE: Confidential Information Exclusions
+TYPE: confidentiality
+HAS_CONTEXT: None
+LEGAL: The clause provides clear definitions of what is not considered Confidential Information, which helps in limiting the scope of confidentiality obligations and protects the Receiving Party from liability for information that falls within these exclusions.
+RAW CLAUSE: Duration and Confidentiality Obligations confidentiality
+NORMALIZED: Duration and Confidentiality Obligations confidentiality
+
+DEBUG FINAL INSIGHT
+TITLE: Duration and Confidentiality Obligations
+TYPE: confidentiality
+HAS_CONTEXT: None
+LEGAL: The clause establishes a clear two-year term for the agreement and a five-year confidentiality obligation, which is standard in many contracts. The provision for trade secrets to survive indefinitely aligns with legal protections for such information.
+RAW CLAUSE: Confidential Information Ownership confidentiality
+NORMALIZED: Confidential Information Ownership confidentiality
+
+DEBUG FINAL INSIGHT
+TITLE: Confidential Information Ownership
+TYPE: confidentiality
+HAS_CONTEXT: None
+LEGAL: The clause protects the disclosing party by explicitly stating that the Confidential Information remains their property and is provided without any warranties, limiting liability for any issues arising from its use.
+RAW CLAUSE: Confidential Information Acknowledgment confidentiality
+NORMALIZED: Confidential Information Acknowledgment confidentiality
+
+DEBUG FINAL INSIGHT
+TITLE: Confidential Information Acknowledgment
+TYPE: confidentiality
+HAS_CONTEXT: None
+LEGAL: The clause creates a pathway for the non-breaching party to seek immediate injunctive relief, which can be crucial in preventing further damage from unauthorized disclosures. The lack of a bond requirement lowers the barrier for obtaining such relief, potentially increasing the leverage of the non-breaching party in disputes.
+RAW CLAUSE: Governing Law and Jurisdiction governance
+NORMALIZED: Governing Law and Jurisdiction governance
+
+DEBUG FINAL INSIGHT
+TITLE: Governing Law and Jurisdiction
+TYPE: dispute_resolution
+HAS_CONTEXT: None
+LEGAL: The choice of Delaware law is common in commercial agreements due to its well-established legal precedents, which may provide predictability in legal outcomes.
+PASS | clauses=7 | receipts=12 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=4.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+================================================================================
+[2/15] 02_Master_Services_Agreement.docx
+================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': '1.1 Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards.', 'text': '1.1 Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards.', 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. SERVICES AND STATEMENTS OF WORK', 'section_path': ['1. SERVICES AND STATEMENTS OF WORK', '1.1 Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards.'], 'lineage': ['1. SERVICES AND STATEMENTS OF WORK'], 'children': [], 'confidence': 0.85}
+RAW CLAUSE: Performance of Services other
+NORMALIZED: Performance of Services other
+
+DEBUG FINAL INSIGHT
+TITLE: Performance of Services
+TYPE: services
+HAS_CONTEXT: None
+LEGAL: The clause sets a standard for service delivery, which can help in assessing performance and potential disputes regarding service quality. However, the lack of specific metrics or consequences for non-compliance may limit enforceability.
+RAW CLAUSE: Conflict Resolution other
+NORMALIZED: Conflict Resolution other
+
+DEBUG FINAL INSIGHT
+TITLE: Conflict Resolution
+TYPE: other
+HAS_CONTEXT: None
+LEGAL: This clause provides a clear hierarchy between the Agreement and SOW, which can help prevent confusion and litigation regarding conflicting obligations. However, it relies on the SOW to explicitly state any overrides, which could lead to ambiguity if not carefully drafted.
+RAW CLAUSE: Payment Terms payment
+NORMALIZED: Payment Terms payment
+
+DEBUG FINAL INSIGHT
+TITLE: Payment Terms
+TYPE: payment
+HAS_CONTEXT: None
+LEGAL: The clause imposes a clear obligation on the Client to pay within a specified timeframe, but the interest rate on late payments could lead to increased financial liability if payments are delayed.
+RAW CLAUSE: Fee Increase for Renewal Term renewal
+NORMALIZED: Fee Increase for Renewal Term renewal
+
+DEBUG FINAL INSIGHT
+TITLE: Fee Increase for Renewal Term
+TYPE: renewal
+HAS_CONTEXT: None
+LEGAL: The unilateral right to increase fees without consent creates a leverage imbalance, favoring the Provider. The Client may face unexpected costs during renewal periods, which could lead to financial strain or necessitate renegotiation.
+RAW CLAUSE: Retention of Rights intellectual_property
+NORMALIZED: Retention of Rights intellectual_property
+
+DEBUG FINAL INSIGHT
+TITLE: Retention of Rights
+TYPE: intellectual_property
+HAS_CONTEXT: None
+LEGAL: The clause ensures that the Provider retains control over its proprietary tools and methodologies, which is standard in service agreements to prevent the Client from claiming ownership of the Provider's pre-existing assets.
+RAW CLAUSE: Ownership of Deliverables intellectual_property
+NORMALIZED: Ownership of Deliverables intellectual_property
+
+DEBUG FINAL INSIGHT
+TITLE: Ownership of Deliverables
+TYPE: payment
+HAS_CONTEXT: None
+LEGAL: The designation of Deliverables as 'work made for hire' typically means that the Client will own the rights to the work created, which can limit the Provider's ability to use the Deliverables in the future. However, the requirement for full payment to vest ownership introduces a risk that if payment is delayed or disputed, the Client may not have full rights to the Deliverables until the issue is resolved.
+RAW CLAUSE: Term and Renewal renewal
+NORMALIZED: Term and Renewal renewal
+
+DEBUG FINAL INSIGHT
+TITLE: Term and Renewal
+TYPE: renewal
+HAS_CONTEXT: None
+LEGAL: The automatic renewal feature creates a risk of unintentional continuation of the agreement, which may not align with the parties' current intentions or business needs. The 90-day notice period provides a mechanism to terminate the agreement, but it requires proactive action from the party wishing to avoid renewal.
+RAW CLAUSE: Termination Rights termination
+NORMALIZED: Termination Rights termination
+
+DEBUG FINAL INSIGHT
+TITLE: Termination Rights
+TYPE: termination
+HAS_CONTEXT: None
+LEGAL: Provider's ability to terminate without cause creates a significant leverage imbalance, potentially leaving Client vulnerable to sudden termination without recourse. Client's termination rights are restricted to material breaches, which may not cover all scenarios where termination could be warranted.
+RAW CLAUSE: Limitation of Liability liability
+NORMALIZED: Limitation of Liability liability
+
+DEBUG FINAL INSIGHT
+TITLE: Limitation of Liability
+TYPE: liability
+HAS_CONTEXT: None
+LEGAL: The clause creates a cap on liability, which may favor the Provider by limiting potential financial exposure. However, it excludes breaches of confidentiality and indemnification, which could lead to significant liability in those specific cases.
+RAW CLAUSE: Dispute Resolution dispute_resolution
+NORMALIZED: Dispute Resolution dispute_resolution
+
+DEBUG FINAL INSIGHT
+TITLE: Dispute Resolution
+TYPE: dispute_resolution
+HAS_CONTEXT: None
+LEGAL: The requirement for good-faith negotiation followed by binding arbitration may create a disadvantage for a party that prefers litigation, as it imposes a structured resolution process that could delay immediate legal recourse.
+PASS | clauses=10 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.2 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+================================================================================
+[3/15] 03_SaaS_Cloud_Agreement.docx
+================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.", 'text': "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.", 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. ACCESS AND USE RIGHTS', 'section_path': ['1. ACCESS AND USE RIGHTS', "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes."], 'lineage': ['1. ACCESS AND USE RIGHTS'], 'children': [], 'confidence': 0.85}
+RAW CLAUSE: Grant of License other
+NORMALIZED: Grant of License other
+
+DEBUG FINAL INSIGHT
+TITLE: Grant of License
+TYPE: term
+HAS_CONTEXT: None
+LEGAL: The non-exclusive and non-transferable nature of the license limits the Customer's ability to share or resell access to the Platform, which protects Northwind's interests.
+RAW CLAUSE: Uptime Commitment service_level
+NORMALIZED: Uptime Commitment service_level
+
+DEBUG FINAL INSIGHT
+TITLE: Uptime Commitment
+TYPE: service_level
+HAS_CONTEXT: None
+LEGAL: The limitation of remedy to a service credit may restrict the customer's ability to seek further compensation for downtime, potentially creating a risk of dissatisfaction if uptime falls below the specified level.
+RAW CLAUSE: Payment and Renewal renewal
+NORMALIZED: Payment and Renewal renewal
+
+DEBUG FINAL INSIGHT
+TITLE: Payment and Renewal
+TYPE: renewal
+HAS_CONTEXT: None
+LEGAL: The automatic renewal feature may create a risk of unintentional financial commitment for the Customer if they overlook the notice requirement. This could lead to disputes regarding the renewal terms and pricing.
+RAW CLAUSE: Customer Data Ownership and Export other
+NORMALIZED: Customer Data Ownership and Export other
+
+DEBUG FINAL INSIGHT
+TITLE: Customer Data Ownership and Export
+TYPE: intellectual_property
+HAS_CONTEXT: None
+LEGAL: The clause clearly delineates data ownership, which is crucial for compliance with data protection regulations. It also provides a defined timeframe for data export, reducing the risk of data loss.
+RAW CLAUSE: Security Safeguards and Incident Notification security
+NORMALIZED: Security Safeguards and Incident Notification security
+
+DEBUG FINAL INSIGHT
+TITLE: Security Safeguards and Incident Notification
+TYPE: security
+HAS_CONTEXT: None
+LEGAL: The requirement to adhere to SOC 2 Type II standards indicates a commitment to recognized security practices, which can mitigate risks related to data breaches. The 72-hour notification period provides a clear timeline for incident reporting, which is beneficial for the Customer's response efforts.
+RAW CLAUSE: Limitation of Liability liability
+NORMALIZED: Limitation of Liability liability
+
+DEBUG FINAL INSIGHT
+TITLE: Limitation of Liability
+TYPE: liability
+HAS_CONTEXT: None
+LEGAL: The clause creates a cap on liability that protects Northwind from excessive claims, but the exceptions for security breaches and indemnification could expose Northwind to significant financial risk if such issues arise.
+RAW CLAUSE: Termination for Convenience termination
+NORMALIZED: Termination for Convenience termination
+
+DEBUG FINAL INSIGHT
+TITLE: Termination for Convenience
+TYPE: termination
+HAS_CONTEXT: None
+LEGAL: The unilateral right for Northwind to terminate at any time introduces a risk for the Customer, as they are locked into the agreement until the end of the Subscription Term without a similar option to exit early.
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+================================================================================
+[4/15] 04_Cybersecurity_Services_Agreement.docx
+================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': '1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the NIST Cybersecurity Framework.', 'text': '1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the NIST Cybersecurity Framework.', 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. SCOPE OF SERVICES', 'section_path': ['1. SCOPE OF SERVICES', '1.1 Provider shall deliver 24x7x365 security monitoring, threat detection, and incident response services as further described in Exhibit A, consistent with the NIST Cybersecurity Framework.'], 'lineage': ['1. SCOPE OF SERVICES'], 'children': [], 'confidence': 0.85}
+RAW CLAUSE: Security Monitoring and Incident Response security
+NORMALIZED: Security Monitoring and Incident Response security
+
+DEBUG FINAL INSIGHT
+TITLE: Security Monitoring and Incident Response
+TYPE: security
+HAS_CONTEXT: None
+LEGAL: The obligation to provide 24x7x365 services indicates a strong commitment to security, aligning with industry standards such as the NIST Cybersecurity Framework, which may enhance the Provider's credibility and reliability.
+RAW CLAUSE: Notification of Security Incidents and Vulnerabilities security
+NORMALIZED: Notification of Security Incidents and Vulnerabilities security
+
+DEBUG FINAL INSIGHT
+TITLE: Notification of Security Incidents and Vulnerabilities
+TYPE: security
+HAS_CONTEXT: None
+LEGAL: Failure to notify within the specified timeframes could expose the Provider to liability for damages resulting from delayed responses to security threats.
+RAW CLAUSE: Root-Cause Analysis for Security Incidents security
+NORMALIZED: Root-Cause Analysis for Security Incidents security
+
+DEBUG FINAL INSIGHT
+TITLE: Root-Cause Analysis for Security Incidents
+TYPE: security
+HAS_CONTEXT: None
+LEGAL: The obligation to provide a root-cause analysis within a specified timeframe creates accountability for the Provider regarding security incidents, which is a standard practice in security management.
+RAW CLAUSE: Certification Requirements compliance
+NORMALIZED: Certification Requirements compliance
+
+DEBUG FINAL INSIGHT
+TITLE: Certification Requirements
+TYPE: services
+HAS_CONTEXT: None
+LEGAL: This clause imposes a compliance obligation on the Provider, ensuring that they meet industry standards for security and data protection. The requirement to provide audit reports allows the Client to verify compliance without imposing excessive burden on the Provider.
+RAW CLAUSE: On-Site Security Audit audit
+NORMALIZED: On-Site Security Audit other
+
+DEBUG FINAL INSIGHT
+TITLE: On-Site Security Audit
+TYPE: notice
+HAS_CONTEXT: None
+LEGAL: The clause provides the Client with a right to audit, which is a common practice to ensure that the Provider maintains adequate security measures. The requirement for notice and the limitation to once annually balances the interests of both parties.
+RAW CLAUSE: Subcontractor Engagement subcontracting
+NORMALIZED: Subcontractor Engagement subcontracting
+
+DEBUG FINAL INSIGHT
+TITLE: Subcontractor Engagement
+TYPE: subcontracting
+HAS_CONTEXT: None
+LEGAL: The requirement for prior written approval from the Client provides a level of oversight and control, reducing the risk of unauthorized access to sensitive information. The stipulation that approval shall not be unreasonably withheld promotes a balanced approach to subcontractor engagement.
+RAW CLAUSE: Limitation of Liability liability
+NORMALIZED: Limitation of Liability liability
+
+DEBUG FINAL INSIGHT
+TITLE: Limitation of Liability
+TYPE: liability
+HAS_CONTEXT: None
+LEGAL: The uncapped liability for gross negligence or willful misconduct increases the risk for the Provider, as it could lead to substantial financial consequences in the event of a serious failure. This creates an imbalance in liability exposure, favoring the Client.
+RAW CLAUSE: Indemnification for Security Incident indemnity
+NORMALIZED: Indemnification for Security Incident indemnity
+
+DEBUG FINAL INSIGHT
+TITLE: Indemnification for Security Incident
+TYPE: indemnity
+HAS_CONTEXT: None
+LEGAL: The indemnification obligation creates a potential financial exposure for the Provider, especially if a Security Incident occurs due to their breach. This could lead to substantial costs related to third-party claims and regulatory fines, impacting the Provider's financial stability.
+RAW CLAUSE: Termination Rights termination
+NORMALIZED: Termination Rights termination
+
+DEBUG FINAL INSIGHT
+TITLE: Termination Rights
+TYPE: termination
+HAS_CONTEXT: None
+LEGAL: The clause creates a balanced termination framework, but the immediate termination right for security incidents may favor the Client, especially if the definition of 'gross negligence' is broad.
+PASS | clauses=9 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+================================================================================
+[5/15] 05_Data_Processing_Agreement.docx
+================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': '1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.', 'text': '1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.', 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. PROCESSING INSTRUCTIONS', 'section_path': ['1. PROCESSING INSTRUCTIONS', '1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.'], 'lineage': ['1. PROCESSING INSTRUCTIONS'], 'children': [], 'confidence': 0.85}
+RAW CLAUSE: Processing of Personal Data data_protection
+NORMALIZED: Processing of Personal Data data_protection
+
+DEBUG FINAL INSIGHT
+TITLE: Processing of Personal Data
+TYPE: data_protection
+HAS_CONTEXT: None
+LEGAL: The clause establishes a clear obligation for the Processor to act only on the Controller's instructions, which is a standard requirement in data protection agreements. It also allows for exceptions if mandated by law, which is a common legal safeguard.
+RAW CLAUSE: Confidentiality of Personal Data Processing data_protection
+NORMALIZED: Confidentiality of Personal Data Processing data_protection
+
+DEBUG FINAL INSIGHT
+TITLE: Confidentiality of Personal Data Processing
+TYPE: data_protection
+HAS_CONTEXT: None
+LEGAL: The clause establishes a clear obligation for the Processor to safeguard Personal Data through confidentiality agreements or statutory obligations, which is a standard practice in data protection.
+RAW CLAUSE: Subprocessor Engagement subcontracting
+NORMALIZED: Subprocessor Engagement subcontracting
+
+DEBUG FINAL INSIGHT
+TITLE: Subprocessor Engagement
+TYPE: data_processing
+HAS_CONTEXT: None
+LEGAL: The requirement for prior authorization creates a layer of oversight for the Controller, which can mitigate risks associated with data handling by third parties. However, the provision for general authorization may lead to ambiguity regarding what constitutes acceptable changes, potentially complicating compliance.
+RAW CLAUSE: Security Measures security
+NORMALIZED: Security Measures security
+
+DEBUG FINAL INSIGHT
+TITLE: Security Measures
+TYPE: security
+HAS_CONTEXT: None
+LEGAL: The requirement for appropriate technical and organizational measures indicates a commitment to data protection, aligning with legal standards such as GDPR. However, the clause lacks specificity on what constitutes 'appropriate' measures, which could lead to varying interpretations.
+RAW CLAUSE: Assistance with Data Subject Rights data_protection
+NORMALIZED: Assistance with Data Subject Rights data_protection
+
+DEBUG FINAL INSIGHT
+TITLE: Assistance with Data Subject Rights
+TYPE: data_processing
+HAS_CONTEXT: None
+LEGAL: The clause establishes a cooperative obligation for the Processor, which is standard in data protection agreements. It helps mitigate risks related to compliance with data subject rights.
+RAW CLAUSE: Notification of Personal Data Breach data_protection
+NORMALIZED: Notification of Personal Data Breach data_protection
+
+DEBUG FINAL INSIGHT
+TITLE: Notification of Personal Data Breach
+TYPE: data_protection
+HAS_CONTEXT: None
+LEGAL: Failure to notify within the specified timeframe could expose the Processor to regulatory penalties and damage the Controller's compliance standing.
+RAW CLAUSE: Data Return and Deletion data_protection
+NORMALIZED: Data Return and Deletion data_protection
+
+DEBUG FINAL INSIGHT
+TITLE: Data Return and Deletion
+TYPE: data_protection
+HAS_CONTEXT: None
+LEGAL: The clause provides a clear obligation for the Processor to handle Personal Data appropriately upon termination, but the exception for legal requirements could lead to ambiguity regarding what data may be retained and for how long.
+RAW CLAUSE: Audit Rights audit
+NORMALIZED: Audit Rights other
+
+DEBUG FINAL INSIGHT
+TITLE: Audit Rights
+TYPE: data_processing
+HAS_CONTEXT: None
+LEGAL: The limitation of audits to once per year, unless a Personal Data breach occurs, may restrict the Controller's ability to monitor compliance effectively. This could create a risk if issues arise between audit periods, potentially leading to non-compliance without timely detection.
+PASS | clauses=8 | receipts=23 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+================================================================================
+[6/15] 06_Executive_Employment_Agreement.docx
+================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+FIRST CLAUSE OBJECT: {'id': 'node_3', 'title': "1.1 Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to the Company's affairs.", 'text': "1.1 Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to the Company's affairs.", 'level': 2, 'depth': 2, 'number': '1.1', 'parent_id': 'node_2', 'parent_clause_id': 'node_2', 'semantic_parent': '1. POSITION AND DUTIES', 'section_path': ['1. POSITION AND DUTIES', "1.1 Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to the Company's affairs."], 'lineage': ['1. POSITION AND DUTIES'], 'children': [], 'confidence': 0.85}

@@ -1,0 +1,825 @@
+[
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 إذا وافق حاملو أغلبية الأسهم الممتازة القائمة وأغلبية المجلس على بيع الشركة، يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها (\"حق التنازل الإلزامي\")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات.",
+    "primary_type": "assignment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "MANDATORY_CONJUNCTION",
+        "rank": 94,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 81,
+            "end": 233,
+            "text": "يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها (\"حق التنازل الإلزامي\")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "arguments": [
+          {
+            "text": "يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة",
+            "tokens": [
+              "يلتزم",
+              "جميع",
+              "المساهمين",
+              "الآخرين",
+              "بالتصويت",
+              "لصالح",
+              "هذه",
+              "المعاملة"
+            ]
+          },
+          {
+            "text": "الموافقة عليها (\"حق التنازل الإلزامي\")",
+            "tokens": [
+              "الموافقة",
+              "عليها",
+              "التنازل",
+              "الإلزامي"
+            ]
+          },
+          {
+            "text": "رهناً بالحمايات المعتادة المتعلقة بالمقابل",
+            "tokens": [
+              "رهنا",
+              "بالحمايات",
+              "المعتادة",
+              "المتعلقة",
+              "بالمقابل"
+            ]
+          },
+          {
+            "text": "الإقرارات.",
+            "tokens": [
+              "الإقرارات"
+            ]
+          }
+        ],
+        "evidence_hash": "3d9c4c081b752235abaa7c27f2e0bae78fac48956e1c8c02c96111aaae614e91",
+        "normalized_concept": "MANDATORY_CONJUNCTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "3.2",
+    "source_language": "ar",
+    "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\").",
+    "primary_type": "governance",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "حق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك",
+            "start": 83,
+            "end": 149
+          }
+        ]
+      },
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "بنفس الشروط",
+            "start": 117,
+            "end": 128
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TAG_ALONG_RIGHT",
+        "rank": 96,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TAG_ALONG_RIGHT",
+            "start": 20,
+            "end": 151,
+            "text": "مؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\")"
+          },
+          {
+            "label": "TAG_ALONG_RIGHT",
+            "start": 131,
+            "end": 151,
+            "text": "حق التنازل المشترك\")"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "68de601713706054c447c09686a9bd76bb12ad62ec5db4f3d817d17143a7aa6f",
+        "normalized_concept": "TAG_ALONG_RIGHT",
+        "normalized_relation": {
+          "right_holder": "INVESTOR",
+          "obligated_actor": null,
+          "counterparty": "COMPANY",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "SHARE_TRANSFER_TRIGGER",
+              "related_mechanism": "TAG_ALONG_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "SAME_TERMS_RIGHT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "بنفس الشروط",
+            "start": 117,
+            "end": 128
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 لا يجوز لأي مساهم التنازل عن أي أسهم من رأس مال الشركة إلا وفقاً لهذه الاتفاقية، بما في ذلك حق الشفعة لصالح الشركة ثم المساهمين الآخرين، والامتثال لقوانين الأوراق المالية المعمول بها.",
+    "primary_type": "assignment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 187,
+            "text": "لا يجوز لأي مساهم التنازل عن أي أسهم من رأس مال الطرف الطرف المتعاقد ب أ إلا وفقاً لهذه الاتفاقية، بما في ذلك حق الشفعة لصالح الطرف الطرف المتعاقد ب أ ثم المساهمين الآخرين، والامتثال لقوانين الأوراق المالية المعمول بها."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "239a9ce4567b782840bab7751e82a8473d72789d0eb817a4822eed190c61c53c",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 187,
+            "text": "لا يجوز لأي مساهم التنازل عن أي أسهم من رأس مال الطرف الطرف المتعاقد ب أ إلا وفقاً لهذه الاتفاقية، بما في ذلك حق الشفعة لصالح الطرف الطرف المتعاقد ب أ ثم المساهمين الآخرين، والامتثال لقوانين الأوراق المالية المعمول بها."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "239a9ce4567b782840bab7751e82a8473d72789d0eb817a4822eed190c61c53c",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.",
+    "primary_type": "governance",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "BOARD_COMPOSITION_STRUCTURE",
+        "rank": 90,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BOARD_COMPOSITION_STRUCTURE",
+            "start": 4,
+            "end": 217,
+            "text": "يتكون مجلس إدارة الطرف الطرف المتعاقد ب أ من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "510de0992df6d54340ecb6d40a5efa2d667b3ae5db54c28a552213ffd402a804",
+        "normalized_concept": "BOARD_COMPOSITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "MEMBERS",
+              "semantic_role": "BOARD_SIZE",
+              "related_mechanism": "BOARD_COMPOSITION"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "BOARD_COMPOSITION_STRUCTURE",
+        "rank": 90,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BOARD_COMPOSITION_STRUCTURE",
+            "start": 4,
+            "end": 217,
+            "text": "يتكون مجلس إدارة الطرف الطرف المتعاقد ب أ من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "510de0992df6d54340ecb6d40a5efa2d667b3ae5db54c28a552213ffd402a804",
+        "normalized_concept": "BOARD_COMPOSITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "MEMBERS",
+              "semantic_role": "BOARD_SIZE",
+              "related_mechanism": "BOARD_COMPOSITION"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل.",
+    "primary_type": "anti_dilution_preemptive_rights",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "anti_dilution_preemptive_rights",
+        "anchors": [
+          "أوراق",
+          "الأولي",
+          "التناسبية",
+          "الحوافز",
+          "الشركة",
+          "الطرح",
+          "العام",
+          "المؤهل",
+          "المعتادة",
+          "بالاستثناءات",
+          "تصدرها",
+          "جديدة",
+          "حصته",
+          "خطط",
+          "رهنا",
+          "شراء",
+          "لإصدارات",
+          "للمستثمر",
+          "مالية",
+          "وإصدارات",
+          "والاستحواذات",
+          "يحق"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 طالما احتفظ المستثمر بنسبة لا تقل عن 3% من رأس المال المخفف بالكامل للشركة، تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUDITED_REPORTING",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "بيانات مالية سنوية مدققة",
+            "start": 95,
+            "end": 119
+          },
+          {
+            "text": "بيانات مالية ربع سنوية غير مدققة",
+            "start": 167,
+            "end": 199
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 95,
+            "end": 226,
+            "text": "بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوم"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 80,
+            "end": 228,
+            "text": "تقدم الطرف الطرف المتعاقد ب أ له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "26117d125e8fad13768284c851040c8368a225f005b1c442a0012bdccc3c9844",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 95,
+            "end": 226,
+            "text": "بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوم"
+          },
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 80,
+            "end": 228,
+            "text": "تقدم الطرف الطرف المتعاقد ب أ له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "26117d125e8fad13768284c851040c8368a225f005b1c442a0012bdccc3c9844",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "COMPANY",
+          "counterparty": null,
+          "beneficiary": "INVESTOR",
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 3,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 90,
+              "unit": "DAYS",
+              "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            },
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "AUDITED_REPORTING",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "بيانات مالية سنوية مدققة",
+            "start": 95,
+            "end": 119
+          },
+          {
+            "text": "بيانات مالية ربع سنوية غير مدققة",
+            "start": 167,
+            "end": 199
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "BROAD_COMPATIBLE",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 96,
+            "end": 116
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 96,
+            "end": 116,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 100,
+            "end": 116,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "f08dad3a30c06c333bfee53d900faa7be1288cecb771eb1d18510cbc40d9668b",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+            },
+            {
+              "value": 2000000,
+              "unit": "USD",
+              "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+              "related_mechanism": "CONSENT_PREREQUISITE"
+            }
+          ]
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 100,
+            "end": 110,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "12196964e061dc3140793d2db1842f903ff22aa0eb8f703c833ebabe7bf1dd6e",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": [
+            {
+              "value": 5,
+              "unit": "PERCENT",
+              "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+              "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+            },
+            {
+              "value": 2000000,
+              "unit": "USD",
+              "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+              "related_mechanism": "CONSENT_PREREQUISITE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 80,
+            "end": 307,
+            "text": "لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأع"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "2cc6f052aa78bd8c1e11dc880d02313759d8680bbc391112f575b11522733426",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 80,
+            "end": 307,
+            "text": "لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأع"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "2cc6f052aa78bd8c1e11dc880d02313759d8680bbc391112f575b11522733426",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "BROAD_COMPATIBLE",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "البند 7.1",
+    "source_language": "ar",
+    "source_text": "7.1 تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الشركة الموافق عليه وفقاً للبند 3.1.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUTOMATIC_TERMINATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "تنتهي هذه الاتفاقية تلقائياً",
+            "start": 4,
+            "end": 32
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_EVENT_TRANSITION",
+        "rank": 98,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_EVENT_TRANSITION",
+            "start": 4,
+            "end": 116,
+            "text": "تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الطرف الطرف المتعاقد ب أ الموافق عليه وفقاً للبند 3.1."
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_EVENT",
+        "evidence_hash": "a4d40fc334c9a1246e200fdd38f7ff6110419977052320025db06651cfe97c39",
+        "normalized_concept": "AUTOMATIC_EVENT_TRANSITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  }
+]

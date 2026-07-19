@@ -1,0 +1,136 @@
+ROWS: 8
+
+====================================================================================================
+[1/8]
+LANG: ar
+DOC: 03_SaaS_Cloud_Agreement_AR.json
+REF: clause_3
+PIPELINE: data_protection
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+MARGIN: None
+SOURCE:
+4.1 فيما بين الطرفين، يحتفظ العميل بكامل الحقوق في بيانات العميل. عند الإنهاء، تتيح Northwind بيانات العميل للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً.
+DOMINANCE:
+MECHANISMS:
+- CUSTOMER_DATA_LIFECYCLE | role= DOMAIN_SECONDARY | primary= data_protection | eligible= False | rank= 82
+  EVIDENCE: 'بيانات العميل للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً'
+
+====================================================================================================
+[2/8]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_6
+PIPELINE: data_protection
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+2.1 يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية.
+DOMINANCE:
+{'type': 'data_protection', 'score': 70.7339, 'coverage': 0.9565, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- AUTHORIZED_PERSON_CONFIDENTIALITY | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 88
+  EVIDENCE: 'يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية'
+
+====================================================================================================
+[3/8]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_7
+PIPELINE: data_protection
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+5.1 يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة.
+DOMINANCE:
+{'type': 'data_protection', 'score': 71.4149, 'coverage': 0.9699, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- DATA_SUBJECT_ASSISTANCE | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 89
+  EVIDENCE: 'يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة'
+
+====================================================================================================
+[4/8]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_6
+PIPELINE: data_protection
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+8.1 Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach.
+DOMINANCE:
+{'type': 'data_protection', 'score': 71.7469, 'coverage': 0.9835, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- DATA_PROTECTION_AUDIT_COOPERATION | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 87
+  EVIDENCE: 'Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach'
+
+====================================================================================================
+[5/8]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_7
+PIPELINE: data_protection
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+2.1 Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality.
+DOMINANCE:
+{'type': 'data_protection', 'score': 71.4489, 'coverage': 0.9735, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- AUTHORIZED_PERSON_CONFIDENTIALITY | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 88
+  EVIDENCE: 'Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality'
+
+====================================================================================================
+[6/8]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_8
+PIPELINE: data_processing
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+5.1 Processor shall assist Controller, insofar as possible, in fulfilling Controller's obligation to respond to requests for exercising data subject rights, and shall notify Controller without undue delay if Processor receives such a request directly.
+DOMINANCE:
+{'type': 'data_protection', 'score': 71.8433, 'coverage': 0.9801, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- DATA_SUBJECT_ASSISTANCE | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 89
+  EVIDENCE: "Processor shall assist Controller, insofar as possible, in fulfilling Controller's obligation to respond to requests for exercising data subject rights, and shall notify Controller without undue delay if Processor receives such a request directly"
+
+====================================================================================================
+[7/8]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_4
+PIPELINE: data_processing
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+8.1 Le Sous-traitant mettra à la disposition du Responsable du Traitement toutes les informations nécessaires pour démontrer sa conformité au présent ATD et permettra la réalisation d'audits, y compris des inspections, menés par le Responsable du Traitement ou un auditeur mandaté par lui, au maximum une fois par an en l'absence de violation de Données Personnelles.
+DOMINANCE:
+{'type': 'data_protection', 'score': 71.5245, 'coverage': 0.9782, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- DATA_PROTECTION_AUDIT_COOPERATION | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 87
+  EVIDENCE: "Sous-traitant mettra à la disposition du Responsable du Traitement toutes les informations nécessaires pour démontrer sa conformité au présent ATD et permettra la réalisation d'audits, y compris des inspections, menés par le Responsable du Traitement ou un auditeur mandaté par lui, au maximum une fois par an en l'absence de violation de Données Personnelles"
+
+====================================================================================================
+[8/8]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_8
+PIPELINE: data_processing
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+MARGIN: None
+SOURCE:
+5.1 Le Sous-traitant assistera le Responsable du Traitement, dans la mesure du possible, dans l'exécution de son obligation de répondre aux demandes d'exercice des droits des personnes concernées, et notifiera sans délai injustifié le Responsable du Traitement s'il reçoit une telle demande directement.
+DOMINANCE:
+{'type': 'data_protection', 'score': 71.5711, 'coverage': 0.9736, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}
+MECHANISMS:
+- DATA_SUBJECT_ASSISTANCE | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 89
+  EVIDENCE: "Sous-traitant assistera le Responsable du Traitement, dans la mesure du possible, dans l'exécution de son obligation de répondre aux demandes d'exercice des droits des personnes concernées, et notifiera sans délai injustifié le Responsable du Traitement s'il reçoit une telle demande directement"

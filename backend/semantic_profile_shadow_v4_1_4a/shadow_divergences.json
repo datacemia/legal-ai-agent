@@ -1,0 +1,428 @@
+[
+  {
+    "language": "en",
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "clause_2",
+    "source_text": "5.1 Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours.",
+    "pipeline_clause_type": "data_protection",
+    "semantic_profile_version": "shadow-p0-v4.1.4a-data-security-boundary",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9837,
+    "shadow_dominance_margin": 86.356,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 86.356,
+        "coverage": 0.9837,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 306,
+            "text": "Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 306,
+            "text": "Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7dbb1e129211517e5d65ad2deb8ca8fe0e347fbf7bd6e61d837774d0967fc579"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 306,
+            "text": "Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7dbb1e129211517e5d65ad2deb8ca8fe0e347fbf7bd6e61d837774d0967fc579"
+      }
+    ],
+    "semantic_profile_hash": "a974ec0a3a0304d7afe951b6e3565c3fface2b7e18b6e36fdf5ccb951fed1677",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "clause_5",
+    "source_text": "5.1 La Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures.",
+    "pipeline_clause_type": "data_protection",
+    "semantic_profile_version": "shadow-p0-v4.1.4a-data-security-boundary",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9799,
+    "shadow_dominance_margin": 86.1958,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 86.1958,
+        "coverage": 0.9799,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 397,
+            "text": "Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 397,
+            "text": "Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f305fa93d695c405c78f3cac4537736c5e41b3fb39689615692fcc485e1b0bf"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 397,
+            "text": "Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f305fa93d695c405c78f3cac4537736c5e41b3fb39689615692fcc485e1b0bf"
+      }
+    ],
+    "semantic_profile_hash": "7eeb2f0ec1ec824e2f2e822bd6b5b8b44011024d05ed5fe1db5b1322ea36b0b5",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "clause_4",
+    "source_text": "4.1 ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء.",
+    "pipeline_clause_type": "data_protection",
+    "semantic_profile_version": "shadow-p0-v4.1.4a-data-security-boundary",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.965,
+    "shadow_dominance_margin": 85.5715,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 85.5715,
+        "coverage": 0.965,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 142,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 142,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "165de53a7bad54f6233d13dfd5a11a8a877a798bb033adb74c0357fd5e0aa5a3"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 142,
+            "text": "ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "165de53a7bad54f6233d13dfd5a11a8a877a798bb033adb74c0357fd5e0aa5a3"
+      }
+    ],
+    "semantic_profile_hash": "bc693f2520c97778e90b80b2ae6a164aad9eccb5aa0f35069da4a6d0ffa97a50",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "clause_6",
+    "source_text": "5.1 يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة.",
+    "pipeline_clause_type": "data_protection",
+    "semantic_profile_version": "shadow-p0-v4.1.4a-data-security-boundary",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.96,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9823,
+    "shadow_dominance_margin": 131.298,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 131.298,
+        "coverage": 0.9823,
+        "independent_support": 2,
+        "core_count": 2,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION",
+      "SECURITY_INCIDENT_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 282,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 211,
+            "end": 282,
+            "text": "ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 282,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "32fc38c49d84505c8739bc1152ad189361d18d6d07d71c47811e8a2cac583ec4"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 211,
+            "end": 282,
+            "text": "ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "35dfe803eabd03e2cfe0ae72976b271ee7bd441e01871e5361f1832f5c33fe4a"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 282,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "32fc38c49d84505c8739bc1152ad189361d18d6d07d71c47811e8a2cac583ec4"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 211,
+            "end": 282,
+            "text": "ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "35dfe803eabd03e2cfe0ae72976b271ee7bd441e01871e5361f1832f5c33fe4a"
+      }
+    ],
+    "semantic_profile_hash": "3fda316a46607d6bb0e2e05b1a927c1d43ff1779ba36aa46bac0c3317f1546ee",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

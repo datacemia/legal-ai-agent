@@ -1,0 +1,1040 @@
+[
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Le Sous-traitant ne fera appel à un Sous-traitant Ultérieur qu'avec l'autorisation écrite préalable, spécifique ou générale, du Responsable du Traitement. En cas d'autorisation générale, le Sous-traitant informera le Responsable du Traitement de tout changement prévu concernant l'ajout ou le remplacement de Sous-traitants Ultérieurs, en lui donnant la possibilité de s'y opposer dans un délai de quatorze (14) jours.",
+    "primary_type": "subcontracting",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 74,
+            "end": 93,
+            "text": "autorisation écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f1c2d1c289bc23fc847b46af280ef1fff53f7b30d48588201cbc5470939cfcf",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 74,
+            "end": 93,
+            "text": "autorisation écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f1c2d1c289bc23fc847b46af280ef1fff53f7b30d48588201cbc5470939cfcf",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Le Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 21,
+            "end": 81,
+            "text": "mettra en œuvre des mesures techniques et organisationnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "550b9a33f972d23cefd2f2777abd5bea77297e02525dbb75e0e75b4f9b99cd75",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 235,
+            "text": "Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b92d77d73e3a8fdc17d94e5d85196d002f472a51a107947d442f20a4279d64f6",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 21,
+            "end": 81,
+            "text": "mettra en œuvre des mesures techniques et organisationnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "550b9a33f972d23cefd2f2777abd5bea77297e02525dbb75e0e75b4f9b99cd75",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 235,
+            "text": "Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b92d77d73e3a8fdc17d94e5d85196d002f472a51a107947d442f20a4279d64f6",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Le Sous-traitant notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation de Données Personnelles dont il aurait connaissance, et fournira une assistance raisonnable au Responsable du Traitement pour respecter ses obligations de notification aux autorités de contrôle et aux personnes concernées.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 21,
+            "end": 159,
+            "text": "notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "47f525677b7f2f8437b2085cea34082288760a97ba72797234580a750e5ea4fb",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PERSONAL_DATA_BREACH_NOTIFICATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PERSONAL_DATA_BREACH_NOTIFICATION",
+            "start": 7,
+            "end": 381,
+            "text": "Sous-traitant notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation de Données Personnelles dont il aurait connaissance, et fournira une assistance raisonnable au Responsable du Traitement pour respecter ses obligations de notification aux autorités de contrôle et aux personnes concernées"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0e5d3852ef1c1c5a804cecf07760d45374e29ca2aea439c1f6d13efc2b7968f5",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 21,
+            "end": 159,
+            "text": "notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "47f525677b7f2f8437b2085cea34082288760a97ba72797234580a750e5ea4fb",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PERSONAL_DATA_BREACH_NOTIFICATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PERSONAL_DATA_BREACH_NOTIFICATION",
+            "start": 7,
+            "end": 381,
+            "text": "Sous-traitant notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation de Données Personnelles dont il aurait connaissance, et fournira une assistance raisonnable au Responsable du Traitement pour respecter ses obligations de notification aux autorités de contrôle et aux personnes concernées"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0e5d3852ef1c1c5a804cecf07760d45374e29ca2aea439c1f6d13efc2b7968f5",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "Clause 8.1",
+    "source_language": "fr",
+    "source_text": "8.1 Le Sous-traitant mettra à la disposition du Responsable du Traitement toutes les informations nécessaires pour démontrer sa conformité au présent ATD et permettra la réalisation d'audits, y compris des inspections, menés par le Responsable du Traitement ou un auditeur mandaté par lui, au maximum une fois par an en l'absence de violation de Données Personnelles.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 7,
+            "end": 366,
+            "text": "Sous-traitant mettra à la disposition du Responsable du Traitement toutes les informations nécessaires pour démontrer sa conformité au présent ATD et permettra la réalisation d'audits, y compris des inspections, menés par le Responsable du Traitement ou un auditeur mandaté par lui, au maximum une fois par an en l'absence de violation de Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "211cdd88162755f8d16e6f33c996c11ba5983631572e169cf3a51a67377f80fe",
+        "normalized_concept": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 7,
+            "end": 366,
+            "text": "Sous-traitant mettra à la disposition du Responsable du Traitement toutes les informations nécessaires pour démontrer sa conformité au présent ATD et permettra la réalisation d'audits, y compris des inspections, menés par le Responsable du Traitement ou un auditeur mandaté par lui, au maximum une fois par an en l'absence de violation de Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "211cdd88162755f8d16e6f33c996c11ba5983631572e169cf3a51a67377f80fe",
+        "normalized_concept": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "Clause 7.1",
+    "source_language": "fr",
+    "source_text": "7.1 Au choix du Responsable du Traitement, à la résiliation de l'accord de services sous-jacent, le Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles au Responsable du Traitement et supprimera les copies existantes, sauf obligation légale de conservation.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 100,
+            "end": 174,
+            "text": "Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7fedb30403400d6e852eac1d6f51798cc72a8126203db9f9810af7302aee74ce",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": null,
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN",
+            "start": 128,
+            "end": 174,
+            "text": "restituera l'ensemble des Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f83fb77d0409a0bcca5dbe20dc2310d9d36046518848bd34424279cf161fe744",
+        "normalized_concept": "DATA_RETURN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": null,
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "RETURN_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 100,
+            "end": 279,
+            "text": "Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles au Responsable du Traitement et supprimera les copies existantes, sauf obligation légale de conservation"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8414aec1408b63ce9d129388813013ddf961e35e0060389f80987805f4745d50",
+        "normalized_concept": "DATA_RETURN_OR_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 100,
+            "end": 174,
+            "text": "Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7fedb30403400d6e852eac1d6f51798cc72a8126203db9f9810af7302aee74ce",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": null,
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN",
+            "start": 128,
+            "end": 174,
+            "text": "restituera l'ensemble des Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f83fb77d0409a0bcca5dbe20dc2310d9d36046518848bd34424279cf161fe744",
+        "normalized_concept": "DATA_RETURN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": null,
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "RETURN_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 100,
+            "end": 279,
+            "text": "Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles au Responsable du Traitement et supprimera les copies existantes, sauf obligation légale de conservation"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8414aec1408b63ce9d129388813013ddf961e35e0060389f80987805f4745d50",
+        "normalized_concept": "DATA_RETURN_OR_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Le Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement, y compris en ce qui concerne les transferts vers un pays tiers, sauf obligation contraire du droit applicable.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PURPOSE_LIMITATION",
+        "rank": 96,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURPOSE_LIMITATION",
+            "start": 7,
+            "end": 119,
+            "text": "Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "67d3c9ae36ef43f2eedbdd2e1b02441216db94ee8389f3c9d9eab13217b9f9c9",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROCESSING_INSTRUCTION_LIMIT",
+        "rank": 94,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROCESSING_INSTRUCTION_LIMIT",
+            "start": 7,
+            "end": 230,
+            "text": "Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement, y compris en ce qui concerne les transferts vers un pays tiers, sauf obligation contraire du droit applicable"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "b4dcd0f1cb45594a56e0e8acece5af137c43d95f015229443008d6b58fedb150",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 7,
+            "end": 57,
+            "text": "Sous-traitant ne traitera les Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c78115fec0b30581c700310cd198e9b823d1c2855472261c871f7f6c4270fb51",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PURPOSE_LIMITATION",
+        "rank": 96,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURPOSE_LIMITATION",
+            "start": 7,
+            "end": 119,
+            "text": "Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "67d3c9ae36ef43f2eedbdd2e1b02441216db94ee8389f3c9d9eab13217b9f9c9",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROCESSING_INSTRUCTION_LIMIT",
+        "rank": 94,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROCESSING_INSTRUCTION_LIMIT",
+            "start": 7,
+            "end": 230,
+            "text": "Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement, y compris en ce qui concerne les transferts vers un pays tiers, sauf obligation contraire du droit applicable"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "b4dcd0f1cb45594a56e0e8acece5af137c43d95f015229443008d6b58fedb150",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 7,
+            "end": 57,
+            "text": "Sous-traitant ne traitera les Données Personnelles"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c78115fec0b30581c700310cd198e9b823d1c2855472261c871f7f6c4270fb51",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROCESSOR",
+          "counterparty": "CONTROLLER",
+          "beneficiary": "CONTROLLER",
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 7,
+            "end": 203,
+            "text": "Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "68b35d47a1f7948196e678c1ee641d107a16b3dfcad48b50571390e01ca728a2",
+        "normalized_concept": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 7,
+            "end": 203,
+            "text": "Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "68b35d47a1f7948196e678c1ee641d107a16b3dfcad48b50571390e01ca728a2",
+        "normalized_concept": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "PERSONAL_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Le Sous-traitant assistera le Responsable du Traitement, dans la mesure du possible, dans l'exécution de son obligation de répondre aux demandes d'exercice des droits des personnes concernées, et notifiera sans délai injustifié le Responsable du Traitement s'il reçoit une telle demande directement.",
+    "primary_type": "data_protection",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 7,
+            "end": 302,
+            "text": "Sous-traitant assistera le Responsable du Traitement, dans la mesure du possible, dans l'exécution de son obligation de répondre aux demandes d'exercice des droits des personnes concernées, et notifiera sans délai injustifié le Responsable du Traitement s'il reçoit une telle demande directement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "47470746948482c1084259dfde0fb815462207f1eb63245db647ffb24de8a058",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DATA_SUBJECT_ASSISTANCE",
+        "rank": 89,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_SUBJECT_ASSISTANCE",
+            "start": 7,
+            "end": 302,
+            "text": "Sous-traitant assistera le Responsable du Traitement, dans la mesure du possible, dans l'exécution de son obligation de répondre aux demandes d'exercice des droits des personnes concernées, et notifiera sans délai injustifié le Responsable du Traitement s'il reçoit une telle demande directement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "47470746948482c1084259dfde0fb815462207f1eb63245db647ffb24de8a058",
+        "normalized_concept": "DATA_SUBJECT_ASSISTANCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

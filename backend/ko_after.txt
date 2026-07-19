@@ -1,0 +1,34 @@
+NEEDS_PARSER_FIX 16.pdf -> aucune transaction candidate extraite; income_gap=5229.1
+NEEDS_PARSER_FIX 17.pdf -> income_gap=185241.02
+NEEDS_PARSER_FIX arabie saudite.pdf -> expense_gap=3189.78
+NO_TRANSACTIONS t1.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t10.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t11.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t12.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t13.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t14.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t2.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t3 special.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t4.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t5.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t6.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t7.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t8.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t9.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX   16.pdf | validated=False tx=0 income=0 expenses=0 expected_income=5229.1 expected_expenses=0.0 gap_i=5229.1 gap_e=0.0 reason=aucune transaction candidate extraite; income_gap=5229.1
+NEEDS_PARSER_FIX   17.pdf | validated=False tx=16 income=545425.49 expenses=0 expected_income=360184.47 expected_expenses=0.0 gap_i=185241.02 gap_e=0.0 reason=income_gap=185241.02
+NEEDS_PARSER_FIX   arabie saudite.pdf | validated=False tx=120 income=40302315782.19 expenses=155415.2 expected_income=40302315782.19 expected_expenses=152225.42 gap_i=0.0 gap_e=3189.78 reason=expense_gap=3189.78
+NO_TRANSACTIONS    t1.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t10.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t11.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t12.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t13.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t14.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t2.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t3 special.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t4.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t5.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t6.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t7.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t8.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t9.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite

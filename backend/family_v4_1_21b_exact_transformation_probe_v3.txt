@@ -1,0 +1,917 @@
+========== PII_REDACTOR V2 LOADED ==========
+C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\huggingface_hub\utils\_validators.py:189: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+  warnings.warn(
+========================================================================================================================
+V4.1.21B EXACT TRANSFORMATION DIFFERENTIAL V3
+========================================================================================================================
+
+DOCX MATCHES: 1
+- regression_docs\04_Cybersecurity_Services_Agreement_FR.docx
+
+SELECTED DOCX: regression_docs\04_Cybersecurity_Services_Agreement_FR.docx
+HTTP DEBUG EXISTS: True
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 147.66it/s]
+
+========================================================================================================================
+A — PYTHON-DOCX PARAGRAPHS
+========================================================================================================================
+LENGTH: 3583
+SHA256: 18589cd41e3a1518995bf0b7470b3d7e179b39fc99032dc8950ca1b7cb6b394c
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED: [["Cybersecurity", 140], ["MSA", 134], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+CYBERSECURITY EVIDENCE:
+[
+  {
+    "term": "iso/iec 27001",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "soc 2",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "cybersécurité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "cybersécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 6,
+    "weight": 3,
+    "points": 18
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "sécurité",
+    "count": 8,
+    "weight": 1,
+    "points": 8
+  },
+  {
+    "term": "sécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  }
+]
+
+MSA EVIDENCE:
+[
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  },
+  {
+    "term": "client",
+    "count": 13,
+    "weight": 1,
+    "points": 13
+  },
+  {
+    "term": "client",
+    "count": 4,
+    "weight": 5,
+    "points": 20,
+    "zone": "title"
+  },
+  {
+    "term": "prestataire",
+    "count": 12,
+    "weight": 1,
+    "points": 12
+  },
+  {
+    "term": "prestataire",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  }
+]
+
+========================================================================================================================
+B — CONTRACT PARSER EXTRACT_TEXT
+========================================================================================================================
+LENGTH: 3463
+SHA256: 7c35ac2453c7bcbd3fc2c02b5a831e8482017170948b3797e67d18383d1b461a
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED: [["Cybersecurity", 140], ["MSA", 134], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+CYBERSECURITY EVIDENCE:
+[
+  {
+    "term": "iso/iec 27001",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "soc 2",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "cybersécurité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "cybersécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 6,
+    "weight": 3,
+    "points": 18
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "sécurité",
+    "count": 8,
+    "weight": 1,
+    "points": 8
+  },
+  {
+    "term": "sécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  }
+]
+
+MSA EVIDENCE:
+[
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  },
+  {
+    "term": "client",
+    "count": 13,
+    "weight": 1,
+    "points": 13
+  },
+  {
+    "term": "client",
+    "count": 4,
+    "weight": 5,
+    "points": 20,
+    "zone": "title"
+  },
+  {
+    "term": "prestataire",
+    "count": 12,
+    "weight": 1,
+    "points": 12
+  },
+  {
+    "term": "prestataire",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  }
+]
+
+========================================================================================================================
+C — CLEAN_TEXT
+========================================================================================================================
+LENGTH: 3463
+SHA256: 7c35ac2453c7bcbd3fc2c02b5a831e8482017170948b3797e67d18383d1b461a
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED: [["Cybersecurity", 140], ["MSA", 134], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+CYBERSECURITY EVIDENCE:
+[
+  {
+    "term": "iso/iec 27001",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "soc 2",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "cybersécurité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "cybersécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 6,
+    "weight": 3,
+    "points": 18
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "sécurité",
+    "count": 8,
+    "weight": 1,
+    "points": 8
+  },
+  {
+    "term": "sécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  }
+]
+
+MSA EVIDENCE:
+[
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  },
+  {
+    "term": "client",
+    "count": 13,
+    "weight": 1,
+    "points": 13
+  },
+  {
+    "term": "client",
+    "count": 4,
+    "weight": 5,
+    "points": 20,
+    "zone": "title"
+  },
+  {
+    "term": "prestataire",
+    "count": 12,
+    "weight": 1,
+    "points": 12
+  },
+  {
+    "term": "prestataire",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  }
+]
+
+========================================================================================================================
+D — REDACT_SENSITIVE_DATA
+========================================================================================================================
+LENGTH: 3387
+SHA256: 5dc3462edce823c226ccd9946f6b19cd3168286492c0fe5f4f46bc9497bee7d2
+FAMILY: MSA
+CONFIDENCE: medium
+RANKED: [["MSA", 134], ["Cybersecurity", 132], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+CYBERSECURITY EVIDENCE:
+[
+  {
+    "term": "iso/iec 27001",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "soc 2",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "cybersécurité",
+    "count": 2,
+    "weight": 3,
+    "points": 6
+  },
+  {
+    "term": "cybersécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 6,
+    "weight": 3,
+    "points": 18
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "sécurité",
+    "count": 8,
+    "weight": 1,
+    "points": 8
+  },
+  {
+    "term": "sécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  }
+]
+
+MSA EVIDENCE:
+[
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  },
+  {
+    "term": "client",
+    "count": 13,
+    "weight": 1,
+    "points": 13
+  },
+  {
+    "term": "client",
+    "count": 4,
+    "weight": 5,
+    "points": 20,
+    "zone": "title"
+  },
+  {
+    "term": "prestataire",
+    "count": 12,
+    "weight": 1,
+    "points": 12
+  },
+  {
+    "term": "prestataire",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  }
+]
+
+========================================================================================================================
+E — HTTP DEBUG_CLEANED_TEXT
+========================================================================================================================
+LENGTH: 3387
+SHA256: 5dc3462edce823c226ccd9946f6b19cd3168286492c0fe5f4f46bc9497bee7d2
+FAMILY: MSA
+CONFIDENCE: medium
+RANKED: [["MSA", 134], ["Cybersecurity", 132], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+CYBERSECURITY EVIDENCE:
+[
+  {
+    "term": "iso/iec 27001",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "soc 2",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "cybersécurité",
+    "count": 2,
+    "weight": 3,
+    "points": 6
+  },
+  {
+    "term": "cybersécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 6,
+    "weight": 3,
+    "points": 18
+  },
+  {
+    "term": "incident de sécurité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "détection des menaces",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "vulnérabilité",
+    "count": 2,
+    "weight": 5,
+    "points": 10,
+    "zone": "title"
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 3,
+    "points": 9
+  },
+  {
+    "term": "réponse aux incidents",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 3,
+    "points": 3
+  },
+  {
+    "term": "surveillance de sécurité",
+    "count": 1,
+    "weight": 5,
+    "points": 5,
+    "zone": "title"
+  },
+  {
+    "term": "sécurité",
+    "count": 8,
+    "weight": 1,
+    "points": 8
+  },
+  {
+    "term": "sécurité",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  }
+]
+
+MSA EVIDENCE:
+[
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  },
+  {
+    "term": "client",
+    "count": 13,
+    "weight": 1,
+    "points": 13
+  },
+  {
+    "term": "client",
+    "count": 4,
+    "weight": 5,
+    "points": 20,
+    "zone": "title"
+  },
+  {
+    "term": "prestataire",
+    "count": 12,
+    "weight": 1,
+    "points": 12
+  },
+  {
+    "term": "prestataire",
+    "count": 3,
+    "weight": 5,
+    "points": 15,
+    "zone": "title"
+  },
+  {
+    "term": "services",
+    "count": 7,
+    "weight": 1,
+    "points": 7
+  },
+  {
+    "term": "services",
+    "count": 6,
+    "weight": 5,
+    "points": 30,
+    "zone": "title"
+  }
+]
+
+========================================================================================================================
+EXACT TEXT EQUALITY
+========================================================================================================================
+A == B False
+B == C True
+C == D False
+D == E True
+
+========================================================================================================================
+FAMILY TRANSITIONS
+========================================================================================================================
+A — PYTHON-DOCX PARAGRAPHS => Cybersecurity
+B — CONTRACT PARSER EXTRACT_TEXT => Cybersecurity
+C — CLEAN_TEXT => Cybersecurity
+D — REDACT_SENSITIVE_DATA => MSA
+TRANSITION: C — CLEAN_TEXT Cybersecurity -> D — REDACT_SENSITIVE_DATA MSA
+E — HTTP DEBUG_CLEANED_TEXT => MSA
+
+========================================================================================================================
+FIRST DIFFERING CHARACTER
+========================================================================================================================
+
+A == B
+INDEX: 3399
+LEFT:
+" sans pénalité, si le Prestataire subit un Incident de Sécurité affectant les données du Client résultant de sa négligence grave.\nSIGNATURES\nEN FOI DE QUOI, les parties ont signé le présent Accord à la Date d'Effet.\nPour Obsidian Threat Defense LLC :  ____________________________\nNom / Fonction :  ____________________________\nPour Cascadia Regional Bank :  ____________________________\nNom / Fonction :  ____________________________"
+RIGHT:
+" sans pénalité, si le Prestataire subit un Incident de Sécurité affectant les données du Client résultant de sa négligence grave.\nSIGNATURES\nEN FOI DE QUOI, les parties ont signé le présent Accord à la Date d'Effet.\nPour Obsidian Threat Defense LLC :\nNom / Fonction :\nPour Cascadia Regional Bank :\nNom / Fonction :"
+
+B == C
+INDEX: None
+IDENTICAL
+
+C == D
+INDEX: 156
+LEFT:
+"ACCORD DE SERVICES DE CYBERSÉCURITÉ GÉRÉS\nLe présent Accord de Services de Cybersécurité Gérés (l'« Accord ») est conclu à la date du 6 juillet 2026, entre Obsidian Threat Defense LLC, une société à responsabilité limitée du Delaware (le « Prestataire »), et Cascadia Regional Bank, une banque agréée par l'État de Washington (le « Client »), pour la fourniture de services de détection et de réponse gérées, de gestion des vulnérabilités et de réponse aux incidents (les « Services »).\n« Incident de Sécurité » désigne tout accès non autorisé confirmé, ou toute acquisition, divulgation, altération ou destruction non autorisée, des systèmes ou données du"
+RIGHT:
+"ACCORD DE SERVICES DE CYBERSÉCURITÉ GÉRÉS\nLe présent Accord de Services de Cybersécurité Gérés (l'« Accord ») est conclu à la date du 6 juillet 2026, entre [PARTY_1], une société à responsabilité limitée du [LOCATION] (le « Prestataire »), et [PARTY_2], une banque agréée par l'État de Washington (le « Client »), pour la fourniture de services de détection et de réponse gérées, de gestion des vulnérabilités et de réponse aux incidents (les « Services »).\n« Incident de Sécurité » désigne tout accès non autorisé confirmé, ou toute acquisition, divulgation, altération ou destruction non autorisée, des systèmes ou données du Client.\n« Vulnérabilité Crit"
+
+D == E
+INDEX: None
+IDENTICAL

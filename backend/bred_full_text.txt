@@ -1,0 +1,368 @@
+FINANCE_TEXT_PDF_EXTRACTED 20491
+PDF_LINES_DEBUG {'line_count': 316, 'non_empty_line_count': 254, 'max_line_len': 188, 'first_20': ['Relevé de comptes', '', '                  Date                     N° de compte                      N° de relevé                 Page', '              1er mars 2025                 00319058454                          4                          1/1', '', '( Vos numéros et adresses utiles', '', ' Votre agence                         : 0820 336 174 (1)', ' BRED Direct Services         : 0 806 060 211 (2)             M. FERNANDES GAETAN', ' Opposition carte bancaire : 33(0)1 77 86 24 24 (3)          18 BOULEVARD JOHN FITZGERALD KENNEDY', ' Internet                                   : www.bred.fr               63100 CLERMONT FERRAND', '', '  (1) Service 0,12 EUR/mn + prix appel. (2) Service gratuit + prix appel. (3) tarif', '  local en vigueur.', '', '  Votre Code BIC        Votre Code IBAN', '   BREDFRPPXXX   FR76 1680 7003 2536 9503 1619 937', '', 'F Votre Conseiller    : Mme Agnes Natan                                                          Envoi précédent effectué le 1er février 2025', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 50, 'income_total': 7584.79, 'expense_total': 5257.69}
+BRED_POSITION_LINES_EXTRACTED 50
+Relevé de comptes
+
+                  Date                     N° de compte                      N° de relevé                 Page
+              1er mars 2025                 00319058454                          4                          1/1
+
+( Vos numéros et adresses utiles
+
+ Votre agence                         : 0820 336 174 (1)
+ BRED Direct Services         : 0 806 060 211 (2)             M. FERNANDES GAETAN
+ Opposition carte bancaire : 33(0)1 77 86 24 24 (3)          18 BOULEVARD JOHN FITZGERALD KENNEDY
+ Internet                                   : www.bred.fr               63100 CLERMONT FERRAND
+
+  (1) Service 0,12 EUR/mn + prix appel. (2) Service gratuit + prix appel. (3) tarif
+  local en vigueur.
+
+  Votre Code BIC        Votre Code IBAN
+   BREDFRPPXXX   FR76 1680 7003 2536 9503 1619 937
+
+F Votre Conseiller    : Mme Agnes Natan                                                          Envoi précédent effectué le 1er février 2025
+
+
+    Téléphone                       : 0153213885
+     e-mail                               : agnes.natan@bred.fr
+
+
+
+
+
+      Situation de vos comptes
+
+                                                 Plafond en Euros                                                     Euros
+          Poste principal                                                                                            627,06
+       LDD Solidaire                               12.000,00                                                       2.001,96
+          Carte paiement en trois fois                                                          Débit                243,66
+     Autorisation de découvert au 28.02.2025
+        Champ Libre Accueil :
+              plafonné à                                                                                             500,00
+             au taux débiteur annuel de 0,00 % jusqu'à 400,00 Euros
+             au taux débiteur annuel de 19,55 % jusqu'à 500,00 Euros
+             au TAEG* de 3,98 % **
+
+ Relevé d'opérations du poste principal
+
+    Date                              Référence                                     Débit                   Crédit            Valeur
+
+   01.02                                               Solde précédent                                       447,50
+    04.02   Virement Sociéte EDIMARK                             0240205                                         2168,34  05.02.25
+              19 rue Dumont D'Urville
+              75016 PARIS cedex 16
+               Paye du mois de Janvier
+
+               04/02/2025 17:57:08 cet
+
+    05.02   Carte                                                 0025612                    69,95                            05.02.25
+               zara.com le 02/02/25 cb.xxxxx3214  / pays d'origine :
+               espagne  / montant : 69,95 eur
+    05.02   Carte                                                 9917628                    43,88                            05.02.25
+                 sushi club le 04/02/25 cb.xxxxx3214  / pays d'origine :
+                france  / montant : 43,88 eur
+    05.02   Carte                                                 3036746                    20,00                            05.02.25
+              bp colombes cha le 03/02/25 cb.xxxxx3214  / pays
+                 d'origine : france  / montant : 20,00 eur
+    05.02   Carte                                                 3036383                    17,98                            05.02.25
+                phie benamran le 04/02/25 cb.xxxxx3214  / pays
+                 d'origine : france  / montant : 17,98 eur
+    05.02   Prelevement echeance 022 de votre                                               64,90                            05.02.25
+                pret personnel  / n°06845203
+  i Frais
+
+
+
+      BRED Banque Populaire - Société anonyme coopérative de banque populaire régie par les articles L 512-2 et suivants du code monétaire et financier et l’ensemble des textes
+          relatifs aux banques populaires et aux établissements de crédit, au capital de 1 893 934 238,40 euros. Siège social : 18, quai de la Rapée 75604 PARIS Cedex 12 - 552091795
+      RCS Paris - Ident. TVA FR 09 552 091 795 - Intermédiaire en assurances immatriculé à l’ORIAS sous le numéro 07 003 608. Entité du Groupe BPCE, titulaire de l’identifiant
+       unique REP Papiers n° FR232581_03FWUB délivré par l’ADEME.
+           M.FERNANDESGAETAN
+
+
+                     Date                     N° de compte                      N° de relevé                 Page
+                  1er mars 2025                 00319058454                          4                          2/2
+
+
+
+Relevé d'opérations du poste principal
+
+   Date                              Référence                                     Débit                   Crédit            Valeur
+   05.02   Prélèvement SEPA                                     2385861                    86,40                            05.02.25
+              navigo annuel - comutitres sas
+              navigo annuel
+              fr42zzz457385               sepa
+             fr42zzz45738550214067555755040008  rcur
+             3/50214067555755/800799281
+   06.02   Carte                                                 0000069                    23,00                            06.02.25
+              heetch* transpo le 05/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 23,00 eur
+   06.02   Carte                                                 0000077                    22,00                            06.02.25
+              heetch* transpo le 05/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 22,00 eur
+   06.02    Frais CB paiement en trois fois  i                   0216832                     3,00                            06.02.25
+               millimetro corp  / mnt origine 162,00 eur  / transaction
+            du 05/02 07.02   Carte                                                 8819882                    99,90                            07.02.25
+               zara le 06/02/25 cb.xxxxx3214  / pays d'origine : france  /
+             montant : 99,90 eur
+   07.02   Carte                                                 3036180                    14,04                            07.02.25
+              carrefourexpres le 05/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 14,04 eur
+   07.02   Carte                                                 9200315                    10,17                            07.02.25
+            temu.com le 06/02/25 cb.xxxxx3214  / pays d'origine :
+                irlande  / montant : 10,17 eur
+   07.02   Facture CB crédit                                     0024113                                             69,95   07.02.25
+              zara.com le 02/02/25 cb.xxxxx3214  / pays d'origine :
+              espagne  / montant : 69,95 eur
+   07.02   Prélèvement SEPA                                     2388187                    24,96                            07.02.25
+               aloy
+            on air la defense - onair-3829735776734-j8cm0olp
+              fr72zzz88f820               sepa
+            rumon382973577673402           rcur
+             onair-3829735776734-j8cm0olp
+   08.02   Carte                                                 1610575                     8,12                            08.02.25
+             happy curl defe le 07/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 8,12 eur
+   08.02   Carte                                                 1810682                     5,70                            08.02.25
+              brothers le 07/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 5,70 eur
+   08.02   Carte                                                 3171037                  549,99                            08.02.24
+             micromania 4t le 07/02/25 cb.xxxxx3214  / pays d'origine
+                             : france  / montant : 549,99 eur
+   09.02   Virement instantané reçu                              0240209                                          423,50  09.02.24
+        m hugo sanchez
+              notprovided
+               crlyfrppxxx
+             09/02/2024 08:18:56 cet
+   09.02   Carte                                                 0000137                    11,00                            09.02.25
+              heetch* transpo le 08/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 11,00 eur
+   09.02   Carte                                                 0018002                     3,00                            09.02.25
+            on air fitness le 07/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 3,00 eur
+   09.02   Facture CB crédit                                     0000018                                             23,00   09.02.25
+              heetch* transpo le 08/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 23,00 eur
+   09.02   Virement instantané émis                              e930577                    12,00                            09.02.25
+             k2
+                paylib bdxwjawzpt heetch
+                paylib entre amis
+              cmcifr2axxx
+             09/02/2024 09:04:20 cet
+
+  i Frais
+
+
+         BRED Banque Populaire - Société anonyme coopérative de banque populaire régie par les articles L 512-2 et suivants du code monétaire et financier et l’ensemble des textes
+                 relatifs aux banques populaires et aux établissements de crédit, au capital de 1 893 934 238,40 euros. Siège social : 18, quai de la Rapée 75604 PARIS Cedex 12 - 552091795
+          RCS Paris - Ident. TVA FR 09 552 091 795 - Intermédiaire en assurances immatriculé à l’ORIAS sous le numéro 07 003 608. Entité du Groupe BPCE, titulaire de l’identifiant
+            unique REP Papiers n° FR232581_03FWUB délivré par l’ADEME.
+         M.FERNANDESGAETAN
+
+
+                  Date                     N° de compte                      N° de relevé                 Page
+              1er mars 2025                 00319058454                          4                          3/4
+
+
+
+Relevé d'opérations du poste principal
+
+   Date                              Référence                                     Débit                   Crédit            Valeur
+   12.02   Virement SEPA reçu                                   9010214                                           2.400,00  12.02.25
+             m. jean pierre sanchez
+              retour smart
+             bredfrppxxx
+   12.02   Virement                                             9935325                                           2.500,00   30.01.25
+               voiture
+   12.02   Carte                                                 1197324                    60,00                            12.02.25
+              magic circus le 10/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 60,00 eur
+   12.02   Carte                                                 8819092                    40,00                            12.02.25
+                 gloria le 10/02/25 cb.xxxxx3214  / pays d'origine : france
+                       / montant : 40,00 eur
+   12.02   Carte                                                 3040797                    14,82                            12.02.25
+               carrefour expre le 09/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 14,82 eur
+   12.02   Carte                                                 0000120                    11,00                            12.02.25
+              heetch* transpo le 10/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 11,00 eur
+   12.02   Carte                                                 1813642                    11,00                            12.02.25
+               diabledeslombar le 10/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 11,00 eur
+   12.02   Carte                                                 1011689                    10,99                            12.02.25
+                apple.com/bill le 10/02/25 cb.xxxxx3214  / pays d'origine
+                             : irlande  / montant : 10,99 eur
+   12.02   Carte                                                 3310462                    10,80                            12.02.25
+                sushi club le 10/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 10,80 eur
+   12.02   Carte                                                 1007406                     9,99                            12.02.25
+                apple.com/bill le 09/02/25 cb.xxxxx3214  / pays d'origine
+                             : irlande  / montant : 9,99 eur
+   12.02   Carte                                                 3040764                     9,25                            12.02.25
+              sandraruba le 09/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 9,25 eur
+   12.02   Carte                                                 1814152                     4,30                            12.02.25
+              comptoir belge le 10/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 4,30 eur
+   12.02   Carte                                                 3039169                     2,26                            12.02.25
+               carrefour expre le 08/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 2,26 eur
+   12.02   Virement SEPA émis                                   9001179                 2.500,00                            12.02.25
+             papa
+               voiture
+             bredfrppxxx
+   13.02   Carte                                                 0013622                     3,50                            13.02.25
+            on air fitness le 11/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 3,50 eur
+   13.02   Virement instantané émis                              d27cb82                    85,00                            13.02.25
+               ludovic simon
+                paylib bdfwukt5ev ouigo
+                paylib entre amis
+             ntsbdeb1xxx
+             13/02/2024 22:19:22 cet
+   14.02   Carte                                                 3044235                    16,00                            14.02.25
+               istambul le 13/02/25 cb.xxxxx3214  / pays d'origine :
+               france  / montant : 16,00 eur
+   14.02   Carte                                                 0000154                    10,00                            14.02.25
+              heetch* transpo le 13/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 10,00 eur
+   15.02   Carte                                                 8810342                     7,95                            15.02.25
+            pharm facultes le 14/02/25 cb.xxxxx3214  / pays
+                d'origine : france  / montant : 7,95 eur
+  i Frais
+
+
+
+      BRED Banque Populaire - Société anonyme coopérative de banque populaire régie par les articles L 512-2 et suivants du code monétaire et financier et l’ensemble des textes
+           relatifs aux banques populaires et aux établissements de crédit, au capital de 1 893 934 238,40 euros. Siège social : 18, quai de la Rapée 75604 PARIS Cedex 12 - 552091795
+      RCS Paris - Ident. TVA FR 09 552 091 795 - Intermédiaire en assurances immatriculé à l’ORIAS sous le numéro 07 003 608. Entité du Groupe BPCE, titulaire de l’identifiant
+        unique REP Papiers n° FR232581_03FWUB délivré par l’ADEME.
+           M.FERNANDESGAETAN
+
+
+                     Date                     N° de compte                      N° de relevé                 Page
+                  1er mars 2025                 00319058454                          4                          4/4
+
+
+
+Relevé d'opérations du poste principal
+
+   Date                              Référence                                     Débit                   Crédit            Valeur
+   28.02   Carte                                                 3057372                    14,70                            28.02.25
+             mcdonalds 921 le 26/02/24 cb.xxxxx3706  / pays
+                d'origine : france  / montant : 14,70 eur
+   28.02   Virement SEPA émis                                   9011234                  500,00                            28.02.25
+            hugo lcl
+             cadeaux
+               crlyfrppxxx
+   28.02   Virement instantané émis                              0939de6                    20,00                            28.02.25
+             medhi nanterre barber
+                paylib bdkauu44lp coupe
+                paylib entre amis
+             bredfrppxxx
+             28/02/2024 00:14:14 cet
+   28.02   Virement instantané émis                                 bb1ef37                  701,00                            28.02.25
+            hugo lcl
+              notprovided
+               crlyfrppxxx
+             28/02/2024 13:49:55 cet
+   28.02   Commission virement instantané émis                    bb1ef37                     1,00                            28.02.25 28.02   Prélèvement SEPA                                     2400770                    36,96                            28.02.25
+               aloy
+            on air la defense - onair-3829735777006-l26mbiji
+              fr72zzz88f820               sepa
+            rumon382973577700603           rcur
+              onair-3829735777006-l26mbiji
+   28.02   Carte                                                 3058758                    30,18                            28.02.25
+               carrefour expre le 27/02/25 cb.xxxxx3706  / pays
+                d'origine : france  / montant : 30,18 eur
+   01.03   Carte                                                 6413583                    57,00                            01.03.25
+                universal flowe le 29/02/25 cb.xxxxx3706  / pays
+                d'origine : france  / montant : 57,00 eur
+
+                                                                   Total des mouvements                 9.832,14               10.011,70
+
+  01.03                                         Nouveau solde                                       627,06
+
+  i Frais
+
+ Total des frais de gestion débités du 01.02 au 29.02.2025                                     11,78
+
+    * TAEG indicatif calculé conformément à l'article L.313-2 du code de la consommation sur la base d'une utilisation constante et intégrale sur la durée totale
+    du découvert ou sur une durée de 3 mois si la durée du découvert est indéterminée.
+    ** Ce taux sera automatiquement réduit au taux maximum autorisé, selon le montant de l'autorisation, en application des dispositions relatives à l'usure pour
+     la période concernée.
+
+Relevé d'opérations poste annexe
+   Date                              Référence                                     Débit                   Crédit            Valeur
+
+
+      LDD Solidaire
+
+  30.01                                               Solde précédent                                       3.001,96
+   12.02   Virement                                             9935325                  2.500,00                            30.01.24
+                voiture
+   27.02   Virement                                             9933103                                           2.500,00  01.03.24 28.02   Virement                                             9915656                  1.000,00                            15.02.24
+
+                                                                    Total des mouvements                 3.500,00                 2.500,00
+
+  01.03                                         Nouveau solde                                       2.001,96
+
+
+
+
+
+         BRED Banque Populaire - Société anonyme coopérative de banque populaire régie par les articles L 512-2 et suivants du code monétaire et financier et l’ensemble des textes
+                 relatifs aux banques populaires et aux établissements de crédit, au capital de 1 893 934 238,40 euros. Siège social : 18, quai de la Rapée 75604 PARIS Cedex 12 - 552091795
+          RCS Paris - Ident. TVA FR 09 552 091 795 - Intermédiaire en assurances immatriculé à l’ORIAS sous le numéro 07 003 608. Entité du Groupe BPCE, titulaire de l’identifiant
+            unique REP Papiers n° FR232581_03FWUB délivré par l’ADEME.
+
+BRED_POSITION_TX 2025-02-04 income 2168.34 EUR Virement Sociéte EDIMARK 0240205 page=1
+BRED_POSITION_TX 2025-02-05 expense -69.95 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -43.88 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -20.00 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -17.98 EUR Carte page=1
+BRED_POSITION_TX 2025-02-05 expense -64.90 EUR Prelevement echeance 022 de votre page=1
+BRED_POSITION_TX 2025-02-05 expense -86.40 EUR Prélèvement SEPA 2385861 page=2
+BRED_POSITION_TX 2025-02-06 expense -23.00 EUR Carte 0000069 page=2
+BRED_POSITION_TX 2025-02-06 expense -22.00 EUR Carte 0000077 page=2
+BRED_POSITION_TX 2025-02-06 expense -3.00 EUR Frais CB paiement en trois fois i 0216832 page=2
+BRED_POSITION_TX 2025-02-07 expense -99.90 EUR Carte 8819882 page=2
+BRED_POSITION_TX 2025-02-07 expense -14.04 EUR Carte 3036180 page=2
+BRED_POSITION_TX 2025-02-07 expense -10.17 EUR Carte 9200315 page=2
+BRED_POSITION_TX 2025-02-07 income 69.95 EUR Facture CB crédit 0024113 page=2
+BRED_POSITION_TX 2025-02-07 expense -24.96 EUR Prélèvement SEPA 2388187 page=2
+BRED_POSITION_TX 2025-02-08 expense -8.12 EUR Carte 1610575 page=2
+BRED_POSITION_TX 2025-02-08 expense -5.70 EUR Carte 1810682 page=2
+BRED_POSITION_TX 2025-02-08 expense -549.99 EUR Carte 3171037 page=2
+BRED_POSITION_TX 2025-02-09 income 423.50 EUR Virement instantané reçu 0240209 page=2
+BRED_POSITION_TX 2025-02-09 expense -11.00 EUR Carte 0000137 page=2
+BRED_POSITION_TX 2025-02-09 expense -3.00 EUR Carte 0018002 page=2
+BRED_POSITION_TX 2025-02-09 income 23.00 EUR Facture CB crédit 0000018 page=2
+BRED_POSITION_TX 2025-02-09 expense -12.00 EUR Virement instantané émis e930577 page=2
+BRED_POSITION_TX 2025-02-12 income 2400.00 EUR Virement SEPA reçu 9010214 page=3
+BRED_POSITION_TX 2025-02-12 income 2500.00 EUR Virement 9935325 page=3
+BRED_POSITION_TX 2025-02-12 expense -60.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -40.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -14.82 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -11.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -11.00 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -10.99 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -10.80 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -9.99 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -9.25 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -4.30 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -2.26 EUR Carte page=3
+BRED_POSITION_TX 2025-02-12 expense -2500.00 EUR Virement émis page=3
+BRED_POSITION_TX 2025-02-13 expense -3.50 EUR Carte 0013622 page=3
+BRED_POSITION_TX 2025-02-13 expense -85.00 EUR Virement instantané émis d27cb82 page=3
+BRED_POSITION_TX 2025-02-14 expense -16.00 EUR Carte 3044235 page=3
+BRED_POSITION_TX 2025-02-14 expense -10.00 EUR Carte 0000154 page=3
+BRED_POSITION_TX 2025-02-15 expense -7.95 EUR Carte 8810342 page=3
+BRED_POSITION_TX 2025-02-28 expense -14.70 EUR Carte 3057372 page=4
+BRED_POSITION_TX 2025-02-28 expense -500.00 EUR Virement SEPA émis 9011234 page=4
+BRED_POSITION_TX 2025-02-28 expense -20.00 EUR Virement instantané émis 0939de6 page=4
+BRED_POSITION_TX 2025-02-28 expense -701.00 EUR Virement instantané émis bb1ef37 page=4
+BRED_POSITION_TX 2025-02-28 expense -1.00 EUR Commission virement instantané émis bb1ef37 page=4
+BRED_POSITION_TX 2025-02-28 expense -36.96 EUR Prélèvement page=4
+BRED_POSITION_TX 2025-02-28 expense -30.18 EUR Carte 3058758 page=4
+BRED_POSITION_TX 2025-03-01 expense -57.00 EUR Carte 6413583 page=4

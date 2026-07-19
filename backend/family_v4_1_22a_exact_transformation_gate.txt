@@ -1,0 +1,23 @@
+========== PII_REDACTOR V2 LOADED ==========
+C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\huggingface_hub\utils\_validators.py:189: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+  warnings.warn(
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 2011.17it/s]
+
+========================================================================================================================
+CLEAN_TEXT
+========================================================================================================================
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED: [["Cybersecurity", 140], ["MSA", 134], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+========================================================================================================================
+REDACTED
+========================================================================================================================
+FAMILY: Cybersecurity
+CONFIDENCE: medium
+RANKED: [["Cybersecurity", 140], ["MSA", 134], ["Manufacturing", 24], ["Construction", 6], ["Data Processing", 3], ["Outsourcing", 1], ["Corporate Resolution", 1]]
+
+========================================================================================================================
+BEFORE: Cybersecurity
+AFTER : Cybersecurity
+V4.1.22A FAMILY PRESERVATION GATE: PASS

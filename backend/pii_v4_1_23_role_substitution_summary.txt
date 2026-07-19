@@ -1,0 +1,713 @@
+FILE: app\services\contract_agent\ai_client.py
+FUNCTION: call_json_ai
+LINES: 11 - 40
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\clause_grouping_engine.py
+FUNCTION: build_clause_groups
+LINES: 429 - 508
+TOKENS: ['party_roles']
+    party_roles: dict | None = None,
+    if isinstance(party_roles, dict):
+        role_family = str(party_roles.get("family") or "").lower().strip()
+FILE: app\services\contract_agent\clause_wording_library.py
+FUNCTION: normalize_clause_type
+LINES: 1231 - 1444
+TOKENS: ['party_b']
+        "no_third_party_beneficiaries": "third_party_rights",
+        "third_party_beneficiary": "third_party_rights",
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: normalize_final_clause_title
+LINES: 107 - 157
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: call_clause_ai
+LINES: 1175 - 1215
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: detect_clause_baseline
+LINES: 2289 - 2493
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: display_safe_clause_labels
+LINES: 4550 - 4686
+TOKENS: ['SERVICE_PROVIDER', 'CLIENT']
+        output = output.replace(old, new)
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: analyze_contract_clauses
+LINES: 4880 - 4891
+TOKENS: ['party_roles']
+    party_roles: dict | None = None,
+        party_roles=party_roles,
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: __init__
+LINES: 4697 - 4707
+TOKENS: ['party_roles']
+        party_roles: dict | None = None,
+        self.party_roles = party_roles
+FILE: app\services\contract_agent\contract_agent.py
+FUNCTION: run_cleanup
+LINES: 4731 - 4794
+TOKENS: ['party_roles', 'party_a', 'party_b', 'CLIENT']
+        roles = self.party_roles or get_display_roles(
+        party_a = roles.get("party_a")
+        party_b = roles.get("party_b")
+                "company": party_a,
+                "employer": party_a,
+                "client": party_a,
+                "buyer": party_a,
+                "lender": party_a,
+                "lessor": party_a,
+                "employee": party_b,
+                "contractor": party_b,
+                "service provider": party_b,
+                "vendor": party_b,
+                "seller": party_b,
+                "borrower": party_b,
+                "lessee": party_b,
+FILE: app\services\contract_agent\cross_clause_conflicts.py
+FUNCTION: detect_cross_clause_conflicts
+LINES: 342 - 543
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\legal_document_engine.py
+FUNCTION: flatten_legal_tree_to_clause_objects
+LINES: 760 - 916
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\legal_document_engine.py
+FUNCTION: walk
+LINES: 767 - 911
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\market_intelligence.py
+FUNCTION: normalize_clause_type
+LINES: 1216 - 1438
+TOKENS: ['party_b']
+        "no_third_party_beneficiaries": "third_party_rights",
+        "third_party_beneficiary": "third_party_rights",
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: has_unilateral_language
+LINES: 161 - 203
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: _restrictive_covenant_subtype
+LINES: 379 - 478
+TOKENS: ['CLIENT']
+        combined = re.sub(pattern, " ", combined)
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: validate_semantic_object_sanity
+LINES: 1257 - 1291
+TOKENS: ['party_a']
+                return f"party_as_object: '{match.group(0).strip()}'"
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: source_vs_fallback_exclusive_remedy_mismatch
+LINES: 2302 - 2336
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: generated_text_introduces_unaddressed_usage_right
+LINES: 2856 - 2913
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: fallback_wording_removes_termination_limitation
+LINES: 3139 - 3178
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\negotiation_intelligence.py
+FUNCTION: fallback_wording_contains_inherited_denied_right
+LINES: 3181 - 3247
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: roles_are_anonymized
+LINES: 221 - 231
+TOKENS: ['party_a', 'party_b']
+        contains_anonymized_token(roles.get("party_a"))
+        or contains_anonymized_token(roles.get("party_b"))
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: detect_role_family
+LINES: 266 - 455
+TOKENS: ['CLIENT']
+    combined = re.sub(r"\[[a-z_0-9]+\]", " ", combined)
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: get_display_roles
+LINES: 458 - 485
+TOKENS: ['party_a', 'party_b']
+    party_a, party_b = ROLE_LABELS.get(
+        "party_a": party_a,
+        "party_b": party_b,
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: _build_replacements
+LINES: 504 - 541
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'party_a', 'party_b']
+    a = str(roles.get("party_a") or ROLE_LABELS["generic"][language][0])
+    b = str(roles.get("party_b") or ROLE_LABELS["generic"][language][1])
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: _normalize_generated_role_text_en
+LINES: 603 - 639
+TOKENS: ['party_a', 'party_b']
+    party_a: str,
+    party_b: str,
+        ("Employer's", f"{party_a}'s"),
+        ("Employers'", f"{party_a}'s"),
+        ("Employee's", f"{party_b}'s"),
+        ("Employer’s", f"{party_a}'s"),
+        ("Employee’s", f"{party_b}'s"),
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: _normalize_generated_role_text_fr
+LINES: 642 - 671
+TOKENS: ['party_a', 'party_b']
+    party_a: str,
+    party_b: str,
+        ("de l’Employeur", f"de {party_a}"),
+        ("de l'Employeur", f"de {party_a}"),
+        ("à l’Employeur", f"à {party_a}"),
+        ("à l'Employeur", f"à {party_a}"),
+        ("l’Employeur", party_a),
+        ("l'Employeur", party_a),
+        ("Employeur", party_a),
+        ("Employeurs", party_a),
+        ("Employé", party_b),
+        ("Employée", party_b),
+        ("Salarié", party_b),
+        ("Salariée", party_b),
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: _normalize_generated_role_text_ar
+LINES: 674 - 696
+TOKENS: ['party_a', 'party_b']
+    party_a: str,
+    party_b: str,
+        ("صاحب العمل", party_a),
+        ("أصحاب العمل", party_a),
+        ("الموظف", party_b),
+        ("الموظفة", party_b),
+        ("العامل", party_b),
+        output = output.replace(source, target)
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: normalize_anonymized_placeholders_to_roles
+LINES: 700 - 741
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'party_a', 'party_b', 'SERVICE_PROVIDER', 'CLIENT']
+    party_a = str(roles.get("party_a") or ROLE_LABELS["generic"][language][0])
+    party_b = str(roles.get("party_b") or ROLE_LABELS["generic"][language][1])
+        "[PARTY_1]": party_a,
+        "[PARTY_A]": party_a,
+        "[CLIENT]": party_a,
+        "[CUSTOMER]": party_a,
+        "[BUYER]": party_a,
+        "[LESSOR]": party_a,
+        "[LANDLORD]": party_a,
+        "[LENDER]": party_a,
+        "[LICENSOR]": party_a,
+        "[CONTROLLER]": party_a,
+        "[EMPLOYER]": party_a if family == "employment" else party_a,
+        "[PARTY_2]": party_b,
+        "[PARTY_B]": party_b,
+        "[SERVICE_PROVIDER]": party_b,
+        "[PROVIDER]": party_b,
+        "[SUPPLIER]": party_b,
+        "[VENDOR]": party_b,
+        "[SELLER]": party_b,
+        "[LESSEE]": party_b,
+        "[TENANT]": party_b,
+        "[BORROWER]": party_b,
+        "[LICENSEE]": party_b,
+        "[PROCESSOR]": party_b,
+        "[EMPLOYEE]": party_b if family == "employment" else party_b,
+        output = output.replace(source, target)
+FILE: app\services\contract_agent\party_role_detector.py
+FUNCTION: normalize_ai_role_words
+LINES: 743 - 881
+TOKENS: ['party_a', 'party_b']
+            value = value.replace(old, new)
+    party_a = str(
+        roles.get("party_a")
+    party_b = str(
+        roles.get("party_b")
+            party_a,
+            party_b,
+            party_a,
+            party_b,
+        party_a,
+        party_b,
+FILE: app\services\contract_agent\pii_redactor.py
+FUNCTION: redact_arabic_contract_parties
+LINES: 422 - 438
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2']
+    text = re.sub(
+    text = re.sub(
+FILE: app\services\contract_agent\pii_redactor.py
+FUNCTION: redact_labeled_contract_parties
+LINES: 441 - 493
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'CLIENT']
+FILE: app\services\contract_agent\pii_redactor.py
+FUNCTION: role_aware_party_pseudonymize
+LINES: 496 - 562
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2']
+FILE: app\services\contract_agent\pii_redactor.py
+FUNCTION: gliner_redact
+LINES: 836 - 991
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'CLIENT']
+FILE: app\services\contract_agent\pii_redactor_v4_1_22_before_org_actor_gate.py
+FUNCTION: redact_arabic_contract_parties
+LINES: 422 - 438
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2']
+    text = re.sub(
+    text = re.sub(
+FILE: app\services\contract_agent\pii_redactor_v4_1_22_before_org_actor_gate.py
+FUNCTION: redact_labeled_contract_parties
+LINES: 441 - 493
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'CLIENT']
+FILE: app\services\contract_agent\pii_redactor_v4_1_22_before_org_actor_gate.py
+FUNCTION: role_aware_party_pseudonymize
+LINES: 496 - 562
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2']
+FILE: app\services\contract_agent\pii_redactor_v4_1_22_before_org_actor_gate.py
+FUNCTION: gliner_redact
+LINES: 697 - 836
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'CLIENT']
+FILE: app\services\contract_agent\summary_normalizer.py
+FUNCTION: normalize_parties
+LINES: 132 - 190
+TOKENS: ['CLIENT']
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: party_roles_are_anonymized
+LINES: 71 - 81
+TOKENS: ['party_roles', 'party_a', 'party_b']
+def party_roles_are_anonymized(party_roles: dict | None) -> bool:
+    if not isinstance(party_roles, dict):
+    if party_roles.get("anonymized") is True:
+        contains_anonymized_placeholder(party_roles.get("party_a"))
+        or contains_anonymized_placeholder(party_roles.get("party_b"))
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: safe_apply_display_roles
+LINES: 84 - 98
+TOKENS: ['party_roles']
+def safe_apply_display_roles(value, party_roles: dict | None, language: str = "en"):
+    apply_display_roles() is allowed only when party_roles are confirmed
+    if not party_roles_are_anonymized(party_roles):
+        return apply_display_roles(value, party_roles, language)
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: is_employment_contract_context
+LINES: 104 - 145
+TOKENS: ['party_roles', 'party_a', 'party_b']
+def is_employment_contract_context(party_roles: dict | None = None) -> bool:
+    if not isinstance(party_roles, dict):
+        str(party_roles.get(key) or "")
+            "party_a",
+            "party_b",
+            "party_a_role",
+            "party_b_role",
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: build_party_registry_prompt
+LINES: 148 - 207
+TOKENS: ['party_roles', 'party_a', 'party_b', 'CLIENT']
+def build_party_registry_prompt(language: str, party_roles: dict | None = None) -> str:
+    if not isinstance(party_roles, dict):
+    party_a = str(
+        party_roles.get("party_a")
+        or party_roles.get("party_a_role")
+    party_b = str(
+        party_roles.get("party_b")
+        or party_roles.get("party_b_role")
+        party_roles.get("contract_family")
+        or party_roles.get("contract_type")
+    if party_a:
+        lines.append(f"- Party A role: {party_a}")
+    if party_b:
+        lines.append(f"- Party B role: {party_b}")
+    if not party_a and not party_b:
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: scrub_unsupported_employment_roles
+LINES: 210 - 283
+TOKENS: ['party_roles']
+def scrub_unsupported_employment_roles(value, language: str = "en", party_roles: dict | None = None):
+    if is_employment_contract_context(party_roles):
+            scrub_unsupported_employment_roles(item, language, party_roles)
+            key: scrub_unsupported_employment_roles(item, language, party_roles)
+        output = re.sub(pattern, replacement, output)
+        output = output.replace(old, new)
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: generate_summary_data
+LINES: 1140 - 1384
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'party_roles']
+def generate_summary_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+    party_registry_block = build_party_registry_prompt(language, party_roles)
+    if party_roles:
+            party_roles,
+    data = scrub_unsupported_employment_roles(data, language, party_roles)
+            .replace("يلتزم الطرف بتقديم", "يلتزم الطرف ب بتقديم")
+            .replace("يلتزم الطرف بالحفاظ", "يلتزم الطرف ب بالحفاظ")
+    data = display_safe_party_labels(data, language, party_roles)
+    data = force_generic_parties(data, language, party_roles)
+    data = scrub_unsupported_employment_roles(data, language, party_roles)
+    if party_roles:
+            party_roles,
+    if party_roles:
+        data = safe_apply_display_roles(data, party_roles, language)
+            party_roles,
+    data = scrub_unsupported_employment_roles(data, language, party_roles)
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: display_safe_party_labels
+LINES: 1387 - 1528
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'party_roles', 'party_a', 'party_b', 'SERVICE_PROVIDER', 'CLIENT']
+def display_safe_party_labels(value, language: str = "en", party_roles: dict | None = None):
+    role_party_a = None
+    role_party_b = None
+    if isinstance(party_roles, dict):
+        role_party_a = str(party_roles.get("party_a") or "").strip() or None
+        role_party_b = str(party_roles.get("party_b") or "").strip() or None
+    if role_party_a:
+        mapping["[PARTY_1]"] = role_party_a
+        mapping["[PARTY_A]"] = role_party_a
+    if role_party_b:
+        mapping["[PARTY_2]"] = role_party_b
+        mapping["[PARTY_B]"] = role_party_b
+    if not is_employment_contract_context(party_roles):
+        return [display_safe_party_labels(item, language, party_roles) for item in value]
+            key: display_safe_party_labels(item, language, party_roles)
+        output = output.replace(old, new)
+            output = output.replace(old, new)
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: force_generic_parties
+LINES: 1532 - 1680
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'party_roles', 'party_a', 'party_b', 'CLIENT']
+def force_generic_parties(data: dict, language: str, party_roles: dict | None = None) -> dict:
+    if isinstance(party_roles, dict):
+        detected_a = str(party_roles.get("party_a") or "").strip()
+        detected_b = str(party_roles.get("party_b") or "").strip()
+            # already-known, reliable party_roles labels rather than
+                    # runs whenever party_roles IS available, i.e. the
+                    # detected label (party_a/party_b) was sitting right
+                    # reliable party_roles labels. Covers the equivalent
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: render_summary_text
+LINES: 1684 - 1781
+TOKENS: ['party_roles']
+def render_summary_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+    if party_roles:
+            party_roles,
+    data = display_safe_party_labels(data, language, party_roles)
+    data = scrub_unsupported_employment_roles(data, language, party_roles)
+    if party_roles:
+        data = safe_apply_display_roles(data, party_roles, language)
+            party_roles,
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: generate_summary
+LINES: 1784 - 1793
+TOKENS: ['party_roles']
+def generate_summary(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+    data = generate_summary_data(text, language, party_roles)
+    return render_summary_text(data, language, party_roles)
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: generate_simplified_version_data
+LINES: 1810 - 1923
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2', 'party_roles']
+def generate_simplified_version_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+    party_registry_block = build_party_registry_prompt(language, party_roles)
+    if party_roles:
+            party_roles,
+    data = display_safe_party_labels(data, language, party_roles)
+    data = scrub_unsupported_employment_roles(data, language, party_roles)
+    if party_roles:
+        data = safe_apply_display_roles(data, party_roles, language)
+            party_roles,
+    if party_roles:
+            party_roles,
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: render_simplified_text
+LINES: 1926 - 1963
+TOKENS: ['party_roles']
+def render_simplified_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+    if party_roles:
+            party_roles,
+    data = display_safe_party_labels(data, language, party_roles)
+    data = scrub_unsupported_employment_roles(data, language, party_roles)
+    if party_roles:
+        data = safe_apply_display_roles(data, party_roles, language)
+            party_roles,
+FILE: app\services\contract_agent\summary_service.py
+FUNCTION: generate_simplified_version
+LINES: 1966 - 1975
+TOKENS: ['party_roles']
+def generate_simplified_version(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+    data = generate_simplified_version_data(text, language, party_roles)
+    return render_simplified_text(data, language, party_roles)
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: canonicalize_party_labels
+LINES: 272 - 314
+TOKENS: ['canonicalize_party']
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: build_contract_overview
+LINES: 990 - 1092
+TOKENS: ['party_roles', 'party_a', 'party_b', 'canonicalize_party']
+    party_roles: dict | None = None,
+    if isinstance(party_roles, dict):
+            str(party_roles.get(key) or "").strip()
+            for key in ("party_a", "party_b")
+            if str(party_roles.get(key) or "").strip()
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: normalize_published_role_text
+LINES: 1097 - 1183
+TOKENS: ['normalize_published_role_text', 'CLIENT']
+            text = re.sub(
+        text = re.sub(
+        text = re.sub(
+        text = re.sub(
+        text = re.sub(
+        text = re.sub(
+            text = re.sub(
+        text = re.sub(
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: finalize_published_text
+LINES: 1186 - 1205
+TOKENS: ['normalize_published_role_text']
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: build_unified_report_from_pipeline
+LINES: 1881 - 1944
+TOKENS: ['party_roles']
+    party_roles: dict | None = None,
+        party_roles,
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: to_legacy_summary_data
+LINES: 2219 - 2453
+TOKENS: ['canonicalize_party']
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+FUNCTION: to_legacy_simplified_string
+LINES: 2455 - 2572
+TOKENS: ['canonicalize_party']
+FILE: app\services\contract_agent\unified_summary_service.py
+FUNCTION: _build_prompt
+LINES: 403 - 439
+TOKENS: ['[PARTY_1]', '[PARTY_2]', 'PARTY_1', 'PARTY_2']
+        .replace("{definitions_block}", build_definitions_block(definitions))
+        .replace("{family_hint}", build_family_hint(family_detection))
+        .replace("{arbitration_hint}", build_arbitration_hint(arbitration_facts))
+        .replace("{contract_text}", contract_text)
+FILE: app\workers\handlers\business_handler.py
+FUNCTION: _mark_non_performance_dataset
+LINES: 193 - 411
+TOKENS: ['CLIENT']
+FILE: app\workers\handlers\contract_handler.py
+FUNCTION: handle_contract_ai
+LINES: 158 - 602
+TOKENS: ['party_roles', 'CLIENT']
+        party_roles = get_display_roles(
+            party_roles=party_roles,
+            party_roles,
+            party_roles=party_roles,
+            party_roles,
+            party_roles=party_roles,
+            party_roles,
+app\services\contract_agent\clause_grouping_engine.py:432:     party_roles: dict | None = None,
+app\services\contract_agent\clause_grouping_engine.py:437:     if isinstance(party_roles, dict):
+app\services\contract_agent\clause_grouping_engine.py:438:         role_family = str(party_roles.get("family") or "").lower().strip()
+app\services\contract_agent\clause_wording_library.py:1306:         "no_third_party_beneficiaries": "third_party_rights",
+app\services\contract_agent\clause_wording_library.py:1307:         "third_party_beneficiary": "third_party_rights",
+app\services\contract_agent\contract_agent.py:4702:         party_roles: dict | None = None,
+app\services\contract_agent\contract_agent.py:4707:         self.party_roles = party_roles
+app\services\contract_agent\contract_agent.py:4744:         roles = self.party_roles or get_display_roles(
+app\services\contract_agent\contract_agent.py:4756:         party_a = roles.get("party_a")
+app\services\contract_agent\contract_agent.py:4757:         party_b = roles.get("party_b")
+app\services\contract_agent\contract_agent.py:4763:                 "company": party_a,
+app\services\contract_agent\contract_agent.py:4764:                 "employer": party_a,
+app\services\contract_agent\contract_agent.py:4765:                 "client": party_a,
+app\services\contract_agent\contract_agent.py:4766:                 "buyer": party_a,
+app\services\contract_agent\contract_agent.py:4767:                 "lender": party_a,
+app\services\contract_agent\contract_agent.py:4768:                 "lessor": party_a,
+app\services\contract_agent\contract_agent.py:4770:                 "employee": party_b,
+app\services\contract_agent\contract_agent.py:4771:                 "contractor": party_b,
+app\services\contract_agent\contract_agent.py:4772:                 "service provider": party_b,
+app\services\contract_agent\contract_agent.py:4773:                 "vendor": party_b,
+app\services\contract_agent\contract_agent.py:4774:                 "seller": party_b,
+app\services\contract_agent\contract_agent.py:4775:                 "borrower": party_b,
+app\services\contract_agent\contract_agent.py:4776:                 "lessee": party_b,
+app\services\contract_agent\contract_agent.py:4884:     party_roles: dict | None = None,
+app\services\contract_agent\contract_agent.py:4890:         party_roles=party_roles,
+app\services\contract_agent\market_intelligence.py:1298:         "no_third_party_beneficiaries": "third_party_rights",
+app\services\contract_agent\market_intelligence.py:1299:         "third_party_beneficiary": "third_party_rights",
+app\services\contract_agent\negotiation_intelligence.py:1289:                 return f"party_as_object: '{match.group(0).strip()}'"
+app\services\contract_agent\party_role_detector.py:229:         contains_anonymized_token(roles.get("party_a"))
+app\services\contract_agent\party_role_detector.py:230:         or contains_anonymized_token(roles.get("party_b"))
+app\services\contract_agent\party_role_detector.py:475:     party_a, party_b = ROLE_LABELS.get(
+app\services\contract_agent\party_role_detector.py:481:         "party_a": party_a,
+app\services\contract_agent\party_role_detector.py:482:         "party_b": party_b,
+app\services\contract_agent\party_role_detector.py:507:     a = str(roles.get("party_a") or ROLE_LABELS["generic"][language][0])
+app\services\contract_agent\party_role_detector.py:508:     b = str(roles.get("party_b") or ROLE_LABELS["generic"][language][1])
+app\services\contract_agent\party_role_detector.py:605:     party_a: str,
+app\services\contract_agent\party_role_detector.py:606:     party_b: str,
+app\services\contract_agent\party_role_detector.py:612:         ("Employer's", f"{party_a}'s"),
+app\services\contract_agent\party_role_detector.py:613:         ("Employers'", f"{party_a}'s"),
+app\services\contract_agent\party_role_detector.py:614:         ("Employee's", f"{party_b}'s"),
+app\services\contract_agent\party_role_detector.py:616:         ("Employer’s", f"{party_a}'s"),
+app\services\contract_agent\party_role_detector.py:617:         ("Employee’s", f"{party_b}'s"),
+app\services\contract_agent\party_role_detector.py:644:     party_a: str,
+app\services\contract_agent\party_role_detector.py:645:     party_b: str,
+app\services\contract_agent\party_role_detector.py:650:         ("de l’Employeur", f"de {party_a}"),
+app\services\contract_agent\party_role_detector.py:651:         ("de l'Employeur", f"de {party_a}"),
+app\services\contract_agent\party_role_detector.py:652:         ("à l’Employeur", f"à {party_a}"),
+app\services\contract_agent\party_role_detector.py:653:         ("à l'Employeur", f"à {party_a}"),
+app\services\contract_agent\party_role_detector.py:654:         ("l’Employeur", party_a),
+app\services\contract_agent\party_role_detector.py:655:         ("l'Employeur", party_a),
+app\services\contract_agent\party_role_detector.py:656:         ("Employeur", party_a),
+app\services\contract_agent\party_role_detector.py:657:         ("Employeurs", party_a),
+app\services\contract_agent\party_role_detector.py:658:         ("Employé", party_b),
+app\services\contract_agent\party_role_detector.py:659:         ("Employée", party_b),
+app\services\contract_agent\party_role_detector.py:660:         ("Salarié", party_b),
+app\services\contract_agent\party_role_detector.py:661:         ("Salariée", party_b),
+app\services\contract_agent\party_role_detector.py:676:     party_a: str,
+app\services\contract_agent\party_role_detector.py:677:     party_b: str,
+app\services\contract_agent\party_role_detector.py:682:         ("صاحب العمل", party_a),
+app\services\contract_agent\party_role_detector.py:683:         ("أصحاب العمل", party_a),
+app\services\contract_agent\party_role_detector.py:684:         ("الموظف", party_b),
+app\services\contract_agent\party_role_detector.py:685:         ("الموظفة", party_b),
+app\services\contract_agent\party_role_detector.py:689:         ("العامل", party_b),
+app\services\contract_agent\party_role_detector.py:707:     party_a = str(roles.get("party_a") or ROLE_LABELS["generic"][language][0])
+app\services\contract_agent\party_role_detector.py:708:     party_b = str(roles.get("party_b") or ROLE_LABELS["generic"][language][1])
+app\services\contract_agent\party_role_detector.py:711:         "[PARTY_1]": party_a,
+app\services\contract_agent\party_role_detector.py:712:         "[PARTY_A]": party_a,
+app\services\contract_agent\party_role_detector.py:713:         "[CLIENT]": party_a,
+app\services\contract_agent\party_role_detector.py:714:         "[CUSTOMER]": party_a,
+app\services\contract_agent\party_role_detector.py:715:         "[BUYER]": party_a,
+app\services\contract_agent\party_role_detector.py:716:         "[LESSOR]": party_a,
+app\services\contract_agent\party_role_detector.py:717:         "[LANDLORD]": party_a,
+app\services\contract_agent\party_role_detector.py:718:         "[LENDER]": party_a,
+app\services\contract_agent\party_role_detector.py:719:         "[LICENSOR]": party_a,
+app\services\contract_agent\party_role_detector.py:720:         "[CONTROLLER]": party_a,
+app\services\contract_agent\party_role_detector.py:721:         "[EMPLOYER]": party_a if family == "employment" else party_a,
+app\services\contract_agent\party_role_detector.py:722:         "[PARTY_2]": party_b,
+app\services\contract_agent\party_role_detector.py:723:         "[PARTY_B]": party_b,
+app\services\contract_agent\party_role_detector.py:724:         "[SERVICE_PROVIDER]": party_b,
+app\services\contract_agent\party_role_detector.py:725:         "[PROVIDER]": party_b,
+app\services\contract_agent\party_role_detector.py:726:         "[SUPPLIER]": party_b,
+app\services\contract_agent\party_role_detector.py:727:         "[VENDOR]": party_b,
+app\services\contract_agent\party_role_detector.py:728:         "[SELLER]": party_b,
+app\services\contract_agent\party_role_detector.py:729:         "[LESSEE]": party_b,
+app\services\contract_agent\party_role_detector.py:730:         "[TENANT]": party_b,
+app\services\contract_agent\party_role_detector.py:731:         "[BORROWER]": party_b,
+app\services\contract_agent\party_role_detector.py:732:         "[LICENSEE]": party_b,
+app\services\contract_agent\party_role_detector.py:733:         "[PROCESSOR]": party_b,
+app\services\contract_agent\party_role_detector.py:734:         "[EMPLOYEE]": party_b if family == "employment" else party_b,
+app\services\contract_agent\party_role_detector.py:847:     party_a = str(
+app\services\contract_agent\party_role_detector.py:848:         roles.get("party_a")
+app\services\contract_agent\party_role_detector.py:852:     party_b = str(
+app\services\contract_agent\party_role_detector.py:853:         roles.get("party_b")
+app\services\contract_agent\party_role_detector.py:866:             party_a,
+app\services\contract_agent\party_role_detector.py:867:             party_b,
+app\services\contract_agent\party_role_detector.py:873:             party_a,
+app\services\contract_agent\party_role_detector.py:874:             party_b,
+app\services\contract_agent\party_role_detector.py:879:         party_a,
+app\services\contract_agent\party_role_detector.py:880:         party_b,
+app\services\contract_agent\schemas.py:120:     party_roles: Dict[str, str] = Field(default_factory=dict)
+app\services\contract_agent\summary_service.py:71: def party_roles_are_anonymized(party_roles: dict | None) -> bool:
+app\services\contract_agent\summary_service.py:72:     if not isinstance(party_roles, dict):
+app\services\contract_agent\summary_service.py:75:     if party_roles.get("anonymized") is True:
+app\services\contract_agent\summary_service.py:79:         contains_anonymized_placeholder(party_roles.get("party_a"))
+app\services\contract_agent\summary_service.py:80:         or contains_anonymized_placeholder(party_roles.get("party_b"))
+app\services\contract_agent\summary_service.py:84: def safe_apply_display_roles(value, party_roles: dict | None, language: str = "en"):
+app\services\contract_agent\summary_service.py:88:     apply_display_roles() is allowed only when party_roles are confirmed
+app\services\contract_agent\summary_service.py:92:     if not party_roles_are_anonymized(party_roles):
+app\services\contract_agent\summary_service.py:96:         return apply_display_roles(value, party_roles, language)
+app\services\contract_agent\summary_service.py:104: def is_employment_contract_context(party_roles: dict | None = None) -> bool:
+app\services\contract_agent\summary_service.py:112:     if not isinstance(party_roles, dict):
+app\services\contract_agent\summary_service.py:116:         str(party_roles.get(key) or "")
+app\services\contract_agent\summary_service.py:120:             "party_a",
+app\services\contract_agent\summary_service.py:121:             "party_b",
+app\services\contract_agent\summary_service.py:122:             "party_a_role",
+app\services\contract_agent\summary_service.py:123:             "party_b_role",
+app\services\contract_agent\summary_service.py:148: def build_party_registry_prompt(language: str, party_roles: dict | None = None) -> str:
+app\services\contract_agent\summary_service.py:159:     if not isinstance(party_roles, dict):
+app\services\contract_agent\summary_service.py:167:     party_a = str(
+app\services\contract_agent\summary_service.py:168:         party_roles.get("party_a")
+app\services\contract_agent\summary_service.py:169:         or party_roles.get("party_a_role")
+app\services\contract_agent\summary_service.py:172:     party_b = str(
+app\services\contract_agent\summary_service.py:173:         party_roles.get("party_b")
+app\services\contract_agent\summary_service.py:174:         or party_roles.get("party_b_role")
+app\services\contract_agent\summary_service.py:178:         party_roles.get("contract_family")
+app\services\contract_agent\summary_service.py:179:         or party_roles.get("contract_type")
+app\services\contract_agent\summary_service.py:187:     if party_a:
+app\services\contract_agent\summary_service.py:188:         lines.append(f"- Party A role: {party_a}")
+app\services\contract_agent\summary_service.py:189:     if party_b:
+app\services\contract_agent\summary_service.py:190:         lines.append(f"- Party B role: {party_b}")
+app\services\contract_agent\summary_service.py:194:     if not party_a and not party_b:
+app\services\contract_agent\summary_service.py:210: def scrub_unsupported_employment_roles(value, language: str = "en", party_roles: dict | None = None):
+app\services\contract_agent\summary_service.py:222:     if is_employment_contract_context(party_roles):
+app\services\contract_agent\summary_service.py:233:             scrub_unsupported_employment_roles(item, language, party_roles)
+app\services\contract_agent\summary_service.py:239:             key: scrub_unsupported_employment_roles(item, language, party_roles)
+app\services\contract_agent\summary_service.py:1140: def generate_summary_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+app\services\contract_agent\summary_service.py:1154:     party_registry_block = build_party_registry_prompt(language, party_roles)
+app\services\contract_agent\summary_service.py:1232:     if party_roles:
+app\services\contract_agent\summary_service.py:1235:             party_roles,
+app\services\contract_agent\summary_service.py:1239:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1345:     data = display_safe_party_labels(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1346:     data = force_generic_parties(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1347:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1350:     if party_roles:
+app\services\contract_agent\summary_service.py:1353:             party_roles,
+app\services\contract_agent\summary_service.py:1370:     if party_roles:
+app\services\contract_agent\summary_service.py:1371:         data = safe_apply_display_roles(data, party_roles, language)
+app\services\contract_agent\summary_service.py:1374:             party_roles,
+app\services\contract_agent\summary_service.py:1378:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1387: def display_safe_party_labels(value, language: str = "en", party_roles: dict | None = None):
+app\services\contract_agent\summary_service.py:1404:     role_party_a = None
+app\services\contract_agent\summary_service.py:1405:     role_party_b = None
+app\services\contract_agent\summary_service.py:1406:     if isinstance(party_roles, dict):
+app\services\contract_agent\summary_service.py:1407:         role_party_a = str(party_roles.get("party_a") or "").strip() or None
+app\services\contract_agent\summary_service.py:1408:         role_party_b = str(party_roles.get("party_b") or "").strip() or None
+app\services\contract_agent\summary_service.py:1481:     if role_party_a:
+app\services\contract_agent\summary_service.py:1482:         mapping["[PARTY_1]"] = role_party_a
+app\services\contract_agent\summary_service.py:1483:         mapping["[PARTY_A]"] = role_party_a
+app\services\contract_agent\summary_service.py:1484:     if role_party_b:
+app\services\contract_agent\summary_service.py:1485:         mapping["[PARTY_2]"] = role_party_b
+app\services\contract_agent\summary_service.py:1486:         mapping["[PARTY_B]"] = role_party_b
+app\services\contract_agent\summary_service.py:1492:     if not is_employment_contract_context(party_roles):
+app\services\contract_agent\summary_service.py:1502:         return [display_safe_party_labels(item, language, party_roles) for item in value]
+app\services\contract_agent\summary_service.py:1506:             key: display_safe_party_labels(item, language, party_roles)
+app\services\contract_agent\summary_service.py:1532: def force_generic_parties(data: dict, language: str, party_roles: dict | None = None) -> dict:
+app\services\contract_agent\summary_service.py:1547:     if isinstance(party_roles, dict):
+app\services\contract_agent\summary_service.py:1548:         detected_a = str(party_roles.get("party_a") or "").strip()
+app\services\contract_agent\summary_service.py:1549:         detected_b = str(party_roles.get("party_b") or "").strip()
+app\services\contract_agent\summary_service.py:1556:             # already-known, reliable party_roles labels rather than
+app\services\contract_agent\summary_service.py:1573:                     # runs whenever party_roles IS available, i.e. the
+app\services\contract_agent\summary_service.py:1576:                     # detected label (party_a/party_b) was sitting right
+app\services\contract_agent\summary_service.py:1594:                     # reliable party_roles labels. Covers the equivalent
+app\services\contract_agent\summary_service.py:1684: def render_summary_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+app\services\contract_agent\summary_service.py:1695:     if party_roles:
+app\services\contract_agent\summary_service.py:1698:             party_roles,
+app\services\contract_agent\summary_service.py:1702:     data = display_safe_party_labels(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1703:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1705:     if party_roles:
+app\services\contract_agent\summary_service.py:1706:         data = safe_apply_display_roles(data, party_roles, language)
+app\services\contract_agent\summary_service.py:1709:             party_roles,
+app\services\contract_agent\summary_service.py:1784: def generate_summary(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+app\services\contract_agent\summary_service.py:1792:     data = generate_summary_data(text, language, party_roles)
+app\services\contract_agent\summary_service.py:1793:     return render_summary_text(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1810: def generate_simplified_version_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+app\services\contract_agent\summary_service.py:1821:     party_registry_block = build_party_registry_prompt(language, party_roles)
+app\services\contract_agent\summary_service.py:1898:     if party_roles:
+app\services\contract_agent\summary_service.py:1901:             party_roles,
+app\services\contract_agent\summary_service.py:1905:     data = display_safe_party_labels(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1906:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1908:     if party_roles:
+app\services\contract_agent\summary_service.py:1909:         data = safe_apply_display_roles(data, party_roles, language)
+app\services\contract_agent\summary_service.py:1912:             party_roles,
+app\services\contract_agent\summary_service.py:1916:     if party_roles:
+app\services\contract_agent\summary_service.py:1919:             party_roles,
+app\services\contract_agent\summary_service.py:1926: def render_simplified_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+app\services\contract_agent\summary_service.py:1930:     if party_roles:
+app\services\contract_agent\summary_service.py:1933:             party_roles,
+app\services\contract_agent\summary_service.py:1937:     data = display_safe_party_labels(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1938:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+app\services\contract_agent\summary_service.py:1940:     if party_roles:
+app\services\contract_agent\summary_service.py:1941:         data = safe_apply_display_roles(data, party_roles, language)
+app\services\contract_agent\summary_service.py:1944:             party_roles,
+app\services\contract_agent\summary_service.py:1966: def generate_simplified_version(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+app\services\contract_agent\summary_service.py:1974:     data = generate_simplified_version_data(text, language, party_roles)
+app\services\contract_agent\summary_service.py:1975:     return render_simplified_text(data, language, party_roles)
+app\services\contract_agent\unified_report_from_pipeline.py:994:     party_roles: dict | None = None,
+app\services\contract_agent\unified_report_from_pipeline.py:1054:     if isinstance(party_roles, dict):
+app\services\contract_agent\unified_report_from_pipeline.py:1056:             str(party_roles.get(key) or "").strip()
+app\services\contract_agent\unified_report_from_pipeline.py:1057:             for key in ("party_a", "party_b")
+app\services\contract_agent\unified_report_from_pipeline.py:1058:             if str(party_roles.get(key) or "").strip()
+app\services\contract_agent\unified_report_from_pipeline.py:1885:     party_roles: dict | None = None,
+app\services\contract_agent\unified_report_from_pipeline.py:1906:         party_roles,
+app\workers\handlers\contract_handler.py:259:         party_roles = get_display_roles(
+app\workers\handlers\contract_handler.py:269:             party_roles=party_roles,
+app\workers\handlers\contract_handler.py:296:             party_roles,
+app\workers\handlers\contract_handler.py:304:             party_roles=party_roles,
+app\workers\handlers\contract_handler.py:430:             party_roles,
+app\workers\handlers\contract_handler.py:514:             party_roles=party_roles,
+app\workers\handlers\contract_handler.py:581:             party_roles,

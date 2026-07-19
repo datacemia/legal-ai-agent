@@ -1,0 +1,3979 @@
+{
+  "clauses": {
+    "results": [
+      {
+        "title": "Payment and Renewal",
+        "_source_text_exact": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+        "original_text": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+        "reasoning_evidence": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (",
+        "clause_title": "Payment and Renewal",
+        "clause_reference": "3.1",
+        "quoted_text": "Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+        "clause_type": "renewal",
+        "risk_level": "medium",
+        "explanation_simple": "The clause requires annual payment in advance and includes automatic renewal provisions.",
+        "why_it_matters": "Automatic renewal can lead to ongoing financial obligations without explicit consent if the Customer fails to provide timely notice of non-renewal.",
+        "legal_insight": "This clause controls how the contract continues, renews, extends, or ends after the initial term.",
+        "favours": "Borrower",
+        "market_comparison": "",
+        "red_flag": true,
+        "red_flag_reason": "The automatic renewal clause could lead to unintentional financial obligations for the Customer.",
+        "recommendation": "",
+        "confidence": "medium",
+        "safer_alternative": "The Agreement shall renew only upon explicit written consent from the Customer at least sixty (60) days prior to the end of the term.",
+        "negotiation_advice": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes.",
+        "negotiation_priority": "high",
+        "_meta": {
+          "risk_modified_by": [],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": []
+        },
+        "trigger": null,
+        "clause_id": "node_7",
+        "parent_id": "node_6",
+        "parent_clause_id": "node_6",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "3. FEES AND AUTO-RENEWAL",
+          "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term."
+        ],
+        "children": [],
+        "semantic_parent": "3. FEES AND AUTO-RENEWAL",
+        "confidence_score": 0.85,
+        "lineage": [
+          "3. FEES AND AUTO-RENEWAL"
+        ],
+        "risk_baseline": "other",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": true,
+        "has_semantic_signal": true,
+        "has_legal_signal": true,
+        "evidence_strength": "high",
+        "materiality_level": "medium",
+        "importance_score": 59,
+        "risk_reasons": [
+          "Renewal provisions may affect contract duration, exit rights, or future pricing leverage.",
+          "Payment provisions may affect cash flow or performance rights.",
+          "Real estate provisions may affect possession, rent, maintenance, permitted use, deposits, or property-related liability."
+        ],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "automatic_renewal",
+              "anchors": [
+                "advance",
+                "annually",
+                "automatically",
+                "before",
+                "current",
+                "customer",
+                "days",
+                "fees",
+                "form",
+                "least",
+                "list",
+                "northwind",
+                "notice",
+                "order",
+                "price",
+                "provide",
+                "renew",
+                "renewal",
+                "sixty",
+                "specified",
+                "subscription",
+                "successive",
+                "term",
+                "terms",
+                "then",
+                "unles",
+                "written",
+                "year"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "0941c92677dd80eba1b3343c8e96a00ad05a27fbc3981f6fb1c1b4a3ce842e27"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.1667,
+            "semantic_profile_hash": "0941c92677dd80eba1b3343c8e96a00ad05a27fbc3981f6fb1c1b4a3ce842e27",
+            "validated_text_hash": "6146ac52673f0d5396ee39f9f91b1c341c255228cc15e325a98fc0e940f7d29b",
+            "final_text_hash": "6146ac52673f0d5396ee39f9f91b1c341c255228cc15e325a98fc0e940f7d29b",
+            "source_text_hash": "032e34a0d6f37517fa26ba8e2c0a8107e921c703ee71f6b8e61df324a002d825",
+            "input_text_hash": "6146ac52673f0d5396ee39f9f91b1c341c255228cc15e325a98fc0e940f7d29b",
+            "text_before_validation": "This clause controls how the contract continues, renews, extends, or ends after the initial term.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "negotiation_advice": {
+            "field": "negotiation_advice",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.25,
+            "semantic_profile_hash": "0941c92677dd80eba1b3343c8e96a00ad05a27fbc3981f6fb1c1b4a3ce842e27",
+            "validated_text_hash": "1499fb5e06e0badcfe33f6275efd1164e611a302b5054eab3815af40d297176a",
+            "final_text_hash": "1499fb5e06e0badcfe33f6275efd1164e611a302b5054eab3815af40d297176a",
+            "source_text_hash": "032e34a0d6f37517fa26ba8e2c0a8107e921c703ee71f6b8e61df324a002d825",
+            "input_text_hash": "1499fb5e06e0badcfe33f6275efd1164e611a302b5054eab3815af40d297176a",
+            "text_before_validation": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "safer_alternative": {
+            "field": "safer_alternative",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.5833,
+            "semantic_profile_hash": "0941c92677dd80eba1b3343c8e96a00ad05a27fbc3981f6fb1c1b4a3ce842e27",
+            "validated_text_hash": "8a830e8245eba7ed0852ae34033582ee746507509e93de97aca312d4be4d7965",
+            "final_text_hash": "8a830e8245eba7ed0852ae34033582ee746507509e93de97aca312d4be4d7965",
+            "source_text_hash": "032e34a0d6f37517fa26ba8e2c0a8107e921c703ee71f6b8e61df324a002d825",
+            "input_text_hash": "8a830e8245eba7ed0852ae34033582ee746507509e93de97aca312d4be4d7965",
+            "text_before_validation": "The Agreement shall renew only upon explicit written consent from the Customer at least sixty (60) days prior to the end of the term.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      },
+      {
+        "title": "Uptime Commitment",
+        "_source_text_exact": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+        "original_text": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+        "reasoning_evidence": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusi",
+        "clause_title": "Uptime Commitment",
+        "clause_reference": "2.1",
+        "quoted_text": "Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+        "clause_type": "service_level",
+        "risk_level": "medium",
+        "explanation_simple": "The clause commits Northwind to a specific uptime percentage and limits the customer's remedy to a service credit.",
+        "why_it_matters": "This clause defines the service level expectations and the consequences for failing to meet them, which can impact customer satisfaction and operational reliability.",
+        "legal_insight": "The clause defines measurable service commitments, so measurement periods, exclusions, credits, reporting, and repeated-failure remedies should be clear.",
+        "favours": "Unclear",
+        "market_comparison": "The uptime commitment is relatively standard in service agreements, but the limitation of remedy to a service credit may be seen as favoring the provider.",
+        "red_flag": true,
+        "red_flag_reason": "The clause limits the customer's remedies for service failures, which could lead to significant operational impacts if uptime is not maintained.",
+        "recommendation": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear.",
+        "confidence": "medium",
+        "safer_alternative": "In addition to service credits, provide the customer with the option for a refund or additional support in the event of significant downtime.",
+        "negotiation_advice": "",
+        "negotiation_priority": "high",
+        "_meta": {
+          "risk_modified_by": [],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": []
+        },
+        "trigger": "exclusive",
+        "has_contextual_reasoning": true,
+        "clause_id": "node_5",
+        "parent_id": "node_4",
+        "parent_clause_id": "node_4",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "2. SERVICE LEVELS",
+          "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A."
+        ],
+        "children": [],
+        "semantic_parent": "2. SERVICE LEVELS",
+        "confidence_score": 0.85,
+        "lineage": [
+          "2. SERVICE LEVELS"
+        ],
+        "risk_baseline": "other",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": false,
+        "has_semantic_signal": true,
+        "has_legal_signal": true,
+        "evidence_strength": "high",
+        "materiality_level": "low",
+        "importance_score": 51,
+        "risk_reasons": [
+          "Service obligations should be assessed together with performance standards and remedies.",
+          "Restrictive commitments may reduce commercial or operational flexibility."
+        ],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "sla",
+              "anchors": [
+                "commercially",
+                "commitment",
+                "credit",
+                "customer",
+                "effort",
+                "excluding",
+                "exclusive",
+                "exhibit",
+                "failure",
+                "forth",
+                "maintain",
+                "maintenance",
+                "measured",
+                "meet",
+                "monthly",
+                "northwind",
+                "reasonable",
+                "remedy",
+                "scheduled",
+                "service",
+                "sole",
+                "uptime"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "a6d5b6efbc3fb10af613b4d7107dedeaf183d8550dc8d1178b7453650d1265d7"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.4167,
+            "semantic_profile_hash": "a6d5b6efbc3fb10af613b4d7107dedeaf183d8550dc8d1178b7453650d1265d7",
+            "validated_text_hash": "0ae5eeee2606a8a739c678bd58514a73f0051b0aa392647fe1d75c38bb13d688",
+            "final_text_hash": "0ae5eeee2606a8a739c678bd58514a73f0051b0aa392647fe1d75c38bb13d688",
+            "source_text_hash": "c96b95534ac64cf67e9ae0900710d9d32af38a151460ca49a24fec139d6882fa",
+            "input_text_hash": "0ae5eeee2606a8a739c678bd58514a73f0051b0aa392647fe1d75c38bb13d688",
+            "text_before_validation": "The clause defines measurable service commitments, so measurement periods, exclusions, credits, reporting, and repeated-failure remedies should be clear.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "recommendation": {
+            "field": "recommendation",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.1667,
+            "semantic_profile_hash": "a6d5b6efbc3fb10af613b4d7107dedeaf183d8550dc8d1178b7453650d1265d7",
+            "validated_text_hash": "91bc77063d42e21ae40fdbe335e56a5f0ab6000550129d3efbebcc2d7da04210",
+            "final_text_hash": "91bc77063d42e21ae40fdbe335e56a5f0ab6000550129d3efbebcc2d7da04210",
+            "source_text_hash": "c96b95534ac64cf67e9ae0900710d9d32af38a151460ca49a24fec139d6882fa",
+            "input_text_hash": "91bc77063d42e21ae40fdbe335e56a5f0ab6000550129d3efbebcc2d7da04210",
+            "text_before_validation": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "safer_alternative": {
+            "field": "safer_alternative",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.25,
+            "semantic_profile_hash": "a6d5b6efbc3fb10af613b4d7107dedeaf183d8550dc8d1178b7453650d1265d7",
+            "validated_text_hash": "6b861d28755141886ebb31a56029184f1737d13617a54d7a62013cc9dc2460d3",
+            "final_text_hash": "6b861d28755141886ebb31a56029184f1737d13617a54d7a62013cc9dc2460d3",
+            "source_text_hash": "c96b95534ac64cf67e9ae0900710d9d32af38a151460ca49a24fec139d6882fa",
+            "input_text_hash": "6b861d28755141886ebb31a56029184f1737d13617a54d7a62013cc9dc2460d3",
+            "text_before_validation": "In addition to service credits, provide the customer with the option for a refund or additional support in the event of significant downtime.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      },
+      {
+        "title": "Limitation of Liability",
+        "_source_text_exact": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+        "original_text": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+        "reasoning_evidence": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, exce",
+        "clause_title": "Limitation of Liability",
+        "clause_reference": "6.1",
+        "quoted_text": "Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+        "clause_type": "liability",
+        "risk_level": "medium",
+        "explanation_simple": "Northwind's liability is limited to the fees paid by the Customer in the last year, with exceptions for security breaches and indemnification.",
+        "why_it_matters": "This limitation caps financial exposure for Northwind, but the exceptions could lead to higher liability in specific cases.",
+        "legal_insight": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.",
+        "favours": "Unclear",
+        "market_comparison": "This clause is relatively standard in commercial agreements, providing a balance between limiting liability and acknowledging certain risks.",
+        "red_flag": false,
+        "red_flag_reason": "",
+        "recommendation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+        "confidence": "high",
+        "safer_alternative": "",
+        "negotiation_advice": "",
+        "negotiation_priority": "low",
+        "_meta": {
+          "risk_modified_by": [],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": []
+        },
+        "trigger": "liability",
+        "clause_id": "node_13",
+        "parent_id": "node_12",
+        "parent_clause_id": "node_12",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "6. LIMITATION OF LIABILITY",
+          "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees."
+        ],
+        "children": [],
+        "semantic_parent": "6. LIMITATION OF LIABILITY",
+        "confidence_score": 0.85,
+        "lineage": [
+          "6. LIMITATION OF LIABILITY"
+        ],
+        "risk_baseline": "limited_liability",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": false,
+        "has_semantic_signal": true,
+        "has_legal_signal": true,
+        "evidence_strength": "medium",
+        "materiality_level": "high",
+        "importance_score": 47,
+        "risk_reasons": [
+          "Liability allocation may affect financial exposure or available remedies.",
+          "Payment provisions may affect cash flow or performance rights."
+        ],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "indemnity",
+              "anchors": [
+                "aggregate",
+                "arising",
+                "breache",
+                "capped",
+                "claim",
+                "customer",
+                "exceed",
+                "except",
+                "fees",
+                "indemnification",
+                "liability",
+                "month",
+                "northwind",
+                "obligation",
+                "paid",
+                "preceding",
+                "security",
+                "times",
+                "twelve",
+                "which"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "675c9c7697bf22155b40f378e4f560eec54d0cfca3836db32f9901b18dec85a4"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "675c9c7697bf22155b40f378e4f560eec54d0cfca3836db32f9901b18dec85a4",
+            "validated_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e",
+            "final_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e",
+            "source_text_hash": "77c1a8243ca6e737ec2c81bb9a5e50c46a7d89a524cbaeafd6999256531866e4",
+            "input_text_hash": "8078b315844fab1296b440a847c9622e66dce00b8414e9b4d7d57f85d306364e",
+            "text_before_validation": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "recommendation": {
+            "field": "recommendation",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "675c9c7697bf22155b40f378e4f560eec54d0cfca3836db32f9901b18dec85a4",
+            "validated_text_hash": "d3830c801e1fce9b0168a4a9e571ae4171111d807647d284f5bdae60e413f712",
+            "final_text_hash": "d3830c801e1fce9b0168a4a9e571ae4171111d807647d284f5bdae60e413f712",
+            "source_text_hash": "77c1a8243ca6e737ec2c81bb9a5e50c46a7d89a524cbaeafd6999256531866e4",
+            "input_text_hash": "d3830c801e1fce9b0168a4a9e571ae4171111d807647d284f5bdae60e413f712",
+            "text_before_validation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      },
+      {
+        "title": "Grant of License",
+        "_source_text_exact": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+        "original_text": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+        "reasoning_evidence": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscrip",
+        "clause_title": "Grant of License",
+        "clause_reference": "1.1",
+        "quoted_text": "Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+        "clause_type": "term",
+        "risk_level": "medium",
+        "explanation_simple": "The clause grants a limited license to the Customer for internal use of the Platform.",
+        "why_it_matters": "This clause defines the scope of the Customer's rights regarding the use of the Platform, which is essential for compliance and operational clarity.",
+        "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+        "favours": "Balanced",
+        "market_comparison": "The terms are typical for software licensing agreements, providing a standard framework for usage rights.",
+        "red_flag": false,
+        "red_flag_reason": "",
+        "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+        "confidence": "high",
+        "safer_alternative": "",
+        "negotiation_advice": "Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.",
+        "negotiation_priority": "medium",
+        "_meta": {
+          "risk_modified_by": [
+            "apply_rule_based_risk"
+          ],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": [
+            {
+              "field": "risk_level",
+              "from": "low",
+              "to": "medium",
+              "source": "apply_rule_based_risk"
+            },
+            {
+              "field": "negotiation_priority",
+              "from": "low",
+              "to": "medium",
+              "source": "apply_rule_based_risk"
+            }
+          ]
+        },
+        "trigger": "exclusive",
+        "clause_id": "node_3",
+        "parent_id": "node_2",
+        "parent_clause_id": "node_2",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "1. ACCESS AND USE RIGHTS",
+          "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes."
+        ],
+        "children": [],
+        "semantic_parent": "1. ACCESS AND USE RIGHTS",
+        "confidence_score": 0.85,
+        "lineage": [
+          "1. ACCESS AND USE RIGHTS"
+        ],
+        "risk_baseline": "other",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": true,
+        "has_semantic_signal": true,
+        "has_legal_signal": false,
+        "evidence_strength": "medium",
+        "materiality_level": "medium",
+        "importance_score": 34,
+        "risk_reasons": [],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "term",
+              "anchors": [
+                "acces",
+                "busines",
+                "customer",
+                "during",
+                "exclusive",
+                "grant",
+                "internal",
+                "northwind",
+                "platform",
+                "purpose",
+                "right",
+                "solely",
+                "subject",
+                "subscription",
+                "term",
+                "terms",
+                "transferable"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "460ad3292ef71bd1792549675594de2bb354f803fb47c582e195b70072a33502"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "460ad3292ef71bd1792549675594de2bb354f803fb47c582e195b70072a33502",
+            "validated_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389",
+            "final_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389",
+            "source_text_hash": "eb6da0ceb9d3fb1f4efb6aaeda046350008bccf360a07bc10853537ac727028c",
+            "input_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389",
+            "text_before_validation": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "recommendation": {
+            "field": "recommendation",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "460ad3292ef71bd1792549675594de2bb354f803fb47c582e195b70072a33502",
+            "validated_text_hash": "631676e83292379c6285e1af92261bb874276f5d78509c6ff14220c8b94faa08",
+            "final_text_hash": "631676e83292379c6285e1af92261bb874276f5d78509c6ff14220c8b94faa08",
+            "source_text_hash": "eb6da0ceb9d3fb1f4efb6aaeda046350008bccf360a07bc10853537ac727028c",
+            "input_text_hash": "631676e83292379c6285e1af92261bb874276f5d78509c6ff14220c8b94faa08",
+            "text_before_validation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "negotiation_advice": {
+            "field": "negotiation_advice",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "460ad3292ef71bd1792549675594de2bb354f803fb47c582e195b70072a33502",
+            "validated_text_hash": "41050511d34c8545f6ecefc508dd744d0a4cf54b79856938b8cc34ecdd6993c5",
+            "final_text_hash": "41050511d34c8545f6ecefc508dd744d0a4cf54b79856938b8cc34ecdd6993c5",
+            "source_text_hash": "eb6da0ceb9d3fb1f4efb6aaeda046350008bccf360a07bc10853537ac727028c",
+            "input_text_hash": "41050511d34c8545f6ecefc508dd744d0a4cf54b79856938b8cc34ecdd6993c5",
+            "text_before_validation": "Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      },
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "_source_text_exact": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+        "original_text": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+        "reasoning_evidence": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confir",
+        "clause_title": "Security Safeguards and Incident Notification",
+        "clause_reference": "5.1",
+        "quoted_text": "Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+        "clause_type": "security",
+        "risk_level": "high",
+        "explanation_simple": "Northwind is required to implement security measures and notify the Customer of incidents.",
+        "why_it_matters": "This clause ensures that Customer Data is protected and that the Customer is informed of any security breaches in a timely manner.",
+        "legal_insight": "This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted.",
+        "favours": "Unclear",
+        "market_comparison": "",
+        "red_flag": false,
+        "red_flag_reason": "",
+        "recommendation": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.",
+        "confidence": "high",
+        "safer_alternative": "",
+        "negotiation_advice": "Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.",
+        "negotiation_priority": "medium",
+        "_meta": {
+          "risk_modified_by": [
+            "apply_rule_based_risk"
+          ],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": [
+            {
+              "field": "risk_level",
+              "from": "low",
+              "to": "medium",
+              "source": "apply_rule_based_risk"
+            },
+            {
+              "field": "negotiation_priority",
+              "from": "low",
+              "to": "medium",
+              "source": "apply_rule_based_risk"
+            }
+          ]
+        },
+        "trigger": "security incident",
+        "clause_id": "node_11",
+        "parent_id": "node_10",
+        "parent_clause_id": "node_10",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "5. SECURITY",
+          "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery."
+        ],
+        "children": [],
+        "semantic_parent": "5. SECURITY",
+        "confidence_score": 0.85,
+        "lineage": [
+          "5. SECURITY"
+        ],
+        "risk_baseline": "other",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": true,
+        "has_semantic_signal": true,
+        "has_legal_signal": true,
+        "evidence_strength": "medium",
+        "materiality_level": "low",
+        "importance_score": 26,
+        "risk_reasons": [
+          "Security obligations may require technical controls, incident response, monitoring, or audit readiness."
+        ],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "cybersecurity",
+              "anchors": [
+                "administrative",
+                "affecting",
+                "confirmed",
+                "consistent",
+                "customer",
+                "data",
+                "discovery",
+                "hours",
+                "incident",
+                "maintain",
+                "northwind",
+                "notify",
+                "physical",
+                "safeguard",
+                "security",
+                "seventy",
+                "standard",
+                "technical",
+                "type",
+                "within"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "a0767aa74457528efbfd35441cc20161a6741c4a5c187d7b338ba1c4ca665e4c"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "a0767aa74457528efbfd35441cc20161a6741c4a5c187d7b338ba1c4ca665e4c",
+            "validated_text_hash": "0509304a3367bb69af96109e225be66a92fddc6f9598b9dc73eaae0177c6a9cc",
+            "final_text_hash": "0509304a3367bb69af96109e225be66a92fddc6f9598b9dc73eaae0177c6a9cc",
+            "source_text_hash": "b91140393cea20813eb1740c9ce6ec6cd2831d3188dd09e806e064a41757775e",
+            "input_text_hash": "0509304a3367bb69af96109e225be66a92fddc6f9598b9dc73eaae0177c6a9cc",
+            "text_before_validation": "This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "recommendation": {
+            "field": "recommendation",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "a0767aa74457528efbfd35441cc20161a6741c4a5c187d7b338ba1c4ca665e4c",
+            "validated_text_hash": "431694d3f3b296436a16fae036f088804b114648a24cf189d284adb0882cb3ea",
+            "final_text_hash": "431694d3f3b296436a16fae036f088804b114648a24cf189d284adb0882cb3ea",
+            "source_text_hash": "b91140393cea20813eb1740c9ce6ec6cd2831d3188dd09e806e064a41757775e",
+            "input_text_hash": "431694d3f3b296436a16fae036f088804b114648a24cf189d284adb0882cb3ea",
+            "text_before_validation": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "negotiation_advice": {
+            "field": "negotiation_advice",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.1667,
+            "semantic_profile_hash": "a0767aa74457528efbfd35441cc20161a6741c4a5c187d7b338ba1c4ca665e4c",
+            "validated_text_hash": "a4e75c71ff7aad767d8f4e90553a655cbec928fe50111d6873f473d2c07edcc2",
+            "final_text_hash": "a4e75c71ff7aad767d8f4e90553a655cbec928fe50111d6873f473d2c07edcc2",
+            "source_text_hash": "b91140393cea20813eb1740c9ce6ec6cd2831d3188dd09e806e064a41757775e",
+            "input_text_hash": "a4e75c71ff7aad767d8f4e90553a655cbec928fe50111d6873f473d2c07edcc2",
+            "text_before_validation": "Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      },
+      {
+        "title": "Customer Data Ownership and Export",
+        "_source_text_exact": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+        "original_text": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+        "reasoning_evidence": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for",
+        "clause_title": "Customer Data Ownership and Export",
+        "clause_reference": "4.1",
+        "quoted_text": "Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+        "clause_type": "intellectual_property",
+        "risk_level": "medium",
+        "explanation_simple": "The clause establishes that the Customer owns their data and outlines the process for data export upon termination.",
+        "why_it_matters": "This clause protects the Customer's ownership of their data and ensures they can retrieve it before deletion.",
+        "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+        "favours": "Unclear",
+        "market_comparison": "This clause is standard in agreements involving data ownership and export rights.",
+        "red_flag": false,
+        "red_flag_reason": "",
+        "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+        "confidence": "high",
+        "safer_alternative": "",
+        "negotiation_advice": "",
+        "negotiation_priority": "low",
+        "_meta": {
+          "risk_modified_by": [
+            "apply_rule_based_risk"
+          ],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": [
+            {
+              "field": "risk_level",
+              "from": "low",
+              "to": "medium",
+              "source": "apply_rule_based_risk"
+            },
+            {
+              "field": "negotiation_priority",
+              "from": "low",
+              "to": "medium",
+              "source": "apply_rule_based_risk"
+            }
+          ]
+        },
+        "trigger": "termination",
+        "clause_id": "node_9",
+        "parent_id": "node_8",
+        "parent_clause_id": "node_8",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "4. DATA OWNERSHIP AND PORTABILITY",
+          "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted."
+        ],
+        "children": [],
+        "semantic_parent": "4. DATA OWNERSHIP AND PORTABILITY",
+        "confidence_score": 0.85,
+        "lineage": [
+          "4. DATA OWNERSHIP AND PORTABILITY"
+        ],
+        "risk_baseline": "ip_after_payment",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": false,
+        "has_semantic_signal": true,
+        "has_legal_signal": true,
+        "evidence_strength": "medium",
+        "materiality_level": "high",
+        "importance_score": 15,
+        "risk_reasons": [
+          "Termination provisions may affect operational continuity or legal remedies."
+        ],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "intellectual_property",
+              "anchors": [
+                "after",
+                "available",
+                "between",
+                "customer",
+                "data",
+                "days",
+                "deleted",
+                "export",
+                "format",
+                "interest",
+                "make",
+                "northwind",
+                "party",
+                "permanently",
+                "retain",
+                "right",
+                "standard",
+                "termination",
+                "thirty",
+                "title",
+                "upon",
+                "which"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "c2f1c5bbad81b0720f0e5f3eb14880843fdf8af4678a4f57001d0750b47a8c8b"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "c2f1c5bbad81b0720f0e5f3eb14880843fdf8af4678a4f57001d0750b47a8c8b",
+            "validated_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389",
+            "final_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389",
+            "source_text_hash": "80e5bfb85ce72b5cf9a4de8637b81715bd91eca3ba788b952a579291b5c318ee",
+            "input_text_hash": "9c6ca4ddd2e523b2b14228356c2e85bc615f17bd616a8a890974ef895ed71389",
+            "text_before_validation": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "recommendation": {
+            "field": "recommendation",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.1667,
+            "semantic_profile_hash": "c2f1c5bbad81b0720f0e5f3eb14880843fdf8af4678a4f57001d0750b47a8c8b",
+            "validated_text_hash": "631676e83292379c6285e1af92261bb874276f5d78509c6ff14220c8b94faa08",
+            "final_text_hash": "631676e83292379c6285e1af92261bb874276f5d78509c6ff14220c8b94faa08",
+            "source_text_hash": "80e5bfb85ce72b5cf9a4de8637b81715bd91eca3ba788b952a579291b5c318ee",
+            "input_text_hash": "631676e83292379c6285e1af92261bb874276f5d78509c6ff14220c8b94faa08",
+            "text_before_validation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      },
+      {
+        "title": "Termination for Convenience",
+        "_source_text_exact": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+        "original_text": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+        "reasoning_evidence": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for",
+        "clause_title": "Termination for Convenience",
+        "clause_reference": "7.1",
+        "quoted_text": "Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+        "clause_type": "termination",
+        "risk_level": "medium",
+        "explanation_simple": "The clause allows Northwind to terminate the agreement at any time with notice, while the Customer cannot terminate for convenience until the Subscription Term ends.",
+        "why_it_matters": "This creates an imbalance in termination rights, favoring Northwind, which could lead to operational challenges for the Customer if they wish to exit the agreement early.",
+        "legal_insight": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.",
+        "favours": "Borrower",
+        "market_comparison": "",
+        "red_flag": false,
+        "red_flag_reason": "",
+        "recommendation": "",
+        "confidence": "medium",
+        "safer_alternative": "Both parties may terminate this Agreement for convenience upon ninety (90) days' written notice.",
+        "negotiation_advice": "",
+        "negotiation_priority": "low",
+        "_meta": {
+          "risk_modified_by": [],
+          "reasoning_modified_by": [],
+          "cleanup_applied": [],
+          "changes": []
+        },
+        "trigger": "terminate",
+        "clause_id": "node_15",
+        "parent_id": "node_14",
+        "parent_clause_id": "node_14",
+        "depth": 2,
+        "level": 2,
+        "section_path": [
+          "7. TERMINATION FOR CONVENIENCE",
+          "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees."
+        ],
+        "children": [],
+        "semantic_parent": "7. TERMINATION FOR CONVENIENCE",
+        "confidence_score": 0.85,
+        "lineage": [
+          "7. TERMINATION FOR CONVENIENCE"
+        ],
+        "risk_baseline": "mutual_termination_notice",
+        "risk_escalated": false,
+        "risk_reduced": false,
+        "has_details": true,
+        "has_reasoning": true,
+        "has_negotiation": false,
+        "has_semantic_signal": true,
+        "has_legal_signal": true,
+        "evidence_strength": "medium",
+        "materiality_level": "medium",
+        "importance_score": 15,
+        "risk_reasons": [
+          "Termination provisions may affect operational continuity or legal remedies.",
+          "Payment provisions may affect cash flow or performance rights.",
+          "Real estate provisions may affect possession, rent, maintenance, permitted use, deposits, or property-related liability."
+        ],
+        "normalized_contract_score": 61,
+        "_publication_validation_history": {},
+        "source_evidence_model": {
+          "evidence_spans": [],
+          "mechanisms": [
+            {
+              "kind": "SOURCE_PROFILE",
+              "primary_type": "termination",
+              "anchors": [
+                "convenience",
+                "current",
+                "customer",
+                "days",
+                "fees",
+                "ninety",
+                "northwind",
+                "notice",
+                "prepaid",
+                "prior",
+                "rata",
+                "refund",
+                "subscription",
+                "term",
+                "terminate",
+                "then",
+                "time",
+                "unused",
+                "upon",
+                "written"
+              ]
+            }
+          ],
+          "semantic_profile_hash": "976d1c21fd5b74f479890638d39c5b17c1e02d7b8e28ae0b54ee008508acb92e"
+        },
+        "validation_receipts": {
+          "legal_insight": {
+            "field": "legal_insight",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.0833,
+            "semantic_profile_hash": "976d1c21fd5b74f479890638d39c5b17c1e02d7b8e28ae0b54ee008508acb92e",
+            "validated_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3",
+            "final_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3",
+            "source_text_hash": "9b33d203b489b6c5a5896bdec9b370f5f407494f706c3053a51ae6f3f53ed1c4",
+            "input_text_hash": "f4f1d45296d8edd8d6a0cdb74574cc82d4abab2c3f35ec22f8269058295323a3",
+            "text_before_validation": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.",
+            "successful": true,
+            "post_gate_mutators": []
+          },
+          "safer_alternative": {
+            "field": "safer_alternative",
+            "publication_gate_called": true,
+            "gate_result": "PASS",
+            "validation_reasons": [],
+            "semantic_coverage": 0.5833,
+            "semantic_profile_hash": "976d1c21fd5b74f479890638d39c5b17c1e02d7b8e28ae0b54ee008508acb92e",
+            "validated_text_hash": "c26442dddb4e75e4f8ff5dedb8b33c2f42d4287198c986e181eb83ce0fd1c9eb",
+            "final_text_hash": "c26442dddb4e75e4f8ff5dedb8b33c2f42d4287198c986e181eb83ce0fd1c9eb",
+            "source_text_hash": "9b33d203b489b6c5a5896bdec9b370f5f407494f706c3053a51ae6f3f53ed1c4",
+            "input_text_hash": "c26442dddb4e75e4f8ff5dedb8b33c2f42d4287198c986e181eb83ce0fd1c9eb",
+            "text_before_validation": "Both parties may terminate this Agreement for convenience upon ninety (90) days' written notice.",
+            "successful": true,
+            "post_gate_mutators": []
+          }
+        }
+      }
+    ]
+  },
+  "contract_timeline": [
+    {
+      "event": "payment",
+      "time_period": "annually",
+      "source_clause": "Payment and Renewal",
+      "source_clause_id": "node_7",
+      "clause_type": "renewal",
+      "risk_level": "medium",
+      "confidence": "high"
+    },
+    {
+      "event": "service_level",
+      "time_period": "monthly",
+      "source_clause": "Uptime Commitment",
+      "source_clause_id": "node_5",
+      "clause_type": "service_level",
+      "risk_level": "medium",
+      "confidence": "high"
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "id": 0,
+        "title": "Payment and Renewal",
+        "reference": "3.1",
+        "type": "renewal",
+        "risk_level": "medium"
+      },
+      {
+        "id": 1,
+        "title": "Uptime Commitment",
+        "reference": "2.1",
+        "type": "service_level",
+        "risk_level": "medium"
+      },
+      {
+        "id": 2,
+        "title": "Limitation of Liability",
+        "reference": "6.1",
+        "type": "liability",
+        "risk_level": "medium"
+      },
+      {
+        "id": 3,
+        "title": "Grant of License",
+        "reference": "1.1",
+        "type": "term",
+        "risk_level": "medium"
+      },
+      {
+        "id": 4,
+        "title": "Security Safeguards and Incident Notification",
+        "reference": "5.1",
+        "type": "security",
+        "risk_level": "high"
+      },
+      {
+        "id": 5,
+        "title": "Customer Data Ownership and Export",
+        "reference": "4.1",
+        "type": "intellectual_property",
+        "risk_level": "medium"
+      },
+      {
+        "id": 6,
+        "title": "Termination for Convenience",
+        "reference": "7.1",
+        "type": "termination",
+        "risk_level": "medium"
+      }
+    ],
+    "edges": [
+      {
+        "from": 1,
+        "to": 2,
+        "reason": "Service failures may affect liability exposure."
+      },
+      {
+        "from": 0,
+        "to": 4,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 2,
+        "to": 4,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 2,
+        "to": 5,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 4,
+        "to": 0,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 4,
+        "to": 1,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 4,
+        "to": 2,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 4,
+        "to": 3,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 4,
+        "to": 6,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 5,
+        "to": 2,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 5,
+        "to": 4,
+        "reason": "Data obligations may depend on security safeguards."
+      },
+      {
+        "from": 6,
+        "to": 4,
+        "reason": "Data obligations may depend on security safeguards."
+      }
+    ],
+    "edges_count": 15
+  },
+  "legal_relation_graph": {
+    "nodes": [
+      {
+        "id": "clause_0",
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "clause_type": "renewal",
+        "concepts": [
+          "payment_obligation"
+        ],
+        "roles": [
+          "financial_consequence"
+        ],
+        "domains": [
+          "termination",
+          "payment",
+          "intellectual_property",
+          "notice",
+          "real_estate",
+          "renewal"
+        ],
+        "relation_triggers": [],
+        "relation_consequences": [
+          "notice",
+          "payment"
+        ]
+      },
+      {
+        "id": "clause_1",
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "clause_type": "service_level",
+        "concepts": [
+          "performance_condition"
+        ],
+        "roles": [
+          "condition"
+        ],
+        "domains": [
+          "liability",
+          "services_operations",
+          "warranties"
+        ],
+        "relation_triggers": [
+          "vice"
+        ],
+        "relation_consequences": []
+      },
+      {
+        "id": "clause_2",
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "clause_type": "liability",
+        "concepts": [
+          "breach_default",
+          "liability_protection",
+          "dispute_resolution"
+        ],
+        "roles": [
+          "breach_trigger",
+          "risk_allocation",
+          "forum_resolution"
+        ],
+        "domains": [
+          "payment",
+          "liability",
+          "open_source"
+        ],
+        "relation_triggers": [
+          "breach",
+          "claim",
+          "loss",
+          "liability"
+        ],
+        "relation_consequences": [
+          "indemnification",
+          "limitation of liability"
+        ]
+      },
+      {
+        "id": "clause_3",
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "clause_type": "term",
+        "concepts": [
+          "ip_ownership"
+        ],
+        "roles": [
+          "rights_allocation"
+        ],
+        "domains": [
+          "intellectual_property",
+          "real_estate",
+          "business_continuity"
+        ],
+        "relation_triggers": [],
+        "relation_consequences": []
+      },
+      {
+        "id": "clause_4",
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "clause_type": "security",
+        "concepts": [
+          "notice_requirement",
+          "data_protection"
+        ],
+        "roles": [
+          "procedural_requirement",
+          "regulated_obligation"
+        ],
+        "domains": [
+          "confidentiality",
+          "data_privacy_security",
+          "notice"
+        ],
+        "relation_triggers": [
+          "disclosure",
+          "security incident"
+        ],
+        "relation_consequences": [
+          "notify",
+          "notification"
+        ]
+      },
+      {
+        "id": "clause_5",
+        "title": "Customer Data Ownership and Export",
+        "risk_level": "medium",
+        "clause_type": "intellectual_property",
+        "concepts": [
+          "ip_ownership"
+        ],
+        "roles": [
+          "rights_allocation"
+        ],
+        "domains": [
+          "termination",
+          "confidentiality",
+          "intellectual_property",
+          "finance_lending",
+          "real_estate"
+        ],
+        "relation_triggers": [],
+        "relation_consequences": [
+          "termination"
+        ]
+      },
+      {
+        "id": "clause_6",
+        "title": "Termination for Convenience",
+        "risk_level": "medium",
+        "clause_type": "termination",
+        "concepts": [
+          "termination_event"
+        ],
+        "roles": [
+          "legal_consequence"
+        ],
+        "domains": [
+          "termination",
+          "payment",
+          "intellectual_property",
+          "notice",
+          "real_estate"
+        ],
+        "relation_triggers": [],
+        "relation_consequences": [
+          "terminate",
+          "termination",
+          "notice"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "from": "clause_1",
+        "to": "clause_0",
+        "type": "performance_payment_dependency",
+        "reason": "Payment may depend on performance, delivery, milestones, or acceptance conditions.",
+        "confidence": 0.85
+      },
+      {
+        "from": "clause_1",
+        "to": "clause_2",
+        "type": "semantic_dependency",
+        "reason": "Service level may affect liability obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_1",
+        "to": "clause_5",
+        "type": "semantic_dependency",
+        "reason": "Service level may affect termination obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_2",
+        "to": "clause_3",
+        "type": "semantic_dependency",
+        "reason": "Liability may affect intellectual property obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_2",
+        "to": "clause_4",
+        "type": "semantic_dependency",
+        "reason": "Liability may affect security incident obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_2",
+        "to": "clause_5",
+        "type": "semantic_dependency",
+        "reason": "Liability may affect intellectual property obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_2",
+        "to": "clause_6",
+        "type": "breach_termination_dependency",
+        "reason": "Breach or default may trigger termination rights or consequences.",
+        "confidence": 0.85
+      },
+      {
+        "from": "clause_4",
+        "to": "clause_2",
+        "type": "data_liability_dependency",
+        "reason": "Data protection failures may affect liability or indemnity exposure.",
+        "confidence": 0.85
+      },
+      {
+        "from": "clause_4",
+        "to": "clause_6",
+        "type": "notice_dependency",
+        "reason": "Termination or contractual consequences may depend on notice requirements.",
+        "confidence": 0.9
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_0",
+        "type": "semantic_dependency",
+        "reason": "Intellectual property may affect payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_3",
+        "type": "semantic_dependency",
+        "reason": "Intellectual property may affect licensing obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_6",
+        "type": "semantic_dependency",
+        "reason": "Intellectual property may affect termination obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_0",
+        "type": "semantic_dependency",
+        "reason": "Termination may affect payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_2",
+        "type": "semantic_dependency",
+        "reason": "Termination may affect fees obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_3",
+        "type": "semantic_dependency",
+        "reason": "Termination may affect licensing obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_4",
+        "type": "semantic_dependency",
+        "reason": "Termination may affect data obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_5",
+        "type": "semantic_dependency",
+        "reason": "Termination may affect intellectual property obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_2",
+        "to": "clause_6",
+        "domains": [
+          "payment"
+        ],
+        "shared_terms": [
+          "termination"
+        ],
+        "relation_type": "trigger_consequence",
+        "type": "trigger_consequence",
+        "reason": "A trigger in one clause may produce consequences addressed in another clause.",
+        "confidence": 0.9,
+        "score": 5
+      },
+      {
+        "from": "clause_4",
+        "to": "clause_5",
+        "domains": [
+          "confidentiality"
+        ],
+        "shared_terms": [
+          "termination"
+        ],
+        "relation_type": "trigger_consequence",
+        "type": "trigger_consequence",
+        "reason": "A trigger in one clause may produce consequences addressed in another clause.",
+        "confidence": 0.9,
+        "score": 5
+      },
+      {
+        "from": "clause_4",
+        "to": "clause_6",
+        "domains": [
+          "notice"
+        ],
+        "shared_terms": [
+          "termination"
+        ],
+        "relation_type": "trigger_consequence",
+        "type": "trigger_consequence",
+        "reason": "A trigger in one clause may produce consequences addressed in another clause.",
+        "confidence": 0.9,
+        "score": 5
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_2",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_3",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_4",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_5",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_5",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_6",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_0",
+        "to": "clause_6",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_1",
+        "to": "clause_0",
+        "type": "services_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "services_operations",
+          "payment"
+        ],
+        "reason": "Service delivery, milestones, or acceptance may affect payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_1",
+        "to": "clause_2",
+        "type": "services_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "services_operations",
+          "payment"
+        ],
+        "reason": "Service delivery, milestones, or acceptance may affect payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_1",
+        "to": "clause_2",
+        "type": "services_liability_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "services_operations",
+          "liability"
+        ],
+        "reason": "Service failures may interact with liability caps, remedies, or indemnities.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_1",
+        "to": "clause_6",
+        "type": "services_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "services_operations",
+          "payment"
+        ],
+        "reason": "Service delivery, milestones, or acceptance may affect payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_3",
+        "to": "clause_4",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_3",
+        "to": "clause_5",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_4",
+        "to": "clause_1",
+        "type": "data_liability_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "data_privacy_security",
+          "liability"
+        ],
+        "reason": "Data protection failures may affect liability or indemnity exposure.",
+        "confidence": 0.8
+      },
+      {
+        "from": "clause_4",
+        "to": "clause_2",
+        "type": "data_liability_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "data_privacy_security",
+          "liability"
+        ],
+        "reason": "Data protection failures may affect liability or indemnity exposure.",
+        "confidence": 0.8
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_0",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_0",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_2",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_3",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_4",
+        "type": "confidentiality_data_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "confidentiality",
+          "data_privacy_security"
+        ],
+        "reason": "Confidentiality obligations may interact with data protection duties.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_4",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_6",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_5",
+        "to": "clause_6",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_0",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_0",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_2",
+        "type": "termination_payment_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "payment"
+        ],
+        "reason": "Termination may affect outstanding fees, refunds, or payment obligations.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_3",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_4",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_5",
+        "type": "termination_ip_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "termination",
+          "intellectual_property"
+        ],
+        "reason": "Termination may affect license rights, deliverables, or IP use after contract end.",
+        "confidence": 0.75
+      },
+      {
+        "from": "clause_6",
+        "to": "clause_5",
+        "type": "ip_confidentiality_dependency",
+        "relation_type": "cross_domain_dependency",
+        "domains": [
+          "intellectual_property",
+          "confidentiality"
+        ],
+        "reason": "IP rights may depend on confidential information handling.",
+        "confidence": 0.75
+      }
+    ],
+    "groups": {
+      "Payment & Commercial Terms": [
+        "clause_0"
+      ],
+      "termination": [
+        "clause_0",
+        "clause_5",
+        "clause_6"
+      ],
+      "payment": [
+        "clause_0",
+        "clause_2",
+        "clause_6"
+      ],
+      "intellectual_property": [
+        "clause_0",
+        "clause_3",
+        "clause_5",
+        "clause_6"
+      ],
+      "notice": [
+        "clause_0",
+        "clause_4",
+        "clause_6"
+      ],
+      "real_estate": [
+        "clause_0",
+        "clause_3",
+        "clause_5",
+        "clause_6"
+      ],
+      "renewal": [
+        "clause_0"
+      ],
+      "Performance & Operations": [
+        "clause_1"
+      ],
+      "liability": [
+        "clause_1",
+        "clause_2"
+      ],
+      "services_operations": [
+        "clause_1"
+      ],
+      "warranties": [
+        "clause_1"
+      ],
+      "Default & Remedies": [
+        "clause_2"
+      ],
+      "Liability & Risk": [
+        "clause_2"
+      ],
+      "Dispute Resolution": [
+        "clause_2"
+      ],
+      "open_source": [
+        "clause_2"
+      ],
+      "Intellectual Property": [
+        "clause_3",
+        "clause_5"
+      ],
+      "business_continuity": [
+        "clause_3"
+      ],
+      "Contract Lifecycle": [
+        "clause_4",
+        "clause_6"
+      ],
+      "Data & Confidentiality": [
+        "clause_4",
+        "clause_5"
+      ],
+      "data_privacy_security": [
+        "clause_4"
+      ],
+      "finance_lending": [
+        "clause_5"
+      ]
+    }
+  },
+  "clause_groups": {
+    "groups": [
+      {
+        "name": "Contract Lifecycle",
+        "key": "contract_lifecycle",
+        "count": 2,
+        "clauses": [
+          {
+            "title": "Payment and Renewal",
+            "_source_text_exact": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+            "original_text": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+            "reasoning_evidence": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (",
+            "clause_title": "Payment and Renewal",
+            "clause_reference": "3.1",
+            "quoted_text": "Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+            "clause_type": "renewal",
+            "risk_level": "medium",
+            "explanation_simple": "The clause requires annual payment in advance and includes automatic renewal provisions.",
+            "why_it_matters": "Automatic renewal can lead to ongoing financial obligations without explicit consent if the Customer fails to provide timely notice of non-renewal.",
+            "legal_insight": "This clause controls how the contract continues, renews, extends, or ends after the initial term.",
+            "favours": "Borrower",
+            "market_comparison": "",
+            "red_flag": true,
+            "red_flag_reason": "The automatic renewal clause could lead to unintentional financial obligations for the Customer.",
+            "recommendation": "",
+            "confidence": "medium",
+            "safer_alternative": "The Agreement shall renew only upon explicit written consent from the Customer at least sixty (60) days prior to the end of the term.",
+            "negotiation_advice": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes.",
+            "negotiation_priority": "high",
+            "_meta": {
+              "risk_modified_by": [],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": []
+            },
+            "trigger": null,
+            "clause_id": "node_7",
+            "parent_id": "node_6",
+            "parent_clause_id": "node_6",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "3. FEES AND AUTO-RENEWAL",
+              "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term."
+            ],
+            "children": [],
+            "semantic_parent": "3. FEES AND AUTO-RENEWAL",
+            "confidence_score": 0.85,
+            "lineage": [
+              "3. FEES AND AUTO-RENEWAL"
+            ],
+            "risk_baseline": "other",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": true,
+            "has_semantic_signal": true,
+            "has_legal_signal": true,
+            "evidence_strength": "high",
+            "materiality_level": "medium",
+            "importance_score": 59,
+            "risk_reasons": [
+              "Renewal provisions may affect contract duration, exit rights, or future pricing leverage.",
+              "Payment provisions may affect cash flow or performance rights.",
+              "Real estate provisions may affect possession, rent, maintenance, permitted use, deposits, or property-related liability."
+            ],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "automatic_renewal",
+                  "anchors": [
+                    "advance",
+                    "annually",
+                    "automatically",
+                    "before",
+                    "current",
+                    "customer",
+                    "days",
+                    "fees",
+                    "form",
+                    "least",
+                    "list",
+                    "northwind",
+                    "notice",
+                    "order",
+                    "price",
+                    "provide",
+                    "renew",
+                    "renewal",
+                    "sixty",
+                    "specified",
+                    "subscription",
+                    "successive",
+                    "term",
+                    "terms",
+                    "then",
+                    "unles",
+                    "written",
+                    "year"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "0941c92677dd80eba1b3343c8e96a00ad05a27fbc3981f6fb1c1b4a3ce842e27"
+            },
+            "primary_group": "contract_lifecycle",
+            "secondary_groups": [
+              "commercial_finance"
+            ]
+          },
+          {
+            "title": "Termination for Convenience",
+            "_source_text_exact": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+            "original_text": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+            "reasoning_evidence": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for",
+            "clause_title": "Termination for Convenience",
+            "clause_reference": "7.1",
+            "quoted_text": "Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+            "clause_type": "termination",
+            "risk_level": "medium",
+            "explanation_simple": "The clause allows Northwind to terminate the agreement at any time with notice, while the Customer cannot terminate for convenience until the Subscription Term ends.",
+            "why_it_matters": "This creates an imbalance in termination rights, favoring Northwind, which could lead to operational challenges for the Customer if they wish to exit the agreement early.",
+            "legal_insight": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.",
+            "favours": "Borrower",
+            "market_comparison": "",
+            "red_flag": false,
+            "red_flag_reason": "",
+            "recommendation": "",
+            "confidence": "medium",
+            "safer_alternative": "Both parties may terminate this Agreement for convenience upon ninety (90) days' written notice.",
+            "negotiation_advice": "",
+            "negotiation_priority": "low",
+            "_meta": {
+              "risk_modified_by": [],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": []
+            },
+            "trigger": "terminate",
+            "clause_id": "node_15",
+            "parent_id": "node_14",
+            "parent_clause_id": "node_14",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "7. TERMINATION FOR CONVENIENCE",
+              "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees."
+            ],
+            "children": [],
+            "semantic_parent": "7. TERMINATION FOR CONVENIENCE",
+            "confidence_score": 0.85,
+            "lineage": [
+              "7. TERMINATION FOR CONVENIENCE"
+            ],
+            "risk_baseline": "mutual_termination_notice",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": false,
+            "has_semantic_signal": true,
+            "has_legal_signal": true,
+            "evidence_strength": "medium",
+            "materiality_level": "medium",
+            "importance_score": 15,
+            "risk_reasons": [
+              "Termination provisions may affect operational continuity or legal remedies.",
+              "Payment provisions may affect cash flow or performance rights.",
+              "Real estate provisions may affect possession, rent, maintenance, permitted use, deposits, or property-related liability."
+            ],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "termination",
+                  "anchors": [
+                    "convenience",
+                    "current",
+                    "customer",
+                    "days",
+                    "fees",
+                    "ninety",
+                    "northwind",
+                    "notice",
+                    "prepaid",
+                    "prior",
+                    "rata",
+                    "refund",
+                    "subscription",
+                    "term",
+                    "terminate",
+                    "then",
+                    "time",
+                    "unused",
+                    "upon",
+                    "written"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "976d1c21fd5b74f479890638d39c5b17c1e02d7b8e28ae0b54ee008508acb92e"
+            },
+            "primary_group": "contract_lifecycle",
+            "secondary_groups": []
+          }
+        ]
+      },
+      {
+        "name": "Services & Operations",
+        "key": "services_operations",
+        "count": 1,
+        "clauses": [
+          {
+            "title": "Uptime Commitment",
+            "_source_text_exact": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+            "original_text": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+            "reasoning_evidence": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusi",
+            "clause_title": "Uptime Commitment",
+            "clause_reference": "2.1",
+            "quoted_text": "Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+            "clause_type": "service_level",
+            "risk_level": "medium",
+            "explanation_simple": "The clause commits Northwind to a specific uptime percentage and limits the customer's remedy to a service credit.",
+            "why_it_matters": "This clause defines the service level expectations and the consequences for failing to meet them, which can impact customer satisfaction and operational reliability.",
+            "legal_insight": "The clause defines measurable service commitments, so measurement periods, exclusions, credits, reporting, and repeated-failure remedies should be clear.",
+            "favours": "Unclear",
+            "market_comparison": "The uptime commitment is relatively standard in service agreements, but the limitation of remedy to a service credit may be seen as favoring the provider.",
+            "red_flag": true,
+            "red_flag_reason": "The clause limits the customer's remedies for service failures, which could lead to significant operational impacts if uptime is not maintained.",
+            "recommendation": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear.",
+            "confidence": "medium",
+            "safer_alternative": "In addition to service credits, provide the customer with the option for a refund or additional support in the event of significant downtime.",
+            "negotiation_advice": "",
+            "negotiation_priority": "high",
+            "_meta": {
+              "risk_modified_by": [],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": []
+            },
+            "trigger": "exclusive",
+            "has_contextual_reasoning": true,
+            "clause_id": "node_5",
+            "parent_id": "node_4",
+            "parent_clause_id": "node_4",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "2. SERVICE LEVELS",
+              "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A."
+            ],
+            "children": [],
+            "semantic_parent": "2. SERVICE LEVELS",
+            "confidence_score": 0.85,
+            "lineage": [
+              "2. SERVICE LEVELS"
+            ],
+            "risk_baseline": "other",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": false,
+            "has_semantic_signal": true,
+            "has_legal_signal": true,
+            "evidence_strength": "high",
+            "materiality_level": "low",
+            "importance_score": 51,
+            "risk_reasons": [
+              "Service obligations should be assessed together with performance standards and remedies.",
+              "Restrictive commitments may reduce commercial or operational flexibility."
+            ],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "sla",
+                  "anchors": [
+                    "commercially",
+                    "commitment",
+                    "credit",
+                    "customer",
+                    "effort",
+                    "excluding",
+                    "exclusive",
+                    "exhibit",
+                    "failure",
+                    "forth",
+                    "maintain",
+                    "maintenance",
+                    "measured",
+                    "meet",
+                    "monthly",
+                    "northwind",
+                    "reasonable",
+                    "remedy",
+                    "scheduled",
+                    "service",
+                    "sole",
+                    "uptime"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "a6d5b6efbc3fb10af613b4d7107dedeaf183d8550dc8d1178b7453650d1265d7"
+            },
+            "primary_group": "services_operations",
+            "secondary_groups": []
+          }
+        ]
+      },
+      {
+        "name": "Liability & Risk",
+        "key": "liability_risk",
+        "count": 1,
+        "clauses": [
+          {
+            "title": "Limitation of Liability",
+            "_source_text_exact": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+            "original_text": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+            "reasoning_evidence": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, exce",
+            "clause_title": "Limitation of Liability",
+            "clause_reference": "6.1",
+            "quoted_text": "Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+            "clause_type": "liability",
+            "risk_level": "medium",
+            "explanation_simple": "Northwind's liability is limited to the fees paid by the Customer in the last year, with exceptions for security breaches and indemnification.",
+            "why_it_matters": "This limitation caps financial exposure for Northwind, but the exceptions could lead to higher liability in specific cases.",
+            "legal_insight": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.",
+            "favours": "Unclear",
+            "market_comparison": "This clause is relatively standard in commercial agreements, providing a balance between limiting liability and acknowledging certain risks.",
+            "red_flag": false,
+            "red_flag_reason": "",
+            "recommendation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+            "confidence": "high",
+            "safer_alternative": "",
+            "negotiation_advice": "",
+            "negotiation_priority": "low",
+            "_meta": {
+              "risk_modified_by": [],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": []
+            },
+            "trigger": "liability",
+            "clause_id": "node_13",
+            "parent_id": "node_12",
+            "parent_clause_id": "node_12",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "6. LIMITATION OF LIABILITY",
+              "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees."
+            ],
+            "children": [],
+            "semantic_parent": "6. LIMITATION OF LIABILITY",
+            "confidence_score": 0.85,
+            "lineage": [
+              "6. LIMITATION OF LIABILITY"
+            ],
+            "risk_baseline": "limited_liability",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": false,
+            "has_semantic_signal": true,
+            "has_legal_signal": true,
+            "evidence_strength": "medium",
+            "materiality_level": "high",
+            "importance_score": 47,
+            "risk_reasons": [
+              "Liability allocation may affect financial exposure or available remedies.",
+              "Payment provisions may affect cash flow or performance rights."
+            ],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "indemnity",
+                  "anchors": [
+                    "aggregate",
+                    "arising",
+                    "breache",
+                    "capped",
+                    "claim",
+                    "customer",
+                    "exceed",
+                    "except",
+                    "fees",
+                    "indemnification",
+                    "liability",
+                    "month",
+                    "northwind",
+                    "obligation",
+                    "paid",
+                    "preceding",
+                    "security",
+                    "times",
+                    "twelve",
+                    "which"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "675c9c7697bf22155b40f378e4f560eec54d0cfca3836db32f9901b18dec85a4"
+            },
+            "primary_group": "liability_risk",
+            "secondary_groups": []
+          }
+        ]
+      },
+      {
+        "name": "IP & Licensing",
+        "key": "ip_licensing",
+        "count": 2,
+        "clauses": [
+          {
+            "title": "Grant of License",
+            "_source_text_exact": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+            "original_text": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+            "reasoning_evidence": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscrip",
+            "clause_title": "Grant of License",
+            "clause_reference": "1.1",
+            "quoted_text": "Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+            "clause_type": "term",
+            "risk_level": "medium",
+            "explanation_simple": "The clause grants a limited license to the Customer for internal use of the Platform.",
+            "why_it_matters": "This clause defines the scope of the Customer's rights regarding the use of the Platform, which is essential for compliance and operational clarity.",
+            "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+            "favours": "Balanced",
+            "market_comparison": "The terms are typical for software licensing agreements, providing a standard framework for usage rights.",
+            "red_flag": false,
+            "red_flag_reason": "",
+            "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+            "confidence": "high",
+            "safer_alternative": "",
+            "negotiation_advice": "Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.",
+            "negotiation_priority": "medium",
+            "_meta": {
+              "risk_modified_by": [
+                "apply_rule_based_risk"
+              ],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": [
+                {
+                  "field": "risk_level",
+                  "from": "low",
+                  "to": "medium",
+                  "source": "apply_rule_based_risk"
+                },
+                {
+                  "field": "negotiation_priority",
+                  "from": "low",
+                  "to": "medium",
+                  "source": "apply_rule_based_risk"
+                }
+              ]
+            },
+            "trigger": "exclusive",
+            "clause_id": "node_3",
+            "parent_id": "node_2",
+            "parent_clause_id": "node_2",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "1. ACCESS AND USE RIGHTS",
+              "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes."
+            ],
+            "children": [],
+            "semantic_parent": "1. ACCESS AND USE RIGHTS",
+            "confidence_score": 0.85,
+            "lineage": [
+              "1. ACCESS AND USE RIGHTS"
+            ],
+            "risk_baseline": "other",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": true,
+            "has_semantic_signal": true,
+            "has_legal_signal": false,
+            "evidence_strength": "medium",
+            "materiality_level": "medium",
+            "importance_score": 34,
+            "risk_reasons": [],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "term",
+                  "anchors": [
+                    "acces",
+                    "busines",
+                    "customer",
+                    "during",
+                    "exclusive",
+                    "grant",
+                    "internal",
+                    "northwind",
+                    "platform",
+                    "purpose",
+                    "right",
+                    "solely",
+                    "subject",
+                    "subscription",
+                    "term",
+                    "terms",
+                    "transferable"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "460ad3292ef71bd1792549675594de2bb354f803fb47c582e195b70072a33502"
+            },
+            "primary_group": "ip_licensing",
+            "secondary_groups": []
+          },
+          {
+            "title": "Customer Data Ownership and Export",
+            "_source_text_exact": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+            "original_text": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+            "reasoning_evidence": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for",
+            "clause_title": "Customer Data Ownership and Export",
+            "clause_reference": "4.1",
+            "quoted_text": "Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+            "clause_type": "intellectual_property",
+            "risk_level": "medium",
+            "explanation_simple": "The clause establishes that the Customer owns their data and outlines the process for data export upon termination.",
+            "why_it_matters": "This clause protects the Customer's ownership of their data and ensures they can retrieve it before deletion.",
+            "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+            "favours": "Unclear",
+            "market_comparison": "This clause is standard in agreements involving data ownership and export rights.",
+            "red_flag": false,
+            "red_flag_reason": "",
+            "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+            "confidence": "high",
+            "safer_alternative": "",
+            "negotiation_advice": "",
+            "negotiation_priority": "low",
+            "_meta": {
+              "risk_modified_by": [
+                "apply_rule_based_risk"
+              ],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": [
+                {
+                  "field": "risk_level",
+                  "from": "low",
+                  "to": "medium",
+                  "source": "apply_rule_based_risk"
+                },
+                {
+                  "field": "negotiation_priority",
+                  "from": "low",
+                  "to": "medium",
+                  "source": "apply_rule_based_risk"
+                }
+              ]
+            },
+            "trigger": "termination",
+            "clause_id": "node_9",
+            "parent_id": "node_8",
+            "parent_clause_id": "node_8",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "4. DATA OWNERSHIP AND PORTABILITY",
+              "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted."
+            ],
+            "children": [],
+            "semantic_parent": "4. DATA OWNERSHIP AND PORTABILITY",
+            "confidence_score": 0.85,
+            "lineage": [
+              "4. DATA OWNERSHIP AND PORTABILITY"
+            ],
+            "risk_baseline": "ip_after_payment",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": false,
+            "has_semantic_signal": true,
+            "has_legal_signal": true,
+            "evidence_strength": "medium",
+            "materiality_level": "high",
+            "importance_score": 15,
+            "risk_reasons": [
+              "Termination provisions may affect operational continuity or legal remedies."
+            ],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "intellectual_property",
+                  "anchors": [
+                    "after",
+                    "available",
+                    "between",
+                    "customer",
+                    "data",
+                    "days",
+                    "deleted",
+                    "export",
+                    "format",
+                    "interest",
+                    "make",
+                    "northwind",
+                    "party",
+                    "permanently",
+                    "retain",
+                    "right",
+                    "standard",
+                    "termination",
+                    "thirty",
+                    "title",
+                    "upon",
+                    "which"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "c2f1c5bbad81b0720f0e5f3eb14880843fdf8af4678a4f57001d0750b47a8c8b"
+            },
+            "primary_group": "ip_licensing",
+            "secondary_groups": []
+          }
+        ]
+      },
+      {
+        "name": "Data & Confidentiality",
+        "key": "data_confidentiality",
+        "count": 1,
+        "clauses": [
+          {
+            "title": "Security Safeguards and Incident Notification",
+            "_source_text_exact": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+            "original_text": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+            "reasoning_evidence": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confir",
+            "clause_title": "Security Safeguards and Incident Notification",
+            "clause_reference": "5.1",
+            "quoted_text": "Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+            "clause_type": "security",
+            "risk_level": "high",
+            "explanation_simple": "Northwind is required to implement security measures and notify the Customer of incidents.",
+            "why_it_matters": "This clause ensures that Customer Data is protected and that the Customer is informed of any security breaches in a timely manner.",
+            "legal_insight": "This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted.",
+            "favours": "Unclear",
+            "market_comparison": "",
+            "red_flag": false,
+            "red_flag_reason": "",
+            "recommendation": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.",
+            "confidence": "high",
+            "safer_alternative": "",
+            "negotiation_advice": "Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.",
+            "negotiation_priority": "medium",
+            "_meta": {
+              "risk_modified_by": [
+                "apply_rule_based_risk"
+              ],
+              "reasoning_modified_by": [],
+              "cleanup_applied": [],
+              "changes": [
+                {
+                  "field": "risk_level",
+                  "from": "low",
+                  "to": "medium",
+                  "source": "apply_rule_based_risk"
+                },
+                {
+                  "field": "negotiation_priority",
+                  "from": "low",
+                  "to": "medium",
+                  "source": "apply_rule_based_risk"
+                }
+              ]
+            },
+            "trigger": "security incident",
+            "clause_id": "node_11",
+            "parent_id": "node_10",
+            "parent_clause_id": "node_10",
+            "depth": 2,
+            "level": 2,
+            "section_path": [
+              "5. SECURITY",
+              "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery."
+            ],
+            "children": [],
+            "semantic_parent": "5. SECURITY",
+            "confidence_score": 0.85,
+            "lineage": [
+              "5. SECURITY"
+            ],
+            "risk_baseline": "other",
+            "risk_escalated": false,
+            "risk_reduced": false,
+            "has_details": true,
+            "has_reasoning": true,
+            "has_negotiation": true,
+            "has_semantic_signal": true,
+            "has_legal_signal": true,
+            "evidence_strength": "medium",
+            "materiality_level": "low",
+            "importance_score": 26,
+            "risk_reasons": [
+              "Security obligations may require technical controls, incident response, monitoring, or audit readiness."
+            ],
+            "normalized_contract_score": 61,
+            "_publication_validation_history": {},
+            "source_evidence_model": {
+              "evidence_spans": [],
+              "mechanisms": [
+                {
+                  "kind": "SOURCE_PROFILE",
+                  "primary_type": "cybersecurity",
+                  "anchors": [
+                    "administrative",
+                    "affecting",
+                    "confirmed",
+                    "consistent",
+                    "customer",
+                    "data",
+                    "discovery",
+                    "hours",
+                    "incident",
+                    "maintain",
+                    "northwind",
+                    "notify",
+                    "physical",
+                    "safeguard",
+                    "security",
+                    "seventy",
+                    "standard",
+                    "technical",
+                    "type",
+                    "within"
+                  ]
+                }
+              ],
+              "semantic_profile_hash": "a0767aa74457528efbfd35441cc20161a6741c4a5c187d7b338ba1c4ca665e4c"
+            },
+            "primary_group": "data_confidentiality",
+            "secondary_groups": []
+          }
+        ]
+      }
+    ]
+  },
+  "executive_summary": {
+    "language": "en",
+    "privacy_first": true,
+    "jurisdiction": {},
+    "jurisdiction_summary": "",
+    "risk_overview": {
+      "high": 1,
+      "medium": 6,
+      "low": 0
+    },
+    "top_risks": [
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "importance_score": 26,
+        "legal_insight": "This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted."
+      },
+      {
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "importance_score": 59,
+        "legal_insight": "This clause controls how the contract continues, renews, extends, or ends after the initial term."
+      },
+      {
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "importance_score": 51,
+        "legal_insight": "The clause defines measurable service commitments, so measurement periods, exclusions, credits, reporting, and repeated-failure remedies should be clear."
+      },
+      {
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "importance_score": 47,
+        "legal_insight": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise."
+      },
+      {
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "importance_score": 34,
+        "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property."
+      }
+    ],
+    "negotiation_priorities": [
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "recommendation": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.",
+        "negotiation_advice": "Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.",
+        "safer_alternative": "",
+        "fallback_position": null
+      },
+      {
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "recommendation": "",
+        "negotiation_advice": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes.",
+        "safer_alternative": "The Agreement shall renew only upon explicit written consent from the Customer at least sixty (60) days prior to the end of the term.",
+        "fallback_position": null
+      },
+      {
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "recommendation": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear.",
+        "negotiation_advice": "",
+        "safer_alternative": "In addition to service credits, provide the customer with the option for a refund or additional support in the event of significant downtime.",
+        "fallback_position": null
+      },
+      {
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "recommendation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+        "negotiation_advice": "",
+        "safer_alternative": "",
+        "fallback_position": null
+      },
+      {
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+        "negotiation_advice": "Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.",
+        "safer_alternative": "",
+        "fallback_position": null
+      }
+    ],
+    "recommended_actions": [
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "action": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care."
+      },
+      {
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "action": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes."
+      },
+      {
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "action": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear."
+      },
+      {
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "action": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate."
+      },
+      {
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "action": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights."
+      }
+    ],
+    "dependency_summary": {
+      "edges_count": 15,
+      "key_dependencies": [
+        {
+          "from": 1,
+          "to": 2,
+          "reason": "Service failures may affect liability exposure."
+        },
+        {
+          "from": 0,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 2,
+          "to": 5,
+          "reason": "Data obligations may depend on security safeguards."
+        }
+      ]
+    }
+  },
+  "executive_risk_narrative": "This contract contains 1 high-risk clause(s) and 6 medium-risk clause(s). The most sensitive clauses are Security Safeguards and Incident Notification, Payment and Renewal, Uptime Commitment. These clauses should be reviewed carefully before signing because they may affect liability, operational continuity, financial exposure, or negotiation leverage.",
+  "contradictions": [
+    {
+      "id": "exclusive_vs_non_exclusive",
+      "label": "Exclusive vs. non-exclusive",
+      "severity": "high",
+      "message": "The agreement may contain both exclusive and non-exclusive language for the same commercial relationship.",
+      "clauses": [
+        {
+          "title": "Uptime Commitment",
+          "reference": "2.1",
+          "clause_type": "service_level",
+          "risk_level": "medium",
+          "excerpt": "Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A. 2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A"
+        },
+        {
+          "title": "Grant of License",
+          "reference": "1.1",
+          "clause_type": "term",
+          "risk_level": "medium",
+          "excerpt": "Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes. 1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.   The clause grants a limited license to the Customer for internal use of the Platform. This clause allo"
+        }
+      ]
+    }
+  ],
+  "executive_report": {
+    "report_type": "executive_contract_report",
+    "language": "en",
+    "privacy_first": true,
+    "contract_overview": {
+      "clauses_analyzed": 7,
+      "risk_overview": {
+        "high": 1,
+        "medium": 6,
+        "low": 0
+      },
+      "risk_distribution": {
+        "counts": {
+          "high": 1,
+          "medium": 6,
+          "low": 0
+        },
+        "percentages": {
+          "high": 14,
+          "medium": 86,
+          "low": 0
+        }
+      },
+      "dependencies_count": 15,
+      "risk_score": null,
+      "contract_score": null,
+      "contract_quality": null,
+      "contract_complexity": null,
+      "overall_balance": null,
+      "jurisdiction_detected": null
+    },
+    "executive_narrative": "This contract contains 1 high-risk clause(s) and 6 medium-risk clause(s). The most sensitive clauses are Security Safeguards and Incident Notification, Payment and Renewal, Uptime Commitment. These clauses should be reviewed carefully before signing because they may affect liability, operational continuity, financial exposure, or negotiation leverage.",
+    "top_risks": [
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "importance_score": 26,
+        "legal_insight": "This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted."
+      },
+      {
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "importance_score": 59,
+        "legal_insight": "This clause controls how the contract continues, renews, extends, or ends after the initial term."
+      },
+      {
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "importance_score": 51,
+        "legal_insight": "The clause defines measurable service commitments, so measurement periods, exclusions, credits, reporting, and repeated-failure remedies should be clear."
+      },
+      {
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "importance_score": 47,
+        "legal_insight": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise."
+      },
+      {
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "importance_score": 34,
+        "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property."
+      }
+    ],
+    "negotiation_priorities": [
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "recommendation": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.",
+        "negotiation_advice": "Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.",
+        "safer_alternative": "",
+        "fallback_position": null
+      },
+      {
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "recommendation": "",
+        "negotiation_advice": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes.",
+        "safer_alternative": "The Agreement shall renew only upon explicit written consent from the Customer at least sixty (60) days prior to the end of the term.",
+        "fallback_position": null
+      },
+      {
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "recommendation": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear.",
+        "negotiation_advice": "",
+        "safer_alternative": "In addition to service credits, provide the customer with the option for a refund or additional support in the event of significant downtime.",
+        "fallback_position": null
+      },
+      {
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "recommendation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+        "negotiation_advice": "",
+        "safer_alternative": "",
+        "fallback_position": null
+      },
+      {
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+        "negotiation_advice": "Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.",
+        "safer_alternative": "",
+        "fallback_position": null
+      }
+    ],
+    "recommended_actions": [
+      {
+        "title": "Security Safeguards and Incident Notification",
+        "risk_level": "high",
+        "action": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care."
+      },
+      {
+        "title": "Payment and Renewal",
+        "risk_level": "medium",
+        "action": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes."
+      },
+      {
+        "title": "Uptime Commitment",
+        "risk_level": "medium",
+        "action": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear."
+      },
+      {
+        "title": "Limitation of Liability",
+        "risk_level": "medium",
+        "action": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate."
+      },
+      {
+        "title": "Grant of License",
+        "risk_level": "medium",
+        "action": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights."
+      }
+    ],
+    "contradictions": [
+      {
+        "id": "exclusive_vs_non_exclusive",
+        "label": "Exclusive vs. non-exclusive",
+        "severity": "high",
+        "message": "The agreement may contain both exclusive and non-exclusive language for the same commercial relationship.",
+        "clauses": [
+          {
+            "title": "Uptime Commitment",
+            "reference": "2.1",
+            "clause_type": "service_level",
+            "risk_level": "medium",
+            "excerpt": "Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A. 2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A"
+          },
+          {
+            "title": "Grant of License",
+            "reference": "1.1",
+            "clause_type": "term",
+            "risk_level": "medium",
+            "excerpt": "Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes. 1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.   The clause grants a limited license to the Customer for internal use of the Platform. This clause allo"
+          }
+        ]
+      }
+    ],
+    "clause_groups": {
+      "groups": [
+        {
+          "name": "Contract Lifecycle",
+          "key": "contract_lifecycle",
+          "count": 2,
+          "clauses": [
+            {
+              "title": "Payment and Renewal",
+              "_source_text_exact": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+              "original_text": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+              "reasoning_evidence": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (",
+              "clause_title": "Payment and Renewal",
+              "clause_reference": "3.1",
+              "quoted_text": "Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+              "clause_type": "renewal",
+              "risk_level": "medium",
+              "explanation_simple": "The clause requires annual payment in advance and includes automatic renewal provisions.",
+              "why_it_matters": "Automatic renewal can lead to ongoing financial obligations without explicit consent if the Customer fails to provide timely notice of non-renewal.",
+              "legal_insight": "This clause controls how the contract continues, renews, extends, or ends after the initial term.",
+              "favours": "Borrower",
+              "market_comparison": "",
+              "red_flag": true,
+              "red_flag_reason": "The automatic renewal clause could lead to unintentional financial obligations for the Customer.",
+              "recommendation": "",
+              "confidence": "medium",
+              "safer_alternative": "The Agreement shall renew only upon explicit written consent from the Customer at least sixty (60) days prior to the end of the term.",
+              "negotiation_advice": "Consider clarifying renewal mechanics, notice windows, automatic renewal, pricing changes, termination before renewal, and any service or payment changes.",
+              "negotiation_priority": "high",
+              "_meta": {
+                "risk_modified_by": [],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": []
+              },
+              "trigger": null,
+              "clause_id": "node_7",
+              "parent_id": "node_6",
+              "parent_clause_id": "node_6",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "3. FEES AND AUTO-RENEWAL",
+                "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term."
+              ],
+              "children": [],
+              "semantic_parent": "3. FEES AND AUTO-RENEWAL",
+              "confidence_score": 0.85,
+              "lineage": [
+                "3. FEES AND AUTO-RENEWAL"
+              ],
+              "risk_baseline": "other",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": true,
+              "has_semantic_signal": true,
+              "has_legal_signal": true,
+              "evidence_strength": "high",
+              "materiality_level": "medium",
+              "importance_score": 59,
+              "risk_reasons": [
+                "Renewal provisions may affect contract duration, exit rights, or future pricing leverage.",
+                "Payment provisions may affect cash flow or performance rights.",
+                "Real estate provisions may affect possession, rent, maintenance, permitted use, deposits, or property-related liability."
+              ],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "automatic_renewal",
+                    "anchors": [
+                      "advance",
+                      "annually",
+                      "automatically",
+                      "before",
+                      "current",
+                      "customer",
+                      "days",
+                      "fees",
+                      "form",
+                      "least",
+                      "list",
+                      "northwind",
+                      "notice",
+                      "order",
+                      "price",
+                      "provide",
+                      "renew",
+                      "renewal",
+                      "sixty",
+                      "specified",
+                      "subscription",
+                      "successive",
+                      "term",
+                      "terms",
+                      "then",
+                      "unles",
+                      "written",
+                      "year"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "0941c92677dd80eba1b3343c8e96a00ad05a27fbc3981f6fb1c1b4a3ce842e27"
+              },
+              "primary_group": "contract_lifecycle",
+              "secondary_groups": [
+                "commercial_finance"
+              ]
+            },
+            {
+              "title": "Termination for Convenience",
+              "_source_text_exact": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+              "original_text": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+              "reasoning_evidence": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for",
+              "clause_title": "Termination for Convenience",
+              "clause_reference": "7.1",
+              "quoted_text": "Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+              "clause_type": "termination",
+              "risk_level": "medium",
+              "explanation_simple": "The clause allows Northwind to terminate the agreement at any time with notice, while the Customer cannot terminate for convenience until the Subscription Term ends.",
+              "why_it_matters": "This creates an imbalance in termination rights, favoring Northwind, which could lead to operational challenges for the Customer if they wish to exit the agreement early.",
+              "legal_insight": "This clause determines when the contract can end and whether the affected party has notice or an opportunity to cure.",
+              "favours": "Borrower",
+              "market_comparison": "",
+              "red_flag": false,
+              "red_flag_reason": "",
+              "recommendation": "",
+              "confidence": "medium",
+              "safer_alternative": "Both parties may terminate this Agreement for convenience upon ninety (90) days' written notice.",
+              "negotiation_advice": "",
+              "negotiation_priority": "low",
+              "_meta": {
+                "risk_modified_by": [],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": []
+              },
+              "trigger": "terminate",
+              "clause_id": "node_15",
+              "parent_id": "node_14",
+              "parent_clause_id": "node_14",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "7. TERMINATION FOR CONVENIENCE",
+                "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees."
+              ],
+              "children": [],
+              "semantic_parent": "7. TERMINATION FOR CONVENIENCE",
+              "confidence_score": 0.85,
+              "lineage": [
+                "7. TERMINATION FOR CONVENIENCE"
+              ],
+              "risk_baseline": "mutual_termination_notice",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": false,
+              "has_semantic_signal": true,
+              "has_legal_signal": true,
+              "evidence_strength": "medium",
+              "materiality_level": "medium",
+              "importance_score": 15,
+              "risk_reasons": [
+                "Termination provisions may affect operational continuity or legal remedies.",
+                "Payment provisions may affect cash flow or performance rights.",
+                "Real estate provisions may affect possession, rent, maintenance, permitted use, deposits, or property-related liability."
+              ],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "termination",
+                    "anchors": [
+                      "convenience",
+                      "current",
+                      "customer",
+                      "days",
+                      "fees",
+                      "ninety",
+                      "northwind",
+                      "notice",
+                      "prepaid",
+                      "prior",
+                      "rata",
+                      "refund",
+                      "subscription",
+                      "term",
+                      "terminate",
+                      "then",
+                      "time",
+                      "unused",
+                      "upon",
+                      "written"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "976d1c21fd5b74f479890638d39c5b17c1e02d7b8e28ae0b54ee008508acb92e"
+              },
+              "primary_group": "contract_lifecycle",
+              "secondary_groups": []
+            }
+          ]
+        },
+        {
+          "name": "Services & Operations",
+          "key": "services_operations",
+          "count": 1,
+          "clauses": [
+            {
+              "title": "Uptime Commitment",
+              "_source_text_exact": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+              "original_text": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+              "reasoning_evidence": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusi",
+              "clause_title": "Uptime Commitment",
+              "clause_reference": "2.1",
+              "quoted_text": "Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+              "clause_type": "service_level",
+              "risk_level": "medium",
+              "explanation_simple": "The clause commits Northwind to a specific uptime percentage and limits the customer's remedy to a service credit.",
+              "why_it_matters": "This clause defines the service level expectations and the consequences for failing to meet them, which can impact customer satisfaction and operational reliability.",
+              "legal_insight": "The clause defines measurable service commitments, so measurement periods, exclusions, credits, reporting, and repeated-failure remedies should be clear.",
+              "favours": "Unclear",
+              "market_comparison": "The uptime commitment is relatively standard in service agreements, but the limitation of remedy to a service credit may be seen as favoring the provider.",
+              "red_flag": true,
+              "red_flag_reason": "The clause limits the customer's remedies for service failures, which could lead to significant operational impacts if uptime is not maintained.",
+              "recommendation": "Check whether uptime targets, measurement periods, exclusions, remedies, and reporting obligations are clear.",
+              "confidence": "medium",
+              "safer_alternative": "In addition to service credits, provide the customer with the option for a refund or additional support in the event of significant downtime.",
+              "negotiation_advice": "",
+              "negotiation_priority": "high",
+              "_meta": {
+                "risk_modified_by": [],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": []
+              },
+              "trigger": "exclusive",
+              "has_contextual_reasoning": true,
+              "clause_id": "node_5",
+              "parent_id": "node_4",
+              "parent_clause_id": "node_4",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "2. SERVICE LEVELS",
+                "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A."
+              ],
+              "children": [],
+              "semantic_parent": "2. SERVICE LEVELS",
+              "confidence_score": 0.85,
+              "lineage": [
+                "2. SERVICE LEVELS"
+              ],
+              "risk_baseline": "other",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": false,
+              "has_semantic_signal": true,
+              "has_legal_signal": true,
+              "evidence_strength": "high",
+              "materiality_level": "low",
+              "importance_score": 51,
+              "risk_reasons": [
+                "Service obligations should be assessed together with performance standards and remedies.",
+                "Restrictive commitments may reduce commercial or operational flexibility."
+              ],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "sla",
+                    "anchors": [
+                      "commercially",
+                      "commitment",
+                      "credit",
+                      "customer",
+                      "effort",
+                      "excluding",
+                      "exclusive",
+                      "exhibit",
+                      "failure",
+                      "forth",
+                      "maintain",
+                      "maintenance",
+                      "measured",
+                      "meet",
+                      "monthly",
+                      "northwind",
+                      "reasonable",
+                      "remedy",
+                      "scheduled",
+                      "service",
+                      "sole",
+                      "uptime"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "a6d5b6efbc3fb10af613b4d7107dedeaf183d8550dc8d1178b7453650d1265d7"
+              },
+              "primary_group": "services_operations",
+              "secondary_groups": []
+            }
+          ]
+        },
+        {
+          "name": "Liability & Risk",
+          "key": "liability_risk",
+          "count": 1,
+          "clauses": [
+            {
+              "title": "Limitation of Liability",
+              "_source_text_exact": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+              "original_text": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+              "reasoning_evidence": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, exce",
+              "clause_title": "Limitation of Liability",
+              "clause_reference": "6.1",
+              "quoted_text": "Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+              "clause_type": "liability",
+              "risk_level": "medium",
+              "explanation_simple": "Northwind's liability is limited to the fees paid by the Customer in the last year, with exceptions for security breaches and indemnification.",
+              "why_it_matters": "This limitation caps financial exposure for Northwind, but the exceptions could lead to higher liability in specific cases.",
+              "legal_insight": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.",
+              "favours": "Unclear",
+              "market_comparison": "This clause is relatively standard in commercial agreements, providing a balance between limiting liability and acknowledging certain risks.",
+              "red_flag": false,
+              "red_flag_reason": "",
+              "recommendation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+              "confidence": "high",
+              "safer_alternative": "",
+              "negotiation_advice": "",
+              "negotiation_priority": "low",
+              "_meta": {
+                "risk_modified_by": [],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": []
+              },
+              "trigger": "liability",
+              "clause_id": "node_13",
+              "parent_id": "node_12",
+              "parent_clause_id": "node_12",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "6. LIMITATION OF LIABILITY",
+                "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees."
+              ],
+              "children": [],
+              "semantic_parent": "6. LIMITATION OF LIABILITY",
+              "confidence_score": 0.85,
+              "lineage": [
+                "6. LIMITATION OF LIABILITY"
+              ],
+              "risk_baseline": "limited_liability",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": false,
+              "has_semantic_signal": true,
+              "has_legal_signal": true,
+              "evidence_strength": "medium",
+              "materiality_level": "high",
+              "importance_score": 47,
+              "risk_reasons": [
+                "Liability allocation may affect financial exposure or available remedies.",
+                "Payment provisions may affect cash flow or performance rights."
+              ],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "indemnity",
+                    "anchors": [
+                      "aggregate",
+                      "arising",
+                      "breache",
+                      "capped",
+                      "claim",
+                      "customer",
+                      "exceed",
+                      "except",
+                      "fees",
+                      "indemnification",
+                      "liability",
+                      "month",
+                      "northwind",
+                      "obligation",
+                      "paid",
+                      "preceding",
+                      "security",
+                      "times",
+                      "twelve",
+                      "which"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "675c9c7697bf22155b40f378e4f560eec54d0cfca3836db32f9901b18dec85a4"
+              },
+              "primary_group": "liability_risk",
+              "secondary_groups": []
+            }
+          ]
+        },
+        {
+          "name": "IP & Licensing",
+          "key": "ip_licensing",
+          "count": 2,
+          "clauses": [
+            {
+              "title": "Grant of License",
+              "_source_text_exact": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+              "original_text": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+              "reasoning_evidence": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscrip",
+              "clause_title": "Grant of License",
+              "clause_reference": "1.1",
+              "quoted_text": "Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+              "clause_type": "term",
+              "risk_level": "medium",
+              "explanation_simple": "The clause grants a limited license to the Customer for internal use of the Platform.",
+              "why_it_matters": "This clause defines the scope of the Customer's rights regarding the use of the Platform, which is essential for compliance and operational clarity.",
+              "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+              "favours": "Balanced",
+              "market_comparison": "The terms are typical for software licensing agreements, providing a standard framework for usage rights.",
+              "red_flag": false,
+              "red_flag_reason": "",
+              "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+              "confidence": "high",
+              "safer_alternative": "",
+              "negotiation_advice": "Consider clarifying ownership, permitted use, licensing scope, background IP, newly created deliverables, improvements, derivative works, approval rights, moral rights, transfer timing, and post-termination restrictions.",
+              "negotiation_priority": "medium",
+              "_meta": {
+                "risk_modified_by": [
+                  "apply_rule_based_risk"
+                ],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": [
+                  {
+                    "field": "risk_level",
+                    "from": "low",
+                    "to": "medium",
+                    "source": "apply_rule_based_risk"
+                  },
+                  {
+                    "field": "negotiation_priority",
+                    "from": "low",
+                    "to": "medium",
+                    "source": "apply_rule_based_risk"
+                  }
+                ]
+              },
+              "trigger": "exclusive",
+              "clause_id": "node_3",
+              "parent_id": "node_2",
+              "parent_clause_id": "node_2",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "1. ACCESS AND USE RIGHTS",
+                "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes."
+              ],
+              "children": [],
+              "semantic_parent": "1. ACCESS AND USE RIGHTS",
+              "confidence_score": 0.85,
+              "lineage": [
+                "1. ACCESS AND USE RIGHTS"
+              ],
+              "risk_baseline": "other",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": true,
+              "has_semantic_signal": true,
+              "has_legal_signal": false,
+              "evidence_strength": "medium",
+              "materiality_level": "medium",
+              "importance_score": 34,
+              "risk_reasons": [],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "term",
+                    "anchors": [
+                      "acces",
+                      "busines",
+                      "customer",
+                      "during",
+                      "exclusive",
+                      "grant",
+                      "internal",
+                      "northwind",
+                      "platform",
+                      "purpose",
+                      "right",
+                      "solely",
+                      "subject",
+                      "subscription",
+                      "term",
+                      "terms",
+                      "transferable"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "460ad3292ef71bd1792549675594de2bb354f803fb47c582e195b70072a33502"
+              },
+              "primary_group": "ip_licensing",
+              "secondary_groups": []
+            },
+            {
+              "title": "Customer Data Ownership and Export",
+              "_source_text_exact": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+              "original_text": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+              "reasoning_evidence": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for",
+              "clause_title": "Customer Data Ownership and Export",
+              "clause_reference": "4.1",
+              "quoted_text": "Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+              "clause_type": "intellectual_property",
+              "risk_level": "medium",
+              "explanation_simple": "The clause establishes that the Customer owns their data and outlines the process for data export upon termination.",
+              "why_it_matters": "This clause protects the Customer's ownership of their data and ensures they can retrieve it before deletion.",
+              "legal_insight": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+              "favours": "Unclear",
+              "market_comparison": "This clause is standard in agreements involving data ownership and export rights.",
+              "red_flag": false,
+              "red_flag_reason": "",
+              "recommendation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+              "confidence": "high",
+              "safer_alternative": "",
+              "negotiation_advice": "",
+              "negotiation_priority": "low",
+              "_meta": {
+                "risk_modified_by": [
+                  "apply_rule_based_risk"
+                ],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": [
+                  {
+                    "field": "risk_level",
+                    "from": "low",
+                    "to": "medium",
+                    "source": "apply_rule_based_risk"
+                  },
+                  {
+                    "field": "negotiation_priority",
+                    "from": "low",
+                    "to": "medium",
+                    "source": "apply_rule_based_risk"
+                  }
+                ]
+              },
+              "trigger": "termination",
+              "clause_id": "node_9",
+              "parent_id": "node_8",
+              "parent_clause_id": "node_8",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "4. DATA OWNERSHIP AND PORTABILITY",
+                "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted."
+              ],
+              "children": [],
+              "semantic_parent": "4. DATA OWNERSHIP AND PORTABILITY",
+              "confidence_score": 0.85,
+              "lineage": [
+                "4. DATA OWNERSHIP AND PORTABILITY"
+              ],
+              "risk_baseline": "ip_after_payment",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": false,
+              "has_semantic_signal": true,
+              "has_legal_signal": true,
+              "evidence_strength": "medium",
+              "materiality_level": "high",
+              "importance_score": 15,
+              "risk_reasons": [
+                "Termination provisions may affect operational continuity or legal remedies."
+              ],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "intellectual_property",
+                    "anchors": [
+                      "after",
+                      "available",
+                      "between",
+                      "customer",
+                      "data",
+                      "days",
+                      "deleted",
+                      "export",
+                      "format",
+                      "interest",
+                      "make",
+                      "northwind",
+                      "party",
+                      "permanently",
+                      "retain",
+                      "right",
+                      "standard",
+                      "termination",
+                      "thirty",
+                      "title",
+                      "upon",
+                      "which"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "c2f1c5bbad81b0720f0e5f3eb14880843fdf8af4678a4f57001d0750b47a8c8b"
+              },
+              "primary_group": "ip_licensing",
+              "secondary_groups": []
+            }
+          ]
+        },
+        {
+          "name": "Data & Confidentiality",
+          "key": "data_confidentiality",
+          "count": 1,
+          "clauses": [
+            {
+              "title": "Security Safeguards and Incident Notification",
+              "_source_text_exact": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+              "original_text": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+              "reasoning_evidence": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confir",
+              "clause_title": "Security Safeguards and Incident Notification",
+              "clause_reference": "5.1",
+              "quoted_text": "Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+              "clause_type": "security",
+              "risk_level": "high",
+              "explanation_simple": "Northwind is required to implement security measures and notify the Customer of incidents.",
+              "why_it_matters": "This clause ensures that Customer Data is protected and that the Customer is informed of any security breaches in a timely manner.",
+              "legal_insight": "This clause establishes the core non-disclosure obligation: who is bound by it, what standard of care applies, and whether authorized sub-disclosure (e.g. to representatives) is permitted.",
+              "favours": "Unclear",
+              "market_comparison": "",
+              "red_flag": false,
+              "red_flag_reason": "",
+              "recommendation": "Confirm the obligation clearly names who it binds, requires at least equivalent protection for any authorized sub-disclosure, and states a concrete standard of care.",
+              "confidence": "high",
+              "safer_alternative": "",
+              "negotiation_advice": "Consider clarifying security measures, processing instructions, breach notification timelines, audit rights, subprocessor controls, data return or deletion duties, cross-border transfers, and allocation of regulatory responsibility.",
+              "negotiation_priority": "medium",
+              "_meta": {
+                "risk_modified_by": [
+                  "apply_rule_based_risk"
+                ],
+                "reasoning_modified_by": [],
+                "cleanup_applied": [],
+                "changes": [
+                  {
+                    "field": "risk_level",
+                    "from": "low",
+                    "to": "medium",
+                    "source": "apply_rule_based_risk"
+                  },
+                  {
+                    "field": "negotiation_priority",
+                    "from": "low",
+                    "to": "medium",
+                    "source": "apply_rule_based_risk"
+                  }
+                ]
+              },
+              "trigger": "security incident",
+              "clause_id": "node_11",
+              "parent_id": "node_10",
+              "parent_clause_id": "node_10",
+              "depth": 2,
+              "level": 2,
+              "section_path": [
+                "5. SECURITY",
+                "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery."
+              ],
+              "children": [],
+              "semantic_parent": "5. SECURITY",
+              "confidence_score": 0.85,
+              "lineage": [
+                "5. SECURITY"
+              ],
+              "risk_baseline": "other",
+              "risk_escalated": false,
+              "risk_reduced": false,
+              "has_details": true,
+              "has_reasoning": true,
+              "has_negotiation": true,
+              "has_semantic_signal": true,
+              "has_legal_signal": true,
+              "evidence_strength": "medium",
+              "materiality_level": "low",
+              "importance_score": 26,
+              "risk_reasons": [
+                "Security obligations may require technical controls, incident response, monitoring, or audit readiness."
+              ],
+              "normalized_contract_score": 61,
+              "_publication_validation_history": {},
+              "source_evidence_model": {
+                "evidence_spans": [],
+                "mechanisms": [
+                  {
+                    "kind": "SOURCE_PROFILE",
+                    "primary_type": "cybersecurity",
+                    "anchors": [
+                      "administrative",
+                      "affecting",
+                      "confirmed",
+                      "consistent",
+                      "customer",
+                      "data",
+                      "discovery",
+                      "hours",
+                      "incident",
+                      "maintain",
+                      "northwind",
+                      "notify",
+                      "physical",
+                      "safeguard",
+                      "security",
+                      "seventy",
+                      "standard",
+                      "technical",
+                      "type",
+                      "within"
+                    ]
+                  }
+                ],
+                "semantic_profile_hash": "a0767aa74457528efbfd35441cc20161a6741c4a5c187d7b338ba1c4ca665e4c"
+              },
+              "primary_group": "data_confidentiality",
+              "secondary_groups": []
+            }
+          ]
+        }
+      ]
+    },
+    "dependency_insights": {
+      "edges_count": 15,
+      "key_dependencies": [
+        {
+          "from": 1,
+          "to": 2,
+          "reason": "Service failures may affect liability exposure."
+        },
+        {
+          "from": 0,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 2,
+          "to": 5,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 0,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 1,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 2,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 3,
+          "reason": "Data obligations may depend on security safeguards."
+        }
+      ]
+    },
+    "risk_overview": {
+      "high": 1,
+      "medium": 6,
+      "low": 0
+    },
+    "dependency_graph": {
+      "nodes": [
+        {
+          "id": 0,
+          "title": "Payment and Renewal",
+          "reference": "3.1",
+          "type": "renewal",
+          "risk_level": "medium"
+        },
+        {
+          "id": 1,
+          "title": "Uptime Commitment",
+          "reference": "2.1",
+          "type": "service_level",
+          "risk_level": "medium"
+        },
+        {
+          "id": 2,
+          "title": "Limitation of Liability",
+          "reference": "6.1",
+          "type": "liability",
+          "risk_level": "medium"
+        },
+        {
+          "id": 3,
+          "title": "Grant of License",
+          "reference": "1.1",
+          "type": "term",
+          "risk_level": "medium"
+        },
+        {
+          "id": 4,
+          "title": "Security Safeguards and Incident Notification",
+          "reference": "5.1",
+          "type": "security",
+          "risk_level": "high"
+        },
+        {
+          "id": 5,
+          "title": "Customer Data Ownership and Export",
+          "reference": "4.1",
+          "type": "intellectual_property",
+          "risk_level": "medium"
+        },
+        {
+          "id": 6,
+          "title": "Termination for Convenience",
+          "reference": "7.1",
+          "type": "termination",
+          "risk_level": "medium"
+        }
+      ],
+      "edges": [
+        {
+          "from": 1,
+          "to": 2,
+          "reason": "Service failures may affect liability exposure."
+        },
+        {
+          "from": 0,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 2,
+          "to": 5,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 0,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 1,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 2,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 3,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 4,
+          "to": 6,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 5,
+          "to": 2,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 5,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        },
+        {
+          "from": 6,
+          "to": 4,
+          "reason": "Data obligations may depend on security safeguards."
+        }
+      ],
+      "edges_count": 15
+    }
+  }
+}

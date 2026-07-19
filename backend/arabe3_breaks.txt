@@ -1,0 +1,2 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+tx_with_balance = 330

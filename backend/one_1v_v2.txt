@@ -1,0 +1,40 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 101179
+PDF_LINES_DEBUG PDF_LINES_DEBUG_FAILED 'charmap' codec can't encode characters in position 203-206: character maps to <undefined>
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+OFFICIAL_MOVEMENT_SUMMARY_EARLY_RETURN {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67, 'source': 'statement_movements_summary'}
+OFFICIAL_MOVEMENT_SUMMARY_EARLY_RETURN {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67, 'source': 'statement_movements_summary'}
+OFFICIAL_MOVEMENT_SUMMARY_EARLY_RETURN {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67, 'source': 'statement_movements_summary'}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 10, 'dep_line': 'Date        Transaction Type        Description                                 Credit                   Debit                  Balance', 'wd_i': 53, 'wd_line': 'Date        Transaction Type        Description                                 Credit                   Debit                  Balance', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED CANDIDATE_PARSER_FAILED {'parser': 'global_date_boundary_ledger', 'error': "'charmap' codec can't encode characters in position 179-181: character maps to <undefined>"}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_one_finance_real.py", line 11, in <module>
+    r = test_file(Path(sys.argv[1]))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_real_reconciliation.py", line 39, in test_file
+    txs = extract_transactions(text) or []
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 20647, in extract_transactions
+    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 17445, in _runexa_core_extract_transactions
+    txs = parse_debit_credit_balance_ledger(text)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\transaction_extractor.py", line 11542, in parse_debit_credit_balance_ledger
+    print("DEBIT_CREDIT_BALANCE_HEADER_CHECK", {
+  File "C:\Users\rachi\Desktop\app\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 201-204: character maps to <undefined>

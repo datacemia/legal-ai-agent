@@ -1,0 +1,1030 @@
+[
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 La responsabilité globale du Consultant découlant du présent Accord n'excédera pas les honoraires payés par le Client au titre du bon de commande applicable au cours des six (6) mois précédant la réclamation.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 7,
+            "end": 211,
+            "text": "responsabilité globale du Consultant découlant du présent Accord n'excédera pas les honoraires payés par la Partie contractante A au titre du bon de commande applicable au cours des six (6) mois précédant la réclamation"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0be4b3477c75d0e14576a70e71795f01776bc1e38f0de7f3fb9680937902376a",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 7,
+            "end": 211,
+            "text": "responsabilité globale du Consultant découlant du présent Accord n'excédera pas les honoraires payés par la Partie contractante A au titre du bon de commande applicable au cours des six (6) mois précédant la réclamation"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "0be4b3477c75d0e14576a70e71795f01776bc1e38f0de7f3fb9680937902376a",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Tous les travaux, rapports, analyses et recommandations développés par le Consultant spécifiquement pour le Client dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive du Client après paiement intégral.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 22,
+            "end": 273,
+            "text": "rapports, analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "6403d59c2383d09002f1bd93207cd5768e6615201cd2c8fc8ceba640388c62c1",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 22,
+            "end": 273,
+            "text": "rapports, analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "6403d59c2383d09002f1bd93207cd5768e6615201cd2c8fc8ceba640388c62c1",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Le Consultant est un prestataire indépendant et non un salarié, mandataire, coentrepreneur ou associé du Client. Le Consultant sera seul responsable de l'ensemble des taxes, assurances et prestations applicables.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "liability",
+        "anchors": [
+          "applicable",
+          "associé",
+          "assurance",
+          "client",
+          "coentrepreneur",
+          "consultant",
+          "ensemble",
+          "indépendant",
+          "mandataire",
+          "non",
+          "prestataire",
+          "prestation",
+          "responsable",
+          "salarié",
+          "sera",
+          "seul",
+          "taxes"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "Clause 2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Le Consultant exécutera les Services décrits dans chaque bon de commande de manière professionnelle. Le Client paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 108,
+            "end": 259,
+            "text": "Partie contractante A paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "f0ef0ddf7e1bb823ec1a49c6f695f81f823a9e1e6927da3d4aff8d5b6732370a",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 18,
+            "end": 103,
+            "text": "exécutera les Services décrits dans chaque bon de commande de manière professionnelle"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "83830943f543b781cdaa48477f5a288f6adbc3e11ea701ca5289cb4dc382cc2e",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 103,
+            "text": "Consultant exécutera les Services décrits dans chaque bon de commande de manière professionnelle"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0ddc13b3396008e4b58c7138e9ad70dc2d2c77e226673c79c94b2aaee73e6d84",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 108,
+            "end": 259,
+            "text": "Partie contractante A paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f0ef0ddf7e1bb823ec1a49c6f695f81f823a9e1e6927da3d4aff8d5b6732370a",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 115,
+            "end": 259,
+            "text": "paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6ba21d3776d83f7e09056dd730c3c39527ee36b7b4ebd3b186b40c6f8a016fbd",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 108,
+            "end": 259,
+            "text": "Partie contractante A paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "f0ef0ddf7e1bb823ec1a49c6f695f81f823a9e1e6927da3d4aff8d5b6732370a",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PROFESSIONAL_STANDARD_OF_CARE",
+        "rank": 93,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PROFESSIONAL_STANDARD_OF_CARE",
+            "start": 18,
+            "end": 103,
+            "text": "exécutera les Services décrits dans chaque bon de commande de manière professionnelle"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "83830943f543b781cdaa48477f5a288f6adbc3e11ea701ca5289cb4dc382cc2e",
+        "normalized_concept": "PROFESSIONAL_STANDARD_OF_CARE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 103,
+            "text": "Consultant exécutera les Services décrits dans chaque bon de commande de manière professionnelle"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0ddc13b3396008e4b58c7138e9ad70dc2d2c77e226673c79c94b2aaee73e6d84",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 108,
+            "end": 259,
+            "text": "Partie contractante A paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "f0ef0ddf7e1bb823ec1a49c6f695f81f823a9e1e6927da3d4aff8d5b6732370a",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 115,
+            "end": 259,
+            "text": "paiera les honoraires du Consultant tels que prévus dans le bon de commande applicable dans un délai de trente (30) jours suivant la facturation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "6ba21d3776d83f7e09056dd730c3c39527ee36b7b4ebd3b186b40c6f8a016fbd",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "3.2",
+    "source_language": "fr",
+    "source_text": "3.2 Le Consultant conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre de missions futures avec d'autres clients, à condition de ne divulguer aucune Information Confidentielle du Client.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 18,
+            "end": 216,
+            "text": "conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e260d6f76387ce7c67ccfc71c281807116b19ef2a4a17683d92e8f1875519797",
+        "normalized_concept": "BACKGROUND_IP_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "BACKGROUND_IP_RETENTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BACKGROUND_IP_RETENTION",
+            "start": 18,
+            "end": 216,
+            "text": "conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "e260d6f76387ce7c67ccfc71c281807116b19ef2a4a17683d92e8f1875519797",
+        "normalized_concept": "BACKGROUND_IP_RETENTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Le Consultant conservera confidentielle toute information non publique du Client divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable du Client.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "sans le consentement écrit préalable",
+            "start": 155,
+            "end": 191
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 155,
+            "end": 191,
+            "text": "sans le consentement écrit préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 163,
+            "end": 191,
+            "text": "consentement écrit préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "b9c792d6085fa3ef5f6a5bb87e438869ad3a412a4b165ba65bf08d1743dd6b7e",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 163,
+            "end": 181,
+            "text": "consentement écrit"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "cafcd9d253523b6e3787cbb4f09a152d7a0c1af3dd2c566216fbd35e16b1ba81",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 202,
+            "text": "conservera confidentielle toute information non publique de la Partie contractante A divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable de la Partie contractante A."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d7f33087c6d53a19c13bf42a66ad8d731bf3bacbbdb4d3766f260810170fb05f",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 202,
+            "text": "conservera confidentielle toute information non publique de la Partie contractante A divulguée dans le cadre des Services, et ne la divulguera à des tiers sans le consentement écrit préalable de la Partie contractante A."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d7f33087c6d53a19c13bf42a66ad8d731bf3bacbbdb4d3766f260810170fb05f",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "MISMATCH",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Le présent Accord se poursuivra jusqu'à l'achèvement des Services décrits dans le bon de commande applicable, sauf résiliation anticipée. Chaque Partie pourra résilier le présent Accord pour convenance moyennant un préavis écrit de trente (30) jours, le Client restant responsable des honoraires acquis jusqu'à la date effective de résiliation.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 219,
+            "end": 347,
+            "text": "préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "62892751268b8d6a1e1490887bee8e3ccacd42db206446a0297053bb640c81d5",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 156,
+            "end": 347,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 163,
+            "end": 347,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "33c95f198b2e7c75f43fa378d4a88eb58173f352e8df3b7b9ef5d271a3301163",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 219,
+            "end": 347,
+            "text": "préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "df932de9db718c5eae66f8a3bed528e1184d974b37f208d284725d0e475c3b15",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 219,
+            "end": 347,
+            "text": "préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "62892751268b8d6a1e1490887bee8e3ccacd42db206446a0297053bb640c81d5",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 156,
+            "end": 347,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 163,
+            "end": 347,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "33c95f198b2e7c75f43fa378d4a88eb58173f352e8df3b7b9ef5d271a3301163",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 219,
+            "end": 347,
+            "text": "préavis écrit de trente (30) jours, la Partie contractante A restant responsable des honoraires acquis jusqu'à la date effective de résiliation"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "df932de9db718c5eae66f8a3bed528e1184d974b37f208d284725d0e475c3b15",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

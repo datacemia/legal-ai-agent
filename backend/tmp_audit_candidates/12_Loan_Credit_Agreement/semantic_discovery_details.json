@@ -1,0 +1,746 @@
+[
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "6.2",
+    "source_language": "en",
+    "source_text": "6.2 Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Collateral.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "ACCELERATION_ON_DEFAULT",
+        "rank": 97,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ACCELERATION_ON_DEFAULT",
+            "start": 4,
+            "end": 111,
+            "text": "Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "96d186635ca105c20b685038745076491764d2683da8486f144349af281617e3",
+        "normalized_concept": "ACCELERATION_ON_DEFAULT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "ACCELERATION_ON_DEFAULT",
+        "rank": 97,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ACCELERATION_ON_DEFAULT",
+            "start": 4,
+            "end": 111,
+            "text": "Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "96d186635ca105c20b685038745076491764d2683da8486f144349af281617e3",
+        "normalized_concept": "ACCELERATION_ON_DEFAULT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 This Agreement shall be governed by the laws of the State of Delaware. Any dispute arising under this Agreement shall be resolved in the state or federal courts located in Wilmington, Delaware, and each Party irrevocably waives any right to a jury trial.",
+    "primary_type": "governing_law",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 28,
+            "end": 211,
+            "text": "governed by the laws of the State of Delaware. Any dispute arising under this Agreement shall be resolved in the state or federal courts located in Wilmington, Delaware, and each Part"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "82d4bef7c6742ac7474f1ce5f4ff4d62807798366b708047340682a94b80a38f",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 28,
+            "end": 211,
+            "text": "governed by the laws of the State of Delaware. Any dispute arising under this Agreement shall be resolved in the state or federal courts located in Wilmington, Delaware, and each Part"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "82d4bef7c6742ac7474f1ce5f4ff4d62807798366b708047340682a94b80a38f",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 An Event of Default shall occur if Borrower fails to make any payment when due and such failure continues for ten (10) business days, breaches any covenant in Section 3 and fails to cure within thirty (30) days of notice, or becomes subject to insolvency proceedings.",
+    "primary_type": "notice",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 186,
+            "end": 270,
+            "text": "cure within thirty (30) days of notice, or becomes subject to insolvency proceedings"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "1943cccf4ab71eda39b2ca79227255aba2a1e904aa5605ce32144f21d4b0eb1c",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 186,
+            "end": 270,
+            "text": "cure within thirty (30) days of notice, or becomes subject to insolvency proceedings"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "1943cccf4ab71eda39b2ca79227255aba2a1e904aa5605ce32144f21d4b0eb1c",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 As security for Borrower's obligations under this Agreement, Borrower grants Lender a first-priority security interest in the Collateral, and shall execute all documents reasonably necessary to perfect such security interest, including UCC financing statements.",
+    "primary_type": "security_interest",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "security_interest",
+        "anchors": [
+          "borrower",
+          "collateral",
+          "document",
+          "execute",
+          "financing",
+          "first",
+          "grant",
+          "including",
+          "interest",
+          "lender",
+          "necessary",
+          "obligation",
+          "perfect",
+          "priority",
+          "reasonably",
+          "security",
+          "statement",
+          "ucc",
+          "under"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Borrower represents that it is duly organized, in good standing, and has the authority to enter into this Agreement. Borrower covenants to maintain a debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statements within forty-five (45) days of each fiscal quarter end.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "quarterly financial statements",
+            "start": 252,
+            "end": 282
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_COVENANT",
+        "rank": 94,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 4,
+            "end": 338,
+            "text": "Borrower represents that it is duly organized, in good standing, and has the authority to enter into this Agreement. Borrower covenants to maintain a debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statements within forty-five (45) days of each fiscal quarter end."
+          },
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 154,
+            "end": 278,
+            "text": "debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statem"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b3e0d8bb039c8afe885c80674e77b57b6e4a7abc6f25648f6c9b5a2a5d45da07",
+        "normalized_concept": "FINANCIAL_COVENANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 262,
+            "end": 310,
+            "text": "financial statements within forty-five (45) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "20cbe2138cfee2786187d3c79304c619ec093d3520a34fc39e80410531593be7",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "FINANCIAL_COVENANT",
+        "rank": 94,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 4,
+            "end": 338,
+            "text": "Borrower represents that it is duly organized, in good standing, and has the authority to enter into this Agreement. Borrower covenants to maintain a debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statements within forty-five (45) days of each fiscal quarter end."
+          },
+          {
+            "label": "FINANCIAL_COVENANT",
+            "start": 154,
+            "end": 278,
+            "text": "debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statem"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b3e0d8bb039c8afe885c80674e77b57b6e4a7abc6f25648f6c9b5a2a5d45da07",
+        "normalized_concept": "FINANCIAL_COVENANT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "FINANCIAL_REPORTING_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "financial_reporting",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "FINANCIAL_REPORTING_OBLIGATION",
+            "start": 262,
+            "end": 310,
+            "text": "financial statements within forty-five (45) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "20cbe2138cfee2786187d3c79304c619ec093d3520a34fc39e80410531593be7",
+        "normalized_concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "DELIVER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 45,
+              "unit": "DAYS",
+              "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+              "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "QUARTERLY_FINANCIAL_STATEMENTS",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "quarterly financial statements",
+            "start": 252,
+            "end": 282
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Borrower's obligations under this Agreement are guaranteed by Trailhead Holdings Inc., the parent company of Borrower, pursuant to a separate Guarantee Agreement executed concurrently herewith.",
+    "primary_type": "guarantee",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "guarantee",
+        "anchors": [
+          "borrower",
+          "company",
+          "concurrently",
+          "executed",
+          "guarantee",
+          "guaranteed",
+          "herewith",
+          "holding",
+          "inc",
+          "obligation",
+          "parent",
+          "pursuant",
+          "separate",
+          "trailhead",
+          "under"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Borrower may prepay the Loan, in whole or in part, at any time without penalty, provided that any partial prepayment shall be applied first to accrued interest and then to outstanding principal.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 4,
+            "end": 82,
+            "text": "Borrower may prepay the Loan, in whole or in part, at any time without penalty"
+          },
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 82,
+            "text": "prepay the Loan, in whole or in part, at any time without penalty"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "36d348bf9bdcbbc238c3561e90a7dfea6cda80c728402ff6db5430c9884eaa1d",
+        "normalized_concept": "PREPAYMENT_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BORROWER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PREPAY",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 4,
+            "end": 82,
+            "text": "Borrower may prepay the Loan, in whole or in part, at any time without penalty"
+          },
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 82,
+            "text": "prepay the Loan, in whole or in part, at any time without penalty"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "36d348bf9bdcbbc238c3561e90a7dfea6cda80c728402ff6db5430c9884eaa1d",
+        "normalized_concept": "PREPAYMENT_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BORROWER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PREPAY",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.",
+    "primary_type": "loan",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PAY_FREQUENCY",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "payable monthly",
+            "start": 206,
+            "end": 221
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LOAN_PRINCIPAL_DISBURSEMENT",
+        "rank": 96,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 4,
+            "end": 116,
+            "text": "Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent"
+          },
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 17,
+            "end": 116,
+            "text": "disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "181a371d532b65c11a266f6e18e790a54cf860cfaf26e4a886f0af41cc720230",
+        "normalized_concept": "LOAN_DISBURSEMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 206,
+            "end": 221,
+            "text": "payable monthly"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "477c622a4b0572aca72b6316098148d23048e6d501438e927c7be9428806b4bd",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LOAN_PRINCIPAL_DISBURSEMENT",
+        "rank": 96,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 4,
+            "end": 116,
+            "text": "Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent"
+          },
+          {
+            "label": "LOAN_PRINCIPAL_DISBURSEMENT",
+            "start": 17,
+            "end": 116,
+            "text": "disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "181a371d532b65c11a266f6e18e790a54cf860cfaf26e4a886f0af41cc720230",
+        "normalized_concept": "LOAN_DISBURSEMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LOAN",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

@@ -1,0 +1,455 @@
+====================================================================================================
+LAST ANALYSIS STRUCTURE PROBE
+====================================================================================================
+FILE: last_analysis.json
+
+$.clauses => dict[9]
+$.clauses.clauses => dict[1]
+$.clauses.clauses.results => list[109]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'validation_receipts', 'why_it_matters']
+$.clauses.clauses.results[0].clause_title => str
+$.clauses.clauses.results[0].clause_reference => str
+$.clauses.clauses.results[0].clause_type => str
+$.clauses.clauses.results[0].risk_level => str
+$.clauses.clauses.results[0]._meta.risk_modified_by => list[1]
+$.clauses.clauses.results[0]._meta.changes => list[4]
+  FIRST ITEM KEYS: ['field', 'from', 'source', 'to']
+$.clauses.clauses.results[0].clause_id => str
+$.clauses.clauses.results[0].parent_clause_id => NoneType
+$.clauses.clauses.results[0].risk_baseline => str
+$.clauses.clauses.results[0].risk_escalated => bool
+$.clauses.clauses.results[0].risk_reduced => bool
+$.clauses.clauses.results[0].risk_reasons => list[2]
+$.clauses.clauses.results[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clauses.results[0].validation_receipts.legal_insight.gate_result => str
+$.clauses.clauses.results[0].validation_receipts.market_comparison.gate_result => str
+$.clauses.clauses.results[0].validation_receipts.recommendation.gate_result => str
+$.clauses.clauses.results[0].validation_receipts.negotiation_advice.gate_result => str
+$.clauses.clauses.results[1].clause_title => str
+$.clauses.clauses.results[1].clause_reference => str
+$.clauses.clauses.results[1].clause_type => str
+$.clauses.clauses.results[1].risk_level => str
+$.clauses.clauses.results[1]._meta.risk_modified_by => list[0]
+$.clauses.clauses.results[1].clause_id => str
+$.clauses.clauses.results[1].parent_clause_id => NoneType
+$.clauses.clauses.results[1].risk_baseline => str
+$.clauses.clauses.results[1].risk_escalated => bool
+$.clauses.clauses.results[1].risk_reduced => bool
+$.clauses.clauses.results[1].risk_reasons => list[2]
+$.clauses.clauses.results[1].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clauses.results[1].validation_receipts.legal_insight.gate_result => str
+$.clauses.clauses.results[1].validation_receipts.market_comparison.gate_result => str
+$.clauses.clauses.results[1].validation_receipts.safer_alternative.gate_result => str
+$.clauses.clauses.results[1].validation_receipts.recommendation.gate_result => str
+$.clauses.clauses.results[2].clause_title => str
+$.clauses.clauses.results[2].clause_reference => str
+$.clauses.clauses.results[2].clause_type => str
+$.clauses.clauses.results[2].risk_level => str
+$.clauses.clauses.results[2]._meta.risk_modified_by => list[0]
+$.clauses.clauses.results[2].clause_id => str
+$.clauses.clauses.results[2].parent_clause_id => NoneType
+$.clauses.clauses.results[2].risk_baseline => str
+$.clauses.clauses.results[2].risk_escalated => bool
+$.clauses.clauses.results[2].risk_reduced => bool
+$.clauses.clauses.results[2].risk_reasons => list[0]
+$.clauses.clauses.results[2].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clauses.results[2].validation_receipts.legal_insight.gate_result => str
+$.clauses.clauses.results[2].validation_receipts.market_comparison.gate_result => str
+$.clauses.clauses.results[2].validation_receipts.safer_alternative.gate_result => str
+$.clauses.clauses.results[2].validation_receipts.recommendation.gate_result => str
+$.clauses.clauses.results[2].validation_receipts.negotiation_advice.gate_result => str
+$.clauses.contract_timeline => list[3]
+  FIRST ITEM KEYS: ['clause_type', 'confidence', 'event', 'risk_level', 'source_clause', 'source_clause_id', 'time_period']
+$.clauses.contract_timeline[0].source_clause => str
+$.clauses.contract_timeline[0].source_clause_id => str
+$.clauses.contract_timeline[0].clause_type => str
+$.clauses.contract_timeline[0].risk_level => str
+$.clauses.contract_timeline[1].source_clause => str
+$.clauses.contract_timeline[1].source_clause_id => str
+$.clauses.contract_timeline[1].clause_type => str
+$.clauses.contract_timeline[1].risk_level => str
+$.clauses.contract_timeline[2].source_clause => str
+$.clauses.contract_timeline[2].source_clause_id => str
+$.clauses.contract_timeline[2].clause_type => str
+$.clauses.contract_timeline[2].risk_level => str
+$.clauses.dependency_graph.nodes => list[109]
+  FIRST ITEM KEYS: ['id', 'reference', 'risk_level', 'title', 'type']
+$.clauses.dependency_graph.nodes[0].risk_level => str
+$.clauses.dependency_graph.nodes[1].risk_level => str
+$.clauses.dependency_graph.nodes[2].risk_level => str
+$.clauses.dependency_graph.edges => list[179]
+  FIRST ITEM KEYS: ['from', 'reason', 'to']
+$.clauses.legal_relation_graph.nodes => list[109]
+  FIRST ITEM KEYS: ['clause_type', 'concepts', 'domains', 'id', 'relation_consequences', 'relation_triggers', 'risk_level', 'roles', 'title']
+$.clauses.legal_relation_graph.nodes[0].risk_level => str
+$.clauses.legal_relation_graph.nodes[0].clause_type => str
+$.clauses.legal_relation_graph.nodes[1].risk_level => str
+$.clauses.legal_relation_graph.nodes[1].clause_type => str
+$.clauses.legal_relation_graph.nodes[2].risk_level => str
+$.clauses.legal_relation_graph.nodes[2].clause_type => str
+$.clauses.legal_relation_graph.edges => list[5009]
+  FIRST ITEM KEYS: ['confidence', 'from', 'reason', 'to', 'type']
+$.clauses.legal_relation_graph.groups.Liability & Risk => list[14]
+$.clauses.clause_groups => dict[1]
+$.clauses.clause_groups.groups => list[10]
+  FIRST ITEM KEYS: ['clauses', 'count', 'key', 'name']
+$.clauses.clause_groups.groups[0].clauses => list[32]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+$.clauses.clause_groups.groups[0].clauses[0].clause_title => str
+$.clauses.clause_groups.groups[0].clauses[0].clause_reference => str
+$.clauses.clause_groups.groups[0].clauses[0].clause_type => str
+$.clauses.clause_groups.groups[0].clauses[0].risk_level => str
+$.clauses.clause_groups.groups[0].clauses[0]._meta.risk_modified_by => list[1]
+$.clauses.clause_groups.groups[0].clauses[0]._meta.changes => list[4]
+  FIRST ITEM KEYS: ['field', 'from', 'source', 'to']
+$.clauses.clause_groups.groups[0].clauses[0].clause_id => str
+$.clauses.clause_groups.groups[0].clauses[0].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[0].clauses[0].risk_baseline => str
+$.clauses.clause_groups.groups[0].clauses[0].risk_escalated => bool
+$.clauses.clause_groups.groups[0].clauses[0].risk_reduced => bool
+$.clauses.clause_groups.groups[0].clauses[0].risk_reasons => list[2]
+$.clauses.clause_groups.groups[0].clauses[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clause_groups.groups[0].clauses[1].clause_title => str
+$.clauses.clause_groups.groups[0].clauses[1].clause_reference => str
+$.clauses.clause_groups.groups[0].clauses[1].clause_type => str
+$.clauses.clause_groups.groups[0].clauses[1].risk_level => str
+$.clauses.clause_groups.groups[0].clauses[1]._meta.risk_modified_by => list[0]
+$.clauses.clause_groups.groups[0].clauses[1].clause_id => str
+$.clauses.clause_groups.groups[0].clauses[1].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[0].clauses[1].risk_baseline => str
+$.clauses.clause_groups.groups[0].clauses[1].risk_escalated => bool
+$.clauses.clause_groups.groups[0].clauses[1].risk_reduced => bool
+$.clauses.clause_groups.groups[0].clauses[1].risk_reasons => list[2]
+$.clauses.clause_groups.groups[0].clauses[1].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clause_groups.groups[0].clauses[2].clause_title => str
+$.clauses.clause_groups.groups[0].clauses[2].clause_reference => str
+$.clauses.clause_groups.groups[0].clauses[2].clause_type => str
+$.clauses.clause_groups.groups[0].clauses[2].risk_level => str
+$.clauses.clause_groups.groups[0].clauses[2]._meta.risk_modified_by => list[1]
+$.clauses.clause_groups.groups[0].clauses[2]._meta.changes => list[2]
+  FIRST ITEM KEYS: ['field', 'from', 'source', 'to']
+$.clauses.clause_groups.groups[0].clauses[2].clause_id => str
+$.clauses.clause_groups.groups[0].clauses[2].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[0].clauses[2].risk_baseline => str
+$.clauses.clause_groups.groups[0].clauses[2].risk_escalated => bool
+$.clauses.clause_groups.groups[0].clauses[2].risk_reduced => bool
+$.clauses.clause_groups.groups[0].clauses[2].risk_reasons => list[2]
+$.clauses.clause_groups.groups[0].clauses[2].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clause_groups.groups[1].clauses => list[4]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+$.clauses.clause_groups.groups[1].clauses[0].clause_title => str
+$.clauses.clause_groups.groups[1].clauses[0].clause_reference => str
+$.clauses.clause_groups.groups[1].clauses[0].clause_type => str
+$.clauses.clause_groups.groups[1].clauses[0].risk_level => str
+$.clauses.clause_groups.groups[1].clauses[0]._meta.risk_modified_by => list[0]
+$.clauses.clause_groups.groups[1].clauses[0].clause_id => str
+$.clauses.clause_groups.groups[1].clauses[0].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[1].clauses[0].risk_baseline => str
+$.clauses.clause_groups.groups[1].clauses[0].risk_escalated => bool
+$.clauses.clause_groups.groups[1].clauses[0].risk_reduced => bool
+$.clauses.clause_groups.groups[1].clauses[0].risk_reasons => list[0]
+$.clauses.clause_groups.groups[1].clauses[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clause_groups.groups[1].clauses[1].clause_title => str
+$.clauses.clause_groups.groups[1].clauses[1].clause_reference => str
+$.clauses.clause_groups.groups[1].clauses[1].clause_type => str
+$.clauses.clause_groups.groups[1].clauses[1].risk_level => str
+$.clauses.clause_groups.groups[1].clauses[1]._meta.risk_modified_by => list[0]
+$.clauses.clause_groups.groups[1].clauses[1].clause_id => str
+$.clauses.clause_groups.groups[1].clauses[1].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[1].clauses[1].risk_baseline => str
+$.clauses.clause_groups.groups[1].clauses[1].risk_escalated => bool
+$.clauses.clause_groups.groups[1].clauses[1].risk_reduced => bool
+$.clauses.clause_groups.groups[1].clauses[1].risk_reasons => list[1]
+$.clauses.clause_groups.groups[1].clauses[1].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clause_groups.groups[1].clauses[2].clause_title => str
+$.clauses.clause_groups.groups[1].clauses[2].clause_reference => str
+$.clauses.clause_groups.groups[1].clauses[2].clause_type => str
+$.clauses.clause_groups.groups[1].clauses[2].risk_level => str
+$.clauses.clause_groups.groups[1].clauses[2]._meta.risk_modified_by => list[0]
+$.clauses.clause_groups.groups[1].clauses[2].clause_id => str
+$.clauses.clause_groups.groups[1].clauses[2].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[1].clauses[2].risk_baseline => str
+$.clauses.clause_groups.groups[1].clauses[2].risk_escalated => bool
+$.clauses.clause_groups.groups[1].clauses[2].risk_reduced => bool
+$.clauses.clause_groups.groups[1].clauses[2].risk_reasons => list[0]
+$.clauses.clause_groups.groups[1].clauses[2].fidelity_issues => list[1]
+  FIRST ITEM KEYS: ['field', 'kind', 'note', 'severity']
+$.clauses.clause_groups.groups[1].clauses[2].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.clause_groups.groups[2].clauses => list[1]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+$.clauses.clause_groups.groups[2].clauses[0].clause_title => str
+$.clauses.clause_groups.groups[2].clauses[0].clause_reference => str
+$.clauses.clause_groups.groups[2].clauses[0].clause_type => str
+$.clauses.clause_groups.groups[2].clauses[0].risk_level => str
+$.clauses.clause_groups.groups[2].clauses[0]._meta.risk_modified_by => list[0]
+$.clauses.clause_groups.groups[2].clauses[0].clause_id => str
+$.clauses.clause_groups.groups[2].clauses[0].parent_clause_id => NoneType
+$.clauses.clause_groups.groups[2].clauses[0].risk_baseline => str
+$.clauses.clause_groups.groups[2].clauses[0].risk_escalated => bool
+$.clauses.clause_groups.groups[2].clauses[0].risk_reduced => bool
+$.clauses.clause_groups.groups[2].clauses[0].risk_reasons => list[1]
+$.clauses.clause_groups.groups[2].clauses[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_summary.risk_overview => dict[3]
+$.clauses.executive_summary.top_risks => list[5]
+  FIRST ITEM KEYS: ['importance_score', 'legal_insight', 'risk_level', 'title']
+$.clauses.executive_summary.top_risks[0].risk_level => str
+$.clauses.executive_summary.top_risks[1].risk_level => str
+$.clauses.executive_summary.top_risks[2].risk_level => str
+$.clauses.executive_summary.negotiation_priorities => list[5]
+  FIRST ITEM KEYS: ['fallback_position', 'negotiation_advice', 'recommendation', 'risk_level', 'safer_alternative', 'title']
+$.clauses.executive_summary.negotiation_priorities[0].risk_level => str
+$.clauses.executive_summary.negotiation_priorities[1].risk_level => str
+$.clauses.executive_summary.negotiation_priorities[2].risk_level => str
+$.clauses.executive_summary.recommended_actions => list[5]
+  FIRST ITEM KEYS: ['action', 'risk_level', 'title']
+$.clauses.executive_summary.recommended_actions[0].risk_level => str
+$.clauses.executive_summary.recommended_actions[1].risk_level => str
+$.clauses.executive_summary.recommended_actions[2].risk_level => str
+$.clauses.executive_summary.dependency_summary.key_dependencies => list[5]
+  FIRST ITEM KEYS: ['from', 'reason', 'to']
+$.clauses.executive_risk_narrative => str
+$.clauses.contradictions => list[3]
+  FIRST ITEM KEYS: ['clauses', 'id', 'label', 'message', 'severity']
+$.clauses.contradictions[0].clauses => list[2]
+  FIRST ITEM KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+$.clauses.contradictions[0].clauses[0].clause_type => str
+$.clauses.contradictions[0].clauses[0].risk_level => str
+$.clauses.contradictions[0].clauses[1].clause_type => str
+$.clauses.contradictions[0].clauses[1].risk_level => str
+$.clauses.contradictions[1].clauses => list[2]
+  FIRST ITEM KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+$.clauses.contradictions[1].clauses[0].clause_type => str
+$.clauses.contradictions[1].clauses[0].risk_level => str
+$.clauses.contradictions[1].clauses[1].clause_type => str
+$.clauses.contradictions[1].clauses[1].risk_level => str
+$.clauses.contradictions[2].clauses => list[3]
+  FIRST ITEM KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+$.clauses.contradictions[2].clauses[0].clause_type => str
+$.clauses.contradictions[2].clauses[0].risk_level => str
+$.clauses.contradictions[2].clauses[1].clause_type => str
+$.clauses.contradictions[2].clauses[1].risk_level => str
+$.clauses.contradictions[2].clauses[2].clause_type => str
+$.clauses.contradictions[2].clauses[2].risk_level => str
+$.clauses.executive_report => dict[13]
+$.clauses.executive_report.report_type => str
+$.clauses.executive_report.contract_overview.clauses_analyzed => int
+$.clauses.executive_report.contract_overview.risk_overview => dict[3]
+$.clauses.executive_report.contract_overview.risk_distribution => dict[2]
+$.clauses.executive_report.contract_overview.risk_score => NoneType
+$.clauses.executive_report.top_risks => list[5]
+  FIRST ITEM KEYS: ['importance_score', 'legal_insight', 'risk_level', 'title']
+$.clauses.executive_report.top_risks[0].risk_level => str
+$.clauses.executive_report.top_risks[1].risk_level => str
+$.clauses.executive_report.top_risks[2].risk_level => str
+$.clauses.executive_report.negotiation_priorities => list[5]
+  FIRST ITEM KEYS: ['fallback_position', 'negotiation_advice', 'recommendation', 'risk_level', 'safer_alternative', 'title']
+$.clauses.executive_report.negotiation_priorities[0].risk_level => str
+$.clauses.executive_report.negotiation_priorities[1].risk_level => str
+$.clauses.executive_report.negotiation_priorities[2].risk_level => str
+$.clauses.executive_report.recommended_actions => list[5]
+  FIRST ITEM KEYS: ['action', 'risk_level', 'title']
+$.clauses.executive_report.recommended_actions[0].risk_level => str
+$.clauses.executive_report.recommended_actions[1].risk_level => str
+$.clauses.executive_report.recommended_actions[2].risk_level => str
+$.clauses.executive_report.contradictions => list[3]
+  FIRST ITEM KEYS: ['clauses', 'id', 'label', 'message', 'severity']
+$.clauses.executive_report.contradictions[0].clauses => list[2]
+  FIRST ITEM KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+$.clauses.executive_report.contradictions[0].clauses[0].clause_type => str
+$.clauses.executive_report.contradictions[0].clauses[0].risk_level => str
+$.clauses.executive_report.contradictions[0].clauses[1].clause_type => str
+$.clauses.executive_report.contradictions[0].clauses[1].risk_level => str
+$.clauses.executive_report.contradictions[1].clauses => list[2]
+  FIRST ITEM KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+$.clauses.executive_report.contradictions[1].clauses[0].clause_type => str
+$.clauses.executive_report.contradictions[1].clauses[0].risk_level => str
+$.clauses.executive_report.contradictions[1].clauses[1].clause_type => str
+$.clauses.executive_report.contradictions[1].clauses[1].risk_level => str
+$.clauses.executive_report.contradictions[2].clauses => list[3]
+  FIRST ITEM KEYS: ['clause_type', 'excerpt', 'reference', 'risk_level', 'title']
+$.clauses.executive_report.contradictions[2].clauses[0].clause_type => str
+$.clauses.executive_report.contradictions[2].clauses[0].risk_level => str
+$.clauses.executive_report.contradictions[2].clauses[1].clause_type => str
+$.clauses.executive_report.contradictions[2].clauses[1].risk_level => str
+$.clauses.executive_report.contradictions[2].clauses[2].clause_type => str
+$.clauses.executive_report.contradictions[2].clauses[2].risk_level => str
+$.clauses.executive_report.clause_groups => dict[1]
+$.clauses.executive_report.clause_groups.groups => list[10]
+  FIRST ITEM KEYS: ['clauses', 'count', 'key', 'name']
+$.clauses.executive_report.clause_groups.groups[0].clauses => list[32]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].clause_title => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].clause_type => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].risk_level => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[0]._meta.risk_modified_by => list[1]
+$.clauses.executive_report.clause_groups.groups[0].clauses[0]._meta.changes => list[4]
+  FIRST ITEM KEYS: ['field', 'from', 'source', 'to']
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].clause_id => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].risk_reasons => list[2]
+$.clauses.executive_report.clause_groups.groups[0].clauses[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].clause_title => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].clause_type => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].risk_level => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[1]._meta.risk_modified_by => list[0]
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].clause_id => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].risk_reasons => list[2]
+$.clauses.executive_report.clause_groups.groups[0].clauses[1].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].clause_title => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].clause_type => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].risk_level => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[2]._meta.risk_modified_by => list[1]
+$.clauses.executive_report.clause_groups.groups[0].clauses[2]._meta.changes => list[2]
+  FIRST ITEM KEYS: ['field', 'from', 'source', 'to']
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].clause_id => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].risk_reasons => list[2]
+$.clauses.executive_report.clause_groups.groups[0].clauses[2].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.clause_groups.groups[1].clauses => list[4]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].clause_title => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].clause_type => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].risk_level => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[0]._meta.risk_modified_by => list[0]
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].clause_id => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].risk_reasons => list[0]
+$.clauses.executive_report.clause_groups.groups[1].clauses[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].clause_title => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].clause_type => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].risk_level => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[1]._meta.risk_modified_by => list[0]
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].clause_id => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].risk_reasons => list[1]
+$.clauses.executive_report.clause_groups.groups[1].clauses[1].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].clause_title => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].clause_type => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].risk_level => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[2]._meta.risk_modified_by => list[0]
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].clause_id => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].risk_reasons => list[0]
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].fidelity_issues => list[1]
+  FIRST ITEM KEYS: ['field', 'kind', 'note', 'severity']
+$.clauses.executive_report.clause_groups.groups[1].clauses[2].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.clause_groups.groups[2].clauses => list[1]
+  FIRST ITEM KEYS: ['_meta', '_publication_validation_history', '_source_text_exact', 'children', 'clause_id', 'clause_reference', 'clause_title', 'clause_type', 'confidence', 'confidence_score', 'depth', 'evidence_strength', 'explanation_simple', 'favours', 'has_details', 'has_legal_signal', 'has_negotiation', 'has_reasoning', 'has_semantic_signal', 'importance_score', 'legal_insight', 'level', 'lineage', 'market_comparison', 'materiality_level', 'negotiation_advice', 'negotiation_priority', 'normalized_contract_score', 'original_text', 'parent_clause_id', 'parent_id', 'primary_group', 'quoted_text', 'reasoning_evidence', 'recommendation', 'red_flag', 'red_flag_reason', 'risk_baseline', 'risk_escalated', 'risk_level', 'risk_reasons', 'risk_reduced', 'safer_alternative', 'secondary_groups', 'section_path', 'semantic_parent', 'source_evidence_model', 'title', 'trigger', 'why_it_matters']
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].clause_title => str
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].clause_reference => str
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].clause_type => str
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].risk_level => str
+$.clauses.executive_report.clause_groups.groups[2].clauses[0]._meta.risk_modified_by => list[0]
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].clause_id => str
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].parent_clause_id => NoneType
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].risk_baseline => str
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].risk_escalated => bool
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].risk_reduced => bool
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].risk_reasons => list[1]
+$.clauses.executive_report.clause_groups.groups[2].clauses[0].source_evidence_model.mechanisms => list[1]
+  FIRST ITEM KEYS: ['anchors', 'kind', 'primary_type']
+$.clauses.executive_report.dependency_insights.key_dependencies => list[10]
+  FIRST ITEM KEYS: ['from', 'reason', 'to']
+$.clauses.executive_report.risk_overview => dict[3]
+$.clauses.executive_report.dependency_graph.nodes => list[109]
+  FIRST ITEM KEYS: ['id', 'reference', 'risk_level', 'title', 'type']
+$.clauses.executive_report.dependency_graph.nodes[0].risk_level => str
+$.clauses.executive_report.dependency_graph.nodes[1].risk_level => str
+$.clauses.executive_report.dependency_graph.nodes[2].risk_level => str
+$.clauses.executive_report.dependency_graph.edges => list[179]
+  FIRST ITEM KEYS: ['from', 'reason', 'to']
+$.risk_level => str
+$.risk_score => dict[11]
+$.risk_score.top_factors => list[4]
+  FIRST ITEM KEYS: ['contribution', 'factor', 'risk_level']
+$.risk_score.top_factors[0].risk_level => str
+$.risk_score.top_factors[1].risk_level => str
+$.risk_score.top_factors[2].risk_level => str
+$.risk_score.critical_clauses => list[3]
+$.risk_score.missing_clause_penalty => int
+$.unified_report => dict[13]
+$.unified_report.contract_overview._clauses_analyzed => int
+$.unified_report.key_clauses => list[109]
+  FIRST ITEM KEYS: ['clause_type', 'id', 'risk_level', 'title', 'why_it_matters']
+$.unified_report.key_clauses[0].clause_type => str
+$.unified_report.key_clauses[0].risk_level => str
+$.unified_report.key_clauses[1].clause_type => str
+$.unified_report.key_clauses[1].risk_level => str
+$.unified_report.key_clauses[2].clause_type => str
+$.unified_report.key_clauses[2].risk_level => str
+$.unified_report.risks_identified => list[56]
+  FIRST ITEM KEYS: ['clause_ref', 'explanation', 'exposure', 'id', 'market_practice', 'market_practice_score', 'red_flag', 'risk_level']
+$.unified_report.risks_identified[0].clause_ref => str
+$.unified_report.risks_identified[0].risk_level => str
+$.unified_report.risks_identified[1].clause_ref => str
+$.unified_report.risks_identified[1].risk_level => str
+$.unified_report.risks_identified[2].clause_ref => str
+$.unified_report.risks_identified[2].risk_level => str
+$.unified_report.negotiation_priorities => list[7]
+  FIRST ITEM KEYS: ['acceptable_compromise', 'commercial_objective', 'negotiable', 'never_accept', 'priority', 'risk_ref', 'what_should_change']
+$.unified_report.negotiation_priorities[0].risk_ref => str
+$.unified_report.negotiation_priorities[1].risk_ref => str
+$.unified_report.negotiation_priorities[2].risk_ref => str
+$.unified_report.suggested_wording => list[9]
+  FIRST ITEM KEYS: ['fallback_wording', 'negotiation_alternative', 'preferred_wording', 'risk_ref']
+$.unified_report.suggested_wording[0].risk_ref => str
+$.unified_report.suggested_wording[1].risk_ref => str
+$.unified_report.suggested_wording[2].risk_ref => str
+$.unified_report.action_checklist => list[13]
+  FIRST ITEM KEYS: ['action', 'category', 'clause_ref', 'deadline', 'owner', 'urgency']
+$.unified_report.action_checklist[0].clause_ref => str
+$.unified_report.action_checklist[1].clause_ref => str
+$.unified_report.action_checklist[2].clause_ref => str
+$.unified_report.risk_score => dict[11]
+$.unified_report.risk_score.top_factors => list[4]
+  FIRST ITEM KEYS: ['contribution', 'factor', 'risk_level']
+$.unified_report.risk_score.top_factors[0].risk_level => str
+$.unified_report.risk_score.top_factors[1].risk_level => str
+$.unified_report.risk_score.top_factors[2].risk_level => str
+$.unified_report.risk_score.critical_clauses => list[3]
+$.unified_report.risk_score.missing_clause_penalty => int
+$.unified_report.missing_clauses => list[0]
+$.total_clauses_detected => NoneType
+$.clauses_analyzed => NoneType
+$.clauses_truncated => bool

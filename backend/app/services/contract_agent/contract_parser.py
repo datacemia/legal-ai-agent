@@ -1,6 +1,9 @@
+import logging
+import mimetypes
 import os
 import re
 from collections import Counter
+from pathlib import Path
 from typing import Optional
 
 import fitz
@@ -11,6 +14,10 @@ from app.services.shared.ocr_service import (
     extract_pdf_text,
     extract_scanned_pdf_text,
 )
+
+
+logger = logging.getLogger(__name__)
+
 
 MAX_PAGES = 20
 MAX_CHARS = 200_000
@@ -25,6 +32,18 @@ ARABIC_FIXES = {
     "اإلتفاق": "الاتفاق",
     "األول": "الأول",
     "األولى": "الأولى",
+}
+
+
+FRENCH_OCR_FIXES = {
+    "confidentiaIité": "confidentialité",
+    "responsabiIité": "responsabilité",
+    "rėsiliation": "résiliation",
+    "resiliation": "résiliation",
+    "preavis": "préavis",
+    "execution": "exécution",
+    "obIigation": "obligation",
+    "obIigations": "obligations",
 }
 
 
@@ -99,16 +118,19 @@ def clean_text(text: str) -> str:
 
     text = re.sub(r"\n{3,}", "\n\n", text)
 
-    # Remove common page markers
+    # Remove common page markers.
     text = re.sub(r"(?im)^\s*page\s+\d+\s*$", "", text)
     text = re.sub(r"(?im)^\s*\d+\s*\|\s*page\s*$", "", text)
     text = re.sub(r"(?im)^\s*صفحة\s+\d+\s*$", "", text)
 
-    # Remove long signature/underline artifacts
+    # Remove long signature / underline artifacts.
     text = re.sub(r"_{3,}", "", text)
     text = re.sub(r"-{5,}", "", text)
 
     for wrong, correct in ARABIC_FIXES.items():
+        text = text.replace(wrong, correct)
+
+    for wrong, correct in FRENCH_OCR_FIXES.items():
         text = text.replace(wrong, correct)
 
     return text.strip()[:MAX_CHARS]
@@ -129,7 +151,18 @@ def text_quality_score(text: str) -> int:
     if "\n" in stripped:
         score += 10
 
-    if re.search(r"\b(agreement|contract|article|section|clause)\b", stripped, re.I):
+    if re.search(
+        r"\b(agreement|contract|article|section|clause)\b",
+        stripped,
+        re.I,
+    ):
+        score += 20
+
+    if re.search(
+        r"\b(contrat|accord|article|section|clause|résiliation|responsabilité)\b",
+        stripped,
+        re.I,
+    ):
         score += 20
 
     if re.search(r"(المادة|العقد|الاتفاق|البند|الطرف)", stripped):
@@ -138,15 +171,17 @@ def text_quality_score(text: str) -> int:
     if re.search(r"\d+(\.\d+)?", stripped):
         score += 10
 
-    # Penalize extraction noise
+    # Penalize extraction noise.
     weird_chars = len(re.findall(r"[�□■●◆]", stripped))
     if weird_chars > 10:
         score -= 20
 
     very_short_lines = [
-        line for line in stripped.splitlines()
+        line
+        for line in stripped.splitlines()
         if 0 < len(line.strip()) <= 2
     ]
+
     if len(very_short_lines) > 30:
         score -= 15
 
@@ -227,13 +262,14 @@ def extract_text_from_pdf(file_path: str) -> str:
         text = extract_pdf_text(content)
 
         if not text or len(text) < 80:
-            print("LEGAL OCR FALLBACK...")
+            logger.info("Legal OCR fallback triggered for PDF extraction.")
             text = extract_scanned_pdf_text(content)
 
         if text:
             candidates.append(clean_text(text))
-    except Exception as e:
-        print("Shared PDF/OCR extraction failed:", e)
+
+    except Exception:
+        logger.exception("Shared PDF/OCR extraction failed.")
 
     for extractor in (
         extract_text_from_pdf_pymupdf,
@@ -242,13 +278,22 @@ def extract_text_from_pdf(file_path: str) -> str:
         try:
             extracted = extractor(file_path)
             candidates.append(extracted)
+
         except Exception:
+            logger.debug(
+                "PDF extractor failed: %s",
+                getattr(extractor, "__name__", str(extractor)),
+                exc_info=True,
+            )
             continue
 
     if not candidates:
         raise ValueError("Failed to extract readable text from PDF")
 
-    best_text = max(candidates, key=text_quality_score)
+    best_text = max(
+        candidates,
+        key=text_quality_score,
+    )
 
     if text_quality_score(best_text) < 20:
         raise ValueError("PDF text quality is too low or unreadable")
@@ -307,11 +352,56 @@ def extract_text_from_docx(file_path: str) -> str:
     return text
 
 
+def normalize_file_type(
+    file_path: str,
+    file_type: Optional[str],
+) -> str:
+    """
+    Accept common extensions and MIME types.
+
+    Privacy-first note: this function only determines file format;
+    it does not inspect or infer personal data.
+    """
+
+    normalized_type = (
+        str(file_type or "")
+        .lower()
+        .strip()
+        .replace(".", "")
+    )
+
+    mime_map = {
+        "application/pdf": "pdf",
+        "pdf": "pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
+        "application/msword": "docx",
+        "docx": "docx",
+    }
+
+    if normalized_type in mime_map:
+        return mime_map[normalized_type]
+
+    extension = Path(file_path or "").suffix.lower().replace(".", "")
+
+    if extension in {"pdf", "docx"}:
+        return extension
+
+    guessed_mime, _ = mimetypes.guess_type(file_path or "")
+
+    if guessed_mime in mime_map:
+        return mime_map[guessed_mime]
+
+    return normalized_type
+
+
 def extract_text(file_path: str, file_type: Optional[str]) -> str:
     if not file_path or not os.path.exists(file_path):
         raise ValueError("File does not exist")
 
-    normalized_type = (file_type or "").lower().strip().replace(".", "")
+    normalized_type = normalize_file_type(
+        file_path=file_path,
+        file_type=file_type,
+    )
 
     if normalized_type == "pdf":
         return extract_text_from_pdf(file_path)

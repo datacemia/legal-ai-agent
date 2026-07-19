@@ -1,0 +1,338 @@
+====================================================================================================
+V4.1.2a LIABILITY ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 19
+
+####################################################################################################
+[1/19]
+LANG: ar
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_9
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1512
+SIGNALS: ['EXCLUDED_DAMAGES', 'CARVE_OUT', 'AGGREGATE_PERIOD']
+SOURCE:
+5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.
+RANKED MECHANISMS:
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'الأضرار غير المباشرة أو التبعية أو العقابية.'
+
+####################################################################################################
+[2/19]
+LANG: ar
+DOC: 03_SaaS_Cloud_Agreement_AR.json
+REF: clause_6
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CARVE_OUT', 'SUPER_CAP', 'AGGREGATE_PERIOD']
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.
+RANKED MECHANISMS:
+
+####################################################################################################
+[3/19]
+LANG: ar
+DOC: 04_Cybersecurity_Services_Agreement_AR.json
+REF: clause_1
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LIABILITY_CAP', 'AGGREGATE_PERIOD']
+SOURCE:
+5.1 لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب.
+RANKED MECHANISMS:
+
+####################################################################################################
+[4/19]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_3
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CARVE_OUT', 'AGGREGATE_PERIOD']
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية).
+RANKED MECHANISMS:
+
+####################################################################################################
+[5/19]
+LANG: ar
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_1
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['AGGREGATE_PERIOD']
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من الطرف الطرف المتعاقد ب أ بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة.
+RANKED MECHANISMS:
+
+####################################################################################################
+[6/19]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_7
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CARVE_OUT', 'SUPER_CAP', 'AGGREGATE_PERIOD']
+SOURCE:
+7.1 لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالطرف الطرف المتعاقد ب ب، والتي تُحدد بضعف تلك الرسوم.
+RANKED MECHANISMS:
+
+####################################################################################################
+[7/19]
+LANG: ar
+DOC: 15_General_Commercial_Agreement_AR.json
+REF: clause_2
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.7124
+SIGNALS: ['EXCLUDED_DAMAGES']
+SOURCE:
+7.1 لا يتحمل أي طرف تجاه الآخر المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية الناشئة عن هذه الاتفاقية. تخضع هذه الاتفاقية لقانون ولاية نيويورك.
+RANKED MECHANISMS:
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'الأضرار غير المباشرة أو العرضية أو التبعية الناشئة عن هذه الاتفاقية. تخضع هذه الاتفاقية لقانون ولاية نيويورك.'
+
+####################################################################################################
+[8/19]
+LANG: en
+DOC: 02_Master_Services_Agreement.json
+REF: clause_9
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1826
+SIGNALS: ['LIABILITY_CAP', 'EXCLUDED_DAMAGES', 'CARVE_OUT']
+SOURCE:
+5.1 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.
+RANKED MECHANISMS:
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.'
+
+####################################################################################################
+[9/19]
+LANG: en
+DOC: 15_General_Commercial_Agreement.json
+REF: clause_1
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.6142
+SIGNALS: ['EXCLUDED_DAMAGES']
+SOURCE:
+7.1 Neither Party shall be liable to the other for indirect, incidental, or consequential damages arising from this Agreement. This Agreement shall be governed by the laws of the State of New York.
+RANKED MECHANISMS:
+- GOVERNING_LAW_SELECTION | role= DOMAIN_CORE | primary= governing_law | eligible= True | rank= 88
+  EVIDENCE: 'governed by the laws of the State of New York.'
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'consequential damages arising from this Agreement. This Agreement shall be governed by the laws of the State of New York.'
+
+####################################################################################################
+[10/19]
+LANG: fr
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_9
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1321
+SIGNALS: ['LIABILITY_CAP', 'EXCLUDED_DAMAGES', 'CARVE_OUT', 'AGGREGATE_PERIOD']
+SOURCE:
+5.1 SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ OU D'INDEMNISATION, LA RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION. LE PRESTATAIRE NE SERA EN AUCUN CAS RESPONSABLE DE DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS.
+RANKED MECHANISMS:
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: 'DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS.'
+
+####################################################################################################
+[11/19]
+LANG: fr
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_6
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1551
+SIGNALS: ['LIABILITY_CAP', 'CARVE_OUT', 'AGGREGATE_PERIOD']
+SOURCE:
+6.1 La responsabilité globale de Northwind découlant du présent Accord n'excédera pas les frais payés par la Partie contractante A au cours des douze (12) mois précédant la réclamation, sauf en cas de violation de l'article 5 (Sécurité) ou des obligations d'indemnisation de Northwind, pour lesquelles la responsabilité sera plafonnée à deux (2) fois ces frais.
+RANKED MECHANISMS:
+- LIABILITY_CAP | role= DOMAIN_CORE | primary= liability | eligible= True | rank= 89
+  EVIDENCE: 'responsabilité sera plafonnée à deux (2) fois ces frais.'
+
+####################################################################################################
+[12/19]
+LANG: fr
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_1
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LIABILITY_CAP', 'AGGREGATE_PERIOD']
+SOURCE:
+5.1 La responsabilité globale de la Partie contractante B pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Partie contractante A, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Partie contractante B.
+RANKED MECHANISMS:
+
+####################################################################################################
+[13/19]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_2
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LIABILITY_CAP', 'CARVE_OUT', 'AGGREGATE_PERIOD']
+SOURCE:
+6.1 La responsabilité globale du Concédant au titre du présent Accord n'excédera pas le total des redevances payées par le Licencié au cours des douze (12) mois précédant la réclamation, sauf en cas de violation par le Concédant de l'article 3 (Propriété de la Propriété Intellectuelle).
+RANKED MECHANISMS:
+
+####################################################################################################
+[14/19]
+LANG: fr
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_1
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.7762
+SIGNALS: ['LIABILITY_CAP', 'EXCLUDED_DAMAGES', 'AGGREGATE_PERIOD']
+SOURCE:
+7.1 Aucune des Parties ne sera responsable des dommages indirects, accessoires ou consécutifs. La responsabilité globale du Fournisseur n'excédera pas la valeur du Bon de Commande à l'origine de la réclamation.
+RANKED MECHANISMS:
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: "dommages indirects, accessoires ou consécutifs. La responsabilité globale du Fournisseur n'excédera pas la valeur du Bon de Commande à l'origine de la réclamation."
+
+####################################################################################################
+[15/19]
+LANG: fr
+DOC: 09_Consulting_Services_Agreement_FR.json
+REF: clause_1
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LIABILITY_CAP', 'AGGREGATE_PERIOD']
+SOURCE:
+6.1 La responsabilité globale du Consultant découlant du présent Accord n'excédera pas les honoraires payés par la Partie contractante A au titre du bon de commande applicable au cours des six (6) mois précédant la réclamation.
+RANKED MECHANISMS:
+
+####################################################################################################
+[16/19]
+LANG: fr
+DOC: 09_Consulting_Services_Agreement_FR.json
+REF: clause_3
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+1.1 Le Consultant est un prestataire indépendant et non un salarié, mandataire, coentrepreneur ou associé de la Partie contractante A. Le Consultant sera seul responsable de l'ensemble des taxes, assurances et prestations applicables.
+RANKED MECHANISMS:
+
+####################################################################################################
+[17/19]
+LANG: fr
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_7
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LIABILITY_CAP', 'CARVE_OUT', 'AGGREGATE_PERIOD']
+SOURCE:
+7.1 La responsabilité globale de la Partie contractante B n'excédera pas les honoraires payés par la Partie contractante A au cours des douze (12) mois précédant la réclamation, sauf en cas de violation de l'article 5 (Sécurité des Données et Conformité) ou des obligations d'indemnisation de la Partie contractante B, lesquelles seront plafonnées à deux (2) fois ces honoraires.
+RANKED MECHANISMS:
+
+####################################################################################################
+[18/19]
+LANG: fr
+DOC: 11_Commercial_Lease_Agreement_FR.json
+REF: clause_7
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+4.2 Le Bailleur sera responsable de l'entretien et de la réparation de la structure du bâtiment, de la toiture et des systèmes communs, y compris le système de climatisation desservant les Locaux.
+RANKED MECHANISMS:
+
+####################################################################################################
+[19/19]
+LANG: fr
+DOC: 15_General_Commercial_Agreement_FR.json
+REF: clause_7
+PIPELINE: liability
+PROFILE VERSION: shadow-p0-v4.1.2a-ip-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.6935
+SIGNALS: ['EXCLUDED_DAMAGES']
+SOURCE:
+7.1 Aucune des Parties ne sera responsable envers l'autre de dommages indirects, accessoires ou consécutifs découlant du présent Accord. Le présent Accord est régi par le droit de l'État de New York.
+RANKED MECHANISMS:
+- GOVERNING_LAW_SELECTION | role= DOMAIN_CORE | primary= governing_law | eligible= True | rank= 88
+  EVIDENCE: "régi par le droit de l'État de New York."
+- EXCLUDED_DAMAGE_CATEGORY | role= DOMAIN_SECONDARY | primary= liability | eligible= True | rank= 84
+  EVIDENCE: "dommages indirects, accessoires ou consécutifs découlant du présent Accord. Le présent Accord est régi par le droit de l'État de New York."
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+ROWS: 19
+BY LANGUAGE: {'ar': 7, 'en': 2, 'fr': 10}
+BY PIPELINE TYPE: {'liability': 19}
+ABSTENTION REASONS: {'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 8, 'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 11}
+SIGNAL COUNTS: {'EXCLUDED_DAMAGES': 7, 'CARVE_OUT': 9, 'AGGREGATE_PERIOD': 13, 'SUPER_CAP': 2, 'LIABILITY_CAP': 9}
+NO SIGNAL ROWS: 2

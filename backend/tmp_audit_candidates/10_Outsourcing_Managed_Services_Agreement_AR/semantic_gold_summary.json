@@ -1,0 +1,759 @@
+{
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": null,
+      "fr": null,
+      "ar": 0.5,
+      "macro": 0.5
+    },
+    "mechanism_precision": {
+      "en": null,
+      "fr": null,
+      "ar": 1.0,
+      "macro": 1.0
+    },
+    "mechanism_recall": {
+      "en": null,
+      "fr": null,
+      "ar": 0.5,
+      "macro": 0.5
+    },
+    "actor_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": 0.0,
+      "macro": 0.0
+    },
+    "object_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "trigger_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": 0.0,
+      "macro": 0.0
+    },
+    "polarity_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": 0.5,
+      "macro": 0.5
+    },
+    "procedural_state_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    }
+  },
+  "per_semantic_family": {
+    "TRANSITION": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 0.5,
+      "required_mechanisms": 4
+    }
+  },
+  "grounding": {
+    "UNSUPPORTED": 2
+  },
+  "cross_language_equivalence": {
+    "EN-FR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "EN-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "FR-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    }
+  },
+  "observed_failure_regressions": {
+    "LIABILITY → GOVERNING LAW": {
+      "result": "FAIL",
+      "expected": [
+        "LIABILITY_CAP"
+      ],
+      "forbidden": [
+        "FORUM_SELECTION",
+        "GOVERNING_LAW"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "02_5_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "FINANCIAL REPORTING → BOARD / DEADLOCK": {
+      "result": "FAIL",
+      "expected": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "forbidden": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_4_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "BOARD → SUBCONTRACTING": {
+      "result": "FAIL",
+      "expected": [
+        "BOARD_COMPOSITION"
+      ],
+      "forbidden": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "DRAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "forbidden": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "TAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "PARTICIPATION_OPTION",
+        "TAG_ALONG_RIGHT"
+      ],
+      "forbidden": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_2_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "AUTOMATIC TERMINATION": {
+      "result": "FAIL",
+      "expected": [
+        "AUTOMATIC_TERMINATION"
+      ],
+      "forbidden": [
+        "NOTICE_PREREQUISITE"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": []
+    },
+    "INVESTOR PRIOR WRITTEN CONSENT": {
+      "result": "FAIL",
+      "expected": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_6_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "CONFIDENTIALITY MULTI-MECHANISM": {
+      "result": "FAIL",
+      "expected": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "01_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    }
+  },
+  "critical_failures": [
+    {
+      "fixture_id": "10_1_1_ar",
+      "language": "ar",
+      "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_PLAN"
+        ],
+        "relations": [
+          {
+            "concept": "TRANSITION_PLAN",
+            "obligated_actor": "PROVIDER",
+            "action": "IMPLEMENT_TRANSITION_PLAN",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "services",
+        "mechanisms": [
+          "SERVICE_SCOPE",
+          "TRANSITION_PLAN"
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "SERVICE_SCOPE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [
+        "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+      ],
+      "high": []
+    }
+  ],
+  "high_failures": [
+    {
+      "fixture_id": "10_6_1_ar",
+      "language": "ar",
+      "source_text": "6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "EXIT_ASSISTANCE",
+          "TERM_DURATION"
+        ],
+        "relations": [
+          {
+            "concept": "EXIT_ASSISTANCE",
+            "obligated_actor": "PROVIDER",
+            "trigger": "EXPIRATION_OR_TERMINATION",
+            "action": "PROVIDE_EXIT_ASSISTANCE",
+            "polarity": "OBLIGATION"
+          }
+        ],
+        "states": [],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "pricing",
+        "mechanisms": [],
+        "states": [],
+        "numeric_roles": []
+      },
+      "source_evidence": [],
+      "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:EXIT_ASSISTANCE",
+        "MISSING_MATERIAL_MECHANISM:TERM_DURATION"
+      ]
+    }
+  ],
+  "failure_count": 2,
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_clause_count": 105,
+  "gold_clauses_by_language": {
+    "en": 35,
+    "fr": 35,
+    "ar": 35
+  },
+  "publication_baseline_persisted_json_check": {
+    "expected_runs": 45,
+    "completed_runs": 0,
+    "errors": 0,
+    "integrity_failures": 0,
+    "total_receipts_observed_in_json": 0,
+    "total_blocked_observed_in_json": 0,
+    "hash_mismatch_count": 0,
+    "post_gate_mutation_count": 0,
+    "final_result": "FAIL",
+    "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts."
+  },
+  "before_after_metric_comparison": {
+    "primary_type_support_rate": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      }
+    },
+    "mechanism_precision": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "mechanism_recall": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      }
+    },
+    "actor_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      }
+    },
+    "object_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    },
+    "trigger_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      }
+    },
+    "polarity_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      },
+      "macro": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      }
+    },
+    "procedural_state_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    }
+  },
+  "baseline_path": "tmp_audit_candidates\\10_Outsourcing_Managed_Services_Agreement_AR\\frozen_gold_baseline_metrics.json"
+}

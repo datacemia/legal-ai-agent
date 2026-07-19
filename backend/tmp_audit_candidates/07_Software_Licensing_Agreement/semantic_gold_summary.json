@@ -1,0 +1,676 @@
+{
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    },
+    "mechanism_precision": {
+      "en": 0.6667,
+      "fr": null,
+      "ar": null,
+      "macro": 0.6667
+    },
+    "mechanism_recall": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    },
+    "actor_accuracy": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    },
+    "object_accuracy": {
+      "en": 0.5,
+      "fr": null,
+      "ar": null,
+      "macro": 0.5
+    },
+    "trigger_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "polarity_accuracy": {
+      "en": 1.0,
+      "fr": null,
+      "ar": null,
+      "macro": 1.0
+    },
+    "procedural_state_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    }
+  },
+  "per_semantic_family": {
+    "LICENSE": {
+      "mechanism_precision": 0.6667,
+      "mechanism_recall": 1.0,
+      "required_mechanisms": 2
+    }
+  },
+  "grounding": {
+    "GROUNDED": 2,
+    "UNSUPPORTED": 1
+  },
+  "cross_language_equivalence": {
+    "EN-FR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "EN-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "FR-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    }
+  },
+  "observed_failure_regressions": {
+    "LIABILITY → GOVERNING LAW": {
+      "result": "FAIL",
+      "expected": [
+        "LIABILITY_CAP"
+      ],
+      "forbidden": [
+        "FORUM_SELECTION",
+        "GOVERNING_LAW"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "02_5_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "FINANCIAL REPORTING → BOARD / DEADLOCK": {
+      "result": "FAIL",
+      "expected": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "forbidden": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_4_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "BOARD → SUBCONTRACTING": {
+      "result": "FAIL",
+      "expected": [
+        "BOARD_COMPOSITION"
+      ],
+      "forbidden": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "DRAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "forbidden": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "TAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "PARTICIPATION_OPTION",
+        "TAG_ALONG_RIGHT"
+      ],
+      "forbidden": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_2_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "AUTOMATIC TERMINATION": {
+      "result": "FAIL",
+      "expected": [
+        "AUTOMATIC_TERMINATION"
+      ],
+      "forbidden": [
+        "NOTICE_PREREQUISITE"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": []
+    },
+    "INVESTOR PRIOR WRITTEN CONSENT": {
+      "result": "FAIL",
+      "expected": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_6_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "CONFIDENTIALITY MULTI-MECHANISM": {
+      "result": "FAIL",
+      "expected": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "01_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    }
+  },
+  "critical_failures": [],
+  "high_failures": [],
+  "failure_count": 0,
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_clause_count": 105,
+  "gold_clauses_by_language": {
+    "en": 35,
+    "fr": 35,
+    "ar": 35
+  },
+  "publication_baseline_persisted_json_check": {
+    "expected_runs": 45,
+    "completed_runs": 0,
+    "errors": 0,
+    "integrity_failures": 0,
+    "total_receipts_observed_in_json": 0,
+    "total_blocked_observed_in_json": 0,
+    "hash_mismatch_count": 0,
+    "post_gate_mutation_count": 0,
+    "final_result": "FAIL",
+    "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts."
+  },
+  "before_after_metric_comparison": {
+    "primary_type_support_rate": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "mechanism_precision": {
+      "en": {
+        "baseline": 0.6667,
+        "after_fix": 0.6667,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.6667,
+        "after_fix": 0.6667,
+        "delta": 0.0
+      }
+    },
+    "mechanism_recall": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "actor_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "object_accuracy": {
+      "en": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      }
+    },
+    "trigger_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    },
+    "polarity_accuracy": {
+      "en": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "procedural_state_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    }
+  },
+  "baseline_path": "tmp_audit_candidates\\07_Software_Licensing_Agreement\\frozen_gold_baseline_metrics.json"
+}

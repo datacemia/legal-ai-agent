@@ -1,0 +1,95 @@
+[
+  {
+    "language": "fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "clause_5",
+    "source_text": "5.1 La Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures.",
+    "pipeline_clause_type": "data_protection",
+    "semantic_profile_version": "shadow-p0-v4.1.4a-data-security-boundary",
+    "shadow_primary_type": "security",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9799,
+    "shadow_dominance_margin": 86.1958,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "security",
+        "score": 86.1958,
+        "coverage": 0.9799,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 397,
+            "text": "Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 397,
+            "text": "Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f305fa93d695c405c78f3cac4537736c5e41b3fb39689615692fcc485e1b0bf"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 397,
+            "text": "Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f305fa93d695c405c78f3cac4537736c5e41b3fb39689615692fcc485e1b0bf"
+      }
+    ],
+    "semantic_profile_hash": "7eeb2f0ec1ec824e2f2e822bd6b5b8b44011024d05ed5fe1db5b1322ea36b0b5",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

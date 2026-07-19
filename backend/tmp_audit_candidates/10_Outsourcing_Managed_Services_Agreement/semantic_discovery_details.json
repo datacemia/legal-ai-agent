@@ -1,0 +1,1313 @@
+[
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 Provider's aggregate liability shall not exceed the fees paid by Client in the twelve (12) months preceding the claim, except for breaches of Section 5 (Data Security and Compliance) or Provider's indemnification obligations, which shall be capped at two (2) times such fees.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aggregate liability shall not exceed",
+            "start": 15,
+            "end": 51
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 123,
+            "end": 228,
+            "text": "except for breaches of Section 5 (Data Security and Compliance) or Provider's indemnification obligations"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "b368acb8360c309e3163b59aeb25d8527a45de27902a91ec4a86bf041fa5f825",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 15,
+            "end": 271,
+            "text": "aggregate liability shall not exceed the fees paid by Contracting Party A in the twelve (12) months preceding the claim, except for breaches of Section 5 (Data Security and Compliance) or Provider's indemnification obligations, which shall be capped at two (2) times su"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fc4ad2865309a04b20a461d0a72925e941da497230506e6dbfed4df6c7acbd82",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 5,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 35,
+            "end": 264,
+            "text": "shall not exceed the fees paid by Contracting Party A in the twelve (12) months preceding the claim, except for breaches of Section 5 (Data Security and Compliance) or Provider's indemnification obligations, which shall be capped at two (2) t"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "60acb9ac2382278f9f2d58db2ed617dade05aebf9feff3716e0f984e7fe86c44",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 123,
+            "end": 228,
+            "text": "except for breaches of Section 5 (Data Security and Compliance) or Provider's indemnification obligations"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "b368acb8360c309e3163b59aeb25d8527a45de27902a91ec4a86bf041fa5f825",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 35,
+            "end": 264,
+            "text": "shall not exceed the fees paid by Contracting Party A in the twelve (12) months preceding the claim, except for breaches of Section 5 (Data Security and Compliance) or Provider's indemnification obligations, which shall be capped at two (2) t"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "60acb9ac2382278f9f2d58db2ed617dade05aebf9feff3716e0f984e7fe86c44",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Provider shall maintain administrative, technical, and physical safeguards for Client data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Client of any security incident within twenty-four (24) hours.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 206,
+            "end": 250,
+            "text": "shall notify Contracting Party A of any security incident"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 212,
+            "end": 241,
+            "text": "notify Contracting Party A of any security"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ee33e1629d6e7c311c218558f5b1866fac42a45f68952e2a023ac19c450e351b",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 13,
+            "end": 78,
+            "text": "shall maintain administrative, technical, and physical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9d93b6ea05827d88f924b7a4438ed6b91bd643d0f412bcb29fc67b458a6914af",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 280,
+            "text": "Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e20d094380c4089a736cc696ad4018aa62a96cf3b7a426ca90d3f17352e159bf",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 212,
+            "end": 280,
+            "text": "notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1d8a3a14af5986a8789ffe039e89349da86486ffecb8fdbd228c6eea4a38d98e",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 206,
+            "end": 250,
+            "text": "shall notify Contracting Party A of any security incident"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 212,
+            "end": 241,
+            "text": "notify Contracting Party A of any security"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ee33e1629d6e7c311c218558f5b1866fac42a45f68952e2a023ac19c450e351b",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 13,
+            "end": 78,
+            "text": "shall maintain administrative, technical, and physical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9d93b6ea05827d88f924b7a4438ed6b91bd643d0f412bcb29fc67b458a6914af",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 280,
+            "text": "Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e20d094380c4089a736cc696ad4018aa62a96cf3b7a426ca90d3f17352e159bf",
+        "normalized_concept": "SECURITY_SAFEGUARD_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 212,
+            "end": 280,
+            "text": "notify Contracting Party A of any security incident within twenty-four (24) hours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1d8a3a14af5986a8789ffe039e89349da86486ffecb8fdbd228c6eea4a38d98e",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Provider shall offer employment to the Transferred Employees on terms substantially comparable to their current terms with Client, and shall recognize their prior service with Client for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans.",
+    "primary_type": "employment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSFERRED_EMPLOYEE_OFFER",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSFERRED_EMPLOYEE_OFFER",
+            "start": 4,
+            "end": 276,
+            "text": "Provider shall offer employment to the Transferred applicable applicable Contracting Party Bs on terms substantially comparable to their current terms with Contracting Party A, and shall recognize their prior service with Contracting Party A for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f4e7c7d3d5cd0506442e7c07efdc229b5e42678310a2385a26a9ce09f93938e",
+        "normalized_concept": "TRANSFERRED_EMPLOYEE_OFFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PRIOR_SERVICE_RECOGNITION",
+        "rank": 92,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRIOR_SERVICE_RECOGNITION",
+            "start": 145,
+            "end": 276,
+            "text": "recognize their prior service with Contracting Party A for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b2aab7f90217bd217a65d3c5d139c06a56114bc10a8ffcb8ccd9e8b1dad0e473",
+        "normalized_concept": "PRIOR_SERVICE_RECOGNITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BENEFITS_ELIGIBILITY_CONTINUITY",
+            "start": 161,
+            "end": 276,
+            "text": "prior service with Contracting Party A for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "b91bd0c68eaffa516fa125d1ef7f4715295d79dcd73ab91cebcbefeca8424f4a",
+        "normalized_concept": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TRANSFERRED_EMPLOYEE_OFFER",
+        "rank": 94,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSFERRED_EMPLOYEE_OFFER",
+            "start": 4,
+            "end": 276,
+            "text": "Provider shall offer employment to the Transferred applicable applicable Contracting Party Bs on terms substantially comparable to their current terms with Contracting Party A, and shall recognize their prior service with Contracting Party A for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "8f4e7c7d3d5cd0506442e7c07efdc229b5e42678310a2385a26a9ce09f93938e",
+        "normalized_concept": "TRANSFERRED_EMPLOYEE_OFFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PRIOR_SERVICE_RECOGNITION",
+        "rank": 92,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRIOR_SERVICE_RECOGNITION",
+            "start": 145,
+            "end": 276,
+            "text": "recognize their prior service with Contracting Party A for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b2aab7f90217bd217a65d3c5d139c06a56114bc10a8ffcb8ccd9e8b1dad0e473",
+        "normalized_concept": "PRIOR_SERVICE_RECOGNITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "rank": 91,
+        "candidate_primary_type": "employment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BENEFITS_ELIGIBILITY_CONTINUITY",
+            "start": 161,
+            "end": 276,
+            "text": "prior service with Contracting Party A for purposes of benefits eligibility, to the extent permitted by Provider's benefit plans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "b91bd0c68eaffa516fa125d1ef7f4715295d79dcd73ab91cebcbefeca8424f4a",
+        "normalized_concept": "BENEFITS_ELIGIBILITY_CONTINUITY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred Employees, with minimal disruption to Client's business operations.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 34,
+            "end": 257,
+            "text": "Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred applicable applicable Contracting Party Bs, with minimal disruption to Contracting Party A's business operations"
+          },
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 63,
+            "end": 257,
+            "text": "transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred applicable applicable Contracting Party Bs, with minimal disruption to Contracting Party A's business operations"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3f089c8d7c49d1259a7b6052f94de1e97a66b4ecf92cddb533082cdf7f40656d",
+        "normalized_concept": "TRANSITION_PLAN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 34,
+            "end": 78,
+            "text": "Provider shall implement the transition plan"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "74f6b4974f8d4b69a0853c154f498a5ab3d7ae7784035e704c529aa4ef619346",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 34,
+            "end": 257,
+            "text": "Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred applicable applicable Contracting Party Bs, with minimal disruption to Contracting Party A's business operations"
+          },
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 63,
+            "end": 257,
+            "text": "transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred applicable applicable Contracting Party Bs, with minimal disruption to Contracting Party A's business operations"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3f089c8d7c49d1259a7b6052f94de1e97a66b4ecf92cddb533082cdf7f40656d",
+        "normalized_concept": "TRANSITION_PLAN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 34,
+            "end": 78,
+            "text": "Provider shall implement the transition plan"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "74f6b4974f8d4b69a0853c154f498a5ab3d7ae7784035e704c529aa4ef619346",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Provider shall perform the Services in accordance with the service levels set forth in Exhibit A. The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives.",
+    "primary_type": "services",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 102,
+            "end": 251,
+            "text": "The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 251,
+            "text": "joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "procedural_state": "JOINT_GOVERNANCE_COMMITTEE",
+        "evidence_hash": "3cb688ca779f4a60d120afdb8d64b66b6d5c743899cd97be70d5d28775f4413b",
+        "normalized_concept": "JOINT_GOVERNANCE_COMMITTEE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9a3bf36677abf095b780abb34574af15e9a679fcb27d145390d8b2e5ba325c46",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 102,
+            "end": 251,
+            "text": "The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 251,
+            "text": "joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "procedural_state": "JOINT_GOVERNANCE_COMMITTEE",
+        "evidence_hash": "3cb688ca779f4a60d120afdb8d64b66b6d5c743899cd97be70d5d28775f4413b",
+        "normalized_concept": "JOINT_GOVERNANCE_COMMITTEE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9a3bf36677abf095b780abb34574af15e9a679fcb27d145390d8b2e5ba325c46",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 Client shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty (30) days.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 208,
+            "text": "Contracting Party A shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty (30) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "193d65c87d7116e1c05adb822dd5d83653f894ab97c768966c6cd123e610f203",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 11,
+            "end": 200,
+            "text": "shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty ("
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b7d51e3ffd1b71451ebd89ab49cbae0847906796ddc5c0090e2c0bbbdafb7d34",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 11,
+            "end": 208,
+            "text": "shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty (30) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d43f23874ecb45b31de1fb6b0cb3dae19ed66fbc27a41672d8feaf189ea3fdac",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 208,
+            "text": "Contracting Party A shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty (30) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "193d65c87d7116e1c05adb822dd5d83653f894ab97c768966c6cd123e610f203",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 11,
+            "end": 200,
+            "text": "shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty ("
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b7d51e3ffd1b71451ebd89ab49cbae0847906796ddc5c0090e2c0bbbdafb7d34",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 11,
+            "end": 208,
+            "text": "shall pay Provider a monthly fee as set forth in Exhibit A, subject to adjustment based on volume-based metrics defined therein, invoiced monthly in arrears with payment due within thirty (30) days"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d43f23874ecb45b31de1fb6b0cb3dae19ed66fbc27a41672d8feaf189ea3fdac",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Client or a successor provider, at Client's request and expense at Provider's then-current rates.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of five (5) years",
+            "start": 26,
+            "end": 56
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "termination",
+        "anchors": [
+          "assistance",
+          "client",
+          "current",
+          "days",
+          "eighty",
+          "exit",
+          "expense",
+          "expiration",
+          "facilitate",
+          "five",
+          "has",
+          "hundred",
+          "initial",
+          "one",
+          "provide",
+          "provider",
+          "rates",
+          "reasonable",
+          "request",
+          "successor",
+          "term",
+          "terminate",
+          "then",
+          "transition",
+          "up",
+          "upon",
+          "years"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "initial term of five (5) years",
+            "start": 26,
+            "end": 56
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  }
+]

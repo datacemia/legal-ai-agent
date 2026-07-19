@@ -1,0 +1,239 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 5789
+PDF_LINES_DEBUG {'line_count': 102, 'non_empty_line_count': 58, 'max_line_len': 290, 'first_20': ['ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ', '              Account Statement', '', '', '  CLICK TO VALIDATE', 'Ref. No           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ', 'Date                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ', 'Time                                            2:39       AMﺍﻟﻮﻗﺖ', '  Statement  Detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ', '', 'Customer Nameﻋﻠﻲﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ                                                                                                         ﺍﻟﻌﻤﻴﻞ ﺍﺳﻢ', '', 'Account Number             215608010156629ﺭﻗﻢﺍﻟﺤﺴﺎﺏ', '', 'IBAN Number                SA9780000215608010156629ﺭﻗﻢﺍﻵﻳﺒﺎﻥ', '', 'Opening Balance                              3,323.54        SARﺭﺻﻴﺪﺍﻹﻓﺘﺘﺎﺣﻲ ﺍﻟﺤﺴﺎﺏ', '', 'Closing Balance                                 0.43       SARﺭﺻﻴﺪﺍﻹﻗﻔﺎﻝ', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 12, 'dep_line': 'Number Of Deposits    1ﻋﺪﺩﺍﻹﻳﺪﺍﻋﺎﺕ', 'wd_i': 13, 'wd_line': 'Number Of Withdrawals     10ﻋﺪﺩﺍﻟﺴﺤﻮﺑﺎﺕ', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ\n              account statement\n\n\n  click to validate\nref. no           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ\ndate                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ\ntime                                            2:39       amﺍﻟﻮﻗﺖ\n  statement  detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ\n\ncustom'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '12/11/2023 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 - 2023/11/11ﺧﻼﻝﺍﻟﻔﺘﺮﺓ National Addressﺍﻟﻌﻨﻮﺍﻥﺍﻟﻮﻃﻨﻲ Cityﺍﻟﺮﻳﺎﺽ ﺍﻟﻤﺪﻳﻨﺔ Street ﺍﻟﺒﻠﻴﺪﻩ ﺍﻟﺸﺎﺭﻉ District ﺍﻟﺒﻴﻀﺎﺀ ﺍﻟﺪﺍﺭ ﺍﻟﺤﻲ Postal Code 14519ﺍﻟﺮﻣﺰﺍﻟﺒﺮﻳﺪﻱ Building Number 7131ﺭﻗﻢﺍﻟﻤﺒﻨﻰ Secondary Number 4003ﺍﻟﺮﻗﻢﺍﻟﻔﺮﻋﻲ 1 Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ ﺍﻟﺮﺻﻴﺪ ﺩﺍﺋﻦ ﻣﺪﻳﻦ ﺍﻟﻌﻤﻠﻴﺔ ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﻌﻤﻴﻞ ﺣﺴﺎﺏ ﺇﻟﻰ 58,823.54 SAR 55,500.00 SAR 0.00 SARﺗﺤﻮﻳﻞ ﺳﻴﺎﺭﺓ10:27:15:ﺍﻟﻮﻗﺖ2023/11/09ﺷﺮﺍ / ﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﺑﺮﺍﻫﻴﻢ **ﻣﻼﺣﻈﺔ:ﺗﺤﻮﻳﻞ (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,785.54 SAR 0.00 SAR 38.00 SAR Faida (331300262532-6451354000078624):**ﻣﻼﺣﻈﺔ00:27:03:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 AlSaiari Foundat, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,685.54 SAR 0.00 SAR 100.00 SAR Al Jeri (331300281240-6418044945230131):**ﻣﻼﺣﻈﺔ00:28:20:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 dar albydha, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,653.43 SAR 0.00 SAR 32.11 SAR aswaq (331301423282-6321647801934801):**ﻣﻼﺣﻈﺔ01:42:40:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 althalatheen, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,627.43 SAR 0.00 SAR 26.00 SAR (331302344328-6301497901942260):**ﻣﻼﺣﻈﺔ02:34:51:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 TURKISH VALLEY ESTAURA, RIYADH, SA 8,627.43 SAR 0.00 SAR 50,000.00 SARﺗﺤﻮﻳﻞ-ﻣﺤﻤﺪW-/TOACCT/43300608010053343TO:**ﻣﻼﺣﻈﺔ16:28:24:ﺍﻟﻮﻗﺖ ﺍﻟﻨﻌﻤﻲ2023/11/09ﻋﻠﻲ ﻋﺒﺪﻩ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﻣﺤﻤﺪ ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺳﺤﺐ 8,127.43 SAR 0.00 SAR 500.00 SAR ALFAISAL STATION ALMASANI, RIYADH:**ﻣﻼﺣﻈﺔ18:09:04:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 ((OP0101ND01055856-180857526615 (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 8,104.93 SAR 0.00 SAR 22.50 SAR (331319123393-6327019701980248):**ﻣﻼﺣﻈﺔ19:12:42:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 tamwinat talal al fale, RIYADH, SA ()ﻣﺤﻠﻲApple Pay ﺍﻧﺘﺮﻧﺖ ﺷﺮﺍﺀ 1,405.93 SAR 0.00 SAR 6,699.00 SAR Online Purchase from Yaqoot, Riyadh:**ﻣﻼﺣﻈﺔ20:58:16:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺻﺮﺍﻑ-ﺑﻄﺎﻗﺔ ﺗﺠﺪﻳﺪ ﺭﺳﻮﻡ ﺫﺍﺗﻴﺔ ﺧﺪﻣﺔ 1,371.43 SAR 0.00 SAR 34.50 SAR CardPrnFee-0180K9IB KIOUDF01:**ﻣﻼﺣﻈﺔ20:50:10:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺍﻟﺤﺴﺎﺏ ﻣﻦ ﺍﻟﺘﺤﻮﻳﻞ 0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/11 ﺯﻳﻦ433000010006080362223$ﻣﺤﻤﺪ ﻋﻠﻲ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﺍﺣﻤﺪ Noteﻣﻼﺣﻈﺔ This document is responsibility of the confidentialholder.ﻫﺬﻩand under the ﺍﻟﻤﺤﺎﻓﻈﺔ ﻣﺴﺆﻭﻟﻴﺔ ﻛﺎﻣﻞ ﺣﺎﻣﻠﻬﺎ ﻭﻳﺘﺤﻤﻞ ﺳﺮﻳﺔ ﺍﻟﻮﺛﻴﻘﺔ 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 1, 'sample_date_lines': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 1, 'samples': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+BNP_AMOUNT_DEBUG {'line': '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11', 'nums': ['1,371.00'], 'normalized': '1,371.00', 'parsed': 1371.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11'
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 12, 'dep_line': 'Number Of Deposits    1ﻋﺪﺩﺍﻹﻳﺪﺍﻋﺎﺕ', 'wd_i': 13, 'wd_line': 'Number Of Withdrawals     10ﻋﺪﺩﺍﻟﺴﺤﻮﺑﺎﺕ', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ\n              account statement\n\n\n  click to validate\nref. no           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ\ndate                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ\ntime                                            2:39       amﺍﻟﻮﻗﺖ\n  statement  detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ\n\ncustom'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '12/11/2023 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 - 2023/11/11ﺧﻼﻝﺍﻟﻔﺘﺮﺓ National Addressﺍﻟﻌﻨﻮﺍﻥﺍﻟﻮﻃﻨﻲ Cityﺍﻟﺮﻳﺎﺽ ﺍﻟﻤﺪﻳﻨﺔ Street ﺍﻟﺒﻠﻴﺪﻩ ﺍﻟﺸﺎﺭﻉ District ﺍﻟﺒﻴﻀﺎﺀ ﺍﻟﺪﺍﺭ ﺍﻟﺤﻲ Postal Code 14519ﺍﻟﺮﻣﺰﺍﻟﺒﺮﻳﺪﻱ Building Number 7131ﺭﻗﻢﺍﻟﻤﺒﻨﻰ Secondary Number 4003ﺍﻟﺮﻗﻢﺍﻟﻔﺮﻋﻲ 1 Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ ﺍﻟﺮﺻﻴﺪ ﺩﺍﺋﻦ ﻣﺪﻳﻦ ﺍﻟﻌﻤﻠﻴﺔ ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﻌﻤﻴﻞ ﺣﺴﺎﺏ ﺇﻟﻰ 58,823.54 SAR 55,500.00 SAR 0.00 SARﺗﺤﻮﻳﻞ ﺳﻴﺎﺭﺓ10:27:15:ﺍﻟﻮﻗﺖ2023/11/09ﺷﺮﺍ / ﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﺑﺮﺍﻫﻴﻢ **ﻣﻼﺣﻈﺔ:ﺗﺤﻮﻳﻞ (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,785.54 SAR 0.00 SAR 38.00 SAR Faida (331300262532-6451354000078624):**ﻣﻼﺣﻈﺔ00:27:03:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 AlSaiari Foundat, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,685.54 SAR 0.00 SAR 100.00 SAR Al Jeri (331300281240-6418044945230131):**ﻣﻼﺣﻈﺔ00:28:20:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 dar albydha, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,653.43 SAR 0.00 SAR 32.11 SAR aswaq (331301423282-6321647801934801):**ﻣﻼﺣﻈﺔ01:42:40:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 althalatheen, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,627.43 SAR 0.00 SAR 26.00 SAR (331302344328-6301497901942260):**ﻣﻼﺣﻈﺔ02:34:51:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 TURKISH VALLEY ESTAURA, RIYADH, SA 8,627.43 SAR 0.00 SAR 50,000.00 SARﺗﺤﻮﻳﻞ-ﻣﺤﻤﺪW-/TOACCT/43300608010053343TO:**ﻣﻼﺣﻈﺔ16:28:24:ﺍﻟﻮﻗﺖ ﺍﻟﻨﻌﻤﻲ2023/11/09ﻋﻠﻲ ﻋﺒﺪﻩ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﻣﺤﻤﺪ ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺳﺤﺐ 8,127.43 SAR 0.00 SAR 500.00 SAR ALFAISAL STATION ALMASANI, RIYADH:**ﻣﻼﺣﻈﺔ18:09:04:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 ((OP0101ND01055856-180857526615 (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 8,104.93 SAR 0.00 SAR 22.50 SAR (331319123393-6327019701980248):**ﻣﻼﺣﻈﺔ19:12:42:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 tamwinat talal al fale, RIYADH, SA ()ﻣﺤﻠﻲApple Pay ﺍﻧﺘﺮﻧﺖ ﺷﺮﺍﺀ 1,405.93 SAR 0.00 SAR 6,699.00 SAR Online Purchase from Yaqoot, Riyadh:**ﻣﻼﺣﻈﺔ20:58:16:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺻﺮﺍﻑ-ﺑﻄﺎﻗﺔ ﺗﺠﺪﻳﺪ ﺭﺳﻮﻡ ﺫﺍﺗﻴﺔ ﺧﺪﻣﺔ 1,371.43 SAR 0.00 SAR 34.50 SAR CardPrnFee-0180K9IB KIOUDF01:**ﻣﻼﺣﻈﺔ20:50:10:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺍﻟﺤﺴﺎﺏ ﻣﻦ ﺍﻟﺘﺤﻮﻳﻞ 0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/11 ﺯﻳﻦ433000010006080362223$ﻣﺤﻤﺪ ﻋﻠﻲ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﺍﺣﻤﺪ Noteﻣﻼﺣﻈﺔ This document is responsibility of the confidentialholder.ﻫﺬﻩand under the ﺍﻟﻤﺤﺎﻓﻈﺔ ﻣﺴﺆﻭﻟﻴﺔ ﻛﺎﻣﻞ ﺣﺎﻣﻠﻬﺎ ﻭﻳﺘﺤﻤﻞ ﺳﺮﻳﺔ ﺍﻟﻮﺛﻴﻘﺔ 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 1, 'sample_date_lines': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 1, 'samples': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+BNP_AMOUNT_DEBUG {'line': '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11', 'nums': ['1,371.00'], 'normalized': '1,371.00', 'parsed': 1371.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11'
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 12, 'dep_line': 'Number Of Deposits    1ﻋﺪﺩﺍﻹﻳﺪﺍﻋﺎﺕ', 'wd_i': 13, 'wd_line': 'Number Of Withdrawals     10ﻋﺪﺩﺍﻟﺴﺤﻮﺑﺎﺕ', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ\n              account statement\n\n\n  click to validate\nref. no           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ\ndate                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ\ntime                                            2:39       amﺍﻟﻮﻗﺖ\n  statement  detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ\n\ncustom'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '12/11/2023 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 - 2023/11/11ﺧﻼﻝﺍﻟﻔﺘﺮﺓ National Addressﺍﻟﻌﻨﻮﺍﻥﺍﻟﻮﻃﻨﻲ Cityﺍﻟﺮﻳﺎﺽ ﺍﻟﻤﺪﻳﻨﺔ Street ﺍﻟﺒﻠﻴﺪﻩ ﺍﻟﺸﺎﺭﻉ District ﺍﻟﺒﻴﻀﺎﺀ ﺍﻟﺪﺍﺭ ﺍﻟﺤﻲ Postal Code 14519ﺍﻟﺮﻣﺰﺍﻟﺒﺮﻳﺪﻱ Building Number 7131ﺭﻗﻢﺍﻟﻤﺒﻨﻰ Secondary Number 4003ﺍﻟﺮﻗﻢﺍﻟﻔﺮﻋﻲ 1 Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ ﺍﻟﺮﺻﻴﺪ ﺩﺍﺋﻦ ﻣﺪﻳﻦ ﺍﻟﻌﻤﻠﻴﺔ ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﻌﻤﻴﻞ ﺣﺴﺎﺏ ﺇﻟﻰ 58,823.54 SAR 55,500.00 SAR 0.00 SARﺗﺤﻮﻳﻞ ﺳﻴﺎﺭﺓ10:27:15:ﺍﻟﻮﻗﺖ2023/11/09ﺷﺮﺍ / ﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﺑﺮﺍﻫﻴﻢ **ﻣﻼﺣﻈﺔ:ﺗﺤﻮﻳﻞ (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,785.54 SAR 0.00 SAR 38.00 SAR Faida (331300262532-6451354000078624):**ﻣﻼﺣﻈﺔ00:27:03:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 AlSaiari Foundat, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,685.54 SAR 0.00 SAR 100.00 SAR Al Jeri (331300281240-6418044945230131):**ﻣﻼﺣﻈﺔ00:28:20:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 dar albydha, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,653.43 SAR 0.00 SAR 32.11 SAR aswaq (331301423282-6321647801934801):**ﻣﻼﺣﻈﺔ01:42:40:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 althalatheen, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,627.43 SAR 0.00 SAR 26.00 SAR (331302344328-6301497901942260):**ﻣﻼﺣﻈﺔ02:34:51:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 TURKISH VALLEY ESTAURA, RIYADH, SA 8,627.43 SAR 0.00 SAR 50,000.00 SARﺗﺤﻮﻳﻞ-ﻣﺤﻤﺪW-/TOACCT/43300608010053343TO:**ﻣﻼﺣﻈﺔ16:28:24:ﺍﻟﻮﻗﺖ ﺍﻟﻨﻌﻤﻲ2023/11/09ﻋﻠﻲ ﻋﺒﺪﻩ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﻣﺤﻤﺪ ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺳﺤﺐ 8,127.43 SAR 0.00 SAR 500.00 SAR ALFAISAL STATION ALMASANI, RIYADH:**ﻣﻼﺣﻈﺔ18:09:04:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 ((OP0101ND01055856-180857526615 (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 8,104.93 SAR 0.00 SAR 22.50 SAR (331319123393-6327019701980248):**ﻣﻼﺣﻈﺔ19:12:42:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 tamwinat talal al fale, RIYADH, SA ()ﻣﺤﻠﻲApple Pay ﺍﻧﺘﺮﻧﺖ ﺷﺮﺍﺀ 1,405.93 SAR 0.00 SAR 6,699.00 SAR Online Purchase from Yaqoot, Riyadh:**ﻣﻼﺣﻈﺔ20:58:16:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺻﺮﺍﻑ-ﺑﻄﺎﻗﺔ ﺗﺠﺪﻳﺪ ﺭﺳﻮﻡ ﺫﺍﺗﻴﺔ ﺧﺪﻣﺔ 1,371.43 SAR 0.00 SAR 34.50 SAR CardPrnFee-0180K9IB KIOUDF01:**ﻣﻼﺣﻈﺔ20:50:10:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺍﻟﺤﺴﺎﺏ ﻣﻦ ﺍﻟﺘﺤﻮﻳﻞ 0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/11 ﺯﻳﻦ433000010006080362223$ﻣﺤﻤﺪ ﻋﻠﻲ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﺍﺣﻤﺪ Noteﻣﻼﺣﻈﺔ This document is responsibility of the confidentialholder.ﻫﺬﻩand under the ﺍﻟﻤﺤﺎﻓﻈﺔ ﻣﺴﺆﻭﻟﻴﺔ ﻛﺎﻣﻞ ﺣﺎﻣﻠﻬﺎ ﻭﻳﺘﺤﻤﻞ ﺳﺮﻳﺔ ﺍﻟﻮﺛﻴﻘﺔ 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 1, 'sample_date_lines': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 1, 'samples': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+BNP_AMOUNT_DEBUG {'line': '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11', 'nums': ['1,371.00'], 'normalized': '1,371.00', 'parsed': 1371.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11'
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 12, 'dep_line': 'Number Of Deposits    1ﻋﺪﺩﺍﻹﻳﺪﺍﻋﺎﺕ', 'wd_i': 13, 'wd_line': 'Number Of Withdrawals     10ﻋﺪﺩﺍﻟﺴﺤﻮﺑﺎﺕ', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ\n              account statement\n\n\n  click to validate\nref. no           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ\ndate                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ\ntime                                            2:39       amﺍﻟﻮﻗﺖ\n  statement  detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ\n\ncustom'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '12/11/2023 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 - 2023/11/11ﺧﻼﻝﺍﻟﻔﺘﺮﺓ National Addressﺍﻟﻌﻨﻮﺍﻥﺍﻟﻮﻃﻨﻲ Cityﺍﻟﺮﻳﺎﺽ ﺍﻟﻤﺪﻳﻨﺔ Street ﺍﻟﺒﻠﻴﺪﻩ ﺍﻟﺸﺎﺭﻉ District ﺍﻟﺒﻴﻀﺎﺀ ﺍﻟﺪﺍﺭ ﺍﻟﺤﻲ Postal Code 14519ﺍﻟﺮﻣﺰﺍﻟﺒﺮﻳﺪﻱ Building Number 7131ﺭﻗﻢﺍﻟﻤﺒﻨﻰ Secondary Number 4003ﺍﻟﺮﻗﻢﺍﻟﻔﺮﻋﻲ 1 Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ ﺍﻟﺮﺻﻴﺪ ﺩﺍﺋﻦ ﻣﺪﻳﻦ ﺍﻟﻌﻤﻠﻴﺔ ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﻌﻤﻴﻞ ﺣﺴﺎﺏ ﺇﻟﻰ 58,823.54 SAR 55,500.00 SAR 0.00 SARﺗﺤﻮﻳﻞ ﺳﻴﺎﺭﺓ10:27:15:ﺍﻟﻮﻗﺖ2023/11/09ﺷﺮﺍ / ﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﺑﺮﺍﻫﻴﻢ **ﻣﻼﺣﻈﺔ:ﺗﺤﻮﻳﻞ (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,785.54 SAR 0.00 SAR 38.00 SAR Faida (331300262532-6451354000078624):**ﻣﻼﺣﻈﺔ00:27:03:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 AlSaiari Foundat, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,685.54 SAR 0.00 SAR 100.00 SAR Al Jeri (331300281240-6418044945230131):**ﻣﻼﺣﻈﺔ00:28:20:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 dar albydha, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,653.43 SAR 0.00 SAR 32.11 SAR aswaq (331301423282-6321647801934801):**ﻣﻼﺣﻈﺔ01:42:40:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 althalatheen, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,627.43 SAR 0.00 SAR 26.00 SAR (331302344328-6301497901942260):**ﻣﻼﺣﻈﺔ02:34:51:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 TURKISH VALLEY ESTAURA, RIYADH, SA 8,627.43 SAR 0.00 SAR 50,000.00 SARﺗﺤﻮﻳﻞ-ﻣﺤﻤﺪW-/TOACCT/43300608010053343TO:**ﻣﻼﺣﻈﺔ16:28:24:ﺍﻟﻮﻗﺖ ﺍﻟﻨﻌﻤﻲ2023/11/09ﻋﻠﻲ ﻋﺒﺪﻩ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﻣﺤﻤﺪ ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺳﺤﺐ 8,127.43 SAR 0.00 SAR 500.00 SAR ALFAISAL STATION ALMASANI, RIYADH:**ﻣﻼﺣﻈﺔ18:09:04:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 ((OP0101ND01055856-180857526615 (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 8,104.93 SAR 0.00 SAR 22.50 SAR (331319123393-6327019701980248):**ﻣﻼﺣﻈﺔ19:12:42:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 tamwinat talal al fale, RIYADH, SA ()ﻣﺤﻠﻲApple Pay ﺍﻧﺘﺮﻧﺖ ﺷﺮﺍﺀ 1,405.93 SAR 0.00 SAR 6,699.00 SAR Online Purchase from Yaqoot, Riyadh:**ﻣﻼﺣﻈﺔ20:58:16:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺻﺮﺍﻑ-ﺑﻄﺎﻗﺔ ﺗﺠﺪﻳﺪ ﺭﺳﻮﻡ ﺫﺍﺗﻴﺔ ﺧﺪﻣﺔ 1,371.43 SAR 0.00 SAR 34.50 SAR CardPrnFee-0180K9IB KIOUDF01:**ﻣﻼﺣﻈﺔ20:50:10:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺍﻟﺤﺴﺎﺏ ﻣﻦ ﺍﻟﺘﺤﻮﻳﻞ 0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/11 ﺯﻳﻦ433000010006080362223$ﻣﺤﻤﺪ ﻋﻠﻲ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﺍﺣﻤﺪ Noteﻣﻼﺣﻈﺔ This document is responsibility of the confidentialholder.ﻫﺬﻩand under the ﺍﻟﻤﺤﺎﻓﻈﺔ ﻣﺴﺆﻭﻟﻴﺔ ﻛﺎﻣﻞ ﺣﺎﻣﻠﻬﺎ ﻭﻳﺘﺤﻤﻞ ﺳﺮﻳﺔ ﺍﻟﻮﺛﻴﻘﺔ 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 12, 'dep_line': 'Number Of Deposits    1ﻋﺪﺩﺍﻹﻳﺪﺍﻋﺎﺕ', 'wd_i': 13, 'wd_line': 'Number Of Withdrawals     10ﻋﺪﺩﺍﻟﺴﺤﻮﺑﺎﺕ', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'ﺟﺎﺭﻱ ﺣﺴﺎﺏ ﻛﺸﻒ\n              account statement\n\n\n  click to validate\nref. no           10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ\ndate                                  12/11/2023 -                  28/04/1445ﺍﻟﺘﺎﺭﻳﺦ\ntime                                            2:39       amﺍﻟﻮﻗﺖ\n  statement  detailsﺗﻔﺎﺻﻴﻞﺍﻟﻜﺸﻒ\n\ncustom'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '12/11/2023 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 - 2023/11/11ﺧﻼﻝﺍﻟﻔﺘﺮﺓ National Addressﺍﻟﻌﻨﻮﺍﻥﺍﻟﻮﻃﻨﻲ Cityﺍﻟﺮﻳﺎﺽ ﺍﻟﻤﺪﻳﻨﺔ Street ﺍﻟﺒﻠﻴﺪﻩ ﺍﻟﺸﺎﺭﻉ District ﺍﻟﺒﻴﻀﺎﺀ ﺍﻟﺪﺍﺭ ﺍﻟﺤﻲ Postal Code 14519ﺍﻟﺮﻣﺰﺍﻟﺒﺮﻳﺪﻱ Building Number 7131ﺭﻗﻢﺍﻟﻤﺒﻨﻰ Secondary Number 4003ﺍﻟﺮﻗﻢﺍﻟﻔﺮﻋﻲ 1 Ref. No 10028303ﺍﻟﺮﻗﻢﺍﻟﺘﺴﻠﺴﻠﻲ ﺍﻟﺮﺻﻴﺪ ﺩﺍﺋﻦ ﻣﺪﻳﻦ ﺍﻟﻌﻤﻠﻴﺔ ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﻌﻤﻴﻞ ﺣﺴﺎﺏ ﺇﻟﻰ 58,823.54 SAR 55,500.00 SAR 0.00 SARﺗﺤﻮﻳﻞ ﺳﻴﺎﺭﺓ10:27:15:ﺍﻟﻮﻗﺖ2023/11/09ﺷﺮﺍ / ﺯﻳﻦ ﻋﻠﻲ ﻣﺤﻤﺪ ﺍﺑﺮﺍﻫﻴﻢ **ﻣﻼﺣﻈﺔ:ﺗﺤﻮﻳﻞ (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,785.54 SAR 0.00 SAR 38.00 SAR Faida (331300262532-6451354000078624):**ﻣﻼﺣﻈﺔ00:27:03:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 AlSaiari Foundat, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,685.54 SAR 0.00 SAR 100.00 SAR Al Jeri (331300281240-6418044945230131):**ﻣﻼﺣﻈﺔ00:28:20:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 dar albydha, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,653.43 SAR 0.00 SAR 32.11 SAR aswaq (331301423282-6321647801934801):**ﻣﻼﺣﻈﺔ01:42:40:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 althalatheen, RIYADH, SA (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 58,627.43 SAR 0.00 SAR 26.00 SAR (331302344328-6301497901942260):**ﻣﻼﺣﻈﺔ02:34:51:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 TURKISH VALLEY ESTAURA, RIYADH, SA 8,627.43 SAR 0.00 SAR 50,000.00 SARﺗﺤﻮﻳﻞ-ﻣﺤﻤﺪW-/TOACCT/43300608010053343TO:**ﻣﻼﺣﻈﺔ16:28:24:ﺍﻟﻮﻗﺖ ﺍﻟﻨﻌﻤﻲ2023/11/09ﻋﻠﻲ ﻋﺒﺪﻩ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﻣﺤﻤﺪ ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺳﺤﺐ 8,127.43 SAR 0.00 SAR 500.00 SAR ALFAISAL STATION ALMASANI, RIYADH:**ﻣﻼﺣﻈﺔ18:09:04:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 ((OP0101ND01055856-180857526615 (ﺷﺮﺍﺀ)ﻣﺤﻠﻲ ﺃﺛﻴﺮ ﺍﻟﺒﻴﻊ ﻧﻘﺎﻁ ﻋﺒﺮ 8,104.93 SAR 0.00 SAR 22.50 SAR (331319123393-6327019701980248):**ﻣﻼﺣﻈﺔ19:12:42:ﺍﻟﻮﻗﺖ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/09 tamwinat talal al fale, RIYADH, SA ()ﻣﺤﻠﻲApple Pay ﺍﻧﺘﺮﻧﺖ ﺷﺮﺍﺀ 1,405.93 SAR 0.00 SAR 6,699.00 SAR Online Purchase from Yaqoot, Riyadh:**ﻣﻼﺣﻈﺔ20:58:16:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺻﺮﺍﻑ-ﺑﻄﺎﻗﺔ ﺗﺠﺪﻳﺪ ﺭﺳﻮﻡ ﺫﺍﺗﻴﺔ ﺧﺪﻣﺔ 1,371.43 SAR 0.00 SAR 34.50 SAR CardPrnFee-0180K9IB KIOUDF01:**ﻣﻼﺣﻈﺔ20:50:10:ﺍﻟﻮﻗﺖ2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/10 ﺍﻵﻟﻲ-ﺍﻟﺼﺮﺍﻑ ﺍﻟﺤﺴﺎﺏ ﻣﻦ ﺍﻟﺘﺤﻮﻳﻞ 0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '11/11 ﺯﻳﻦ433000010006080362223$ﻣﺤﻤﺪ ﻋﻠﻲ **ﺍﻟﻤﺴﺘﻔﻴﺪ:ﺍﺣﻤﺪ Noteﻣﻼﺣﻈﺔ This document is responsibility of the confidentialholder.ﻫﺬﻩand under the ﺍﻟﻤﺤﺎﻓﻈﺔ ﻣﺴﺆﻭﻟﻴﺔ ﻛﺎﻣﻞ ﺣﺎﻣﻠﻬﺎ ﻭﻳﺘﺤﻤﻞ ﺳﺮﻳﺔ ﺍﻟﻮﺛﻴﻘﺔ 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 1, 'sample_date_lines': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 1, 'samples': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+BNP_AMOUNT_DEBUG {'line': '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11', 'nums': ['1,371.00'], 'normalized': '1,371.00', 'parsed': 1371.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11'
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 1, 'sample_date_lines': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 1, 'samples': ['0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11']}
+BNP_AMOUNT_DEBUG {'line': '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11', 'nums': ['1,371.00'], 'normalized': '1,371.00', 'parsed': 1371.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '0.43 SAR 0.00 SAR 1,371.00 SAR ﺯﻳﻦ20:53:08:ﺍﻟﻮﻗﺖﻣﺤﻤﺪ ﻋﻠﻲ ﺍﺣﻤﺪ ﺣﺴﺎﺏ **ﻣﻼﺣﻈﺔ:ﺍﻟﻰ 2023/11/11'
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0}
+WDB_PRE_ROUTE_RESULT {'transactions': 0, 'income': 0, 'expenses': 0}
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+SUSPICIOUS ARABE1.pdf | tx=0 income=0 expenses=0 expected_income=55500.0 expected_expenses=58823.11 summary_ok=False real_ok=None opening=3323.54 ending=0.43 gap=None reason=NO_TRANSACTIONS; SUMMARY_GAP income=55500.0 expense=58823.11

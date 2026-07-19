@@ -9,114 +9,225 @@ def normalize_text(text: str) -> str:
     )
 
 
+# Universal, contract-family-neutral clause grouping taxonomy.
+# This file intentionally avoids treating restrictive covenants
+# as Employment/HR by default, because non-compete, non-solicitation,
+# non-circumvention and exclusivity clauses appear across many
+# commercial contract families internationally.
 DOMAIN_TERMS = {
     "commercial_finance": [
-        "payment", "pricing", "invoice", "tax", "late payment", "refund",
-        "expense", "fees", "commission", "bonus", "royalties",
+        # EN
+        "payment", "payments", "pricing", "price", "invoice", "tax",
+        "late payment", "refund", "expense", "fees", "fee",
+        "commission", "bonus", "royalties", "royalty", "interest",
+        "service credits", "service credit", "credit note",
+        # FR
         "paiement", "prix", "facture", "taxe", "retard de paiement",
-        "remboursement", "frais", "commission", "prime",
-        "الدفع", "السعر", "فاتورة", "ضريبة", "رسوم", "عمولة", "مكافأة",
+        "remboursement", "frais", "commission", "prime", "redevance",
+        "intérêt", "avoirs", "crédit de service",
+        # AR
+        "الدفع", "السعر", "فاتورة", "ضريبة", "رسوم", "عمولة",
+        "مكافأة", "فائدة", "إتاوة", "ائتمان الخدمة", "رصيد الخدمة",
     ],
 
     "contract_lifecycle": [
-        "term", "duration", "renewal", "termination", "notice", "default",
-        "cure period", "expiration", "non-renewal",
-        "durée", "renouvellement", "résiliation", "préavis", "défaut",
-        "délai de correction", "expiration",
-        "المدة", "التجديد", "إنهاء", "فسخ", "إشعار", "إخلال",
+        # EN
+        "term", "duration", "renewal", "automatic renewal", "termination",
+        "notice", "default", "cure period", "expiration", "non-renewal",
+        "termination for cause", "termination for convenience",
+        # FR
+        "durée", "renouvellement", "renouvellement automatique",
+        "résiliation", "préavis", "défaut", "délai de correction",
+        "expiration", "non-renouvellement",
+        # AR
+        "المدة", "التجديد", "التجديد التلقائي", "إنهاء", "فسخ",
+        "إشعار", "إخلال", "مهلة تصحيح", "انتهاء", "عدم التجديد",
     ],
 
     "liability_risk": [
-        "liability", "limitation of liability", "indemnity", "insurance",
-        "warranty", "damages", "penalty", "force majeure",
-        "responsabilité", "limitation de responsabilité", "indemnisation",
-        "assurance", "garantie", "dommages", "pénalité", "force majeure",
+        # EN
+        "liability", "limitation of liability", "liability cap",
+        "indemnity", "indemnification", "insurance", "warranty",
+        "damages", "penalty", "liquidated damages", "force majeure",
+        "hold harmless", "consequential damages", "gross negligence",
+        "willful misconduct",
+        # FR
+        "responsabilité", "limitation de responsabilité",
+        "plafond de responsabilité", "indemnisation", "assurance",
+        "garantie", "dommages", "pénalité", "dommages-intérêts",
+        "force majeure", "faute lourde", "faute intentionnelle",
+        # AR
         "المسؤولية", "حد المسؤولية", "تعويض", "تأمين", "ضمان",
-        "أضرار", "غرامة", "القوة القاهرة",
+        "أضرار", "غرامة", "القوة القاهرة", "الإهمال الجسيم",
+        "سوء السلوك المتعمد",
     ],
 
     "ip_licensing": [
-        "intellectual property", "ip", "ownership", "license", "assignment",
-        "copyright", "trademark", "patent", "work product", "invention",
+        # EN
+        "intellectual property", "ip", "ownership", "license", "licence",
+        "assignment", "copyright", "trademark", "patent", "work product",
+        "deliverables", "invention", "moral rights", "source code",
+        # FR
         "propriété intellectuelle", "licence", "cession", "droit d'auteur",
-        "marque", "brevet", "livrable", "invention",
-        "الملكية الفكرية", "ترخيص", "تنازل", "حقوق النشر", "علامة تجارية",
-        "براءة", "اختراع",
+        "marque", "brevet", "livrable", "livrables", "invention",
+        "droits moraux", "code source",
+        # AR
+        "الملكية الفكرية", "ترخيص", "تنازل", "حقوق النشر",
+        "علامة تجارية", "براءة", "اختراع", "المخرجات", "الحقوق المعنوية",
+        "الشفرة المصدرية",
     ],
 
     "data_confidentiality": [
+        # EN
         "confidentiality", "confidential", "non-disclosure", "trade secret",
-        "personal data", "data protection", "privacy", "security",
+        "personal data", "data protection", "privacy", "security incident",
+        "security", "processor", "controller", "subprocessor",
+        "data processing", "gdpr", "personal information",
+        # FR
         "confidentialité", "confidentiel", "non-divulgation",
         "secret commercial", "données personnelles", "protection des données",
-        "vie privée", "sécurité",
+        "vie privée", "incident de sécurité", "sécurité", "sous-traitant",
+        "responsable du traitement", "traitement des données",
+        # AR
         "السرية", "سري", "عدم الإفصاح", "بيانات شخصية", "حماية البيانات",
-        "الخصوصية", "الأمن",
+        "الخصوصية", "حادث أمني", "الأمن", "معالج البيانات",
+        "المتحكم", "المعالج الفرعي", "معالجة البيانات",
+    ],
+
+    "restrictive_covenants": [
+        # EN
+        "non-compete", "non compete", "noncompetition", "non-competition",
+        "non-solicitation", "non solicitation", "non-solicit",
+        "non-dealing", "non dealing", "non-circumvention",
+        "non circumvention", "exclusive dealing", "exclusivity",
+        "exclusive arrangement", "restraint of trade", "poaching",
+        "customer solicitation", "employee solicitation",
+        "post-termination restriction", "restrictive covenant",
+        # FR
+        "non-concurrence", "non concurrence", "non-sollicitation",
+        "non sollicitation", "non détournement", "non-contournement",
+        "exclusivité", "clause restrictive", "restriction post-contractuelle",
+        "débauchage", "sollicitation de clients", "sollicitation des employés",
+        # AR
+        "عدم المنافسة", "عدم الاستقطاب", "عدم الالتفاف", "الحصرية",
+        "قيد تعاقدي", "قيود تعاقدية", "استقطاب العملاء", "استقطاب الموظفين",
+        "قيود ما بعد انتهاء العقد",
     ],
 
     "employment_hr": [
-        "employment", "employee", "employer", "salary", "benefits",
-        "vacation", "non-compete", "non-solicitation", "conflict of interest",
-        "emploi", "employé", "employeur", "salaire", "avantages",
-        "congés", "non-concurrence", "non-sollicitation", "conflit d'intérêt",
-        "العمل", "الموظف", "صاحب العمل", "راتب", "مزايا", "إجازة",
-        "عدم المنافسة", "عدم الاستقطاب",
+        # EN — true HR/employment terms only
+        "employment", "employment agreement", "employment contract",
+        "employee", "employer", "salary", "wages", "benefits",
+        "vacation", "leave", "working hours", "disciplinary",
+        "promotion", "retirement", "severance", "termination of employment",
+        "bonus plan", "payroll",
+        # FR
+        "emploi", "contrat de travail", "employé", "employeur",
+        "salarié", "salaire", "avantages", "congés", "temps de travail",
+        "licenciement", "indemnité de départ", "paie",
+        # AR
+        "العمل", "عقد عمل", "الموظف", "صاحب العمل", "راتب",
+        "مزايا", "إجازة", "ساعات العمل", "فصل", "تعويض نهاية الخدمة",
+        "كشوف الرواتب",
     ],
 
     "services_operations": [
-        "services", "service level", "sla", "support", "maintenance",
-        "delivery", "acceptance", "performance", "change request",
-        "services", "niveau de service", "support", "maintenance",
-        "livraison", "acceptation", "performance",
-        "الخدمات", "مستوى الخدمة", "الدعم", "الصيانة", "التسليم",
-        "القبول", "الأداء",
+        # EN
+        "services", "service level", "sla", "uptime", "availability",
+        "support", "maintenance", "delivery", "acceptance", "performance",
+        "change request", "statement of work", "sow", "service credits",
+        "remediation", "incident report", "deliver the services",
+        # FR
+        "services", "niveau de service", "disponibilité", "support",
+        "maintenance", "livraison", "acceptation", "performance",
+        "demande de changement", "cahier des charges", "crédits de service",
+        "remédiation", "rapport d'incident",
+        # AR
+        "الخدمات", "مستوى الخدمة", "توفر الخدمة", "الجاهزية", "الدعم",
+        "الصيانة", "التسليم", "القبول", "الأداء", "طلب تغيير",
+        "رصيد الخدمة", "معالجة الخلل", "تقرير الحادث",
     ],
 
     "governance_compliance": [
-        "assignment", "change of control", "compliance", "anti-bribery",
-        "sanctions", "governance", "subcontracting", "audit",
-        "cession", "changement de contrôle", "conformité", "sanctions",
-        "gouvernance", "sous-traitance", "audit",
-        "التنازل", "تغيير السيطرة", "الامتثال", "العقوبات", "الحوكمة",
-        "التعاقد من الباطن", "التدقيق",
+        # EN
+        "compliance", "anti-bribery", "anti bribery", "sanctions",
+        "governance", "committee", "subcontracting", "audit", "audit rights",
+        "policies", "regulatory", "framework", "controls", "code of conduct",
+        # FR
+        "conformité", "anti-corruption", "sanctions", "gouvernance",
+        "comité", "sous-traitance", "audit", "droits d'audit",
+        "réglementaire", "contrôles", "code de conduite",
+        # AR
+        "الامتثال", "مكافحة الرشوة", "العقوبات", "الحوكمة", "لجنة",
+        "التعاقد من الباطن", "التدقيق", "حقوق التدقيق", "تنظيمي",
+        "ضوابط", "مدونة السلوك",
+    ],
+
+    "corporate": [
+        # EN
+        "board", "director", "shareholder", "member", "equity", "shares",
+        "voting", "capital", "company", "merger", "acquisition",
+        "change of control", "affiliate", "subsidiary", "joint venture",
+        # FR
+        "conseil d'administration", "administrateur", "actionnaire",
+        "membre", "capital", "société", "fusion", "acquisition",
+        "changement de contrôle", "filiale", "coentreprise",
+        # AR
+        "مجلس الإدارة", "مدير", "مساهم", "عضو", "أسهم", "تصويت",
+        "رأس المال", "شركة", "اندماج", "استحواذ", "تغيير السيطرة",
+        "شركة تابعة", "مشروع مشترك",
     ],
 
     "real_estate": [
+        # EN
         "lease", "rent", "deposit", "premises", "property", "repairs",
-        "utilities", "tenant", "landlord",
+        "utilities", "tenant", "landlord", "lessor", "lessee",
+        # FR
         "bail", "loyer", "dépôt", "locaux", "bien immobilier",
         "réparations", "charges", "locataire", "bailleur",
+        # AR
         "إيجار", "أجرة", "وديعة", "عقار", "إصلاحات", "مستأجر", "مؤجر",
     ],
 
     "finance_lending": [
+        # EN
         "loan", "interest", "collateral", "guarantee", "repayment",
-        "acceleration", "borrower", "lender",
+        "acceleration", "borrower", "lender", "security interest",
+        "financing", "credit facility",
+        # FR
         "prêt", "intérêt", "garantie", "remboursement", "exigibilité",
-        "emprunteur", "prêteur",
+        "emprunteur", "prêteur", "sûreté", "financement", "crédit",
+        # AR
         "قرض", "فائدة", "ضمان", "سداد", "مقترض", "مقرض",
+        "ضمان عيني", "تمويل", "تسهيلات ائتمانية",
     ],
 
     "dispute_resolution": [
+        # EN
         "dispute", "governing law", "jurisdiction", "venue", "arbitration",
-        "mediation", "court", "litigation",
+        "mediation", "court", "litigation", "tribunal", "icc", "aaa",
+        "seat of arbitration",
+        # FR
         "litige", "droit applicable", "juridiction", "tribunal",
-        "arbitrage", "médiation", "contentieux",
+        "arbitrage", "médiation", "contentieux", "siège de l'arbitrage",
+        # AR
         "نزاع", "القانون الواجب التطبيق", "اختصاص", "محكمة",
-        "تحكيم", "وساطة", "تقاضي",
+        "تحكيم", "وساطة", "تقاضي", "هيئة التحكيم", "مقر التحكيم",
     ],
 
     "general_provisions": [
+        # EN
         "parties", "party", "definitions", "interpretation", "notices",
-        "assignment", "entire agreement", "amendment", "severability",
-        "waiver", "counterparts",
-
+        "entire agreement", "amendment", "severability", "waiver",
+        "counterparts", "signatures", "headings",
+        # FR
         "parties", "définitions", "interprétation", "notifications",
-        "cession", "intégralité de l'accord", "modification",
-        "divisibilité", "renonciation", "exemplaires",
-
+        "intégralité de l'accord", "modification", "divisibilité",
+        "renonciation", "exemplaires", "signatures", "titres",
+        # AR
         "الأطراف", "طرف", "التعاريف", "التفسير", "الإشعارات",
-        "التنازل", "الاتفاق الكامل", "التعديل", "قابلية الفصل",
+        "الاتفاق الكامل", "التعديل", "قابلية الفصل", "التنازل",
+        "التوقيعات", "العناوين",
     ],
 }
 
@@ -147,8 +258,13 @@ GROUP_LABELS = {
         "fr": "Données et confidentialité",
         "ar": "البيانات والسرية",
     },
+    "restrictive_covenants": {
+        "en": "Restrictive Covenants",
+        "fr": "Clauses restrictives",
+        "ar": "القيود التعاقدية",
+    },
     "employment_hr": {
-        "en": "Employment & HR",
+        "en": "Restrictive Covenants & Personnel",
         "fr": "Emploi et ressources humaines",
         "ar": "العمل والموارد البشرية",
     },
@@ -161,6 +277,11 @@ GROUP_LABELS = {
         "en": "Governance & Compliance",
         "fr": "Gouvernance et conformité",
         "ar": "الحوكمة والامتثال",
+    },
+    "corporate": {
+        "en": "Corporate & Ownership",
+        "fr": "Société et gouvernance capitalistique",
+        "ar": "الشركات والملكية",
     },
     "real_estate": {
         "en": "Real Estate",
@@ -189,12 +310,144 @@ MIN_GROUP_CONFIDENCE = 0.55
 SECONDARY_GROUP_THRESHOLD = 0.72
 
 
-def build_clause_groups(clauses: list[dict], language: str = "en") -> dict:
-    buckets: dict[str, list[dict]] = {}
+PARTIES_TITLES = {
+    "parties",
+    "party",
+    "article 1 - parties",
+    "article 1 parties",
+    "les parties",
+    "الأطراف",
+}
 
+
+# Some domain terms are legally stronger than generic body matches.
+# These explicit title rules prevent terms like "employee" inside a
+# non-solicitation clause from making the whole clause Employment/HR.
+TITLE_PRIORITY_RULES = {
+    "restrictive_covenants": [
+        "non-compete", "non compete", "non-solicitation", "non solicitation",
+        "non-circumvention", "non circumvention", "non-dealing", "exclusivity",
+        "restrictive covenant", "non-concurrence", "non-sollicitation",
+        "non sollicitation", "عدم المنافسة", "عدم الاستقطاب", "الحصرية",
+    ],
+    "services_operations": [
+        "service level", "service levels", "uptime", "availability",
+        "support", "maintenance", "services and service levels",
+        "niveau de service", "disponibilité", "مستوى الخدمة", "توفر الخدمة",
+    ],
+    "data_confidentiality": [
+        "data protection", "data processing", "security incident",
+        "security measures", "subprocessor", "confidentiality",
+        "protection des données", "traitement des données",
+        "incident de sécurité", "confidentialité", "حماية البيانات",
+        "معالجة البيانات", "حادث أمني", "السرية",
+    ],
+    "liability_risk": [
+        "liability", "limitation of liability", "indemnification",
+        "indemnity", "insurance", "responsabilité", "indemnisation",
+        "المسؤولية", "تعويض",
+    ],
+    "dispute_resolution": [
+        "dispute", "arbitration", "mediation", "governing law",
+        "jurisdiction", "litige", "arbitrage", "médiation", "نزاع", "تحكيم",
+    ],
+    "employment_hr": [
+        "employment", "employment duties", "compensation", "salary",
+        "benefits", "vacation", "termination of employment",
+        "contrat de travail", "salaire", "congés", "عقد عمل", "راتب",
+    ],
+}
+
+
+
+GROUP_PRIORITY = [
+    "liability_risk",
+    "data_confidentiality",
+    "services_operations",
+    "commercial_finance",
+    "ip_licensing",
+    "contract_lifecycle",
+    "governance_compliance",
+    "dispute_resolution",
+    "finance_lending",
+    "corporate",
+    "real_estate",
+    "restrictive_covenants",
+    "employment_hr",
+    "general_provisions",
+]
+
+
+def normalize_language(language: str) -> str:
+    language = str(language or "en").lower().strip()
+
+    if language in {"en", "fr", "ar"}:
+        return language
+
+    return "en"
+
+
+def safe_group_label(
+    name: str,
+    language: str = "en",
+) -> str:
+    language = normalize_language(language)
+
+    labels = GROUP_LABELS.get(name, {})
+
+    return (
+        labels.get(language)
+        or labels.get("en")
+        or name
+    )
+
+
+def stable_best_group(
+    scores: dict[str, int],
+) -> str:
+    if not scores:
+        return "general_provisions"
+
+    best_score = max(scores.values())
+
+    candidates = [
+        group
+        for group, score in scores.items()
+        if score == best_score
+    ]
+
+    if len(candidates) == 1:
+        return candidates[0]
+
+    for group in GROUP_PRIORITY:
+        if group in candidates:
+            return group
+
+    return sorted(candidates)[0]
+
+
+def build_clause_groups(
+    clauses: list[dict],
+    language: str = "en",
+    party_roles: dict | None = None,
+) -> dict:
+    language = normalize_language(language)
+
+    role_family = ""
+    if isinstance(party_roles, dict):
+        role_family = str(party_roles.get("family") or "").lower().strip()
+
+    is_employment_contract = role_family == "employment"
+
+    buckets: dict[str, list[dict]] = {}
     seen_titles = set()
 
     for clause in clauses:
+        if not isinstance(clause, dict):
+            continue
+
+        clause = dict(clause)
+
         title = str(
             clause.get("title")
             or clause.get("clause_title")
@@ -203,17 +456,9 @@ def build_clause_groups(clauses: list[dict], language: str = "en") -> dict:
 
         normalized_title = normalize_text(title)
 
-        if normalized_title in {
-            "parties",
-            "party",
-            "article 1 - parties",
-            "article 1 parties",
-            "les parties",
-            "الأطراف",
-        }:
+        if normalized_title in PARTIES_TITLES:
             primary_group = "general_provisions"
             secondary_groups = []
-
         else:
             reference = str(
                 clause.get("clause_reference")
@@ -228,60 +473,11 @@ def build_clause_groups(clauses: list[dict], language: str = "en") -> dict:
                 str(clause.get("explanation_simple") or ""),
             ])
 
-            scores = score_groups(
+            primary_group, secondary_groups = classify_clause_group(
                 title=title,
                 reference=reference,
                 body=body,
             )
-
-            primary_group = max(
-                scores,
-                key=scores.get,
-            )
-
-            best_score = float(
-                scores[primary_group]
-            )
-
-            if best_score < MIN_GROUP_CONFIDENCE:
-
-                text = " ".join([
-                    title,
-                    reference,
-                    body,
-                ])
-
-                ontology_domains = detect_legal_domains(text)
-
-                if ontology_domains:
-                    primary_group = ontology_domains[0]
-
-                else:
-                    primary_group = "general_provisions"
-
-            secondary_groups = []
-
-            primary_score = float(
-                scores.get(
-                    primary_group,
-                    0,
-                )
-            )
-
-            for name, score in scores.items():
-
-                if name == primary_group:
-                    continue
-
-                if primary_score <= 0:
-                    continue
-
-                similarity = (
-                    score / primary_score
-                )
-
-                if similarity >= SECONDARY_GROUP_THRESHOLD:
-                    secondary_groups.append(name)
 
         normalized = normalized_title
 
@@ -301,7 +497,7 @@ def build_clause_groups(clauses: list[dict], language: str = "en") -> dict:
     return {
         "groups": [
             {
-                "name": GROUP_LABELS.get(name, {}).get(language, name),
+                "name": safe_group_label(name, language),
                 "key": name,
                 "count": len(items),
                 "clauses": items,
@@ -312,19 +508,131 @@ def build_clause_groups(clauses: list[dict], language: str = "en") -> dict:
     }
 
 
+def classify_clause_group(
+    title: str,
+    reference: str = "",
+    body: str = "",
+) -> tuple[str, list[str]]:
+    title_text = normalize_text(title)
+    reference_text = normalize_text(reference)
+    body_text = normalize_text(body)
+    full_text = " ".join([title_text, reference_text, body_text])
+
+    priority_group = detect_priority_group_from_title(title_text)
+
+    scores = score_groups(
+        title=title,
+        reference=reference,
+        body=body,
+    )
+
+    if priority_group:
+        primary_group = priority_group
+    else:
+        primary_group = stable_best_group(scores)
+
+        best_score = float(
+            scores[primary_group]
+        )
+
+        if best_score < MIN_GROUP_CONFIDENCE:
+            ontology_domains = detect_legal_domains(full_text)
+
+            if ontology_domains:
+                primary_group = normalize_ontology_domain(
+                    ontology_domains[0]
+                )
+            else:
+                primary_group = "general_provisions"
+
+    secondary_groups = build_secondary_groups(
+        scores=scores,
+        primary_group=primary_group,
+    )
+
+    return primary_group, secondary_groups
+
+
+def detect_priority_group_from_title(title_text: str) -> str | None:
+    if not title_text:
+        return None
+
+    for group, terms in TITLE_PRIORITY_RULES.items():
+        if any(term in title_text for term in terms):
+            return group
+
+    return None
+
+
+def normalize_ontology_domain(domain: str) -> str:
+    value = normalize_text(domain).replace(" ", "_")
+
+    aliases = {
+        "data_privacy": "data_confidentiality",
+        "privacy": "data_confidentiality",
+        "data_protection": "data_confidentiality",
+        "confidentiality": "data_confidentiality",
+        "ip": "ip_licensing",
+        "intellectual_property": "ip_licensing",
+        "licensing": "ip_licensing",
+        "liability": "liability_risk",
+        "risk": "liability_risk",
+        "employment": "employment_hr",
+        "hr": "employment_hr",
+        "restrictive_covenant": "restrictive_covenants",
+        "restrictive_covenants": "restrictive_covenants",
+        "post_termination_restrictions": "restrictive_covenants",
+        "services": "services_operations",
+        "operations": "services_operations",
+        "dispute": "dispute_resolution",
+        "dispute_resolution": "dispute_resolution",
+        "commercial": "commercial_finance",
+        "finance": "commercial_finance",
+    }
+
+    return aliases.get(value, value if value in DOMAIN_TERMS else "general_provisions")
+
+
+def build_secondary_groups(
+    scores: dict[str, int],
+    primary_group: str,
+) -> list[str]:
+    secondary_groups = []
+
+    primary_score = float(
+        scores.get(
+            primary_group,
+            0,
+        )
+    )
+
+    for name, score in scores.items():
+        if name == primary_group:
+            continue
+
+        if primary_score <= 0:
+            continue
+
+        similarity = score / primary_score
+
+        if similarity >= SECONDARY_GROUP_THRESHOLD:
+            secondary_groups.append(name)
+
+    return secondary_groups
+
+
 def score_groups(
     title: str,
     reference: str = "",
     body: str = "",
 ) -> dict[str, int]:
-
-    title_text = str(title or "").lower()
-    reference_text = str(reference or "").lower()
-    body_text = str(body or "").lower()
+    title_text = normalize_text(title)
+    reference_text = normalize_text(reference)
+    body_text = normalize_text(body)
 
     return {
         name: (
-            score_terms(title_text, terms) * 3
+            score_terms(title_text, terms) * 4
             + score_terms(reference_text, terms) * 2
             + score_terms(body_text, terms)
         )
@@ -336,8 +644,10 @@ def score_terms(
     text: str,
     terms: list[str],
 ) -> int:
+    normalized_terms = [normalize_text(term) for term in terms]
+
     return sum(
         1
-        for term in terms
-        if term in text
+        for term in normalized_terms
+        if term and term in text
     )

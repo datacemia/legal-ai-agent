@@ -1,0 +1,397 @@
+        spans.append(automatic)
+        mechanisms.append({
+            "kind": "PROCEDURAL_STATE",
+            "state": "AUTOMATIC_EVENT",
+            "notice_prerequisite": False,
+        })
+
+    prior_consent = None
+
+    for pattern in _PRIOR_CONSENT_PATTERNS:
+        prior_consent = _span(
+            source,
+            pattern,
+            "PRIOR_CONSENT_PREREQUISITE",
+        )
+
+        if prior_consent:
+            break
+
+    if prior_consent:
+        spans.append(prior_consent)
+        consent_holder = _extract_consent_holder(source)
+
+        prerequisite: dict[str, Any] = {
+            "kind": "PREREQUISITE",
+            "state": "PRIOR_CONSENT",
+        }
+
+        if consent_holder:
+            prerequisite["consent_holder"] = consent_holder["normalized"]
+            prerequisite["consent_holder_text"] = consent_holder["raw"]
+            spans.append({
+                "label": "CONSENT_HOLDER",
+                "start": consent_holder["start"],
+                "end": consent_holder["end"],
+                "text": consent_holder["raw"],
+            })
+
+        mechanisms.append(prerequisite)
+
+    source_type = detect_clause_type_from_taxonomy(source)
+
+    mechanisms.append({
+        "kind": "SOURCE_PROFILE",
+        "primary_type": source_type,
+        "anchors": sorted(_tokens(source)),
+    })
+
+    canonical = json.dumps(
+        mechanisms,
+        sort_keys=True,
+        ensure_ascii=False,
+    )
+
+    return {
+        "evidence_spans": spans,
+        "mechanisms": mechanisms,
+        "semantic_profile_hash": _hash(canonical),
+    }
+
+
+def rank_grounded_mechanisms(profile: dict) -> list[dict]:
+    rank = {
+        "PREREQUISITE": 100,
+        "PROCEDURAL_STATE": 95,
+        "MANDATORY_CONJUNCTION": 90,
+        "SOURCE_PROFILE": 10,
+    }
+    return sorted(
+        profile.get("mechanisms", []),
+        key=lambda item: rank.get(item.get("kind"), 0),
+        reverse=True,
+    )
+
+
+def _semantic_coverage(source_text: str, generated_text: str) -> float | None:
+    source_tokens = _tokens(source_text)
+    generated_tokens = _tokens(generated_text)
+    if not source_tokens or not generated_tokens:
+        return None
+    denominator = max(1, min(len(source_tokens), 12))
+    return round(len(source_tokens & generated_tokens) / denominator, 4)
+
+
+def _is_abstention(text: str) -> bool:
+    low = str(text or "").lower()
+    return any(marker in low for marker in _ABSTENTION_MARKERS)
+
+
+def _normalized_compact_value(value: str) -> str:
+    return re.sub(
+        r"\\s+",
+        " ",
+        str(value or "").strip().lower(),
+    )
+
+
+def _validate_compact_conclusion(
+    field: str,
+    generated_text: str,
+) -> list[str]:
+    """Validate compact published conclusion fields without prose validators."""
+    value = _normalized_compact_value(generated_text)
+    reasons: list[str] = []
+
+    if not value:
+        return reasons
+
+    if field == "market_practice":
+        if value not in _MARKET_PRACTICE_ALLOWED:
+            reasons.append("INVALID_MARKET_PRACTICE_VALUE")
+
+    elif field == "negotiable":
+        if value not in _NEGOTIABLE_ALLOWED:
+            reasons.append("INVALID_NEGOTIABLE_VALUE")
+
+    return reasons
+
+
+def validate_source_grounding(
+    source_text: str,
+    generated_text: str,
+    field: str,
+    profile: dict,
+) -> tuple[list[str], float | None]:
+    reasons: list[str] = []
+    generated = str(generated_text or "")
+    low = generated.lower()
+    generated_tokens = _tokens(generated)
+    coverage = _semantic_coverage(source_text, generated)
+    policy = _FIELD_POLICIES.get(field, "relevance")
+
+    if policy == "compact_conclusion":
+        reasons.extend(
+            _validate_compact_conclusion(
+                field,
+                generated,
+            )
+        )
+        return list(dict.fromkeys(reasons)), coverage
+
+    if _is_abstention(generated):
+        return reasons, coverage
+
+    for mechanism in rank_grounded_mechanisms(profile):
+        kind = mechanism.get("kind")
+
+        if kind == "MANDATORY_CONJUNCTION" and field in _FIDELITY_FIELDS:
+            arguments = mechanism.get("arguments", [])
+
+            # Only enforce full conjunctive coverage when the generated
+            # text actually engages the same operative source mechanism.
+            # A collateral recommendation about a different protection
+            # must not be forced to restate every mandatory source action.
+            source_signatures = {
+                token
+                for argument in arguments
+                for token in argument.get("signature", [])
+            }
+
+            engages_same_mechanism = bool(
+                source_signatures & generated_tokens
+            )
+
+            if engages_same_mechanism:
+                missing_arguments = []
+
+                for argument in arguments:
+                    argument_tokens = set(argument.get("tokens", []))
+                    signature_tokens = set(argument.get("signature", []))
+
+                    if signature_tokens:
+                        covered = bool(
+                            signature_tokens & generated_tokens
+                        )
+                    else:
+                        covered = bool(
+                            argument_tokens & generated_tokens
+                        )
+
+                    if argument_tokens and not covered:
+                        missing_arguments.append(argument)
+
+                if missing_arguments:
+                    reasons.extend([
+                        "SEMANTIC_ARGUMENT_COVERAGE_LOSS",
+                        "RIGHT_POLARITY_OR_SCOPE_WEAKENING",
+                    ])
+
+        elif kind == "PROCEDURAL_STATE" and field in _FIDELITY_FIELDS:
+            if mechanism.get("state") == "AUTOMATIC_EVENT":
+                introduces_notice = any(
+                    re.search(
+                        pattern,
+                        low,
+                        re.IGNORECASE | re.DOTALL,
+                    )
+                    for pattern in _NOTICE_PATTERNS
+                )
+                if introduces_notice:
+                    reasons.append("PROCEDURAL_STATE_MISMATCH_AUTOMATIC_TO_NOTICE")
+
+        elif kind == "PREREQUISITE":
+            if mechanism.get("state") == "PRIOR_CONSENT":
+                has_consent = bool(_CONSENT_WORD_PATTERN.search(low))
+                has_notice = bool(_NOTICE_WORD_PATTERN.search(low))
+
+                if field in _FIDELITY_FIELDS and has_notice and not has_consent:
+                    reasons.append("CONSENT_PREREQUISITE_WEAKENED_TO_NOTICE")
+
+                # Compare the holder only when both source and generated text
+                # expressly attribute the same prior-consent mechanism.
+                source_holder = _normalize_actor_label(
+                    str(mechanism.get("consent_holder") or "")
+                )
+                generated_holder_data = _extract_consent_holder(generated)
+                generated_holder = _normalize_actor_label(
+                    generated_holder_data.get("normalized", "")
+                    if generated_holder_data
+                    else ""
+                )
+
+                if (
+                    has_consent
+                    and source_holder
+                    and generated_holder
+                    and source_holder != generated_holder
+                ):
+                    reasons.append("CONSENT_HOLDER_ACTOR_MISMATCH")
+
+    if field in _RELEVANCE_FIELDS:
+        source_type = detect_clause_type_from_taxonomy(source_text)
+        generated_type = detect_clause_type_from_taxonomy(generated)
+        weak_types = {"", "other", "general", None}
+        if (
+            source_type not in weak_types
+            and generated_type not in weak_types
+            and source_type != generated_type
+            and coverage == 0.0
+        ):
+            reasons.append("FINAL_TEXT_SOURCE_CONTAMINATION")
+
+    return list(dict.fromkeys(reasons)), coverage
+
+
+def _blocked_text(language: str) -> str:
+    return {
+        "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
+        "ar": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.",
+    }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
+
+
+def _issue(field: str, reason: str) -> dict:
+    high_markers = ("POLARITY", "PROCEDURAL", "CONSENT", "ACTOR", "CONTAMINATION")
+    return {
+        "kind": reason.lower(),
+        "field": field,
+        "severity": "high" if any(marker in reason for marker in high_markers) else "medium",
+        "note": reason,
+    }
+
+
+def enforce_final_publication_gate(
+    results: list[dict],
+    language: str = "en",
+    *,
+    final_pass: bool = False,
+) -> list[dict]:
+    """Validate and fail closed. A final pass emits exact-text receipts."""
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+
+        source = str(
+            item.get("_source_text_exact")
+            or item.get("original_text")
+            or item.get("clause_text")
+            or item.get("quoted_text")
+            or ""
+        )
+        profile = build_source_evidence_model(source)
+        history = item.setdefault("_publication_validation_history", {})
+        emitted: list[dict] = []
+        current_failures: list[str] = []
+
+        for field in PROTECTED_FIELDS:
+            text = str(item.get(field) or "")
+            if not text.strip():
+                continue
+
+            reasons, coverage = validate_source_grounding(source, text, field, profile)
+            if reasons:
+                history[field] = {
+                    "input_text": text,
+                    "input_text_hash": _hash(text),
+                    "validation_reasons": reasons,
+                    "semantic_coverage": coverage,
+                }
+                item[field] = _blocked_text(language)
+                current_failures.extend(reasons)
+                emitted.extend(_issue(field, reason) for reason in reasons)
+
+        positive_field = str(item.get("legal_insight") or "")
+        positive_low = positive_field.lower()
+        prior_failures = [
+            reason
+            for entry in history.values()
+            for reason in entry.get("validation_reasons", [])
+        ]
+        if any(marker in positive_low for marker in _POSITIVE_SAFE) and (current_failures or prior_failures):
+            reason = "UNKNOWN_IS_NOT_SAFE_POSITIVE_CONCLUSION"
+            history["legal_insight"] = {
+                "input_text": positive_field,
+                "input_text_hash": _hash(positive_field),
+                "validation_reasons": [reason],
+                "semantic_coverage": _semantic_coverage(source, positive_field),
+            }
+            item["legal_insight"] = _blocked_text(language)
+            emitted.append(_issue("legal_insight", reason))
+
+        if emitted:
+            existing = item.setdefault("fidelity_issues", [])
+            existing.extend(emitted)
+            item["negotiation_fidelity_warning"] = True
+            item["negotiation_fidelity_note"] = emitted[0]["note"]
+
+        item["source_evidence_model"] = profile
+
+        if final_pass:
+            receipts: dict[str, dict] = {}
+            for field in PROTECTED_FIELDS:
+                final_text = str(item.get(field) or "")
+                if not final_text.strip():
+                    continue
+
+                final_reasons, final_coverage = validate_source_grounding(
+                    source, final_text, field, profile
+                )
+                if final_reasons:
+                    raise AssertionError(
+                        f"final publication field failed validation: {field}: {final_reasons}"
+                    )
+
+                prior = history.get(field, {})
+                prior_reasons = list(prior.get("validation_reasons", []))
+                receipts[field] = {
+                    "field": field,
+                    "field_policy": _FIELD_POLICIES.get(field, "relevance"),
+                    "publication_gate_called": True,
+                    "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
+                    "validation_reasons": prior_reasons,
+                    "semantic_coverage": final_coverage,
+                    "semantic_profile_hash": profile["semantic_profile_hash"],
+                    "validated_text_hash": _hash(final_text),
+                    "final_text_hash": _hash(final_text),
+                    "source_text_hash": _hash(source),
+                    "input_text_hash": prior.get("input_text_hash", _hash(final_text)),
+                    "text_before_validation": prior.get("input_text", final_text),
+                    "successful": True,
+                    "post_gate_mutators": [],
+                }
+            item["validation_receipts"] = receipts
+
+    return results
+
+
+def assert_final_serialization(results: list[dict]) -> None:
+    """Assert exact final-text and semantic-profile receipt integrity."""
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+        source = str(
+            item.get("_source_text_exact")
+            or item.get("original_text")
+            or item.get("clause_text")
+            or item.get("quoted_text")
+            or ""
+        )
+        profile_hash = build_source_evidence_model(source)["semantic_profile_hash"]
+        receipts = item.get("validation_receipts") or {}
+
+        for field in PROTECTED_FIELDS:
+            text = str(item.get(field) or "")
+            if not text.strip():
+                continue
+            receipt = receipts.get(field)
+            if not receipt or receipt.get("successful") is not True:
+                raise AssertionError(f"missing successful validation receipt for {field}")
+            final_hash = _hash(text)
+            if receipt.get("validated_text_hash") != final_hash:
+                raise AssertionError(f"validated text hash mismatch for {field}")
+            if receipt.get("final_text_hash") != final_hash:
+                raise AssertionError(f"final text hash mismatch for {field}")
+            if receipt.get("semantic_profile_hash") != profile_hash:
+                raise AssertionError(f"semantic profile hash mismatch for {field}")
+            if receipt.get("post_gate_mutators"):
+                raise AssertionError(f"post-gate mutation recorded for {field}")

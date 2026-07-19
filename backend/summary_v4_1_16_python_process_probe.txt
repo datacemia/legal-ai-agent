@@ -1,0 +1,25 @@
+====================================================================================================
+PYTHON PROCESS PROBE
+====================================================================================================
+
+====================================================================================================
+METHOD: 1
+COMMAND: ['wmic', 'process', 'where', "name='python.exe' or name='pythonw.exe'", 'get', 'ProcessId,CreationDate,CommandLine', '/format:list']
+====================================================================================================
+ERROR: FileNotFoundError(2, 'Le fichier spécifié est introuvable', None, 2, None)
+
+====================================================================================================
+METHOD: 2
+COMMAND: ['cmd', '/c', 'tasklist | findstr /I "python celery uvicorn gunicorn"']
+====================================================================================================
+RETURN CODE: 255
+STDERR:
+'tasklist' n’est pas reconnu en tant que commande interne
+ou externe, un programme exécutable ou un fichier de commandes.
+
+
+====================================================================================================
+CURRENT PROCESS
+====================================================================================================
+PID: 9296
+PYTHON: C:\Users\rachi\legal-ai-agent\backend\venv\Scripts\python.exe

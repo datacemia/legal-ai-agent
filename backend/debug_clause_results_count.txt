@@ -1,0 +1,7 @@
+Nombre de clauses finales (etape 2): 6
+  ref='6.1' title='Limitation of Liability'
+  ref='1.1' title='Independent Contractor Status'
+  ref='2.1' title='Payment Terms'
+  ref='5.1' title='Termination for Convenience'
+  ref='3.2' title='Ownership of Methodologies'
+  ref='4.1' title='Confidentiality Obligations'

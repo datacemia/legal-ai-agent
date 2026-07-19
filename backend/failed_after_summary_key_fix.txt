@@ -1,0 +1,25 @@
+NEEDS_PARSER_FIX   1.pdf | validated=False tx=248 income=2663290.45 expenses=13601036.32 expected_income=176610.45 expected_expenses=230125624.39 gap_i=2486680.0 gap_e=216524588.07 reason=income_gap=2486680.0; expense_gap=216524588.07
+NO_TRANSACTIONS    3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   772605810-كشف-حساب-بنكي (2).pdf | validated=False tx=116 income=320627.85 expenses=1574785.51 expected_income=2000.0 expected_expenses=16582.58 gap_i=318627.85 gap_e=1558202.93 reason=income_gap=318627.85; expense_gap=1558202.93
+NEEDS_PARSER_FIX   ARABE3.pdf | validated=False tx=330 income=325458.0 expenses=370945.44 expected_income=325458.0 expected_expenses=370995.44 gap_i=0.0 gap_e=50.0 reason=expense_gap=50.0
+NO_TRANSACTIONS    arabe5.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   BANK CHAABI.pdf | validated=False tx=105 income=912747.13 expenses=431707.37 expected_income=912747.13 expected_expenses=431702.87 gap_i=0.0 gap_e=4.5 reason=expense_gap=4.5
+NEEDS_PARSER_FIX   banque d'epagne.pdf | validated=False tx=24 income=500.0 expenses=656.71 expected_income=80.0 expected_expenses=584.02 gap_i=420.0 gap_e=72.69 reason=income_gap=420.0; expense_gap=72.69
+NEEDS_PARSER_FIX   banque populare 1 france.pdf | validated=False tx=44 income=516.45 expenses=5063.48 expected_income=10011.7 expected_expenses=9832.14 gap_i=9495.25 gap_e=4768.66 reason=income_gap=9495.25; expense_gap=4768.66
+NO_TRANSACTIONS    BANQUE POSTALE (2).pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   BMCE.pdf | validated=False tx=45 income=31542.0 expenses=39227.31 expected_income=31542.0 expected_expenses=38211.91 gap_i=0.0 gap_e=1015.4 reason=expense_gap=1015.4
+NEEDS_PARSER_FIX   cic.pdf | validated=False tx=0 income=0 expenses=0 expected_income=501.03 expected_expenses=501.03 gap_i=501.03 gap_e=501.03 reason=aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03
+NO_TRANSACTIONS    dakar.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    EGPTE.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    EJJAMI12.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   EJJAMI6.pdf | validated=False tx=53 income=0 expenses=3524.55 expected_income=0.0 expected_expenses=3522.05 gap_i=0.0 gap_e=2.5 reason=expense_gap=2.5
+NEEDS_PARSER_FIX   emirate.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.75 gap_i=0.0 gap_e=0.75 reason=aucune transaction candidate extraite; expense_gap=0.75
+NO_TRANSACTIONS    habitat.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   llc.pdf | validated=False tx=8 income=0 expenses=82.67 expected_income=1907.72 expected_expenses=327.08 gap_i=1907.72 gap_e=244.41 reason=income_gap=1907.72; expense_gap=244.41
+NEEDS_PARSER_FIX   n26 .1.pdf | validated=False tx=81 income=2975.12 expenses=2997.02 expected_income=2905.12 expected_expenses=2917.02 gap_i=70.0 gap_e=80.0 reason=income_gap=70.0; expense_gap=80.0
+NEEDS_PARSER_FIX   OMAR1.pdf | validated=False tx=115 income=20393.0 expenses=15489.58 expected_income=20615.05 expected_expenses=15267.53 gap_i=222.05 gap_e=222.05 reason=income_gap=222.05; expense_gap=222.05
+NEEDS_PARSER_FIX   OMAR2.pdf | validated=False tx=54 income=10374.0 expenses=20211.69 expected_income=12450.25 expected_expenses=15159.36 gap_i=2076.25 gap_e=5052.33 reason=income_gap=2076.25; expense_gap=5052.33
+NEEDS_PARSER_FIX   OMAR3.pdf | validated=False tx=107 income=36653.99 expenses=25940.92 expected_income=36899.55 expected_expenses=25899.27 gap_i=245.56 gap_e=41.65 reason=income_gap=245.56; expense_gap=41.65
+NEEDS_PARSER_FIX   Relevés compte 3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=6.0 gap_i=0.0 gap_e=6.0 reason=aucune transaction candidate extraite; expense_gap=6.0
+NEEDS_PARSER_FIX   soc general.pdf | validated=False tx=40 income=1707.92 expenses=1150.99 expected_income=10.0 expected_expenses=876.96 gap_i=1697.92 gap_e=274.03 reason=income_gap=1697.92; expense_gap=274.03
+NO_TRANSACTIONS    x.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite

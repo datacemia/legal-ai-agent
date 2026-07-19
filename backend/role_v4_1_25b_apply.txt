@@ -1,0 +1,13 @@
+================================================================================================
+V4.1.25B AST-SCOPED FR LITERAL ROLE GRAMMAR APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\party_role_detector.py
+BACKUP : app\services\contract_agent\party_role_detector.py.before_v4_1_25b_20260715_010121
+A: helper inserted immediately before normalize_ai_role_words
+B: FR branch patched inside normalize_ai_role_words only
+C: placeholder realization V4.1.24/A preserved
+D: EN branch unchanged
+E: AR branch unchanged
+F: no executive_summary/frontend changes
+AST: OK
+================================================================================================

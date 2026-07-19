@@ -1,0 +1,596 @@
+[
+  {
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "hold the Disclosing Party's Confiden",
+            "start": 31,
+            "end": 67
+          }
+        ]
+      },
+      {
+        "concept": "NON_DISCLOSURE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "shall not disclos",
+            "start": 109,
+            "end": 126
+          }
+        ]
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "without prior written consent",
+            "start": 150,
+            "end": 179
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 150,
+            "end": 179,
+            "text": "without prior written consent"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 158,
+            "end": 179,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "8bf79fb29e285e8b1354dd0b3cb99929b219fccb584746bba5d77ed9c5a53fee",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 158,
+            "end": 179,
+            "text": "prior written consent"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9abbcd173be074cc2a11925373623ccc72c5b78e1a6db7c8d568d6809c3e1cce",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "NON_DISCLOSURE",
+        "rank": 97,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 59,
+            "end": 149,
+            "text": "Confidential Information in strict confidence and shall not disclose it to any third party"
+          },
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 9,
+            "end": 149,
+            "text": "Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "69b3f98c64ad572d42caf99e95c6814672ff474741bf3d3a9363aca478f36971",
+        "normalized_concept": "NON_DISCLOSURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": "DISCLOSE",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 109,
+            "end": 285,
+            "text": "shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fbd7f4a338ddf1761f107b12437185500245fe46afd3471494c13219c341dc3b",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 25,
+            "end": 284,
+            "text": "shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement"
+          },
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 87,
+            "end": 284,
+            "text": "strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "436afe880f5544f680d5337b60a10a95463b56c6bddb1caf619b876524a2c9c5",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 109,
+            "end": 285,
+            "text": "shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fbd7f4a338ddf1761f107b12437185500245fe46afd3471494c13219c341dc3b",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Confidential Information does not include information that: (a) is or becomes publicly available through no fault of the Receiving Party; (b) was rightfully known to the Receiving Party prior to disclosure; (c) is independently developed without use of the Confidential Information; or (d) is rightfully received from a third party without duty of confidentiality.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_EXCLUSION",
+        "rank": 86,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_EXCLUSION",
+            "start": 4,
+            "end": 368,
+            "text": "Confidential Information does not include information that: (a) is or becomes publicly available through no fault of the Receiving Party; (b) was rightfully known to the Receiving Party prior to disclosure; (c) is independently developed without use of the Confidential Information; or (d) is rightfully received from a third party without duty of confidentiality."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "6a927b15d970672f8730609c2a36cad2d11ae22c5746715a6a7c25bec42649f8",
+        "normalized_concept": "CONFIDENTIALITY_EXCLUSION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_EXCLUSION",
+        "rank": 86,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_EXCLUSION",
+            "start": 4,
+            "end": 368,
+            "text": "Confidential Information does not include information that: (a) is or becomes publicly available through no fault of the Receiving Party; (b) was rightfully known to the Receiving Party prior to disclosure; (c) is independently developed without use of the Confidential Information; or (d) is rightfully received from a third party without duty of confidentiality."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "6a927b15d970672f8730609c2a36cad2d11ae22c5746715a6a7c25bec42649f8",
+        "normalized_concept": "CONFIDENTIALITY_EXCLUSION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 This Agreement shall remain in effect for two (2) years from the Effective Date. The confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 89,
+            "end": 378,
+            "text": "confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law."
+          },
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 246,
+            "end": 378,
+            "text": "obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8ff644b75eb6db00ed9d469a9c015ffd40f007886c26b6a9e3d9be3f0d0718bc",
+        "normalized_concept": "CONFIDENTIALITY_SURVIVAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 89,
+            "end": 378,
+            "text": "confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law."
+          },
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 246,
+            "end": 378,
+            "text": "obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "8ff644b75eb6db00ed9d469a9c015ffd40f007886c26b6a9e3d9be3f0d0718bc",
+        "normalized_concept": "CONFIDENTIALITY_SURVIVAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Each Party acknowledges that unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 33,
+            "end": 330,
+            "text": "unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "453b17b57628bba0b6c282aa43ab60eca4595b16d0a0c032f5324d03e6329ecd",
+        "normalized_concept": "CONFIDENTIALITY_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 33,
+            "end": 330,
+            "text": "unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "453b17b57628bba0b6c282aa43ab60eca4595b16d0a0c032f5324d03e6329ecd",
+        "normalized_concept": "CONFIDENTIALITY_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 This Agreement shall be governed by the laws of the State of Delaware, without regard to conflict of laws principles. Any dispute arising under this Agreement shall be subject to the exclusive jurisdiction of the state and federal courts located in Wilmington, Delaware.",
+    "primary_type": "governing_law",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 28,
+            "end": 211,
+            "text": "governed by the laws of the State of Delaware, without regard to conflict of laws principles. Any dispute arising under this Agreement shall be subject to the exclusive jurisdiction o"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "55a4186138db3d0151f01b23ab2e64a6ab425f99ded551a3c0d937c1653ae2d2",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 28,
+            "end": 211,
+            "text": "governed by the laws of the State of Delaware, without regard to conflict of laws principles. Any dispute arising under this Agreement shall be subject to the exclusive jurisdiction o"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "55a4186138db3d0151f01b23ab2e64a6ab425f99ded551a3c0d937c1653ae2d2",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

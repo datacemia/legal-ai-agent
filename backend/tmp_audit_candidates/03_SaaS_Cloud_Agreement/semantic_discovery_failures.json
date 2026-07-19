@@ -1,0 +1,1402 @@
+[
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "2.1",
+    "source_language": "en",
+    "source_text": "2.1 Northwind shall use commercially reasonable efforts to maintain 99.9% uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A.",
+    "primary_type": "service_level",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SERVICE_LEVEL_COMMITMENT",
+        "rank": 89,
+        "candidate_primary_type": "service_level",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_LEVEL_COMMITMENT",
+            "start": 74,
+            "end": 252,
+            "text": "uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "197ca918b09b9a429b0b35a890db2cec20e0abfd0a061149db5baaed478d48f2",
+        "normalized_concept": "SERVICE_LEVEL_COMMITMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SERVICE_LEVEL_COMMITMENT",
+        "rank": 89,
+        "candidate_primary_type": "service_level",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_LEVEL_COMMITMENT",
+            "start": 74,
+            "end": 252,
+            "text": "uptime, measured monthly, excluding scheduled maintenance. Customer's sole and exclusive remedy for failure to meet this commitment is a service credit as set forth in Exhibit A."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "197ca918b09b9a429b0b35a890db2cec20e0abfd0a061149db5baaed478d48f2",
+        "normalized_concept": "SERVICE_LEVEL_COMMITMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "6.1",
+    "source_language": "en",
+    "source_text": "6.1 Northwind's aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such fees.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "aggregate liability arising out of this Agreement shall not exceed",
+            "start": 16,
+            "end": 82
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 156,
+            "end": 242,
+            "text": "except for breaches of Section 5 (Security) or Northwind's indemnification obligations"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "aef4af1d735f1250c88998e8e1e955432e32011fe6014b72a59a34fcd44a07b5",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 16,
+            "end": 302,
+            "text": "aggregate liability arising out of this Agreement shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) times such "
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "053114873ee47adb3a759dea43bcae1658a2e0b7f58153c2aa72b9a6b3d7f5f6",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 12,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            },
+            {
+              "value": 5,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 66,
+            "end": 295,
+            "text": "shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) time"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "619675a7bdb2ae756d3801c5e7d2c88086e63fb86316739511f049b853873457",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CARVEOUT",
+        "rank": 98,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CARVEOUT",
+            "start": 156,
+            "end": 242,
+            "text": "except for breaches of Section 5 (Security) or Northwind's indemnification obligations"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCEPTION",
+        "evidence_hash": "aef4af1d735f1250c88998e8e1e955432e32011fe6014b72a59a34fcd44a07b5",
+        "normalized_concept": "LIABILITY_CARVEOUT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "EXCLUDE_FROM_LIABILITY_LIMIT",
+          "polarity": "EXCEPTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "EXCEPTION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 66,
+            "end": 295,
+            "text": "shall not exceed the fees paid by Customer in the twelve (12) months preceding the claim, except for breaches of Section 5 (Security) or Northwind's indemnification obligations, for which liability shall be capped at two (2) time"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "619675a7bdb2ae756d3801c5e7d2c88086e63fb86316739511f049b853873457",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "5.1",
+    "source_language": "en",
+    "source_text": "5.1 Northwind shall maintain administrative, physical, and technical safeguards consistent with SOC 2 Type II standards, and shall notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 125,
+            "end": 200,
+            "text": "shall notify Customer of any confirmed security incident affecting Customer"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 131,
+            "end": 172,
+            "text": "notify Customer of any confirmed security"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "14b9bf30c345f34072dc5c69d3462ed2899b9ba7b0f4531efb3611c7a539137d",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 14,
+            "end": 79,
+            "text": "shall maintain administrative, physical, and technical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "08c6c4a6e5890b7ca16aeb765d9c43b4a5d433d0af42be1e0222a1f7485b6629",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "SECURITY_CONTROLS",
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 131,
+            "end": 248,
+            "text": "notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "55dd0e19a5d44655a7fd58f4db985edc150c5f1c22242711de801a79d69e08ea",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CUSTOMER",
+          "object": null,
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 72,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 125,
+            "end": 200,
+            "text": "shall notify Customer of any confirmed security incident affecting Customer"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 131,
+            "end": 172,
+            "text": "notify Customer of any confirmed security"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "14b9bf30c345f34072dc5c69d3462ed2899b9ba7b0f4531efb3611c7a539137d",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 95,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 14,
+            "end": 79,
+            "text": "shall maintain administrative, physical, and technical safeguards"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "08c6c4a6e5890b7ca16aeb765d9c43b4a5d433d0af42be1e0222a1f7485b6629",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "SECURITY_CONTROLS",
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 131,
+            "end": 248,
+            "text": "notify Customer of any confirmed security incident affecting Customer Data within seventy-two (72) hours of discovery"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "55dd0e19a5d44655a7fd58f4db985edc150c5f1c22242711de801a79d69e08ea",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": "CUSTOMER",
+          "object": null,
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 72,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "1.1",
+    "source_language": "en",
+    "source_text": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "solely for Customer's internal business purpose",
+            "start": 170,
+            "end": 217
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 4,
+            "end": 140,
+            "text": "Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "e35e249f7514a0474ed44b1447f719eb6362e6b7293f037978467dd6d3f55f9d",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 113,
+            "end": 218,
+            "text": "access and use the Platform during the Subscription Term solely for Customer's internal business purposes"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "13c28c20284705af807a9ccf12ca01de28acb21858be95e697ce4074c3f36570",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "CUSTOMER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 4,
+            "end": 140,
+            "text": "Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "e35e249f7514a0474ed44b1447f719eb6362e6b7293f037978467dd6d3f55f9d",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 113,
+            "end": 218,
+            "text": "access and use the Platform during the Subscription Term solely for Customer's internal business purposes"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "13c28c20284705af807a9ccf12ca01de28acb21858be95e697ce4074c3f36570",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "CUSTOMER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "solely for Customer's internal business purpose",
+            "start": 170,
+            "end": 217
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "3.1",
+    "source_language": "en",
+    "source_text": "3.1 Customer shall pay the subscription fees in advance, annually, as specified in the Order Form. This Agreement shall automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUTO_RENEW_OPT_OUT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "automatically renew",
+            "start": 120,
+            "end": 139
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 120,
+            "end": 319,
+            "text": "automatically renew for successive one (1) year terms at Northwind's then-current list price unless Customer provides written notice of non-renewal at least sixty (60) days before the end of the then"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "c6e1a572392e12120facfba61a78b69f2c6a7ec3bb8e9f79be3f78f3844f5eeb",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 97,
+            "text": "Customer shall pay the subscription fees in advance, annually, as specified in the Order Form"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "c64a3f5d7eccbdc9adda293162bbee30b0287705979eab160d906fb4258dd66e",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 13,
+            "end": 97,
+            "text": "shall pay the subscription fees in advance, annually, as specified in the Order Form"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c736b81b429af421b70ac30e232b1e8805d28fbe19ec818aec661b117d8d3f79",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 238,
+            "end": 332,
+            "text": "written notice of non-renewal at least sixty (60) days before the end of the then-current term"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "dee9da1b740cb3877c31d1b993406748deb1f609c2778db9765403ce17e30571",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 246,
+            "end": 333,
+            "text": "notice of non-renewal at least sixty (60) days before the end of the then-current term."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "cc66c77e85c26b4910a3999d93aafb60fdf52fbbd5ae77b402f27d2371657de1",
+        "normalized_concept": "NOTICE_PROCEDURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 97,
+            "text": "Customer shall pay the subscription fees in advance, annually, as specified in the Order Form"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "c64a3f5d7eccbdc9adda293162bbee30b0287705979eab160d906fb4258dd66e",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 13,
+            "end": 97,
+            "text": "shall pay the subscription fees in advance, annually, as specified in the Order Form"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c736b81b429af421b70ac30e232b1e8805d28fbe19ec818aec661b117d8d3f79",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 238,
+            "end": 332,
+            "text": "written notice of non-renewal at least sixty (60) days before the end of the then-current term"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "dee9da1b740cb3877c31d1b993406748deb1f609c2778db9765403ce17e30571",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "NOTICE_PROCEDURE",
+        "rank": 78,
+        "candidate_primary_type": "notice",
+        "semantic_role": "GENERIC_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PROCEDURE",
+            "start": 246,
+            "end": 333,
+            "text": "notice of non-renewal at least sixty (60) days before the end of the then-current term."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "cc66c77e85c26b4910a3999d93aafb60fdf52fbbd5ae77b402f27d2371657de1",
+        "normalized_concept": "NOTICE_PROCEDURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "BROAD_COMPATIBLE",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "4.1",
+    "source_language": "en",
+    "source_text": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "OWNERSHIP",
+        "rank": 96,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OWNERSHIP",
+            "start": 28,
+            "end": 92,
+            "text": "Customer retains all right, title, and interest in Customer Data"
+          },
+          {
+            "label": "OWNERSHIP",
+            "start": 4,
+            "end": 75,
+            "text": "As between the Parties, Customer retains all right, title, and interest"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "1af67b48d468ab8c94645b00dff6694cda093e2f553a9e92c942b3343c3bc3d4",
+        "normalized_concept": "OWNERSHIP",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "OWN",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "cafbb36744a23a2febfccc73555126eaad503e47f24721fd12ea33fbbcfd970d",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN",
+            "start": 94,
+            "end": 167,
+            "text": "Upon termination, Northwind shall make Customer Data available for export"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3b0f544303555dea6d70b264849f9037579bfa6c8702f8e165fd4cafffb48b07",
+        "normalized_concept": "DATA_RETURN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "RETURN_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CUSTOMER_DATA_LIFECYCLE",
+        "rank": 82,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CUSTOMER_DATA_LIFECYCLE",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "a7a895519663d1f54b259d0c76857ca188ccf69dc237c3a6732ca0c0ffe3c954",
+        "normalized_concept": "CUSTOMER_DATA_LIFECYCLE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "OWNERSHIP",
+        "rank": 96,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OWNERSHIP",
+            "start": 28,
+            "end": 92,
+            "text": "Customer retains all right, title, and interest in Customer Data"
+          },
+          {
+            "label": "OWNERSHIP",
+            "start": 4,
+            "end": 75,
+            "text": "As between the Parties, Customer retains all right, title, and interest"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "1af67b48d468ab8c94645b00dff6694cda093e2f553a9e92c942b3343c3bc3d4",
+        "normalized_concept": "OWNERSHIP",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": "OWN",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "DATA_DELETION",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_DELETION",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "cafbb36744a23a2febfccc73555126eaad503e47f24721fd12ea33fbbcfd970d",
+        "normalized_concept": "DATA_DELETION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "DELETE_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "DATA_RETURN",
+        "rank": 95,
+        "candidate_primary_type": "data_governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN",
+            "start": 94,
+            "end": 167,
+            "text": "Upon termination, Northwind shall make Customer Data available for export"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3b0f544303555dea6d70b264849f9037579bfa6c8702f8e165fd4cafffb48b07",
+        "normalized_concept": "DATA_RETURN",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": "CUSTOMER",
+          "beneficiary": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "trigger": "CONTRACT_TERMINATION_OR_EXPIRATION",
+          "action": "RETURN_DATA",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CUSTOMER_DATA_LIFECYCLE",
+        "rank": 82,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CUSTOMER_DATA_LIFECYCLE",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "a7a895519663d1f54b259d0c76857ca188ccf69dc237c3a6732ca0c0ffe3c954",
+        "normalized_concept": "CUSTOMER_DATA_LIFECYCLE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CUSTOMER_DATA",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "7.1",
+    "source_language": "en",
+    "source_text": "7.1 Customer may not terminate this Agreement for convenience prior to the end of the then-current Subscription Term. Northwind may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 128,
+            "end": 270,
+            "text": "may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 21,
+            "end": 116,
+            "text": "terminate this Agreement for convenience prior to the end of the then-current Subscription Term"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 132,
+            "end": 270,
+            "text": "terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "84cdf0961868ee1c006717e8d8f84e17e7a17db86088182904d33f80fa991abe",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 128,
+            "end": 270,
+            "text": "may terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 21,
+            "end": 116,
+            "text": "terminate this Agreement for convenience prior to the end of the then-current Subscription Term"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 132,
+            "end": 270,
+            "text": "terminate this Agreement for convenience at any time upon ninety (90) days' written notice, with a pro-rata refund of prepaid, unused fees"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "84cdf0961868ee1c006717e8d8f84e17e7a17db86088182904d33f80fa991abe",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": "CUSTOMER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

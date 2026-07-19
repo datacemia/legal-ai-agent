@@ -1,0 +1,1179 @@
+[
+  {
+    "language": "en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "clause_1",
+    "source_text": "4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.",
+    "pipeline_clause_type": "employment",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.7366,
+    "shadow_dominance_margin": 76.3383,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 76.3383,
+        "coverage": 0.7366,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_COMPETE_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 73,
+            "end": 243,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      },
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 63,
+            "end": 242,
+            "text": "Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 73,
+            "end": 242,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 73,
+            "end": 243,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "2df3cc6cd5b9c108fa35224067ea9e8ca9aa2f245187bf71e3d14f00f2200e44"
+      },
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 63,
+            "end": 242,
+            "text": "Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 73,
+            "end": 242,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "df1d314ad9fe96ec8c544adf36540f772b09cf3070408f4f41cce4927bec9e15"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 63,
+            "end": 242,
+            "text": "Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 73,
+            "end": 242,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "df1d314ad9fe96ec8c544adf36540f772b09cf3070408f4f41cce4927bec9e15"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 73,
+            "end": 243,
+            "text": "shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "2df3cc6cd5b9c108fa35224067ea9e8ca9aa2f245187bf71e3d14f00f2200e44"
+      }
+    ],
+    "semantic_profile_hash": "5a0759266836873d7d1b5f966f38f47d3ead9288000d561deb63e0bef581361e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "4.2 During employment and for twenty-four (24) months thereafter, Executive shall not solicit for employment any employee of the Company.",
+    "pipeline_clause_type": "employment",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5109,
+    "shadow_dominance_margin": 66.7399,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 66.7399,
+        "coverage": 0.5109,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_SOLICITATION_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 76,
+            "end": 137,
+            "text": "shall not solicit for employment any employee of the Company."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      },
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 66,
+            "end": 136,
+            "text": "Executive shall not solicit for employment any employee of the Company"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 76,
+            "end": 136,
+            "text": "shall not solicit for employment any employee of the Company"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 76,
+            "end": 137,
+            "text": "shall not solicit for employment any employee of the Company."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "100bb727e6545b9918f3eb00c9fe61ea92fbb0ba54affa6bf83f81944c680fa5"
+      },
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 66,
+            "end": 136,
+            "text": "Executive shall not solicit for employment any employee of the Company"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 76,
+            "end": 136,
+            "text": "shall not solicit for employment any employee of the Company"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3494152499b9b65bf50a911ca114358554d7976fd3b738db01d7a0965c08f649"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 66,
+            "end": 136,
+            "text": "Executive shall not solicit for employment any employee of the Company"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 76,
+            "end": 136,
+            "text": "shall not solicit for employment any employee of the Company"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "3494152499b9b65bf50a911ca114358554d7976fd3b738db01d7a0965c08f649"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 76,
+            "end": 137,
+            "text": "shall not solicit for employment any employee of the Company."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "100bb727e6545b9918f3eb00c9fe61ea92fbb0ba54affa6bf83f81944c680fa5"
+      }
+    ],
+    "semantic_profile_hash": "9f7cca1b929e2e20861d1a5e18e34e4ee3de2ba227e36c1ff9686218df427cbc",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "clause_5",
+    "source_text": "2.2 Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years.",
+    "pipeline_clause_type": "employment",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "compensation",
+    "shadow_primary_type_confidence": 0.99,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9779,
+    "shadow_dominance_margin": 162.2308,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "compensation",
+        "score": 162.2308,
+        "coverage": 0.9779,
+        "independent_support": 3,
+        "core_count": 2,
+        "secondary_count": 1,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INCENTIVE_COMPENSATION",
+      "EQUITY_COMPENSATION_GRANT",
+      "VESTING_SCHEDULE"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 225,
+            "text": "Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 60,
+            "end": 225,
+            "text": "bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      },
+      {
+        "kind": "EQUITY_COMPENSATION_GRANT",
+        "rank": 92,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_COMPENSATION_GRANT",
+            "start": 23,
+            "end": 225,
+            "text": "eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      },
+      {
+        "kind": "VESTING_SCHEDULE",
+        "rank": 90,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VESTING_SCHEDULE",
+            "start": 151,
+            "end": 225,
+            "text": "equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "VESTING_SCHEDULE"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 225,
+            "text": "Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 60,
+            "end": 225,
+            "text": "bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "dcc4f48c481de757b15d3dd30da7c5e4cfa0bba71fd49ac280f6e19ced9a4433"
+      },
+      {
+        "kind": "EQUITY_COMPENSATION_GRANT",
+        "rank": 92,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_COMPENSATION_GRANT",
+            "start": 23,
+            "end": 225,
+            "text": "eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "60fa85ac5d249cf5782a531ffd5b4432d5883e8094cfcb7f84ac6545577d7085"
+      },
+      {
+        "kind": "VESTING_SCHEDULE",
+        "rank": 90,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VESTING_SCHEDULE",
+            "start": 151,
+            "end": 225,
+            "text": "equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "VESTING_SCHEDULE",
+        "evidence_hash": "0eff6cc545c1d27ce534066eb4b9ab23264e7122596d5fa199e6e2b6d12aa183"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 225,
+            "text": "Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 60,
+            "end": 225,
+            "text": "bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "dcc4f48c481de757b15d3dd30da7c5e4cfa0bba71fd49ac280f6e19ced9a4433"
+      },
+      {
+        "kind": "EQUITY_COMPENSATION_GRANT",
+        "rank": 92,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EQUITY_COMPENSATION_GRANT",
+            "start": 23,
+            "end": 225,
+            "text": "eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "60fa85ac5d249cf5782a531ffd5b4432d5883e8094cfcb7f84ac6545577d7085"
+      },
+      {
+        "kind": "VESTING_SCHEDULE",
+        "rank": 90,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VESTING_SCHEDULE",
+            "start": 151,
+            "end": 225,
+            "text": "equity grant of 150,000 restricted stock units vesting over four (4) years"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "VESTING_SCHEDULE",
+        "evidence_hash": "0eff6cc545c1d27ce534066eb4b9ab23264e7122596d5fa199e6e2b6d12aa183"
+      }
+    ],
+    "semantic_profile_hash": "07512d9fefdc490f916c430b1a198040a90f094647f52920773fc09ea02d934d",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "clause_1",
+    "source_text": "2.2 La Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans.",
+    "pipeline_clause_type": "change_of_control",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "compensation",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9708,
+    "shadow_dominance_margin": 85.9337,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "compensation",
+        "score": 85.9337,
+        "coverage": 0.9708,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INCENTIVE_COMPENSATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 7,
+            "end": 273,
+            "text": "Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 38,
+            "end": 273,
+            "text": "prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 7,
+            "end": 273,
+            "text": "Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 38,
+            "end": 273,
+            "text": "prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "8224c4263ce5cdc57aa7882942c5e586859b8536b9a3ec16c1176e27b87b90bf"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 7,
+            "end": 273,
+            "text": "Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 38,
+            "end": 273,
+            "text": "prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "8224c4263ce5cdc57aa7882942c5e586859b8536b9a3ec16c1176e27b87b90bf"
+      }
+    ],
+    "semantic_profile_hash": "34e4bfc4df8a4ba0f115617627c9b689a392cbebd035b7cdc693c7fc64ce9d1e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "clause_5",
+    "source_text": "4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.685,
+    "shadow_dominance_margin": 74.1692,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 74.1692,
+        "coverage": 0.685,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_COMPETE_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 85,
+            "end": 272,
+            "text": "Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 96,
+            "end": 272,
+            "text": "ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 85,
+            "end": 272,
+            "text": "Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 96,
+            "end": 272,
+            "text": "ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "da09e7d78441cf47494d64ad3663ae336160390478a01363d27e9e8d8b05746a"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 85,
+            "end": 272,
+            "text": "Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          },
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 96,
+            "end": 272,
+            "text": "ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "da09e7d78441cf47494d64ad3663ae336160390478a01363d27e9e8d8b05746a"
+      }
+    ],
+    "semantic_profile_hash": "7c6ec923b0daf981c709f788e237afb73e191871ddc1081dc310d160e74f692e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "clause_6",
+    "source_text": "4.2 Pendant la durée du contrat et pendant vingt-quatre (24) mois après sa cessation, la Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société.",
+    "pipeline_clause_type": "employment",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.4545,
+    "shadow_dominance_margin": 64.3709,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 64.3709,
+        "coverage": 0.4545,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_SOLICITATION_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 89,
+            "end": 164,
+            "text": "Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 100,
+            "end": 164,
+            "text": "ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 89,
+            "end": 164,
+            "text": "Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 100,
+            "end": 164,
+            "text": "ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "bc566d456ea3b4556e0a816dc191acfa64eef5f615b4628745da53d69de997a7"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 89,
+            "end": 164,
+            "text": "Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          },
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 100,
+            "end": 164,
+            "text": "ne sollicitera pas en vue d'un emploi tout salarié de la Société"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "bc566d456ea3b4556e0a816dc191acfa64eef5f615b4628745da53d69de997a7"
+      }
+    ],
+    "semantic_profile_hash": "86ecd8239f36c10ca941c9625f1c1742ecc0364f0d57d9d0922437f600e269cc",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_2",
+    "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.6995,
+    "shadow_dominance_margin": 74.7793,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 74.7793,
+        "coverage": 0.6995,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_COMPETE_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 202,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 202,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "dfcac0dacab4ee630701f352097013368f70d0bce7ee8eaf550b614a1b5d5440"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_COMPETE_RESTRICTION",
+        "rank": 95,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_COMPETE_RESTRICTION",
+            "start": 60,
+            "end": 202,
+            "text": "تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "dfcac0dacab4ee630701f352097013368f70d0bce7ee8eaf550b614a1b5d5440"
+      }
+    ],
+    "semantic_profile_hash": "ab80f498d4c937b9f4d4504c652985ef487a1e7c8d3fdcbc3350e2132b60b037",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_3",
+    "source_text": "4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل.",
+    "pipeline_clause_type": "employment",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "restrictive_covenants",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.4836,
+    "shadow_dominance_margin": 65.5915,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "restrictive_covenants",
+        "score": 65.5915,
+        "coverage": 0.4836,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "NON_SOLICITATION_RESTRICTION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 121,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 121,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fa5d04a5b494f56564a13fda43054b1f292d121050a8dc965a2424a1dd74ee30"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "NON_SOLICITATION_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "restrictive_covenants",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_SOLICITATION_RESTRICTION",
+            "start": 62,
+            "end": 121,
+            "text": "تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "fa5d04a5b494f56564a13fda43054b1f292d121050a8dc965a2424a1dd74ee30"
+      }
+    ],
+    "semantic_profile_hash": "2930e41dc4910618c86b350186da9ef5a6aad4392854373fa04d72759e90eb8d",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "clause_5",
+    "source_text": "2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.",
+    "pipeline_clause_type": "other",
+    "semantic_profile_version": "shadow-p0-v4.1.9-employment-wave",
+    "shadow_primary_type": "compensation",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.974,
+    "shadow_dominance_margin": 86.0662,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "compensation",
+        "score": 86.0662,
+        "coverage": 0.974,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "INCENTIVE_COMPENSATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 191,
+            "text": "تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 34,
+            "end": 191,
+            "text": "مكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 191,
+            "text": "تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 34,
+            "end": 191,
+            "text": "مكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "66a1afe07cbff560b8e85f370753f674c27d19aa5006f502f28b6441f4dec683"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "INCENTIVE_COMPENSATION",
+        "rank": 93,
+        "candidate_primary_type": "compensation",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 4,
+            "end": 191,
+            "text": "تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          },
+          {
+            "label": "INCENTIVE_COMPENSATION",
+            "start": 34,
+            "end": 191,
+            "text": "مكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "66a1afe07cbff560b8e85f370753f674c27d19aa5006f502f28b6441f4dec683"
+      }
+    ],
+    "semantic_profile_hash": "cb35e6752c654f5fa87ce7bad9a51f023fbd19d450f2a80e2429e3b524703d18",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

@@ -1,0 +1,4233 @@
+[
+  {
+    "fixture_id": "01_1_1_en",
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "CONFIDENTIALITY",
+    "primary_type_actual": "confidentiality",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CONFIDENTIALITY_OBLIGATION",
+      "NON_DISCLOSURE"
+    ],
+    "actual_material_mechanisms": [
+      "CONFIDENTIALITY_OBLIGATION",
+      "CONSENT_PREREQUISITE",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [
+      "NON_DISCLOSURE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [
+        false,
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "01_1_1_fr",
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "CONFIDENTIALITY",
+    "primary_type_actual": "confidentiality",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CONFIDENTIALITY_OBLIGATION",
+      "NON_DISCLOSURE"
+    ],
+    "actual_material_mechanisms": [
+      "CONFIDENTIALITY_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "missing_required_mechanisms": [
+      "NON_DISCLOSURE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [
+        false,
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "01_1_1_ar",
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "CONFIDENTIALITY",
+    "primary_type_actual": "confidentiality",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CONFIDENTIALITY_OBLIGATION",
+      "NON_DISCLOSURE"
+    ],
+    "actual_material_mechanisms": [
+      "CONFIDENTIALITY_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "missing_required_mechanisms": [
+      "NON_DISCLOSURE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [
+        false,
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "01_1_2_en",
+    "document": "01_NDA_Confidentiality_Agreement.json",
+    "reference": "1.2",
+    "language": "en",
+    "semantic_family": "CONFIDENTIALITY",
+    "primary_type_actual": "confidentiality",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PURPOSE_LIMITATION"
+    ],
+    "actual_material_mechanisms": [
+      "PURPOSE_LIMITATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "01_1_2_fr",
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "1.2",
+    "language": "fr",
+    "semantic_family": "CONFIDENTIALITY",
+    "primary_type_actual": "confidentiality",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PURPOSE_LIMITATION"
+    ],
+    "actual_material_mechanisms": [
+      "PURPOSE_LIMITATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "01_1_2_ar",
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "1.2",
+    "language": "ar",
+    "semantic_family": "CONFIDENTIALITY",
+    "primary_type_actual": "confidentiality",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PURPOSE_LIMITATION"
+    ],
+    "actual_material_mechanisms": [
+      "MANDATORY_OBLIGATION",
+      "PURPOSE_LIMITATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "MANDATORY_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "02_4_2_en",
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "4.2",
+    "language": "en",
+    "semantic_family": "TERMINATION",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "NOTICE_PREREQUISITE",
+      "TERMINATION_FOR_CAUSE",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "actual_material_mechanisms": [
+      "NOTICE_PROCEDURE",
+      "TERMINATION_FOR_CAUSE"
+    ],
+    "missing_required_mechanisms": [
+      "NOTICE_PREREQUISITE",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PROCEDURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false,
+        true
+      ],
+      "object": [],
+      "trigger": [
+        true
+      ],
+      "polarity": [
+        false,
+        true
+      ]
+    },
+    "expected_states": [
+      "MANUAL",
+      "NOTICE_REQUIRED"
+    ],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "02_4_2_fr",
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "4.2",
+    "language": "fr",
+    "semantic_family": "TERMINATION",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "NOTICE_PREREQUISITE",
+      "TERMINATION_FOR_CAUSE",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "actual_material_mechanisms": [
+      "IMMEDIATE_TERMINATION",
+      "NOTICE_PREREQUISITE",
+      "NOTICE_PROCEDURE",
+      "TERMINATION_CURE_PERIOD",
+      "TERMINATION_FOR_CAUSE",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CONVENIENCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "IMMEDIATE_TERMINATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_CURE_PERIOD",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PROCEDURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        true
+      ],
+      "object": [],
+      "trigger": [
+        true
+      ],
+      "polarity": [
+        true,
+        true
+      ]
+    },
+    "expected_states": [
+      "MANUAL",
+      "NOTICE_REQUIRED"
+    ],
+    "actual_states": [
+      "CURE_PERIOD",
+      "NOTICE_PERIOD",
+      "NOTICE_REQUIRED",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "02_4_2_ar",
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "4.2",
+    "language": "ar",
+    "semantic_family": "TERMINATION",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "NOTICE_PREREQUISITE",
+      "TERMINATION_FOR_CAUSE",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "actual_material_mechanisms": [
+      "IMMEDIATE_TERMINATION",
+      "NOTICE_PREREQUISITE",
+      "PROHIBITION",
+      "TERMINATION_FOR_CAUSE",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CONVENIENCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "IMMEDIATE_TERMINATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        true
+      ],
+      "object": [],
+      "trigger": [
+        true
+      ],
+      "polarity": [
+        true,
+        true
+      ]
+    },
+    "expected_states": [
+      "MANUAL",
+      "NOTICE_REQUIRED"
+    ],
+    "actual_states": [
+      "NOTICE_PERIOD",
+      "NOTICE_REQUIRED",
+      "TERMINATION_FOR_CONVENIENCE"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "02_5_1_en",
+    "document": "02_Master_Services_Agreement.json",
+    "reference": "5.1",
+    "language": "en",
+    "semantic_family": "LIABILITY",
+    "primary_type_actual": "liability",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "EXCLUDED_DAMAGES",
+      "LIABILITY_CAP",
+      "LIABILITY_CARVEOUT"
+    ],
+    "actual_material_mechanisms": [
+      "EXCLUDED_DAMAGES",
+      "LIABILITY_CAP"
+    ],
+    "missing_required_mechanisms": [
+      "LIABILITY_CARVEOUT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "LIABILITY_CAP",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "02_5_1_fr",
+    "document": "02_Master_Services_Agreement_FR.json",
+    "reference": "5.1",
+    "language": "fr",
+    "semantic_family": "LIABILITY",
+    "primary_type_actual": "liability",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "EXCLUDED_DAMAGES",
+      "LIABILITY_CAP",
+      "LIABILITY_CARVEOUT"
+    ],
+    "actual_material_mechanisms": [
+      "EXCLUDED_DAMAGES"
+    ],
+    "missing_required_mechanisms": [
+      "LIABILITY_CAP",
+      "LIABILITY_CARVEOUT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "02_5_1_ar",
+    "document": "02_Master_Services_Agreement_AR.json",
+    "reference": "5.1",
+    "language": "ar",
+    "semantic_family": "LIABILITY",
+    "primary_type_actual": "liability",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "EXCLUDED_DAMAGES",
+      "LIABILITY_CAP",
+      "LIABILITY_CARVEOUT"
+    ],
+    "actual_material_mechanisms": [
+      "EXCLUDED_DAMAGES",
+      "LIABILITY_CAP"
+    ],
+    "missing_required_mechanisms": [
+      "LIABILITY_CARVEOUT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "LIABILITY_CAP",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "03_1_1_en",
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "term",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "LICENSE_GRANT",
+      "LICENSE_RESTRICTION"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "LICENSE_GRANT",
+      "LICENSE_RESTRICTION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "03_1_1_fr",
+    "document": "03_SaaS_Cloud_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "services",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "LICENSE_GRANT",
+      "LICENSE_RESTRICTION"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "LICENSE_GRANT",
+      "LICENSE_RESTRICTION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "03_1_1_ar",
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "term",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "LICENSE_GRANT",
+      "LICENSE_RESTRICTION"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "LICENSE_GRANT",
+      "LICENSE_RESTRICTION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "03_4_1_en",
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "DATA_OWNERSHIP",
+    "primary_type_actual": "intellectual_property",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "actual_material_mechanisms": [
+      "CUSTOMER_DATA_LIFECYCLE"
+    ],
+    "missing_required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CUSTOMER_DATA_LIFECYCLE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "03_4_1_fr",
+    "document": "03_SaaS_Cloud_Agreement_FR.json",
+    "reference": "4.1",
+    "language": "fr",
+    "semantic_family": "DATA_OWNERSHIP",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "03_4_1_ar",
+    "document": "03_SaaS_Cloud_Agreement_AR.json",
+    "reference": "4.1",
+    "language": "ar",
+    "semantic_family": "DATA_OWNERSHIP",
+    "primary_type_actual": "data_protection",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "actual_material_mechanisms": [
+      "CUSTOMER_DATA_LIFECYCLE"
+    ],
+    "missing_required_mechanisms": [
+      "DATA_DELETION",
+      "DATA_RETURN",
+      "OWNERSHIP"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CUSTOMER_DATA_LIFECYCLE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "04_2_1_en",
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "security",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DATA_BREACH_NOTICE",
+      "NOTICE_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [
+      "DATA_BREACH_NOTICE"
+    ],
+    "missing_required_mechanisms": [
+      "NOTICE_PREREQUISITE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "DATA_BREACH_NOTICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [
+      "NOTICE_REQUIRED"
+    ],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "04_2_1_fr",
+    "document": "04_Cybersecurity_Services_Agreement_FR.json",
+    "reference": "2.1",
+    "language": "fr",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "security",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DATA_BREACH_NOTICE",
+      "NOTICE_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [
+      "DATA_BREACH_NOTICE"
+    ],
+    "missing_required_mechanisms": [
+      "NOTICE_PREREQUISITE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "DATA_BREACH_NOTICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [
+      "NOTICE_REQUIRED"
+    ],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "04_2_1_ar",
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "2.1",
+    "language": "ar",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "security",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DATA_BREACH_NOTICE",
+      "NOTICE_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [
+      "DATA_BREACH_NOTICE"
+    ],
+    "missing_required_mechanisms": [
+      "NOTICE_PREREQUISITE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "DATA_BREACH_NOTICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [
+      "NOTICE_REQUIRED"
+    ],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "04_3_1_en",
+    "document": "04_Cybersecurity_Services_Agreement.json",
+    "reference": "3.1",
+    "language": "en",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "services",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_MEASURES",
+      "SERVICE_SCOPE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "SECURITY_MEASURES",
+      "SERVICE_SCOPE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "04_3_1_fr",
+    "document": "04_Cybersecurity_Services_Agreement_FR.json",
+    "reference": "3.1",
+    "language": "fr",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "services",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_MEASURES",
+      "SERVICE_SCOPE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "SECURITY_MEASURES",
+      "SERVICE_SCOPE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "04_3_1_ar",
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "3.1",
+    "language": "ar",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "term",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "SECURITY_MEASURES",
+      "SERVICE_SCOPE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "SECURITY_MEASURES",
+      "SERVICE_SCOPE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "05_1_1_en",
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "DATA_PROTECTION",
+    "primary_type_actual": "data_protection",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PURPOSE_LIMITATION",
+      "SERVICE_SCOPE"
+    ],
+    "actual_material_mechanisms": [
+      "MANDATORY_OBLIGATION",
+      "PROCESSING_INSTRUCTION_LIMIT"
+    ],
+    "missing_required_mechanisms": [
+      "PURPOSE_LIMITATION",
+      "SERVICE_SCOPE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PROCESSING_INSTRUCTION_LIMIT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "MANDATORY_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "05_1_1_fr",
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "DATA_PROTECTION",
+    "primary_type_actual": "data_protection",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PURPOSE_LIMITATION",
+      "SERVICE_SCOPE"
+    ],
+    "actual_material_mechanisms": [
+      "PROCESSING_INSTRUCTION_LIMIT"
+    ],
+    "missing_required_mechanisms": [
+      "PURPOSE_LIMITATION",
+      "SERVICE_SCOPE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PROCESSING_INSTRUCTION_LIMIT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "05_1_1_ar",
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "DATA_PROTECTION",
+    "primary_type_actual": "data_protection",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PURPOSE_LIMITATION",
+      "SERVICE_SCOPE"
+    ],
+    "actual_material_mechanisms": [
+      "PROCESSING_INSTRUCTION_LIMIT"
+    ],
+    "missing_required_mechanisms": [
+      "PURPOSE_LIMITATION",
+      "SERVICE_SCOPE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PROCESSING_INSTRUCTION_LIMIT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "05_4_1_en",
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "security",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_MEASURES"
+    ],
+    "actual_material_mechanisms": [
+      "SECURITY_MEASURES"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "SECURITY_MEASURES",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "05_4_1_fr",
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "4.1",
+    "language": "fr",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "security",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_MEASURES"
+    ],
+    "actual_material_mechanisms": [
+      "SECURITY_MEASURES"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "SECURITY_MEASURES",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "05_4_1_ar",
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "4.1",
+    "language": "ar",
+    "semantic_family": "SECURITY",
+    "primary_type_actual": "security",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_MEASURES"
+    ],
+    "actual_material_mechanisms": [
+      "SECURITY_MEASURES"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "SECURITY_MEASURES",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "06_2_1_en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "BASE_COMPENSATION",
+      "PAY_FREQUENCY"
+    ],
+    "actual_material_mechanisms": [
+      "BASE_COMPENSATION",
+      "PAYMENT_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "PAY_FREQUENCY"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_1_fr",
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "2.1",
+    "language": "fr",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "employment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "BASE_COMPENSATION",
+      "PAY_FREQUENCY"
+    ],
+    "actual_material_mechanisms": [
+      "BASE_COMPENSATION"
+    ],
+    "missing_required_mechanisms": [
+      "PAY_FREQUENCY"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_1_ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "2.1",
+    "language": "ar",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "employment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "BASE_COMPENSATION",
+      "PAY_FREQUENCY"
+    ],
+    "actual_material_mechanisms": [
+      "BASE_COMPENSATION"
+    ],
+    "missing_required_mechanisms": [
+      "PAY_FREQUENCY"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_2_en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "2.2",
+    "language": "en",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "compensation",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "actual_material_mechanisms": [
+      "BASE_COMPENSATION",
+      "EQUITY_COMPENSATION_GRANT",
+      "INCENTIVE_COMPENSATION",
+      "VESTING_SCHEDULE"
+    ],
+    "missing_required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "INCENTIVE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "EQUITY_COMPENSATION_GRANT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "VESTING_SCHEDULE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [
+      "VESTING_SCHEDULE"
+    ],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_2_fr",
+    "document": "06_Executive_Employment_Agreement_FR.json",
+    "reference": "2.2",
+    "language": "fr",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "compensation",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "actual_material_mechanisms": [
+      "INCENTIVE_COMPENSATION"
+    ],
+    "missing_required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "INCENTIVE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_2_ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "2.2",
+    "language": "ar",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "compensation",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "actual_material_mechanisms": [
+      "INCENTIVE_COMPENSATION"
+    ],
+    "missing_required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "INCENTIVE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_4_1_en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "RESTRICTIVE_COVENANTS",
+    "primary_type_actual": "restrictive_covenants",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "NON_COMPETE"
+    ],
+    "actual_material_mechanisms": [
+      "NON_COMPETE_RESTRICTION",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [
+      "NON_COMPETE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "NON_COMPETE_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_ar",
+    "document": "06_Executive_Employment_Agreement_AR.json",
+    "reference": "4.1",
+    "language": "ar",
+    "semantic_family": "RESTRICTIVE_COVENANTS",
+    "primary_type_actual": "restrictive_covenants",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "NON_COMPETE"
+    ],
+    "actual_material_mechanisms": [
+      "NON_COMPETE_RESTRICTION"
+    ],
+    "missing_required_mechanisms": [
+      "NON_COMPETE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "NON_COMPETE_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "07_1_1_en",
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "intellectual_property",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "actual_material_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "LICENSE_GRANT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "07_1_1_fr",
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "intellectual_property",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "actual_material_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "LICENSE_GRANT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "07_1_1_ar",
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "intellectual_property",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "LICENSE_GRANT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "07_1_2_en",
+    "document": "07_Software_Licensing_Agreement.json",
+    "reference": "1.2",
+    "language": "en",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "intellectual_property",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LICENSE_RESTRICTION"
+    ],
+    "actual_material_mechanisms": [
+      "LICENSE_RESTRICTION",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "LICENSE_RESTRICTION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "07_1_2_fr",
+    "document": "07_Software_Licensing_Agreement_FR.json",
+    "reference": "1.2",
+    "language": "fr",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "intellectual_property",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LICENSE_RESTRICTION"
+    ],
+    "actual_material_mechanisms": [
+      "LICENSE_RESTRICTION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "LICENSE_RESTRICTION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "07_1_2_ar",
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "1.2",
+    "language": "ar",
+    "semantic_family": "LICENSE",
+    "primary_type_actual": "other",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "LICENSE_RESTRICTION"
+    ],
+    "actual_material_mechanisms": [
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [
+      "LICENSE_RESTRICTION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "08_1_1_en",
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "delivery",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DELIVERY_OBLIGATION",
+      "PURCHASE_ORDER"
+    ],
+    "actual_material_mechanisms": [
+      "PURCHASE_ORDER"
+    ],
+    "missing_required_mechanisms": [
+      "DELIVERY_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_1_1_fr",
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "delivery",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DELIVERY_OBLIGATION",
+      "PURCHASE_ORDER"
+    ],
+    "actual_material_mechanisms": [
+      "PURCHASE_ORDER"
+    ],
+    "missing_required_mechanisms": [
+      "DELIVERY_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_1_1_ar",
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "delivery",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DELIVERY_OBLIGATION",
+      "PURCHASE_ORDER"
+    ],
+    "actual_material_mechanisms": [
+      "PURCHASE_ORDER"
+    ],
+    "missing_required_mechanisms": [
+      "DELIVERY_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_3_1_en",
+    "document": "08_Procurement_Supply_Agreement.json",
+    "reference": "3.1",
+    "language": "en",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "supply_distribution",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "INSPECTION_RIGHT",
+      "REPLACEMENT_REMEDY"
+    ],
+    "actual_material_mechanisms": [
+      "EXPRESS_RIGHT",
+      "INSPECTION_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "REPLACEMENT_REMEDY"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_3_1_fr",
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "3.1",
+    "language": "fr",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "INSPECTION_RIGHT",
+      "REPLACEMENT_REMEDY"
+    ],
+    "actual_material_mechanisms": [
+      "INSPECTION_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "REPLACEMENT_REMEDY"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "08_3_1_ar",
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "3.1",
+    "language": "ar",
+    "semantic_family": "PROCUREMENT",
+    "primary_type_actual": "delivery",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "INSPECTION_RIGHT",
+      "REPLACEMENT_REMEDY"
+    ],
+    "actual_material_mechanisms": [
+      "INSPECTION_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "REPLACEMENT_REMEDY"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "09_1_1_en",
+    "document": "09_Consulting_Services_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "SERVICES",
+    "primary_type_actual": "employment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "INDEPENDENT_CONTRACTOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "INDEPENDENT_CONTRACTOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "09_1_1_fr",
+    "document": "09_Consulting_Services_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "SERVICES",
+    "primary_type_actual": "liability",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "INDEPENDENT_CONTRACTOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "INDEPENDENT_CONTRACTOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "09_1_1_ar",
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "SERVICES",
+    "primary_type_actual": "tax",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "INDEPENDENT_CONTRACTOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "INDEPENDENT_CONTRACTOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "10_1_1_en",
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "TRANSITION",
+    "primary_type_actual": "services",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SERVICE_SCOPE",
+      "TRANSITION_PLAN"
+    ],
+    "actual_material_mechanisms": [
+      "TRANSITION_SERVICE_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "SERVICE_SCOPE",
+      "TRANSITION_PLAN"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TRANSITION_SERVICE_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "10_1_1_fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "TRANSITION",
+    "primary_type_actual": "services",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SERVICE_SCOPE",
+      "TRANSITION_PLAN"
+    ],
+    "actual_material_mechanisms": [
+      "TRANSITION_SERVICE_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "SERVICE_SCOPE",
+      "TRANSITION_PLAN"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TRANSITION_SERVICE_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "10_1_1_ar",
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "TRANSITION",
+    "primary_type_actual": "services",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SERVICE_SCOPE",
+      "TRANSITION_PLAN"
+    ],
+    "actual_material_mechanisms": [
+      "TRANSITION_SERVICE_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "SERVICE_SCOPE",
+      "TRANSITION_PLAN"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TRANSITION_SERVICE_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "10_6_1_en",
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "6.1",
+    "language": "en",
+    "semantic_family": "TRANSITION",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "EXIT_ASSISTANCE",
+      "TERM_DURATION"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "EXIT_ASSISTANCE",
+      "TERM_DURATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "10_6_1_fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "6.1",
+    "language": "fr",
+    "semantic_family": "TRANSITION",
+    "primary_type_actual": "termination",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "EXIT_ASSISTANCE",
+      "TERM_DURATION"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "EXIT_ASSISTANCE",
+      "TERM_DURATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "10_6_1_ar",
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "6.1",
+    "language": "ar",
+    "semantic_family": "TRANSITION",
+    "primary_type_actual": "pricing",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "EXIT_ASSISTANCE",
+      "TERM_DURATION"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "EXIT_ASSISTANCE",
+      "TERM_DURATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "11_2_1_en",
+    "document": "11_Commercial_Lease_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "LEASE",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PAY_FREQUENCY",
+      "RENT_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "PAYMENT_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "PAY_FREQUENCY",
+      "RENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "11_2_1_fr",
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "2.1",
+    "language": "fr",
+    "semantic_family": "LEASE",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PAY_FREQUENCY",
+      "RENT_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "PAYMENT_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "PAY_FREQUENCY",
+      "RENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "11_2_1_ar",
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "2.1",
+    "language": "ar",
+    "semantic_family": "LEASE",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PAY_FREQUENCY",
+      "RENT_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "PAYMENT_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "PAY_FREQUENCY",
+      "RENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "11_2_2_en",
+    "document": "11_Commercial_Lease_Agreement.json",
+    "reference": "2.2",
+    "language": "en",
+    "semantic_family": "LEASE",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "OPERATING_EXPENSES",
+      "PAYMENT_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "PAYMENT_DEADLINE",
+      "PAYMENT_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "OPERATING_EXPENSES"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PAYMENT_DEADLINE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "11_2_2_fr",
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "2.2",
+    "language": "fr",
+    "semantic_family": "LEASE",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "OPERATING_EXPENSES",
+      "PAYMENT_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "OPERATING_CHARGE_RECONCILIATION",
+      "PAYMENT_DEADLINE",
+      "PAYMENT_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [
+      "OPERATING_EXPENSES"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "OPERATING_CHARGE_RECONCILIATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAYMENT_DEADLINE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "11_2_2_ar",
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "2.2",
+    "language": "ar",
+    "semantic_family": "LEASE",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "OPERATING_EXPENSES",
+      "PAYMENT_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "PAYMENT_DEADLINE"
+    ],
+    "missing_required_mechanisms": [
+      "OPERATING_EXPENSES",
+      "PAYMENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PAYMENT_DEADLINE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "11_5_1_en",
+    "document": "11_Commercial_Lease_Agreement.json",
+    "reference": "5.1",
+    "language": "en",
+    "semantic_family": "ASSIGNMENT",
+    "primary_type_actual": "assignment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [
+      "ASSIGNMENT_RESTRICTION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "11_5_1_fr",
+    "document": "11_Commercial_Lease_Agreement_FR.json",
+    "reference": "5.1",
+    "language": "fr",
+    "semantic_family": "ASSIGNMENT",
+    "primary_type_actual": "termination_for_convenience",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [
+      "CONSENT_PREREQUISITE"
+    ],
+    "missing_required_mechanisms": [
+      "ASSIGNMENT_RESTRICTION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "11_5_1_ar",
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "5.1",
+    "language": "ar",
+    "semantic_family": "ASSIGNMENT",
+    "primary_type_actual": "assignment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "CONSENT_PREREQUISITE",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_1_1_en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LOAN_DISBURSEMENT"
+    ],
+    "actual_material_mechanisms": [
+      "LOAN_PRINCIPAL_DISBURSEMENT"
+    ],
+    "missing_required_mechanisms": [
+      "LOAN_DISBURSEMENT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "LOAN_PRINCIPAL_DISBURSEMENT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_1_1_fr",
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LOAN_DISBURSEMENT"
+    ],
+    "actual_material_mechanisms": [
+      "LOAN_PRINCIPAL_DISBURSEMENT"
+    ],
+    "missing_required_mechanisms": [
+      "LOAN_DISBURSEMENT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "LOAN_PRINCIPAL_DISBURSEMENT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_1_1_ar",
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "LOAN_DISBURSEMENT"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "LOAN_DISBURSEMENT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [
+        false
+      ],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_2_1_en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "security_interest",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_INTEREST"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "SECURITY_INTEREST"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_2_1_fr",
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "2.1",
+    "language": "fr",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "security_interest",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "SECURITY_INTEREST"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "SECURITY_INTEREST"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_2_1_ar",
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "2.1",
+    "language": "ar",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "SECURITY_INTEREST"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "SECURITY_INTEREST"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_5_1_en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "5.1",
+    "language": "en",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "guarantee",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "GUARANTEE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "GUARANTEE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_5_1_fr",
+    "document": "12_Loan_Credit_Agreement_FR.json",
+    "reference": "5.1",
+    "language": "fr",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "warranty",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "GUARANTEE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "GUARANTEE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_5_1_ar",
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "5.1",
+    "language": "ar",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "guarantee",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "GUARANTEE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "GUARANTEE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_4_1_en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PREPAYMENT_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "PREPAYMENT_RIGHT"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PREPAYMENT_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "12_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_ar",
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "4.1",
+    "language": "ar",
+    "semantic_family": "FINANCE",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PREPAYMENT_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "PREPAYMENT_RIGHT"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PREPAYMENT_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [
+        true
+      ],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "13_2_1_en",
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "M&A",
+    "primary_type_actual": "indemnity",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PAYMENT_OBLIGATION",
+      "PURCHASE_PRICE"
+    ],
+    "actual_material_mechanisms": [
+      "PURCHASE_PRICE",
+      "PURCHASE_PRICE_PAYMENT_SCHEDULE"
+    ],
+    "missing_required_mechanisms": [
+      "PAYMENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURCHASE_PRICE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "13_2_1_fr",
+    "document": "13_Asset_Purchase_Agreement_FR.json",
+    "reference": "2.1",
+    "language": "fr",
+    "semantic_family": "M&A",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PAYMENT_OBLIGATION",
+      "PURCHASE_PRICE"
+    ],
+    "actual_material_mechanisms": [
+      "PURCHASE_PRICE",
+      "PURCHASE_PRICE_PAYMENT_SCHEDULE"
+    ],
+    "missing_required_mechanisms": [
+      "PAYMENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURCHASE_PRICE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "13_2_1_ar",
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "2.1",
+    "language": "ar",
+    "semantic_family": "M&A",
+    "primary_type_actual": "indemnity",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PAYMENT_OBLIGATION",
+      "PURCHASE_PRICE"
+    ],
+    "actual_material_mechanisms": [
+      "PURCHASE_PRICE"
+    ],
+    "missing_required_mechanisms": [
+      "PAYMENT_OBLIGATION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "PURCHASE_PRICE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "13_5_1_en",
+    "document": "13_Asset_Purchase_Agreement.json",
+    "reference": "5.1",
+    "language": "en",
+    "semantic_family": "M&A",
+    "primary_type_actual": "warranty",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CLOSING_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "CLOSING_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "13_5_1_fr",
+    "document": "13_Asset_Purchase_Agreement_FR.json",
+    "reference": "5.1",
+    "language": "fr",
+    "semantic_family": "M&A",
+    "primary_type_actual": "warranty",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CLOSING_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "CLOSING_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "13_5_1_ar",
+    "document": "13_Asset_Purchase_Agreement_AR.json",
+    "reference": "5.1",
+    "language": "ar",
+    "semantic_family": "M&A",
+    "primary_type_actual": "covenant",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "CLOSING_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "CLOSING_OBLIGATION",
+      "CONSENT_PREREQUISITE"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_3_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "3.1",
+    "language": "en",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "share_transfer_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_3_1_fr",
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "3.1",
+    "language": "fr",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "share_transfer_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_3_1_ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "3.1",
+    "language": "ar",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "assignment",
+    "primary_type_verdict": "BROAD_COMPATIBLE",
+    "required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "DRAG_ALONG_RIGHT",
+      "MANDATORY_PARTICIPATION",
+      "OBLIGATION_TO_CONSENT",
+      "OBLIGATION_TO_VOTE_IN_FAVOR"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_3_2_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "3.2",
+    "language": "en",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "EXPRESS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_3_2_fr",
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "3.2",
+    "language": "fr",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "ASSIGNMENT_RESTRICTION",
+      "EXPRESS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "3.2",
+    "language": "ar",
+    "semantic_family": "SHARE_TRANSFER",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT",
+      "TAG_ALONG_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "TAG_ALONG_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "PARTICIPATION_OPTION",
+      "SAME_TERMS_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true,
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true,
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_2_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "INVESTOR_RIGHTS",
+    "primary_type_actual": "anti_dilution_preemptive_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "actual_material_mechanisms": [
+      "EXPRESS_RIGHT"
+    ],
+    "missing_required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_2_1_fr",
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "2.1",
+    "language": "fr",
+    "semantic_family": "INVESTOR_RIGHTS",
+    "primary_type_actual": "other",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_2_1_ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "2.1",
+    "language": "ar",
+    "semantic_family": "INVESTOR_RIGHTS",
+    "primary_type_actual": "anti_dilution_preemptive_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "actual_material_mechanisms": [],
+    "missing_required_mechanisms": [
+      "PREEMPTIVE_RIGHT"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 0,
+    "numeric_total": 0
+  },
+  {
+    "fixture_id": "14_1_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "1.1",
+    "language": "en",
+    "semantic_family": "GOVERNANCE",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "actual_material_mechanisms": [
+      "BOARD_COMPOSITION_STRUCTURE"
+    ],
+    "missing_required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BOARD_COMPOSITION_STRUCTURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_1_1_fr",
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "1.1",
+    "language": "fr",
+    "semantic_family": "GOVERNANCE",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "actual_material_mechanisms": [
+      "BOARD_COMPOSITION_STRUCTURE"
+    ],
+    "missing_required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BOARD_COMPOSITION_STRUCTURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_1_1_ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "1.1",
+    "language": "ar",
+    "semantic_family": "GOVERNANCE",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "actual_material_mechanisms": [
+      "BOARD_COMPOSITION_STRUCTURE"
+    ],
+    "missing_required_mechanisms": [
+      "APPOINTMENT_RIGHT",
+      "BOARD_COMPOSITION"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BOARD_COMPOSITION_STRUCTURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "14_4_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "FINANCIAL_REPORTING",
+    "primary_type_actual": "investor_information_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 3,
+    "numeric_total": 3
+  },
+  {
+    "fixture_id": "14_4_1_fr",
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "4.1",
+    "language": "fr",
+    "semantic_family": "FINANCIAL_REPORTING",
+    "primary_type_actual": "investor_information_rights",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 3,
+    "numeric_total": 3
+  },
+  {
+    "fixture_id": "14_4_1_ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "4.1",
+    "language": "ar",
+    "semantic_family": "FINANCIAL_REPORTING",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "actual_material_mechanisms": [
+      "FINANCIAL_REPORTING_OBLIGATION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "FINANCIAL_REPORTING_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        true
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 3,
+    "numeric_total": 3
+  },
+  {
+    "fixture_id": "14_6_1_en",
+    "document": "14_Shareholders_Agreement.json",
+    "reference": "6.1",
+    "language": "en",
+    "semantic_family": "CONSENT",
+    "primary_type_actual": "governance",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "actual_material_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "PROHIBITION",
+      "RESERVED_MATTERS_CONSENT"
+    ],
+    "missing_required_mechanisms": [
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "RESERVED_MATTERS_CONSENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 2,
+    "numeric_total": 2
+  },
+  {
+    "fixture_id": "14_6_1_fr",
+    "document": "14_Shareholders_Agreement_FR.json",
+    "reference": "6.1",
+    "language": "fr",
+    "semantic_family": "CONSENT",
+    "primary_type_actual": "loan",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "actual_material_mechanisms": [
+      "CONSENT_PREREQUISITE"
+    ],
+    "missing_required_mechanisms": [
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 2,
+    "numeric_total": 2
+  },
+  {
+    "fixture_id": "14_6_1_ar",
+    "document": "14_Shareholders_Agreement_AR.json",
+    "reference": "6.1",
+    "language": "ar",
+    "semantic_family": "CONSENT",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "actual_material_mechanisms": [
+      "CONSENT_PREREQUISITE",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [
+      "INVESTOR_CONSENT_RIGHT",
+      "RESERVED_MATTER"
+    ],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [
+        false
+      ],
+      "trigger": [],
+      "polarity": [
+        false
+      ]
+    },
+    "expected_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL"
+    ],
+    "actual_states": [
+      "CONSENT_REQUIRED",
+      "PRIOR_APPROVAL",
+      "PRIOR_CONSENT"
+    ],
+    "numeric_hits": 2,
+    "numeric_total": 2
+  }
+]

@@ -1,0 +1,1825 @@
+
+####################################################################################################
+TYPE: confidentiality
+####################################################################################################
+
+--- EN TOTAL=5 ---
+
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_2
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.2 Each Receiving Party shall use the Confidential Information solely for the Purpose.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_3
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 Confidential Information does not include information that: (a) is or becomes publicly available through no fault of the Receiving Party; (b) was rightfully known to the Receiving Party prior to disclosure; (c) is independently developed without use of the Confidential Information; or (d) is rightfully received from a third party without duty of confidentiality.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_4
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 This Agreement shall remain in effect for two (2) years from the Effective Date. The confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_5
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 Nothing in this Agreement grants any license or ownership interest in the Confidential Information. All Confidential Information is provided "as is" without warranty of any kind.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_6
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 Each Party acknowledges that unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=6 ---
+
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_2
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Chaque Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles du présent Accord.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE']
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_3
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.2 Chaque Partie Réceptrice n'utilisera les Informations Confidentielles qu'aux fins de l'Objet.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_4
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 Les Informations Confidentielles n'incluent pas les informations qui : (a) sont ou deviennent publiquement accessibles sans faute de la Partie Réceptrice ; (b) étaient légitimement connues de la Partie Réceptrice avant leur divulgation ; (c) sont développées indépendamment sans utilisation des Informations Confidentielles ; ou (d) sont légitimement reçues d'un tiers sans obligation de confidentialité.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_5
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Le présent Accord restera en vigueur pendant deux (2) ans à compter de la Date d'Effet. Les obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard du droit applicable.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_7
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 Le Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- AR TOTAL=5 ---
+
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_1
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 لا ينشئ شيء في هذه الاتفاقية أي ترخيص أو حق ملكية في المعلومات السرية. تُقدَّم جميع المعلومات السرية "كما هي" دون أي ضمان من أي نوع.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_4
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.2 يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.
+MECHANISMS: ['MANDATORY_OBLIGATION']
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_5
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 لا تشمل المعلومات السرية المعلومات التي: (أ) أصبحت متاحة للجمهور دون تقصير من الطرف المتلقي؛ (ب) كانت معروفة لدى الطرف المتلقي بشكل مشروع قبل الإفصاح عنها؛ (ج) طُورت بشكل مستقل دون استخدام المعلومات السرية؛ أو (د) وردت بشكل مشروع من طرف ثالث دون التزام بالسرية.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_7
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 يقر كل طرف بأن الإفصاح غير المصرح به عن المعلومات السرية قد يسبب ضرراً لا يمكن جبره بالتعويض المالي وحده، وأن الطرف غير المخل يحق له طلب أمر قضائي بالإضافة إلى أي سبل انتصاف أخرى متاحة، دون الحاجة إلى تقديم كفالة.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 15_General_Commercial_Agreement_AR.json
+REF: clause_7
+PIPELINE: confidentiality
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 يحافظ كل طرف على سرية أي معلومات غير علنية يفصح عنها الطرف الآخر فيما يتعلق بهذه الاتفاقية، ولا يستخدمها إلا لأغراض أنشطة التعاون.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: data_protection
+####################################################################################################
+
+--- EN TOTAL=6 ---
+
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_1
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 At Controller's election, upon termination of the underlying services agreement, Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_2
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.
+MECHANISMS: ['MANDATORY_OBLIGATION']
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_5
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 Processor shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach, and shall provide reasonable assistance to Controller in meeting its obligations to notify supervisory authorities and affected data subjects.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_6
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+8.1 Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_7
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=4 ---
+
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_3
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 Le Sous-traitant notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation de Données Personnelles dont il aurait connaissance, et fournira une assistance raisonnable au Responsable du Traitement pour respecter ses obligations de notification aux autorités de contrôle et aux personnes concernées.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_5
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 Au choix du Responsable du Traitement, à la résiliation de l'accord de services sous-jacent, le Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles au Responsable du Traitement et supprimera les copies existantes, sauf obligation légale de conservation.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_6
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Le Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement, y compris en ce qui concerne les transferts vers un pays tiers, sauf obligation contraire du droit applicable.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_5
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 La Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- AR TOTAL=8 ---
+
+DOC: 03_SaaS_Cloud_Agreement_AR.json
+REF: clause_3
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 فيما بين الطرفين، يحتفظ الطرف الطرف المتعاقد ب أ بكامل الحقوق في بيانات الطرف الطرف المتعاقد ب أ. عند الإنهاء، تتيح Northwind بيانات الطرف الطرف المتعاقد ب أ للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_1
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 يخطر المعالج المتحكم، دون تأخير غير مبرر وفي جميع الأحوال خلال ثمانٍ وأربعين (48) ساعة، بأي خرق للبيانات الشخصية يعلم به، ويقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_2
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 وفقاً لاختيار المتحكم، عند إنهاء اتفاقية الخدمات الأساسية، يحذف المعالج أو يعيد جميع البيانات الشخصية إلى المتحكم ويحذف النسخ الموجودة، ما لم يقتضِ القانون المعمول به الاحتفاظ بها.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_3
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_5
+PIPELINE: data_protection
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: employment
+####################################################################################################
+
+--- EN TOTAL=6 ---
+
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_1
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with Contracting Party A's gene-editing therapeutics programs within the United States.
+MECHANISMS: ['PROHIBITION']
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_3
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.2 During employment and for twenty-four (24) months thereafter, Executive shall not solicit for employment any Contracting Party B of Contracting Party A.
+MECHANISMS: ['PROHIBITION']
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_4
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.2 Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_6
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Executive shall serve as Chief Scientific Officer, reporting to the Chief Executive Officer, and shall devote substantially full business time to Contracting Party A's affairs.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 09_Consulting_Services_Agreement.json
+REF: clause_3
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Contracting Party B is an independent contractor and not an Contracting Party B, agent, joint venturer, or partner of Contracting Party A. Contracting Party B shall be solely responsible for all applicable taxes, insurance, and benefits.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=4 ---
+
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_3
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 La Dirigeante exercera les fonctions de Directrice Scientifique, sous l'autorité du Directeur Général, et consacrera l'essentiel de son temps de travail aux affaires de la Société.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_4
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 La Société versera à la Dirigeante un salaire de base annuel de 410 000 $, payable selon les pratiques de paie standard de la Société, sous réserve d'un examen annuel par le Conseil d'Administration.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_6
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.2 Pendant la durée du contrat et pendant vingt-quatre (24) mois après sa cessation, la Dirigeante ne sollicitera pas en vue d'un emploi tout salarié de la Société.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_3
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 La Partie contractante B proposera un emploi aux Salariés Transférés à des conditions substantiellement comparables à leurs conditions actuelles auprès de la Partie contractante A, et reconnaîtra leur ancienneté auprès de la Partie contractante A aux fins d'éligibilité aux avantages sociaux, dans la mesure permise par les régimes d'avantages de la Partie contractante B.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- AR TOTAL=2 ---
+
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_3
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الطرف الطرف المتعاقد ب أ للعمل.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_4
+PIPELINE: employment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 يعرض الطرف الطرف المتعاقد ب ب على الطرف الطرف المتعاقد ب بين المنقولين عملاً بشروط مماثلة إلى حد كبير لشروطهم الحالية لدى الطرف الطرف المتعاقد ب أ، ويعترف بأقدميتهم لدى الطرف الطرف المتعاقد ب أ لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا الطرف الطرف المتعاقد ب ب.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: indemnity
+####################################################################################################
+
+--- EN TOTAL=3 ---
+
+DOC: 04_Cybersecurity_Services_Agreement.json
+REF: clause_9
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.2 Provider shall indemnify Contracting Party A for third-party claims, regulatory fines, and reasonable costs of credit monitoring and forensic investigation arising from a Security Incident attributable to Provider's breach of this Agreement.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_2
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 The aggregate purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing; and (b) $2,000,000 held in escrow for eighteen (18) months to secure Seller's indemnification obligations under Section 6.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_7
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 Seller shall indemnify Buyer for losses arising from breaches of Seller's representations and warranties, subject to a deductible of $100,000 and an aggregate cap of $2,000,000, except for breaches of the title and authority representations, which shall not be subject to the deductible or cap.
+MECHANISMS: ['PROHIBITION']
+DOMINANCE SCORES: []
+
+--- FR TOTAL=3 ---
+
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_6
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.2 La Partie contractante B indemnisera la Partie contractante A au titre des réclamations de tiers, amendes réglementaires et coûts raisonnables de surveillance de crédit et d'enquête judiciaire résultant d'un Incident de Sécurité imputable à une violation du présent Accord par la Partie contractante B.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 11_Commercial_Lease_Agreement_FR.json
+REF: clause_4
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 Le Preneur maintiendra une assurance de responsabilité civile commerciale générale avec des plafonds d'au moins 2 000 000 $ par sinistre, désignant le Bailleur comme assuré additionnel, et indemnisera le Bailleur des réclamations résultant de l'usage des Locaux par le Preneur, sauf en cas de négligence du Bailleur.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement_FR.json
+REF: clause_5
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 Le Vendeur indemnisera l'Acquéreur des pertes résultant de violations des déclarations et garanties du Vendeur, sous réserve d'une franchise de 100 000 $ et d'un plafond global de 2 000 000 $, à l'exception des violations des déclarations de titre et de pouvoir, non soumises à cette franchise ni à ce plafond.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- AR TOTAL=4 ---
+
+DOC: 04_Cybersecurity_Services_Agreement_AR.json
+REF: clause_2
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.2 يعوض الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ عن مطالبات الأطراف الثالثة والغرامات التنظيمية والتكاليف المعقولة لمراقبة الائتمان والتحقيق الجنائي الناشئة عن حادث أمني يُعزى إلى إخلال الطرف الطرف المتعاقد ب ب بهذه الاتفاقية.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement_AR.json
+REF: clause_5
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 يبلغ إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق؛ و(ب) 2,000,000 دولار تُودع في حساب ضمان لمدة ثمانية عشر (18) شهراً لضمان التزامات تعويض الطرف المتعاقد ب بموجب البند 6.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement_AR.json
+REF: clause_6
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 بين تاريخ هذه الاتفاقية وتاريخ الإغلاق، يدير الطرف المتعاقد ب النشاط في السياق الاعتيادي وفقاً للممارسات السابقة، ولا يجوز له، دون موافقة خطية مسبقة من الطرف الطرف المتعاقد ب أ، إبرام عقد جوهري، أو التصرف في أصل جوهري، أو زيادة تعويضات الطرف الطرف المتعاقد ب بين الرئيسيين.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement_AR.json
+REF: clause_7
+PIPELINE: indemnity
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 يعوض الطرف المتعاقد ب الطرف الطرف المتعاقد ب أ عن الخسائر الناشئة عن الإخلال بإقرارات وضمانات الطرف المتعاقد ب، رهناً بحد أدنى قدره 100,000 دولار وحد أقصى إجمالي قدره 2,000,000 دولار، باستثناء الإخلال بإقرارات الملكية والصلاحية، التي لا تخضع لهذا الحد الأدنى أو الحد الأقصى.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: intellectual_property
+####################################################################################################
+
+--- EN TOTAL=9 ---
+
+DOC: 02_Master_Services_Agreement.json
+REF: clause_8
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Provider retains all right, title, and interest in its pre-existing tools, methodologies, and know-how used to deliver the services.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 03_SaaS_Cloud_Agreement.json
+REF: clause_6
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_8
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 Executive hereby assigns to Contracting Party A all right, title, and interest in any inventions, discoveries, and works of authorship conceived or developed during employment that relate to Contracting Party A's business or arise from the use of Contracting Party A resources.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_5
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_7
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Licensor retains all right, title, and interest in and to the Licensed Software, including all modifications and improvements, whether made by Licensor or Licensee.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=7 ---
+
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_7
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 La Dirigeante cède par les présentes à la Société l'intégralité des droits sur toute invention, découverte et œuvre créées pendant la durée du contrat, se rapportant à l'activité de la Société ou résultant de l'utilisation des ressources de la Société.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_3
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Le Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_4
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.2 Le Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_7
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Le Concédant conserve l'intégralité des droits sur le Logiciel Concédé, y compris toutes modifications et améliorations, qu'elles soient réalisées par le Concédant ou le Licencié.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_6
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.79
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: assignment
+COVERAGE: 0.7617
+DOMINANCE MARGIN: None
+SOURCE:
+3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).
+MECHANISMS: ['EXPRESS_RIGHT', 'ASSIGNMENT_TRANSFER']
+DOMINANCE SCORES: [{'type': 'assignment', 'score': 61.8315, 'coverage': 0.7617, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}]
+
+--- AR TOTAL=7 ---
+
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 يحتفظ الطرف الطرف المتعاقد ب ب بكامل الحقوق في أدواته ومنهجياته وخبراته الفنية السابقة المستخدمة في تقديم الخدمات.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_8
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 تتنازل المديرة التنفيذية بموجب هذا العقد للشركة عن كامل الحقوق في أي اختراع أو اكتشاف أو مصنف يُبتكر أثناء مدة العمل، يتعلق بنشاط الطرف الطرف المتعاقد ب أ أو ينشأ عن استخدام موارد الطرف الطرف المتعاقد ب أ.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_4
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج المرخَّص وإعادة إنتاجه وتوزيعه فقط كجزء مدمج في المنتجات المرخَّصة، طوال المدة.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.2 لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.
+MECHANISMS: ['PROHIBITION']
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_7
+PIPELINE: intellectual_property
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 يحتفظ المرخِّص بكامل الحقوق في البرنامج المرخَّص، بما في ذلك جميع التعديلات والتحسينات، سواء أجراها المرخِّص أو المرخَّص له.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: liability
+####################################################################################################
+
+--- EN TOTAL=2 ---
+
+DOC: 02_Master_Services_Agreement.json
+REF: clause_9
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.6026
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1826
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.
+MECHANISMS: ['EXCLUDED_DAMAGE_CATEGORY']
+DOMINANCE SCORES: [{'type': 'liability', 'score': 37.7507, 'coverage': 0.1826, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}]
+
+DOC: 15_General_Commercial_Agreement.json
+REF: clause_1
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.79
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.6142
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 Neither Party shall be liable to the other for indirect, incidental, or consequential damages arising from this Agreement. This Agreement shall be governed by the laws of the State of New York.
+MECHANISMS: ['GOVERNING_LAW_SELECTION', 'EXCLUDED_DAMAGE_CATEGORY']
+DOMINANCE SCORES: [{'type': 'liability', 'score': 55.877, 'coverage': 0.6142, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}, {'type': 'governing_law', 'score': 54.3671, 'coverage': 0.2335, 'independent_support': 1, 'core_count': 1, 'secondary_count': 0, 'procedural_count': 0}]
+
+--- FR TOTAL=10 ---
+
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_9
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.5521
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1321
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ OU D'INDEMNISATION, LA RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION. LE PRESTATAIRE NE SERA EN AUCUN CAS RESPONSABLE DE DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS.
+MECHANISMS: ['EXCLUDED_DAMAGE_CATEGORY']
+DOMINANCE SCORES: [{'type': 'liability', 'score': 35.6295, 'coverage': 0.1321, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}]
+
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_6
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.5751
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1551
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 La responsabilité globale de Northwind découlant du présent Accord n'excédera pas les frais payés par la Partie contractante A au cours des douze (12) mois précédant la réclamation, sauf en cas de violation de l'article 5 (Sécurité) ou des obligations d'indemnisation de Northwind, pour lesquelles la responsabilité sera plafonnée à deux (2) fois ces frais.
+MECHANISMS: ['LIABILITY_CAP']
+DOMINANCE SCORES: [{'type': 'liability', 'score': 51.1952, 'coverage': 0.1551, 'independent_support': 1, 'core_count': 1, 'secondary_count': 0, 'procedural_count': 0}]
+
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_1
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 La responsabilité globale de la Partie contractante B pour un Incident de Sécurité résultant du non-respect des niveaux de service prévus à l'Annexe A n'excédera pas trois (3) fois les honoraires annuels payés par la Partie contractante A, et sera illimitée en cas de négligence grave ou de faute intentionnelle de la Partie contractante B.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_2
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 La responsabilité globale du Concédant au titre du présent Accord n'excédera pas le total des redevances payées par le Licencié au cours des douze (12) mois précédant la réclamation, sauf en cas de violation par le Concédant de l'article 3 (Propriété de la Propriété Intellectuelle).
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_1
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.79
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.7762
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 Aucune des Parties ne sera responsable des dommages indirects, accessoires ou consécutifs. La responsabilité globale du Fournisseur n'excédera pas la valeur du Bon de Commande à l'origine de la réclamation.
+MECHANISMS: ['EXCLUDED_DAMAGE_CATEGORY']
+DOMINANCE SCORES: [{'type': 'liability', 'score': 62.68, 'coverage': 0.7762, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}]
+
+--- AR TOTAL=7 ---
+
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_9
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.5712
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: liability
+COVERAGE: 0.1512
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل الطرف الطرف المتعاقد ب ب بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.
+MECHANISMS: ['EXCLUDED_DAMAGE_CATEGORY']
+DOMINANCE SCORES: [{'type': 'liability', 'score': 36.4305, 'coverage': 0.1512, 'independent_support': 1, 'core_count': 0, 'secondary_count': 1, 'procedural_count': 0}]
+
+DOC: 03_SaaS_Cloud_Agreement_AR.json
+REF: clause_6
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من الطرف الطرف المتعاقد ب أ خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 04_Cybersecurity_Services_Agreement_AR.json
+REF: clause_1
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+5.1 لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_3
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية).
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_1
+PIPELINE: liability
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من الطرف الطرف المتعاقد ب أ بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: loan
+####################################################################################################
+
+--- EN TOTAL=4 ---
+
+DOC: 12_Loan_Credit_Agreement.json
+REF: clause_5
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.562
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: financial_reporting
+COVERAGE: 0.142
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Borrower represents that it is duly organized, in good standing, and has the authority to enter into this Agreement. Borrower covenants to maintain a debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statements within forty-five (45) days of each fiscal quarter end.
+MECHANISMS: ['FINANCIAL_REPORTING_OBLIGATION']
+DOMINANCE SCORES: [{'type': 'financial_reporting', 'score': 50.8845, 'coverage': 0.142, 'independent_support': 1, 'core_count': 1, 'secondary_count': 0, 'procedural_count': 0}]
+
+DOC: 12_Loan_Credit_Agreement.json
+REF: clause_7
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 Borrower may prepay the Loan, in whole or in part, at any time without penalty, provided that any partial prepayment shall be applied first to accrued interest and then to outstanding principal.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 12_Loan_Credit_Agreement.json
+REF: clause_8
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_1
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 For a period of five (5) years following the Closing Date, Seller and its principal shareholders shall not, directly or indirectly, engage in a business competitive with the Business within North America.
+MECHANISMS: ['PROHIBITION']
+DOMINANCE SCORES: []
+
+--- FR TOTAL=4 ---
+
+DOC: 12_Loan_Credit_Agreement_FR.json
+REF: clause_1
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 12_Loan_Credit_Agreement_FR.json
+REF: clause_4
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.5335
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: financial_reporting
+COVERAGE: 0.1135
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 L'Emprunteur déclare être dûment constitué, en règle, et disposer du pouvoir de conclure le présent Contrat. L'Emprunteur s'engage à maintenir un ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers trimestriels dans un délai de quarante-cinq (45) jours suivant la fin de chaque trimestre fiscal.
+MECHANISMS: ['FINANCIAL_REPORTING_OBLIGATION']
+DOMINANCE SCORES: [{'type': 'financial_reporting', 'score': 49.6852, 'coverage': 0.1135, 'independent_support': 1, 'core_count': 1, 'secondary_count': 0, 'procedural_count': 0}]
+
+DOC: 12_Loan_Credit_Agreement_FR.json
+REF: clause_6
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 L'Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité, tout remboursement partiel étant imputé en premier lieu sur les intérêts courus puis sur le principal restant dû.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_2
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE']
+DOMINANCE SCORES: []
+
+--- AR TOTAL=4 ---
+
+DOC: 12_Loan_Credit_Agreement_AR.json
+REF: clause_2
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 ضماناً لالتزامات الطرف المتعاقد ب بموجب هذه الاتفاقية، يمنح الطرف المتعاقد ب المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 12_Loan_Credit_Agreement_AR.json
+REF: clause_3
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.2 عند وقوع حالة تعثر، يجوز للمُقرض إعلان استحقاق كامل المبلغ الأصلي المتبقي والفوائد المتراكمة فوراً وممارسة جميع الحقوق وسبل الانتصاف المتاحة بموجب اتفاقية الضمان والقانون المعمول به، بما في ذلك حجز الضمانات.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 12_Loan_Credit_Agreement_AR.json
+REF: clause_5
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 يُقر الطرف المتعاقد ب بأنه مؤسس حسب الأصول، وفي وضع قانوني سليم، ويملك الصلاحية لإبرام هذه الاتفاقية. يتعهد الطرف المتعاقد ب بالحفاظ على نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 12_Loan_Credit_Agreement_AR.json
+REF: clause_8
+PIPELINE: loan
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى الطرف المتعاقد ب رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: payment
+####################################################################################################
+
+--- EN TOTAL=1 ---
+
+DOC: 02_Master_Services_Agreement.json
+REF: clause_4
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.2 All Deliverables shall be deemed "work made for hire" and shall vest exclusively in Contracting Party A upon full payment of the applicable fees.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=6 ---
+
+DOC: 11_Commercial_Lease_Agreement.json
+REF: clause_5
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Tenant shall pay a security deposit equal to two (2) months of Base Rent upon exécution of this Lease, to be held by Landlord as security for Tenant's performance and returned within thirty (30) days after the expiration of the term, less any lawful deductions.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_5
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.1 La Partie contractante A paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation. Tout montant impayé après soixante (60) jours portera intérêt au taux de 1 % par mois.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_7
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.2 L'Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 09_Consulting_Services_Agreement_FR.json
+REF: clause_2
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Tous les travaux, rapports, analyses et recommandations développés par le Consultant spécifiquement pour la Partie contractante A dans le cadre du présent Accord seront réputés créés dans le cadre d'une commande et deviendront la propriété exclusive de la Partie contractante A après paiement intégral.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_4
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.5799
+ABSTAINED: True
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: payment
+COVERAGE: 0.1599
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 La Partie contractante A paiera à la Partie contractante B des honoraires mensuels tels que prévus à l'Annexe A, sous réserve d'ajustement fondé sur les indicateurs de volume définis dans cette annexe, facturés mensuellement à terme échu avec paiement dû dans un délai de trente (30) jours.
+MECHANISMS: ['PAYMENT_OBLIGATION']
+DOMINANCE SCORES: [{'type': 'payment', 'score': 51.5143, 'coverage': 0.1599, 'independent_support': 1, 'core_count': 1, 'secondary_count': 0, 'procedural_count': 0}]
+
+--- AR TOTAL=9 ---
+
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_6
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.2 تُعتبر جميع المخرجات "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل للرسوم المعنية.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_6
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.2 يحق للمرخِّص، بإشعار مدته ثلاثون (30) يوماً، تدقيق دفاتر وسجلات المرخَّص له المتعلقة بحساب الإتاوات، بحد أقصى مرة واحدة سنوياً؛ وإذا كشف التدقيق عن نقص في السداد يتجاوز خمسة بالمائة (5%)، يتحمل المرخَّص له التكلفة المعقولة للتدقيق.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 08_Procurement_Supply_Agreement_AR.json
+REF: clause_7
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+2.2 يسدد الطرف الطرف المتعاقد ب أ جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_4
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 تُعتبر جميع نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: payment
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 يسدد الطرف الطرف المتعاقد ب أ للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: services
+####################################################################################################
+
+--- EN TOTAL=3 ---
+
+DOC: 02_Master_Services_Agreement.json
+REF: clause_5
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Provider shall perform the services described in each SOW in a professional and workmanlike manner consistent with generally accepted industry standards.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 04_Cybersecurity_Services_Agreement.json
+REF: clause_7
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports to Contracting Party A upon request, no more than once per year.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 10_Outsourcing_Managed_Services_Agreement.json
+REF: clause_4
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred applicable applicable Contracting Party Bs, with minimal disruption to Contracting Party A's business operations.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=8 ---
+
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_3
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 La Partie contractante B exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_7
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 La Partie contractante B conserve l'intégralité des droits sur ses outils, méthodologies et savoir-faire préexistants utilisés pour fournir les services.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_3
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+1.1 Sous réserve des termes du présent Accord, Northwind accorde à la Partie contractante A un droit non exclusif et incessible d'accéder à la Plateforme et de l'utiliser pendant la Durée d'Abonnement, exclusivement à des fins commerciales internes.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_2
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 La Partie contractante B maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira à la Partie contractante A les rapports d'audit en vigueur sur demande, au maximum une fois par an.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_5
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- AR TOTAL=1 ---
+
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_2
+PIPELINE: services
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الطرف الطرف المتعاقد ب أ لعلاجات تحرير الجينات داخل الولايات المتحدة.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+####################################################################################################
+TYPE: termination
+####################################################################################################
+
+--- EN TOTAL=1 ---
+
+DOC: 10_Outsourcing_Managed_Services_Agreement.json
+REF: clause_7
+PIPELINE: termination
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Contracting Party A or a successor provider, at Contracting Party A's request and expense at Provider's then-current rates.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- FR TOTAL=13 ---
+
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_2
+PIPELINE: termination
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.1 Contracting Party A may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein. If Executive is terminated without Cause or resigns for Good Reason, Executive shall receive twelve (12) months of base salary continuation and twelve (12) months of COBRA premium reimbursement, subject to exécution of a release of claims.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_8
+PIPELINE: termination
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.2 La Partie contractante B pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite à la Partie contractante A. La Partie contractante A ne pourra résilier que pour manquement substantiel non corrigé de la Partie contractante B, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_5
+PIPELINE: termination
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+4.1 Entre les Parties, la Partie contractante A conserve l'intégralité des droits sur les Données de la Partie contractante A. À la résiliation, Northwind mettra les Données de la Partie contractante A à disposition pour export dans un format standard pendant trente (30) jours, après quoi elles pourront être définitivement supprimées.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_7
+PIPELINE: termination
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+7.1 La Partie contractante A ne pourra pas résilier le présent Accord pour convenance avant la fin de la Durée d'Abonnement en cours. Northwind pourra résilier le présent Accord pour convenance à tout moment moyennant un préavis écrit de quatre-vingt-dix (90) jours, avec remboursement au prorata des frais prépayés et non utilisés.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_8
+PIPELINE: termination
+SHADOW PRIMARY: UNKNOWN
+SHADOW CONFIDENCE: 0.0
+ABSTAINED: True
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+DOMINANCE MARGIN: None
+SOURCE:
+3.2 La Partie contractante A aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations de la Partie contractante B directement pertinentes pour les Services, au maximum une fois par an, aux frais de la Partie contractante A.
+MECHANISMS: []
+DOMINANCE SCORES: []
+
+--- AR TOTAL=0 ---

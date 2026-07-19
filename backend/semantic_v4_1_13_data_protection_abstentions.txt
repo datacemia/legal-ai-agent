@@ -1,0 +1,8 @@
+====================================================================================================
+V4.1.13 DATA PROTECTION ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 8
+BY LANGUAGE: {'ar': 3, 'en': 3, 'fr': 2}
+BY PIPELINE TYPE: {'data_protection': 5, 'data_processing': 3}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 1, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 7}
+MECHANISM COUNTS: {'CUSTOMER_DATA_LIFECYCLE': 1, 'AUTHORIZED_PERSON_CONFIDENTIALITY': 2, 'DATA_SUBJECT_ASSISTANCE': 3, 'DATA_PROTECTION_AUDIT_COOPERATION': 2}

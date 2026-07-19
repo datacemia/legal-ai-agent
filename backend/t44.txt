@@ -1,0 +1,696 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 4450
+PDF_LINES_DEBUG {'line_count': 64, 'non_empty_line_count': 53, 'max_line_len': 181, 'first_20': ['JOHN CITIZEN                       ACCOUNT NUMBER:      205006880871-10520', 'Coin de Lucan et                         ACCOUNT CURRENCY: USD', 'Rue Bayne, 3550                          STATEMENT DATE:       27/02/22', 'Bendigo, Australie                         STATEMENT PERIOD:     11/02/22 to 27/02/22', '', '', 'RÉSUMÉ DU COMPTE', '', '', '', '                                      Montant de la transaction dans le solde de clôture', '                                               devise du compte      du compte                                      Description de la transaction     Transactions, autres opérations', '', '', '    Date     Amount  Currency   Dans    Out', '', '                                                RECHARGE DE COMPTE (Banque en ligne) (John Citizen)', ' 2/11/2022   1,136.00USD1136.00', '                                                              2050558317341020', '                                                   REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': -1, 'dep_line': None, 'wd_i': 21, 'wd_line': '2/12/2022  1,081.06USD                -1081,06              Commande de retrait JOHN CITIZEN 000308536', 'bal_i': 22, 'bal_line': '-0,06     Solde – Solde de clôture du compte à la fin de la journée'}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': True, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': False}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': False, 'has_balance': True, 'preview': 'john citizen                       account number:      205006880871-10520\ncoin de lucan et                         account currency: usd\nrue bayne, 3550                          statement date:       27/02/22\nbendigo, australie                         statement period:     11/02/22 to 27/02/22\n\n\nré'}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '02/22 Bendigo, Australie STATEMENT PERIOD:'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 to'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '02/22 RÉSUMÉ DU COMPTE Montant de la transaction dans le solde de clôture devise du compte du compte Description de la transaction Transactions, autres opérations Date Amount Currency Dans Out RECHARGE DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55,00 2050558317341020) TRANSACTION (Banque en Ligne) Rapprovisionnement de Compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/11/2022 55,00 USD -55.00 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808,00 USD 808,00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536 -0.06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/17/2022 1,112.70USD1112.70 2050558317341020 1112,64 Solde – Solde de clôture du compte à la fin de la journée'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde – Solde final du compte à la fin de la journée RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 834.18 USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 300.00 USD 300,00 2050558317341020 REPLÉT RÉCOMPTE (Banque Internet) Renflouement de compte (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 311.00 USD -311.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536 3.82 Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 503,00 USD 503.00 2050558317341020'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE [{'date': '2022-11-02', 'description': '55,00 USD - 2050558317341020 RECHARGE (Banque En Ligne) Compte de Replenissement (John Citizen)', 'amount': -55.0, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -55.0, 'locked_amount': -55.0, '_locked_amount': -55.0, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-12-02', 'description': 'USD -1081,06 Commande de retrait JOHN CITIZEN 000308536 -0,06 Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Banque Internet) (John Citizen)', 'amount': -1081.06, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -1081.06, 'locked_amount': -1081.06, '_locked_amount': -1081.06, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-14', 'description': 'USD - Commande de retrait JOHN CITIZEN 000308536 - Solde – Solde de clôture du compte à la fin de la journée RECHARGE DE COMPTE (Virement Bancaire) (John Citizen)', 'amount': -808.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.06, '_balance': 0.06, 'signed_amount': -808.0, 'locked_amount': -808.0, '_locked_amount': -808.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': 'USD 834,18 2050558317341020) RECHARGE DE COMPTE (Internet Banking) (John Citizen)', 'amount': -834.18, 'type': 'expense', 'currency': 'USD', 'balance': None, '_balance': None, 'signed_amount': -834.18, 'locked_amount': -834.18, '_locked_amount': -834.18, 'locked_type': 'expense', '_balance_locked': False, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-20', 'description': '820,00 USD - Commande de retrait JOHN CITIZEN 000308536  Solde – Solde de clôture du compte à la fin de la journée RECHARGE de Compte (Banque Internet) (John Citizen)', 'amount': -820.0, 'type': 'expense', 'currency': 'USD', 'balance': 3.82, '_balance': 3.82, 'signed_amount': -820.0, 'locked_amount': -820.0, '_locked_amount': -820.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}, {'date': '2022-02-27', 'description': 'USD - Ordre de retrait JOHN CITIZEN 000308536 0,82 Solde – Solde de clôture du compte à la fin de la journée Westpac 275 Kent Street, Sydney, NSW 2000, Australia www.westpac.com.au', 'amount': -506.0, 'type': 'expense', 'currency': 'USD', 'balance': 506.0, '_balance': 506.0, 'signed_amount': -506.0, 'locked_amount': -506.0, '_locked_amount': -506.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'withdraw_deposit_balance_ocr_multiline'}]
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_MULTILINE_TOTALS_TARGET {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 16, 'sample_date_lines': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 5, 'income': 0, 'expenses': 5, 'income_total': 0, 'expense_total': 4327.06}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 16, 'samples': ['2/11/2022 1,136.00USD1136.00', '2/11/2022 55,00 USD -55,00', '2/11/2022 55,00 USD -55.00', '2/11/2022 55,00 USD 55,00', '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', '2/14/2022 808,00 USD 808,00', '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', '2/17/2022 1,112.70USD1112.70', '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', '2/20/2022 834.18 USD 834,18', '2/20/2022 300.00 USD 300,00', '2/20/2022 311.00 USD -311.00', '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', '3.82 Solde – Solde de clôture du compte à la fin de la journée', '2/27/2022 503,00 USD 503.00', '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536']}
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 1,136.00USD1136.00', 'nums': ['1,136.00', '1136.00'], 'normalized': '1,136.00', 'parsed': 1136.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 1,136.00USD1136.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55,00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD -55.00', 'nums': ['55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD -55.00'
+BNP_AMOUNT_DEBUG {'line': '2/11/2022 55,00 USD 55,00', 'nums': ['55,00', '55,00'], 'normalized': '55.00', 'parsed': 55.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/11/2022 55,00 USD 55,00'
+BNP_AMOUNT_DEBUG {'line': '2/12/2022 1,081.06USD -1081,06 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,081.06', '1081,06'], 'normalized': '1,081.06', 'parsed': 1081.06}
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808,00 USD 808,00', 'nums': ['808,00', '808,00'], 'normalized': '808.00', 'parsed': 808.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/14/2022 808,00 USD 808,00'
+BNP_AMOUNT_DEBUG {'line': '2/14/2022 808.00 USD -808.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['808.00', '808.00'], 'normalized': '808.00', 'parsed': 808.0}
+BNP_AMOUNT_DEBUG {'line': '2/17/2022 1,112.70USD1112.70', 'nums': ['1,112.70', '1112.70'], 'normalized': '1,112.70', 'parsed': 1112.7}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/17/2022 1,112.70USD1112.70'
+BNP_AMOUNT_DEBUG {'line': '2/18/2022 1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['1,112.00', '1112.00'], 'normalized': '1,112.00', 'parsed': 1112.0}
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 834.18 USD 834,18', 'nums': ['834.18', '834,18'], 'normalized': '834.18', 'parsed': 834.18}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 834.18 USD 834,18'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 300.00 USD 300,00', 'nums': ['300.00', '300,00'], 'normalized': '300.00', 'parsed': 300.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 300.00 USD 300,00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 311.00 USD -311.00', 'nums': ['311.00', '311.00'], 'normalized': '311.00', 'parsed': 311.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/20/2022 311.00 USD -311.00'
+BNP_AMOUNT_DEBUG {'line': '2/20/2022 820,00 USD -820.00 Commande de retrait JOHN CITIZEN 000308536', 'nums': ['820,00', '820.00'], 'normalized': '820.00', 'parsed': 820.0}
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 503,00 USD 503.00', 'nums': ['503,00', '503.00'], 'normalized': '503.00', 'parsed': 503.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '2/27/2022 503,00 USD 503.00'
+BNP_AMOUNT_DEBUG {'line': '2/27/2022 506.00 USD -506.00 Ordre de retrait JOHN CITIZEN 000308536', 'nums': ['506.00', '506.00'], 'normalized': '506.00', 'parsed': 506.0}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 1901.06, 'before_gap': 7350.24, 'after_gap': 9251.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 11, 'income': 0, 'expenses': 11}
+WDB_PRE_ROUTE_RESULT {'transactions': 11, 'income': 0, 'expenses': 11}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 11, 'income': 0, 'expenses': 11, 'income_total': 0, 'expense_total': 8431.3}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 1081.0, 'withdrawals': -1081.06}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1081.06, 'ending_balance': 1081.0}
+WDB_ROUTE_RECON_GUARD {'expected_income': None, 'parsed_income': 0, 'income_gap': None, 'expected_expense': 1081.06, 'parsed_expense': 8431.3, 'expense_gap': 7350.24}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 2, 'income': 0, 'expenses': 2, 'income_total': 0, 'expense_total': 2248.0, 'opening_balance': None, 'sample': [{'date': '2022-11-02', 'description': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)', 'amount': -1136.0, 'signed_amount': -1136.0, 'type': 'expense', 'currency': 'USD', 'balance': 1136.0, '_balance': 1136.0, 'locked_amount': -1136.0, '_locked_amount': -1136.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}, {'date': '2022-18-02', 'description': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)', 'amount': -1112.0, 'signed_amount': -1112.0, 'type': 'expense', 'currency': 'USD', 'balance': 0.64, '_balance': 0.64, 'locked_amount': -1112.0, '_locked_amount': -1112.0, 'locked_type': 'expense', '_balance_locked': True, 'parser_family': 'global_date_boundary_ledger'}]}
+GLOBAL_DATE_BOUNDARY_LEDGER_LARGEST [{'amount': -1136.0, 'date': '2022-11-02', 'balance': 1136.0, 'desc': '1,136.00USD1136.00 2050558317341020 REAPPROVISIONNEMENT DE COMPTE (Banque en ligne) (John Citizen)'}, {'amount': -1112.0, 'date': '2022-18-02', 'balance': 0.64, 'desc': '1,112.00USD -1112.00 Commande de retrait JOHN CITIZEN 000308536 0,64 Solde  Solde final du compte  la fin de la journe RECHARGE DE COMPTE (Transfert bancaire) (John Citizen)'}]
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parse_riyad_position_lines_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parse_riyad_position_lines_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+SUSPICIOUS t44.pdf | tx=0 income=0 expenses=0 expected_income=None expected_expenses=1081.06 summary_ok=False real_ok=None opening=None ending=1081.0 gap=None reason=NO_TRANSACTIONS; SUMMARY_GAP income=None expense=1081.06

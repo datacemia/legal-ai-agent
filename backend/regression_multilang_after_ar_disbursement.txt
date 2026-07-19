@@ -1,0 +1,22 @@
+DOCX FOUND: 45
+EN: 15
+FR: 15
+AR: 15
+
+########################################################################################
+LANGUAGE: EN
+########################################################################################
+
+========================================================================================
+[EN 1/15] 01_NDA_Confidentiality_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+PASS | clauses=7 | receipts=16 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[EN 2/15] 02_Master_Services_Agreement.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10

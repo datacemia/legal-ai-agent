@@ -1,0 +1,371 @@
+[
+  {
+    "language": "en",
+    "document": "03_SaaS_Cloud_Agreement.json",
+    "reference": "clause_6",
+    "source_text": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+    "pipeline_clause_type": "intellectual_property",
+    "semantic_profile_version": "shadow-p0-v4.1.4-data-protection-wave",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.4704,
+    "shadow_dominance_margin": 64.6749,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 64.6749,
+        "coverage": 0.4704,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "DATA_RETURN_OR_DELETION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "dfd6a0a9edbfff5bb79c2565f0b5ccbd07ec72dd719a84e7bfeb7215ac36d385"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "DATA_RETURN_OR_DELETION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_RETURN_OR_DELETION",
+            "start": 133,
+            "end": 252,
+            "text": "Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "dfd6a0a9edbfff5bb79c2565f0b5ccbd07ec72dd719a84e7bfeb7215ac36d385"
+      }
+    ],
+    "semantic_profile_hash": "52a2980b7bc9f4d6a5bb10394f4c77081bbfba5622aedc85aa434aea359e9501",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "en",
+    "document": "05_Data_Processing_Agreement.json",
+    "reference": "clause_4",
+    "source_text": "4.1 Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4.1.4-data-protection-wave",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9764,
+    "shadow_dominance_margin": 86.0494,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 86.0494,
+        "coverage": 0.9764,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 211,
+            "text": "Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 211,
+            "text": "Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a33df7a73696adaf2afbb135dfcd35c81e4b25439ba81614b55083397468dda9"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 4,
+            "end": 211,
+            "text": "Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a33df7a73696adaf2afbb135dfcd35c81e4b25439ba81614b55083397468dda9"
+      }
+    ],
+    "semantic_profile_hash": "13288b3672ed9772c98fa1841f6bcbd576638a2ab87c6062cf0a483ace7a0e9e",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "04_Cybersecurity_Services_Agreement_FR.json",
+    "reference": "clause_3",
+    "source_text": "2.1 La Partie contractante B notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4.1.4-data-protection-wave",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9387,
+    "shadow_dominance_margin": 84.3453,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 84.3453,
+        "coverage": 0.9387,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "BREACH_NOTIFICATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 7,
+            "end": 252,
+            "text": "Partie contractante B notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa dé"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 7,
+            "end": 252,
+            "text": "Partie contractante B notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa dé"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0c071a90aff8d0de5291d900ea4c6b689f95ac32a0e13330cd99fbce805804cb"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "BREACH_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "BREACH_NOTIFICATION",
+            "start": 7,
+            "end": 252,
+            "text": "Partie contractante B notifiera la Partie contractante A de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa dé"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0c071a90aff8d0de5291d900ea4c6b689f95ac32a0e13330cd99fbce805804cb"
+      }
+    ],
+    "semantic_profile_hash": "7a4beafd1021702aedc013bcb29e1008290fc741bb1fe1b6a8053b44eab175e7",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "clause_2",
+    "source_text": "4.1 Le Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant.",
+    "pipeline_clause_type": "security",
+    "semantic_profile_version": "shadow-p0-v4.1.4-data-protection-wave",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9661,
+    "shadow_dominance_margin": 85.6163,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 85.6163,
+        "coverage": 0.9661,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SECURITY_SAFEGUARD_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 235,
+            "text": "Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 235,
+            "text": "Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b92d77d73e3a8fdc17d94e5d85196d002f472a51a107947d442f20a4279d64f6"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SECURITY_SAFEGUARD_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_SAFEGUARD_OBLIGATION",
+            "start": 7,
+            "end": 235,
+            "text": "Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b92d77d73e3a8fdc17d94e5d85196d002f472a51a107947d442f20a4279d64f6"
+      }
+    ],
+    "semantic_profile_hash": "32715024b0144f4ca93c0709bbce229f285365b18d31b51a1eca8508d2bc0820",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

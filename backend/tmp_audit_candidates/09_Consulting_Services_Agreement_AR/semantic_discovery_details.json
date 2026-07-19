@@ -1,0 +1,927 @@
+[
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من العميل بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 158,
+            "text": "لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من الطرف الطرف المتعاقد ب أ بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "c9540591dfd11f8c87fd86b151e593e33735d2fe81ce6aa7e9f26cf662b7df94",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 158,
+            "text": "لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من الطرف الطرف المتعاقد ب أ بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c9540591dfd11f8c87fd86b151e593e33735d2fe81ce6aa7e9f26cf662b7df94",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 158,
+            "text": "لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من الطرف الطرف المتعاقد ب أ بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "c9540591dfd11f8c87fd86b151e593e33735d2fe81ce6aa7e9f26cf662b7df94",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 158,
+            "text": "لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من الطرف الطرف المتعاقد ب أ بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "c9540591dfd11f8c87fd86b151e593e33735d2fe81ce6aa7e9f26cf662b7df94",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 6,
+              "unit": "MONTHS",
+              "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+              "related_mechanism": "LIABILITY_CAP"
+            }
+          ]
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 الاستشاري مقاول مستقل وليس موظفاً أو وكيلاً أو شريكاً في مشروع مشترك أو شريكاً للعميل. يتحمل الاستشاري وحده مسؤولية جميع الضرائب والتأمينات والمزايا المعمول بها.",
+    "primary_type": "tax",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "tax",
+        "anchors": [
+          "الاستشاري",
+          "الضرائب",
+          "المعمول",
+          "بها",
+          "جميع",
+          "شريكا",
+          "للعميل",
+          "مسؤولية",
+          "مستقل",
+          "مشترك",
+          "مشروع",
+          "مقاول",
+          "موظفا",
+          "والتأمينات",
+          "والمزايا",
+          "وحده",
+          "وكيلا",
+          "وليس",
+          "يتحمل"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 ينفذ الاستشاري الخدمات الموصوفة في كل بيان عمل بأسلوب مهني. يسدد العميل أتعاب الاستشاري المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 62,
+            "text": "ينفذ الطرف المتعاقد ب الخدمات الموصوفة في كل بيان عمل بأسلوب مهني"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0b8b33b5ff043dead3e4284d2f0963ef0007daad641072b04d0854e64caf51fd",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 64,
+            "end": 154,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ أتعاب الطرف المتعاقد ب المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4778b83d636e4ddc167bf769e7acc94468e1fb0659dcd7afd1844809f4e5319f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 64,
+            "end": 154,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ أتعاب الطرف المتعاقد ب المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4d53840d89aaa83b3d395cd34ce652da2a2a060ee6534618fc817585c29ce18d",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 62,
+            "text": "ينفذ الطرف المتعاقد ب الخدمات الموصوفة في كل بيان عمل بأسلوب مهني"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0b8b33b5ff043dead3e4284d2f0963ef0007daad641072b04d0854e64caf51fd",
+        "normalized_concept": "SERVICE_PERFORMANCE_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 64,
+            "end": 154,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ أتعاب الطرف المتعاقد ب المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4778b83d636e4ddc167bf769e7acc94468e1fb0659dcd7afd1844809f4e5319f",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 64,
+            "end": 154,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ أتعاب الطرف المتعاقد ب المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4d53840d89aaa83b3d395cd34ce652da2a2a060ee6534618fc817585c29ce18d",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 تُعتبر جميع نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الاستشاري خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى العميل عند السداد الكامل.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 29,
+            "end": 182,
+            "text": "التقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "12cd0e80164575a3e494e8631f6706c7e159a01560bd40269d0b537205d788b9",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+            "start": 29,
+            "end": 182,
+            "text": "التقارير والتحليلات والتوصيات التي يطورها الطرف المتعاقد ب خصيصاً للعميل بموجب هذه الاتفاقية \"عملاً بموجب طلب\" وتؤول ملكيتها حصراً إلى الطرف الطرف المتعاقد ب أ عند السداد الكامل."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "12cd0e80164575a3e494e8631f6706c7e159a01560bd40269d0b537205d788b9",
+        "normalized_concept": "WORK_PRODUCT_OWNERSHIP_TRANSFER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "3.2",
+    "source_language": "ar",
+    "source_text": "3.2 يحتفظ الاستشاري بملكية منهجياته وأطر عمله وخبراته العامة السابقة، ويجوز له إعادة استخدام المعارف والمهارات العامة المكتسبة أثناء التكليف في تكليفات مستقبلية مع عملاء آخرين، شريطة عدم الإفصاح عن أي معلومات سرية للعميل.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "آخرين",
+          "أثناء",
+          "إعادة",
+          "استخدام",
+          "الإفصاح",
+          "الاستشاري",
+          "التكليف",
+          "السابقة",
+          "العامة",
+          "المعارف",
+          "المكتسبة",
+          "بملكية",
+          "تكليفات",
+          "سرية",
+          "شريطة",
+          "عدم",
+          "عملاء",
+          "عمله",
+          "للعميل",
+          "له",
+          "مستقبلية",
+          "معلومات",
+          "منهجياته",
+          "وأطر",
+          "والمهارات",
+          "وخبراته",
+          "ويجوز",
+          "يحتفظ"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 يحافظ الاستشاري على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من العميل.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "يحافظ الاستشاري على سرية",
+            "start": 4,
+            "end": 28
+          }
+        ]
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 118,
+            "end": 138
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 118,
+            "end": 138,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 122,
+            "end": 138,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "cdec5413afe5960dfb6c55e177a153f4ab48e2a2ebe3054fb1d6570a273713b1",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 122,
+            "end": 132,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a6b790e17f6b55a3ea316c98a21d2702c474d1da002a45a1a42792fe04cbc24f",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 4,
+            "end": 150,
+            "text": "يحافظ الطرف المتعاقد ب على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من الطرف الطرف المتعاقد ب أ."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a27cb0ede7a63a36fec163376bdcf2ef408538df2783e8780fee3453f07f0863",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "09_Consulting_Services_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 تستمر هذه الاتفاقية حتى إتمام الخدمات الموصوفة في بيان العمل المعني، ما لم يتم إنهاؤها مبكراً. يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته ثلاثون (30) يوماً، مع بقاء العميل مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 140,
+            "end": 150,
+            "text": "بإشعار خطي"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 141,
+            "end": 240,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً، مع بقاء الطرف الطرف المتعاقد ب أ مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5b64d8f3e44a252e103c31eb6f7a40053cf264c157d6ddd1307064dd98e3cf3e",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 99,
+            "end": 241,
+            "text": "يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته ثلاثون (30) يوماً، مع بقاء الطرف الطرف المتعاقد ب أ مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "9543ed2be09cd88579dd47182816bc8c87c0b5712afe5fa8d0b458b3d6c9177a",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 141,
+            "end": 240,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً، مع بقاء الطرف الطرف المتعاقد ب أ مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "fdce82556cefaddbb0b8e25ddfc3064fb770a2a5d3179d17272d13996e03757c",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 140,
+            "end": 150,
+            "text": "بإشعار خطي"
+          },
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 141,
+            "end": 240,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً، مع بقاء الطرف الطرف المتعاقد ب أ مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5b64d8f3e44a252e103c31eb6f7a40053cf264c157d6ddd1307064dd98e3cf3e",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 99,
+            "end": 241,
+            "text": "يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته ثلاثون (30) يوماً، مع بقاء الطرف الطرف المتعاقد ب أ مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "9543ed2be09cd88579dd47182816bc8c87c0b5712afe5fa8d0b458b3d6c9177a",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 141,
+            "end": 240,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً، مع بقاء الطرف الطرف المتعاقد ب أ مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "fdce82556cefaddbb0b8e25ddfc3064fb770a2a5d3179d17272d13996e03757c",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

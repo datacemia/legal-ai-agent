@@ -1,0 +1,157 @@
+FINANCE_TEXT_PDF_EXTRACTED 11235
+PDF_LINES_DEBUG {'line_count': 241, 'non_empty_line_count': 153, 'max_line_len': 140, 'first_20': ['Statement               11 (Page 1 of 4)', '', '                                                             Statement begins            1 April 2012', '', '                                                             Statement ends        30 September 2012', '', 'MR B W AUSTIN                                           Closing balance                $2.41 CR', 'UNIT 2 1 BUCKBERRY CT', 'NORTH HAVEN SA 5018                                      Enquiries                     13 2221', '                                                                                                (24 hours a day, 7 days a week)', '', '', 'Smart Access                                     Account number 06 5118 10383124', '', '', '', 'Name:  BRADLEY WAYNE AUSTIN', '', 'Branch:  83 Dale Street Port Adelaide SA', '         Bank, State & Branch number (BSB) 06 5118.']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+1: Statement 11 (Page 1 of 4)
+3: Statement begins 1 April 2012
+5: Statement ends 30 September 2012
+7: MR B W AUSTIN Closing balance $2.41 CR
+8: UNIT 2 1 BUCKBERRY CT
+9: NORTH HAVEN SA 5018 Enquiries 13 2221
+10: (24 hours a day, 7 days a week)
+13: Smart Access Account number 06 5118 10383124
+17: Name: BRADLEY WAYNE AUSTIN
+19: Branch: 83 Dale Street Port Adelaide SA
+20: Bank, State & Branch number (BSB) 06 5118.
+22: Note: Proceeds of cheques are not available until cleared. Please check that the entries listed on this
+23: statement are correct. If there are any errors, please contact the Bank immediately on 13 2221.
+25: Further information about your account, including details of benefits or fees and charges, is available by
+26: telephoning the enquiry number listed above. If you have a complaint, information about our dispute
+27: resolution process is available from the same enquiry number.
+31: Date Transaction Debit Credit Balance
+33: 01 Apr 2012 OPENING BALANCE $56.70 CR
+35: 01 Apr Account Fee 4.00 0 $52.70 CR
+37: 06 Apr APIA CREDIT CARD 4914 MELBOURNE VI AUS
+38: Card xx3319
+39: Value Date: 03/04/2012 23.40 ) $29.30 CR
+41: 11 Apr Direct Credit 106600 BRADLEY AUSTIN
+42: top up
+43: BRADLEY AUSTIN 050.00 $79.30 CR
+45: 13 Apr APIA LIFE INSURANCE SYDNEY AUS
+46: Card xx3319
+47: Value Date: 10/04/2012 19.00 ) $60.30 CR
+49: 26 Apr Direct Credit 106600 BRADLEY AUSTIN
+50: top up
+51: BRADLEY AUSTIN 020.00 $80.30 CR
+53: 28 Apr FOXTEL MANAGEMENT PTY NORTH RYDE AUS
+54: Card xx3319
+55: Value Date: 27/04/2012 75.50 ) $4.80 CR
+57: 01 May Account Fee 4.00 ) $0.80 CR
+59: 09 May Direct Credit 106600 BRADLEY AUSTIN
+60: top up
+61: BRADLEY AUSTIN 050.00 $50.80 CR
+63: 19 May PLI*AIRNAV SYSTEMS Plimus,Inc CYP
+64: Card xx4924 AUD 37.04
+65: Value Date: 12/05/2012 37.04 ) $13.76 CR
+67: 23 May Direct Credit 106600 BRADLEY AUSTIN
+68: topup
+69: BRADLEY AUSTIN 050.00 $63.76 CR
+71: $63.76/$63.76/$0.00 BALANCE CARRIED FORWARD $63.76 CR
+75: Australian credit licence 234945 5493.22738.1.2 ZZ258R9 0303
+76: SL.R9.S911.D273.O V03.00.02
+77: Statement 11 (Page 2 of 4)
+79: Account number 06 5118 10383124
+85: Date Transaction Debit Credit Balance
+87: BALANCE BROUGHT FORWARD $63.76 $63.76 CR
+89: 01 Jun Account Fee 4.00 ) $59.76 CR
+91: 05 Jun DRAKE SUPERMARKETS N NORTH HAVEN AUS
+92: Card xx4924
+93: Value Date: 02/06/2012 44.33 ) $15.43 CR
+95: 06 Jun DRAKE SUPERMARKETS N NORTH HAVEN AUS
+96: Card xx4924
+97: Value Date: 05/06/2012 6.94 ) $8.49 CR
+99: 06 Jun Direct Credit 106600 BRADLEY AUSTIN
+100: topup
+101: BRADLEY AUSTIN 050.00 $58.49 CR
+103: 12 Jun LULU PRESS INC 09194595858 NC USA
+104: Card xx4924 USD 12.02
+105: Value Date: 07/06/2012 12.23 ) $46.26 CR
+107: 12 Jun International Transaction Fee
+108: Value Date: 07/06/2012 0.37 ) $45.89 CR
+110: 14 Jun APIA CREDIT CARD 4914 MELBOURNE VI AUS
+111: Card xx4924
+112: Value Date: 11/06/2012 23.40 ) $22.49 CR
+114: 15 Jun INDEPENDENT 132211 MILE END 21.09 ) $1.40 CR
+116: 16 Jun Adjust Purchase ADJUSTMENT TO ACCOUNT
+117: Card xx4924 AUD 37.04
+118: Value Date: 12/05/2012 437.04 $38.44 CR
+120: 01 Jul Account Fee 4.00 ) $34.44 CR
+122: 02 Jul Non CBA ATM Enquiry Fee 2.00 ) $32.44 CR
+124: 04 Jul PAYPAL *SHANG XIN 4029357733 AU AUS
+125: Card xx4924
+126: Value Date: 30/06/2012 2.99 ) $29.45 CR
+128: 04 Jul PAYPAL *PERRINWRIGH 4029357733 AU AUS
+129: Card xx4924
+130: Value Date: 30/06/2012 14.31 ) $15.14 CR
+132: 04 Jul Direct Credit 106600 BRADLEY AUSTIN
+133: top up
+134: BRADLEY AUSTIN 050.00 $65.14 CR
+136: 12 Jul APIA LIFE INSURANCE SYDNEY AUS
+137: Card xx4924
+138: Value Date: 09/07/2012 38.00 ) $27.14 CR
+140: 20 Jul APIA CREDIT CARD 4914 MELBOURNE VI AUS
+141: Card xx4924
+142: Value Date: 17/07/2012 23.40 ) $3.74 CR
+144: 01 Aug Account Fee 4.00 ) $0.26 DR
+146: ($0.26)/$63.76/$0.00 BALANCE CARRIED FORWARD $0.26 DR
+147: Statement 11 (Page 3 of 4)
+149: Account number 06 5118 10383124
+151: Date Transaction Debit Credit Balance
+153: BALANCE BROUGHT FORWARD ($0.26) $0.26 DR
+155: 01 Aug Direct Credit 106600 BRADLEY AUSTIN
+156: top up
+157: BRADLEY AUSTIN 050.00 $49.74 CR
+159: 07 Aug APIA CREDIT CARD 4914 MELBOURNE VI AUS
+160: Card xx4924
+161: Value Date: 03/08/2012 23.40 ) $26.34 CR
+163: 14 Aug APIA LIFE INSURANCE SYDNEY NS AUS
+164: Card xx4924
+165: Value Date: 09/08/2012 19.00 ) $7.34 CR
+167: 17 Aug Cash Dep Agency AUST POST NTH HAVEN 0 SA 0140.00 $147.34 CR
+169: 21 Aug VIRGIN BLUE FORTITUDE VLY AUS
+170: Card xx4924
+171: Value Date: 17/08/2012 113.50 ) $33.84 CR
+173: 29 Aug PAYPAL *PROPAINTBAL 4029357733 AU AUS
+174: Card xx4924
+175: Value Date: 26/08/2012 25.00 ) $8.84 CR
+177: 29 Aug Direct Credit 106600 BRADLEY AUSTIN
+178: top up
+179: BRADLEY AUSTIN 050.00 $58.84 CR
+181: 01 Sep Account Fee 4.00 ) $54.84 CR
+183: 04 Sep Cash Dep Agency AUST POST NTH HAVEN 0 SA 070.00 $124.84 CR
+185: 06 Sep APIA CREDIT CARD 4914 MELBOURNE VI AUS
+186: Card xx4924
+187: Value Date: 03/09/2012 23.07 ) $101.77 CR
+189: 08 Sep PAYPAL *SCRIBD.COM 4029357733 CA USA
+190: Card xx4924 AUD 9.10
+191: Value Date: 05/09/2012 9.10 ) $92.67 CR
+193: 11 Sep GREAT SOUTHERN RAILWAY ADELAIDE AUS
+194: Card xx4924
+195: Value Date: 10/09/2012 57.00 ) $35.67 CR
+197: 12 Sep CITY OF PORT ADELAIDE PORT ADELAIDE AUS
+198: Card xx4924
+199: Value Date: 11/09/2012 6.00 ) $29.67 CR
+201: 13 Sep APIA LIFE INSURANCE SYDNEY NS AUS
+202: Card xx4924
+203: Value Date: 10/09/2012 19.00 ) $10.67 CR
+205: 25 Sep PAYPAL *KARSAJ5 4029357733 AU AUS
+206: Card xx4924
+207: Value Date: 19/09/2012 8.26 ) $2.41 CR
+209: 30 Sep 2012 CLOSING BALANCE $2.41 CR
+211: Opening balance - Total debits + Total credits = Closing balance
+213: $56.70 CR $671.33 $617.04 $2.41 CR
+219: 5493.22739.2.2 ZZ258R9 0303
+220: SL.R9.S911.D273.O V03.00.02
+221: Statement 11 (Page 4 of 4)
+223: Account number 06 5118 10383124
+225: Transaction Summary during 1st April 2012 to 30th September 2012
+226: Transaction Type 01 Apr 01 Jun 01 Aug Free Chargeable Unit Price Fee Charged
+227: to to to
+228: 31 May 31 Jul 30 Sep
+229: Staff assisted withdrawals 0 0 0 0 0 $2.00 $0.00
+230: Cheques written 0 0 0 0 0 $1.00 $0.00
+231: Total 0 0 0 0 0 $0.00
+232: Account Fee $4.00 $24.00
+234: Deposits 4 2 4 -
+240: 5493.22739.2.2 ZZ258R9 0303
+241: SL.R9.S911.D273.O V03.00.02

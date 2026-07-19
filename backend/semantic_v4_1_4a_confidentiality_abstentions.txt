@@ -1,0 +1,204 @@
+====================================================================================================
+V4.1.4a CONFIDENTIALITY ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 11
+
+####################################################################################################
+[1/11]
+LANG: ar
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_1
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+4.1 لا ينشئ شيء في هذه الاتفاقية أي ترخيص أو حق ملكية في المعلومات السرية. تُقدَّم جميع المعلومات السرية "كما هي" دون أي ضمان من أي نوع.
+RANKED MECHANISMS:
+
+####################################################################################################
+[2/11]
+LANG: ar
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_4
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+1.2 يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.
+RANKED MECHANISMS:
+- MANDATORY_OBLIGATION | role= CONTROL_MODIFIER | primary= mandatory_obligation | eligible= False | rank= 72
+  EVIDENCE: 'يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.'
+
+####################################################################################################
+[3/11]
+LANG: ar
+DOC: 01_NDA_Confidentiality_Agreement_AR.json
+REF: clause_7
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+5.1 يقر كل طرف بأن الإفصاح غير المصرح به عن المعلومات السرية قد يسبب ضرراً لا يمكن جبره بالتعويض المالي وحده، وأن الطرف غير المخل يحق له طلب أمر قضائي بالإضافة إلى أي سبل انتصاف أخرى متاحة، دون الحاجة إلى تقديم كفالة.
+RANKED MECHANISMS:
+
+####################################################################################################
+[4/11]
+LANG: ar
+DOC: 15_General_Commercial_Agreement_AR.json
+REF: clause_7
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+5.1 يحافظ كل طرف على سرية أي معلومات غير علنية يفصح عنها الطرف الآخر فيما يتعلق بهذه الاتفاقية، ولا يستخدمها إلا لأغراض أنشطة التعاون.
+RANKED MECHANISMS:
+
+####################################################################################################
+[5/11]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_4
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SURVIVAL_DURATION']
+SOURCE:
+3.1 This Agreement shall remain in effect for two (2) years from the Effective Date. The confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law.
+RANKED MECHANISMS:
+- CONFIDENTIALITY_SURVIVAL | role= DOMAIN_SECONDARY | primary= confidentiality | eligible= False | rank= 84
+  EVIDENCE: 'confidentiality obligations herein shall survive for a period of five (5) years following disclosure of the applicable Confidential Information, except that obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law.'
+  EVIDENCE: 'obligations with respect to trade secrets shall survive for as long as such information remains a trade secret under applicable law.'
+
+####################################################################################################
+[6/11]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_5
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['NO_LICENSE']
+SOURCE:
+4.1 Nothing in this Agreement grants any license or ownership interest in the Confidential Information. All Confidential Information is provided "as is" without warranty of any kind.
+RANKED MECHANISMS:
+
+####################################################################################################
+[7/11]
+LANG: en
+DOC: 01_NDA_Confidentiality_Agreement.json
+REF: clause_6
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: remedies
+COVERAGE: 0.9
+SIGNALS: ['INJUNCTIVE_RELIEF']
+SOURCE:
+5.1 Each Party acknowledges that unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond.
+RANKED MECHANISMS:
+- CONFIDENTIALITY_REMEDY | role= DOMAIN_SECONDARY | primary= remedies | eligible= True | rank= 83
+  EVIDENCE: 'unauthorized disclosure of Confidential Information may cause irreparable harm for which monetary damages would be an inadequate remedy, and that the non-breaching Party shall be entitled to seek injunctive relief in addition to any other available remedies, without the necessity of posting bond.'
+
+####################################################################################################
+[8/11]
+LANG: fr
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_2
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CONFIDENTIALITY_DUTY', 'REPRESENTATIVE_FLOWDOWN']
+SOURCE:
+1.1 Chaque Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles du présent Accord.
+RANKED MECHANISMS:
+- PRIOR_CONSENT_PREREQUISITE | role= CONTROL_MODIFIER | primary= consent_control | eligible= False | rank= 100
+  EVIDENCE: 'sans consentement écrit préalable'
+  EVIDENCE: 'consentement écrit préalable'
+
+####################################################################################################
+[9/11]
+LANG: fr
+DOC: 01_NDA_Confidentiality_Agreement_FR.json
+REF: clause_5
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SURVIVAL_DURATION']
+SOURCE:
+3.1 Le présent Accord restera en vigueur pendant deux (2) ans à compter de la Date d'Effet. Les obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard du droit applicable.
+RANKED MECHANISMS:
+- CONFIDENTIALITY_SURVIVAL | role= DOMAIN_SECONDARY | primary= confidentiality | eligible= False | rank= 84
+  EVIDENCE: 'obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard'
+
+####################################################################################################
+[10/11]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_7
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: data_protection
+COVERAGE: 0.9608
+SIGNALS: []
+SOURCE:
+2.1 Le Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité.
+RANKED MECHANISMS:
+- AUTHORIZED_PERSON_CONFIDENTIALITY | role= DOMAIN_SECONDARY | primary= data_protection | eligible= True | rank= 88
+  EVIDENCE: "Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité"
+
+####################################################################################################
+[11/11]
+LANG: fr
+DOC: 15_General_Commercial_Agreement_FR.json
+REF: clause_6
+PIPELINE: confidentiality
+PROFILE VERSION: shadow-p0-v4.1.4a-data-security-boundary
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CONFIDENTIALITY_DUTY']
+SOURCE:
+5.1 Chaque Partie conservera confidentielle toute information non publique divulguée par l'autre Partie dans le cadre du présent Accord et ne l'utilisera qu'aux fins des Activités de Coopération.
+RANKED MECHANISMS:
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+ROWS: 11
+BY LANGUAGE: {'ar': 4, 'en': 3, 'fr': 4}
+BY PIPELINE TYPE: {'confidentiality': 11}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 9, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 2}
+SIGNAL COUNTS: {'SURVIVAL_DURATION': 2, 'NO_LICENSE': 1, 'INJUNCTIVE_RELIEF': 1, 'CONFIDENTIALITY_DUTY': 2, 'REPRESENTATIVE_FLOWDOWN': 1}
+NO SIGNAL ROWS: 5

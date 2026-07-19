@@ -1,0 +1,402 @@
+"""
+unified_report_from_pipeline.py
+
+CORRECTED architecture for Point 1 (Remove Redundancy).
+
+Earlier draft mistake: generate_unified_report() sent the full contract
+text to the AI a SECOND time (after ClauseAnalysisPipeline.run() had
+already AI-analyzed every clause once). That's not deduplication — it's a
+third redundant narrative-generation path alongside executive_summary /
+executive_risk_narrative / executive_report, which are already computed
+for free from clause_results inside contract_agent.py.
+
+Correct architecture:
+    - key_clauses, risks_identified, negotiation_priorities,
+      suggested_wording, action_checklist, risk_score, contract_overview
+      are AGGREGATED in pure Python from clause_results. Zero extra AI
+      calls — this data already exists.
+    - Only missing_clauses and confidence_notes need a NEW, SMALL AI call,
+      because "a clause that isn't there" cannot be produced by analyzing
+      clauses that ARE there. This is the one genuinely irreducible gap.
+    - definitions_extractor / contract_family_detector / arbitration_analyzer
+      still run once, rule-based, to inform BOTH the aggregation (family-
+      aware missing-clause expectations) and the small AI call.
+
+This replaces generate_unified_report() from the earlier
+unified_summary_service.py draft. to_legacy_summary_data() /
+to_legacy_simplified_string() are unchanged and still work on the output
+of this function, since the top-level schema is identical.
+"""
+
+from app.utils.prompt_loader import load_prompt
+from app.services.contract_agent.ai_client import call_json_ai
+from app.services.contract_agent.definitions_extractor import (
+    extract_definitions,
+    build_definitions_block,
+)
+from app.services.contract_agent.contract_family_detector import (
+    detect_contract_family,
+    build_family_hint,
+)
+from app.services.contract_agent.arbitration_analyzer import (
+    analyze_arbitration,
+    build_arbitration_hint,
+)
+
+RISK_LEVEL_EXPOSURE = {
+    "low": "low",
+    "medium": "medium",
+    "high": "high",
+}
+
+URGENCY_BY_PRIORITY = {
+    "high": "immediate",
+    "medium": "before_signing",
+    "low": "monitor",
+}
+
+
+
+SUPPORTED_LANGUAGES={"en","fr","ar"}
+LOCALIZED_DEFAULTS={
+    "not_specified":{"en":"Not specified","fr":"Non spécifié","ar":"غير محدد"},
+    "not_applicable":{"en":"Not applicable","fr":"Non applicable","ar":"غير منطبق"},
+}
+def localized_default(key:str, language:str="en")->str:
+    language=(language or "en").lower()
+    if language not in SUPPORTED_LANGUAGES:
+        language="en"
+    return LOCALIZED_DEFAULTS[key][language]
+
+def preserve_real_parties(parties):
+    if not parties:
+        return [localized_default("not_specified","en")]
+    placeholders={"[party_1]","[party_2]","[person]","[organization]"}
+    out=[]
+    for p in parties:
+        s=str(p).strip()
+        if s.lower() in placeholders:
+            out.append(s)
+        else:
+            out.append(s)
+    return out
+
+def _get_clause_list(pipeline_result: dict) -> list:
+    """
+    clause_results from contract_handler.py is the FULL pipeline dict
+    (final_result), not a flat list. The actual per-clause analyses live
+    at clause_results["clauses"]["results"].
+    """
+    clauses_block = pipeline_result.get("clauses", {})
+    if isinstance(clauses_block, dict):
+        return clauses_block.get("results", [])
+    if isinstance(clauses_block, list):
+        return clauses_block
+    return []
+
+
+def _clause_id(clause: dict, index: int) -> str:
+    # Prefer the structural id already attached by attach_clause_object_metadata,
+    # fall back to a positional id so every clause is addressable.
+    return str(clause.get("clause_id") or f"kc_{index+1}")
+
+
+def build_contract_overview(ai_overview: dict, family_detection: dict) -> dict:
+    """
+    CORRECTED: the real build_executive_summary() (confirmed from source)
+    returns only {risk_overview, top_risks, negotiation_priorities,
+    dependency_summary} — it has NO parties/duration/payment_terms/
+    jurisdiction/complexity/overall_balance fields. Those facts previously
+    came exclusively from generate_summary_data()'s AI call.
+
+    Rather than adding a second AI call to recover them, they're now part
+    of the single missing-clauses AI call's extended schema (see
+    MISSING_CLAUSES_PROMPT below) — ai_overview is that call's output.
+    """
+    return {
+        "contract_type": family_detection.get("family", "General"),
+        "parties": preserve_real_parties(ai_overview.get("parties")) or [localized_default("not_specified", "en")],
+        "duration": ai_overview.get("duration") or localized_default("not_specified", language if "language" in locals() else "en"),
+        "payment_terms": ai_overview.get("payment_terms") or localized_default("not_specified", language if "language" in locals() else "en"),
+        "jurisdiction_detected": ai_overview.get("jurisdiction_detected") or localized_default("not_specified", language if "language" in locals() else "en"),
+        "jurisdiction_note": ai_overview.get("jurisdiction_note", ""),
+        "contract_complexity": ai_overview.get("contract_complexity", "medium"),
+        "overall_balance": ai_overview.get("overall_balance", "Not specified"),
+    }
+
+
+def build_key_clauses(clauses: list) -> list:
+    key_clauses = []
+    for i, clause in enumerate(clauses):
+        why = (
+            clause.get("legal_insight")
+            or clause.get("explanation_simple")
+            or clause.get("why_it_matters")
+            or ""
+        )
+        if not why:
+            continue
+        key_clauses.append({
+            "id": _clause_id(clause, i),
+            "clause_type": clause.get("clause_type", "other"),
+            "why_it_matters": why,
+        })
+    return key_clauses
+
+
+def build_risks_identified(clauses: list) -> list:
+    risks = []
+    for i, clause in enumerate(clauses):
+        risk_level = clause.get("risk_level", "low")
+        if risk_level == "low" and not clause.get("red_flag"):
+            continue
+
+        explanation = clause.get("legal_insight") or clause.get("explanation_simple") or ""
+        if not explanation:
+            continue
+
+        # market_practice now comes directly from clause_analysis_prompt.txt's
+        # strict enum field (added alongside acceptable_compromise/
+        # never_accept/fallback_wording) instead of being guessed from the
+        # free-text market_comparison narrative.
+        market_practice = clause.get("market_practice") or "standard"
+
+        risks.append({
+            "id": f"risk_{_clause_id(clause, i)}",
+            "clause_ref": _clause_id(clause, i),
+            "risk_level": risk_level,
+            "market_practice": market_practice,
+            "exposure": {
+                "financial": RISK_LEVEL_EXPOSURE.get(risk_level, "low"),
+                "operational": RISK_LEVEL_EXPOSURE.get(risk_level, "low"),
+                "legal": RISK_LEVEL_EXPOSURE.get(risk_level, "low"),
+            },
+            "explanation": explanation,
+        })
+    return risks
+
+
+def build_negotiation_priorities(clauses: list) -> list:
+    priorities = []
+    for i, clause in enumerate(clauses):
+        priority = clause.get("negotiation_priority", "low")
+        advice = clause.get("negotiation_advice", "")
+        if priority == "low" or not advice:
+            continue
+        priorities.append({
+            "risk_ref": f"risk_{_clause_id(clause, i)}",
+            "priority": priority,
+            "negotiable": clause.get("negotiable", True),
+            "what_should_change": advice,
+            "acceptable_compromise": clause.get("acceptable_compromise", ""),
+            "never_accept": clause.get("never_accept", ""),
+        })
+    return priorities
+
+
+def build_suggested_wording(clauses: list) -> list:
+    wording = []
+    for i, clause in enumerate(clauses):
+        alt = clause.get("safer_alternative", "")
+        if not alt:
+            continue
+        wording.append({
+            "risk_ref": f"risk_{_clause_id(clause, i)}",
+            "preferred_wording": alt,
+            "fallback_wording": clause.get("fallback_wording", ""),
+            "negotiation_alternative": clause.get("negotiation_advice", ""),
+        })
+    return wording
+
+
+def build_action_checklist(clauses: list) -> list:
+    actions = []
+    for clause in clauses:
+        if clause.get("red_flag") and clause.get("red_flag_reason"):
+            actions.append({
+                "action": clause["red_flag_reason"],
+                "urgency": "immediate",
+            })
+        elif clause.get("negotiation_priority") in {"high", "medium"} and clause.get("recommendation"):
+            actions.append({
+                "action": clause["recommendation"],
+                "urgency": URGENCY_BY_PRIORITY.get(clause["negotiation_priority"], "monitor"),
+            })
+    return actions
+
+
+def build_risk_score(pipeline_result: dict, risks: list) -> dict:
+    """
+    Uses normalize_importance_score()'s output (normalized_contract_score),
+    already attached to every clause in contract_agent.py. This is the
+    score to test for differentiation across contracts — it's a different
+    computation from summary_prompt.txt's contract_quality_score and may
+    already solve Point 7 without any prompt change.
+    """
+    clauses = _get_clause_list(pipeline_result)
+    scores = [c.get("normalized_contract_score") for c in clauses if c.get("normalized_contract_score") is not None]
+    value = scores[0] if scores else 0
+
+    high_risk_ids = [r["id"] for r in risks if r["risk_level"] == "high"]
+    explanation_parts = []
+    if high_risk_ids:
+        explanation_parts.append(
+            Never expose internal IDs such as risk_node_1, risk_node_2, clause_node_1, or dependency_node_1.
+When explaining the risk score, use human-readable clause titles only.
+        )
+    medium_count = sum(1 for r in risks if r["risk_level"] == "medium")
+    if medium_count:
+        explanation_parts.append(f"and {medium_count} medium-risk clause(s)")
+    explanation = " ".join(explanation_parts) or "No material risks detected in analyzed clauses."
+
+    return {
+        "value": value,
+        "explanation": explanation,
+        "improves_if": (
+            "Resolving the high-risk clauses listed above would raise this score."
+            if high_risk_ids else
+            "Score is already low-risk; no specific change identified."
+        ),
+    }
+
+
+def build_unified_report_from_pipeline(pipeline_result: dict, contract_text: str, language: str = "en") -> dict:
+    """
+    Main entrypoint. Aggregates the clause-level sections from
+    clause_results with ZERO extra AI calls, then makes ONE AI call for
+    what's structurally impossible to get from per-clause analysis alone:
+    contract_overview metadata (parties, duration, jurisdiction...) and
+    missing_clauses (a clause that isn't there can't be found by analyzing
+    clauses that are).
+    """
+    clauses = _get_clause_list(pipeline_result)
+    family_detection = detect_contract_family(contract_text)
+
+    key_clauses = build_key_clauses(clauses)
+    risks = build_risks_identified(clauses)
+    negotiation_priorities = build_negotiation_priorities(clauses)
+    suggested_wording = build_suggested_wording(clauses)
+    action_checklist = build_action_checklist(clauses)
+    risk_score = build_risk_score(pipeline_result, risks)
+
+    ai_overview_and_gaps = _generate_overview_and_gaps(contract_text, family_detection, clauses, language)
+    contract_overview = build_contract_overview(ai_overview_and_gaps, family_detection)
+
+    executive_summary_text = (
+        pipeline_result.get("executive_risk_narrative")
+        or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+        or ""
+    )
+
+    return {
+        "contract_family": family_detection.get("family", "General"),
+        "contract_overview": contract_overview,
+        "executive_summary": executive_summary_text,
+        "key_clauses": key_clauses,
+        "risks_identified": risks,
+        "negotiation_priorities": negotiation_priorities,
+        "suggested_wording": suggested_wording,
+        "fallback_position": ai_overview_and_gaps.get("fallback_position", ""),
+        "action_checklist": action_checklist,
+        "risk_score": risk_score,
+        "missing_clauses": ai_overview_and_gaps.get("missing_clauses", []),
+        "confidence_notes": ai_overview_and_gaps.get("confidence_notes", []),
+    }
+
+
+# ---------------------------------------------------------------------
+# The ONE small AI call this architecture still needs.
+# ---------------------------------------------------------------------
+
+MISSING_CLAUSES_PROMPT = """
+ROLE: You have two jobs in this single pass:
+(a) identify genuinely absent, family-relevant clauses — you do not
+    summarize, re-analyze, or comment on clauses that are present, that
+    has already been done elsewhere;
+(b) extract factual contract metadata that clause-by-clause analysis
+    cannot produce on its own (parties, duration, payment terms,
+    jurisdiction).
+
+The clause types ALREADY DETECTED in this contract are:
+{detected_types}
+
+The contract family is: {family}
+
+TASK: Return JSON with exactly these keys:
+{{
+  "parties": [string],
+  "duration": string,
+  "payment_terms": string,
+  "jurisdiction_detected": string,
+  "jurisdiction_note": string,
+  "contract_complexity": "low" | "medium" | "high",
+  "overall_balance": string,
+  "missing_clauses": [
+    {{"clause_type": string, "business_reason": string}}
+  ],
+  "confidence_notes": [string],
+  "fallback_position": string
+}}
+
+RULES:
+- parties/duration/payment_terms/jurisdiction: extract from the actual
+  text. Use "Not specified" only if genuinely absent — never guess.
+- Only list a clause as missing if it is genuinely expected for a "{family}"
+  contract AND its absence creates measurable legal/operational risk.
+- business_reason must be specific to THIS contract family, never generic.
+- confidence_notes: list anything you are uncertain about (e.g. an
+  arbitration mechanic mentioned in the text but not fully specified).
+- fallback_position: ONE paragraph — if negotiation fails, what is the
+  minimum acceptable position given what's present and absent.
+- Never invent clauses that ARE present under a different name — check
+  the detected list above first.
+
+{definitions_block}
+
+{arbitration_hint}
+
+Contract text:
+{contract_text}
+""".strip()
+
+
+def _generate_overview_and_gaps(
+    contract_text: str, family_detection: dict, clauses: list, language: str,
+) -> dict:
+    """
+    Single AI call covering: contract_overview metadata, missing_clauses,
+    confidence_notes, fallback_position. This is the ONE irreducible AI
+    call in this architecture — everything else is aggregated in pure
+    Python from clause_results.
+    """
+    detected_types = sorted({c.get("clause_type", "other") for c in clauses})
+    definitions = extract_definitions(contract_text)
+    arbitration_facts = analyze_arbitration(contract_text)
+
+    prompt = MISSING_CLAUSES_PROMPT.format(
+        detected_types=", ".join(detected_types) or "none detected",
+        family=family_detection.get("family", "General"),
+        definitions_block=build_definitions_block(definitions),
+        arbitration_hint=build_arbitration_hint(arbitration_facts),
+        contract_text=contract_text[:14000],
+    )
+    prompt += f"\n\nOutput language: {language}. Translate all generated text into {language}."
+
+    try:
+        data = call_json_ai(prompt, temperature=0.0)
+    except Exception as e:
+        print("OVERVIEW/GAPS AI ERROR:", str(e))
+        return {
+            "parties": ["Not specified"], "duration": "Not specified",
+            "payment_terms": "Not specified", "jurisdiction_detected": "Not specified",
+            "jurisdiction_note": "", "contract_complexity": "medium",
+            "overall_balance": "Not specified", "missing_clauses": [],
+            "confidence_notes": [f"Could not generate overview/missing-clause analysis: {e}"],
+            "fallback_position": "",
+        }
+
+    data["missing_clauses"] = [
+        m for m in data.get("missing_clauses", [])
+        if isinstance(m, dict) and m.get("business_reason", "").strip()
+    ]
+    return data

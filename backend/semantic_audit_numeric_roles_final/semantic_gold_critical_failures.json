@@ -1,0 +1,606 @@
+[
+  {
+    "fixture_id": "08_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Buyer shall submit Purchase Orders at least sixty (60) days prior to the requested delivery date. Supplier shall deliver Goods conforming to the Specifications on the dates set forth in each accepted Purchase Order.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DELIVERY_OBLIGATION",
+        "PURCHASE_ORDER"
+      ],
+      "relations": [
+        {
+          "concept": "PURCHASE_ORDER",
+          "obligated_actor": "BUYER",
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "DELIVERY_OBLIGATION",
+          "obligated_actor": "SUPPLIER",
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "delivery",
+      "mechanisms": [
+        "PURCHASE_ORDER"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PURCHASE_ORDER"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DELIVERY_OBLIGATION"
+    ]
+  },
+  {
+    "fixture_id": "08_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 L'Acheteur soumettra les Bons de Commande au moins soixante (60) jours avant la date de livraison souhaitée. Le Fournisseur livrera des Biens conformes aux Spécifications aux dates prévues dans chaque Bon de Commande accepté.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DELIVERY_OBLIGATION",
+        "PURCHASE_ORDER"
+      ],
+      "relations": [
+        {
+          "concept": "PURCHASE_ORDER",
+          "obligated_actor": "BUYER",
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "DELIVERY_OBLIGATION",
+          "obligated_actor": "SUPPLIER",
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "delivery",
+      "mechanisms": [
+        "PURCHASE_ORDER"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PURCHASE_ORDER"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DELIVERY_OBLIGATION"
+    ]
+  },
+  {
+    "fixture_id": "08_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 يقدم المشتري أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم المطلوب. يسلم المورد بضائع مطابقة للمواصفات في التواريخ المحددة في كل أمر شراء مقبول.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DELIVERY_OBLIGATION",
+        "PURCHASE_ORDER"
+      ],
+      "relations": [
+        {
+          "concept": "PURCHASE_ORDER",
+          "obligated_actor": "BUYER",
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "DELIVERY_OBLIGATION",
+          "obligated_actor": "SUPPLIER",
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "delivery",
+      "mechanisms": [
+        "PURCHASE_ORDER"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "PURCHASE_ORDER",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:PURCHASE_ORDER"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DELIVERY_OBLIGATION"
+    ]
+  },
+  {
+    "fixture_id": "08_3_1_en",
+    "language": "en",
+    "source_text": "3.1 Buyer shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications. Supplier shall replace non-conforming Goods at its own expense within ten (10) business days.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INSPECTION_RIGHT",
+        "REPLACEMENT_REMEDY"
+      ],
+      "relations": [
+        {
+          "concept": "INSPECTION_RIGHT",
+          "right_holder": "BUYER",
+          "object": "GOODS",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "supply_distribution",
+      "mechanisms": [
+        "EXPRESS_RIGHT",
+        "INSPECTION_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        },
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:INSPECTION_RIGHT",
+      "POLARITY_INFORMATION_LOST:INSPECTION_RIGHT"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:REPLACEMENT_REMEDY"
+    ]
+  },
+  {
+    "fixture_id": "08_3_1_fr",
+    "language": "fr",
+    "source_text": "3.1 L'Acheteur aura le droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien non conforme aux Spécifications. Le Fournisseur remplacera les Biens non conformes à ses frais dans un délai de dix (10) jours ouvrés.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INSPECTION_RIGHT",
+        "REPLACEMENT_REMEDY"
+      ],
+      "relations": [
+        {
+          "concept": "INSPECTION_RIGHT",
+          "right_holder": "BUYER",
+          "object": "GOODS",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "payment",
+      "mechanisms": [
+        "INSPECTION_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:INSPECTION_RIGHT",
+      "POLARITY_INFORMATION_LOST:INSPECTION_RIGHT"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:REPLACEMENT_REMEDY"
+    ]
+  },
+  {
+    "fixture_id": "08_3_1_ar",
+    "language": "ar",
+    "source_text": "3.1 يحق للمشتري فحص البضائع خلال خمسة عشر (15) يوم عمل من التسليم ورفض أي بضائع غير مطابقة للمواصفات. يستبدل المورد البضائع غير المطابقة على نفقته خلال عشرة (10) أيام عمل.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INSPECTION_RIGHT",
+        "REPLACEMENT_REMEDY"
+      ],
+      "relations": [
+        {
+          "concept": "INSPECTION_RIGHT",
+          "right_holder": "BUYER",
+          "object": "GOODS",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "delivery",
+      "mechanisms": [
+        "INSPECTION_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "INSPECTION_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:INSPECTION_RIGHT",
+      "POLARITY_INFORMATION_LOST:INSPECTION_RIGHT"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:REPLACEMENT_REMEDY"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_en",
+    "language": "en",
+    "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\").",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "EXPRESS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TAG_ALONG_RIGHT",
+      "POLARITY_INFORMATION_LOST:TAG_ALONG_RIGHT"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_fr",
+    "language": "fr",
+    "source_text": "3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "EXPRESS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TAG_ALONG_RIGHT",
+      "POLARITY_INFORMATION_LOST:TAG_ALONG_RIGHT"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "language": "ar",
+    "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\").",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TAG_ALONG_RIGHT",
+      "POLARITY_INFORMATION_LOST:TAG_ALONG_RIGHT"
+    ],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  }
+]

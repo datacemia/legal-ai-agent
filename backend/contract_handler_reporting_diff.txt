@@ -1,0 +1,88 @@
+--- /dev/fd/63	2026-07-14 13:16:28.000000000 +0200
++++ /dev/fd/62	2026-07-14 13:16:28.000000000 +0200
+@@ -156,11 +156,6 @@
+             legal_progress_message("summary", output_language),
+         )
+ 
+-        summary = generate_summary(
+-            cleaned_text,
+-            output_language,
+-            party_roles=party_roles,
+-        )
+         jurisdiction_detection = detect_jurisdiction(
+             cleaned_text,
+             output_language,
+@@ -171,18 +166,50 @@
+             output_language,
+         )
+ 
+-        summary = re.sub(
+-            r"Jurisdiction:\s*.*",
+-            f"Jurisdiction: {jurisdiction_fields['jurisdiction']}",
+-            summary,
+-            flags=re.IGNORECASE,
++        # One analysis truth: enrich the already-built unified report with
++        # deterministic jurisdiction fields before rendering any legacy view.
++        overview = unified_report.get("contract_overview", {}) or {}
++        overview["jurisdiction_detected"] = jurisdiction_fields["jurisdiction"]
++
++        # Avoid a redundant "no clear jurisdiction" sentence when the field
++        # itself already displays the localized Not specified value.
++        if jurisdiction_detection.get("confidence") == "low" and not any([
++            jurisdiction_detection.get("governing_law"),
++            jurisdiction_detection.get("dispute_forum"),
++            jurisdiction_detection.get("arbitration_seat"),
++            jurisdiction_detection.get("arbitration_institution"),
++        ]):
++            overview["jurisdiction_note"] = ""
++        else:
++            overview["jurisdiction_note"] = jurisdiction_fields[
++                "jurisdiction_note"
++            ]
++
++        unified_report["contract_overview"] = overview
++
++        legacy_summary_data = to_legacy_summary_data(
++            unified_report,
++            output_language,
+         )
+ 
+-        summary = re.sub(
+-            r"Jurisdiction Note:\s*.*",
+-            f"Jurisdiction Note: {jurisdiction_fields['jurisdiction_note']}",
+-            summary,
+-            flags=re.IGNORECASE,
++        # Single-truth rendering invariant: legacy text views receive the exact
++        # structured overview values already resolved by the unified pipeline.
++        overview = unified_report.get("contract_overview", {}) or {}
++
++        for source_key, legacy_key in [
++            ("parties", "parties"),
++            ("duration", "duration"),
++            ("payment_terms", "payment_terms"),
++            ("jurisdiction_detected", "jurisdiction_detected"),
++            ("jurisdiction_note", "jurisdiction_note"),
++        ]:
++            if source_key in overview:
++                legacy_summary_data[legacy_key] = overview[source_key]
++
++        summary = render_summary_text(
++            legacy_summary_data,
++            output_language,
++            party_roles=party_roles,
+         )
+ 
+         update_job_progress(
+@@ -192,10 +219,9 @@
+             legal_progress_message("simplified", output_language),
+         )
+ 
+-        simplified = generate_simplified_version(
+-            cleaned_text,
++        simplified = to_legacy_simplified_string(
++            unified_report,
+             output_language,
+-            party_roles=party_roles,
+         )
+ 
+         recommendations = get_default_recommendations(output_language)

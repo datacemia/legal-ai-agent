@@ -1,0 +1,50 @@
+NEEDS_PARSER_FIX 16.pdf -> aucune transaction candidate extraite; income_gap=5229.1
+NEEDS_PARSER_FIX 17.pdf -> income_gap=185241.02
+NEEDS_PARSER_FIX arabie saudite.pdf -> expense_gap=3189.78
+NEEDS_PARSER_FIX t1.pdf -> income_gap=46593.21; expense_gap=31219.06
+NO_TRANSACTIONS t10.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS t11.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX t12.pdf -> aucune transaction candidate extraite; income_gap=0.65
+NO_TRANSACTIONS t13.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX t31.pdf -> income_gap=5.98
+NEEDS_PARSER_FIX t33.pdf -> income_gap=1.75
+NEEDS_PARSER_FIX t36.pdf -> income_gap=10.0
+NEEDS_PARSER_FIX t37.pdf -> aucune transaction candidate extraite; income_gap=145.15; expense_gap=727.5
+NO_TRANSACTIONS t38.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX t40.pdf -> income_gap=5.0
+NEEDS_PARSER_FIX t42.pdf -> aucune transaction candidate extraite; income_gap=8.12; expense_gap=8.02
+NEEDS_PARSER_FIX t43.pdf -> income_gap=50680.0; expense_gap=74640.79
+NEEDS_PARSER_FIX t44.pdf -> aucune transaction candidate extraite; expense_gap=1081.0
+NEEDS_PARSER_FIX t45.pdf -> income_gap=18328.58
+NEEDS_PARSER_FIX t46.pdf -> aucune transaction candidate extraite; expense_gap=1.39
+NEEDS_PARSER_FIX t48.pdf -> expense_gap=70486.71
+NEEDS_PARSER_FIX t49.pdf -> income_gap=185241.02
+NO_TRANSACTIONS t51.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX t52.pdf -> aucune transaction candidate extraite; income_gap=9566.0; expense_gap=9566.0
+NEEDS_PARSER_FIX t7.pdf -> aucune transaction candidate extraite; income_gap=515.87; expense_gap=44413.0
+NEEDS_PARSER_FIX t9.pdf -> income_gap=77.96; expense_gap=1086.1
+NEEDS_PARSER_FIX   16.pdf | validated=False tx=0 income=0 expenses=0 expected_income=5229.1 expected_expenses=0.0 gap_i=5229.1 gap_e=0.0 reason=aucune transaction candidate extraite; income_gap=5229.1
+NEEDS_PARSER_FIX   17.pdf | validated=False tx=16 income=545425.49 expenses=0 expected_income=360184.47 expected_expenses=0.0 gap_i=185241.02 gap_e=0.0 reason=income_gap=185241.02
+NEEDS_PARSER_FIX   arabie saudite.pdf | validated=False tx=120 income=40302315782.19 expenses=155415.2 expected_income=40302315782.19 expected_expenses=152225.42 gap_i=0.0 gap_e=3189.78 reason=expense_gap=3189.78
+NEEDS_PARSER_FIX   t1.pdf | validated=False tx=22 income=15832.05 expenses=463.54 expected_income=62425.26 expected_expenses=31682.6 gap_i=46593.21 gap_e=31219.06 reason=income_gap=46593.21; expense_gap=31219.06
+NO_TRANSACTIONS    t10.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    t11.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   t12.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.65 expected_expenses=0.0 gap_i=0.65 gap_e=0.0 reason=aucune transaction candidate extraite; income_gap=0.65
+NO_TRANSACTIONS    t13.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   t31.pdf | validated=False tx=21 income=2234680.89 expenses=0 expected_income=2234674.91 expected_expenses=0.0 gap_i=5.98 gap_e=0.0 reason=income_gap=5.98
+NEEDS_PARSER_FIX   t33.pdf | validated=False tx=103 income=15655.1 expenses=0 expected_income=15653.35 expected_expenses=0.0 gap_i=1.75 gap_e=0.0 reason=income_gap=1.75
+NEEDS_PARSER_FIX   t36.pdf | validated=False tx=68 income=12147.04 expenses=0 expected_income=12137.04 expected_expenses=0.0 gap_i=10.0 gap_e=0.0 reason=income_gap=10.0
+NEEDS_PARSER_FIX   t37.pdf | validated=False tx=0 income=0 expenses=0 expected_income=145.15 expected_expenses=727.5 gap_i=145.15 gap_e=727.5 reason=aucune transaction candidate extraite; income_gap=145.15; expense_gap=727.5
+NO_TRANSACTIONS    t38.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   t40.pdf | validated=False tx=94 income=2235241.49 expenses=0 expected_income=2235236.49 expected_expenses=0.0 gap_i=5.0 gap_e=0.0 reason=income_gap=5.0
+NEEDS_PARSER_FIX   t42.pdf | validated=False tx=0 income=0 expenses=0 expected_income=8.12 expected_expenses=8.02 gap_i=8.12 gap_e=8.02 reason=aucune transaction candidate extraite; income_gap=8.12; expense_gap=8.02
+NEEDS_PARSER_FIX   t43.pdf | validated=False tx=23 income=50702.0 expenses=74670.79 expected_income=22.0 expected_expenses=30.0 gap_i=50680.0 gap_e=74640.79 reason=income_gap=50680.0; expense_gap=74640.79
+NEEDS_PARSER_FIX   t44.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=1081.0 gap_i=0.0 gap_e=1081.0 reason=aucune transaction candidate extraite; expense_gap=1081.0
+NEEDS_PARSER_FIX   t45.pdf | validated=False tx=117 income=80154.97 expenses=0 expected_income=61826.39 expected_expenses=0.0 gap_i=18328.58 gap_e=0.0 reason=income_gap=18328.58
+NEEDS_PARSER_FIX   t46.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=1.39 gap_i=0.0 gap_e=1.39 reason=aucune transaction candidate extraite; expense_gap=1.39
+NEEDS_PARSER_FIX   t48.pdf | validated=False tx=59 income=0 expenses=95903.73 expected_income=0.0 expected_expenses=25417.02 gap_i=0.0 gap_e=70486.71 reason=expense_gap=70486.71
+NEEDS_PARSER_FIX   t49.pdf | validated=False tx=16 income=545425.49 expenses=0 expected_income=360184.47 expected_expenses=0.0 gap_i=185241.02 gap_e=0.0 reason=income_gap=185241.02
+NO_TRANSACTIONS    t51.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   t52.pdf | validated=False tx=0 income=0 expenses=0 expected_income=9566.0 expected_expenses=9566.0 gap_i=9566.0 gap_e=9566.0 reason=aucune transaction candidate extraite; income_gap=9566.0; expense_gap=9566.0
+NEEDS_PARSER_FIX   t7.pdf | validated=False tx=0 income=0 expenses=0 expected_income=515.87 expected_expenses=44413.0 gap_i=515.87 gap_e=44413.0 reason=aucune transaction candidate extraite; income_gap=515.87; expense_gap=44413.0
+NEEDS_PARSER_FIX   t9.pdf | validated=False tx=102 income=18488.44 expenses=17320.47 expected_income=18410.48 expected_expenses=18406.57 gap_i=77.96 gap_e=1086.1 reason=income_gap=77.96; expense_gap=1086.1

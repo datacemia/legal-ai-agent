@@ -1,0 +1,15 @@
+{
+  "rows_total": 262,
+  "approved_gold_rows": 0,
+  "primary_type_accuracy": null,
+  "primary_type_correct": 0,
+  "primary_type_total": 0,
+  "mechanism_precision": null,
+  "mechanism_recall": null,
+  "mechanism_tp": 0,
+  "mechanism_fp": 0,
+  "mechanism_fn": 0,
+  "abstained_on_approved_gold": 0,
+  "by_language": {},
+  "findings": []
+}

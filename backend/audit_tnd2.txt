@@ -1,0 +1,50 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_PDF_SCAN_DETECTED_OCR_STARTED
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 331, in <module>
+    main()
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 282, in main
+    results.append(analyze(path))
+                   ^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 186, in analyze
+    text = pdf_text(path)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 45, in pdf_text
+    return extract_statement_text_from_path(str(path))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\statement_parser.py", line 624, in extract_statement_text_from_path
+    text = _extract_text_with_scan_fallback(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\statement_parser.py", line 600, in _extract_text_with_scan_fallback
+    ocr_text = scan_agent_extract_text(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\scan_agent.py", line 32, in scan_agent_extract_text
+    page_text = pytesseract.image_to_string(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pytesseract\pytesseract.py", line 486, in image_to_string
+    return {
+           ^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pytesseract\pytesseract.py", line 489, in <lambda>
+    Output.STRING: lambda: run_and_get_output(*args),
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pytesseract\pytesseract.py", line 352, in run_and_get_output
+    run_tesseract(**kwargs)
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pytesseract\pytesseract.py", line 282, in run_tesseract
+    with timeout_manager(proc, timeout) as error_string:
+  File "C:\Users\rachi\Desktop\app\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pytesseract\pytesseract.py", line 144, in timeout_manager
+    yield proc.communicate()[1]
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\Desktop\app\Lib\subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\Desktop\app\Lib\subprocess.py", line 1626, in _communicate
+    self.stdout_thread.join(self._remaining_time(endtime))
+  File "C:\Users\rachi\Desktop\app\Lib\threading.py", line 1147, in join
+    self._wait_for_tstate_lock()
+  File "C:\Users\rachi\Desktop\app\Lib\threading.py", line 1167, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

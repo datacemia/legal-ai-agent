@@ -1,0 +1,757 @@
+[
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 تستمر هذه الاتفاقية لمدة سنتين (2) من تاريخ النفاذ، وتتجدد تلقائياً لمدد متتالية قدرها سنة (1) واحدة، ما لم يقدم أحد الطرفين إشعاراً خطياً بعدم التجديد قبل ستين (60) يوماً على الأقل. يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته تسعون (90) يوماً.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUTO_RENEW_OPT_OUT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "تتجدد تلقائياً",
+            "start": 57,
+            "end": 71
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 57,
+            "end": 251,
+            "text": "تتجدد تلقائياً لمدد متتالية قدرها سنة (1) واحدة، ما لم يقدم أحد الطرفين إشعاراً خطياً بعدم التجديد قبل ستين (60) يوماً على الأقل. يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته تسعون ("
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "c7afae9dc8eb75c20da511df8d8fbded9004853c3ff827645f23e1e1c8a91bfa",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 228,
+            "end": 238,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ee2efb6bd28af11b7a45e3f5414dfbdfe62f06e15e1c869ec72dd58a187bb1d4",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 187,
+            "end": 261,
+            "text": "يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته تسعون (90) يوماً."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2b738fb4492bd977503c2dde15d1c68b1bb9f87ce616a6970de8a9efb56eca2a",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 229,
+            "end": 260,
+            "text": "إشعار خطي مدته تسعون (90) يوماً"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "ae922b20000b05e02400043506ad9d197a3e95f89833a3295f271589795db515",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 228,
+            "end": 238,
+            "text": "بإشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ee2efb6bd28af11b7a45e3f5414dfbdfe62f06e15e1c869ec72dd58a187bb1d4",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 187,
+            "end": 261,
+            "text": "يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته تسعون (90) يوماً."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2b738fb4492bd977503c2dde15d1c68b1bb9f87ce616a6970de8a9efb56eca2a",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 229,
+            "end": 260,
+            "text": "إشعار خطي مدته تسعون (90) يوماً"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "ae922b20000b05e02400043506ad9d197a3e95f89833a3295f271589795db515",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "7.1",
+    "source_language": "ar",
+    "source_text": "7.1 لا يتحمل أي طرف تجاه الآخر المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية الناشئة عن هذه الاتفاقية. تخضع هذه الاتفاقية لقانون ولاية نيويورك.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "الأضرار غير المباشرة أو العرضية أو التبعية",
+            "start": 44,
+            "end": 86
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 4,
+            "end": 64,
+            "text": "لا يتحمل أي طرف تجاه الآخر المسؤولية عن الأضرار غير المباشرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "b2487ba41638b426e77b30daa081245fd4aa163483e47e16c062fd8f789dd389",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 4,
+            "end": 111,
+            "text": "لا يتحمل أي طرف تجاه الآخر المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية الناشئة عن هذه الاتفاقية"
+          },
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 44,
+            "end": 111,
+            "text": "الأضرار غير المباشرة أو العرضية أو التبعية الناشئة عن هذه الاتفاقية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "3ac84c47074370529784803d81e2a8bce870ba5e8178f3e7a323295a67812a70",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يتعاون الطرفان في أنشطة التعاون وفقاً لما يُتفق عليه من وقت لآخر في خطة مشروع خطية، تحدد النطاق والجدول الزمني والميزانية ومسؤوليات كل طرف.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "أنشطة",
+          "التعاون",
+          "الزمني",
+          "الطرفان",
+          "النطاق",
+          "تحدد",
+          "تفق",
+          "خطة",
+          "خطية",
+          "طرف",
+          "عليه",
+          "لآخر",
+          "لما",
+          "مشروع",
+          "والجدول",
+          "والميزانية",
+          "وفقا",
+          "وقت",
+          "ومسؤوليات",
+          "يتعاون"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 ما لم تنص خطة المشروع على خلاف ذلك، يتحمل كل طرف تكاليفه ونفقاته الخاصة المتكبدة فيما يتعلق بأنشطة التعاون. تُوزَّع أي تكاليف مشتركة بالتساوي ما لم يُتفق خطياً على خلاف ذلك.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "التعاون",
+          "الخاصة",
+          "المتكبدة",
+          "المشروع",
+          "بأنشطة",
+          "بالتساوي",
+          "تفق",
+          "تكاليف",
+          "تكاليفه",
+          "تنص",
+          "خطة",
+          "خطيا",
+          "خلاف",
+          "طرف",
+          "فيما",
+          "لم",
+          "ما",
+          "مشتركة",
+          "وز",
+          "ونفقاته",
+          "يتحمل",
+          "يتعلق"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يحتفظ كل طرف بملكية ملكيته الفكرية السابقة. تكون الملكية الفكرية المشتركة مملوكة بشكل مشترك للطرفين بحصص متساوية غير مقسمة، ويحق لكل طرف استغلالها دون تقديم حساب للطرف الآخر، رهناً بحق الأولوية في التفاوض قبل ترخيص الملكية الفكرية المشتركة لمنافس مباشر للطرف الآخر.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 53,
+            "end": 269,
+            "text": "الملكية الفكرية المشتركة مملوكة بشكل مشترك للطرفين بحصص متساوية غير مقسمة، ويحق لكل طرف استغلالها دون تقديم حساب للطرف الآخر، رهناً بحق الأولوية في التفاوض قبل ترخيص الملكية الفكرية المشتركة لمنافس مباشر للطرف الآخر."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "a6c78cc18878c4c4e1f3df59911823ba75c5a402f017d558a72c1cd40436f3a1",
+        "normalized_concept": "IP_OWNERSHIP_ALLOCATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 53,
+            "end": 269,
+            "text": "الملكية الفكرية المشتركة مملوكة بشكل مشترك للطرفين بحصص متساوية غير مقسمة، ويحق لكل طرف استغلالها دون تقديم حساب للطرف الآخر، رهناً بحق الأولوية في التفاوض قبل ترخيص الملكية الفكرية المشتركة لمنافس مباشر للطرف الآخر."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "a6c78cc18878c4c4e1f3df59911823ba75c5a402f017d558a72c1cd40436f3a1",
+        "normalized_concept": "IP_OWNERSHIP_ALLOCATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 لا يجوز لأي طرف استخدام العلامات التجارية أو الأسماء التجارية أو عناصر العلامة الخاصة بالطرف الآخر في أي دعاية أو مواد تسويقية أو بيان صحفي دون موافقة خطية مسبقة من الطرف الآخر.",
+    "primary_type": "trademark_branding",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 144,
+            "end": 164
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 144,
+            "end": 164,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 148,
+            "end": 164,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "9be95a6b80ef9ca161f374ce3a6524be599f783c94a120de3ff023dfb6d6e3db",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 148,
+            "end": 158,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "53165240e95ec5aec1f5c4393376e1a9266edd69761d3fd8b6f9a8ea26373615",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 181,
+            "text": "لا يجوز لأي طرف استخدام العلامات التجارية أو الأسماء التجارية أو عناصر العلامة الخاصة بالطرف الآخر في أي دعاية أو مواد تسويقية أو بيان صحفي دون موافقة خطية مسبقة من الطرف الآخر."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "01aa8d42a2c3f46bb8a8bc737bef84760d8522623cbcc4640881f3fcc98238cc",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 181,
+            "text": "لا يجوز لأي طرف استخدام العلامات التجارية أو الأسماء التجارية أو عناصر العلامة الخاصة بالطرف الآخر في أي دعاية أو مواد تسويقية أو بيان صحفي دون موافقة خطية مسبقة من الطرف الآخر."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "01aa8d42a2c3f46bb8a8bc737bef84760d8522623cbcc4640881f3fcc98238cc",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 يحافظ كل طرف على سرية أي معلومات غير علنية يفصح عنها الطرف الآخر فيما يتعلق بهذه الاتفاقية، ولا يستخدمها إلا لأغراض أنشطة التعاون.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "يحافظ كل طرف على سرية",
+            "start": 4,
+            "end": 25
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 4,
+            "end": 134,
+            "text": "يحافظ كل طرف على سرية أي معلومات غير علنية يفصح عنها الطرف الآخر فيما يتعلق بهذه الاتفاقية، ولا يستخدمها إلا لأغراض أنشطة التعاون."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "93edaf86d1dad785397aad20fdf1be4edb09961c8668ab60169eb8ac6ff78512",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  }
+]

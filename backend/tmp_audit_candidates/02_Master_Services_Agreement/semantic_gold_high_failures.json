@@ -1,0 +1,67 @@
+[
+  {
+    "fixture_id": "02_4_2_en",
+    "language": "en",
+    "source_text": "4.2 Provider may terminate this Agreement or any SOW immediately, for any reason or no reason, upon written notice to Client. Client may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "NOTICE_PROCEDURE",
+        "TERMINATION_FOR_CAUSE"
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PROCEDURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:TERMINATION_FOR_CONVENIENCE"
+    ]
+  }
+]

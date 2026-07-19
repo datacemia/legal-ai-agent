@@ -1,0 +1,299 @@
+====================================================================================================
+V4.1.5 PAYMENT ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 24
+
+ROWS: 24
+BY LANGUAGE: {'en': 3, 'fr': 11, 'ar': 10}
+BY PIPELINE TYPE: {'pricing': 5, 'payment': 13, 'compensation': 2, 'fees': 3, 'invoice': 1}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 24}
+SIGNAL COUNTS: {'PAYMENT_DUTY': 9, 'PAYMENT_DEADLINE': 9, 'BASE_COMPENSATION': 3, 'INVOICE_TRIGGER': 2, 'FEES_CHARGES': 5, 'LATE_PAYMENT_INTEREST': 1, 'PRICE_ONLY': 4, 'REIMBURSEMENT_RECONCILIATION': 1}
+NO SIGNAL ROWS: 7
+
+====================================================================================================
+[1/24]
+LANG: en
+DOC: 08_Procurement_Supply_Agreement.json
+REF: clause_4
+PIPELINE: pricing
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.1 Prices for the Goods are as set forth in Exhibit A and shall remain fixed for the first twelve (12) months of the Term, subject thereafter to adjustment no more than once annually based on documented increases in raw material costs, capped at 6% per year.
+MECHANISMS: []
+
+====================================================================================================
+[2/24]
+LANG: fr
+DOC: 11_Commercial_Lease_Agreement.json
+REF: clause_5
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE']
+SOURCE:
+3.1 Tenant shall pay a security deposit equal to two (2) months of Base Rent upon exécution of this Lease, to be held by Landlord as security for Tenant's performance and returned within thirty (30) days after the expiration of the term, less any lawful deductions.
+MECHANISMS: []
+
+====================================================================================================
+[3/24]
+LANG: en
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_4
+PIPELINE: compensation
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['BASE_COMPENSATION']
+SOURCE:
+4.1 Between the date of this Agreement and the Closing Date, Seller shall operate the Business in the ordinary course consistent with past practice and shall not, without Buyer's prior written consent, enter into any material contract, dispose of any material asset, or increase compensation for key employees.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']
+
+====================================================================================================
+[4/24]
+LANG: en
+DOC: 15_General_Commercial_Agreement.json
+REF: clause_3
+PIPELINE: fees
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.1 Unless otherwise specified in a project plan, each Party shall bear its own costs and expenses incurred in connection with the Cooperation Activities. Any shared costs shall be split equally unless otherwise agreed in writing.
+MECHANISMS: []
+
+====================================================================================================
+[5/24]
+LANG: fr
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_5
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE', 'INVOICE_TRIGGER', 'FEES_CHARGES', 'LATE_PAYMENT_INTEREST']
+SOURCE:
+2.1 Le Client paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation. Tout montant impayé après soixante (60) jours portera intérêt au taux de 1 % par mois.
+MECHANISMS: []
+
+====================================================================================================
+[6/24]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_4
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'BASE_COMPENSATION']
+SOURCE:
+2.1 La Société versera à la Dirigeante un salaire de base annuel de 410 000 $, payable selon les pratiques de paie standard de la Société, sous réserve d'un examen annuel par le Conseil d'Administration.
+MECHANISMS: []
+
+====================================================================================================
+[7/24]
+LANG: fr
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_3
+PIPELINE: pricing
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PRICE_ONLY']
+SOURCE:
+5.1 Pendant la Durée, l'Acheteur achètera au moins soixante-dix pour cent (70 %) de ses besoins en Biens auprès du Fournisseur, sous réserve que ce dernier demeure compétitif en termes de prix, de qualité et de performance de livraison par rapport au marché.
+MECHANISMS: []
+
+====================================================================================================
+[8/24]
+LANG: fr
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_4
+PIPELINE: pricing
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PRICE_ONLY']
+SOURCE:
+2.1 Les prix des Biens sont fixés à l'Annexe A et resteront inchangés pendant les douze (12) premiers mois de la Durée, sous réserve ensuite d'un ajustement au maximum une fois par an fondé sur des augmentations documentées des coûts de matières premières, plafonné à 6 % par an.
+MECHANISMS: []
+
+====================================================================================================
+[9/24]
+LANG: fr
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_7
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE']
+SOURCE:
+2.2 L'Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception.
+MECHANISMS: []
+
+====================================================================================================
+[10/24]
+LANG: fr
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_8
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DEADLINE', 'FEES_CHARGES']
+SOURCE:
+3.1 L'Acheteur aura le droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien non conforme aux Spécifications. Le Fournisseur remplacera les Biens non conformes à ses frais dans un délai de dix (10) jours ouvrés.
+MECHANISMS: []
+
+====================================================================================================
+[11/24]
+LANG: fr
+DOC: 11_Commercial_Lease_Agreement_FR.json
+REF: clause_7
+PIPELINE: fees
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE', 'FEES_CHARGES', 'REIMBURSEMENT_RECONCILIATION']
+SOURCE:
+2.2 Le Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur.
+MECHANISMS: []
+
+====================================================================================================
+[12/24]
+LANG: fr
+DOC: 13_Asset_Purchase_Agreement_FR.json
+REF: clause_3
+PIPELINE: compensation
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['BASE_COMPENSATION']
+SOURCE:
+4.1 Entre la date du présent Contrat et la Date de Clôture, le Vendeur exploitera l'Activité dans le cours normal des affaires, conformément aux pratiques antérieures, et ne pourra, sans le consentement écrit préalable de l'Acquéreur, conclure de contrat substantiel, céder un actif significatif, ou augmenter la rémunération des salariés clés.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE']
+
+====================================================================================================
+[13/24]
+LANG: fr
+DOC: 13_Asset_Purchase_Agreement_FR.json
+REF: clause_7
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PRICE_ONLY']
+SOURCE:
+2.1 Le prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture ; et (b) 2 000 000 $ déposés sous séquestre pendant dix-huit (18) mois pour garantir les obligations d'indemnisation du Vendeur au titre de l'article 6.
+MECHANISMS: []
+
+====================================================================================================
+[14/24]
+LANG: fr
+DOC: 15_General_Commercial_Agreement_FR.json
+REF: clause_3
+PIPELINE: fees
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.1 Sauf disposition contraire d'un plan de projet, chaque Partie supportera ses propres coûts et dépenses engagés dans le cadre des Activités de Coopération. Tout coût partagé sera réparti à parts égales, sauf accord contraire écrit.
+MECHANISMS: []
+
+====================================================================================================
+[15/24]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_6
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.2 يحق للمرخِّص، بإشعار مدته ثلاثون (30) يوماً، تدقيق دفاتر وسجلات المرخَّص له المتعلقة بحساب الإتاوات، بحد أقصى مرة واحدة سنوياً؛ وإذا كشف التدقيق عن نقص في السداد يتجاوز خمسة بالمائة (5%)، يتحمل المرخَّص له التكلفة المعقولة للتدقيق.
+MECHANISMS: []
+
+====================================================================================================
+[16/24]
+LANG: ar
+DOC: 08_Procurement_Supply_Agreement_AR.json
+REF: clause_2
+PIPELINE: pricing
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PRICE_ONLY']
+SOURCE:
+5.1 خلال المدة، يشتري المشتري ما لا يقل عن سبعين بالمائة (70%) من احتياجاته من البضائع من المورد، شريطة أن يظل المورد منافساً من حيث السعر والجودة وأداء التسليم مقارنة بالسوق.
+MECHANISMS: []
+
+====================================================================================================
+[17/24]
+LANG: ar
+DOC: 08_Procurement_Supply_Agreement_AR.json
+REF: clause_7
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE']
+SOURCE:
+2.2 يسدد المشتري جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها.
+MECHANISMS: []
+
+====================================================================================================
+[18/24]
+LANG: ar
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_3
+PIPELINE: invoice
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE', 'INVOICE_TRIGGER', 'FEES_CHARGES']
+SOURCE:
+2.1 ينفذ الاستشاري الخدمات الموصوفة في كل بيان عمل بأسلوب مهني. يسدد العميل أتعاب الاستشاري المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة.
+MECHANISMS: []
+
+====================================================================================================
+[19/24]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_1
+PIPELINE: pricing
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.
+MECHANISMS: []
+
+====================================================================================================
+[20/24]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY', 'PAYMENT_DEADLINE', 'FEES_CHARGES']
+SOURCE:
+4.1 يسدد العميل للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً.
+MECHANISMS: []
+
+====================================================================================================
+[21/24]
+LANG: ar
+DOC: 11_Commercial_Lease_Agreement_AR.json
+REF: clause_4
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DUTY']
+SOURCE:
+2.1 يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد.
+MECHANISMS: []
+
+====================================================================================================
+[22/24]
+LANG: ar
+DOC: 14_Shareholders_Agreement_AR.json
+REF: clause_4
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.
+MECHANISMS: []
+
+====================================================================================================
+[23/24]
+LANG: ar
+DOC: 14_Shareholders_Agreement_AR.json
+REF: clause_6
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['PAYMENT_DEADLINE']
+SOURCE:
+4.1 طالما احتفظ المستثمر بنسبة لا تقل عن 3% من رأس المال المخفف بالكامل للشركة، تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.
+MECHANISMS: []
+
+====================================================================================================
+[24/24]
+LANG: ar
+DOC: 14_Shareholders_Agreement_AR.json
+REF: clause_7
+PIPELINE: payment
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION']

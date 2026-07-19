@@ -1,0 +1,154 @@
+===== 3.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===== BANQUE POSTALE (2).pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 11
+
+
+
+
+
+
+
+
+
+
+
+
+===== EGPTE.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 22763
+                                                                                    PAGE 001
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0                                                                  300002471110003
+     0                 0
+                                                                                24021800165743566
+٤٢-ﻓﺒﺮﺍﻳﺮ-٥١
+15-Feb-24
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+     05/03/24                      10,956.00                         547.80
+     547.80                         547.80                           0.00
+     10,956.00                      10,956.00                        0.00
+     10,956.00                      10,956.00                        0.00
+
+                                                                                    PAGE 002
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0
+     0                 0
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+                                                 0
+                                                 0
+                                                 0
+                                                 0
+                                                 0
+
+                                                                                    PAGE 003
+     ZIYAD N A ALMUTAIRI
+     P O BOX 0
+     0                 0
+     4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+                                               B/F AS OF 15/01/24                      601.50
+                                                   4302 58XX XXXX 9928
+    29-JAN-24         29-JAN-24        CASH TRANSFER                                4,500.00
+٤٢-ﻳﻨﺎﻳﺮ-٩٢
+٤٢-ﻳﻨﺎﻳﺮ-٩٢
+29-JAN-24         30-JAN-24        INT PURCH      gotogate_
+===== EJJAMI12.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 4
+
+
+
+
+
+===== habitat.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 1
+
+
+===== x.pdf =====
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+len= 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

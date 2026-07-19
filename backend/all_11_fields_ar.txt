@@ -1,0 +1,608 @@
+=== PROTECTED FIELDS ===
+legal_insight                policy= relevance blocked= 2
+market_comparison            policy= comparative_relevance blocked= 3
+safer_alternative            policy= fidelity blocked= 0
+recommendation               policy= advisory_relevance blocked= 18
+negotiation_advice           policy= advisory_relevance blocked= 14
+market_practice              policy= compact_conclusion blocked= 0
+fallback_wording             policy= fidelity blocked= 0
+negotiable                   policy= compact_conclusion blocked= 0
+acceptable_compromise        policy= fidelity blocked= 0
+never_accept                 policy= relevance blocked= 0
+negotiation_boundary         policy= relevance blocked= 0
+
+TOTAL BLOCKED: 37
+
+=== BY POLICY ===
+32 advisory_relevance
+3 comparative_relevance
+2 relevance
+
+=== GENERATED TYPES ===
+14 payment
+5 liability
+4 post_termination_obligations
+3 services
+2 governing_law
+2 pricing
+2 intellectual_property
+1 covenant
+1 data_processing
+1 duration
+1 termination
+1 performance
+
+=== FINAL TYPE -> GENERATED TYPE -> FIELD ===
+4 ('indemnity', 'liability', 'recommendation')
+4 ('loan', 'payment', 'recommendation')
+3 ('termination', 'post_termination_obligations', 'recommendation')
+2 ('dispute_resolution', 'governing_law', 'negotiation_advice')
+2 ('loan', 'payment', 'negotiation_advice')
+2 ('covenant', 'payment', 'negotiation_advice')
+1 ('confidentiality', 'covenant', 'legal_insight')
+1 ('renewal', 'pricing', 'recommendation')
+1 ('renewal', 'payment', 'negotiation_advice')
+1 ('subcontracting', 'services', 'recommendation')
+1 ('subcontracting', 'payment', 'negotiation_advice')
+1 ('indemnity', 'intellectual_property', 'negotiation_advice')
+1 ('compliance', 'data_processing', 'market_comparison')
+1 ('services', 'duration', 'negotiation_advice')
+1 ('employment', 'intellectual_property', 'negotiation_advice')
+1 ('intellectual_property', 'post_termination_obligations', 'recommendation')
+1 ('payment', 'services', 'market_comparison')
+1 ('corporate_governance', 'services', 'market_comparison')
+1 ('employment', 'termination', 'recommendation')
+1 ('security', 'liability', 'legal_insight')
+1 ('penalty', 'payment', 'negotiation_advice')
+1 ('guarantee', 'payment', 'recommendation')
+1 ('guarantee', 'payment', 'negotiation_advice')
+1 ('collateral', 'payment', 'recommendation')
+1 ('assignment', 'performance', 'negotiation_advice')
+1 ('automatic_renewal', 'pricing', 'recommendation')
+
+=== FULL CASES ===
+
+====================================================================================================
+FILE: 01_NDA_Confidentiality_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حقوق الملكية في المعلومات السرية
+FINAL TYPE: confidentiality
+FIELD: legal_insight
+POLICY: relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: covenant
+GENERATED CANDIDATES:
+  covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['التزام']
+TEXT BEFORE VALIDATION:
+تنشئ هذه المادة التزام عدم الإفصاح الأساسي: من يلتزم به، وما معيار العناية المطبق، وما إذا كان الإفصاح الفرعي المصرح به (مثلاً للممثلين) مسموحاً.
+
+====================================================================================================
+FILE: 01_NDA_Confidentiality_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: القانون الواجب التطبيق والاختصاص القضائي
+FINAL TYPE: dispute_resolution
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: governing_law
+GENERATED CANDIDATES:
+  governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['القانون الواجب التطبيق']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.
+
+====================================================================================================
+FILE: 02_Master_Services_Agreement_AR.docx
+CLAUSE: 2.2
+TITLE: زيادة الرسوم
+FINAL TYPE: renewal
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: pricing
+GENERATED CANDIDATES:
+  pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+  payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.
+
+====================================================================================================
+FILE: 02_Master_Services_Agreement_AR.docx
+CLAUSE: 2.2
+TITLE: زيادة الرسوم
+FINAL TYPE: renewal
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 4 base= 3 specificity= 0 context+= 1 context-= 0 signals= ['الدفع', 'الأسعار']
+  pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على توضيح آليات التجديد، ومهل الإشعار، والتجديد التلقائي، وتغييرات الأسعار، والإنهاء قبل التجديد، وأي تغييرات في الخدمة أو الدفع.
+
+====================================================================================================
+FILE: 03_SaaS_Cloud_Agreement_AR.docx
+CLAUSE: 7.1
+TITLE: إنهاء الاتفاقية
+FINAL TYPE: termination
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: post_termination_obligations
+GENERATED CANDIDATES:
+  post_termination_obligations score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['بعد الإنهاء']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حظر التعاقد مع مقاول من الباطن
+FINAL TYPE: subcontracting
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: services
+GENERATED CANDIDATES:
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['الدعم']
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من أن النطاق والمسؤوليات ومعايير القبول والجداول الزمنية وإدارة التغييرات والتزامات الدعم محددة بما يكفي.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: حظر التعاقد مع مقاول من الباطن
+FINAL TYPE: subcontracting
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الدفع']
+  acceptance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['قبول']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على معايير قبول موضوعية، ومراحل التسليم، وإجراءات الاختبار، وحقوق الرفض، ومهل المعالجة، والقبول الضمني، والتزامات إعادة التسليم، وربط الدفع بالقبول.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 5.2
+TITLE: تعويض الطرف الطرف المتعاقد ب ب
+FINAL TYPE: indemnity
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: liability
+GENERATED CANDIDATES:
+  liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 04_Cybersecurity_Services_Agreement_AR.docx
+CLAUSE: 5.2
+TITLE: تعويض الطرف الطرف المتعاقد ب ب
+FINAL TYPE: indemnity
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: intellectual_property
+GENERATED CANDIDATES:
+  intellectual_property score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['الملكية الفكرية']
+  limitation_of_liability score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['حد المسؤولية']
+  liability score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية', 'حد المسؤولية', 'الأضرار غير المباشرة']
+  data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حماية البيانات']
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الدفع']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.
+
+====================================================================================================
+FILE: 05_Data_Processing_Agreement_AR.docx
+CLAUSE: 8.1
+TITLE: التدقيق والامتثال
+FINAL TYPE: compliance
+FIELD: market_comparison
+POLICY: comparative_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: data_processing
+GENERATED CANDIDATES:
+  data_processing score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['معالجة البيانات']
+TEXT BEFORE VALIDATION:
+تعتبر هذه الفقرة معيارية في عقود معالجة البيانات.
+
+====================================================================================================
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: الامتناع عن المنافسة
+FINAL TYPE: services
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: duration
+GENERATED CANDIDATES:
+  duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+TEXT BEFORE VALIDATION:
+يجب مناقشة تقليل فترة الامتناع عن المنافسة.
+
+====================================================================================================
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 4.2
+TITLE: الامتناع عن استقطاب الطرف الطرف المتعاقد ب بين
+FINAL TYPE: employment
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: intellectual_property
+GENERATED CANDIDATES:
+  intellectual_property score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['الملكية الفكرية']
+  limitation_of_liability score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['حد المسؤولية']
+  liability score= 6 base= 3 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية', 'حد المسؤولية', 'الأضرار غير المباشرة']
+  data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حماية البيانات']
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الدفع']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.
+
+====================================================================================================
+FILE: 06_Executive_Employment_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: تنازل عن الحقوق
+FINAL TYPE: intellectual_property
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: post_termination_obligations
+GENERATED CANDIDATES:
+  post_termination_obligations score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['بعد الإنهاء']
+  ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ملكية']
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من ملكية المواد السابقة، والمخرجات المنشأة، ونطاق الترخيص، وقيود الاستخدام، والحقوق المعنوية، والحقوق بعد الإنهاء.
+
+====================================================================================================
+FILE: 07_Software_Licensing_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: مدة الاتفاقية وإنهائها
+FINAL TYPE: termination
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: post_termination_obligations
+GENERATED CANDIDATES:
+  post_termination_obligations score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['بعد الإنهاء']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+====================================================================================================
+FILE: 09_Consulting_Services_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: ملكية نواتج العمل
+FINAL TYPE: payment
+FIELD: market_comparison
+POLICY: comparative_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: services
+GENERATED CANDIDATES:
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['الاستشارات']
+TEXT BEFORE VALIDATION:
+هذا النوع من النصوص شائع في عقود الاستشارات.
+
+====================================================================================================
+FILE: 09_Consulting_Services_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: سرية المعلومات
+FINAL TYPE: corporate_governance
+FIELD: market_comparison
+POLICY: comparative_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: services
+GENERATED CANDIDATES:
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['الاستشارات']
+TEXT BEFORE VALIDATION:
+تعتبر هذه الشروط قياسية في عقود الاستشارات.
+
+====================================================================================================
+FILE: 10_Outsourcing_Managed_Services_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: شروط العمل للموظفين المنقولين
+FINAL TYPE: employment
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: termination
+GENERATED CANDIDATES:
+  termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة التعويض والمزايا والمهام وآليات إنهاء العمل والإشعار والالتزامات بعد العمل والامتثال لإطار العمل المحدد.
+
+====================================================================================================
+FILE: 10_Outsourcing_Managed_Services_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: ضمانات البيانات
+FINAL TYPE: security
+FIELD: legal_insight
+POLICY: relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: liability
+GENERATED CANDIDATES:
+  liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+TEXT BEFORE VALIDATION:
+يتناول هذا البند التعامل مع الحوادث أو الاختراقات، لذلك يجب توضيح المهل والتعاون وحفظ الأدلة وواجبات الإخطار ومعالجة المسؤولية.
+
+====================================================================================================
+FILE: 11_Commercial_Lease_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: إنهاء العقد بسبب عدم السداد
+FINAL TYPE: termination
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: post_termination_obligations
+GENERATED CANDIDATES:
+  post_termination_obligations score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['بعد الإنهاء']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 6.2
+TITLE: حالة تعثر
+FINAL TYPE: loan
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: سداد القرض المبكر
+FINAL TYPE: penalty
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ضمان الالتزامات
+FINAL TYPE: loan
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ضمان الالتزامات
+FINAL TYPE: loan
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: التعهدات المالية
+FINAL TYPE: loan
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 3.1
+TITLE: التعهدات المالية
+FINAL TYPE: loan
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: حالة التعثر
+FINAL TYPE: covenant
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزامات الطرف المتعاقد ب
+FINAL TYPE: guarantee
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزامات الطرف المتعاقد ب
+FINAL TYPE: guarantee
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 6 base= 4 specificity= 0 context+= 2 context-= 0 signals= ['الدفع', 'السداد']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على آجال الدفع، وفترات السماح، وفوائد التأخير، وإجراءات الاعتراض على الفواتير، والمعالجة الضريبية، والعملة، وحقوق المقاصة، وحقوق تعليق الالتزامات عند عدم السداد.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 7.1
+TITLE: القانون الواجب التطبيق وحل النزاعات
+FINAL TYPE: dispute_resolution
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: governing_law
+GENERATED CANDIDATES:
+  governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['القانون الواجب التطبيق']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.
+
+====================================================================================================
+FILE: 12_Loan_Credit_Agreement_AR.docx
+CLAUSE: 1.1
+TITLE: شروط صرف القرض
+FINAL TYPE: loan
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التزام الطرف الطرف المتعاقد ب أ بالإغلاق
+FINAL TYPE: covenant
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 1.1
+TITLE: نقل الحقوق
+FINAL TYPE: collateral
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: payment
+GENERATED CANDIDATES:
+  payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+  services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['التنفيذ']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مواعيد السداد، والفائدة، والضمانات، والكفالات، ومحفزات الإخلال، وحقوق التعجيل، وآليات التنفيذ.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 2.1
+TITLE: ثمن شراء الأصول
+FINAL TYPE: indemnity
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: liability
+GENERATED CANDIDATES:
+  liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 4.1
+TITLE: إدارة النشاط
+FINAL TYPE: indemnity
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: liability
+GENERATED CANDIDATES:
+  liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 13_Asset_Purchase_Agreement_AR.docx
+CLAUSE: 6.1
+TITLE: التعويض
+FINAL TYPE: indemnity
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: liability
+GENERATED CANDIDATES:
+  liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+TEXT BEFORE VALIDATION:
+ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.
+
+====================================================================================================
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: 5.1
+TITLE: التنازل عن الأسهم
+FINAL TYPE: assignment
+FIELD: negotiation_advice
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: performance
+GENERATED CANDIDATES:
+  performance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تنفيذ']
+  waiver score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تنازل']
+TEXT BEFORE VALIDATION:
+يمكن التفاوض على اشتراط الموافقة الخطية المسبقة على أي تنازل أو نقل أو تفويض، مع السماح باستثناءات معقولة للشركات التابعة أو إعادة الهيكلة أو الاندماج أو الاستحواذ أو بيع معظم الأصول إذا كان المتنازل له قادراً على تنفيذ الالتزامات.
+
+====================================================================================================
+FILE: 14_Shareholders_Agreement_AR.docx
+CLAUSE: البند 7.1
+TITLE: إنهاء الاتفاقية
+FINAL TYPE: automatic_renewal
+FIELD: recommendation
+POLICY: advisory_relevance
+SOURCE TYPE: SOURCE_NOT_IN_SUMMARY
+GENERATED TYPE: pricing
+GENERATED CANDIDATES:
+  pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+  payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+TEXT BEFORE VALIDATION:
+ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.
+
+OUTPUT: regression_results_multilang\ar\_all_11_fields_diagnostic.json

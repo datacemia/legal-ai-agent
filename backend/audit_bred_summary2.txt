@@ -1,0 +1,1198 @@
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 20491
+PDF_LINES_DEBUG {'line_count': 316, 'non_empty_line_count': 254, 'max_line_len': 188, 'first_20': ['Relevé de comptes', '', '                  Date                     N° de compte                      N° de relevé                 Page', '              1er mars 2025                 00319058454                          4                          1/1', '', '( Vos numéros et adresses utiles', '', ' Votre agence                         : 0820 336 174 (1)', ' BRED Direct Services         : 0 806 060 211 (2)             M. FERNANDES GAETAN', ' Opposition carte bancaire : 33(0)1 77 86 24 24 (3)          18 BOULEVARD JOHN FITZGERALD KENNEDY', ' Internet                                   : www.bred.fr               63100 CLERMONT FERRAND', '', '  (1) Service 0,12 EUR/mn + prix appel. (2) Service gratuit + prix appel. (3) tarif', '  local en vigueur.', '', '  Votre Code BIC        Votre Code IBAN', '   BREDFRPPXXX   FR76 1680 7003 2536 9503 1619 937', '', 'F Votre Conseiller    : Mme Agnes Natan                                                          Envoi précédent effectué le 1er février 2025', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 51, 'income_total': 7584.79, 'expense_total': 5501.35}
+BRED_POSITION_LINES_EXTRACTED 51
+BNB_TEXT_PREVIEW
+92000 NANTERRE
+8 RUE DU 8 MAI 1945
+MME CECILIA JOLY
+03304 02075
+RUEIL MAIR FOCH
+Tél. Agence : 01 55 47 92 56
+(numéro non surtaxé)
+Service Client
+R
+ELEVE DE COMPTE CHEQUES
+du 9 septembre 2024 au 9 octobre 2024
+RIB
+: 30004 02075 00001019787 85
+IBAN
+: FR76 3000 4020 7500 0010 1978 785
+BIC
+: BNPAFRPPXXX
+Les sommes déposées sur ce compte sont éligibles à la garantie des dépôts du Fonds de Garantie des
+Dépôts et de Résolution, sauf exclusions réglementaires en raison de la nature des personnes et/ou des
+dépôts.
+www.garantiedesdepots.fr
+Monnaie du compte : Euro
+D
+ate
+N
+ature des opérations
+V
+aleur
+D
+ébit
+C
+rédit
+SOLDE CREDITEUR AU 09.09.2024 1 966,58
+10.09 10.09 10,00PRLV SEPA FAE ECH/100924 ID
+EMETTEUR/FR12ZZZ394002
+MDT/MVE20190327004523824001000000011515
+REF/PREL FAE 11999 DU 2024-09-10
+LIB/ACTION ENFANCE
+10.09 10.09 15,00PRLV SEPA SOCIETE PROTECTRICE DES
+ANIMAUX ECH/100924 ID
+EMETTEUR/FR12SPA420774 MDT/SLMP022154377
+REF/PRLVT SPA 231545 DU 2024-09-10
+LIB/SPA
+10.09 10.09 1 080,00VIR SCT INST EMIS /MOTIF FORFAIT TALENTS
+BOOST /BEN CATHERINE DUVAL /REFDO
+CF43CD2BF4C642CDB49D2C1CE36A2571 /REFBEN
+NOTPROVIDED
+11.09 11.09 861,58CHANGEMENT D AGENCE BNP PARIBAS
+TOTAL DES OPERATIONS 1 966,58 0,00
+SOLDE CREDITEUR AU 09.10.2024 0,00
+Montant de votre autorisation de débit en compte au 09.10.2024 : 100,00 euros au taux nominal de 15,90 %, soit un
+TAEG de 16,9 % (le TAEG effectif résultera de l'utilisation de débit en compte dans la limite du taux de l'usure et
+sera communiqué lors de l'arrêté trimestriel).
+BNP PARIBAS SA au capital de 2 261 621 342 € - Siège social : 16 bd des Italiens, 75009 Paris - RCS Paris n° 662 042 449 - Id. CE FR76 662042449 - ORIAS n° 07 022 735
+3477 (service gratuit + prix appel) - mabanque.bnpparibas - Réclamations/Exécution du contrat : Conseiller en agence (ligne directe n° non surtaxé)
+V o t r e s a t i s f a c t i o n e s t n o t r e p r i o r i t é . T o u t e f o i s , s i v o u s s o u h a i t e z f a i r e u n e r é c l a m a t i o n :
+- A d r e s s e z - v o u s à v o t r e i n t e r l o c u t e u r h a b i t u e l , v o t r e C o n s e i l l e r o u v o t r e é q u i p e d e C o n s e i l l e r s , d e v i v e v o i x , p a r é c r i t o u v i a l e f o r m u l a i r e e n
+l i g n e a c c e s s i b l e s u r n o t r e s i t e o u s u r v o t r e a p p l i c a t i o n m o b i l e
+( 1 )
+. V o u s p o u v e z a u s s i c o n t a c t e r l e S e r v i c e C l i e n t ( c o o r d o n n é e s e n e n - t ê t e
+d u c o u r r i e r ) .
+- S i v o
+[
+  {
+    "file": "1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "1v.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "3.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "772605810-كشف-حساب-بنكي (2).pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "820869074-كشف-حساب-جديد.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "ARABE 4.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 10.0,
+      "withdrawals": 0.0
+    },
+    "transactions": 1,
+    "income_count": 1,
+    "expense_count": 0,
+    "income_total": 10.0,
+    "expense_total": 0,
+    "expected_income": 10.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": []
+  },
+  {
+    "file": "ARABE1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "opening_balance": 3323.54,
+      "deposits": 55500.0,
+      "withdrawals": 58823.11,
+      "ending_balance": 0.43
+    },
+    "transactions": 11,
+    "income_count": 1,
+    "expense_count": 10,
+    "income_total": 55500.0,
+    "expense_total": 58823.11,
+    "expected_income": 55500.0,
+    "expected_expenses": 58823.11,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}"
+    ]
+  },
+  {
+    "file": "ARABE2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "ARABE3.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "opening_balance": 47608.43,
+      "deposits": 325458.0,
+      "withdrawals": 370995.44,
+      "ending_balance": 2070.99
+    },
+    "transactions": 331,
+    "income_count": 35,
+    "expense_count": 296,
+    "income_total": 325458.0,
+    "expense_total": 370995.44,
+    "expected_income": 325458.0,
+    "expected_expenses": 370995.44,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}"
+    ]
+  },
+  {
+    "file": "arabe5.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "arabie saudite.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "BANCORP.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "withdrawals": 929.06,
+      "deposits": 313.03,
+      "opening_balance": 0.0,
+      "ending_balance": -616.03
+    },
+    "transactions": 14,
+    "income_count": 5,
+    "expense_count": 9,
+    "income_total": 313.03,
+    "expense_total": 929.06,
+    "expected_income": 313.03,
+    "expected_expenses": 929.06,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 929.06, 'deposits': 313.03, 'opening_balance': 0.0, 'ending_balance': -616.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 929.06, 'deposits': 313.03, 'opening_balance': 0.0, 'ending_balance': -616.03}",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger"
+    ]
+  },
+  {
+    "file": "BANK CHAABI.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "bank of america.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "opening_balance": 290.92,
+      "deposits": 390.92,
+      "withdrawals": 168.23,
+      "ending_balance": 68.23
+    },
+    "transactions": 4,
+    "income_count": 2,
+    "expense_count": 2,
+    "income_total": 390.92,
+    "expense_total": 168.23,
+    "expected_income": 390.92,
+    "expected_expenses": 168.23,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement"
+    ]
+  },
+  {
+    "file": "banque d'epagne.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "banque populare 1 france.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite; income_gap=10011.7; expense_gap=9832.14",
+    "summary": {
+      "withdrawals": 9832.14,
+      "deposits": 10011.7,
+      "source": "total_mouvements_inline_flat"
+    },
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 10011.7,
+    "expected_expenses": 9832.14,
+    "income_gap": 10011.7,
+    "expense_gap": 9832.14,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 9832.14, 'deposits': 10011.7, 'source': 'total_mouvements_inline_flat'}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 9832.14, 'deposits': 10011.7, 'source': 'total_mouvements_inline_flat'}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'fr_date_reference_debit_credit_value', 'count': 49, 'income_total': 2916.45, 'expense_total': 47452.19, 'income_gap': 7095.25, 'expense_gap': 37620.05, 'ledger_total': 50368.64, 'max_tx_abs': 37701.0, 'score': 44715.3}, {'parser': 'bred_position_lines', 'count': 51, 'income_total': 7584.79, 'expense_total': 5501.35, 'income_gap': 2426.91, 'expense_gap': 4330.79, 'ledger_total': 13086.14, 'max_tx_abs': 2500.0, 'score': 7257.7}, {'parser': 'global_reference_debit_credit_value', 'count': 45, 'income_total': 2932.45, 'expense_total': 5097.44, 'income_gap': 7079.25, 'expense_gap': 4734.7, 'ledger_total': 8029.89, 'max_tx_abs': 2500.0, 'score': 11813.95}]"
+    ]
+  },
+  {
+    "file": "BANQUE POSTALE (2).pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "banque postale.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "belfis.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "BMCE.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "bnb 1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 0.0,
+      "withdrawals": 1966.58
+    },
+    "transactions": 4,
+    "income_count": 0,
+    "expense_count": 4,
+    "income_total": 0,
+    "expense_total": 1966.58,
+    "expected_income": 0.0,
+    "expected_expenses": 1966.58,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}"
+    ]
+  },
+  {
+    "file": "chase.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "cic.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 5529.86,
+      "withdrawals": 5684.96,
+      "source": "cic_pdf_positions"
+    },
+    "transactions": 22,
+    "income_count": 2,
+    "expense_count": 20,
+    "income_total": 5529.86,
+    "expense_total": 5684.96,
+    "expected_income": 5529.86,
+    "expected_expenses": 5684.96,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cic_column_split', 'count': 18, 'income_total': 0, 'expense_total': 15760.13, 'income_gap': None, 'expense_gap': None, 'ledger_total': 15760.13, 'max_tx_abs': 5529.86, 'score': 632}]",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}"
+    ]
+  },
+  {
+    "file": "city bank.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "credit mutuel.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "dakar.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "EGPTE.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "EJJAMI10.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 2520.0,
+      "withdrawals": 0.0,
+      "opening_balance": 0.0,
+      "ending_balance": 2520.0
+    },
+    "transactions": 3,
+    "income_count": 3,
+    "expense_count": 0,
+    "income_total": 2520.0,
+    "expense_total": 0,
+    "expected_income": 2520.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': 0.0, 'ending_balance': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': 0.0, 'ending_balance': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': 0.0, 'ending_balance': 0.0}"
+    ]
+  },
+  {
+    "file": "EJJAMI11.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "EJJAMI12.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "EJJAMI2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "EJJAMI3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "EJJAMI5.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "EJJAMI6.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "ejjami7.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "ejjami8.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 0,
+      "withdrawals": 698.77,
+      "opening_balance": 0.0,
+      "ending_balance": -698.77
+    },
+    "transactions": 24,
+    "income_count": 0,
+    "expense_count": 24,
+    "income_total": 0,
+    "expense_total": 698.77,
+    "expected_income": 0.0,
+    "expected_expenses": 698.77,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 698.77, 'opening_balance': 0.0, 'ending_balance': -698.77}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 698.77, 'opening_balance': 0.0, 'ending_balance': -698.77}",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger"
+    ]
+  },
+  {
+    "file": "EJJAMI9.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "emirate.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 0,
+      "withdrawals": 4491.83,
+      "opening_balance": 0.0,
+      "ending_balance": -4491.83
+    },
+    "transactions": 6,
+    "income_count": 0,
+    "expense_count": 6,
+    "income_total": 0,
+    "expense_total": 4491.83,
+    "expected_income": 0.0,
+    "expected_expenses": 4491.83,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 4491.83, 'opening_balance': 0.0, 'ending_balance': -4491.83}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 4491.83, 'opening_balance': 0.0, 'ending_balance': -4491.83}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 4491.83, 'opening_balance': 0.0, 'ending_balance': -4491.83}"
+    ]
+  },
+  {
+    "file": "g1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "g2.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "opening_balance": 0.0,
+      "deposits": 4686.17,
+      "withdrawals": 2674.89,
+      "ending_balance": 2011.28
+    },
+    "transactions": 69,
+    "income_count": 9,
+    "expense_count": 60,
+    "income_total": 4686.17,
+    "expense_total": 2674.89,
+    "expected_income": 4686.17,
+    "expected_expenses": 2674.89,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    ]
+  },
+  {
+    "file": "G3.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "opening_balance": 0.0,
+      "deposits": 4686.17,
+      "withdrawals": 2674.89,
+      "ending_balance": 2011.28
+    },
+    "transactions": 69,
+    "income_count": 9,
+    "expense_count": 60,
+    "income_total": 4686.17,
+    "expense_total": 2674.89,
+    "expected_income": 4686.17,
+    "expected_expenses": 2674.89,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    ]
+  },
+  {
+    "file": "general1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "habitat.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "ISLAMIQE.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "deposits": 22000.0,
+      "withdrawals": 18345.0,
+      "opening_balance": 0.0,
+      "ending_balance": 3655.0
+    },
+    "transactions": 7,
+    "income_count": 1,
+    "expense_count": 6,
+    "income_total": 22000.0,
+    "expense_total": 18345.0,
+    "expected_income": 22000.0,
+    "expected_expenses": 18345.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 22000.0, 'withdrawals': 18345.0, 'opening_balance': 0.0, 'ending_balance': 3655.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 22000.0, 'withdrawals': 18345.0, 'opening_balance': 0.0, 'ending_balance': 3655.0}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 22000.0, 'withdrawals': 18345.0, 'opening_balance': 0.0, 'ending_balance': 3655.0}"
+    ]
+  },
+  {
+    "file": "llc.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "mercury.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents",
+    "summary": {
+      "opening_balance": 4.5,
+      "deposits": 32.97,
+      "withdrawals": 32.97,
+      "ending_balance": 4.5
+    },
+    "transactions": 7,
+    "income_count": 3,
+    "expense_count": 4,
+    "income_total": 32.97,
+    "expense_total": 32.97,
+    "expected_income": 32.97,
+    "expected_expenses": 32.97,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    ]
+  },
+  {
+    "file": "n26 .1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "OMAR1.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "OMAR2.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "OMAR3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "Relevés compte 3.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "revolut france.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "soc general.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "well fargo.pdf",
+    "status": "ERROR",
+    "validated": false,
+    "reason": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "error": "cannot access local variable 'income_gap' where it is not associated with a value",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 274, in main\n    results.append(analyze(path))\n                   ^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\tools\\test_finance_folder.py\", line 198, in analyze\n    txs = extract_transactions(text) or []\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 20029, in extract_transactions\n    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\rachi\\legal-ai-agent\\backend\\app\\services\\finance_agent\\transaction_extractor.py\", line 16774, in _runexa_core_extract_transactions\n    income_gap > RUNEXA_STRICT_TOLERANCE\n    ^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'income_gap' where it is not associated with a value\n"
+  },
+  {
+    "file": "x.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  }
+]
+
+SUMMARY
+TOTAL=56
+VALIDATED=14
+NOT_VALIDATED=42
+
+VALIDATED FILES
+OK ARABE 4.pdf
+OK ARABE1.pdf
+OK ARABE3.pdf
+OK BANCORP.pdf
+OK bank of america.pdf
+OK bnb 1.pdf
+OK cic.pdf
+OK EJJAMI10.pdf
+OK ejjami8.pdf
+OK emirate.pdf
+OK g2.pdf
+OK G3.pdf
+OK ISLAMIQE.pdf
+OK mercury.pdf
+
+NOT VALIDATED FILES
+ERROR 1.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR 1v.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR 2.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS 3.pdf -> aucune transaction candidate extraite
+ERROR 772605810-كشف-حساب-بنكي (2).pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR 820869074-كشف-حساب-جديد.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR ARABE2.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS arabe5.pdf -> aucune transaction candidate extraite
+ERROR arabie saudite.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR BANK CHAABI.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR banque d'epagne.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NEEDS_PARSER_FIX banque populare 1 france.pdf -> aucune transaction candidate extraite; income_gap=10011.7; expense_gap=9832.14
+NO_TRANSACTIONS BANQUE POSTALE (2).pdf -> aucune transaction candidate extraite
+ERROR banque postale.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR belfis.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR BMCE.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR chase.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR city bank.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR credit mutuel.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS dakar.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS EGPTE.pdf -> aucune transaction candidate extraite
+ERROR EJJAMI11.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS EJJAMI12.pdf -> aucune transaction candidate extraite
+ERROR EJJAMI2.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR EJJAMI3.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR EJJAMI5.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR EJJAMI6.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR ejjami7.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR EJJAMI9.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR g1.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR general1.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS habitat.pdf -> aucune transaction candidate extraite
+ERROR llc.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR n26 .1.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR OMAR1.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR OMAR2.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR OMAR3.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR Relevés compte 3.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR revolut france.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR soc general.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+ERROR well fargo.pdf -> cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS x.pdf -> aucune transaction candidate extraite
+
+DETAIL
+ERROR              1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              1v.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS    3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+ERROR              772605810-كشف-حساب-بنكي (2).pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              820869074-كشف-حساب-جديد.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 ARABE 4.pdf | validated=True tx=1 income=10.0 expenses=0 expected_income=10.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 ARABE1.pdf | validated=True tx=11 income=55500.0 expenses=58823.11 expected_income=55500.0 expected_expenses=58823.11 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              ARABE2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 ARABE3.pdf | validated=True tx=331 income=325458.0 expenses=370995.44 expected_income=325458.0 expected_expenses=370995.44 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+NO_TRANSACTIONS    arabe5.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+ERROR              arabie saudite.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 BANCORP.pdf | validated=True tx=14 income=313.03 expenses=929.06 expected_income=313.03 expected_expenses=929.06 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              BANK CHAABI.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 bank of america.pdf | validated=True tx=4 income=390.92 expenses=168.23 expected_income=390.92 expected_expenses=168.23 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              banque d'epagne.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+NEEDS_PARSER_FIX   banque populare 1 france.pdf | validated=False tx=0 income=0 expenses=0 expected_income=10011.7 expected_expenses=9832.14 gap_i=10011.7 gap_e=9832.14 reason=aucune transaction candidate extraite; income_gap=10011.7; expense_gap=9832.14
+NO_TRANSACTIONS    BANQUE POSTALE (2).pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+ERROR              banque postale.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              belfis.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              BMCE.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 bnb 1.pdf | validated=True tx=4 income=0 expenses=1966.58 expected_income=0.0 expected_expenses=1966.58 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              chase.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 cic.pdf | validated=True tx=22 income=5529.86 expenses=5684.96 expected_income=5529.86 expected_expenses=5684.96 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              city bank.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              credit mutuel.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS    dakar.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    EGPTE.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 EJJAMI10.pdf | validated=True tx=3 income=2520.0 expenses=0 expected_income=2520.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              EJJAMI11.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS    EJJAMI12.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+ERROR              EJJAMI2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              EJJAMI3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              EJJAMI5.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              EJJAMI6.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              ejjami7.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 ejjami8.pdf | validated=True tx=24 income=0 expenses=698.77 expected_income=0.0 expected_expenses=698.77 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              EJJAMI9.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 emirate.pdf | validated=True tx=6 income=0 expenses=4491.83 expected_income=0.0 expected_expenses=4491.83 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              g1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 g2.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+OK                 G3.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              general1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS    habitat.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 ISLAMIQE.pdf | validated=True tx=7 income=22000.0 expenses=18345.0 expected_income=22000.0 expected_expenses=18345.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              llc.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+OK                 mercury.pdf | validated=True tx=7 income=32.97 expenses=32.97 expected_income=32.97 expected_expenses=32.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY -> CANDIDATE -> RECONCILIATION -> KPI coherents
+ERROR              n26 .1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              OMAR1.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              OMAR2.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              OMAR3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              Relevés compte 3.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              revolut france.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              soc general.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+ERROR              well fargo.pdf | validated=False tx=None income=None expenses=None expected_income=None expected_expenses=None gap_i=None gap_e=None reason=cannot access local variable 'income_gap' where it is not associated with a value
+NO_TRANSACTIONS    x.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite

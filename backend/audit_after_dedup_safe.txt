@@ -1,0 +1,2242 @@
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+BNB_TEXT_PREVIEW
+92000 NANTERRE
+8 RUE DU 8 MAI 1945
+MME CECILIA JOLY
+03304 02075
+RUEIL MAIR FOCH
+Tél. Agence : 01 55 47 92 56
+(numéro non surtaxé)
+Service Client
+R
+ELEVE DE COMPTE CHEQUES
+du 9 septembre 2024 au 9 octobre 2024
+RIB
+: 30004 02075 00001019787 85
+IBAN
+: FR76 3000 4020 7500 0010 1978 785
+BIC
+: BNPAFRPPXXX
+Les sommes déposées sur ce compte sont éligibles à la garantie des dépôts du Fonds de Garantie des
+Dépôts et de Résolution, sauf exclusions réglementaires en raison de la nature des personnes et/ou des
+dépôts.
+www.garantiedesdepots.fr
+Monnaie du compte : Euro
+D
+ate
+N
+ature des opérations
+V
+aleur
+D
+ébit
+C
+rédit
+SOLDE CREDITEUR AU 09.09.2024 1 966,58
+10.09 10.09 10,00PRLV SEPA FAE ECH/100924 ID
+EMETTEUR/FR12ZZZ394002
+MDT/MVE20190327004523824001000000011515
+REF/PREL FAE 11999 DU 2024-09-10
+LIB/ACTION ENFANCE
+10.09 10.09 15,00PRLV SEPA SOCIETE PROTECTRICE DES
+ANIMAUX ECH/100924 ID
+EMETTEUR/FR12SPA420774 MDT/SLMP022154377
+REF/PRLVT SPA 231545 DU 2024-09-10
+LIB/SPA
+10.09 10.09 1 080,00VIR SCT INST EMIS /MOTIF FORFAIT TALENTS
+BOOST /BEN CATHERINE DUVAL /REFDO
+CF43CD2BF4C642CDB49D2C1CE36A2571 /REFBEN
+NOTPROVIDED
+11.09 11.09 861,58CHANGEMENT D AGENCE BNP PARIBAS
+TOTAL DES OPERATIONS 1 966,58 0,00
+SOLDE CREDITEUR AU 09.10.2024 0,00
+Montant de votre autorisation de débit en compte au 09.10.2024 : 100,00 euros au taux nominal de 15,90 %, soit un
+TAEG de 16,9 % (le TAEG effectif résultera de l'utilisation de débit en compte dans la limite du taux de l'usure et
+sera communiqué lors de l'arrêté trimestriel).
+BNP PARIBAS SA au capital de 2 261 621 342 € - Siège social : 16 bd des Italiens, 75009 Paris - RCS Paris n° 662 042 449 - Id. CE FR76 662042449 - ORIAS n° 07 022 735
+3477 (service gratuit + prix appel) - mabanque.bnpparibas - Réclamations/Exécution du contrat : Conseiller en agence (ligne directe n° non surtaxé)
+V o t r e s a t i s f a c t i o n e s t n o t r e p r i o r i t é . T o u t e f o i s , s i v o u s s o u h a i t e z f a i r e u n e r é c l a m a t i o n :
+- A d r e s s e z - v o u s à v o t r e i n t e r l o c u t e u r h a b i t u e l , v o t r e C o n s e i l l e r o u v o t r e é q u i p e d e C o n s e i l l e r s , d e v i v e v o i x , p a r é c r i t o u v i a l e f o r m u l a i r e e n
+l i g n e a c c e s s i b l e s u r n o t r e s i t e o u s u r v o t r e a p p l i c a t i o n m o b i l e
+( 1 )
+. V o u s p o u v e z a u s s i c o n t a c t e r l e S e r v i c e C l i e n t ( c o o r d o n n é e s e n e n - t ê t e
+d u c o u r r i e r ) .
+- S i v o
+[
+  {
+    "file": "1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 243233.16,
+      "deposits": 53236.11,
+      "opening_balance": 0.0,
+      "ending_balance": -189997.05
+    },
+    "transactions": 221,
+    "income_count": 51,
+    "expense_count": 170,
+    "income_total": 53236.11,
+    "expense_total": 243233.16,
+    "expected_income": 53236.11,
+    "expected_expenses": 243233.16,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'riyad_bank_ar_en_balance', 'count': 248, 'income_total': 2663290.45, 'expense_total': 13601036.32, 'income_gap': None, 'expense_gap': None, 'ledger_total': 16264326.77, 'max_tx_abs': 963090.0, 'score': 100000860}, {'parser': 'global_reference_debit_credit_value', 'count': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'ledger_total': 296469.27, 'max_tx_abs': 50989.57, 'score': -220}, {'parser': 'global_date_boundary_ledger', 'count': 12, 'income_total': 0.3, 'expense_total': 1.15, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1.45, 'max_tx_abs': 0.15, 'score': 987.99}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'score': -220}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243233.16, 'deposits': 53236.11, 'opening_balance': 0.0, 'ending_balance': -189997.05}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'riyad_bank_ar_en_balance', 'count': 248, 'income_total': 2663290.45, 'expense_total': 13601036.32, 'income_gap': None, 'expense_gap': None, 'ledger_total': 16264326.77, 'max_tx_abs': 963090.0, 'score': 100000860}, {'parser': 'global_reference_debit_credit_value', 'count': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'ledger_total': 296469.27, 'max_tx_abs': 50989.57, 'score': -220}, {'parser': 'global_date_boundary_ledger', 'count': 12, 'income_total': 0.3, 'expense_total': 1.15, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1.45, 'max_tx_abs': 0.15, 'score': 987.99}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'score': -220}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243233.16, 'deposits': 53236.11, 'opening_balance': 0.0, 'ending_balance': -189997.05}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'riyad_bank_ar_en_balance', 'count': 248, 'income_total': 2663290.45, 'expense_total': 13601036.32, 'income_gap': None, 'expense_gap': None, 'ledger_total': 16264326.77, 'max_tx_abs': 963090.0, 'score': 100000860}, {'parser': 'global_reference_debit_credit_value', 'count': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'ledger_total': 296469.27, 'max_tx_abs': 50989.57, 'score': -220}, {'parser': 'global_date_boundary_ledger', 'count': 12, 'income_total': 0.3, 'expense_total': 1.15, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1.45, 'max_tx_abs': 0.15, 'score': 987.99}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 221, 'income_total': 53236.11, 'expense_total': 243233.16, 'income_gap': None, 'expense_gap': None, 'score': -220}"
+    ]
+  },
+  {
+    "file": "1v.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 7808.58,
+      "deposits": 69487.55,
+      "withdrawals": 38647.75,
+      "ending_balance": 0.67
+    },
+    "transactions": 123,
+    "income_count": 24,
+    "expense_count": 99,
+    "income_total": 69487.55,
+    "expense_total": 38647.75,
+    "expected_income": 69487.55,
+    "expected_expenses": 38647.75,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'ledger_total': 108135.3, 'max_tx_abs': 38647.75, 'score': 38647.71}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 69487.55, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'ledger_total': 108135.3, 'max_tx_abs': 38647.75, 'score': 38647.71}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 69487.55, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 108135.3, 'max_tx_abs': 38647.75, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "2.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 3527.4,
+      "deposits": 8810.0,
+      "withdrawals": 12028.97,
+      "ending_balance": 308.43
+    },
+    "transactions": 75,
+    "income_count": 3,
+    "expense_count": 72,
+    "income_total": 8810.0,
+    "expense_total": 12028.97,
+    "expected_income": 8810.0,
+    "expected_expenses": 12028.97,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cbq_qatar_posting_debit_credit', 'count': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'ledger_total': 20838.97, 'max_tx_abs': 6760.0, 'score': 1834.99}]",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8810.0, 'withdrawals': 12028.97, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cbq_qatar_posting_debit_credit', 'count': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'ledger_total': 20838.97, 'max_tx_abs': 6760.0, 'score': 1834.99}]",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8810.0, 'withdrawals': 12028.97, 'ending_balance': 308.43}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cbq_qatar_posting_debit_credit', 'count': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 20838.97, 'max_tx_abs': 6760.0, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "3.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "772605810-كشف-حساب-بنكي (2).pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 222711.92,
+      "deposits": 349332.85,
+      "opening_balance": 0.0,
+      "ending_balance": 126620.93
+    },
+    "transactions": 70,
+    "income_count": 41,
+    "expense_count": 29,
+    "income_total": 349332.85,
+    "expense_total": 222711.92,
+    "expected_income": 349332.85,
+    "expected_expenses": 222711.92,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 48136.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 48136.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 48136.58}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 108, 'income_total': 459139.43, 'expense_total': 1438026.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1897165.43, 'max_tx_abs': 85344.77, 'score': 99999780}, {'parser': 'global_value_date_debit_credit', 'count': 115, 'income_total': 1313878.34, 'expense_total': 1355686.73, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2669565.07, 'max_tx_abs': 115476.21, 'score': 99999740}, {'parser': 'global_date_boundary_ledger', 'count': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'ledger_total': 572044.77, 'max_tx_abs': 70000.0, 'score': -140}, {'parser': 'global_multiline_debit_credit_balance', 'count': 116, 'income_total': 320627.85, 'expense_total': 1574785.51, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1895413.36, 'max_tx_abs': 104220.21, 'score': 99999800}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 222711.92, 'deposits': 349332.85, 'opening_balance': 0.0, 'ending_balance': 126620.93}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 48136.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 48136.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 48136.58}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 108, 'income_total': 459139.43, 'expense_total': 1438026.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1897165.43, 'max_tx_abs': 85344.77, 'score': 99999780}, {'parser': 'global_value_date_debit_credit', 'count': 115, 'income_total': 1313878.34, 'expense_total': 1355686.73, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2669565.07, 'max_tx_abs': 115476.21, 'score': 99999740}, {'parser': 'global_date_boundary_ledger', 'count': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'ledger_total': 572044.77, 'max_tx_abs': 70000.0, 'score': -140}, {'parser': 'global_multiline_debit_credit_balance', 'count': 116, 'income_total': 320627.85, 'expense_total': 1574785.51, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1895413.36, 'max_tx_abs': 104220.21, 'score': 99999800}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 222711.92, 'deposits': 349332.85, 'opening_balance': 0.0, 'ending_balance': 126620.93}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 108, 'income_total': 459139.43, 'expense_total': 1438026.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1897165.43, 'max_tx_abs': 85344.77, 'score': 99999780}, {'parser': 'global_value_date_debit_credit', 'count': 115, 'income_total': 1313878.34, 'expense_total': 1355686.73, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2669565.07, 'max_tx_abs': 115476.21, 'score': 99999740}, {'parser': 'global_date_boundary_ledger', 'count': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'ledger_total': 572044.77, 'max_tx_abs': 70000.0, 'score': -140}, {'parser': 'global_multiline_debit_credit_balance', 'count': 116, 'income_total': 320627.85, 'expense_total': 1574785.51, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1895413.36, 'max_tx_abs': 104220.21, 'score': 99999800}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 70, 'income_total': 349332.85, 'expense_total': 222711.92, 'income_gap': None, 'expense_gap': None, 'score': -140}"
+    ]
+  },
+  {
+    "file": "820869074-كشف-حساب-جديد.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 7808.58,
+      "deposits": 69487.55,
+      "withdrawals": 38647.75,
+      "ending_balance": 0.67
+    },
+    "transactions": 123,
+    "income_count": 24,
+    "expense_count": 99,
+    "income_total": 69487.55,
+    "expense_total": 38647.75,
+    "expected_income": 69487.55,
+    "expected_expenses": 38647.75,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'ledger_total': 108135.3, 'max_tx_abs': 38647.75, 'score': 38647.71}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 69487.55, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 30839.84, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'ledger_total': 108135.3, 'max_tx_abs': 38647.75, 'score': 38647.71}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 38647.71, 'expense_gap': 0.0, 'score': 38647.71}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 7808.58, 'deposits': 69487.55, 'withdrawals': 38647.75, 'ending_balance': 0.67}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 108135.3, 'max_tx_abs': 38647.75, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 123, 'income_total': 69487.55, 'expense_total': 38647.75, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "ARABE 4.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 10.0,
+      "withdrawals": 0.0
+    },
+    "transactions": 1,
+    "income_count": 1,
+    "expense_count": 0,
+    "income_total": 10.0,
+    "expense_total": 0,
+    "expected_income": 10.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": []
+  },
+  {
+    "file": "ARABE1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 3323.54,
+      "deposits": 55500.0,
+      "withdrawals": 58823.11,
+      "ending_balance": 0.43
+    },
+    "transactions": 11,
+    "income_count": 1,
+    "expense_count": 10,
+    "income_total": 55500.0,
+    "expense_total": 58823.11,
+    "expected_income": 55500.0,
+    "expected_expenses": 58823.11,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'ending_balance': 0.43, 'deposits': 55500.0, 'withdrawals': 58823.11}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3323.54, 'deposits': 55500.0, 'withdrawals': 58823.11, 'ending_balance': 0.43}"
+    ]
+  },
+  {
+    "file": "ARABE2.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 3527.4,
+      "deposits": 8810.0,
+      "withdrawals": 12028.97,
+      "ending_balance": 308.43
+    },
+    "transactions": 75,
+    "income_count": 3,
+    "expense_count": 72,
+    "income_total": 8810.0,
+    "expense_total": 12028.97,
+    "expected_income": 8810.0,
+    "expected_expenses": 12028.97,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cbq_qatar_posting_debit_credit', 'count': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'ledger_total': 20838.97, 'max_tx_abs': 6760.0, 'score': 1834.99}]",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8810.0, 'withdrawals': 12028.97, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8360.0, 'withdrawals': 10643.98, 'ending_balance': 308.43}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cbq_qatar_posting_debit_credit', 'count': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'ledger_total': 20838.97, 'max_tx_abs': 6760.0, 'score': 1834.99}]",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 450.0, 'expense_gap': 1384.99, 'score': 1834.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3527.4, 'deposits': 8810.0, 'withdrawals': 12028.97, 'ending_balance': 308.43}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'cbq_qatar_posting_debit_credit', 'count': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 20838.97, 'max_tx_abs': 6760.0, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED cbq_qatar_posting_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'cbq_qatar_posting_debit_credit', 'transactions': 75, 'income_total': 8810.0, 'expense_total': 12028.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "ARABE3.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "expense_gap=50.0",
+    "summary": {
+      "opening_balance": 47608.43,
+      "deposits": 325458.0,
+      "withdrawals": 370995.44,
+      "ending_balance": 2070.99
+    },
+    "transactions": 330,
+    "income_count": 35,
+    "expense_count": 295,
+    "income_total": 325458.0,
+    "expense_total": 370945.44,
+    "expected_income": 325458.0,
+    "expected_expenses": 370995.44,
+    "income_gap": 0.0,
+    "expense_gap": 50.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 47608.43, 'deposits': 325458.0, 'withdrawals': 370995.44, 'ending_balance': 2070.99}"
+    ]
+  },
+  {
+    "file": "arabe5.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "arabie saudite.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 1735262.25,
+      "withdrawals": 758746.99,
+      "opening_balance": 0.0,
+      "ending_balance": 976515.26
+    },
+    "transactions": 22,
+    "income_count": 12,
+    "expense_count": 10,
+    "income_total": 1735262.25,
+    "expense_total": 758746.99,
+    "expected_income": 1735262.25,
+    "expected_expenses": 758746.99,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2494009.24, 'max_tx_abs': 901600.0, 'score': 99999878}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': None, 'expense_gap': None, 'score': 99999878}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1735262.25, 'withdrawals': 758746.99, 'opening_balance': 0.0, 'ending_balance': 976515.26}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2494009.24, 'max_tx_abs': 901600.0, 'score': 99999878}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': None, 'expense_gap': None, 'score': 99999878}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1735262.25, 'withdrawals': 758746.99, 'opening_balance': 0.0, 'ending_balance': 976515.26}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_date_boundary_ledger', 'count': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 2494009.24, 'max_tx_abs': 901600.0, 'score': 100000000.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_date_boundary_ledger",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_date_boundary_ledger', 'transactions': 22, 'income_total': 1735262.25, 'expense_total': 758746.99, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 100000000.0}"
+    ]
+  },
+  {
+    "file": "BANCORP.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 929.06,
+      "deposits": 313.03,
+      "opening_balance": 0.0,
+      "ending_balance": -616.03
+    },
+    "transactions": 14,
+    "income_count": 5,
+    "expense_count": 9,
+    "income_total": 313.03,
+    "expense_total": 929.06,
+    "expected_income": 313.03,
+    "expected_expenses": 929.06,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 929.06, 'deposits': 313.03, 'opening_balance': 0.0, 'ending_balance': -616.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 3.0}",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 929.06, 'deposits': 313.03, 'opening_balance': 0.0, 'ending_balance': -616.03}",
+      "STATEMENT_LAYOUT_DETECTED debit_credit_balance_ledger"
+    ]
+  },
+  {
+    "file": "BANK CHAABI.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "expense_gap=4.5",
+    "summary": {
+      "deposits": 912747.13,
+      "withdrawals": 431702.87,
+      "opening_balance": 0.0,
+      "ending_balance": 481044.26
+    },
+    "transactions": 105,
+    "income_count": 74,
+    "expense_count": 31,
+    "income_total": 912747.13,
+    "expense_total": 431707.37,
+    "expected_income": 912747.13,
+    "expected_expenses": 431702.87,
+    "income_gap": 0.0,
+    "expense_gap": 4.5,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'banque_populaire_fr_ar', 'count': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1344454.5, 'max_tx_abs': 324360.0, 'score': 100001360}]",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'score': 100001360}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 912747.13, 'withdrawals': 431702.87, 'opening_balance': 0.0, 'ending_balance': 481044.26}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'banque_populaire_fr_ar', 'count': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1344454.5, 'max_tx_abs': 324360.0, 'score': 100001360}]",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'score': 100001360}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 912747.13, 'withdrawals': 431702.87, 'opening_balance': 0.0, 'ending_balance': 481044.26}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'banque_populaire_fr_ar', 'count': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': 0.0, 'expense_gap': 4.5, 'ledger_total': 1344454.5, 'max_tx_abs': 324360.0, 'score': 100001504.5}]",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': 0.0, 'expense_gap': 4.5, 'score': 100001504.5}"
+    ]
+  },
+  {
+    "file": "bank of america.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 290.92,
+      "deposits": 390.92,
+      "withdrawals": 168.23,
+      "ending_balance": 68.23
+    },
+    "transactions": 4,
+    "income_count": 2,
+    "expense_count": 2,
+    "income_total": 390.92,
+    "expense_total": 168.23,
+    "expected_income": 390.92,
+    "expected_expenses": 168.23,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 290.92, 'deposits': 390.92, 'withdrawals': 168.23, 'ending_balance': 68.23}",
+      "STATEMENT_LAYOUT_DETECTED date_posting_description_amount_statement"
+    ]
+  },
+  {
+    "file": "banque d'epagne.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "expense_gap=42.69",
+    "summary": {
+      "deposits": 500.0,
+      "withdrawals": 614.02,
+      "opening_balance": 0.0,
+      "ending_balance": -114.02
+    },
+    "transactions": 24,
+    "income_count": 1,
+    "expense_count": 23,
+    "income_total": 500.0,
+    "expense_total": 656.71,
+    "expected_income": 500.0,
+    "expected_expenses": 614.02,
+    "income_gap": 0.0,
+    "expense_gap": 42.69,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 11882.76, 'withdrawals': 21.12}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 11882.76, 'withdrawals': 21.12}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 11882.76, 'withdrawals': 21.12}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 23, 'income_total': 80.0, 'expense_total': 626.71, 'income_gap': 11802.76, 'expense_gap': 605.59, 'ledger_total': 706.71, 'max_tx_abs': 86.4, 'score': 13908.35}, {'parser': 'global_value_date_debit_credit', 'count': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 11382.76, 'expense_gap': 635.59, 'ledger_total': 1156.71, 'max_tx_abs': 500.0, 'score': 13518.35}]",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 11382.76, 'expense_gap': 635.59, 'score': 13518.35}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 500.0, 'withdrawals': 614.02, 'opening_balance': 0.0, 'ending_balance': -114.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 11882.76, 'withdrawals': 21.12}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 11882.76, 'withdrawals': 21.12}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 11882.76, 'withdrawals': 21.12}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 23, 'income_total': 80.0, 'expense_total': 626.71, 'income_gap': 11802.76, 'expense_gap': 605.59, 'ledger_total': 706.71, 'max_tx_abs': 86.4, 'score': 13908.35}, {'parser': 'global_value_date_debit_credit', 'count': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 11382.76, 'expense_gap': 635.59, 'ledger_total': 1156.71, 'max_tx_abs': 500.0, 'score': 13518.35}]",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 11382.76, 'expense_gap': 635.59, 'score': 13518.35}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 500.0, 'withdrawals': 614.02, 'opening_balance': 0.0, 'ending_balance': -114.02}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 23, 'income_total': 80.0, 'expense_total': 626.71, 'income_gap': 420.0, 'expense_gap': 12.69, 'ledger_total': 706.71, 'max_tx_abs': 86.4, 'score': 1932.69}, {'parser': 'global_value_date_debit_credit', 'count': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 0.0, 'expense_gap': 42.69, 'ledger_total': 1156.71, 'max_tx_abs': 500.0, 'score': 1542.69}]",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 24, 'income_total': 500.0, 'expense_total': 656.71, 'income_gap': 0.0, 'expense_gap': 42.69, 'score': 1542.69}"
+    ]
+  },
+  {
+    "file": "banque populare 1 france.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 5063.48,
+      "deposits": 516.45,
+      "opening_balance": 0.0,
+      "ending_balance": -4547.03
+    },
+    "transactions": 44,
+    "income_count": 3,
+    "expense_count": 41,
+    "income_total": 516.45,
+    "expense_total": 5063.48,
+    "expected_income": 516.45,
+    "expected_expenses": 5063.48,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243.66}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5579.93, 'max_tx_abs': 2500.0, 'score': -175.8}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': None, 'expense_gap': None, 'score': -175.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5063.48, 'deposits': 516.45, 'opening_balance': 0.0, 'ending_balance': -4547.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 243.66}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5579.93, 'max_tx_abs': 2500.0, 'score': -175.8}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': None, 'expense_gap': None, 'score': -175.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5063.48, 'deposits': 516.45, 'opening_balance': 0.0, 'ending_balance': -4547.03}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 5579.93, 'max_tx_abs': 2500.0, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 44, 'income_total': 516.45, 'expense_total': 5063.48, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "BANQUE POSTALE (2).pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "banque postale.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 4258.68,
+      "withdrawals": 20628.72,
+      "opening_balance": 0.0,
+      "ending_balance": -16370.04
+    },
+    "transactions": 65,
+    "income_count": 23,
+    "expense_count": 42,
+    "income_total": 4258.68,
+    "expense_total": 20628.72,
+    "expected_income": 4258.68,
+    "expected_expenses": 20628.72,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 37100.0, 'withdrawals': 8.98}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 37100.0, 'withdrawals': 8.98}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 37100.0, 'withdrawals': 8.98}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 32841.32, 'expense_gap': 20619.74, 'ledger_total': 24887.4, 'max_tx_abs': 4614.23, 'score': 53461.06}, {'parser': 'global_value_date_debit_credit', 'count': 30, 'income_total': 0, 'expense_total': 68687.38, 'income_gap': 37100.0, 'expense_gap': 68678.4, 'ledger_total': 68687.38, 'max_tx_abs': 21642.99, 'score': 105778.4}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 32841.32, 'expense_gap': 20619.74, 'score': 53461.06}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 4258.68, 'withdrawals': 20628.72, 'opening_balance': 0.0, 'ending_balance': -16370.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 37100.0, 'withdrawals': 8.98}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 37100.0, 'withdrawals': 8.98}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 37100.0, 'withdrawals': 8.98}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 32841.32, 'expense_gap': 20619.74, 'ledger_total': 24887.4, 'max_tx_abs': 4614.23, 'score': 53461.06}, {'parser': 'global_value_date_debit_credit', 'count': 30, 'income_total': 0, 'expense_total': 68687.38, 'income_gap': 37100.0, 'expense_gap': 68678.4, 'ledger_total': 68687.38, 'max_tx_abs': 21642.99, 'score': 105778.4}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 32841.32, 'expense_gap': 20619.74, 'score': 53461.06}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 4258.68, 'withdrawals': 20628.72, 'opening_balance': 0.0, 'ending_balance': -16370.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 24887.4, 'max_tx_abs': 4614.23, 'score': 0.0}, {'parser': 'global_value_date_debit_credit', 'count': 30, 'income_total': 0, 'expense_total': 68687.38, 'income_gap': 4258.68, 'expense_gap': 48058.66, 'ledger_total': 68687.38, 'max_tx_abs': 21642.99, 'score': 52317.34}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 65, 'income_total': 4258.68, 'expense_total': 20628.72, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "belfis.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 84.0,
+      "deposits": 34.0,
+      "opening_balance": 0.0,
+      "ending_balance": -50.0
+    },
+    "transactions": 4,
+    "income_count": 2,
+    "expense_count": 2,
+    "income_total": 34.0,
+    "expense_total": 84.0,
+    "expected_income": 34.0,
+    "expected_expenses": 84.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18.56}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18.56}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18.56}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 118.0, 'max_tx_abs': 81.0, 'score': -85.18}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': None, 'expense_gap': None, 'score': -85.18}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 84.0, 'deposits': 34.0, 'opening_balance': 0.0, 'ending_balance': -50.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18.56}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18.56}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18.56}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 118.0, 'max_tx_abs': 81.0, 'score': -85.18}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': None, 'expense_gap': None, 'score': -85.18}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 84.0, 'deposits': 34.0, 'opening_balance': 0.0, 'ending_balance': -50.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 118.0, 'max_tx_abs': 81.0, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 4, 'income_total': 34.0, 'expense_total': 84.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "BMCE.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 40.1,
+      "deposits": 0,
+      "opening_balance": 0.0,
+      "ending_balance": -40.1
+    },
+    "transactions": 5,
+    "income_count": 0,
+    "expense_count": 5,
+    "income_total": 0,
+    "expense_total": 40.1,
+    "expected_income": 0.0,
+    "expected_expenses": 40.1,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 29.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 29.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 29.28}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bmce_date_valeur_debit_credit', 'count': 45, 'income_total': 31542.0, 'expense_total': 39227.31, 'income_gap': None, 'expense_gap': None, 'ledger_total': 70769.31, 'max_tx_abs': 31542.0, 'score': 1360}, {'parser': 'global_reference_debit_credit_value', 'count': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'ledger_total': 40.1, 'max_tx_abs': 10.0, 'score': 914.6}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'score': 914.6}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 40.1, 'deposits': 0, 'opening_balance': 0.0, 'ending_balance': -40.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 29.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 29.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 29.28}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bmce_date_valeur_debit_credit', 'count': 45, 'income_total': 31542.0, 'expense_total': 39227.31, 'income_gap': None, 'expense_gap': None, 'ledger_total': 70769.31, 'max_tx_abs': 31542.0, 'score': 1360}, {'parser': 'global_reference_debit_credit_value', 'count': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'ledger_total': 40.1, 'max_tx_abs': 10.0, 'score': 914.6}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'score': 914.6}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 40.1, 'deposits': 0, 'opening_balance': 0.0, 'ending_balance': -40.1}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bmce_date_valeur_debit_credit', 'count': 45, 'income_total': 31542.0, 'expense_total': 39227.31, 'income_gap': None, 'expense_gap': None, 'ledger_total': 70769.31, 'max_tx_abs': 31542.0, 'score': 1360}, {'parser': 'global_reference_debit_credit_value', 'count': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'ledger_total': 40.1, 'max_tx_abs': 10.0, 'score': 914.6}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 5, 'income_total': 0, 'expense_total': 40.1, 'income_gap': None, 'expense_gap': None, 'score': 914.6}"
+    ]
+  },
+  {
+    "file": "bnb 1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 0.0,
+      "withdrawals": 1966.58
+    },
+    "transactions": 4,
+    "income_count": 0,
+    "expense_count": 4,
+    "income_total": 0,
+    "expense_total": 1966.58,
+    "expected_income": 0.0,
+    "expected_expenses": 1966.58,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 1966.58, 'deposits': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'withdrawals': 1966.58}"
+    ]
+  },
+  {
+    "file": "chase.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 24736.96,
+      "deposits": 6352.33,
+      "withdrawals": 5286.17,
+      "ending_balance": 25798.8
+    },
+    "transactions": 66,
+    "income_count": 4,
+    "expense_count": 62,
+    "income_total": 6352.33,
+    "expense_total": 5286.17,
+    "expected_income": 6352.33,
+    "expected_expenses": 5286.17,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 9719.48, 'withdrawals': 8657.64, 'ending_balance': 25798.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 9719.48, 'withdrawals': 8657.64, 'ending_balance': 25798.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 9719.48, 'withdrawals': 8657.64, 'ending_balance': 25798.8}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 64, 'income_total': 72363.03, 'expense_total': 1500011.75, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1572374.78, 'max_tx_abs': 26349.33, 'score': 99999860}, {'parser': 'standard_date_description_amount_balance', 'count': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'ledger_total': 11638.5, 'max_tx_abs': 2695.2, 'score': -140}]",
+      "STATEMENT_LAYOUT_DETECTED standard_date_description_amount_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_description_amount_balance', 'transactions': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 6352.33, 'withdrawals': 5286.17, 'ending_balance': 25798.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 9719.48, 'withdrawals': 8657.64, 'ending_balance': 25798.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 9719.48, 'withdrawals': 8657.64, 'ending_balance': 25798.8}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 9719.48, 'withdrawals': 8657.64, 'ending_balance': 25798.8}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 64, 'income_total': 72363.03, 'expense_total': 1500011.75, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1572374.78, 'max_tx_abs': 26349.33, 'score': 99999860}, {'parser': 'standard_date_description_amount_balance', 'count': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'ledger_total': 11638.5, 'max_tx_abs': 2695.2, 'score': -140}]",
+      "STATEMENT_LAYOUT_DETECTED standard_date_description_amount_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_description_amount_balance', 'transactions': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'score': -140}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 24736.96, 'deposits': 6352.33, 'withdrawals': 5286.17, 'ending_balance': 25798.8}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 64, 'income_total': 72363.03, 'expense_total': 1500011.75, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1572374.78, 'max_tx_abs': 26349.33, 'score': 99999860}, {'parser': 'standard_date_description_amount_balance', 'count': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'ledger_total': 11638.5, 'max_tx_abs': 2695.2, 'score': -140}]",
+      "STATEMENT_LAYOUT_DETECTED standard_date_description_amount_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_description_amount_balance', 'transactions': 66, 'income_total': 6352.33, 'expense_total': 5286.17, 'income_gap': None, 'expense_gap': None, 'score': -140}"
+    ]
+  },
+  {
+    "file": "cic.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03",
+    "summary": {
+      "deposits": 501.03,
+      "withdrawals": 501.03
+    },
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 501.03,
+    "expected_expenses": 501.03,
+    "income_gap": 501.03,
+    "expense_gap": 501.03,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 501.03, 'withdrawals': 501.03}"
+    ]
+  },
+  {
+    "file": "city bank.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 56567.72,
+      "deposits": 16.0,
+      "withdrawals": 60028.9,
+      "ending_balance": 99465.01
+    },
+    "transactions": 38,
+    "income_count": 1,
+    "expense_count": 37,
+    "income_total": 16.0,
+    "expense_total": 60028.9,
+    "expected_income": 16.0,
+    "expected_expenses": 60028.9,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 65017.19, 'withdrawals': 50097.66, 'ending_balance': 99465.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 65017.19, 'withdrawals': 50097.66, 'ending_balance': 99465.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 65017.19, 'withdrawals': 50097.66, 'ending_balance': 99465.01}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 65001.19, 'expense_gap': 9931.24, 'ledger_total': 60044.9, 'max_tx_abs': 47516.39, 'score': 74932.43}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 65001.19, 'expense_gap': 9931.24, 'score': 74932.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 16.0, 'withdrawals': 60028.9, 'ending_balance': 99465.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 65017.19, 'withdrawals': 50097.66, 'ending_balance': 99465.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 65017.19, 'withdrawals': 50097.66, 'ending_balance': 99465.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 65017.19, 'withdrawals': 50097.66, 'ending_balance': 99465.01}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 65001.19, 'expense_gap': 9931.24, 'ledger_total': 60044.9, 'max_tx_abs': 47516.39, 'score': 74932.43}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 65001.19, 'expense_gap': 9931.24, 'score': 74932.43}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 56567.72, 'deposits': 16.0, 'withdrawals': 60028.9, 'ending_balance': 99465.01}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 60044.9, 'max_tx_abs': 47516.39, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 38, 'income_total': 16.0, 'expense_total': 60028.9, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "credit mutuel.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 1870.78,
+      "withdrawals": 1264.0,
+      "opening_balance": 0.0,
+      "ending_balance": 606.78
+    },
+    "transactions": 29,
+    "income_count": 4,
+    "expense_count": 25,
+    "income_total": 1870.78,
+    "expense_total": 1264.0,
+    "expected_income": 1870.78,
+    "expected_expenses": 1264.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'credit_mutuel_fr', 'count': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'ledger_total': 3134.78, 'max_tx_abs': 1608.16, 'score': 5664.49}]",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'score': 5664.49}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1870.78, 'withdrawals': 1264.0, 'opening_balance': 0.0, 'ending_balance': 606.78}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'credit_mutuel_fr', 'count': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'ledger_total': 3134.78, 'max_tx_abs': 1608.16, 'score': 5664.49}]",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'score': 5664.49}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1870.78, 'withdrawals': 1264.0, 'opening_balance': 0.0, 'ending_balance': 606.78}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'credit_mutuel_fr', 'count': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 3134.78, 'max_tx_abs': 1608.16, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "dakar.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "EGPTE.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "EJJAMI10.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 2520.0,
+      "withdrawals": 0.0,
+      "opening_balance": 0.0,
+      "ending_balance": 2520.0
+    },
+    "transactions": 3,
+    "income_count": 3,
+    "expense_count": 0,
+    "income_total": 2520.0,
+    "expense_total": 0,
+    "expected_income": 2520.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': 0.0, 'ending_balance': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': 0.0, 'ending_balance': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': 0.0, 'ending_balance': 0.0}"
+    ]
+  },
+  {
+    "file": "EJJAMI11.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 15050.64,
+      "deposits": 130.0,
+      "withdrawals": 356.04
+    },
+    "transactions": 4,
+    "income_count": 2,
+    "expense_count": 2,
+    "income_total": 130.0,
+    "expense_total": 356.04,
+    "expected_income": 130.0,
+    "expected_expenses": 356.04,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bbva_usa_checking_summary', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}, {'parser': 'sectioned_deposit_withdrawal_statement', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bbva_usa_checking_summary', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}, {'parser': 'sectioned_deposit_withdrawal_statement', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bbva_usa_checking_summary', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}, {'parser': 'sectioned_deposit_withdrawal_statement', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "EJJAMI12.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "EJJAMI2.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 463.31,
+      "deposits": 2511.55,
+      "withdrawals": 1682.44,
+      "ending_balance": 1292.42
+    },
+    "transactions": 37,
+    "income_count": 2,
+    "expense_count": 35,
+    "income_total": 2511.55,
+    "expense_total": 1682.44,
+    "expected_income": 2511.55,
+    "expected_expenses": 1682.44,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'standard_date_particulars_debit_credit_balance', 'count': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 4193.99, 'max_tx_abs': 1429.4, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED standard_date_particulars_debit_credit_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_particulars_debit_credit_balance', 'transactions': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'standard_date_particulars_debit_credit_balance', 'count': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 4193.99, 'max_tx_abs': 1429.4, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED standard_date_particulars_debit_credit_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_particulars_debit_credit_balance', 'transactions': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 463.31, 'deposits': 2511.55, 'withdrawals': 1682.44, 'ending_balance': 1292.42}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'standard_date_particulars_debit_credit_balance', 'count': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 4193.99, 'max_tx_abs': 1429.4, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED standard_date_particulars_debit_credit_balance",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'standard_date_particulars_debit_credit_balance', 'transactions': 37, 'income_total': 2511.55, 'expense_total': 1682.44, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "EJJAMI3.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 15050.64,
+      "deposits": 130.0,
+      "withdrawals": 356.04
+    },
+    "transactions": 4,
+    "income_count": 2,
+    "expense_count": 2,
+    "income_total": 130.0,
+    "expense_total": 356.04,
+    "expected_income": 130.0,
+    "expected_expenses": 356.04,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bbva_usa_checking_summary', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bbva_usa_checking_summary', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 15050.64, 'deposits': 130.0, 'withdrawals': 356.04}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'bbva_usa_checking_summary', 'count': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 486.04, 'max_tx_abs': 249.84, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED bbva_usa_checking_summary",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'bbva_usa_checking_summary', 'transactions': 4, 'income_total': 130.0, 'expense_total': 356.04, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "EJJAMI5.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 55564.01,
+      "deposits": 0,
+      "withdrawals": 432405.35,
+      "ending_balance": 55564.01
+    },
+    "transactions": 28,
+    "income_count": 0,
+    "expense_count": 28,
+    "income_total": 0,
+    "expense_total": 432405.35,
+    "expected_income": 0.0,
+    "expected_expenses": 432405.35,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 55564.01, 'withdrawals': 55564.01, 'ending_balance': 55564.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 55564.01, 'withdrawals': 55564.01, 'ending_balance': 55564.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 55564.01, 'withdrawals': 55564.01, 'ending_balance': 55564.01}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_balance_history_statement', 'count': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 55564.01, 'expense_gap': 376841.34, 'ledger_total': 432405.35, 'max_tx_abs': 115354.95, 'score': 432405.35}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_balance_history_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_balance_history_statement', 'transactions': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 55564.01, 'expense_gap': 376841.34, 'score': 432405.35}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 0, 'withdrawals': 432405.35, 'ending_balance': 55564.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 55564.01, 'withdrawals': 55564.01, 'ending_balance': 55564.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 55564.01, 'withdrawals': 55564.01, 'ending_balance': 55564.01}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 55564.01, 'withdrawals': 55564.01, 'ending_balance': 55564.01}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_balance_history_statement', 'count': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 55564.01, 'expense_gap': 376841.34, 'ledger_total': 432405.35, 'max_tx_abs': 115354.95, 'score': 432405.35}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_balance_history_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_balance_history_statement', 'transactions': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 55564.01, 'expense_gap': 376841.34, 'score': 432405.35}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 55564.01, 'deposits': 0, 'withdrawals': 432405.35, 'ending_balance': 55564.01}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_balance_history_statement', 'count': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 432405.35, 'max_tx_abs': 115354.95, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_balance_history_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_balance_history_statement', 'transactions': 28, 'income_total': 0, 'expense_total': 432405.35, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "EJJAMI6.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "expense_gap=2.5",
+    "summary": {
+      "opening_balance": 202.02,
+      "deposits": 0,
+      "withdrawals": 3522.05,
+      "ending_balance": 175.47
+    },
+    "transactions": 53,
+    "income_count": 0,
+    "expense_count": 53,
+    "income_total": 0,
+    "expense_total": 3524.55,
+    "expected_income": 0.0,
+    "expected_expenses": 3522.05,
+    "income_gap": 0.0,
+    "expense_gap": 2.5,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 175.47, 'deposits': 1749.0, 'withdrawals': 1027.09, 'opening_balance': 202.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 175.47, 'deposits': 1749.0, 'withdrawals': 1027.09, 'opening_balance': 202.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 202.02, 'deposits': 1749.0, 'withdrawals': 1027.09, 'ending_balance': 175.47}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 1749.0, 'expense_gap': 2497.46, 'ledger_total': 3524.55, 'max_tx_abs': 1149.0, 'score': 5246.46}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 1749.0, 'expense_gap': 2497.46, 'score': 5246.46}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 202.02, 'deposits': 0, 'withdrawals': 3522.05, 'ending_balance': 175.47}",
+      "STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 175.47, 'deposits': 1749.0, 'withdrawals': 1027.09, 'opening_balance': 202.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 175.47, 'deposits': 1749.0, 'withdrawals': 1027.09, 'opening_balance': 202.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 202.02, 'deposits': 1749.0, 'withdrawals': 1027.09, 'ending_balance': 175.47}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 1749.0, 'expense_gap': 2497.46, 'ledger_total': 3524.55, 'max_tx_abs': 1149.0, 'score': 5246.46}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 1749.0, 'expense_gap': 2497.46, 'score': 5246.46}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 202.02, 'deposits': 0, 'withdrawals': 3522.05, 'ending_balance': 175.47}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 0.0, 'expense_gap': 2.5, 'ledger_total': 3524.55, 'max_tx_abs': 1149.0, 'score': 1002.5}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 53, 'income_total': 0, 'expense_total': 3524.55, 'income_gap': 0.0, 'expense_gap': 2.5, 'score': 1002.5}"
+    ]
+  },
+  {
+    "file": "ejjami7.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 150.0,
+      "withdrawals": 12054.77,
+      "opening_balance": 0.0,
+      "ending_balance": -11904.77
+    },
+    "transactions": 97,
+    "income_count": 1,
+    "expense_count": 96,
+    "income_total": 150.0,
+    "expense_total": 12054.77,
+    "expected_income": 150.0,
+    "expected_expenses": 12054.77,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6242.34, 'deposits': 5834.32}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6242.34, 'deposits': 5834.32}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 5834.32, 'withdrawals': 6242.34}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 5684.32, 'expense_gap': 5812.43, 'ledger_total': 12204.77, 'max_tx_abs': 1651.82, 'score': 11496.75}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 5684.32, 'expense_gap': 5812.43, 'score': 11496.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 150.0, 'withdrawals': 12054.77, 'opening_balance': 0.0, 'ending_balance': -11904.77}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6242.34, 'deposits': 5834.32}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6242.34, 'deposits': 5834.32}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 5834.32, 'withdrawals': 6242.34}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 5684.32, 'expense_gap': 5812.43, 'ledger_total': 12204.77, 'max_tx_abs': 1651.82, 'score': 11496.75}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 5684.32, 'expense_gap': 5812.43, 'score': 11496.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 150.0, 'withdrawals': 12054.77, 'opening_balance': 0.0, 'ending_balance': -11904.77}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sectioned_deposit_withdrawal_statement', 'count': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 12204.77, 'max_tx_abs': 1651.82, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED sectioned_deposit_withdrawal_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sectioned_deposit_withdrawal_statement', 'transactions': 97, 'income_total': 150.0, 'expense_total': 12054.77, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "ejjami8.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 0,
+      "withdrawals": 698.77,
+      "opening_balance": 0.0,
+      "ending_balance": -698.77
+    },
+    "transactions": 24,
+    "income_count": 0,
+    "expense_count": 24,
+    "income_total": 0,
+    "expense_total": 698.77,
+    "expected_income": 0.0,
+    "expected_expenses": 698.77,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 698.77, 'opening_balance': 0.0, 'ending_balance': -698.77}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.73, 'withdrawals': 1.73}",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 698.77, 'opening_balance': 0.0, 'ending_balance': -698.77}",
+      "STATEMENT_LAYOUT_DETECTED date_amount_description_ledger"
+    ]
+  },
+  {
+    "file": "EJJAMI9.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 1700.0,
+      "withdrawals": 2155.26,
+      "opening_balance": 0.0,
+      "ending_balance": -455.26
+    },
+    "transactions": 12,
+    "income_count": 1,
+    "expense_count": 11,
+    "income_total": 1700.0,
+    "expense_total": 2155.26,
+    "expected_income": 1700.0,
+    "expected_expenses": 2155.26,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'keybank_hassle_free', 'count': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': None, 'expense_gap': None, 'ledger_total': 3855.26, 'max_tx_abs': 1700.0, 'score': -50.55}]",
+      "STATEMENT_LAYOUT_DETECTED keybank_hassle_free",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'keybank_hassle_free', 'transactions': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': None, 'expense_gap': None, 'score': -50.55}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1700.0, 'withdrawals': 2155.26, 'opening_balance': 0.0, 'ending_balance': -455.26}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'keybank_hassle_free', 'count': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': None, 'expense_gap': None, 'ledger_total': 3855.26, 'max_tx_abs': 1700.0, 'score': -50.55}]",
+      "STATEMENT_LAYOUT_DETECTED keybank_hassle_free",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'keybank_hassle_free', 'transactions': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': None, 'expense_gap': None, 'score': -50.55}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1700.0, 'withdrawals': 2155.26, 'opening_balance': 0.0, 'ending_balance': -455.26}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'keybank_hassle_free', 'count': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 3855.26, 'max_tx_abs': 1700.0, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED keybank_hassle_free",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'keybank_hassle_free', 'transactions': 12, 'income_total': 1700.0, 'expense_total': 2155.26, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "emirate.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite; expense_gap=0.75",
+    "summary": {
+      "withdrawals": 0.75
+    },
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.75,
+    "income_gap": 0.0,
+    "expense_gap": 0.75,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 0.75}"
+    ]
+  },
+  {
+    "file": "g1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 1.02,
+      "deposits": 17527020.0,
+      "withdrawals": 3198040.0,
+      "ending_balance": 14328981.02
+    },
+    "transactions": 40,
+    "income_count": 14,
+    "expense_count": 26,
+    "income_total": 17527020.0,
+    "expense_total": 3198040.0,
+    "expected_income": 17527020.0,
+    "expected_expenses": 3198040.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'vertical_cfa_debit_credit', 'count': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 20725060.0, 'max_tx_abs': 15598000.0, 'score': 99999860}]",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'score': 99999860}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 17527020.0, 'withdrawals': 3198040.0, 'ending_balance': 14328981.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'vertical_cfa_debit_credit', 'count': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 20725060.0, 'max_tx_abs': 15598000.0, 'score': 99999860}]",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'score': 99999860}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 17527020.0, 'withdrawals': 3198040.0, 'ending_balance': 14328981.02}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'vertical_cfa_debit_credit', 'count': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 20725060.0, 'max_tx_abs': 15598000.0, 'score': 100000000.0}]",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 100000000.0}"
+    ]
+  },
+  {
+    "file": "g2.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 0.0,
+      "deposits": 4686.17,
+      "withdrawals": 2674.89,
+      "ending_balance": 2011.28
+    },
+    "transactions": 69,
+    "income_count": 9,
+    "expense_count": 60,
+    "income_total": 4686.17,
+    "expense_total": 2674.89,
+    "expected_income": 4686.17,
+    "expected_expenses": 2674.89,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    ]
+  },
+  {
+    "file": "G3.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 0.0,
+      "deposits": 4686.17,
+      "withdrawals": 2674.89,
+      "ending_balance": 2011.28
+    },
+    "transactions": 69,
+    "income_count": 9,
+    "expense_count": 60,
+    "income_total": 4686.17,
+    "expense_total": 2674.89,
+    "expected_income": 4686.17,
+    "expected_expenses": 2674.89,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'withdrawals': -2674.89, 'deposits': 4686.17, 'ending_balance': 2011.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 0.0, 'deposits': 4686.17, 'withdrawals': 2674.89, 'ending_balance': 2011.28}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    ]
+  },
+  {
+    "file": "general1.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 12328.0,
+      "deposits": 12332.0,
+      "source": "official_statement_totals"
+    },
+    "transactions": 31,
+    "income_count": 14,
+    "expense_count": 17,
+    "income_total": 12332.0,
+    "expense_total": 12328.0,
+    "expected_income": 12332.0,
+    "expected_expenses": 12328.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 200.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 12328.0, 'deposits': 12332.0, 'source': 'official_statement_totals'}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 200.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 12328.0, 'deposits': 12332.0, 'source': 'official_statement_totals'}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 31, 'income_total': 12332.0, 'expense_total': 12328.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 24660.0, 'max_tx_abs': 3020.0, 'score': 1000.0}, {'parser': 'global_value_date_debit_credit', 'count': 19, 'income_total': 7212.0, 'expense_total': 2747.0, 'income_gap': 5120.0, 'expense_gap': 9581.0, 'ledger_total': 9959.0, 'max_tx_abs': 2800.0, 'score': 15201.0}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 31, 'income_total': 12332.0, 'expense_total': 12328.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 1000.0}"
+    ]
+  },
+  {
+    "file": "habitat.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  },
+  {
+    "file": "ISLAMIQE.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 22000.0,
+      "withdrawals": 18345.0,
+      "opening_balance": 0.0,
+      "ending_balance": 3655.0
+    },
+    "transactions": 7,
+    "income_count": 1,
+    "expense_count": 6,
+    "income_total": 22000.0,
+    "expense_total": 18345.0,
+    "expected_income": 22000.0,
+    "expected_expenses": 18345.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 22000.0, 'withdrawals': 18345.0, 'opening_balance': 0.0, 'ending_balance': 3655.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 22000.0, 'withdrawals': 18345.0, 'opening_balance': 0.0, 'ending_balance': 3655.0}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 22000.0, 'withdrawals': 18345.0, 'opening_balance': 0.0, 'ending_balance': 3655.0}"
+    ]
+  },
+  {
+    "file": "llc.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "withdrawals": 79.74,
+      "deposits": 63868.0,
+      "opening_balance": 0.0,
+      "ending_balance": 63788.26
+    },
+    "transactions": 11,
+    "income_count": 3,
+    "expense_count": 8,
+    "income_total": 63868.0,
+    "expense_total": 79.74,
+    "expected_income": 63868.0,
+    "expected_expenses": 79.74,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 31.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 31.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 31.1}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'lcl_date_libelle_valeur_debit_credit', 'count': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': None, 'expense_gap': None, 'ledger_total': 63947.74, 'max_tx_abs': 21630.0, 'score': -111}, {'parser': 'global_reference_debit_credit_value', 'count': 8, 'income_total': 0, 'expense_total': 82.67, 'income_gap': None, 'expense_gap': None, 'ledger_total': 82.67, 'max_tx_abs': 23.57, 'score': -88.83}]",
+      "STATEMENT_LAYOUT_DETECTED lcl_date_libelle_valeur_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'lcl_date_libelle_valeur_debit_credit', 'transactions': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': None, 'expense_gap': None, 'score': -111}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 79.74, 'deposits': 63868.0, 'opening_balance': 0.0, 'ending_balance': 63788.26}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 31.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 31.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 31.1}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'lcl_date_libelle_valeur_debit_credit', 'count': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': None, 'expense_gap': None, 'ledger_total': 63947.74, 'max_tx_abs': 21630.0, 'score': -111}, {'parser': 'global_reference_debit_credit_value', 'count': 8, 'income_total': 0, 'expense_total': 82.67, 'income_gap': None, 'expense_gap': None, 'ledger_total': 82.67, 'max_tx_abs': 23.57, 'score': -88.83}]",
+      "STATEMENT_LAYOUT_DETECTED lcl_date_libelle_valeur_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'lcl_date_libelle_valeur_debit_credit', 'transactions': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': None, 'expense_gap': None, 'score': -111}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 79.74, 'deposits': 63868.0, 'opening_balance': 0.0, 'ending_balance': 63788.26}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'lcl_date_libelle_valeur_debit_credit', 'count': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 63947.74, 'max_tx_abs': 21630.0, 'score': 0.0}, {'parser': 'global_reference_debit_credit_value', 'count': 8, 'income_total': 0, 'expense_total': 82.67, 'income_gap': 63868.0, 'expense_gap': 2.93, 'ledger_total': 82.67, 'max_tx_abs': 23.57, 'score': 63870.93}]",
+      "STATEMENT_LAYOUT_DETECTED lcl_date_libelle_valeur_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'lcl_date_libelle_valeur_debit_credit', 'transactions': 11, 'income_total': 63868.0, 'expense_total': 79.74, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "mercury.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "opening_balance": 4.5,
+      "deposits": 32.97,
+      "withdrawals": 32.97,
+      "ending_balance": 4.5
+    },
+    "transactions": 7,
+    "income_count": 3,
+    "expense_count": 4,
+    "income_total": 32.97,
+    "expense_total": 32.97,
+    "expected_income": 32.97,
+    "expected_expenses": 32.97,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'withdrawals': 32.97, 'deposits': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 4.5, 'deposits': 32.97, 'withdrawals': 32.97, 'ending_balance': 4.5}",
+      "STATEMENT_LAYOUT_DETECTED typed_amount_balance_table"
+    ]
+  },
+  {
+    "file": "n26 .1.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "income_gap=70.0; expense_gap=80.0",
+    "summary": {
+      "deposits": 2905.12,
+      "withdrawals": 2917.02,
+      "opening_balance": 0.0,
+      "ending_balance": -11.9
+    },
+    "transactions": 81,
+    "income_count": 35,
+    "expense_count": 46,
+    "income_total": 2975.12,
+    "expense_total": 2997.02,
+    "expected_income": 2905.12,
+    "expected_expenses": 2917.02,
+    "income_gap": 70.0,
+    "expense_gap": 80.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': -10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': -10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'n26_fr_statement', 'count': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5972.14, 'max_tx_abs': 663.79, 'score': 6400.28}]",
+      "STATEMENT_LAYOUT_DETECTED n26_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'n26_fr_statement', 'transactions': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': None, 'expense_gap': None, 'score': 6400.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 2905.12, 'withdrawals': 2917.02, 'opening_balance': 0.0, 'ending_balance': -11.9}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': -10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': -10.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'n26_fr_statement', 'count': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': None, 'expense_gap': None, 'ledger_total': 5972.14, 'max_tx_abs': 663.79, 'score': 6400.28}]",
+      "STATEMENT_LAYOUT_DETECTED n26_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'n26_fr_statement', 'transactions': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': None, 'expense_gap': None, 'score': 6400.28}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 2905.12, 'withdrawals': 2917.02, 'opening_balance': 0.0, 'ending_balance': -11.9}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'n26_fr_statement', 'count': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': 70.0, 'expense_gap': 80.0, 'ledger_total': 5972.14, 'max_tx_abs': 663.79, 'score': 6650.0}]",
+      "STATEMENT_LAYOUT_DETECTED n26_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'n26_fr_statement', 'transactions': 81, 'income_total': 2975.12, 'expense_total': 2997.02, 'income_gap': 70.0, 'expense_gap': 80.0, 'score': 6650.0}"
+    ]
+  },
+  {
+    "file": "OMAR1.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "expense_gap=15.3",
+    "summary": {
+      "deposits": 20393.0,
+      "withdrawals": 15474.28,
+      "opening_balance": 0.0,
+      "ending_balance": 4918.72
+    },
+    "transactions": 115,
+    "income_count": 5,
+    "expense_count": 110,
+    "income_total": 20393.0,
+    "expense_total": 15489.58,
+    "expected_income": 20393.0,
+    "expected_expenses": 15474.28,
+    "income_gap": 0.0,
+    "expense_gap": 15.3,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15267.53, 'deposits': 20615.05}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15267.53, 'deposits': 20615.05}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 20615.05, 'withdrawals': 15267.53}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 222.05, 'expense_gap': 222.05, 'ledger_total': 35882.58, 'max_tx_abs': 9450.0, 'score': 3944.1}, {'parser': 'global_reference_debit_credit_value', 'count': 97, 'income_total': 0, 'expense_total': 4670.48, 'income_gap': 20615.05, 'expense_gap': 10597.05, 'ledger_total': 4670.48, 'max_tx_abs': 862.75, 'score': 34712.1}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 222.05, 'expense_gap': 222.05, 'score': 3944.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 20393.0, 'withdrawals': 15474.28, 'opening_balance': 0.0, 'ending_balance': 4918.72}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15267.53, 'deposits': 20615.05}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15267.53, 'deposits': 20615.05}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 20615.05, 'withdrawals': 15267.53}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 222.05, 'expense_gap': 222.05, 'ledger_total': 35882.58, 'max_tx_abs': 9450.0, 'score': 3944.1}, {'parser': 'global_reference_debit_credit_value', 'count': 97, 'income_total': 0, 'expense_total': 4670.48, 'income_gap': 20615.05, 'expense_gap': 10597.05, 'ledger_total': 4670.48, 'max_tx_abs': 862.75, 'score': 34712.1}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 222.05, 'expense_gap': 222.05, 'score': 3944.1}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 20393.0, 'withdrawals': 15474.28, 'opening_balance': 0.0, 'ending_balance': 4918.72}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 0.0, 'expense_gap': 15.3, 'ledger_total': 35882.58, 'max_tx_abs': 9450.0, 'score': 3515.3}, {'parser': 'global_reference_debit_credit_value', 'count': 97, 'income_total': 0, 'expense_total': 4670.48, 'income_gap': 20393.0, 'expense_gap': 10803.8, 'ledger_total': 4670.48, 'max_tx_abs': 862.75, 'score': 34696.8}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 115, 'income_total': 20393.0, 'expense_total': 15489.58, 'income_gap': 0.0, 'expense_gap': 15.3, 'score': 3515.3}"
+    ]
+  },
+  {
+    "file": "OMAR2.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "expense_gap=1.5",
+    "summary": {
+      "deposits": 10374.0,
+      "withdrawals": 20210.19,
+      "opening_balance": 0.0,
+      "ending_balance": -9836.19
+    },
+    "transactions": 54,
+    "income_count": 1,
+    "expense_count": 53,
+    "income_total": 10374.0,
+    "expense_total": 20211.69,
+    "expected_income": 10374.0,
+    "expected_expenses": 20210.19,
+    "income_gap": 0.0,
+    "expense_gap": 1.5,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15159.36, 'deposits': 12450.25}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15159.36, 'deposits': 12450.25}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 12450.25, 'withdrawals': 15159.36}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 2076.25, 'expense_gap': 5052.33, 'ledger_total': 30585.69, 'max_tx_abs': 10374.0, 'score': 7628.58}, {'parser': 'global_reference_debit_credit_value', 'count': 41, 'income_total': 0, 'expense_total': 6870.97, 'income_gap': 12450.25, 'expense_gap': 8288.39, 'ledger_total': 6870.97, 'max_tx_abs': 1389.0, 'score': 21238.64}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 2076.25, 'expense_gap': 5052.33, 'score': 7628.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10374.0, 'withdrawals': 20210.19, 'opening_balance': 0.0, 'ending_balance': -9836.19}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15159.36, 'deposits': 12450.25}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 15159.36, 'deposits': 12450.25}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 12450.25, 'withdrawals': 15159.36}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 2076.25, 'expense_gap': 5052.33, 'ledger_total': 30585.69, 'max_tx_abs': 10374.0, 'score': 7628.58}, {'parser': 'global_reference_debit_credit_value', 'count': 41, 'income_total': 0, 'expense_total': 6870.97, 'income_gap': 12450.25, 'expense_gap': 8288.39, 'ledger_total': 6870.97, 'max_tx_abs': 1389.0, 'score': 21238.64}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 2076.25, 'expense_gap': 5052.33, 'score': 7628.58}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10374.0, 'withdrawals': 20210.19, 'opening_balance': 0.0, 'ending_balance': -9836.19}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 0.0, 'expense_gap': 1.5, 'ledger_total': 30585.69, 'max_tx_abs': 10374.0, 'score': 501.5}, {'parser': 'global_reference_debit_credit_value', 'count': 41, 'income_total': 0, 'expense_total': 6870.97, 'income_gap': 10374.0, 'expense_gap': 13339.22, 'ledger_total': 6870.97, 'max_tx_abs': 1389.0, 'score': 24213.22}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 54, 'income_total': 10374.0, 'expense_total': 20211.69, 'income_gap': 0.0, 'expense_gap': 1.5, 'score': 501.5}"
+    ]
+  },
+  {
+    "file": "OMAR3.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 36653.99,
+      "withdrawals": 25940.92,
+      "opening_balance": 0.0,
+      "ending_balance": 10713.07
+    },
+    "transactions": 107,
+    "income_count": 10,
+    "expense_count": 97,
+    "income_total": 36653.99,
+    "expense_total": 25940.92,
+    "expected_income": 36653.99,
+    "expected_expenses": 25940.92,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 25899.27, 'deposits': 36899.55}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 25899.27, 'deposits': 36899.55}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 36899.55, 'withdrawals': 25899.27}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 245.56, 'expense_gap': 41.65, 'ledger_total': 62594.91, 'max_tx_abs': 11438.0, 'score': 287.21}, {'parser': 'global_reference_debit_credit_value', 'count': 83, 'income_total': 0, 'expense_total': 7781.89, 'income_gap': 36899.55, 'expense_gap': 18117.38, 'ledger_total': 7781.89, 'max_tx_abs': 1682.0, 'score': 55016.93}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 245.56, 'expense_gap': 41.65, 'score': 287.21}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 36653.99, 'withdrawals': 25940.92, 'opening_balance': 0.0, 'ending_balance': 10713.07}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 25899.27, 'deposits': 36899.55}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 25899.27, 'deposits': 36899.55}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 36899.55, 'withdrawals': 25899.27}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 245.56, 'expense_gap': 41.65, 'ledger_total': 62594.91, 'max_tx_abs': 11438.0, 'score': 287.21}, {'parser': 'global_reference_debit_credit_value', 'count': 83, 'income_total': 0, 'expense_total': 7781.89, 'income_gap': 36899.55, 'expense_gap': 18117.38, 'ledger_total': 7781.89, 'max_tx_abs': 1682.0, 'score': 55016.93}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 245.56, 'expense_gap': 41.65, 'score': 287.21}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 36653.99, 'withdrawals': 25940.92, 'opening_balance': 0.0, 'ending_balance': 10713.07}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 62594.91, 'max_tx_abs': 11438.0, 'score': 0.0}, {'parser': 'global_reference_debit_credit_value', 'count': 83, 'income_total': 0, 'expense_total': 7781.89, 'income_gap': 36653.99, 'expense_gap': 18159.03, 'ledger_total': 7781.89, 'max_tx_abs': 1682.0, 'score': 54813.02}]",
+      "STATEMENT_LAYOUT_DETECTED sg_date_valeur_nature_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'sg_date_valeur_nature_debit_credit', 'transactions': 107, 'income_total': 36653.99, 'expense_total': 25940.92, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "Relevés compte 3.pdf",
+    "status": "NEEDS_PARSER_FIX",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite; expense_gap=6.0",
+    "summary": {
+      "withdrawals": 6.0,
+      "ending_balance": 7934.66
+    },
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 6.0,
+    "income_gap": 0.0,
+    "expense_gap": 6.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 6.0, 'ending_balance': 7934.66}"
+    ]
+  },
+  {
+    "file": "revolut france.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 2110.0,
+      "ending_balance": 60.0,
+      "withdrawals": 412.0,
+      "opening_balance": 0.0
+    },
+    "transactions": 10,
+    "income_count": 7,
+    "expense_count": 3,
+    "income_total": 2110.0,
+    "expense_total": 412.0,
+    "expected_income": 2110.0,
+    "expected_expenses": 412.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'ending_balance': 60.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'ending_balance': 60.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'ending_balance': 60.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'revolut_fr_statement', 'count': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2522.0, 'max_tx_abs': 1000.0, 'score': -35.22}]",
+      "STATEMENT_LAYOUT_DETECTED revolut_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'revolut_fr_statement', 'transactions': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': None, 'expense_gap': None, 'score': -35.22}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 2110.0, 'ending_balance': 60.0, 'withdrawals': 412.0, 'opening_balance': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'ending_balance': 60.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'ending_balance': 60.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0.0, 'ending_balance': 60.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'revolut_fr_statement', 'count': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2522.0, 'max_tx_abs': 1000.0, 'score': -35.22}]",
+      "STATEMENT_LAYOUT_DETECTED revolut_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'revolut_fr_statement', 'transactions': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': None, 'expense_gap': None, 'score': -35.22}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 2110.0, 'ending_balance': 60.0, 'withdrawals': 412.0, 'opening_balance': 0.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'revolut_fr_statement', 'count': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 2522.0, 'max_tx_abs': 1000.0, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED revolut_fr_statement",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'revolut_fr_statement', 'transactions': 10, 'income_total': 2110.0, 'expense_total': 412.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "soc general.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 0,
+      "withdrawals": 135.0,
+      "opening_balance": 0.0,
+      "ending_balance": -135.0
+    },
+    "transactions": 4,
+    "income_count": 0,
+    "expense_count": 4,
+    "income_total": 0,
+    "expense_total": 135.0,
+    "expected_income": 0.0,
+    "expected_expenses": 135.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 50.0, 'deposits': 933027038.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 50.0, 'deposits': 933027038.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 933027038.75, 'withdrawals': 50.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 40, 'income_total': 1707.92, 'expense_total': 1150.99, 'income_gap': 933025330.83, 'expense_gap': 1100.99, 'ledger_total': 2858.91, 'max_tx_abs': 1595.49, 'score': 933026431.82}, {'parser': 'global_reference_debit_credit_value', 'count': 36, 'income_total': 10.0, 'expense_total': 876.96, 'income_gap': 933027028.75, 'expense_gap': 826.96, 'ledger_total': 886.96, 'max_tx_abs': 60.0, 'score': 933027855.71}, {'parser': 'global_value_date_debit_credit', 'count': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': 933027038.75, 'expense_gap': 85.0, 'ledger_total': 135.0, 'max_tx_abs': 50.0, 'score': 933027123.75}]",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': 933027038.75, 'expense_gap': 85.0, 'score': 933027123.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 135.0, 'opening_balance': 0.0, 'ending_balance': -135.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 50.0, 'deposits': 933027038.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 50.0, 'deposits': 933027038.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 933027038.75, 'withdrawals': 50.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 40, 'income_total': 1707.92, 'expense_total': 1150.99, 'income_gap': 933025330.83, 'expense_gap': 1100.99, 'ledger_total': 2858.91, 'max_tx_abs': 1595.49, 'score': 933026431.82}, {'parser': 'global_reference_debit_credit_value', 'count': 36, 'income_total': 10.0, 'expense_total': 876.96, 'income_gap': 933027028.75, 'expense_gap': 826.96, 'ledger_total': 886.96, 'max_tx_abs': 60.0, 'score': 933027855.71}, {'parser': 'global_value_date_debit_credit', 'count': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': 933027038.75, 'expense_gap': 85.0, 'ledger_total': 135.0, 'max_tx_abs': 50.0, 'score': 933027123.75}]",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': 933027038.75, 'expense_gap': 85.0, 'score': 933027123.75}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 0, 'withdrawals': 135.0, 'opening_balance': 0.0, 'ending_balance': -135.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'sg_date_valeur_nature_debit_credit', 'count': 40, 'income_total': 1707.92, 'expense_total': 1150.99, 'income_gap': None, 'expense_gap': None, 'ledger_total': 2858.91, 'max_tx_abs': 1595.49, 'score': -68.59}, {'parser': 'global_reference_debit_credit_value', 'count': 36, 'income_total': 10.0, 'expense_total': 876.96, 'income_gap': None, 'expense_gap': None, 'ledger_total': 886.96, 'max_tx_abs': 60.0, 'score': -124.87}, {'parser': 'global_value_date_debit_credit', 'count': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 135.0, 'max_tx_abs': 50.0, 'score': -125.35}]",
+      "STATEMENT_LAYOUT_DETECTED global_value_date_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_value_date_debit_credit', 'transactions': 4, 'income_total': 0, 'expense_total': 135.0, 'income_gap': None, 'expense_gap': None, 'score': -125.35}"
+    ]
+  },
+  {
+    "file": "well fargo.pdf",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
+    "summary": {
+      "deposits": 148.0,
+      "withdrawals": 14921.97,
+      "ending_balance": 864.81,
+      "opening_balance": 0.0
+    },
+    "transactions": 26,
+    "income_count": 6,
+    "expense_count": 20,
+    "income_total": 148.0,
+    "expense_total": 14921.97,
+    "expected_income": 148.0,
+    "expected_expenses": 14921.97,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10534.5, 'withdrawals': 10295.31, 'ending_balance': 864.81}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10534.5, 'withdrawals': 10295.31, 'ending_balance': 864.81}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10534.5, 'withdrawals': 10295.31, 'ending_balance': 864.81}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 10386.5, 'expense_gap': 4626.66, 'ledger_total': 15069.97, 'max_tx_abs': 10295.31, 'score': 15013.16}, {'parser': 'global_value_date_debit_credit', 'count': 12, 'income_total': 181.0, 'expense_total': 3088.76, 'income_gap': 10353.5, 'expense_gap': 7206.55, 'ledger_total': 3269.76, 'max_tx_abs': 1038.49, 'score': 17560.05}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 10386.5, 'expense_gap': 4626.66, 'score': 15013.16}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 148.0, 'withdrawals': 14921.97, 'ending_balance': 864.81, 'opening_balance': 0.0}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10534.5, 'withdrawals': 10295.31, 'ending_balance': 864.81}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10534.5, 'withdrawals': 10295.31, 'ending_balance': 864.81}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10534.5, 'withdrawals': 10295.31, 'ending_balance': 864.81}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 10386.5, 'expense_gap': 4626.66, 'ledger_total': 15069.97, 'max_tx_abs': 10295.31, 'score': 15013.16}, {'parser': 'global_value_date_debit_credit', 'count': 12, 'income_total': 181.0, 'expense_total': 3088.76, 'income_gap': 10353.5, 'expense_gap': 7206.55, 'ledger_total': 3269.76, 'max_tx_abs': 1038.49, 'score': 17560.05}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 10386.5, 'expense_gap': 4626.66, 'score': 15013.16}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 148.0, 'withdrawals': 14921.97, 'ending_balance': 864.81, 'opening_balance': 0.0}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'global_reference_debit_credit_value', 'count': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 15069.97, 'max_tx_abs': 10295.31, 'score': 0.0}, {'parser': 'global_value_date_debit_credit', 'count': 12, 'income_total': 181.0, 'expense_total': 3088.76, 'income_gap': 33.0, 'expense_gap': 11833.21, 'ledger_total': 3269.76, 'max_tx_abs': 1038.49, 'score': 11866.21}]",
+      "STATEMENT_LAYOUT_DETECTED global_reference_debit_credit_value",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'global_reference_debit_credit_value', 'transactions': 26, 'income_total': 148.0, 'expense_total': 14921.97, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
+    ]
+  },
+  {
+    "file": "x.pdf",
+    "status": "NO_TRANSACTIONS",
+    "validated": false,
+    "reason": "aucune transaction candidate extraite",
+    "summary": {},
+    "transactions": 0,
+    "income_count": 0,
+    "expense_count": 0,
+    "income_total": 0,
+    "expense_total": 0,
+    "expected_income": 0.0,
+    "expected_expenses": 0.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
+    "logs": [
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}",
+      "STATEMENT_SUMMARY_EXTRACTED {}"
+    ]
+  }
+]
+
+SUMMARY
+TOTAL=56
+VALIDATED=38
+NOT_VALIDATED=18
+
+VALIDATED FILES
+OK 1.pdf
+OK 1v.pdf
+OK 2.pdf
+OK 772605810-كشف-حساب-بنكي (2).pdf
+OK 820869074-كشف-حساب-جديد.pdf
+OK ARABE 4.pdf
+OK ARABE1.pdf
+OK ARABE2.pdf
+OK arabie saudite.pdf
+OK BANCORP.pdf
+OK bank of america.pdf
+OK banque populare 1 france.pdf
+OK banque postale.pdf
+OK belfis.pdf
+OK BMCE.pdf
+OK bnb 1.pdf
+OK chase.pdf
+OK city bank.pdf
+OK credit mutuel.pdf
+OK EJJAMI10.pdf
+OK EJJAMI11.pdf
+OK EJJAMI2.pdf
+OK EJJAMI3.pdf
+OK EJJAMI5.pdf
+OK ejjami7.pdf
+OK ejjami8.pdf
+OK EJJAMI9.pdf
+OK g1.pdf
+OK g2.pdf
+OK G3.pdf
+OK general1.pdf
+OK ISLAMIQE.pdf
+OK llc.pdf
+OK mercury.pdf
+OK OMAR3.pdf
+OK revolut france.pdf
+OK soc general.pdf
+OK well fargo.pdf
+
+NOT VALIDATED FILES
+NO_TRANSACTIONS 3.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX ARABE3.pdf -> expense_gap=50.0
+NO_TRANSACTIONS arabe5.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX BANK CHAABI.pdf -> expense_gap=4.5
+NEEDS_PARSER_FIX banque d'epagne.pdf -> expense_gap=42.69
+NO_TRANSACTIONS BANQUE POSTALE (2).pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX cic.pdf -> aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03
+NO_TRANSACTIONS dakar.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS EGPTE.pdf -> aucune transaction candidate extraite
+NO_TRANSACTIONS EJJAMI12.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX EJJAMI6.pdf -> expense_gap=2.5
+NEEDS_PARSER_FIX emirate.pdf -> aucune transaction candidate extraite; expense_gap=0.75
+NO_TRANSACTIONS habitat.pdf -> aucune transaction candidate extraite
+NEEDS_PARSER_FIX n26 .1.pdf -> income_gap=70.0; expense_gap=80.0
+NEEDS_PARSER_FIX OMAR1.pdf -> expense_gap=15.3
+NEEDS_PARSER_FIX OMAR2.pdf -> expense_gap=1.5
+NEEDS_PARSER_FIX Relevés compte 3.pdf -> aucune transaction candidate extraite; expense_gap=6.0
+NO_TRANSACTIONS x.pdf -> aucune transaction candidate extraite
+
+DETAIL
+OK                 1.pdf | validated=True tx=221 income=53236.11 expenses=243233.16 expected_income=53236.11 expected_expenses=243233.16 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 1v.pdf | validated=True tx=123 income=69487.55 expenses=38647.75 expected_income=69487.55 expected_expenses=38647.75 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 2.pdf | validated=True tx=75 income=8810.0 expenses=12028.97 expected_income=8810.0 expected_expenses=12028.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NO_TRANSACTIONS    3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 772605810-كشف-حساب-بنكي (2).pdf | validated=True tx=70 income=349332.85 expenses=222711.92 expected_income=349332.85 expected_expenses=222711.92 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 820869074-كشف-حساب-جديد.pdf | validated=True tx=123 income=69487.55 expenses=38647.75 expected_income=69487.55 expected_expenses=38647.75 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 ARABE 4.pdf | validated=True tx=1 income=10.0 expenses=0 expected_income=10.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 ARABE1.pdf | validated=True tx=11 income=55500.0 expenses=58823.11 expected_income=55500.0 expected_expenses=58823.11 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 ARABE2.pdf | validated=True tx=75 income=8810.0 expenses=12028.97 expected_income=8810.0 expected_expenses=12028.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   ARABE3.pdf | validated=False tx=330 income=325458.0 expenses=370945.44 expected_income=325458.0 expected_expenses=370995.44 gap_i=0.0 gap_e=50.0 reason=expense_gap=50.0
+NO_TRANSACTIONS    arabe5.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 arabie saudite.pdf | validated=True tx=22 income=1735262.25 expenses=758746.99 expected_income=1735262.25 expected_expenses=758746.99 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 BANCORP.pdf | validated=True tx=14 income=313.03 expenses=929.06 expected_income=313.03 expected_expenses=929.06 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   BANK CHAABI.pdf | validated=False tx=105 income=912747.13 expenses=431707.37 expected_income=912747.13 expected_expenses=431702.87 gap_i=0.0 gap_e=4.5 reason=expense_gap=4.5
+OK                 bank of america.pdf | validated=True tx=4 income=390.92 expenses=168.23 expected_income=390.92 expected_expenses=168.23 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   banque d'epagne.pdf | validated=False tx=24 income=500.0 expenses=656.71 expected_income=500.0 expected_expenses=614.02 gap_i=0.0 gap_e=42.69 reason=expense_gap=42.69
+OK                 banque populare 1 france.pdf | validated=True tx=44 income=516.45 expenses=5063.48 expected_income=516.45 expected_expenses=5063.48 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NO_TRANSACTIONS    BANQUE POSTALE (2).pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 banque postale.pdf | validated=True tx=65 income=4258.68 expenses=20628.72 expected_income=4258.68 expected_expenses=20628.72 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 belfis.pdf | validated=True tx=4 income=34.0 expenses=84.0 expected_income=34.0 expected_expenses=84.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 BMCE.pdf | validated=True tx=5 income=0 expenses=40.1 expected_income=0.0 expected_expenses=40.1 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 bnb 1.pdf | validated=True tx=4 income=0 expenses=1966.58 expected_income=0.0 expected_expenses=1966.58 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 chase.pdf | validated=True tx=66 income=6352.33 expenses=5286.17 expected_income=6352.33 expected_expenses=5286.17 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   cic.pdf | validated=False tx=0 income=0 expenses=0 expected_income=501.03 expected_expenses=501.03 gap_i=501.03 gap_e=501.03 reason=aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03
+OK                 city bank.pdf | validated=True tx=38 income=16.0 expenses=60028.9 expected_income=16.0 expected_expenses=60028.9 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 credit mutuel.pdf | validated=True tx=29 income=1870.78 expenses=1264.0 expected_income=1870.78 expected_expenses=1264.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NO_TRANSACTIONS    dakar.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    EGPTE.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 EJJAMI10.pdf | validated=True tx=3 income=2520.0 expenses=0 expected_income=2520.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 EJJAMI11.pdf | validated=True tx=4 income=130.0 expenses=356.04 expected_income=130.0 expected_expenses=356.04 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NO_TRANSACTIONS    EJJAMI12.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 EJJAMI2.pdf | validated=True tx=37 income=2511.55 expenses=1682.44 expected_income=2511.55 expected_expenses=1682.44 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 EJJAMI3.pdf | validated=True tx=4 income=130.0 expenses=356.04 expected_income=130.0 expected_expenses=356.04 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 EJJAMI5.pdf | validated=True tx=28 income=0 expenses=432405.35 expected_income=0.0 expected_expenses=432405.35 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   EJJAMI6.pdf | validated=False tx=53 income=0 expenses=3524.55 expected_income=0.0 expected_expenses=3522.05 gap_i=0.0 gap_e=2.5 reason=expense_gap=2.5
+OK                 ejjami7.pdf | validated=True tx=97 income=150.0 expenses=12054.77 expected_income=150.0 expected_expenses=12054.77 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 ejjami8.pdf | validated=True tx=24 income=0 expenses=698.77 expected_income=0.0 expected_expenses=698.77 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 EJJAMI9.pdf | validated=True tx=12 income=1700.0 expenses=2155.26 expected_income=1700.0 expected_expenses=2155.26 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   emirate.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.75 gap_i=0.0 gap_e=0.75 reason=aucune transaction candidate extraite; expense_gap=0.75
+OK                 g1.pdf | validated=True tx=40 income=17527020.0 expenses=3198040.0 expected_income=17527020.0 expected_expenses=3198040.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 g2.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 G3.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 general1.pdf | validated=True tx=31 income=12332.0 expenses=12328.0 expected_income=12332.0 expected_expenses=12328.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NO_TRANSACTIONS    habitat.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+OK                 ISLAMIQE.pdf | validated=True tx=7 income=22000.0 expenses=18345.0 expected_income=22000.0 expected_expenses=18345.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 llc.pdf | validated=True tx=11 income=63868.0 expenses=79.74 expected_income=63868.0 expected_expenses=79.74 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 mercury.pdf | validated=True tx=7 income=32.97 expenses=32.97 expected_income=32.97 expected_expenses=32.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   n26 .1.pdf | validated=False tx=81 income=2975.12 expenses=2997.02 expected_income=2905.12 expected_expenses=2917.02 gap_i=70.0 gap_e=80.0 reason=income_gap=70.0; expense_gap=80.0
+NEEDS_PARSER_FIX   OMAR1.pdf | validated=False tx=115 income=20393.0 expenses=15489.58 expected_income=20393.0 expected_expenses=15474.28 gap_i=0.0 gap_e=15.3 reason=expense_gap=15.3
+NEEDS_PARSER_FIX   OMAR2.pdf | validated=False tx=54 income=10374.0 expenses=20211.69 expected_income=10374.0 expected_expenses=20210.19 gap_i=0.0 gap_e=1.5 reason=expense_gap=1.5
+OK                 OMAR3.pdf | validated=True tx=107 income=36653.99 expenses=25940.92 expected_income=36653.99 expected_expenses=25940.92 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NEEDS_PARSER_FIX   Relevés compte 3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=6.0 gap_i=0.0 gap_e=6.0 reason=aucune transaction candidate extraite; expense_gap=6.0
+OK                 revolut france.pdf | validated=True tx=10 income=2110.0 expenses=412.0 expected_income=2110.0 expected_expenses=412.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 soc general.pdf | validated=True tx=4 income=0 expenses=135.0 expected_income=0.0 expected_expenses=135.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+OK                 well fargo.pdf | validated=True tx=26 income=148.0 expenses=14921.97 expected_income=148.0 expected_expenses=14921.97 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
+NO_TRANSACTIONS    x.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite

@@ -1,0 +1,30 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 28355
+PDF_LINES_DEBUG {'line_count': 606, 'non_empty_line_count': 317, 'max_line_len': 187, 'first_20': ['Customer Care: 0860 123 000', '                                                                                                               Website: www.standardbank.co.za', '                          STANDARD BANK                               3 month statement', '', '                                                                                                                      From: 13 Aug 21', '                                   JUBILEE MALL', '                                                                                                                                  To: 11 Nov 21', '                                   11 Nov 2021', '', 'Account number: 10 12 225 214 2                 051001                                                               Address:', 'Account holder:  MR. VHONANI MATUMBA                                GUMBU 1 THOHOYANDOU', '', 'Product name:  ELITEACC                                                 THOHOYANDOU', '', '                                                                  THOHOYANDOU', '', '                                                                                               0950', '', '                                                                                 ZA', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3.42, 'withdrawals': -1283.68}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18406.57, 'deposits': 18410.48, 'source': 'statement_summary_payments_deposits'}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3.42, 'withdrawals': -1283.68}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18406.57, 'deposits': 18410.48, 'source': 'statement_summary_payments_deposits'}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 3.42, 'withdrawals': -1283.68}
+STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 18406.57, 'deposits': 18410.48, 'source': 'statement_summary_payments_deposits'}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 14, 'dep_line': 'Date           Description                                  Payments       Deposits         Balance', 'wd_i': 40, 'wd_line': 'AUTOBANK CASH WITHDRAWAL AT', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_DATE_BOUNDARY_LEDGER_RECON {'transactions': 0, 'income_total': 0, 'expense_total': 0, 'official_income': 18410.48, 'official_expense': 18406.57, 'income_gap': 18410.48, 'expense_gap': 18406.57}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': True, 'has_debit': True, 'has_credit': True, 'has_balance': True, 'preview': 'customer care: 0860 123 000\n                                                                                                               website: www.standardbank.co.za\n                          standard bank                               3 month statement\n\n                                        '}
+DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES []
+DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG {'dates': 0, 'descriptions': 34, 'amounts': 0, 'date_sample': [], 'description_sample': ['Date           Description                                  Payments       Deposits         Balance', '25 Aug 21      EXCESS INTEREST                                                -0.99                              149.99', 'EXCESS INTEREST', 'Date           Description                                  Payments       Deposits         Balance', 'CHEQUE CARD PURCHASE', 'CHEQUE CARD PURCHASE', 'Date           Description                                  Payments       Deposits         Balance', 'CHEQUE CARD PURCHASE', 'CHEQUE CARD PURCHASE', 'CHEQUE CARD PURCHASE'], 'amount_sample': []}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+MONTH_NAME_LEDGER_EXTRACTED {'transactions': 107, 'income': 8, 'expenses': 99, 'income_total': 732488.44, 'expense_total': 18328.61}
+STATEMENT_LAYOUT_DETECTED month_name_ledger
+MONTH_NAME_LEDGER_ROUTE {'transactions': 107, 'income': 8, 'expenses': 99}
+SUSPICIOUS t9.pdf | tx=107 income=732488.44 expenses=18328.61 expected_income=18410.48 expected_expenses=18406.57 summary_ok=False real_ok=None opening=None ending=None gap=None reason=SUMMARY_GAP income=714077.96 expense=77.96

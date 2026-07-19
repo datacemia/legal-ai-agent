@@ -1,0 +1,17 @@
+================================================================================================
+V4.1.20 GENERAL CLOSE-CANDIDATE DOMINANCE RESOLVER APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\contract_family_detector.py
+BACKUP : app\services\contract_agent\contract_family_detector.py.before_v4_1_20_20260714_221152
+SHA256 : 1afcf43120eaaee7c649d1a5dac2d32a46810c91ee0da9afeda1fe1301e3b4ab
+A: raw scores and evidence generation preserved
+B: clear winners preserve historical behavior
+C: historical close-candidate priority remains baseline
+D: rich specific evidence may override generic-dependent priority
+E: existing 5/3/1 tiers used as identity/specific/generic
+F: no family name or language literal in dominance decision
+UNTOUCHED: FAMILY_INDICATORS, TITLE_PATTERNS, title_zone,
+           raw score calculation, semantic profile, publication gate,
+           clause risk scoring, taxonomy, frontend
+AST: OK
+================================================================================================

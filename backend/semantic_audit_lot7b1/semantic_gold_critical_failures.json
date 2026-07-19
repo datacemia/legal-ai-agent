@@ -1,0 +1,699 @@
+[
+  {
+    "fixture_id": "06_4_1_en",
+    "language": "en",
+    "source_text": "4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "restrictive_covenants",
+      "mechanisms": [
+        "NON_COMPETE",
+        "PROHIBITION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:NON_COMPETE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "06_4_1_fr",
+    "language": "fr",
+    "source_text": "4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "restrictive_covenants",
+      "mechanisms": [
+        "NON_COMPETE"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:NON_COMPETE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "06_4_1_ar",
+    "language": "ar",
+    "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "restrictive_covenants",
+      "mechanisms": [
+        "NON_COMPETE",
+        "TERM_DURATION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERM_DURATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:NON_COMPETE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "09_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Consultant is an independent contractor and not an employee, agent, joint venturer, or partner of Client. Consultant shall be solely responsible for all applicable taxes, insurance, and benefits.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "employment",
+      "mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "INDEPENDENT_CONTRACTOR",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:INDEPENDENT_CONTRACTOR",
+      "POLARITY_INFORMATION_LOST:INDEPENDENT_CONTRACTOR"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "09_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Le Consultant est un prestataire indépendant et non un salarié, mandataire, coentrepreneur ou associé du Client. Le Consultant sera seul responsable de l'ensemble des taxes, assurances et prestations applicables.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "liability",
+      "mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "INDEPENDENT_CONTRACTOR",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:INDEPENDENT_CONTRACTOR",
+      "POLARITY_INFORMATION_LOST:INDEPENDENT_CONTRACTOR"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "09_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 الاستشاري مقاول مستقل وليس موظفاً أو وكيلاً أو شريكاً في مشروع مشترك أو شريكاً للعميل. يتحمل الاستشاري وحده مسؤولية جميع الضرائب والتأمينات والمزايا المعمول بها.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "tax",
+      "mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "INDEPENDENT_CONTRACTOR",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:INDEPENDENT_CONTRACTOR",
+      "POLARITY_INFORMATION_LOST:INDEPENDENT_CONTRACTOR"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_1_1_en",
+    "language": "en",
+    "source_text": "1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred Employees, with minimal disruption to Client's business operations.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Pendant la Période de Transition, le Prestataire mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations du Client.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_6_1_en",
+    "language": "en",
+    "source_text": "6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Client or a successor provider, at Client's request and expense at Provider's then-current rates.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "EXIT_ASSISTANCE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "TERM_DURATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:EXIT_ASSISTANCE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_6_1_fr",
+    "language": "fr",
+    "source_text": "6.1 Le présent Accord a une durée initiale de cinq (5) ans. À l'expiration ou à la résiliation, le Prestataire fournira une assistance raisonnable à la sortie pendant une période pouvant aller jusqu'à cent quatre-vingts (180) jours pour faciliter la transition vers le Client ou un prestataire successeur, à la demande du Client et à ses frais aux tarifs alors en vigueur du Prestataire.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "EXIT_ASSISTANCE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "TERM_DURATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:EXIT_ASSISTANCE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_6_1_ar",
+    "language": "ar",
+    "source_text": "6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "pricing",
+      "mechanisms": [
+        "EXIT_ASSISTANCE",
+        "TERM_DURATION"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "EXIT_ASSISTANCE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "TERM_DURATION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:EXIT_ASSISTANCE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_2_1_en",
+    "language": "en",
+    "source_text": "2.1 As security for Borrower's obligations under this Agreement, Borrower grants Lender a first-priority security interest in the Collateral, and shall execute all documents reasonably necessary to perfect such security interest, including UCC financing statements.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "security_interest",
+      "mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "SECURITY_INTEREST",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:SECURITY_INTEREST"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_2_1_fr",
+    "language": "fr",
+    "source_text": "2.1 En garantie des obligations de l'Emprunteur au titre du présent Contrat, l'Emprunteur consent au Prêteur une sûreté de premier rang sur les Sûretés, et signera tous les documents raisonnablement nécessaires à la constitution de cette sûreté, y compris les déclarations de financement UCC.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "security_interest",
+      "mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "SECURITY_INTEREST",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:SECURITY_INTEREST"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_2_1_ar",
+    "language": "ar",
+    "source_text": "2.1 ضماناً لالتزامات المقترض بموجب هذه الاتفاقية، يمنح المقترض المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "SECURITY_INTEREST",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:SECURITY_INTEREST"
+    ],
+    "high": []
+  }
+]

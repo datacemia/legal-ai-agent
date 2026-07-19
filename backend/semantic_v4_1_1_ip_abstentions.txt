@@ -1,0 +1,455 @@
+====================================================================================================
+V4.1.1 INTELLECTUAL PROPERTY ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 27
+
+####################################################################################################
+[1/27]
+LANG: ar
+DOC: 02_Master_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 يحتفظ الطرف الطرف المتعاقد ب ب بكامل الحقوق في أدواته ومنهجياته وخبراته الفنية السابقة المستخدمة في تقديم الخدمات.
+RANKED MECHANISMS:
+
+####################################################################################################
+[2/27]
+LANG: ar
+DOC: 06_Executive_Employment_Agreement_AR.json
+REF: clause_8
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+5.1 تتنازل المديرة التنفيذية بموجب هذا العقد للشركة عن كامل الحقوق في أي اختراع أو اكتشاف أو مصنف يُبتكر أثناء مدة العمل، يتعلق بنشاط الطرف الطرف المتعاقد ب أ أو ينشأ عن استخدام موارد الطرف الطرف المتعاقد ب أ.
+RANKED MECHANISMS:
+
+####################################################################################################
+[3/27]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_4
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['ASSIGNMENT', 'LICENSE']
+SOURCE:
+1.1 يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج المرخَّص وإعادة إنتاجه وتوزيعه فقط كجزء مدمج في المنتجات المرخَّصة، طوال المدة.
+RANKED MECHANISMS:
+
+####################################################################################################
+[4/27]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+1.2 لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.
+RANKED MECHANISMS:
+- PROHIBITION | role= CONTROL_MODIFIER | primary= prohibition | eligible= False | rank= 92
+  EVIDENCE: 'لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.'
+
+####################################################################################################
+[5/27]
+LANG: ar
+DOC: 07_Software_Licensing_Agreement_AR.json
+REF: clause_7
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 يحتفظ المرخِّص بكامل الحقوق في البرنامج المرخَّص، بما في ذلك جميع التعديلات والتحسينات، سواء أجراها المرخِّص أو المرخَّص له.
+RANKED MECHANISMS:
+
+####################################################################################################
+[6/27]
+LANG: ar
+DOC: 09_Consulting_Services_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['NO_GRANT_OR_RETENTION']
+SOURCE:
+3.2 يحتفظ الطرف المتعاقد ب بملكية منهجياته وأطر عمله وخبراته العامة السابقة، ويجوز له إعادة استخدام المعارف والمهارات العامة المكتسبة أثناء التكليف في تكليفات مستقبلية مع عملاء آخرين، شريطة عدم الإفصاح عن أي معلومات سرية للعميل.
+RANKED MECHANISMS:
+
+####################################################################################################
+[7/27]
+LANG: ar
+DOC: 13_Asset_Purchase_Agreement_AR.json
+REF: clause_1
+PIPELINE: ownership
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+3.1 يُقر الطرف المتعاقد ب ويضمن أن: (أ) لديه سند ملكية صحيح وقابل للتداول على الأصول المشتراة؛ (ب) البيانات المالية المقدمة للمشتري تعرض بأمانة الوضع المالي للنشاط؛ و(ج) لا توجد دعاوى قضائية معلقة أو محتملة من شأنها الإضرار الجوهري بالأصول المشتراة.
+RANKED MECHANISMS:
+
+####################################################################################################
+[8/27]
+LANG: ar
+DOC: 15_General_Commercial_Agreement_AR.json
+REF: clause_5
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'LICENSE', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 يحتفظ كل طرف بملكية ملكيته الفكرية السابقة. تكون الملكية الفكرية المشتركة مملوكة بشكل مشترك للطرفين بحصص متساوية غير مقسمة، ويحق لكل طرف استغلالها دون تقديم حساب للطرف الآخر، رهناً بحق الأولوية في التفاوض قبل ترخيص الملكية الفكرية المشتركة لمنافس مباشر للطرف الآخر.
+RANKED MECHANISMS:
+
+####################################################################################################
+[9/27]
+LANG: en
+DOC: 02_Master_Services_Agreement.json
+REF: clause_8
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'BACKGROUND_IP', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 Provider retains all right, title, and interest in its pre-existing tools, methodologies, and know-how used to deliver the services.
+RANKED MECHANISMS:
+
+####################################################################################################
+[10/27]
+LANG: en
+DOC: 03_SaaS_Cloud_Agreement.json
+REF: clause_6
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.
+RANKED MECHANISMS:
+
+####################################################################################################
+[11/27]
+LANG: en
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_8
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'ASSIGNMENT']
+SOURCE:
+5.1 Executive hereby assigns to Contracting Party A all right, title, and interest in any inventions, discoveries, and works of authorship conceived or developed during employment that relate to Contracting Party A's business or arise from the use of Contracting Party A resources.
+RANKED MECHANISMS:
+
+####################################################################################################
+[12/27]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_4
+PIPELINE: license
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LICENSE', 'RESTRICTION']
+SOURCE:
+1.2 Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.
+RANKED MECHANISMS:
+- PROHIBITION | role= CONTROL_MODIFIER | primary= prohibition | eligible= False | rank= 92
+  EVIDENCE: 'shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.'
+
+####################################################################################################
+[13/27]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_5
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LICENSE']
+SOURCE:
+1.1 Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term.
+RANKED MECHANISMS:
+
+####################################################################################################
+[14/27]
+LANG: en
+DOC: 07_Software_Licensing_Agreement.json
+REF: clause_7
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'LICENSE', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 Licensor retains all right, title, and interest in and to the Licensed Software, including all modifications and improvements, whether made by Licensor or Licensee.
+RANKED MECHANISMS:
+
+####################################################################################################
+[15/27]
+LANG: en
+DOC: 09_Consulting_Services_Agreement.json
+REF: clause_2
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'DELIVERABLES_WORK_PRODUCT']
+SOURCE:
+3.1 All work product, reports, analyses, and recommendations developed by Contracting Party B specifically for Contracting Party A under this Agreement shall be deemed "work made for hire" and shall be owned exclusively by Contracting Party A upon payment in full.
+RANKED MECHANISMS:
+
+####################################################################################################
+[16/27]
+LANG: en
+DOC: 09_Consulting_Services_Agreement.json
+REF: clause_5
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'BACKGROUND_IP', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.2 Contracting Party B retains ownership of its pre-existing methodologies, frameworks, and general know-how, and may reuse general knowledge and skills gained during the engagement in future engagements with other clients, provided no Contracting Party A Confidential Information is disclosed.
+RANKED MECHANISMS:
+
+####################################################################################################
+[17/27]
+LANG: en
+DOC: 13_Asset_Purchase_Agreement.json
+REF: clause_6
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: assignment
+COVERAGE: 0.3655
+SIGNALS: ['OWNERSHIP', 'ASSIGNMENT']
+SOURCE:
+1.1 At the Closing, Seller shall sell, transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right, title, and interest in the Purchased Assets, free and clear of all liens, except Permitted Liens listed in Exhibit C.
+RANKED MECHANISMS:
+- ASSIGNMENT_TRANSFER | role= DOMAIN_SECONDARY | primary= assignment | eligible= True | rank= 82
+  EVIDENCE: "transfer, and deliver to Buyer, and Buyer shall purchase from Seller, all of Seller's right"
+
+####################################################################################################
+[18/27]
+LANG: en
+DOC: 15_General_Commercial_Agreement.json
+REF: clause_4
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'BACKGROUND_IP', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 Each Party retains ownership of its pre-existing intellectual property. Joint IP shall be jointly owned by the Parties in equal, undivided shares, with each Party entitled to exploit the Joint IP without accounting to the other, subject to a right of first negotiation before licensing Joint IP to a direct competitor of the other Party.
+RANKED MECHANISMS:
+
+####################################################################################################
+[19/27]
+LANG: fr
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_2
+PIPELINE: work_product
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'DELIVERABLES_WORK_PRODUCT']
+SOURCE:
+3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive de la Partie contractante A dès le paiement intégral des honoraires applicables.
+RANKED MECHANISMS:
+
+####################################################################################################
+[20/27]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement_FR.json
+REF: clause_7
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['ASSIGNMENT']
+SOURCE:
+5.1 La Dirigeante cède par les présentes à la Société l'intégralité des droits sur toute invention, découverte et œuvre créées pendant la durée du contrat, se rapportant à l'activité de la Société ou résultant de l'utilisation des ressources de la Société.
+RANKED MECHANISMS:
+
+####################################################################################################
+[21/27]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_3
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LICENSE']
+SOURCE:
+1.1 Le Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée.
+RANKED MECHANISMS:
+
+####################################################################################################
+[22/27]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_4
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LICENSE', 'RESTRICTION']
+SOURCE:
+1.2 Le Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable.
+RANKED MECHANISMS:
+
+####################################################################################################
+[23/27]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_7
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['LICENSE', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 Le Concédant conserve l'intégralité des droits sur le Logiciel Concédé, y compris toutes modifications et améliorations, qu'elles soient réalisées par le Concédant ou le Licencié.
+RANKED MECHANISMS:
+
+####################################################################################################
+[24/27]
+LANG: fr
+DOC: 09_Consulting_Services_Agreement_FR.json
+REF: clause_5
+PIPELINE: ownership
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'BACKGROUND_IP', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.2 Le Consultant conserve la propriété de ses méthodologies, cadres et savoir-faire général préexistants, et pourra réutiliser les connaissances et compétences générales acquises au cours de la mission dans le cadre de missions futures avec d'autres clients, à condition de ne divulguer aucune Information Confidentielle de la Partie contractante A.
+RANKED MECHANISMS:
+
+####################################################################################################
+[25/27]
+LANG: fr
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_6
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+CANDIDATE: assignment
+COVERAGE: 0.7617
+SIGNALS: []
+SOURCE:
+3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).
+RANKED MECHANISMS:
+- EXPRESS_RIGHT | role= CONTROL_MODIFIER | primary= express_right | eligible= False | rank= 90
+  EVIDENCE: 'aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).'
+- ASSIGNMENT_TRANSFER | role= DOMAIN_SECONDARY | primary= assignment | eligible= True | rank= 82
+  EVIDENCE: "céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit"
+
+####################################################################################################
+[26/27]
+LANG: fr
+DOC: 14_Shareholders_Agreement_FR.json
+REF: clause_8
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+7.1 Le présent Pacte prendra automatiquement fin à la première des dates suivantes : une Introduction en Bourse Qualifiée ou une cession de la Société approuvée conformément à l'article 3.1.
+RANKED MECHANISMS:
+
+####################################################################################################
+[27/27]
+LANG: fr
+DOC: 15_General_Commercial_Agreement_FR.json
+REF: clause_3
+PIPELINE: intellectual_property
+PROFILE VERSION: shadow-p0-v4.1
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['OWNERSHIP', 'BACKGROUND_IP', 'LICENSE', 'NO_GRANT_OR_RETENTION']
+SOURCE:
+3.1 Chaque Partie conserve la propriété de sa propriété intellectuelle préexistante. La PI Conjointe sera détenue conjointement par les Parties en parts égales et indivises, chaque Partie étant en droit de l'exploiter sans avoir à rendre de comptes à l'autre, sous réserve d'un droit de première négociation avant toute concession de licence de PI Conjointe à un concurrent direct de l'autre Partie.
+RANKED MECHANISMS:
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+ROWS: 27
+BY LANGUAGE: {'ar': 8, 'en': 10, 'fr': 9}
+BY PIPELINE TYPE: {'intellectual_property': 23, 'ownership': 2, 'license': 1, 'work_product': 1}
+SIGNAL COUNTS: {'NO_GRANT_OR_RETENTION': 12, 'ASSIGNMENT': 4, 'LICENSE': 9, 'OWNERSHIP': 12, 'BACKGROUND_IP': 5, 'RESTRICTION': 2, 'DELIVERABLES_WORK_PRODUCT': 2}
+NO SIGNAL ROWS: 5

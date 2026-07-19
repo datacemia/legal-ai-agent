@@ -1,0 +1,103 @@
+[
+  {
+    "fixture_id": "12_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:LOAN_DISBURSEMENT"
+    ]
+  },
+  {
+    "fixture_id": "12_2_1_ar",
+    "language": "ar",
+    "source_text": "2.1 ضماناً لالتزامات المقترض بموجب هذه الاتفاقية، يمنح المقترض المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:SECURITY_INTEREST"
+    ]
+  },
+  {
+    "fixture_id": "12_5_1_ar",
+    "language": "ar",
+    "source_text": "5.1 التزامات المقترض بموجب هذه الاتفاقية مكفولة من قبل شركة Trailhead Holdings Inc.، الشركة الأم للمقترض، بموجب اتفاقية كفالة منفصلة مبرمة بالتزامن مع هذه الاتفاقية.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "GUARANTEE"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "guarantee",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:GUARANTEE"
+    ]
+  }
+]

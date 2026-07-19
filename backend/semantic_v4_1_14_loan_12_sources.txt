@@ -1,0 +1,109 @@
+ROWS: 12
+
+========================================================================================================================
+[1/12]
+LANG: en
+DOC: None
+REF: None
+ABSTAIN: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+
+3.1 Borrower represents that it is duly organized, in good standing, and has the authority to enter into this Agreement. Borrower covenants to maintain a debt-service coverage ratio of not less than 1.25:1, tested quarterly, and to provide Lender with quarterly financial statements within forty-five (45) days of each fiscal quarter end.
+
+========================================================================================================================
+[2/12]
+LANG: en
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+4.1 Borrower may prepay the Loan, in whole or in part, at any time without penalty, provided that any partial prepayment shall be applied first to accrued interest and then to outstanding principal.
+
+========================================================================================================================
+[3/12]
+LANG: en
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.
+
+========================================================================================================================
+[4/12]
+LANG: en
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+7.1 For a period of five (5) years following the Closing Date, Seller and its principal shareholders shall not, directly or indirectly, engage in a business competitive with the Business within North America.
+
+========================================================================================================================
+[5/12]
+LANG: fr
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.
+
+========================================================================================================================
+[6/12]
+LANG: fr
+DOC: None
+REF: None
+ABSTAIN: DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH
+
+3.1 L'Emprunteur déclare être dûment constitué, en règle, et disposer du pouvoir de conclure le présent Contrat. L'Emprunteur s'engage à maintenir un ratio de couverture du service de la dette d'au moins 1,25:1, testé trimestriellement, et à fournir au Prêteur des états financiers trimestriels dans un délai de quarante-cinq (45) jours suivant la fin de chaque trimestre fiscal.
+
+========================================================================================================================
+[7/12]
+LANG: fr
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+4.1 L'Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité, tout remboursement partiel étant imputé en premier lieu sur les intérêts courus puis sur le principal restant dû.
+
+========================================================================================================================
+[8/12]
+LANG: fr
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires.
+
+========================================================================================================================
+[9/12]
+LANG: ar
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+6.2 عند وقوع حالة تعثر، يجوز للمُقرض إعلان استحقاق كامل المبلغ الأصلي المتبقي والفوائد المتراكمة فوراً وممارسة جميع الحقوق وسبل الانتصاف المتاحة بموجب اتفاقية الضمان والقانون المعمول به، بما في ذلك حجز الضمانات.
+
+========================================================================================================================
+[10/12]
+LANG: ar
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+2.1 ضماناً لالتزامات المقترض بموجب هذه الاتفاقية، يمنح المقترض المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.
+
+========================================================================================================================
+[11/12]
+LANG: ar
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+3.1 يُقر المقترض بأنه مؤسس حسب الأصول، وفي وضع قانوني سليم، ويملك الصلاحية لإبرام هذه الاتفاقية. يتعهد المقترض بالحفاظ على نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.
+
+========================================================================================================================
+[12/12]
+LANG: ar
+DOC: None
+REF: None
+ABSTAIN: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+
+1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.

@@ -1,0 +1,659 @@
+[
+  {
+    "fixture_id": "01_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "01_1_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_4_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "02_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "03_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "04_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "05_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "2.1",
+    "language": "en",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "payment",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "BASE_COMPENSATION",
+      "PAY_FREQUENCY"
+    ],
+    "actual_material_mechanisms": [
+      "BASE_COMPENSATION",
+      "PAYMENT_OBLIGATION",
+      "PAY_FREQUENCY"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BASE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAYMENT_OBLIGATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "2.2",
+    "language": "en",
+    "semantic_family": "COMPENSATION",
+    "primary_type_actual": "employment",
+    "primary_type_verdict": "WEAK",
+    "required_mechanisms": [
+      "BONUS",
+      "EQUITY_GRANT"
+    ],
+    "actual_material_mechanisms": [
+      "BASE_COMPENSATION",
+      "BONUS",
+      "EQUITY_COMPENSATION_GRANT",
+      "EQUITY_GRANT",
+      "INCENTIVE_COMPENSATION",
+      "VESTING_SCHEDULE"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "BONUS",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EQUITY_GRANT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "BASE_COMPENSATION",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "INCENTIVE_COMPENSATION",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "EQUITY_COMPENSATION_GRANT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "VESTING_SCHEDULE",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "argument_results": {
+      "actor": [],
+      "object": [],
+      "trigger": [],
+      "polarity": []
+    },
+    "expected_states": [],
+    "actual_states": [
+      "VESTING_SCHEDULE"
+    ],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_2_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_2_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_en",
+    "document": "06_Executive_Employment_Agreement.json",
+    "reference": "4.1",
+    "language": "en",
+    "semantic_family": "RESTRICTIVE_COVENANTS",
+    "primary_type_actual": "restrictive_covenants",
+    "primary_type_verdict": "SUPPORTED",
+    "required_mechanisms": [
+      "NON_COMPETE"
+    ],
+    "actual_material_mechanisms": [
+      "NON_COMPETE",
+      "PROHIBITION"
+    ],
+    "missing_required_mechanisms": [],
+    "forbidden_detected_mechanisms": [],
+    "grounding": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "argument_results": {
+      "actor": [
+        false
+      ],
+      "object": [],
+      "trigger": [],
+      "polarity": [
+        true
+      ]
+    },
+    "expected_states": [],
+    "actual_states": [],
+    "numeric_hits": 1,
+    "numeric_total": 1
+  },
+  {
+    "fixture_id": "06_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "06_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "07_1_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "08_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "09_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "10_6_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_2_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "11_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "12_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "13_5_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_2_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_1_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_4_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_en",
+    "language": "en",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_fr",
+    "language": "fr",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  },
+  {
+    "fixture_id": "14_6_1_ar",
+    "language": "ar",
+    "error": "SOURCE_RESULT_NOT_FOUND"
+  }
+]

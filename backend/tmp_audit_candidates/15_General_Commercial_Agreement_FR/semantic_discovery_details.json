@@ -1,0 +1,750 @@
+[
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "Clause 7.1",
+    "source_language": "fr",
+    "source_text": "7.1 Aucune des Parties ne sera responsable envers l'autre de dommages indirects, accessoires ou consécutifs découlant du présent Accord. Le présent Accord est régi par le droit de l'État de New York.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "dommages indirects, accessoires ou consécutifs",
+            "start": 61,
+            "end": 107
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 23,
+            "end": 79,
+            "text": "ne sera responsable envers l'autre de dommages indirects"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "770d5ae27318b4f6fce63a34483947f227376edfeb485dee7b4ad68b1e5385c8",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 61,
+            "end": 135,
+            "text": "dommages indirects, accessoires ou consécutifs découlant du présent Accord"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "28d6608141cbf27b061aa45dbe0c7ec0c3dfd14b092d06d5f6870c11c2cb7eaf",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 159,
+            "end": 199,
+            "text": "régi par le droit de l'État de New York."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "4e05feb139de0f34dd89a146faebf4cd0ecacd3d8a8e06a15ec433027313e4f1",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 159,
+            "end": 199,
+            "text": "régi par le droit de l'État de New York."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "4e05feb139de0f34dd89a146faebf4cd0ecacd3d8a8e06a15ec433027313e4f1",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Les Parties collaboreront aux Activités de Coopération telles que convenues d'un commun accord dans un plan de projet écrit, précisant l'étendue, le calendrier, le budget et les responsabilités de chaque Partie.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "activité",
+          "aux",
+          "budget",
+          "calendrier",
+          "chaque",
+          "collaboreront",
+          "commun",
+          "convenue",
+          "coopération",
+          "partie",
+          "party",
+          "plan",
+          "projet",
+          "précisant",
+          "que",
+          "responsabilité",
+          "telle",
+          "écrit",
+          "étendue"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Sauf disposition contraire d'un plan de projet, chaque Partie supportera ses propres coûts et dépenses engagés dans le cadre des Activités de Coopération. Tout coût partagé sera réparti à parts égales, sauf accord contraire écrit.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "COST_ALLOCATION",
+        "rank": 87,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "COST_ALLOCATION",
+            "start": 52,
+            "end": 157,
+            "text": "chaque Partie supportera ses propres coûts et dépenses engagés dans le cadre des Activités de Coopération"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "1eb1dad543afc2951fb6b9566bd6b40b27f22e273e931013dca05bb4b72214a0",
+        "normalized_concept": "COST_ALLOCATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "COST_ALLOCATION",
+        "rank": 87,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "COST_ALLOCATION",
+            "start": 52,
+            "end": 157,
+            "text": "chaque Partie supportera ses propres coûts et dépenses engagés dans le cadre des Activités de Coopération"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "1eb1dad543afc2951fb6b9566bd6b40b27f22e273e931013dca05bb4b72214a0",
+        "normalized_concept": "COST_ALLOCATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Chaque Partie conserve la propriété de sa propriété intellectuelle préexistante. La PI Conjointe sera détenue conjointement par les Parties en parts égales et indivises, chaque Partie étant en droit de l'exploiter sans avoir à rendre de comptes à l'autre, sous réserve d'un droit de première négociation avant toute concession de licence de PI Conjointe à un concurrent direct de l'autre Partie.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 88,
+            "end": 347,
+            "text": "PI Conjointe sera détenue conjointement par les Parties en parts égales et indivises, chaque Partie étant en droit de l'exploiter sans avoir à rendre de comptes à l'autre, sous réserve d'un droit de première négociation avant toute concession de licence de PI"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "db8b29a046cbd9455e4e869d049b42758b0bde5dbc63341a759a95267f6064e7",
+        "normalized_concept": "IP_OWNERSHIP_ALLOCATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IP_OWNERSHIP_ALLOCATION",
+        "rank": 91,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IP_OWNERSHIP_ALLOCATION",
+            "start": 88,
+            "end": 347,
+            "text": "PI Conjointe sera détenue conjointement par les Parties en parts égales et indivises, chaque Partie étant en droit de l'exploiter sans avoir à rendre de comptes à l'autre, sous réserve d'un droit de première négociation avant toute concession de licence de PI"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "db8b29a046cbd9455e4e869d049b42758b0bde5dbc63341a759a95267f6064e7",
+        "normalized_concept": "IP_OWNERSHIP_ALLOCATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "Clause 4.1",
+    "source_language": "fr",
+    "source_text": "4.1 Aucune des Parties n'utilisera les marques, noms commerciaux ou éléments de marque de l'autre Partie dans une communication, un support marketing ou un communiqué de presse sans l'approbation écrite préalable de l'autre Partie.",
+    "primary_type": "trademark_branding",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "sans l'approbation écrite préalable",
+            "start": 177,
+            "end": 212
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 177,
+            "end": 212,
+            "text": "sans l'approbation écrite préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 184,
+            "end": 212,
+            "text": "approbation écrite préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "dedfb7ffcc9ca1752a9f69403e485401c70926d22b89fae8406b3eac172656e7",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 184,
+            "end": 202,
+            "text": "approbation écrite"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "084908d71050bd91ed2b343cecb84dbb31a9f761308b8ffa47c1c7aa3fa50332",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Chaque Partie conservera confidentielle toute information non publique divulguée par l'autre Partie dans le cadre du présent Accord et ne l'utilisera qu'aux fins des Activités de Coopération.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 195,
+            "text": "conservera confidentielle toute information non publique divulguée par l'autre Partie dans le cadre du présent Accord et ne l'utilisera qu'aux fins des Activités de Coopération."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9f73be3f639c0025cad260a34a5b2517b183be36139780accf275f25a39c1bfd",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 18,
+            "end": 195,
+            "text": "conservera confidentielle toute information non publique divulguée par l'autre Partie dans le cadre du présent Accord et ne l'utilisera qu'aux fins des Activités de Coopération."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9f73be3f639c0025cad260a34a5b2517b183be36139780accf275f25a39c1bfd",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "15_General_Commercial_Agreement_FR.json",
+    "reference": "6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Le présent Accord se poursuivra pendant deux (2) ans à compter de la Date d'Effet, se renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins soixante (60) jours à l'avance. Chaque Partie pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours.",
+    "primary_type": "renewal",
+    "expected_source_mechanisms": [
+      {
+        "concept": "AUTO_RENEW_OPT_OUT",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "renouvelant automatique",
+            "start": 90,
+            "end": 113
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTOMATIC_RENEWAL",
+        "rank": 96,
+        "candidate_primary_type": "renewal",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTOMATIC_RENEWAL",
+            "start": 90,
+            "end": 297,
+            "text": "renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'une des Parties notifie par écrit son intention de ne pas renouveler au moins soixante (60) jours à l'avance. Chaque Partie po"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "AUTOMATIC_RENEWAL",
+        "evidence_hash": "734fed273fcb325bfecad9e099ddada038fe2996826f589a51466bb5dd13b9d6",
+        "normalized_concept": "AUTOMATIC_RENEWAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "AUTOMATIC",
+            "OPT_OUT"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 295,
+            "end": 402,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 302,
+            "end": 402,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "4e9b20946b6cdc5b24a8f19f976402593939ffe5d1357bf2966f795e6f492f94",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 358,
+            "end": 402,
+            "text": "préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "e00990c88f3f813fff2ef850bc62806a85febaa326082aae784d9a63885ee070",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CONVENIENCE",
+        "rank": 93,
+        "candidate_primary_type": "termination",
+        "semantic_role": "PROCEDURAL_STATE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 295,
+            "end": 402,
+            "text": "pourra résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          },
+          {
+            "label": "TERMINATION_FOR_CONVENIENCE",
+            "start": 302,
+            "end": 402,
+            "text": "résilier le présent Accord pour convenance moyennant un préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "procedural_state": "TERMINATION_FOR_CONVENIENCE",
+        "evidence_hash": "4e9b20946b6cdc5b24a8f19f976402593939ffe5d1357bf2966f795e6f492f94",
+        "normalized_concept": "TERMINATION_FOR_CONVENIENCE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 358,
+            "end": 402,
+            "text": "préavis écrit de quatre-vingt-dix (90) jours"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "e00990c88f3f813fff2ef850bc62806a85febaa326082aae784d9a63885ee070",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

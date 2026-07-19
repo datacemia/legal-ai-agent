@@ -1,0 +1,39 @@
+{
+  "exact_fixture_files": 45,
+  "clauses_audited": 355,
+  "file_errors": [],
+  "language_counts": {
+    "en": 117,
+    "fr": 119,
+    "ar": 119
+  },
+  "type_verdicts": {
+    "MATCH": 56,
+    "ABSTAINED": 299
+  },
+  "ranked_mechanism_counts": {
+    "PRIOR_CONSENT_PREREQUISITE": 21,
+    "PROHIBITION": 28,
+    "CONFIDENTIALITY_DUTY": 4,
+    "GOVERNING_LAW_SELECTION": 8,
+    "TERMINATION_RIGHT": 17,
+    "NOTICE_PROCEDURE": 3,
+    "AUTOMATIC_RENEWAL": 9,
+    "PAYMENT_OBLIGATION": 11,
+    "EXCLUDED_DAMAGE_CATEGORY": 9,
+    "SERVICE_LEVEL_COMMITMENT": 2,
+    "LIABILITY_CAP": 8,
+    "MANDATORY_OBLIGATION": 2,
+    "EXPRESS_RIGHT": 5,
+    "FINANCIAL_REPORTING_OBLIGATION": 4,
+    "ASSIGNMENT_TRANSFER": 6,
+    "MANDATORY_CONJUNCTION": 6,
+    "BOARD_COMPOSITION_STRUCTURE": 2,
+    "AUTOMATIC_EVENT_TRANSITION": 2
+  },
+  "evidence_integrity_failures": 0,
+  "type_divergences": 0,
+  "publication_gate_modified": false,
+  "publication_baseline_asserted_here": false,
+  "note": "Shadow audit only. Divergence is a review candidate, not automatically a pipeline defect."
+}

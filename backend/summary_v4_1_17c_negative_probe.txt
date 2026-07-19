@@ -1,0 +1,30 @@
+
+EN NOTICE
+RESULT: None
+
+EN CONFIDENTIALITY
+RESULT: None
+
+EN PAYMENT
+RESULT: None
+
+FR NOTICE
+RESULT: None
+
+FR CONFIDENTIALITY
+RESULT: None
+
+FR PAYMENT
+RESULT: None
+
+AR NOTICE
+RESULT: None
+
+AR CONFIDENTIALITY
+RESULT: None
+
+AR PAYMENT
+RESULT: None
+
+====================================================================================================
+NEGATIVE GATE: PASS

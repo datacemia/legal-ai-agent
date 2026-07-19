@@ -1,0 +1,56 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+RUNEXA_FINANCE_EXTRACTOR_VERSION international-multipass-v8-terminal-balance-authority-fr-en-ar
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 209, in <module>
+    main()
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 160, in main
+    results.append(analyze(path))
+                   ^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 79, in analyze
+    text = pdf_text(path)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 40, in pdf_text
+    txt_plumber = from_pdfplumber()
+                  ^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 29, in from_pdfplumber
+    return "\n".join(page.extract_text() or "" for page in pdf.pages)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_folder.py", line 29, in <genexpr>
+    return "\n".join(page.extract_text() or "" for page in pdf.pages)
+                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfplumber\page.py", line 530, in extract_text
+    return self.get_textmap(**tuplify_list_kwargs(kwargs)).as_string
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfplumber\page.py", line 507, in _get_textmap
+    return utils.chars_to_textmap(self.chars, **full_kwargs)
+                                  ^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfplumber\container.py", line 52, in chars
+    return self.objects.get("char", [])
+           ^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfplumber\page.py", line 346, in objects
+    self._objects: Dict[str, T_obj_list] = self.parse_objects()
+                                           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfplumber\page.py", line 443, in parse_objects
+    for obj in self.iter_layout_objects(self.layout._objs):
+                                        ^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfplumber\page.py", line 266, in layout
+    interpreter.process_page(self.page_obj)
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\pdfinterp.py", line 1334, in process_page
+    self.render_contents(page.resources, page.contents, ctm=ctm)
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\pdfinterp.py", line 1355, in render_contents
+    self.execute(list_value(streams))
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\pdfinterp.py", line 1409, in execute
+    func(*args)
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\pdfinterp.py", line 1308, in do_Do
+    interpreter.render_contents(
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\pdfinterp.py", line 1355, in render_contents
+    self.execute(list_value(streams))
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\pdfinterp.py", line 1389, in execute
+    (_, obj) = parser.nextobject()
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pdfminer\psparser.py", line 657, in nextobject
+    log.debug(f"nextobject: {obj!r}")
+  File "C:\Users\rachi\Desktop\app\Lib\logging\__init__.py", line 1517, in debug
+    def debug(self, msg, *args, **kwargs):
+
+KeyboardInterrupt

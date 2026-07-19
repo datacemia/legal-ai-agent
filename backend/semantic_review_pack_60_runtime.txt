@@ -1,0 +1,40 @@
+========================================================================================
+SEMANTIC HUMAN REVIEW PACK
+========================================================================================
+INPUT ROWS: 262
+SELECTED ROWS: 60
+SELECTED BY LANGUAGE: {'en': 20, 'fr': 20, 'ar': 20}
+ABSTENTIONS BY LANGUAGE: {'en': 20, 'fr': 20, 'ar': 20}
+DISTINCT DOCUMENTS: 32
+JSONL: semantic_gold\review_pack_60\review_pack_60.jsonl
+CSV: semantic_gold\review_pack_60\review_pack_60.csv
+SUMMARY: semantic_gold\review_pack_60\review_pack_60_summary.json
+
+SELECTED TYPES
+   3  termination
+   3  renewal
+   3  liability
+   3  indemnity
+   3  payment
+   3  pricing
+   3  intellectual_property
+   3  confidentiality
+   3  data_protection
+   3  security
+   3  loan
+   3  employment
+   3  services
+   2  fees
+   2  data_processing
+   2  security_interest
+   2  guarantee
+   2  compensation
+   2  ownership
+   2  cybersecurity
+   1  license
+   1  service_level
+   1  work_product
+   1  delivery
+   1  corporate_governance
+   1  anti_dilution_preemptive_rights
+   1  assignment

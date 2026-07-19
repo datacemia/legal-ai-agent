@@ -1,0 +1,7 @@
+clause_ref='1.1' | clause_type_envoye='confidentiality' | safer_alternative="Une alternative plus sûre consiste à énoncer clairement l'obligation de non-divu"
+clause_ref='1.2' | clause_type_envoye='confidentiality' | safer_alternative='Une alternative plus sûre consiste à définir la finalité autorisée de manière ét'
+clause_ref='2.1' | clause_type_envoye='confidentiality' | safer_alternative='Une alternative plus sûre consiste à conserver les quatre exclusions usuelles (i'
+clause_ref='3.1' | clause_type_envoye='confidentiality' | safer_alternative='Une alternative plus sûre consiste à fixer une durée de survie définie pour les '
+clause_ref='4.1' | clause_type_envoye='warranty' | safer_alternative='Une alternative plus sûre consiste à énoncer précisément les garanties, à défini'
+clause_ref='5.1' | clause_type_envoye='remedies' | safer_alternative='Une alternative plus sûre consiste à clarifier la portée, les critères objectifs'
+clause_ref='6.1' | clause_type_envoye='dispute_resolution' | safer_alternative='Une alternative plus sûre consiste à préciser le droit applicable, le forum, les'

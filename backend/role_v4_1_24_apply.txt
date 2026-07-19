@@ -1,0 +1,16 @@
+================================================================================================
+V4.1.24 LANGUAGE-AWARE ROLE REALIZATION APPLIED
+================================================================================================
+TARGET : app\services\contract_agent\party_role_detector.py
+BACKUP : app\services\contract_agent\party_role_detector.py.before_v4_1_24_20260715_003148
+A: placeholder-to-role mapping preserved
+B: EN realization unchanged
+C: AR realization unchanged
+D: FR determiner agreement added at placeholder boundary
+E: FR de+le/à+le contractions handled
+F: feminine ROLE_LABELS preserved through role metadata
+G: source strings without placeholders are not recursively rewritten
+UNTOUCHED: PII redactor, family detector, semantic profile,
+           publication gate, risk scoring, taxonomy, summary, frontend
+AST: OK
+================================================================================================

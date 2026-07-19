@@ -1,0 +1,58 @@
+RULES FOUND: ['BACKGROUND_IP_RETENTION', 'IP_RIGHTS_RETENTION', 'LICENSE_GRANT', 'LICENSE_RESTRICTION']
+
+====================================================================================================
+RULE: BACKGROUND_IP_RETENTION
+AR PATTERNS: 1
+
+PATTERN 1
+(?:يحتفظ|تحتفظ).{0,100}(?:بملكية|بكامل\s+الحقوق|بجميع\s+الحقوق).{0,220}(?:السابقة|المسبقة|سابقة).{0,160}(?:منهجيات|أطر|خبرات|ملكية\s+فكرية)
+BACKGROUND_MSA_AR => NO MATCH
+LICENSE_GRANT_AR => NO MATCH
+LICENSE_RESTRICTION_AR => NO MATCH
+IP_RETENTION_AR => NO MATCH
+BACKGROUND_CONSULTING_AR => NO MATCH
+
+====================================================================================================
+RULE: IP_RIGHTS_RETENTION
+AR PATTERNS: 1
+
+PATTERN 1
+(?:يحتفظ\s+المرخ[ِّ]?ص|المرخ[ِّ]?ص\s+يحتفظ).{0,120}(?:بكامل\s+الحقوق|بجميع\s+الحقوق).{0,220}(?:البرنامج|التعديلات|التحسينات)
+BACKGROUND_MSA_AR => NO MATCH
+LICENSE_GRANT_AR => NO MATCH
+LICENSE_RESTRICTION_AR => NO MATCH
+IP_RETENTION_AR => NO MATCH
+BACKGROUND_CONSULTING_AR => NO MATCH
+
+====================================================================================================
+RULE: LICENSE_GRANT
+AR PATTERNS: 2
+
+PATTERN 1
+(?:يمنح\s+المرخ[ِّ]?ص).{0,60}(?:المرخ[َّ]?ص\s+له).{0,60}(?:ترخيص(?:اً|ًا|ا)).{0,240}
+BACKGROUND_MSA_AR => NO MATCH
+LICENSE_GRANT_AR => NO MATCH
+LICENSE_RESTRICTION_AR => NO MATCH
+IP_RETENTION_AR => NO MATCH
+BACKGROUND_CONSULTING_AR => NO MATCH
+
+PATTERN 2
+(?:تمنح|يمنح)\s+(?:الشركة|المزود|المالك).{0,60}(?:العميل|المستخدم).{0,60}(?:ترخيص(?:اً|ًا|ا)).{0,240}
+BACKGROUND_MSA_AR => NO MATCH
+LICENSE_GRANT_AR => NO MATCH
+LICENSE_RESTRICTION_AR => NO MATCH
+IP_RETENTION_AR => NO MATCH
+BACKGROUND_CONSULTING_AR => NO MATCH
+
+====================================================================================================
+RULE: LICENSE_RESTRICTION
+AR PATTERNS: 1
+
+PATTERN 1
+(?:لا\s+يجوز\s+لل?مرخ[َّ]?ص\s+له).{0,140}(?:هندسة\s+عكسية|فك\s+تجميع|إنشاء\s+مصنفات\s+مشتقة).{0,220}
+BACKGROUND_MSA_AR => NO MATCH
+LICENSE_GRANT_AR => NO MATCH
+LICENSE_RESTRICTION_AR => NO MATCH
+IP_RETENTION_AR => NO MATCH
+BACKGROUND_CONSULTING_AR => NO MATCH
+

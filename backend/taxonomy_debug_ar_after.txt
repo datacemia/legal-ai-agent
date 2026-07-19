@@ -1,0 +1,1104 @@
+DOCX FOUND: 45
+EN: 15
+FR: 15
+AR: 15
+TARGET LANGUAGES: AR
+
+########################################################################################
+LANGUAGE: AR
+########################################################################################
+
+========================================================================================
+[AR 1/15] 01_NDA_Confidentiality_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة، باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية.
+AI TYPE: confidentiality
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.2 يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 لا تشمل المعلومات السرية المعلومات التي: (أ) أصبحت متاحة للجمهور دون تقصير من الطرف المتلقي؛ (ب) كانت معروفة لدى الطرف المتلقي بشكل مشروع قبل الإفصاح عنها؛ (ج) طُورت بشكل مستقل دون استخدام المعلومات السرية؛ أو (د) وردت بشكل مشروع من طرف ثالث دون التزام بالسرية.
+AI TYPE: confidentiality
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['التزام']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به.
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 لا ينشئ شيء في هذه الاتفاقية أي ترخيص أو حق ملكية في المعلومات السرية. تُقدَّم جميع المعلومات السرية "كما هي" دون أي ضمان من أي نوع.
+AI TYPE: confidentiality
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['ضمان']
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['ترخيص']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ملكية']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ترخيص']
+deposit score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ضمان']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 يقر كل طرف بأن الإفصاح غير المصرح به عن المعلومات السرية قد يسبب ضرراً لا يمكن جبره بالتعويض المالي وحده، وأن الطرف غير المخل يحق له طلب أمر قضائي بالإضافة إلى أي سبل انتصاف أخرى متاحة، دون الحاجة إلى تقديم كفالة.
+AI TYPE: confidentiality
+remedies score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['أمر قضائي']
+guarantee score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['كفالة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 تخضع هذه الاتفاقية لقانون ولاية ديلاوير، دون اعتبار لمبادئ تنازع القوانين. يخضع أي نزاع ينشأ عن هذه الاتفاقية للاختصاص القضائي الحصري للمحاكم الولائية والفيدرالية الواقعة في ويلمنغتون، ديلاوير.
+AI TYPE: governance
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['نزاع']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=20 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=4.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 2/15] 02_Master_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 10
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يلتزم المزود بتنفيذ الخدمات الموصوفة في كل بيان عمل بأسلوب مهني، وفقاً للمعايير المقبولة عموماً في القطاع.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.2 في حال وجود تعارض بين هذه الاتفاقية وبيان العمل، تسود هذه الاتفاقية ما لم ينص بيان العمل صراحة على نية الاستثناء من حكم محدد.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يلتزم العميل بدفع جميع الرسوم المحددة في كل بيان عمل خلال خمسة وأربعين (45) يوماً من تاريخ الفاتورة. يترتب على أي مبلغ غير مدفوع بعد ستين (60) يوماً فائدة بنسبة 1% شهرياً.
+AI TYPE: payment
+payment score= 4 base= 3 specificity= 0 context+= 1 context-= 0 signals= ['الفاتورة', 'الرسوم']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+invoice score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الفاتورة']
+interest score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فائدة']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.2 يحتفظ المزود بالحق في زيادة الرسوم من جانب واحد لأي فترة تجديد بنسبة تصل إلى خمسة عشر بالمائة (15%)، بإشعار خطي مدته ثلاثون (30) يوماً، دون الحاجة إلى موافقة العميل.
+AI TYPE: renewal
+pricing_adjustment score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['زيادة الرسوم']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+renewal score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تجديد']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يحتفظ المزود بكامل الحقوق في أدواته ومنهجياته وخبراته الفنية السابقة المستخدمة في تقديم الخدمات.
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.2 تُعتبر جميع المخرجات "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى العميل عند السداد الكامل للرسوم المعنية.
+AI TYPE: intellectual_property
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 تسري هذه الاتفاقية اعتباراً من تاريخ النفاذ وتستمر لمدة أولية قدرها سنتان (2)، وتتجدد تلقائياً لمدد متتالية قدرها سنة (1) واحدة ما لم يقدم أحد الطرفين إشعاراً خطياً بعدم التجديد قبل تسعين (90) يوماً على الأقل.
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['تلقائياً']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.2 يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل. ولا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من المزود، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال.
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['إخلال جوهري']
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء', 'إشعار']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من العميل خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل المزود بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.
+AI TYPE: liability
+liability score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية', 'الأضرار غير المباشرة']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 يحاول الطرفان أولاً تسوية أي نزاع عبر التفاوض بحسن نية بين كبار المسؤولين التنفيذيين لمدة ثلاثين (30) يوماً. وفي حال عدم التوصل إلى تسوية، يُحسم أي نزاع نهائياً بالتحكيم الملزم الذي تديره الجمعية الأمريكية للتحكيم وفقاً لقواعدها للتحكيم التجاري، على أن يكون مقر التحكيم في ويلمنغتون، ديلاوير، أمام محكم واحد، باللغة الإنجليزية.
+AI TYPE: dispute_resolution
+dispute_resolution score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['نزاع', 'تسوية']
+arbitration score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['محكم']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=10 | receipts=29 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=2.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.2 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 3/15] 03_SaaS_Cloud_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 رهناً بأحكام هذه الاتفاقية، تمنح Northwind العميل حقاً غير حصري وغير قابل للتحويل للوصول إلى المنصة واستخدامها خلال مدة الاشتراك، حصراً للأغراض التجارية الداخلية للعميل.
+AI TYPE: other
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 تبذل Northwind جهوداً معقولة تجارياً للحفاظ على نسبة توافر قدرها 99.9%، تُقاس شهرياً، باستثناء الصيانة المجدولة. يتمثل سبيل الانتصاف الحصري للعميل في حال عدم الوفاء بهذا الالتزام في رصيد خدمة وفقاً للملحق أ.
+AI TYPE: service_level
+maintenance score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['الصيانة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يدفع العميل رسوم الاشتراك مقدماً، سنوياً، وفقاً لنموذج الطلب. تتجدد هذه الاتفاقية تلقائياً لمدد متتالية قدرها سنة (1) واحدة بالسعر المعلن السائد لدى Northwind حينذاك، ما لم يقدم العميل إشعاراً خطياً بعدم التجديد قبل ستين (60) يوماً على الأقل من نهاية المدة الجارية.
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['تلقائياً']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 فيما بين الطرفين، يحتفظ العميل بكامل الحقوق في بيانات العميل. عند الإنهاء، تتيح Northwind بيانات العميل للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً.
+AI TYPE: data_protection
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 تحافظ Northwind على ضمانات إدارية ومادية وتقنية متوافقة مع معايير SOC 2 Type II، وتخطر العميل بأي حادث أمني مؤكد يؤثر على بيانات العميل خلال اثنتين وسبعين (72) ساعة من اكتشافه.
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 لا تتجاوز المسؤولية الإجمالية لـ Northwind الناشئة عن هذه الاتفاقية الرسوم المدفوعة من العميل خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (الأمن) أو التزامات التعويض الخاصة بـ Northwind، والتي تُحدد المسؤولية بشأنها بضعف تلك الرسوم.
+AI TYPE: liability
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 لا يجوز للعميل إنهاء هذه الاتفاقية للمصلحة قبل نهاية مدة الاشتراك الجارية. يجوز لـ Northwind إنهاء هذه الاتفاقية للمصلحة في أي وقت بإشعار خطي مدته تسعون (90) يوماً، مع استرداد تناسبي للرسوم المدفوعة مقدماً وغير المستخدمة.
+AI TYPE: termination
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 4/15] 04_Cybersecurity_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يقدم المزود خدمات مراقبة أمنية وكشف تهديدات واستجابة للحوادث على مدار الساعة طوال أيام الأسبوع، على النحو الموصوف في الملحق أ، بما يتوافق مع إطار عمل الأمن السيبراني الصادر عن NIST.
+AI TYPE: service_level
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['الأمن السيبراني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['الأمن السيبراني']
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['خدمات']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.2 يقدم المزود تحليلاً خطياً للأسباب الجذرية خلال خمسة (5) أيام عمل من حل أي حادث أمني مصنف كخطير أو حرج.
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يحافظ المزود على شهادتي SOC 2 Type II وISO/IEC 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق السارية عند الطلب، بحد أقصى مرة واحدة سنوياً.
+AI TYPE: security
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.2 يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 لا يجوز للمزود التعاقد مع مقاول من الباطن جديد له إمكانية الوصول إلى أنظمة العميل أو بياناته دون موافقة خطية مسبقة من العميل، والتي لا يجوز حجبها دون سبب معقول.
+AI TYPE: subcontracting
+subcontracting score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مقاول من الباطن']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من العميل، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من المزود.
+AI TYPE: liability
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.2 يعوض المزود العميل عن مطالبات الأطراف الثالثة والغرامات التنظيمية والتكاليف المعقولة لمراقبة الائتمان والتحقيق الجنائي الناشئة عن حادث أمني يُعزى إلى إخلال المزود بهذه الاتفاقية.
+AI TYPE: indemnity
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['يعوض', 'مطالبات']
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 مدة هذه الاتفاقية الأولية ثلاث (3) سنوات. يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً. يجوز للعميل الإنهاء فوراً، دون غرامة، إذا تعرض المزود لحادث أمني يؤثر على بيانات العميل نتيجة إهماله الجسيم.
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['إخلال جوهري']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إشعار']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['غرامة']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=32 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=4
+  BLOCKED: clause=5.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 5/15] 05_Data_Processing_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك.
+AI TYPE: data_protection
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['البيانات الشخصية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية.
+AI TYPE: data_protection
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['البيانات الشخصية']
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['التزام']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم. في حالة التفويض العام، يُخطر المعالج المتحكم بأي تغييرات مقترحة تتعلق بإضافة أو استبدال المعالجين الفرعيين، مع منح المتحكم فرصة الاعتراض خلال أربعة عشر (14) يوماً.
+AI TYPE: subcontracting
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء.
+AI TYPE: security
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['البيانات الشخصية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة.
+AI TYPE: data_protection
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 يخطر المعالج المتحكم، دون تأخير غير مبرر وفي جميع الأحوال خلال ثمانٍ وأربعين (48) ساعة، بأي خرق للبيانات الشخصية يعلم به، ويقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين.
+AI TYPE: data_protection
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 وفقاً لاختيار المتحكم، عند إنهاء اتفاقية الخدمات الأساسية، يحذف المعالج أو يعيد جميع البيانات الشخصية إلى المتحكم ويحذف النسخ الموجودة، ما لم يقتضِ القانون المعمول به الاحتفاظ بها.
+AI TYPE: data_protection
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['البيانات الشخصية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 8.1 يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية.
+AI TYPE: other
+compliance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الامتثال']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=8.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 6/15] 06_Executive_Employment_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 تشغل المديرة التنفيذية منصب كبيرة المسؤولين العلميين، وتخضع لإشراف الرئيس التنفيذي، وتكرس معظم وقت عملها لشؤون الشركة.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 تدفع الشركة للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة.
+AI TYPE: payment
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['مجلس الإدارة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يجوز للشركة إنهاء عمل المديرة التنفيذية في أي وقت، بسبب مشروع أو دونه، رهناً بأحكام تعويض نهاية الخدمة الواردة هنا. في حال الإنهاء دون سبب مشروع أو الاستقالة لسبب وجيه، تحصل المديرة التنفيذية على استمرار دفع راتبها الأساسي لمدة اثني عشر (12) شهراً وسداد أقساط التأمين الصحي لمدة اثني عشر (12) شهراً، رهناً بتوقيع إبراء ذمة.
+AI TYPE: termination
+indemnity score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['تعويض']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعويض']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.
+AI TYPE: non_compete
+services score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['خدمات']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.2 خلال مدة العمل ولمدة أربعة وعشرين (24) شهراً بعد انتهائه، تمتنع المديرة التنفيذية عن استقطاب أي موظف لدى الشركة للعمل.
+AI TYPE: non_compete
+employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['موظف']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 تتنازل المديرة التنفيذية بموجب هذا العقد للشركة عن كامل الحقوق في أي اختراع أو اكتشاف أو مصنف يُبتكر أثناء مدة العمل، يتعلق بنشاط الشركة أو ينشأ عن استخدام موارد الشركة.
+AI TYPE: intellectual_property
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['اختراع']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 يخضع هذا العقد لقانون ولاية ديلاوير. تقر المديرة التنفيذية بأن أحكام عدم المنافسة الواردة هنا مقابل عوض كافٍ ومعقولة من حيث النطاق والمدة.
+AI TYPE: other
+restrictive_covenants score= 10 base= 5 specificity= 4 context+= 1 context-= 0 signals= ['عدم المنافسة']
+non_compete score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['عدم المنافسة']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=4.2 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 7/15] 07_Software_Licensing_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج المرخَّص وإعادة إنتاجه وتوزيعه فقط كجزء مدمج في المنتجات المرخَّصة، طوال المدة.
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.2 لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يدفع المرخَّص له للمرخِّص إتاوة قدرها 4.5% من صافي المبيعات للمنتجات المرخَّصة، تُدفع ربع سنوياً، مع تقرير إتاوات يفصّل الوحدات المباعة وصافي المبيعات.
+AI TYPE: payment
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إتاوة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.2 يحق للمرخِّص، بإشعار مدته ثلاثون (30) يوماً، تدقيق دفاتر وسجلات المرخَّص له المتعلقة بحساب الإتاوات، بحد أقصى مرة واحدة سنوياً؛ وإذا كشف التدقيق عن نقص في السداد يتجاوز خمسة بالمائة (5%)، يتحمل المرخَّص له التكلفة المعقولة للتدقيق.
+AI TYPE: other
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الإتاوات']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يحتفظ المرخِّص بكامل الحقوق في البرنامج المرخَّص، بما في ذلك جميع التعديلات والتحسينات، سواء أجراها المرخِّص أو المرخَّص له.
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 يضمن المرخِّص أنه يملك الحق في منح الترخيص الوارد هنا. باستثناء ما هو منصوص عليه صراحة، يُقدَّم البرنامج المرخَّص "كما هو" دون أي ضمان من أي نوع، صريح أو ضمني، بما في ذلك ضمانات القابلية للتسويق أو الملاءمة لغرض معين.
+AI TYPE: intellectual_property
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['ضمان']
+deposit score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ضمان']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 تستمر هذه الاتفاقية لمدة خمس (5) سنوات من تاريخ النفاذ. يجوز للمرخِّص إنهاء هذه الاتفاقية فوراً إذا لم يسدد المرخَّص له الإتاوات المستحقة ولم يعالج هذا التقصير خلال خمسة عشر (15) يوماً من إشعار خطي.
+AI TYPE: termination
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء', 'إشعار']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الإتاوات']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية).
+AI TYPE: liability
+intellectual_property score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['الملكية الفكرية']
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ملكية']
+royalties score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الإتاوات']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=25 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 8/15] 08_Procurement_Supply_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يقدم المشتري أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم المطلوب. يسلم المورد بضائع مطابقة للمواصفات في التواريخ المحددة في كل أمر شراء مقبول.
+AI TYPE: delivery
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.2 الوقت عنصر جوهري. إذا لم يسلم المورد البضائع خلال خمسة (5) أيام عمل من تاريخ التسليم المقرر، يجوز للمشتري، وفقاً لتقديره، إلغاء أمر الشراء المعني دون غرامة والحصول على بضائع بديلة، مع تحميل المورد مسؤولية أي تكاليف بديلة معقولة.
+AI TYPE: delivery
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['غرامة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 تُحدَّد أسعار البضائع في الملحق أ وتظل ثابتة خلال الاثني عشر (12) شهراً الأولى من المدة، رهناً بعد ذلك بتعديل بحد أقصى مرة واحدة سنوياً بناءً على زيادات موثقة في تكاليف المواد الخام، بحد أقصى 6% سنوياً.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.2 يسدد المشتري جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها.
+AI TYPE: payment
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يحق للمشتري فحص البضائع خلال خمسة عشر (15) يوم عمل من التسليم ورفض أي بضائع غير مطابقة للمواصفات. يستبدل المورد البضائع غير المطابقة على نفقته خلال عشرة (10) أيام عمل.
+AI TYPE: delivery
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 يضمن المورد أن البضائع ستكون خالية من عيوب المواد والصناعة لمدة أربعة وعشرين (24) شهراً من التسليم، وستكون مطابقة للمواصفات.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 خلال المدة، يشتري المشتري ما لا يقل عن سبعين بالمائة (70%) من احتياجاته من البضائع من المورد، شريطة أن يظل المورد منافساً من حيث السعر والجودة وأداء التسليم مقارنة بالسوق.
+AI TYPE: other
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['السعر']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 مدة هذه الاتفاقية الأولية ثلاث (3) سنوات. يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة.
+AI TYPE: termination
+termination_for_cause score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['إخلال جوهري']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إشعار']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+default score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['إخلال']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 لا يتحمل أي طرف المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية. لا تتجاوز المسؤولية الإجمالية للمورد قيمة أمر الشراء الذي نشأت عنه المطالبة.
+AI TYPE: liability
+liability score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية', 'الأضرار غير المباشرة']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=24 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+========================================================================================
+[AR 9/15] 09_Consulting_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 الاستشاري مقاول مستقل وليس موظفاً أو وكيلاً أو شريكاً في مشروع مشترك أو شريكاً للعميل. يتحمل الاستشاري وحده مسؤولية جميع الضرائب والتأمينات والمزايا المعمول بها.
+AI TYPE: other
+tax score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الضرائب']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 ينفذ الاستشاري الخدمات الموصوفة في كل بيان عمل بأسلوب مهني. يسدد العميل أتعاب الاستشاري المحددة في بيان العمل المعني خلال ثلاثين (30) يوماً من الفوترة.
+AI TYPE: payment
+invoice score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الفوترة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 تُعتبر جميع نواتج العمل والتقارير والتحليلات والتوصيات التي يطورها الاستشاري خصيصاً للعميل بموجب هذه الاتفاقية "عملاً بموجب طلب" وتؤول ملكيتها حصراً إلى العميل عند السداد الكامل.
+AI TYPE: intellectual_property
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.2 يحتفظ الاستشاري بملكية منهجياته وأطر عمله وخبراته العامة السابقة، ويجوز له إعادة استخدام المعارف والمهارات العامة المكتسبة أثناء التكليف في تكليفات مستقبلية مع عملاء آخرين، شريطة عدم الإفصاح عن أي معلومات سرية للعميل.
+AI TYPE: intellectual_property
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 يحافظ الاستشاري على سرية أي معلومات غير علنية للعميل يتم الإفصاح عنها في سياق الخدمات، ولا يفصح عنها لأطراف ثالثة دون موافقة خطية مسبقة من العميل.
+AI TYPE: confidentiality
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 تستمر هذه الاتفاقية حتى إتمام الخدمات الموصوفة في بيان العمل المعني، ما لم يتم إنهاؤها مبكراً. يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته ثلاثون (30) يوماً، مع بقاء العميل مسؤولاً عن الأتعاب المستحقة حتى تاريخ نفاذ الإنهاء.
+AI TYPE: termination
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 لا تتجاوز المسؤولية الإجمالية للاستشاري الناشئة عن هذه الاتفاقية الأتعاب المدفوعة من العميل بموجب بيان العمل المعني خلال الأشهر الستة (6) السابقة للمطالبة.
+AI TYPE: liability
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=18 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=1
+  BLOCKED: clause=3.1 field=market_comparison reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 10/15] 10_Outsourcing_Managed_Services_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.
+AI TYPE: other
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 ينفذ المزود الخدمات وفقاً لمستويات الخدمة المحددة في الملحق أ. ينشئ الطرفان لجنة حوكمة مشتركة، تجتمع شهرياً، لمراجعة الأداء والتصعيدات ومبادرات التحسين المستمر.
+AI TYPE: service_level
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['حوكمة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يعرض المزود على الموظفين المنقولين عملاً بشروط مماثلة إلى حد كبير لشروطهم الحالية لدى العميل، ويعترف بأقدميتهم لدى العميل لأغراض الأهلية للمزايا، بالقدر الذي تسمح به خطط مزايا المزود.
+AI TYPE: other
+employment score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['مزايا']
+benefits score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مزايا']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 يسدد العميل للمزود رسوماً شهرية على النحو المحدد في الملحق أ، رهناً بالتعديل بناءً على مؤشرات الحجم المحددة في ذلك الملحق، تُفوتَر شهرياً بأثر رجعي مع استحقاق السداد خلال ثلاثين (30) يوماً.
+AI TYPE: payment
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['السداد']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 يحافظ المزود على ضمانات إدارية وتقنية ومادية لبيانات العميل متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر العميل بأي حادث أمني خلال أربع وعشرين (24) ساعة.
+AI TYPE: security
+cybersecurity score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+data_protection score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['حادث أمني']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['أمن']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.
+AI TYPE: renewal
+pricing score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['الأسعار']
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 لا تتجاوز المسؤولية الإجمالية للمزود الرسوم المدفوعة من العميل خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء الإخلال بالبند 5 (أمن البيانات والامتثال) أو التزامات التعويض الخاصة بالمزود، والتي تُحدد بضعف تلك الرسوم.
+AI TYPE: liability
+liability score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية']
+payment score= 3 base= 2 specificity= 0 context+= 1 context-= 0 signals= ['الرسوم']
+fees score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['الرسوم']
+security score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['أمن']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=15 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=2
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=legal_insight reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 11/15] 11_Commercial_Lease_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 9
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 مدة هذا العقد خمس (5) سنوات، تبدأ في 1 أغسطس 2026 وتنتهي في 31 يوليو 2031، ما لم يُنهَ العقد مبكراً وفقاً لأحكامه.
+AI TYPE: renewal
+term score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['مدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد.
+AI TYPE: payment
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.2 يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر.
+AI TYPE: payment
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['تسوية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة.
+AI TYPE: other
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['ضمان']
+deposit score= 2 base= 2 specificity= 0 context+= 0 context-= 0 signals= ['وديعة', 'ضمان']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 يستخدم المستأجر المباني حصراً لأغراض المكاتب العامة واستوديو التصميم، ويحافظ على داخل المباني في حالة جيدة، باستثناء التآكل الناتج عن الاستخدام العادي.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.2 يكون المؤجر مسؤولاً عن صيانة وإصلاح هيكل المبنى والسطح والأنظمة المشتركة للمبنى، بما في ذلك نظام التكييف الذي يخدم المباني.
+AI TYPE: other
+maintenance score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['صيانة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول.
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['التنازل']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['التنازل']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 إذا لم يسدد المستأجر الإيجار الأساسي خلال عشرة (10) أيام من استحقاقه، أو أخل بأي شرط جوهري آخر من هذا العقد ولم يعالج ذلك خلال ثلاثين (30) يوماً من إشعار خطي، يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار المعجل للمدة المتبقية، رهناً بواجب المؤجر في تخفيف الأضرار.
+AI TYPE: termination
+termination score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء', 'إشعار']
+notice score= 3 base= 1 specificity= 2 context+= 0 context-= 0 signals= ['إشعار']
+refund score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['استرداد']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 يحافظ المستأجر على تأمين مسؤولية مدنية تجارية عامة بحدود لا تقل عن 2,000,000 دولار لكل حادثة، مع تسمية المؤجر كمؤمَّن إضافي، ويعوض المؤجر عن المطالبات الناشئة عن استخدام المستأجر للمباني، باستثناء ما ينشأ عن إهمال المؤجر.
+AI TYPE: insurance
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تأمين']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=9 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=3
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 12/15] 12_Loan_Credit_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.
+AI TYPE: payment
+loan score= 3 base= 1 specificity= 0 context+= 2 context-= 0 signals= ['قرض']
+interest score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فائدة']
+duration score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['فترة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 ضماناً لالتزامات المقترض بموجب هذه الاتفاقية، يمنح المقترض المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.
+AI TYPE: other
+loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يُقر المقترض بأنه مؤسس حسب الأصول، وفي وضع قانوني سليم، ويملك الصلاحية لإبرام هذه الاتفاقية. يتعهد المقترض بالحفاظ على نسبة تغطية خدمة الدين لا تقل عن 1.25:1، تُختبر ربع سنوياً، وبتزويد المُقرض ببيانات مالية ربع سنوية خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.
+AI TYPE: compliance
+loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+insurance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تغطية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.
+AI TYPE: other
+penalty score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['غرامة']
+repayment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['سداد']
+loan score= 1 base= 0 specificity= 0 context+= 1 context-= 0 signals= []
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 التزامات المقترض بموجب هذه الاتفاقية مكفولة من قبل شركة Trailhead Holdings Inc.، الشركة الأم للمقترض، بموجب اتفاقية كفالة منفصلة مبرمة بالتزامن مع هذه الاتفاقية.
+AI TYPE: other
+guarantee score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['كفالة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 تنشأ حالة تعثر إذا لم يسدد المقترض أي دفعة عند استحقاقها واستمر هذا التقصير لمدة عشرة (10) أيام عمل، أو أخل بأي تعهد في البند 3 ولم يعالج ذلك خلال ثلاثين (30) يوماً من الإخطار، أو خضع لإجراءات إعسار.
+AI TYPE: penalty
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعهد']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.2 عند وقوع حالة تعثر، يجوز للمُقرض إعلان استحقاق كامل المبلغ الأصلي المتبقي والفوائد المتراكمة فوراً وممارسة جميع الحقوق وسبل الانتصاف المتاحة بموجب اتفاقية الضمان والقانون المعمول به، بما في ذلك حجز الضمانات.
+AI TYPE: penalty
+loan score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['قرض']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 تخضع هذه الاتفاقية لقانون ولاية ديلاوير. يُحسم أي نزاع ينشأ عن هذه الاتفاقية أمام المحاكم الولائية أو الفيدرالية الواقعة في ويلمنغتون، ديلاوير، ويتنازل كل طرف بشكل نهائي عن أي حق في محاكمة أمام هيئة محلفين.
+AI TYPE: governance
+dispute_resolution score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['نزاع']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['المحاكم']
+jurisdiction score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['المحاكم']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=27 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=11
+  BLOCKED: clause=4.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=7.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 13/15] 13_Asset_Purchase_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 عند الإغلاق، يبيع البائع وينقل ويسلم إلى المشتري، ويشتري المشتري من البائع، كامل حقوق البائع في الأصول المشتراة، خالية من أي رهن، باستثناء الرهون المسموح بها المدرجة في الملحق ج.
+AI TYPE: other
+collateral score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['رهن']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يبلغ إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق؛ و(ب) 2,000,000 دولار تُودع في حساب ضمان لمدة ثمانية عشر (18) شهراً لضمان التزامات تعويض البائع بموجب البند 6.
+AI TYPE: payment
+warranty score= 6 base= 1 specificity= 5 context+= 0 context-= 0 signals= ['ضمان']
+indemnity score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['تعويض']
+deposit score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ضمان']
+compensation score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعويض']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يُقر البائع ويضمن أن: (أ) لديه سند ملكية صحيح وقابل للتداول على الأصول المشتراة؛ (ب) البيانات المالية المقدمة للمشتري تعرض بأمانة الوضع المالي للنشاط؛ و(ج) لا توجد دعاوى قضائية معلقة أو محتملة من شأنها الإضرار الجوهري بالأصول المشتراة.
+AI TYPE: other
+ownership score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ملكية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 بين تاريخ هذه الاتفاقية وتاريخ الإغلاق، يدير البائع النشاط في السياق الاعتيادي وفقاً للممارسات السابقة، ولا يجوز له، دون موافقة خطية مسبقة من المشتري، إبرام عقد جوهري، أو التصرف في أصل جوهري، أو زيادة تعويضات الموظفين الرئيسيين.
+AI TYPE: governance
+indemnity score= 9 base= 5 specificity= 4 context+= 0 context-= 0 signals= ['تعويضات']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 يخضع التزام المشتري بالإغلاق لاستيفاء الشروط المعتادة، بما في ذلك دقة إقرارات وضمانات البائع كما في تاريخ الإغلاق، والحصول على جميع موافقات الأطراف الثالثة المطلوبة، وعدم وجود أي تغيير جوهري سلبي يؤثر على النشاط.
+AI TYPE: other
+covenant score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['التزام']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 يعوض البائع المشتري عن الخسائر الناشئة عن الإخلال بإقرارات وضمانات البائع، رهناً بحد أدنى قدره 100,000 دولار وحد أقصى إجمالي قدره 2,000,000 دولار، باستثناء الإخلال بإقرارات الملكية والصلاحية، التي لا تخضع لهذا الحد الأدنى أو الحد الأقصى.
+AI TYPE: indemnity
+indemnity score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['يعوض']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 لمدة خمس (5) سنوات بعد تاريخ الإغلاق، يمتنع البائع وكبار مساهميه، بشكل مباشر أو غير مباشر، عن مزاولة نشاط منافس للنشاط في أمريكا الشمالية.
+AI TYPE: non_compete
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=17 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=5
+  BLOCKED: clause=5.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=2.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 14/15] 14_Shareholders_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 8
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.
+AI TYPE: governance
+loan score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل.
+AI TYPE: other
+anti_dilution_preemptive_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['أوراق مالية جديدة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 إذا وافق حاملو أغلبية الأسهم الممتازة القائمة وأغلبية المجلس على بيع الشركة، يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها ("حق التنازل الإلزامي")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات.
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['التنازل']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['التنازل']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط ("حق التنازل المشترك").
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['التنازل']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['التنازل']
+loan score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 طالما احتفظ المستثمر بنسبة لا تقل عن 3% من رأس المال المخفف بالكامل للشركة، تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.
+AI TYPE: other
+loan score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+investor_information_rights score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['نهاية السنة المالية']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 لا يجوز لأي مساهم التنازل عن أي أسهم من رأس مال الشركة إلا وفقاً لهذه الاتفاقية، بما في ذلك حق الشفعة لصالح الشركة ثم المساهمين الآخرين، والامتثال لقوانين الأوراق المالية المعمول بها.
+AI TYPE: other
+intellectual_property score= 5 base= 1 specificity= 4 context+= 0 context-= 0 signals= ['التنازل']
+assignment score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['التنازل']
+corporate_governance score= 2 base= 1 specificity= 0 context+= 1 context-= 0 signals= ['مساهم']
+governing_law score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['لقوانين']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.
+AI TYPE: other
+loan score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+payment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['رأس المال']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+amendment score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['تعديل']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 تنتهي هذه الاتفاقية تلقائياً عند وقوع أيهما أولاً: طرح عام أولي مؤهل أو بيع الشركة الموافق عليه وفقاً للبند 3.1.
+AI TYPE: termination
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['تلقائياً']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=8 | receipts=21 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=10
+  BLOCKED: clause=6.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=6.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=1.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=البند 7.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=البند 7.1 field=negotiation_advice reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=3.2 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=4.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+  BLOCKED: clause=5.1 field=recommendation reasons=['FINAL_TEXT_SOURCE_CONTAMINATION']
+
+========================================================================================
+[AR 15/15] 15_General_Commercial_Agreement_AR.docx
+========================================================================================
+CLAUSES INPUT TYPE: <class 'dict'>
+CLAUSES INPUT LEN: 7
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 1.1 يتعاون الطرفان في أنشطة التعاون وفقاً لما يُتفق عليه من وقت لآخر في خطة مشروع خطية، تحدد النطاق والجدول الزمني والميزانية ومسؤوليات كل طرف.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 2.1 ما لم تنص خطة المشروع على خلاف ذلك، يتحمل كل طرف تكاليفه ونفقاته الخاصة المتكبدة فيما يتعلق بأنشطة التعاون. تُوزَّع أي تكاليف مشتركة بالتساوي ما لم يُتفق خطياً على خلاف ذلك.
+AI TYPE: other
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 3.1 يحتفظ كل طرف بملكية ملكيته الفكرية السابقة. تكون الملكية الفكرية المشتركة مملوكة بشكل مشترك للطرفين بحصص متساوية غير مقسمة، ويحق لكل طرف استغلالها دون تقديم حساب للطرف الآخر، رهناً بحق الأولوية في التفاوض قبل ترخيص الملكية الفكرية المشتركة لمنافس مباشر للطرف الآخر.
+AI TYPE: intellectual_property
+intellectual_property score= 10 base= 6 specificity= 4 context+= 0 context-= 0 signals= ['الملكية الفكرية', 'ترخيص']
+license score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['ترخيص']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 4.1 لا يجوز لأي طرف استخدام العلامات التجارية أو الأسماء التجارية أو عناصر العلامة الخاصة بالطرف الآخر في أي دعاية أو مواد تسويقية أو بيان صحفي دون موافقة خطية مسبقة من الطرف الآخر.
+AI TYPE: other
+trademark_branding score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['العلامات التجارية']
+corporate_governance score= 1 base= 1 specificity= 0 context+= 0 context-= 0 signals= ['موافقة']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 5.1 يحافظ كل طرف على سرية أي معلومات غير علنية يفصح عنها الطرف الآخر فيما يتعلق بهذه الاتفاقية، ولا يستخدمها إلا لأغراض أنشطة التعاون.
+AI TYPE: confidentiality
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 6.1 تستمر هذه الاتفاقية لمدة سنتين (2) من تاريخ النفاذ، وتتجدد تلقائياً لمدد متتالية قدرها سنة (1) واحدة، ما لم يقدم أحد الطرفين إشعاراً خطياً بعدم التجديد قبل ستين (60) يوماً على الأقل. يجوز لأي طرف إنهاء هذه الاتفاقية للمصلحة بإشعار خطي مدته تسعون (90) يوماً.
+AI TYPE: renewal
+automatic_renewal score= 7 base= 1 specificity= 6 context+= 0 context-= 0 signals= ['تلقائياً']
+termination score= 4 base= 1 specificity= 3 context+= 0 context-= 0 signals= ['إنهاء']
+=== END TAXONOMY DEBUG ===
+
+
+=== TAXONOMY DEBUG ===
+CLAUSE: 7.1 لا يتحمل أي طرف تجاه الآخر المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية الناشئة عن هذه الاتفاقية. تخضع هذه الاتفاقية لقانون ولاية نيويورك.
+AI TYPE: liability
+liability score= 5 base= 2 specificity= 3 context+= 0 context-= 0 signals= ['المسؤولية', 'الأضرار غير المباشرة']
+=== END TAXONOMY DEBUG ===
+
+PASS | clauses=7 | receipts=19 | unsuccessful=0 | hash_mismatch=0 | post_gate=0 | blocked=0
+
+----------------------------------------------------------------------------------------
+AR SUMMARY
+----------------------------------------------------------------------------------------
+DOCUMENTS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 337
+TOTAL BLOCKED: 48
+SUMMARY: regression_results_multilang\ar\_summary.json
+
+########################################################################################
+FINAL ARABIC-ONLY SUMMARY
+########################################################################################
+EXPECTED RUNS: 15
+COMPLETED RUNS: 15
+ERRORS: 0
+INTEGRITY FAILURES: 0
+TOTAL RECEIPTS: 337
+TOTAL BLOCKED: 48
+SUMMARY: regression_results_multilang\_summary_ar_only.json
+FINAL RESULT: PASS

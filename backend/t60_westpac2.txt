@@ -1,0 +1,44 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 23208
+PDF_LINES_DEBUG {'line_count': 413, 'non_empty_line_count': 277, 'max_line_len': 255, 'first_20': ['Your Statement', '                                                                Statement 15              (Page 1 of 6)', '', '                                                              Account Number    06 3010 13274026', '                                      027', '                                                                Statement', '                                                                    Period        1 Jul 2023 - 14 Jul 2023      MS W N ABD KADIR', '        UNIT 4 23-25 HILLCREST GR', '                                                                    Closing Balance         $12,567.82 CR', '       SPRINGVALE VIC 3171', '                                                                       Enquiries                   13 2221', '', '', '', '', '    Smart Access', '', '         Enjoy the convenience and security of withdrawing what you need, when you need it. Plus you can have your', '         monthly account fee waived if you deposit at least $2,000 each calendar month.', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+STATEMENT_SUMMARY_EXTRACTED {'ending_balance': 12567.82, 'withdrawals': 6.0, 'opening_balance': 156.25, 'deposits': 156.25}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 156.25, 'withdrawals': 23631.04, 'deposits': 36042.61, 'ending_balance': 12567.82, 'source': 'opening_total_debits_credits_closing'}
+DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 96, 'income_total': 23114.2, 'expense_total': 13079.43}
+CM_POSITION_LINES_SMALL_EXPENSES []
+GENERAL1_BLOCKS_DEBUG {'blocks': 0, 'last_10': []}
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': True, 'has_total_debits': True}
+WESTPAC_GUARD_DEBUG2 {'has_date_transaction_debit_credit_balance': True, 'has_date_transaction_description_debit_credit_balance': False, 'has_total_credits': True, 'has_total_debits': True, 'has_closing_balance': True, 'has_opening_formula': True, 'has_westpac_layout': True}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['06.00', '13,000.00', '22,273.55'], 'body': 'Fast Transfer From HAMZAN SUYUKV06.00.36 I love you too muchhhhhhh $13,000.00 $22,273.55 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['35.25', '22,238.30'], 'body': 'StepPay Repayment 35.25 $ $22,238.30 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['44.00', '22,194.30'], 'body': 'StepPay Repayment 44.00 $ $22,194.30 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['25.36', '22,168.94'], 'body': 'StepPay Repayment 25.36 $ $22,168.94 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['36.25', '22,132.69', '22,103.81', '28.88'], 'body': 'StepPay Repayment 36.25 $ $22,132.69 CRSL.R3.S951.D195.O $ $22,103.81 CR0303 14 Jul StepPay Repayment 28.88'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['25.34', '22,078.47'], 'body': 'StepPay Repayment 25.34 $ $22,078.47 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['36.25', '22,042.22'], 'body': 'StepPay Repayment 36.25 $ $22,042.22 CRZZ258R3'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['36.25', '22,005.97'], 'body': 'StepPay Repayment 36.25 $ $22,005.97 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['3.00', '22,002.97'], 'body': 'CocaColaEPP Keysborough AUS Card xx9855 Value Date: 12/07/2023 3.00 $ $22,002.97 CR7351.17965.3.3'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['10.66', '21,992.31'], 'body': 'Sushi Shien Parkmore Keysborough VI AUS Card xx9855 Value Date: 12/07/2023 10.66 $ $21,992.31 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['23.50', '21,968.81'], 'body': 'WOOLWORTHS 3371 KEYSBOROUGH AU AUS Card xx9855 Value Date: 12/07/2023 23.50 $ $21,968.81 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['0.99', '21,967.82'], 'body': 'WOOLWORTHS 3371 KEYSBOROUGH AU AUS Card xx9855 Value Date: 12/07/2023 0.99 $ $21,967.82 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['1,800.00', '20,167.82'], 'body': 'Transfer To C YUGARANG PayID Phone from CommBank App tq kakak 1,800.00 $ $20,167.82 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['2,700.00', '17,467.82'], 'body': 'Transfer To My Love CommBank App i love u 2,700.00 $ $17,467.82 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['100.00', '17,567.82'], 'body': 'Fast Transfer From WAN NORAIN ABD KADIR to PayID Phone Shop $100.00 $17,567.82 CR'}
+WESTPAC_BIG_BLOCK {'date': '2023-07-14', 'nums': ['5,000.00', '12,567.82'], 'body': 'Transfer to xx6620 CommBank app simpan 5,000.00 $ $12,567.82 CR'}
+WESTPAC_AU_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 101, 'income_total': 22777.61, 'expense_total': 23417.19}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': True, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+FINANCE_CANDIDATE_AUDIT [{'parser': 'date_description_debit_credit_balance', 'count': 96, 'income_total': 23114.2, 'expense_total': 13079.43, 'income_gap': 12928.41, 'expense_gap': 10551.61, 'ledger_total': 36193.63, 'max_tx_abs': 8871.0, 'score': 23480.02}, {'parser': 'westpac_au_debit_credit_balance', 'count': 101, 'income_total': 22777.61, 'expense_total': 23417.19, 'income_gap': 13265.0, 'expense_gap': 213.85, 'ledger_total': 46194.8, 'max_tx_abs': 8871.0, 'score': 13978.85}]
+FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER [{'parser': 'westpac_au_debit_credit_balance', 'income_gap': 13265.0, 'expense_gap': 213.85, 'score': 13978.85}]
+NO_EXACT_OFFICIAL_FINANCE_CANDIDATE [{'parser': 'westpac_au_debit_credit_balance', 'income_gap': 13265.0, 'expense_gap': 213.85, 'score': 13978.85}]
+STATEMENT_LAYOUT_DETECTED westpac_au_debit_credit_balance
+FINANCE_CANDIDATE_SELECTED {'parser': 'westpac_au_debit_credit_balance', 'transactions': 101, 'income_total': 22777.61, 'expense_total': 23417.19, 'income_gap': 13265.0, 'expense_gap': 213.85, 'score': 13978.85}
+SUSPICIOUS t60.pdf | tx=101 income=22777.61 expenses=23417.19 expected_income=36042.61 expected_expenses=23631.04 summary_ok=False real_ok=False opening=156.25 ending=12567.82 gap=13051.15 reason=SUMMARY_GAP income=13265.0 expense=213.85; REAL_BALANCE_GAP=13051.15

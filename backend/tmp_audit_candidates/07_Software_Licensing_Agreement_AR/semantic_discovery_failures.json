@@ -1,0 +1,749 @@
+[
+  {
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يدفع المرخَّص له للمرخِّص إتاوة قدرها 4.5% من صافي المبيعات للمنتجات المرخَّصة، تُدفع ربع سنوياً، مع تقرير إتاوات يفصّل الوحدات المباعة وصافي المبيعات.",
+    "primary_type": "royalties",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 84,
+            "end": 100,
+            "text": "تُدفع ربع سنوياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c21d39119f5d927066d439bb764c7c289cd3d68d58f10875c4345b4e3e24dfe4",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 84,
+            "end": 100,
+            "text": "تُدفع ربع سنوياً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c21d39119f5d927066d439bb764c7c289cd3d68d58f10875c4345b4e3e24dfe4",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية).",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 225,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية)"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "2eced378ddc4bbca4f1cd98b67ee39dac38b62dd5940bb191eca5e50604928f3",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 225,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية)"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2eced378ddc4bbca4f1cd98b67ee39dac38b62dd5940bb191eca5e50604928f3",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 225,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية)"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "2eced378ddc4bbca4f1cd98b67ee39dac38b62dd5940bb191eca5e50604928f3",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 225,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمرخِّص بموجب هذه الاتفاقية إجمالي الإتاوات المدفوعة من المرخَّص له خلال الاثني عشر (12) شهراً السابقة للمطالبة، باستثناء المطالبات الناشئة عن إخلال المرخِّص بالبند 3 (ملكية الملكية الفكرية)"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "2eced378ddc4bbca4f1cd98b67ee39dac38b62dd5940bb191eca5e50604928f3",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج المرخَّص وإعادة إنتاجه وتوزيعه فقط كجزء مدمج في المنتجات المرخَّصة، طوال المدة.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 95,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 4,
+            "end": 87,
+            "text": "يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "32cde5ecb3eea4683368fc9a995c220c98e6a8266f2b27a124fcf24a78dd5d71",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "LICENSEE",
+          "obligated_actor": null,
+          "counterparty": "LICENSOR",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 30,
+            "end": 64,
+            "text": "ترخيصاً غير حصري وغير قابل للتحويل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "1b9b5fd10764caee974a5c5762915fa2e14576b366db955dacbef5ddff24e68d",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 30,
+            "end": 64,
+            "text": "ترخيصاً غير حصري وغير قابل للتحويل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "1b9b5fd10764caee974a5c5762915fa2e14576b366db955dacbef5ddff24e68d",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_GRANT",
+        "rank": 95,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_GRANT",
+            "start": 4,
+            "end": 87,
+            "text": "يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "32cde5ecb3eea4683368fc9a995c220c98e6a8266f2b27a124fcf24a78dd5d71",
+        "normalized_concept": "LICENSE_GRANT",
+        "normalized_relation": {
+          "right_holder": "LICENSEE",
+          "obligated_actor": null,
+          "counterparty": "LICENSOR",
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "GRANT_LICENSE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 30,
+            "end": 64,
+            "text": "ترخيصاً غير حصري وغير قابل للتحويل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "1b9b5fd10764caee974a5c5762915fa2e14576b366db955dacbef5ddff24e68d",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 92,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 30,
+            "end": 64,
+            "text": "ترخيصاً غير حصري وغير قابل للتحويل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "1b9b5fd10764caee974a5c5762915fa2e14576b366db955dacbef5ddff24e68d",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "1.2",
+    "source_language": "ar",
+    "source_text": "1.2 لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.",
+    "primary_type": "intellectual_property",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 87,
+            "text": "لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "6f088a466ac4462ea9c13bd481326fabc160b1963758e5e9e6d3a2790b2a43e2",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 175,
+            "text": "لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "c702c36edc6530fcfa25e009e37adb02a39cab282aa212a4657e8a868546f575",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LICENSE_RESTRICTION",
+        "rank": 94,
+        "candidate_primary_type": "intellectual_property",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LICENSE_RESTRICTION",
+            "start": 4,
+            "end": 87,
+            "text": "لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "6f088a466ac4462ea9c13bd481326fabc160b1963758e5e9e6d3a2790b2a43e2",
+        "normalized_concept": "LICENSE_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "LICENSEE",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 175,
+            "text": "لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "c702c36edc6530fcfa25e009e37adb02a39cab282aa212a4657e8a868546f575",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LICENSED_SOFTWARE",
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "07_Software_Licensing_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 تستمر هذه الاتفاقية لمدة خمس (5) سنوات من تاريخ النفاذ. يجوز للمرخِّص إنهاء هذه الاتفاقية فوراً إذا لم يسدد المرخَّص له الإتاوات المستحقة ولم يعالج هذا التقصير خلال خمسة عشر (15) يوماً من إشعار خطي.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة خمس (5) سنوات",
+            "start": 25,
+            "end": 42
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 60,
+            "end": 201,
+            "text": "يجوز للمرخِّص إنهاء هذه الاتفاقية فوراً إذا لم يسدد المرخَّص له الإتاوات المستحقة ولم يعالج هذا التقصير خلال خمسة عشر (15) يوماً من إشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "7f1589aaa31ddeaa76c6d036c38c8c00b68dc7830975ce8a94f2f1b71f3aeb18",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 107,
+            "end": 201,
+            "text": "يسدد المرخَّص له الإتاوات المستحقة ولم يعالج هذا التقصير خلال خمسة عشر (15) يوماً من إشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7531b80ee01af2d164f1b1a943a5ae67551d7d9dce6ed2b702a01487fe968217",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 60,
+            "end": 201,
+            "text": "يجوز للمرخِّص إنهاء هذه الاتفاقية فوراً إذا لم يسدد المرخَّص له الإتاوات المستحقة ولم يعالج هذا التقصير خلال خمسة عشر (15) يوماً من إشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "7f1589aaa31ddeaa76c6d036c38c8c00b68dc7830975ce8a94f2f1b71f3aeb18",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 107,
+            "end": 201,
+            "text": "يسدد المرخَّص له الإتاوات المستحقة ولم يعالج هذا التقصير خلال خمسة عشر (15) يوماً من إشعار خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "7531b80ee01af2d164f1b1a943a5ae67551d7d9dce6ed2b702a01487fe968217",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة خمس (5) سنوات",
+            "start": 25,
+            "end": 42
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

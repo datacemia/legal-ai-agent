@@ -1,0 +1,798 @@
+{
+  "metrics": {
+    "primary_type_support_rate": {
+      "en": null,
+      "fr": 0.5,
+      "ar": null,
+      "macro": 0.5
+    },
+    "mechanism_precision": {
+      "en": null,
+      "fr": 0.6667,
+      "ar": null,
+      "macro": 0.6667
+    },
+    "mechanism_recall": {
+      "en": null,
+      "fr": 0.5,
+      "ar": null,
+      "macro": 0.5
+    },
+    "actor_accuracy": {
+      "en": null,
+      "fr": 0.0,
+      "ar": null,
+      "macro": 0.0
+    },
+    "object_accuracy": {
+      "en": null,
+      "fr": 0.0,
+      "ar": null,
+      "macro": 0.0
+    },
+    "trigger_accuracy": {
+      "en": null,
+      "fr": null,
+      "ar": null,
+      "macro": null
+    },
+    "polarity_accuracy": {
+      "en": null,
+      "fr": 0.0,
+      "ar": null,
+      "macro": 0.0
+    },
+    "procedural_state_accuracy": {
+      "en": null,
+      "fr": 1.0,
+      "ar": null,
+      "macro": 1.0
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": null,
+      "fr": 1.0,
+      "ar": null,
+      "macro": 1.0
+    }
+  },
+  "per_semantic_family": {
+    "ASSIGNMENT": {
+      "mechanism_precision": 1.0,
+      "mechanism_recall": 0.5,
+      "required_mechanisms": 2
+    },
+    "LEASE": {
+      "mechanism_precision": 0.5,
+      "mechanism_recall": 0.5,
+      "required_mechanisms": 2
+    }
+  },
+  "grounding": {
+    "UNSUPPORTED": 4,
+    "GROUNDED": 1
+  },
+  "cross_language_equivalence": {
+    "EN-FR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "EN-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    },
+    "FR-AR": {
+      "concept_equivalence": null,
+      "argument_equivalence": null,
+      "polarity_equivalence": null,
+      "procedural_state_equivalence": null,
+      "numeric_role_equivalence": null,
+      "pairs": 0
+    }
+  },
+  "observed_failure_regressions": {
+    "LIABILITY → GOVERNING LAW": {
+      "result": "FAIL",
+      "expected": [
+        "LIABILITY_CAP"
+      ],
+      "forbidden": [
+        "FORUM_SELECTION",
+        "GOVERNING_LAW"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "02_5_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "02_5_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "FINANCIAL REPORTING → BOARD / DEADLOCK": {
+      "result": "FAIL",
+      "expected": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "forbidden": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_4_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_4_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "BOARD → SUBCONTRACTING": {
+      "result": "FAIL",
+      "expected": [
+        "BOARD_COMPOSITION"
+      ],
+      "forbidden": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "DRAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "forbidden": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "TAG-ALONG POLARITY": {
+      "result": "FAIL",
+      "expected": [
+        "PARTICIPATION_OPTION",
+        "TAG_ALONG_RIGHT"
+      ],
+      "forbidden": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_3_2_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_3_2_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "AUTOMATIC TERMINATION": {
+      "result": "FAIL",
+      "expected": [
+        "AUTOMATIC_TERMINATION"
+      ],
+      "forbidden": [
+        "NOTICE_PREREQUISITE"
+      ],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": []
+    },
+    "INVESTOR PRIOR WRITTEN CONSENT": {
+      "result": "FAIL",
+      "expected": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "14_6_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "14_6_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    },
+    "CONFIDENTIALITY MULTI-MECHANISM": {
+      "result": "FAIL",
+      "expected": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "forbidden": [],
+      "actual_by_language": {},
+      "pass_by_language": {},
+      "missing_languages": [
+        "ar",
+        "en",
+        "fr"
+      ],
+      "malformed_or_missing_rows": [
+        {
+          "fixture_id": "01_1_1_en",
+          "language": "en",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_fr",
+          "language": "fr",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        },
+        {
+          "fixture_id": "01_1_1_ar",
+          "language": "ar",
+          "error": "SOURCE_RESULT_NOT_FOUND",
+          "available_keys": [
+            "error",
+            "fixture_id",
+            "language"
+          ]
+        }
+      ]
+    }
+  },
+  "critical_failures": [],
+  "high_failures": [
+    {
+      "fixture_id": "11_2_1_fr",
+      "language": "fr",
+      "source_text": "2.1 Le Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "PAY_FREQUENCY",
+          "RENT_OBLIGATION"
+        ],
+        "relations": [],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "actual_semantics": {
+        "primary_type": "payment",
+        "mechanisms": [
+          "PAYMENT_OBLIGATION",
+          "PAY_FREQUENCY"
+        ],
+        "states": [],
+        "numeric_roles": [
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          },
+          {
+            "value": 18500,
+            "unit": "USD",
+            "semantic_role": "MONTHLY_BASE_RENT",
+            "related_mechanism": "RENT_OBLIGATION"
+          }
+        ]
+      },
+      "source_evidence": [
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PAYMENT_OBLIGATION",
+          "verdict": "UNSUPPORTED"
+        },
+        {
+          "concept": "PAY_FREQUENCY",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:RENT_OBLIGATION"
+      ]
+    },
+    {
+      "fixture_id": "11_5_1_fr",
+      "language": "fr",
+      "source_text": "5.1 Le Preneur ne pourra céder le présent Bail ni sous-louer les Locaux, en tout ou partie, sans le consentement écrit préalable du Bailleur, lequel ne pourra être refusé, conditionné ou retardé sans motif raisonnable.",
+      "expected_semantics": {
+        "required_mechanisms": [
+          "ASSIGNMENT_RESTRICTION",
+          "CONSENT_PREREQUISITE"
+        ],
+        "relations": [
+          {
+            "concept": "ASSIGNMENT_RESTRICTION",
+            "obligated_actor": "TENANT",
+            "object": "LEASE_OR_PREMISES",
+            "action": "ASSIGN_OR_SUBLET",
+            "polarity": "PROHIBITION"
+          }
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL"
+        ],
+        "numeric_roles": []
+      },
+      "actual_semantics": {
+        "primary_type": "termination_for_convenience",
+        "mechanisms": [
+          "CONSENT_PREREQUISITE"
+        ],
+        "states": [
+          "CONSENT_REQUIRED",
+          "PRIOR_APPROVAL",
+          "PRIOR_CONSENT"
+        ],
+        "numeric_roles": []
+      },
+      "source_evidence": [
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "GROUNDED"
+        },
+        {
+          "concept": "CONSENT_PREREQUISITE",
+          "verdict": "UNSUPPORTED"
+        }
+      ],
+      "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+      "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+      "critical": [],
+      "high": [
+        "MISSING_MATERIAL_MECHANISM:ASSIGNMENT_RESTRICTION"
+      ]
+    }
+  ],
+  "failure_count": 2,
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_clause_count": 105,
+  "gold_clauses_by_language": {
+    "en": 35,
+    "fr": 35,
+    "ar": 35
+  },
+  "publication_baseline_persisted_json_check": {
+    "expected_runs": 45,
+    "completed_runs": 0,
+    "errors": 0,
+    "integrity_failures": 0,
+    "total_receipts_observed_in_json": 0,
+    "total_blocked_observed_in_json": 0,
+    "hash_mismatch_count": 0,
+    "post_gate_mutation_count": 0,
+    "final_result": "FAIL",
+    "note": "This summarizes persisted JSON evidence only; rerun the repository publication regression for authoritative receipt/block counts."
+  },
+  "before_after_metric_comparison": {
+    "primary_type_support_rate": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      }
+    },
+    "mechanism_precision": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 0.6667,
+        "after_fix": 0.6667,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.6667,
+        "after_fix": 0.6667,
+        "delta": 0.0
+      }
+    },
+    "mechanism_recall": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.5,
+        "after_fix": 0.5,
+        "delta": 0.0
+      }
+    },
+    "actor_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      }
+    },
+    "object_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      }
+    },
+    "trigger_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      }
+    },
+    "polarity_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 0.0,
+        "after_fix": 0.0,
+        "delta": 0.0
+      }
+    },
+    "procedural_state_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    },
+    "numeric_semantic_role_accuracy": {
+      "en": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "fr": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      },
+      "ar": {
+        "baseline": null,
+        "after_fix": null,
+        "delta": null
+      },
+      "macro": {
+        "baseline": 1.0,
+        "after_fix": 1.0,
+        "delta": 0.0
+      }
+    }
+  },
+  "baseline_path": "tmp_audit_candidates\\11_Commercial_Lease_Agreement_FR\\frozen_gold_baseline_metrics.json"
+}

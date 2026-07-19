@@ -1,0 +1,78 @@
+========================================================================================================================
+V4.1.20 LIVE WORKER / DISK PROBE — STDLIB
+========================================================================================================================
+
+FRESH PROBE PROCESS
+------------------------------------------------------------------------------------------------------------------------
+PYTHON: C:\Users\rachi\legal-ai-agent\backend\venv\Scripts\python.exe
+PID: 23720
+CWD: C:\Users\rachi\legal-ai-agent\backend
+MODULE: C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_family_detector.py
+FILE SHA256: 1afcf43120eaaee7c649d1a5dac2d32a46810c91ee0da9afeda1fe1301e3b4ab
+HAS EVIDENCE QUALITY RESOLVER: True
+PICK SIGNATURE: (ranked: list[tuple[str, int]], evidence: dict | None = None) -> tuple[str, int]
+HAS GENERIC DEPENDENCE LOGIC: True
+
+========================================================================================================================
+PROCESS COMMAND PROBES
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+METHOD: PS
+COMMAND: ['ps', '-ef']
+RETURN CODE: 0
+STDOUT:
+     UID     PID    PPID  TTY        STIME COMMAND
+   rachi   15811    4617 pty1     22:17:47 /usr/bin/tee
+   rachi   15164       1 ?        18:13:10 /usr/bin/mintty
+   rachi    4975    4967 pty2       Jul 10 /c/Program Files/nodejs/node
+   rachi    1655       1 ?          Jul  3 /usr/bin/mintty
+   rachi   15831    3453 pty0     22:24:54 /c/Users/rachi/legal-ai-agent/backend/venv/Scripts/python
+   rachi   15834       1 ?        22:26:25 /usr/bin/ps
+   rachi   15810    4617 pty1     22:17:47 /c/Users/rachi/legal-ai-agent/backend/venv/Scripts/python
+   rachi   10361    4336 pty3       Jul 12 /c/Users/rachi/legal-ai-agent/backend/venv/Scripts/python
+   rachi    4617    4616 pty1       Jul  9 /usr/bin/bash
+   rachi   15833   15165 pty4     22:26:24 /usr/bin/tee
+   rachi    4335       1 ?          Jul  9 /usr/bin/mintty
+   rachi    4967    1656 pty2       Jul 10 /usr/bin/bash
+   rachi    3452       1 ?          Jul  8 /usr/bin/mintty
+   rachi   15165   15164 pty4     18:13:14 /usr/bin/bash
+   rachi   15832   15165 pty4     22:26:24 /c/Users/rachi/legal-ai-agent/backend/venv/Scripts/python
+   rachi    4336    4335 pty3       Jul  9 /usr/bin/bash
+   rachi    1656    1655 pty2       Jul  3 /usr/bin/bash
+   rachi    4616       1 ?          Jul  9 /usr/bin/mintty
+   rachi    3453    3452 pty0       Jul  8 /usr/bin/bash
+
+
+------------------------------------------------------------------------------------------------------------------------
+METHOD: PGREP PYTHON
+COMMAND: ['pgrep', '-a', '-f', 'python']
+ERROR: FileNotFoundError(2, 'Le fichier spécifié est introuvable', None, 2, None)
+
+------------------------------------------------------------------------------------------------------------------------
+METHOD: PGREP WORKER
+COMMAND: ['pgrep', '-a', '-f', 'worker|celery|uvicorn|gunicorn']
+ERROR: FileNotFoundError(2, 'Le fichier spécifié est introuvable', None, 2, None)
+
+========================================================================================================================
+/PROC PROCESS PROBE
+========================================================================================================================
+/proc is not available.
+
+========================================================================================================================
+PROJECT RUNTIME ARTIFACTS
+========================================================================================================================
+2026-06-22 16:59:54 |            0 | venv\Lib\site-packages\setuptools\_vendor\.lock
+2026-06-06 11:24:41 |       312055 | validation_worker.log
+2026-06-08 15:32:45 |        30130 | worker_fk_error.log
+2026-06-08 11:19:10 |       397623 | worker_recovered.log
+2026-06-08 09:50:31 |        28551 | worker_recovered_latest.log
+2026-06-08 17:03:19 |          474 | worker_recovery.log
+2026-07-14 22:24:01 |          122 | family_v4_1_20_live_worker_probe.txt
+2026-07-14 22:26:24 |            0 | family_v4_1_20_live_worker_probe_stdlib.txt
+
+========================================================================================================================
+SUMMARY
+========================================================================================================================
+/PROC MATCHES: 0
+RUNTIME ARTIFACTS: 8

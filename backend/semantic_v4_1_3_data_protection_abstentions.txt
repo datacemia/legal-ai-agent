@@ -1,0 +1,388 @@
+====================================================================================================
+V4.1.3 DATA PROTECTION ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 23
+
+####################################################################################################
+[1/23]
+LANG: ar
+DOC: 03_SaaS_Cloud_Agreement_AR.json
+REF: clause_3
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+4.1 فيما بين الطرفين، يحتفظ الطرف الطرف المتعاقد ب أ بكامل الحقوق في بيانات الطرف الطرف المتعاقد ب أ. عند الإنهاء، تتيح Northwind بيانات الطرف الطرف المتعاقد ب أ للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً.
+RANKED MECHANISMS:
+
+####################################################################################################
+[2/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_1
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['DATA_RETURN_DELETE']
+SOURCE:
+7.1 وفقاً لاختيار المتحكم، عند إنهاء اتفاقية الخدمات الأساسية، يحذف المعالج أو يعيد جميع البيانات الشخصية إلى المتحكم ويحذف النسخ الموجودة، ما لم يقتضِ القانون المعمول به الاحتفاظ بها.
+RANKED MECHANISMS:
+
+####################################################################################################
+[3/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_2
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['PROCESSING_INSTRUCTIONS']
+SOURCE:
+1.1 لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك.
+RANKED MECHANISMS:
+
+####################################################################################################
+[4/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_3
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SUBPROCESSOR']
+SOURCE:
+3.1 لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم. في حالة التفويض العام، يُخطر المعالج المتحكم بأي تغييرات مقترحة تتعلق بإضافة أو استبدال المعالجين الفرعيين، مع منح المتحكم فرصة الاعتراض خلال أربعة عشر (14) يوماً.
+RANKED MECHANISMS:
+- PROHIBITION | role= CONTROL_MODIFIER | primary= prohibition | eligible= False | rank= 92
+  EVIDENCE: 'لا يجوز للمعالج الاستعانة بمعالج فرعي دون تفويض خطي مسبق، محدد أو عام، من المتحكم. في حالة التفويض العام، يُخطر المعالج المتحكم بأي تغييرات مقترحة تتعلق بإضافة أو استبدال المعالجين الفرعيين، مع منح المتحكم فرصة الاعتراض خلال أر'
+
+####################################################################################################
+[5/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_4
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SECURITY_SAFEGUARDS']
+SOURCE:
+4.1 ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء.
+RANKED MECHANISMS:
+
+####################################################################################################
+[6/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_5
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['DATA_SUBJECT_RIGHTS']
+SOURCE:
+6.1 يخطر المعالج المتحكم، دون تأخير غير مبرر وفي جميع الأحوال خلال ثمانٍ وأربعين (48) ساعة، بأي خرق للبيانات الشخصية يعلم به، ويقدم مساعدة معقولة للمتحكم للوفاء بالتزاماته بإخطار السلطات الرقابية وأصحاب البيانات المتأثرين.
+RANKED MECHANISMS:
+
+####################################################################################################
+[7/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_6
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CONFIDENTIAL_PERSONNEL']
+SOURCE:
+2.1 يضمن المعالج التزام الأشخاص المصرح لهم بمعالجة البيانات الشخصية بالسرية أو خضوعهم لالتزام قانوني مناسب بالسرية.
+RANKED MECHANISMS:
+
+####################################################################################################
+[8/23]
+LANG: ar
+DOC: 05_Data_Processing_Agreement_AR.json
+REF: clause_7
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['DATA_SUBJECT_RIGHTS']
+SOURCE:
+5.1 يساعد المعالج المتحكم، قدر الإمكان، في الوفاء بالتزامه بالرد على طلبات ممارسة حقوق أصحاب البيانات، ويخطر المتحكم دون تأخير غير مبرر إذا تلقى مثل هذا الطلب مباشرة.
+RANKED MECHANISMS:
+
+####################################################################################################
+[9/23]
+LANG: ar
+DOC: 10_Outsourcing_Managed_Services_Agreement_AR.json
+REF: clause_6
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SECURITY_SAFEGUARDS', 'BREACH_NOTIFICATION']
+SOURCE:
+5.1 يحافظ الطرف الطرف المتعاقد ب ب على ضمانات إدارية وتقنية ومادية لبيانات الطرف الطرف المتعاقد ب أ متوافقة مع المتطلبات التنظيمية المعمول بها في قطاع التأمين، بما في ذلك قوانين أمن البيانات على مستوى الولايات، ويخطر الطرف الطرف المتعاقد ب أ بأي حادث أمني خلال أربع وعشرين (24) ساعة.
+RANKED MECHANISMS:
+
+####################################################################################################
+[10/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_1
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['DATA_RETURN_DELETE']
+SOURCE:
+7.1 At Controller's election, upon termination of the underlying services agreement, Processor shall delete or return all Personal Data to Controller and delete existing copies, unless applicable law requires storage of the Personal Data.
+RANKED MECHANISMS:
+
+####################################################################################################
+[11/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_2
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['PROCESSING_INSTRUCTIONS']
+SOURCE:
+1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.
+RANKED MECHANISMS:
+- MANDATORY_OBLIGATION | role= CONTROL_MODIFIER | primary= mandatory_obligation | eligible= False | rank= 72
+  EVIDENCE: 'required to do otherwise by applicable law.'
+
+####################################################################################################
+[12/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_3
+PIPELINE: data_processing
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SUBPROCESSOR']
+SOURCE:
+3.1 Processor shall not engage a Subprocessor without prior specific or general written authorization from Controller. In the case of general authorization, Processor shall inform Controller of any intended changes concerning the addition or replacement of Subprocessors, giving Controller the opportunity to object within fourteen (14) days.
+RANKED MECHANISMS:
+- PROHIBITION | role= CONTROL_MODIFIER | primary= prohibition | eligible= False | rank= 92
+  EVIDENCE: 'shall not engage a Subprocessor without prior specific or general written authorization from Controller. In the case of general authorization, Processor shall inform Controller of any intended changes concerning the addition or r'
+
+####################################################################################################
+[13/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_5
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['BREACH_NOTIFICATION', 'DATA_SUBJECT_RIGHTS']
+SOURCE:
+6.1 Processor shall notify Controller without undue delay, and in any event within forty-eight (48) hours, after becoming aware of a Personal Data breach, and shall provide reasonable assistance to Controller in meeting its obligations to notify supervisory authorities and affected data subjects.
+RANKED MECHANISMS:
+
+####################################################################################################
+[14/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_6
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+8.1 Processor shall make available to Controller all information necessary to demonstrate compliance with this DPA and shall allow for and contribute to audits, including inspections, conducted by Controller or an auditor mandated by Controller, no more than once per year absent a Personal Data breach.
+RANKED MECHANISMS:
+
+####################################################################################################
+[15/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_7
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['CONFIDENTIAL_PERSONNEL']
+SOURCE:
+2.1 Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality.
+RANKED MECHANISMS:
+
+####################################################################################################
+[16/23]
+LANG: en
+DOC: 05_Data_Processing_Agreement.json
+REF: clause_8
+PIPELINE: data_processing
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['DATA_SUBJECT_RIGHTS']
+SOURCE:
+5.1 Processor shall assist Controller, insofar as possible, in fulfilling Controller's obligation to respond to requests for exercising data subject rights, and shall notify Controller without undue delay if Processor receives such a request directly.
+RANKED MECHANISMS:
+
+####################################################################################################
+[17/23]
+LANG: en
+DOC: 10_Outsourcing_Managed_Services_Agreement.json
+REF: clause_2
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SECURITY_SAFEGUARDS', 'BREACH_NOTIFICATION']
+SOURCE:
+5.1 Provider shall maintain administrative, technical, and physical safeguards for Contracting Party A data consistent with applicable insurance industry regulatory requirements, including state data security laws, and shall notify Contracting Party A of any security incident within twenty-four (24) hours.
+RANKED MECHANISMS:
+
+####################################################################################################
+[18/23]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_3
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+6.1 Le Sous-traitant notifiera au Responsable du Traitement, sans délai injustifié et en tout état de cause dans les quarante-huit (48) heures, toute violation de Données Personnelles dont il aurait connaissance, et fournira une assistance raisonnable au Responsable du Traitement pour respecter ses obligations de notification aux autorités de contrôle et aux personnes concernées.
+RANKED MECHANISMS:
+
+####################################################################################################
+[19/23]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_4
+PIPELINE: data_processing
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+8.1 Le Sous-traitant mettra à la disposition du Responsable du Traitement toutes les informations nécessaires pour démontrer sa conformité au présent ATD et permettra la réalisation d'audits, y compris des inspections, menés par le Responsable du Traitement ou un auditeur mandaté par lui, au maximum une fois par an en l'absence de violation de Données Personnelles.
+RANKED MECHANISMS:
+
+####################################################################################################
+[20/23]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_5
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+7.1 Au choix du Responsable du Traitement, à la résiliation de l'accord de services sous-jacent, le Sous-traitant supprimera ou restituera l'ensemble des Données Personnelles au Responsable du Traitement et supprimera les copies existantes, sauf obligation légale de conservation.
+RANKED MECHANISMS:
+
+####################################################################################################
+[21/23]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_6
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: []
+SOURCE:
+1.1 Le Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement, y compris en ce qui concerne les transferts vers un pays tiers, sauf obligation contraire du droit applicable.
+RANKED MECHANISMS:
+
+####################################################################################################
+[22/23]
+LANG: fr
+DOC: 05_Data_Processing_Agreement_FR.json
+REF: clause_8
+PIPELINE: data_processing
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['DATA_SUBJECT_RIGHTS']
+SOURCE:
+5.1 Le Sous-traitant assistera le Responsable du Traitement, dans la mesure du possible, dans l'exécution de son obligation de répondre aux demandes d'exercice des droits des personnes concernées, et notifiera sans délai injustifié le Responsable du Traitement s'il reçoit une telle demande directement.
+RANKED MECHANISMS:
+
+####################################################################################################
+[23/23]
+LANG: fr
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_5
+PIPELINE: data_protection
+PROFILE VERSION: shadow-p0-v4.1.3-liability-wave
+PRIMARY: UNKNOWN
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+CANDIDATE: None
+COVERAGE: None
+SIGNALS: ['SECURITY_SAFEGUARDS', 'BREACH_NOTIFICATION']
+SOURCE:
+5.1 La Partie contractante B maintiendra des mesures de sauvegarde administratives, techniques et physiques pour les données de la Partie contractante A conformes aux exigences réglementaires applicables au secteur de l'assurance, y compris les lois étatiques sur la sécurité des données, et notifiera la Partie contractante A de tout incident de sécurité dans un délai de vingt-quatre (24) heures.
+RANKED MECHANISMS:
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+ROWS: 23
+BY LANGUAGE: {'ar': 9, 'en': 8, 'fr': 6}
+BY PIPELINE TYPE: {'data_protection': 19, 'data_processing': 4}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 23}
+SIGNAL COUNTS: {'DATA_RETURN_DELETE': 2, 'PROCESSING_INSTRUCTIONS': 2, 'SUBPROCESSOR': 2, 'SECURITY_SAFEGUARDS': 4, 'DATA_SUBJECT_RIGHTS': 5, 'CONFIDENTIAL_PERSONNEL': 2, 'BREACH_NOTIFICATION': 4}
+NO SIGNAL ROWS: 6

@@ -1,0 +1,2706 @@
+import logging
+import re
+
+"""
+unified_report_from_pipeline.py
+
+CORRECTED architecture for Point 1 (Remove Redundancy).
+
+Earlier draft mistake: generate_unified_report() sent the full contract
+text to the AI a SECOND time (after ClauseAnalysisPipeline.run() had
+already AI-analyzed every clause once). That's not deduplication — it's a
+third redundant narrative-generation path alongside executive_summary /
+executive_risk_narrative / executive_report, which are already computed
+for free from clause_results inside contract_agent.py.
+
+Correct architecture:
+    - key_clauses, risks_identified, negotiation_priorities,
+      suggested_wording, action_checklist, risk_score, contract_overview
+      are AGGREGATED in pure Python from clause_results. Zero extra AI
+      calls — this data already exists.
+    - Only missing_clauses and confidence_notes need a NEW, SMALL AI call,
+      because "a clause that isn't there" cannot be produced by analyzing
+      clauses that ARE there. This is the one genuinely irreducible gap.
+    - definitions_extractor / contract_family_detector / arbitration_analyzer
+      still run once, rule-based, to inform BOTH the aggregation (family-
+      aware missing-clause expectations) and the small AI call.
+
+This replaces generate_unified_report() from the earlier
+unified_summary_service.py draft. to_legacy_summary_data() /
+to_legacy_simplified_string() are unchanged and still work on the output
+of this function, since the top-level schema is identical.
+"""
+
+from app.utils.prompt_loader import load_prompt
+from app.services.contract_agent.ai_client import call_json_ai
+from app.services.contract_agent.definitions_extractor import (
+    extract_definitions,
+    build_definitions_block,
+)
+from app.services.contract_agent.contract_family_detector import (
+    detect_contract_family,
+    build_family_hint,
+)
+from app.services.contract_agent.arbitration_analyzer import (
+    analyze_arbitration,
+    build_arbitration_hint,
+)
+
+logger = logging.getLogger(__name__)
+
+RISK_LEVEL_EXPOSURE = {
+    "low": "low",
+    "medium": "medium",
+    "high": "high",
+}
+
+URGENCY_BY_PRIORITY = {
+    "high": "immediate",
+    "medium": "before_signing",
+    "low": "monitor",
+}
+
+SUPPORTED_LANGUAGES = {"en", "fr", "ar"}
+
+NEGOTIABILITY_VALUES = {
+    "yes",
+    "limited",
+    "usually",
+    "jurisdiction_dependent",
+    "no",
+}
+
+EXPOSURE_DIMENSIONS = [
+    "financial",
+    "operational",
+    "legal",
+    "regulatory",
+    "compliance",
+    "privacy",
+    "tax",
+    "employment",
+    "ip",
+    "reputation",
+    "cybersecurity",
+]
+
+FAMILY_OPTIONAL_FIELDS = {
+    "NDA": {"payment_terms"},
+    "Confidentiality": {"payment_terms"},
+    "Power of Attorney": {"payment_terms"},
+    "Corporate Resolution": {"payment_terms", "duration"},
+    "IP Assignment": {"payment_terms"},
+    "Settlement": set(),
+    "General": set(),
+
+    # International document families where payment terms are often absent
+    # or not expected. This avoids false validation pressure.
+    "Policy": {"payment_terms"},
+    "Terms of Use": {"payment_terms"},
+    "Privacy Policy": {"payment_terms"},
+    "Bylaws": {"payment_terms"},
+    "Minutes": {"payment_terms", "duration"},
+    "Shareholder Resolution": {"payment_terms", "duration"},
+    "Memorandum": {"payment_terms"},
+    "Board Resolution": {"payment_terms", "duration"},
+    "Corporate Policy": {"payment_terms"},
+    "Data Processing Addendum": {"payment_terms"},
+}
+
+def normalize_family_name_for_optional_fields(value: str) -> str:
+    return (
+        str(value or "")
+        .lower()
+        .strip()
+        .replace("-", "_")
+        .replace("/", "_")
+        .replace(" ", "_")
+    )
+
+
+NORMALIZED_FAMILY_OPTIONAL_FIELDS = {
+    normalize_family_name_for_optional_fields(family): fields
+    for family, fields in FAMILY_OPTIONAL_FIELDS.items()
+}
+
+
+
+def normalize_language(language: str) -> str:
+    language = str(language or "en").lower().strip()
+    return language if language in SUPPORTED_LANGUAGES else "en"
+
+
+LOCALIZED_DEFAULTS = {
+    "not_specified": {
+        "en": "Not specified",
+        "fr": "Non spécifié",
+        "ar": "غير محدد",
+    },
+    "not_applicable": {
+        "en": "Not applicable",
+        "fr": "Non applicable",
+        "ar": "غير منطبق",
+    },
+}
+
+
+def localized_default(key: str, language: str = "en") -> str:
+    language = normalize_language(language)
+    values = LOCALIZED_DEFAULTS.get(
+        key,
+        LOCALIZED_DEFAULTS["not_specified"],
+    )
+    return values.get(language, values["en"])
+
+
+def safe_get_text(*values) -> str:
+    return " ".join(str(v or "") for v in values).strip()
+
+
+GENERIC_PARTY_LABELS = {
+    "en": ["Contracting Party A", "Contracting Party B"],
+    "fr": ["Partie contractante A", "Partie contractante B"],
+    "ar": ["الطرف أ", "الطرف ب"],
+}
+
+# Legal roles that inherently describe a party's position relative to the
+# clause/event and may switch between the two parties in reciprocal contracts.
+# These are not safe as fixed party identities.
+RECIPROCAL_ROLE_MARKERS = {
+    "en": {
+        "disclosing party", "receiving party",
+        "discloser", "recipient",
+        "indemnifying party", "indemnified party",
+        "breaching party", "non-breaching party",
+        "notifying party", "receiving party",
+        "requesting party", "responding party",
+        "claiming party", "other party",
+        "either party", "each party",
+    },
+    "fr": {
+        "partie divulgatrice", "partie réceptrice", "partie receptrice",
+        "partie indemnisante", "partie indemnisée", "partie indemnisee",
+        "partie défaillante", "partie defaillante",
+        "partie non défaillante", "partie non defaillante",
+        "partie notifiante", "partie destinataire",
+        "partie demanderesse", "autre partie",
+        "chaque partie", "l'une des parties",
+    },
+    "ar": {
+        "الطرف المفصح", "الطرف المتلقي",
+        "الطرف المعوض", "الطرف المستفيد من التعويض",
+        "الطرف المخل", "الطرف غير المخل",
+        "الطرف المخطر", "الطرف المستلم",
+        "الطرف الطالب", "الطرف الآخر",
+        "كل طرف", "أي من الطرفين",
+    },
+}
+
+PLACEHOLDER_PARTY_VALUES = {
+    "not specified", "non spécifié", "non specifie", "غير محدد",
+    "unknown", "inconnu", "غير معروف",
+    "company", "société", "societe", "entreprise", "الشركة", "المؤسسة",
+}
+
+CANONICAL_FAMILY_ALIASES = {
+    "nda": {
+        "nda", "non_disclosure_agreement", "mutual_non_disclosure_agreement",
+        "confidentiality_agreement", "mutual_confidentiality_agreement",
+        "confidentiality",
+    },
+    "employment": {
+        "employment", "employment_agreement", "employment_contract",
+        "executive_employment_agreement",
+    },
+    "services": {
+        "services", "service_agreement", "master_services_agreement",
+        "consulting_services_agreement", "managed_services_agreement",
+        "outsourcing_managed_services_agreement",
+    },
+    "license": {
+        "license", "licensing", "software_license_agreement",
+        "software_licensing_agreement",
+    },
+    "lease": {
+        "lease", "commercial_lease", "commercial_lease_agreement",
+    },
+    "loan": {
+        "loan", "credit_agreement", "loan_credit_agreement",
+        "loan_agreement",
+    },
+    "purchase": {
+        "asset_purchase_agreement", "purchase_agreement",
+        "procurement_supply_agreement", "supply_agreement",
+    },
+    "data_processing": {
+        "data_processing_agreement", "data_processing_addendum",
+        "dpa",
+    },
+}
+
+
+def normalize_role_label(value: str) -> str:
+    return " ".join(str(value or "").lower().strip().split())
+
+
+def canonical_family_key(value: str) -> str:
+    normalized = normalize_family_name_for_optional_fields(value)
+
+    for canonical, aliases in CANONICAL_FAMILY_ALIASES.items():
+        if normalized in aliases:
+            return canonical
+
+    return normalized
+
+
+def roles_are_reciprocal_or_contextual(
+    parties: list[str],
+    language: str = "en",
+) -> bool:
+    language = normalize_language(language)
+    markers = RECIPROCAL_ROLE_MARKERS[language]
+
+    normalized = {
+        normalize_role_label(item)
+        for item in parties
+        if str(item or "").strip()
+    }
+
+    return bool(normalized & markers)
+
+
+def canonicalize_party_labels(
+    parties,
+    language: str = "en",
+) -> list[str]:
+    """
+    International party-display invariant.
+
+    Stable asymmetric legal roles remain unchanged.
+    Reciprocal/context-dependent roles become neutral Party A / Party B.
+    Missing, duplicate, or generic structural labels also become Party A / Party B.
+
+    This policy does not inspect contract names or company names.
+    """
+    language = normalize_language(language)
+    generic = list(GENERIC_PARTY_LABELS[language])
+
+    if isinstance(parties, str):
+        parties = [parties]
+    elif not isinstance(parties, list):
+        parties = []
+
+    cleaned = [
+        str(item or "").strip()
+        for item in parties
+        if str(item or "").strip()
+    ]
+
+    if len(cleaned) < 2:
+        return generic
+
+    first_two = cleaned[:2]
+    normalized = [normalize_role_label(item) for item in first_two]
+
+    if any(item in PLACEHOLDER_PARTY_VALUES for item in normalized):
+        return generic
+
+    if normalized[0] == normalized[1]:
+        return generic
+
+    if roles_are_reciprocal_or_contextual(first_two, language):
+        return generic
+
+    return first_two
+
+
+OPTIONAL_FIELD_POLICY = {
+    # Payment is structurally optional for these document families.
+    "nda": {"payment_terms"},
+    "data_processing": {"payment_terms"},
+    "ip_assignment": {"payment_terms"},
+    "power_of_attorney": {"payment_terms"},
+    "corporate_resolution": {"payment_terms", "duration"},
+    "board_resolution": {"payment_terms", "duration"},
+    "shareholder_resolution": {"payment_terms", "duration"},
+    "policy": {"payment_terms"},
+    "privacy_policy": {"payment_terms"},
+    "terms_of_use": {"payment_terms"},
+    "bylaws": {"payment_terms"},
+    "minutes": {"payment_terms", "duration"},
+    "memorandum": {"payment_terms"},
+}
+
+
+def get_optional_fields_for_family(family: str) -> set[str]:
+    return OPTIONAL_FIELD_POLICY.get(
+        canonical_family_key(family),
+        set(),
+    )
+
+
+CONTRACT_DURATION_PATTERNS = {
+    "en": (
+        r"\b(?:this\s+)?(?:agreement|contract)\s+shall\s+remain\s+in\s+effect\s+for\s+([^.;\n]{2,120})",
+        r"\b(?:this\s+)?(?:agreement|contract)\s+shall\s+continue\s+for\s+([^.;\n]{2,120})",
+        r"\b(?:this\s+)?(?:agreement|contract)\s+(?:continues?|runs?|lasts?)\s+for\s+([^.;\n]{2,120})",
+        r"\b(?:this\s+)?(?:agreement|contract)\s+(?:expires?|ends?|terminates?)\s+after\s+([^.;\n]{2,120})",
+        r"\binitial\s+term\s+(?:shall\s+be|is|of|will\s+be)\s+([^.;\n]{2,120})",
+        r"\b(?:the\s+)?initial\s+term\s+is\s+([^.;\n]{2,120})",
+        r"\bterm\s+of\s+(?:this\s+)?(?:agreement|contract)\s+(?:shall\s+be|is|will\s+be)\s+([^.;\n]{2,120})",
+        r"\b(?:agreement|contract)\s+term\s+(?:shall\s+be|is|of|will\s+be)\s+([^.;\n]{2,120})",
+    ),
+    "fr": (
+        r"\b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+restera\s+en\s+vigueur\s+pendant\s+([^.;\n]{2,120})",
+        r"\b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+se\s+poursuivra\s+pendant\s+([^.;\n]{2,120})",
+        r"\b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+(?:est\s+conclu|est\s+convenu)\s+pour\s+(?:une\s+)?(?:durée|duree)\s+de\s+([^.;\n]{2,120})",
+        r"\b(?:le\s+présent\s+|le\s+present\s+)?(?:accord|contrat)\s+(?:prend\s+fin|expire)\s+après\s+([^.;\n]{2,120})",
+        r"\b(?:durée|duree)\s+initiale\s+(?:sera|est)\s+(?:de|à|a)\s+([^.;\n]{2,120})",
+        r"\b(?:la\s+)?(?:durée|duree)\s+(?:du\s+|de\s+l['’])?(?:contrat|accord)\s+(?:est|sera)\s+de\s+([^.;\n]{2,120})",
+        r"\b(?:contrat|accord)\s+(?:d['’]une\s+)?(?:durée|duree)\s+de\s+([^.;\n]{2,120})",
+    ),
+    "ar": (
+        r"(?:تظل|تبقى)\s+(?:هذه\s+)?(?:الاتفاقية|العقد)\s+(?:سارية|نافذة)\s+لمدة\s+([^.;؛!؟\n]{2,120})",
+        r"(?:يستمر|تستمر|يسري|تسري)\s+(?:هذا|هذه)?\s*(?:العقد|الاتفاقية)\s+لمدة\s+([^.;؛!؟\n]{2,120})",
+        r"(?:ينتهي|تنتهي)\s+(?:هذا|هذه)?\s*(?:العقد|الاتفاقية)\s+بعد\s+([^.;؛!؟\n]{2,120})",
+        r"(?:المدة|مدة\s+العقد|مدة\s+الاتفاقية)\s+الأولية\s+(?:هي|تكون|تبلغ)\s+([^.;؛!؟\n]{2,120})",
+        r"(?:مدة\s+العقد|مدة\s+الاتفاقية)\s+(?:هي|تكون|تبلغ)\s+([^.;؛!؟\n]{2,120})",
+        r"(?:يبرم|يُبرم|أبرم|أُبرم)\s+(?:هذا\s+)?(?:العقد|الاتفاقية)\s+لمدة\s+([^.;؛!؟\n]{2,120})",
+    ),
+}
+
+def extract_contract_duration(
+    contract_text: str,
+    language: str = "en",
+) -> str | None:
+    """
+    Conservative document-level term extraction.
+
+    Only agreement/contract-term wording is eligible. Periods attached to
+    confidentiality survival, cure, notice, payment, vesting, non-compete,
+    audit frequency, or data retention are not treated as contract duration.
+    """
+    language = normalize_language(language)
+    text = str(contract_text or "")
+
+    for pattern in CONTRACT_DURATION_PATTERNS[language]:
+        match = re.search(pattern, text, flags=re.IGNORECASE)
+        if not match:
+            continue
+
+        value = " ".join(match.group(1).strip().split())
+
+        # Stop at common clause continuations without interpreting them.
+        value = re.split(
+            r"\b(?:unless|except|provided\s+that|but)\b"
+            r"|\b(?:sauf|à\s+moins\s+que|a\s+moins\s+que|mais)\b"
+            r"|(?:ما\s+لم|باستثناء|ولكن)",
+            value,
+            maxsplit=1,
+            flags=re.IGNORECASE,
+        )[0].strip(" ,،")
+
+        if 2 <= len(value) <= 120:
+            return value
+
+    return None
+
+
+def infer_exposure_dimensions(clause: dict, risk_level: str) -> dict:
+    text = safe_get_text(
+        clause.get("clause_type"),
+        clause.get("title"),
+        clause.get("clause_title"),
+        clause.get("legal_insight"),
+        clause.get("explanation_simple"),
+        clause.get("quoted_text"),
+        clause.get("original_text"),
+    ).lower()
+
+    exposure = {dimension: "low" for dimension in EXPOSURE_DIMENSIONS}
+
+    base = RISK_LEVEL_EXPOSURE.get(risk_level, "low")
+
+    if risk_level in {"medium", "high"}:
+        exposure["legal"] = base
+        exposure["operational"] = base
+
+    if any(k in text for k in ["payment", "fees", "price", "rent", "salary", "invoice", "paiement", "loyer", "فاتورة", "الدفع"]):
+        exposure["financial"] = base
+
+    if any(k in text for k in ["liability", "indemn", "damages", "responsabilité", "indemnisation", "مسؤولية", "تعويض"]):
+        exposure["financial"] = base
+        exposure["legal"] = base
+
+    if any(k in text for k in ["data", "privacy", "security incident", "personal data", "données", "vie privée", "البيانات", "الخصوصية"]):
+        exposure["privacy"] = base
+        exposure["cybersecurity"] = base
+        exposure["regulatory"] = base
+        exposure["compliance"] = base
+
+    if any(k in text for k in ["intellectual property", "copyright", "license", "licence", "propriété intellectuelle", "الملكية الفكرية"]):
+        exposure["ip"] = base
+        exposure["legal"] = base
+
+    if any(k in text for k in ["tax", "withholding", "vat", "tva", "impôt", "ضريبة"]):
+        exposure["tax"] = base
+        exposure["financial"] = base
+
+    if any(k in text for k in ["employment", "employee", "employer", "salary", "emploi", "salarié", "employeur", "موظف", "صاحب العمل"]):
+        exposure["employment"] = base
+
+    if any(k in text for k in ["public", "reputation", "brand", "media", "réputation", "سمعة"]):
+        exposure["reputation"] = base
+
+    return exposure
+
+
+def infer_negotiability(clause: dict) -> str:
+    text = safe_get_text(
+        clause.get("clause_type"),
+        clause.get("title"),
+        clause.get("clause_title"),
+        clause.get("legal_insight"),
+        clause.get("quoted_text"),
+        clause.get("original_text"),
+    ).lower()
+
+    if any(k in text for k in ["mandatory law", "public procurement", "consumer law", "sanctions", "anti-bribery", "gdpr", "droit impératif", "marché public", "قانون إلزامي", "العقوبات"]):
+        return "limited"
+
+    if any(k in text for k in ["governing law", "jurisdiction", "arbitration", "droit applicable", "juridiction", "تحكيم", "اختصاص"]):
+        return "usually"
+
+    if any(k in text for k in ["tax", "employment law", "labor law", "data protection", "consumer", "ضريبة", "حماية البيانات", "قانون العمل"]):
+        return "jurisdiction_dependent"
+
+    return "yes"
+
+
+def infer_market_practice(clause: dict) -> str:
+    market_comparison_text = str(clause.get("market_comparison") or "").lower()
+
+    if "aggressive" in market_comparison_text:
+        return "market_aggressive"
+
+    if "unusual" in market_comparison_text or "uncommon" in market_comparison_text:
+        return "market_uncommon"
+
+    if "favorable" in market_comparison_text or "favours" in market_comparison_text:
+        return "market_favorable"
+
+    if "standard" in market_comparison_text:
+        return "market_standard"
+
+    if str(clause.get("favours", "")).lower() == "balanced":
+        return "market_standard"
+
+    return "market_unknown"
+
+
+def infer_action_category(clause: dict) -> str:
+    text = safe_get_text(
+        clause.get("clause_type"),
+        clause.get("title"),
+        clause.get("clause_title"),
+        clause.get("recommendation"),
+    ).lower()
+
+    if any(k in text for k in ["payment", "fee", "invoice", "rent", "paiement", "facture", "الدفع"]):
+        return "commercial"
+
+    if any(k in text for k in ["data", "privacy", "security", "données", "البيانات"]):
+        return "data_compliance"
+
+    if any(k in text for k in ["liability", "indemn", "insurance", "responsabilité", "تأمين", "مسؤولية"]):
+        return "risk_allocation"
+
+    if any(k in text for k in ["termination", "renewal", "notice", "résiliation", "إشعار", "فسخ"]):
+        return "contract_lifecycle"
+
+    if any(k in text for k in ["ip", "intellectual property", "license", "propriété intellectuelle", "الملكية الفكرية"]):
+        return "ip_rights"
+
+    return "legal_review"
+
+
+def infer_action_owner(clause: dict) -> str:
+    category = infer_action_category(clause)
+
+    owners = {
+        "commercial": "Commercial / Finance",
+        "data_compliance": "Legal / Security / Privacy",
+        "risk_allocation": "Legal / Risk",
+        "contract_lifecycle": "Legal / Operations",
+        "ip_rights": "Legal / Product",
+        "legal_review": "Legal",
+    }
+
+    return owners.get(category, "Legal")
+
+
+def infer_action_deadline(urgency: str) -> str:
+    if urgency == "immediate":
+        return "before_signature"
+    if urgency == "before_signing":
+        return "before_signature"
+    return "post_signature_monitoring"
+
+
+
+
+def _get_clause_list(pipeline_result: dict) -> list:
+    """
+    clause_results from contract_handler.py is the FULL pipeline dict
+    (final_result), not a flat list. The actual per-clause analyses live
+    at clause_results["clauses"]["results"].
+    """
+    clauses_block = pipeline_result.get("clauses", {})
+    if isinstance(clauses_block, dict):
+        return clauses_block.get("results", [])
+    if isinstance(clauses_block, list):
+        return clauses_block
+    return []
+
+
+def _clause_id(clause: dict, index: int) -> str:
+    # Prefer the structural id already attached by attach_clause_object_metadata,
+    # fall back to a positional id so every clause is addressable.
+    return str(clause.get("clause_id") or f"kc_{index+1}")
+
+
+
+GENERIC_REPORT_TEXT_MARKERS = {
+    "en": (
+        "this clause may create legal or operational exposure",
+        "this clause should be reviewed because it may affect",
+        "this clause appears administrative or operational in nature",
+        "this clause is primarily administrative or definitional",
+        "review this clause in the context of the overall contract",
+        "consistent with the commercial objective",
+        "commercial objectives, operational processes and overall risk allocation",
+        "commercial objective, operational processes and overall risk allocation",
+        "legal, financial, or operational obligations",
+        "legal, financial or operational obligations",
+        "manual review required",
+        "review manually",
+        "source-fidelity validation",
+        "source fidelity validation",
+        "publication validation failed",
+        "publication gate",
+        "block_and_replace",
+        "internal replacement",
+        "blocked status",
+    ),
+    "fr": (
+        "cette clause peut créer une exposition juridique ou opérationnelle",
+        "cette clause doit être examinée car elle peut affecter",
+        "cette clause semble de nature administrative ou opérationnelle",
+        "cette clause est principalement administrative ou définitionnelle",
+        "examiner cette clause dans le contexte global du contrat",
+        "cohérente avec l'objectif commercial",
+        "cohérent avec l'objectif commercial",
+        "les processus opérationnels et la répartition globale des risques",
+        "obligations juridiques, financières ou opérationnelles",
+        "obligations juridiques, financières, ou opérationnelles",
+        "examen manuel requis",
+        "revue manuelle requise",
+        "révision manuelle requise",
+        "validation de fidélité à la source",
+        "validation de fidelite a la source",
+        "fidélité à la source",
+        "fidelite a la source",
+        "échec de la validation de publication",
+        "echec de la validation de publication",
+        "publication gate",
+        "block_and_replace",
+        "remplacement interne",
+        "statut bloqué",
+        "statut bloque",
+    ),
+    "ar": (
+        "قد ينشئ هذا البند تعرضاً قانونياً أو تشغيلياً",
+        "قد ينشئ هذا البند تعرضًا قانونيًا أو تشغيليًا",
+        "ينبغي مراجعة هذا البند لأنه قد يؤثر",
+        "يبدو هذا البند إدارياً أو تشغيلياً",
+        "يبدو هذا البند إداريًا أو تشغيليًا",
+        "هذا البند إداري أو تعريفي في المقام الأول",
+        "مراجعة هذا البند في سياق العقد ككل",
+        "متسقاً مع الهدف التجاري",
+        "متسقًا مع الهدف التجاري",
+        "العمليات التشغيلية والتوزيع العام للمخاطر",
+        "التزامات قانونية أو مالية أو تشغيلية",
+        "مراجعة يدوية مطلوبة",
+        "المراجعة اليدوية مطلوبة",
+        "التحقق من مطابقته للمصدر",
+        "التحقق من مطابقة المصدر",
+        "فشل التحقق من النشر",
+        "بوابة النشر",
+        "block_and_replace",
+        "استبدال داخلي",
+        "حالة محظورة",
+    ),
+}
+def normalize_report_text(value: str) -> str:
+    return " ".join(str(value or "").strip().split())
+
+
+def report_text_key(value: str) -> str:
+    value = normalize_report_text(value).lower()
+    value = re.sub(r"[^\w\u0600-\u06ff]+", " ", value, flags=re.UNICODE)
+    return " ".join(value.split())
+
+
+def is_generic_report_text(
+    value: str,
+    language: str = "en",
+) -> bool:
+    language = normalize_language(language)
+    lowered = normalize_report_text(value).lower()
+    if not lowered:
+        return True
+
+    markers = GENERIC_REPORT_TEXT_MARKERS.get(
+        language,
+        GENERIC_REPORT_TEXT_MARKERS["en"],
+    )
+    return any(marker in lowered for marker in markers)
+
+
+def compact_unique_texts(
+    values,
+    language: str = "en",
+    limit: int = 6,
+    drop_generic: bool = True,
+) -> list[str]:
+    output = []
+    seen = set()
+
+    for value in values or []:
+        text = normalize_report_text(value)
+        if not text:
+            continue
+        if drop_generic and is_generic_report_text(text, language):
+            continue
+
+        key = report_text_key(text)
+        if not key or key in seen:
+            continue
+
+        seen.add(key)
+        output.append(text)
+
+        if len(output) >= max(1, int(limit or 1)):
+            break
+
+    return output
+
+
+def is_substantive_overview_value(
+    value,
+    language: str = "en",
+) -> bool:
+    language = normalize_language(language)
+    text = normalize_report_text(value)
+
+    if not text:
+        return False
+
+    defaults = {
+        normalize_report_text(localized_default("not_specified", language)).lower(),
+        normalize_report_text(localized_default("not_applicable", language)).lower(),
+        "unknown",
+        "inconnu",
+        "غير معروف",
+    }
+    return text.lower() not in defaults
+
+
+GOVERNING_LAW_PATTERNS = {
+    "en": (
+        r"\b(?:governed by|governed and construed in accordance with|construed in accordance with)\s+(?:the\s+)?laws?\s+of\s+([^.;\n]{2,120})",
+        r"\bexclusive jurisdiction\s+of\s+(?:the\s+)?([^.;\n]{2,120}?)(?:\s+for\s+the\s+resolution|\s+for\s+resolution|[.;\n])",
+    ),
+    "fr": (
+        r"\b(?:régi|regi)\s+par\s+(?:les?\s+)?(?:lois?|droit)\s+de\s+([^.;\n]{2,120})",
+        r"\bjuridiction\s+exclusive\s+(?:des?|de\s+la)\s+([^.;\n]{2,120})",
+    ),
+    "ar": (
+        r"(?:يخضع|تخضع).{0,40}(?:لقانون|لقوانين)\s+([^.;؛!؟\n]{2,120})",
+        r"(?:الاختصاص\s+الحصري|الولاية\s+القضائية\s+الحصرية).{0,40}(?:لـ|ل)\s*([^.;؛!؟\n]{2,120})",
+    ),
+}
+
+
+def extract_document_jurisdiction(
+    contract_text: str,
+    language: str = "en",
+) -> str | None:
+    language = normalize_language(language)
+    text = str(contract_text or "")
+
+    for pattern in GOVERNING_LAW_PATTERNS[language]:
+        match = re.search(pattern, text, flags=re.IGNORECASE)
+        if not match:
+            continue
+
+        value = normalize_report_text(match.group(1)).strip(" ,،")
+        value = re.split(
+            r"\bwithout\s+regard\b|\bsubject\s+to\b"
+            r"|\bsans\s+égard\b|\bsous\s+réserve\b"
+            r"|(?:دون\s+اعتبار|مع\s+مراعاة)",
+            value,
+            maxsplit=1,
+            flags=re.IGNORECASE,
+        )[0].strip(" ,،")
+
+        if 2 <= len(value) <= 120:
+            return value
+
+    return None
+
+
+def build_contract_quality_score(
+    pipeline_result: dict,
+    clauses: list,
+) -> int:
+    """
+    Deterministic analysis-quality score.
+
+    This is intentionally independent from contractual risk. It measures
+    analysis coverage and confidence, so a low-risk contract cannot be
+    mislabeled as a low-quality contract merely because both use 0-100 scales.
+    """
+    if not clauses:
+        return 0
+
+    confidence_points = {
+        "high": 1.0,
+        "medium": 0.72,
+        "low": 0.35,
+    }
+
+    confidence_values = [
+        confidence_points.get(
+            str(clause.get("confidence") or "medium").lower(),
+            0.55,
+        )
+        for clause in clauses
+        if isinstance(clause, dict)
+    ]
+
+    average_confidence = (
+        sum(confidence_values) / len(confidence_values)
+        if confidence_values else 0.0
+    )
+
+    total_detected = (
+        pipeline_result.get("total_clauses_detected")
+        or len(clauses)
+    )
+    analyzed = (
+        pipeline_result.get("clauses_analyzed")
+        or len(clauses)
+    )
+
+    try:
+        coverage = min(
+            1.0,
+            max(0.0, float(analyzed) / max(float(total_detected), 1.0)),
+        )
+    except (TypeError, ValueError, ZeroDivisionError):
+        coverage = 1.0
+
+    fidelity_failures = sum(
+        1
+        for clause in clauses
+        if isinstance(clause, dict)
+        and any(
+            marker in safe_get_text(
+                clause.get("legal_insight"),
+                clause.get("recommendation"),
+                clause.get("negotiation_advice"),
+                clause.get("safer_alternative"),
+            ).lower()
+            for marker in (
+                "manual review required",
+                "examen manuel requis",
+                "مراجعة يدوية مطلوبة",
+            )
+        )
+    )
+
+    fidelity_ratio = max(
+        0.0,
+        1.0 - (fidelity_failures / max(len(clauses), 1)),
+    )
+
+    score = round(
+        (average_confidence * 60)
+        + (coverage * 25)
+        + (fidelity_ratio * 15)
+    )
+
+    return max(0, min(100, score))
+
+
+CORE_MISSING_CLAUSE_EXPECTATIONS = {
+    "nda": {
+        "confidentiality",
+        "confidentiality_obligations",
+        "permitted_disclosures",
+        "confidentiality_exclusions",
+        "use_restrictions",
+        "term",
+        "termination",
+        "confidentiality_survival",
+        "return_or_destruction",
+        "governing_law",
+        "dispute_resolution",
+    },
+    "employment": {
+        "employment_role",
+        "compensation",
+        "term",
+        "termination",
+        "confidentiality",
+        "governing_law",
+    },
+    "services": {
+        "services",
+        "service_levels",
+        "payment",
+        "term",
+        "termination",
+        "liability",
+        "confidentiality",
+        "governing_law",
+    },
+    "license": {
+        "license_grant",
+        "license_restrictions",
+        "intellectual_property",
+        "fees",
+        "term",
+        "termination",
+        "liability",
+        "governing_law",
+    },
+    "lease": {
+        "premises",
+        "rent",
+        "term",
+        "security_deposit",
+        "maintenance",
+        "termination",
+        "governing_law",
+    },
+    "loan": {
+        "principal",
+        "interest",
+        "payment",
+        "maturity",
+        "default",
+        "security_interest",
+        "governing_law",
+    },
+    "purchase": {
+        "purchased_assets",
+        "purchase_price",
+        "closing",
+        "representations_and_warranties",
+        "indemnification",
+        "liability",
+        "governing_law",
+    },
+    "data_processing": {
+        "processing_instructions",
+        "security",
+        "personal_data_breach",
+        "subprocessor",
+        "data_subject_rights",
+        "return_or_deletion",
+        "data_transfer",
+    },
+}
+
+
+def normalize_clause_type_key(value: str) -> str:
+    value = normalize_family_name_for_optional_fields(value)
+    aliases = {
+        "force_majeure_clause": "force_majeure",
+        "business_days": "business_day",
+        "choice_of_law": "governing_law",
+        "jurisdiction": "dispute_resolution",
+        "confidentiality_duty": "confidentiality",
+        "data_breach": "personal_data_breach",
+    }
+    return aliases.get(value, value)
+
+
+def filter_family_relevant_missing_clauses(
+    missing: list,
+    family: str,
+    clauses: list,
+) -> list:
+    family_key = canonical_family_key(family)
+    expected = CORE_MISSING_CLAUSE_EXPECTATIONS.get(family_key)
+
+    detected = {
+        normalize_clause_type_key(c.get("clause_type", ""))
+        for c in clauses
+        if isinstance(c, dict)
+    }
+
+    output = []
+    seen = set()
+
+    for item in missing or []:
+        if not isinstance(item, dict):
+            continue
+
+        clause_type = normalize_clause_type_key(
+            item.get("clause_type", "")
+        )
+        if not clause_type or clause_type in detected:
+            continue
+
+        # For known families, only core expectations are eligible for the
+        # final "missing clauses" list. Optional boilerplate may remain in
+        # confidence notes but must not drive negotiation priorities.
+        if expected is not None and clause_type not in expected:
+            continue
+
+        key = clause_type
+        if key in seen:
+            continue
+
+        seen.add(key)
+        output.append(item)
+
+    return output
+
+
+def build_contract_overview(
+    pipeline_result: dict,
+    family_detection: dict,
+    contract_text: str = "",
+    party_roles: dict | None = None,
+    language: str = "en",
+) -> dict:
+    """
+    Defensive, family-aware overview with non-destructive fact resolution.
+
+    Structured values already resolved upstream are preserved. Conservative
+    document-level extractors only fill gaps and never overwrite a substantive
+    value with a localized "Not specified" placeholder.
+    """
+    language = normalize_language(language)
+    not_specified = localized_default("not_specified", language)
+    not_applicable = localized_default("not_applicable", language)
+
+    exec_summary = pipeline_result.get("executive_summary", {}) or {}
+    exec_report = pipeline_result.get("executive_report", {}) or {}
+    overview = exec_report.get("contract_overview", {}) or {}
+
+    family = family_detection.get("family", "General")
+    optional_fields = get_optional_fields_for_family(family)
+
+    payment_terms = exec_summary.get("payment_terms")
+    source_duration = extract_contract_duration(
+        contract_text,
+        language,
+    )
+    duration = (
+        source_duration
+        or exec_summary.get("duration")
+        or overview.get("duration")
+    )
+
+    if "payment_terms" in optional_fields and not payment_terms:
+        payment_terms = not_applicable
+
+    if "duration" in optional_fields and not duration:
+        duration = not_applicable
+
+    arbitration_facts = analyze_arbitration(contract_text or "") or {}
+
+    jurisdiction_candidates = [
+        exec_summary.get("jurisdiction_detected"),
+        overview.get("jurisdiction_detected"),
+        extract_document_jurisdiction(contract_text, language),
+        arbitration_facts.get("seat"),
+        arbitration_facts.get("place"),
+        arbitration_facts.get("country"),
+    ]
+
+    jurisdiction_detected = next(
+        (
+            value
+            for value in jurisdiction_candidates
+            if is_substantive_overview_value(value, language)
+        ),
+        not_specified,
+    )
+
+    parties = exec_summary.get("parties") or overview.get("parties")
+
+    if isinstance(party_roles, dict):
+        detected_roles = [
+            str(party_roles.get(key) or "").strip()
+            for key in ("party_a", "party_b")
+            if str(party_roles.get(key) or "").strip()
+        ]
+
+        if len(detected_roles) >= 2:
+            parties = detected_roles
+
+    parties = canonicalize_party_labels(
+        parties,
+        language,
+    )
+
+    return {
+        "contract_type": family,
+        "parties": parties or [not_specified],
+        "duration": duration or not_specified,
+        "payment_terms": payment_terms or not_specified,
+        "jurisdiction_detected": jurisdiction_detected,
+        "jurisdiction_note": (
+            exec_summary.get("jurisdiction_note")
+            or overview.get("jurisdiction_note")
+            or ""
+        ),
+        "contract_complexity": (
+            exec_summary.get("contract_complexity")
+            or overview.get("contract_complexity")
+            or "medium"
+        ),
+        "overall_balance": (
+            exec_summary.get("overall_balance")
+            or overview.get("overall_balance")
+            or not_specified
+        ),
+        "family_hint": build_family_hint(family_detection),
+        "_clauses_analyzed": overview.get("clauses_analyzed"),
+    }
+
+
+
+
+def normalize_published_role_text(
+    value: str,
+    language: str = "en",
+) -> str:
+    """
+    Final publication-only role localization.
+
+    This function is intentionally lexical and never applies to original_text,
+    quoted_text, or exact source evidence. It removes generic party-role leakage
+    from already-generated report prose in EN / FR / AR.
+    """
+    language = normalize_language(language)
+    text = normalize_report_text(value)
+
+    if not text:
+        return ""
+
+    if language == "fr":
+        replacements = (
+            (r"\bservice\s+provider\b", "Prestataire"),
+            (r"\bprovider\b", "Prestataire"),
+            (r"\bcustomer\b", "Client"),
+        )
+
+        for pattern, target in replacements:
+            text = re.sub(
+                pattern,
+                target,
+                text,
+                flags=re.IGNORECASE,
+            )
+
+        # Canonical publication labels Client / Prestataire are masculine.
+        text = re.sub(
+            r"\b[Ll]a\s+(Client|Prestataire)\b",
+            r"le \1",
+            text,
+        )
+        text = re.sub(
+            r"\b[Dd]e\s+la\s+(Client|Prestataire)\b",
+            r"du \1",
+            text,
+        )
+        text = re.sub(
+            r"\b[Àà]\s+la\s+(Client|Prestataire)\b",
+            r"au \1",
+            text,
+        )
+        text = re.sub(
+            r"\b[Dd]u\s+Provider\b",
+            "du Prestataire",
+            text,
+            flags=re.IGNORECASE,
+        )
+        text = re.sub(
+            r"\b[Ll]e\s+Provider\b",
+            "le Prestataire",
+            text,
+            flags=re.IGNORECASE,
+        )
+
+    elif language == "ar":
+        replacements = (
+            (r"\bservice\s+provider\b", "مزود الخدمة"),
+            (r"\bprovider\b", "مزود الخدمة"),
+            (r"\bprestataire\b", "مزود الخدمة"),
+            (r"\bcustomer\b", "العميل"),
+            (r"\bclient\b", "العميل"),
+        )
+
+        for pattern, target in replacements:
+            text = re.sub(
+                pattern,
+                target,
+                text,
+                flags=re.IGNORECASE,
+            )
+
+    else:
+        text = re.sub(
+            r"\bprestataire\b",
+            "Provider",
+            text,
+            flags=re.IGNORECASE,
+        )
+
+    return normalize_report_text(text)
+
+
+def finalize_published_text(
+    value: str,
+    language: str = "en",
+) -> str:
+    """
+    Last-mile publication invariant shared by unified and legacy buckets.
+    """
+    language = normalize_language(language)
+    value = normalize_published_role_text(
+        value,
+        language,
+    )
+
+    if not value:
+        return ""
+
+    if is_generic_report_text(value, language):
+        return ""
+
+    return value
+
+def _canonical_report_type(value: str) -> str:
+    value = normalize_family_name_for_optional_fields(
+        value,
+    )
+
+    aliases = {
+        "cybersecurity": "security",
+        "cyber_security": "security",
+        "information_security": "security",
+        "data_processing": "data_protection",
+        "privacy": "data_protection",
+        "non_compete": "restrictive_covenants",
+        "non_solicitation": "restrictive_covenants",
+    }
+
+    return aliases.get(value, value)
+
+
+def clause_semantic_candidate_types(
+    clause: dict,
+) -> set[str]:
+    """
+    Read semantic candidate types already attached to the clause.
+
+    No new analysis is run here. The helper is deliberately permissive:
+    primary type and all grounded mechanism candidate types are accepted.
+    If semantic metadata is absent, callers preserve historical behavior.
+    """
+    found: set[str] = set()
+
+    containers = [
+        clause.get("semantic_source_profile"),
+        clause.get("source_semantic_profile"),
+        clause.get("source_evidence_model"),
+        clause.get("_semantic_source_profile"),
+    ]
+
+    for container in containers:
+        if not isinstance(container, dict):
+            continue
+
+        for key in (
+            "primary_type",
+            "candidate_primary_type",
+        ):
+            value = _canonical_report_type(
+                container.get(key, "")
+            )
+            if value and value not in {
+                "unknown",
+                "other",
+                "general",
+            }:
+                found.add(value)
+
+        for list_key in (
+            "mechanisms",
+            "supporting_mechanisms",
+            "ranked_material_mechanisms",
+        ):
+            for mechanism in (
+                container.get(list_key)
+                or []
+            ):
+                if not isinstance(mechanism, dict):
+                    continue
+
+                value = _canonical_report_type(
+                    mechanism.get(
+                        "candidate_primary_type",
+                        "",
+                    )
+                    or mechanism.get(
+                        "primary_type",
+                        "",
+                    )
+                )
+
+                if value and value not in {
+                    "unknown",
+                    "other",
+                    "general",
+                }:
+                    found.add(value)
+
+    return found
+
+
+def clause_type_semantically_supported(
+    clause: dict,
+) -> bool:
+    semantic_types = clause_semantic_candidate_types(
+        clause,
+    )
+
+    # Preserve historical output when semantic metadata is unavailable.
+    if not semantic_types:
+        return True
+
+    clause_type = _canonical_report_type(
+        clause.get("clause_type", "")
+    )
+
+    if not clause_type or clause_type in {
+        "unknown",
+        "other",
+        "general",
+    }:
+        return False
+
+    return clause_type in semantic_types
+
+
+DANGEROUS_PATTERN_MARKERS = {
+    "en": (
+        "unlimited",
+        "uncapped",
+        "without limitation",
+        "sole discretion",
+        "unilateral",
+        "without notice",
+        "without a cure",
+        "no opportunity to cure",
+        "waive",
+        "waiver of",
+        "exclusive remedy",
+        "broad indemn",
+        "all losses",
+        "consequential damages",
+        "indirect damages",
+        "liquidated damages",
+        "penalty",
+        "non-refundable",
+        "automatic renewal",
+        "irrevocable",
+        "perpetual",
+        "immediate termination",
+    ),
+    "fr": (
+        "illimitée",
+        "illimitee",
+        "sans limitation",
+        "seule discrétion",
+        "seule discretion",
+        "unilatéral",
+        "unilateral",
+        "sans préavis",
+        "sans preavis",
+        "sans possibilité de régularisation",
+        "sans possibilite de regularisation",
+        "aucune possibilité de remédier",
+        "aucune possibilite de remedier",
+        "renonce",
+        "renonciation",
+        "recours exclusif",
+        "indemnisation générale",
+        "indemnisation generale",
+        "toutes les pertes",
+        "dommages indirects",
+        "dommages consécutifs",
+        "dommages consecutifs",
+        "dommages-intérêts forfaitaires",
+        "dommages-interets forfaitaires",
+        "pénalité",
+        "penalite",
+        "non remboursable",
+        "renouvellement automatique",
+        "irrévocable",
+        "irrevocable",
+        "perpétuel",
+        "perpetuel",
+        "résiliation immédiate",
+        "resiliation immediate",
+    ),
+    "ar": (
+        "غير محدودة",
+        "دون حد",
+        "بدون حد",
+        "وفق تقديره المنفرد",
+        "من جانب واحد",
+        "دون إشعار",
+        "بدون إشعار",
+        "دون مهلة للمعالجة",
+        "بدون مهلة للمعالجة",
+        "لا فرصة للمعالجة",
+        "تنازل",
+        "سبيل الانتصاف الحصري",
+        "تعويض واسع",
+        "جميع الخسائر",
+        "الأضرار غير المباشرة",
+        "الأضرار التبعية",
+        "تعويضات مقطوعة",
+        "غرامة",
+        "غير قابل للاسترداد",
+        "تجديد تلقائي",
+        "غير قابل للإلغاء",
+        "دائم",
+        "إنهاء فوري",
+    ),
+}
+
+
+def risk_is_dangerous_pattern(
+    risk: dict,
+    language: str = "en",
+) -> bool:
+    if bool(risk.get("red_flag")):
+        return True
+
+    language = normalize_language(language)
+
+    text = " ".join(
+        normalize_report_text(
+            risk.get(field, "")
+        ).lower()
+        for field in (
+            "explanation",
+            "risk_reason",
+            "red_flag_reason",
+        )
+    )
+
+    if not text:
+        return False
+
+    return any(
+        marker in text
+        for marker in DANGEROUS_PATTERN_MARKERS[
+            language
+        ]
+    )
+
+
+def select_clause_report_text(
+    clause: dict,
+    language: str = "en",
+    *,
+    purpose: str = "explanation",
+) -> str:
+    """
+    Select one already-produced field by purpose and publication suitability.
+
+    Internal diagnostics and generic legal/business filler are skipped. For
+    type-specific negotiation guidance, a contradictory semantic profile
+    prevents publication of the advice. Missing semantic metadata preserves
+    the historical path.
+    """
+    language = normalize_language(language)
+
+    field_orders = {
+        "explanation": (
+            "explanation_simple",
+            "why_it_matters",
+            "legal_insight",
+            "business_impact",
+            "commercial_impact",
+            "operational_impact",
+        ),
+        "risk": (
+            "risk_reason",
+            "business_impact",
+            "commercial_impact",
+            "operational_impact",
+            "legal_insight",
+            "explanation_simple",
+            "why_it_matters",
+        ),
+        "action": (
+            "recommendation",
+            "negotiation_advice",
+            "safer_alternative",
+        ),
+        "negotiation": (
+            "negotiation_advice",
+            "recommendation",
+            "safer_alternative",
+        ),
+    }
+
+    type_specific_purposes = {
+        "negotiation",
+    }
+
+    if (
+        purpose in type_specific_purposes
+        and not clause_type_semantically_supported(
+            clause,
+        )
+    ):
+        return ""
+
+    for field in field_orders.get(
+        purpose,
+        field_orders["explanation"],
+    ):
+        value = finalize_published_text(
+            clause.get(field, ""),
+            language,
+        )
+
+        if value:
+            return value
+
+    return ""
+def build_key_clauses(clauses: list, language: str = "en") -> list:
+    key_clauses = []
+    language = normalize_language(language)
+    for i, clause in enumerate(clauses):
+        why = select_clause_report_text(clause, language, purpose="explanation")
+        if not why:
+            continue
+        key_clauses.append({
+            "id": _clause_id(clause, i),
+            "clause_type": clause.get("clause_type", "other"),
+            "title": clause.get("clause_title") or clause.get("title", ""),
+            "why_it_matters": why,
+            "risk_level": clause.get("risk_level", "low"),
+        })
+    return key_clauses
+
+
+def build_risks_identified(
+    clauses: list,
+    language: str = "en",
+) -> list:
+    risks = []
+    language = normalize_language(language)
+
+    for i, clause in enumerate(clauses):
+        risk_level = str(
+            clause.get("risk_level", "low")
+        ).lower()
+
+        if (
+            risk_level == "low"
+            and not clause.get("red_flag")
+        ):
+            continue
+
+        explanation = select_clause_report_text(
+            clause,
+            language,
+            purpose="risk",
+        )
+
+        if not explanation:
+            continue
+
+        risks.append({
+            "id": f"risk_{_clause_id(clause, i)}",
+            "clause_ref": _clause_id(clause, i),
+            "title": (
+                clause.get("clause_title")
+                or clause.get("title")
+                or ""
+            ),
+            "clause_type": clause.get(
+                "clause_type",
+                "other",
+            ),
+            "risk_level": risk_level,
+            "market_practice": infer_market_practice(
+                clause
+            ),
+            "market_practice_score": clause.get(
+                "market_practice_score"
+            ),
+            "exposure": infer_exposure_dimensions(
+                clause,
+                risk_level,
+            ),
+            "explanation": explanation,
+            "risk_reason": finalize_published_text(
+                clause.get("risk_reason", ""),
+                language,
+            ),
+            "red_flag_reason": finalize_published_text(
+                clause.get("red_flag_reason", ""),
+                language,
+            ),
+            "red_flag": bool(
+                clause.get("red_flag")
+            ),
+        })
+
+    return risks
+
+def build_negotiation_priorities(
+    clauses: list,
+    language: str = "en",
+) -> list:
+    priorities = []
+    language = normalize_language(language)
+
+    for i, clause in enumerate(clauses):
+        priority = str(
+            clause.get(
+                "negotiation_priority",
+                "low",
+            )
+        ).lower()
+
+        if priority == "low":
+            continue
+
+        advice = select_clause_report_text(
+            clause,
+            language,
+            purpose="negotiation",
+        )
+
+        if not advice:
+            continue
+
+        priorities.append({
+            "risk_ref": f"risk_{_clause_id(clause, i)}",
+            "priority": priority,
+            "negotiable": infer_negotiability(clause),
+            "what_should_change": advice,
+            "commercial_objective": finalize_published_text(
+                clause.get("commercial_objective", ""),
+                language,
+            ),
+            "acceptable_compromise": finalize_published_text(
+                clause.get("acceptable_compromise", ""),
+                language,
+            ),
+            "never_accept": finalize_published_text(
+                clause.get("never_accept", ""),
+                language,
+            ),
+        })
+
+    return priorities
+
+
+def build_suggested_wording(clauses: list) -> list:
+    wording = []
+    for i, clause in enumerate(clauses):
+        alt = clause.get("safer_alternative", "")
+        if not alt:
+            continue
+        wording.append({
+            "risk_ref": f"risk_{_clause_id(clause, i)}",
+            "preferred_wording": alt,
+            "fallback_wording": "",     # not currently distinguished from preferred — see confidence_notes
+            "negotiation_alternative": clause.get("negotiation_advice", ""),
+        })
+    return wording
+
+
+def build_action_checklist(clauses: list, language: str = "en") -> list:
+    """Publish actionable fields only; red_flag_reason is never an action."""
+    actions = []
+    language = normalize_language(language)
+    for clause in clauses:
+        priority = str(clause.get("negotiation_priority", "low")).lower()
+        action = select_clause_report_text(clause, language, purpose="action")
+        if not action:
+            continue
+        urgency = (
+            "immediate"
+            if clause.get("red_flag") and priority == "high"
+            else URGENCY_BY_PRIORITY.get(priority, "monitor")
+        )
+        actions.append({
+            "action": action,
+            "urgency": urgency,
+            "owner": infer_action_owner(clause),
+            "deadline": infer_action_deadline(urgency),
+            "category": infer_action_category(clause),
+            "clause_ref": clause.get("clause_id", ""),
+        })
+    return actions
+
+
+
+RISK_SCORE_POINTS = {
+    "low": 0,
+    "medium": 8,
+    "high": 20,
+}
+
+MATERIALITY_SCORE_POINTS = {
+    "low": 8,
+    "medium": 16,
+    "high": 24,
+}
+
+
+def build_risk_score_top_factors(
+    clauses: list,
+    language: str = "en",
+    top_n: int = 4,
+) -> list:
+    if not clauses:
+        return []
+
+    total_materiality_points = sum(
+        MATERIALITY_SCORE_POINTS.get(
+            str(c.get("materiality_level", "medium")).lower(),
+            16,
+        )
+        for c in clauses
+    )
+
+    if total_materiality_points <= 0:
+        return []
+
+    factors = []
+
+    for clause in clauses:
+        risk_level = str(clause.get("risk_level", "low")).lower()
+        risk_points = RISK_SCORE_POINTS.get(risk_level, 0)
+
+        if risk_points <= 0:
+            continue
+
+        contribution = round((risk_points / total_materiality_points) * 100)
+
+        if contribution <= 0:
+            continue
+
+        title = (
+            clause.get("display_title")
+            or clause.get("localized_title")
+            or clause.get("clause_title")
+            or clause.get("title")
+            or clause.get("clause_type")
+            or {
+                "en": "Untitled clause",
+                "fr": "Clause sans titre",
+                "ar": "بند بدون عنوان",
+            }.get(language, "Untitled clause")
+        )
+
+        factors.append({
+            "factor": title,
+            "contribution": contribution,
+            "risk_level": risk_level,
+        })
+
+    factors.sort(key=lambda item: item["contribution"], reverse=True)
+
+    return factors[:top_n]
+
+
+
+def build_risk_score(pipeline_result: dict, risks: list) -> dict:
+    clauses = _get_clause_list(pipeline_result)
+
+    scores = [
+        c.get("normalized_contract_score")
+        for c in clauses
+        if c.get("normalized_contract_score") is not None
+    ]
+
+    value = scores[0] if scores else 0
+
+    language = normalize_language(
+        pipeline_result.get("language", "en")
+    )
+
+    high_titles = [
+        (
+            c.get("display_title")
+            or c.get("localized_title")
+            or c.get("clause_title")
+            or c.get("title")
+            or c.get("clause_type")
+        )
+        for c in clauses
+        if str(c.get("risk_level", "")).lower() == "high"
+    ]
+
+    high_titles = [t for t in high_titles if t][:3]
+
+    medium_count = sum(
+        1
+        for c in clauses
+        if str(c.get("risk_level", "")).lower() == "medium"
+    )
+
+    low_count = sum(
+        1
+        for c in clauses
+        if str(c.get("risk_level", "")).lower() == "low"
+    )
+
+    if language == "fr":
+        if high_titles:
+            explanation = (
+                f"Le score est principalement influencé par "
+                f"{len(high_titles)} clause(s) à risque élevé : "
+                f"{', '.join(high_titles)}."
+            )
+            if medium_count:
+                explanation += (
+                    f" {medium_count} clause(s) à risque moyen "
+                    f"contribuent également au score."
+                )
+        elif medium_count:
+            explanation = (
+                f"Le score est principalement influencé par "
+                f"{medium_count} clause(s) à risque moyen."
+            )
+        else:
+            explanation = "Aucun risque significatif n'a été détecté."
+    elif language == "ar":
+        if high_titles:
+            explanation = (
+                f"تعتمد النتيجة بشكل أساسي على "
+                f"{len(high_titles)} بند عالي المخاطر: "
+                f"{'، '.join(high_titles)}."
+            )
+            if medium_count:
+                explanation += (
+                    f" كما ساهم {medium_count} بند متوسط المخاطر "
+                    f"في احتساب النتيجة."
+                )
+        elif medium_count:
+            explanation = (
+                f"تعتمد النتيجة بشكل أساسي على "
+                f"{medium_count} بند متوسط المخاطر."
+            )
+        else:
+            explanation = "لم يتم اكتشاف مخاطر جوهرية."
+    else:
+        if high_titles:
+            explanation = (
+                f"The score is mainly influenced by "
+                f"{len(high_titles)} high-risk clause(s): "
+                f"{', '.join(high_titles)}."
+            )
+            if medium_count:
+                explanation += (
+                    f" {medium_count} medium-risk clause(s) "
+                    f"also contributed."
+                )
+        elif medium_count:
+            explanation = (
+                f"The score is mainly influenced by "
+                f"{medium_count} medium-risk clause(s)."
+            )
+        else:
+            explanation = "No material risks detected in analyzed clauses."
+
+    top_factors = build_risk_score_top_factors(
+        clauses,
+        language=language,
+        top_n=4,
+    )
+
+    return {
+        "value": value,
+        "explanation": explanation,
+        "top_factors": top_factors,
+        "improves_if": (
+            "Resolving the high-risk clauses listed above would reduce the risk score."
+            if high_titles else
+            "No specific high-risk clause identified."
+        ),
+        "high_count": len(high_titles),
+        "medium_count": medium_count,
+        "low_count": low_count,
+        "critical_clauses": high_titles,
+        "confidence": "high" if clauses else "low",
+        "coverage": round(len(clauses) / max(len(clauses), 1), 2),
+        "missing_clause_penalty": 0,
+    }
+
+
+
+
+def build_unified_report_from_pipeline(
+    pipeline_result: dict,
+    contract_text: str,
+    language: str = "en",
+    party_roles: dict | None = None,
+) -> dict:
+    language = normalize_language(language)
+    """
+    Main entrypoint. Aggregates the report from one clause-analysis truth.
+    The only small AI call is limited to genuinely absent family-core clauses
+    and confidence notes.
+    """
+    clauses = _get_clause_list(pipeline_result)
+    family_detection = detect_contract_family(contract_text)
+
+    key_clauses = build_key_clauses(clauses, language)
+    risks = build_risks_identified(clauses, language)
+    negotiation_priorities = build_negotiation_priorities(clauses, language)
+    suggested_wording = build_suggested_wording(clauses)
+    action_checklist = build_action_checklist(clauses, language)
+    risk_score = build_risk_score(pipeline_result, risks)
+    contract_overview = build_contract_overview(
+        pipeline_result,
+        family_detection,
+        contract_text,
+        party_roles,
+        language,
+    )
+
+    executive_summary_text = (
+        pipeline_result.get("executive_risk_narrative")
+        or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+        or ""
+    )
+
+    missing_clauses, confidence_notes, fallback_position = (
+        _generate_missing_clauses_and_notes(
+            contract_text,
+            family_detection,
+            clauses,
+            language,
+        )
+    )
+
+    quality_score = build_contract_quality_score(
+        pipeline_result,
+        clauses,
+    )
+
+    return {
+        "contract_family": family_detection.get("family", "General"),
+        "contract_overview": contract_overview,
+        "executive_summary": executive_summary_text,
+        "key_clauses": key_clauses,
+        "risks_identified": risks,
+        "negotiation_priorities": negotiation_priorities,
+        "suggested_wording": suggested_wording,
+        "fallback_position": fallback_position,
+        "action_checklist": action_checklist,
+        "risk_score": risk_score,
+        "confidence_score": quality_score,
+        "missing_clauses": missing_clauses,
+        "confidence_notes": confidence_notes,
+    }
+
+
+
+# ---------------------------------------------------------------------
+# Pure-Python legacy adapters.
+#
+# These adapters reshape the ALREADY-BUILT unified report. They never
+# call the AI and therefore preserve one analysis truth per contract.
+# ---------------------------------------------------------------------
+
+
+OBLIGATION_TYPE_MARKERS = (
+    "obligation",
+    "duty",
+    "payment",
+    "service",
+    "performance",
+    "confidentiality",
+    "non_disclosure",
+    "use_restriction",
+    "security",
+    "notification",
+    "notice",
+    "return",
+    "deletion",
+    "destruction",
+    "cooperation",
+    "compliance",
+    "safeguard",
+    "processing_instruction",
+    "subprocessor",
+    "assistance",
+    "delivery",
+    "reporting",
+    "maintenance",
+)
+
+KEY_POINT_TYPE_MARKERS = (
+    "ownership",
+    "intellectual_property",
+    "license",
+    "term",
+    "duration",
+    "survival",
+    "liability",
+    "indemn",
+    "governing_law",
+    "jurisdiction",
+    "dispute",
+    "arbitration",
+    "cap",
+    "limitation",
+    "exclusion",
+    "exception",
+    "definition",
+    "right",
+    "termination",
+    "renewal",
+    "assignment",
+    "governance",
+    "board",
+    "reserved_matter",
+)
+
+
+def clause_display_title(
+    clause: dict,
+    language: str = "en",
+) -> str:
+    language = normalize_language(language)
+
+    title = normalize_report_text(
+        clause.get("title")
+        or clause.get("clause_title")
+        or clause.get("clause_type")
+        or ""
+    )
+
+    if title:
+        return title
+
+    fallbacks = {
+        "en": "Contract provision",
+        "fr": "Disposition contractuelle",
+        "ar": "حكم تعاقدي",
+    }
+    return fallbacks[language]
+
+
+def clean_clause_lead(
+    text: str,
+    language: str = "en",
+) -> str:
+    language = normalize_language(language)
+    text = normalize_report_text(text)
+
+    if not text:
+        return ""
+
+    prefixes = {
+        "en": (
+            "This clause ",
+            "The clause ",
+        ),
+        "fr": (
+            "Cette clause ",
+            "La clause ",
+        ),
+        "ar": (
+            "ينص هذا البند على ",
+            "يحدد هذا البند ",
+            "يتناول هذا البند ",
+            "هذا البند ",
+        ),
+    }
+
+    for prefix in prefixes[language]:
+        if text.lower().startswith(prefix.lower()):
+            text = text[len(prefix):].strip()
+            if text:
+                text = text[0].upper() + text[1:] if language != "ar" else text
+            break
+
+    return text
+
+
+def title_aware_clause_text(
+    clause: dict,
+    language: str = "en",
+) -> str:
+    title = clause_display_title(clause, language)
+    insight = clean_clause_lead(
+        clause.get("why_it_matters")
+        or clause.get("business_impact")
+        or clause.get("commercial_impact")
+        or clause.get("operational_impact")
+        or clause.get("risk_reason")
+        or clause.get("legal_insight")
+        or clause.get("explanation_simple")
+        or "",
+        language,
+    )
+
+    if not insight or is_generic_report_text(insight, language):
+        return ""
+
+    separator = " — " if language != "ar" else " — "
+    return f"{title}{separator}{insight}"
+
+
+def classify_legacy_section_role(
+    clause: dict,
+) -> str:
+    clause_type = normalize_family_name_for_optional_fields(
+        clause.get("clause_type", "")
+    )
+    text = safe_get_text(
+        clause_type,
+        clause.get("title"),
+        clause.get("clause_title"),
+    ).lower()
+
+    obligation_score = sum(
+        1
+        for marker in OBLIGATION_TYPE_MARKERS
+        if marker in text
+    )
+    key_point_score = sum(
+        1
+        for marker in KEY_POINT_TYPE_MARKERS
+        if marker in text
+    )
+
+    if obligation_score > key_point_score:
+        return "obligation"
+
+    if key_point_score > obligation_score:
+        return "key_point"
+
+    # Conservative default: high/medium risk allocation or structural clauses
+    # belong in key points; operational duties belong in obligations.
+    if str(clause.get("risk_level", "")).lower() == "high":
+        return "key_point"
+
+    return "obligation"
+
+
+def build_legacy_clause_sections(
+    report: dict,
+    language: str = "en",
+) -> tuple[list[str], list[str]]:
+    language = normalize_language(language)
+
+    obligation_items = []
+    key_point_items = []
+
+    for clause in report.get("key_clauses", []) or []:
+        if not isinstance(clause, dict):
+            continue
+
+        item = title_aware_clause_text(
+            clause,
+            language,
+        )
+        if not item:
+            continue
+
+        role = classify_legacy_section_role(clause)
+        if role == "key_point":
+            key_point_items.append(item)
+        else:
+            obligation_items.append(item)
+
+    obligations = compact_unique_texts(
+        obligation_items,
+        language,
+        limit=8,
+        drop_generic=True,
+    )
+    key_points = compact_unique_texts(
+        key_point_items,
+        language,
+        limit=8,
+        drop_generic=True,
+    )
+
+    # Keep sections informative even where a contract family contains mostly
+    # one role class, without duplicating identical bullets across sections.
+    obligation_keys = {report_text_key(item) for item in obligations}
+
+    if not key_points:
+        key_points = compact_unique_texts(
+            [
+                item
+                for item in obligation_items + key_point_items
+                if report_text_key(item) not in obligation_keys
+            ],
+            language,
+            limit=8,
+            drop_generic=True,
+        )
+
+    key_point_keys = {report_text_key(item) for item in key_points}
+
+    if not obligations:
+        obligations = compact_unique_texts(
+            [
+                item
+                for item in obligation_items + key_point_items
+                if report_text_key(item) not in key_point_keys
+            ],
+            language,
+            limit=8,
+            drop_generic=True,
+        )
+
+    return obligations, key_points
+
+
+def english_indefinite_article(value: str) -> str:
+    word = normalize_report_text(value)
+    if not word:
+        return "a"
+
+    # Adequate for legal family labels such as NDA, Agreement, Employment,
+    # Outsourcing, IP Assignment, etc. Acronym vowel-sound exceptions are
+    # handled explicitly.
+    upper = word.upper()
+    if upper.startswith(("NDA", "MSA", "SLA", "SPA", "LLC", "FCA")):
+        return "an"
+
+    return "an" if word[0].lower() in "aeiou" else "a"
+
+
+def to_legacy_summary_data(
+    report: dict,
+    language: str = "en",
+) -> dict:
+    language = normalize_language(language)
+    not_specified = localized_default(
+        "not_specified",
+        language,
+    )
+
+    overview = (
+        report.get("contract_overview", {})
+        or {}
+    )
+    negotiation = (
+        report.get("negotiation_priorities", [])
+        or []
+    )
+    risks = (
+        report.get("risks_identified", [])
+        or []
+    )
+
+    contract_family = (
+        report.get("contract_family")
+        or overview.get("contract_type")
+        or ""
+    )
+    optional_fields = get_optional_fields_for_family(
+        contract_family
+    )
+
+    parties = canonicalize_party_labels(
+        overview.get("parties"),
+        language,
+    )
+
+    payment_terms = overview.get("payment_terms")
+    if not payment_terms:
+        payment_terms = (
+            localized_default(
+                "not_applicable",
+                language,
+            )
+            if "payment_terms" in optional_fields
+            else not_specified
+        )
+
+    main_obligations, important_points = (
+        build_legacy_clause_sections(
+            report,
+            language,
+        )
+    )
+
+    action_texts = [
+        finalize_published_text(
+            action.get("action", ""),
+            language,
+        )
+        for action in report.get(
+            "action_checklist",
+            [],
+        )
+        if isinstance(action, dict)
+    ]
+
+    dangerous_risks = [
+        risk
+        for risk in risks
+        if isinstance(risk, dict)
+        and risk_is_dangerous_pattern(
+            risk,
+            language,
+        )
+    ]
+
+    high_risk_texts = [
+        finalize_published_text(
+            title_aware_clause_text(
+                {
+                    "title": risk.get("title", ""),
+                    "clause_type": risk.get(
+                        "clause_type",
+                        "other",
+                    ),
+                    "why_it_matters": risk.get(
+                        "explanation",
+                        "",
+                    ),
+                },
+                language,
+            ),
+            language,
+        )
+        for risk in dangerous_risks
+    ]
+
+    all_risk_texts = [
+        finalize_published_text(
+            title_aware_clause_text(
+                {
+                    "title": risk.get("title", ""),
+                    "clause_type": risk.get(
+                        "clause_type",
+                        "other",
+                    ),
+                    "why_it_matters": risk.get(
+                        "explanation",
+                        "",
+                    ),
+                },
+                language,
+            ),
+            language,
+        )
+        for risk in risks
+        if isinstance(risk, dict)
+    ]
+
+    negotiation_texts = [
+        finalize_published_text(
+            item.get("what_should_change", ""),
+            language,
+        )
+        for item in negotiation
+        if isinstance(item, dict)
+    ]
+
+    missing_texts = [
+        finalize_published_text(
+            (
+                f"{item.get('clause_type', 'unknown')}: "
+                f"{item.get('business_reason') or item.get('risk_if_missing') or item.get('why_missing') or ''}"
+            ).strip(),
+            language,
+        )
+        for item in report.get(
+            "missing_clauses",
+            [],
+        )
+        if isinstance(item, dict)
+    ]
+
+    return {
+        "contract_type": (
+            overview.get("contract_type")
+            or report.get("contract_family")
+            or not_specified
+        ),
+        "parties": parties,
+        "duration": (
+            overview.get("duration")
+            or not_specified
+        ),
+        "payment_terms": payment_terms,
+        "main_obligations": compact_unique_texts(
+            [
+                finalize_published_text(
+                    item,
+                    language,
+                )
+                for item in main_obligations
+            ],
+            language,
+            limit=8,
+        ),
+        "global_summary": finalize_published_text(
+            report.get("executive_summary", ""),
+            language,
+        ),
+        "important_points": compact_unique_texts(
+            [
+                finalize_published_text(
+                    item,
+                    language,
+                )
+                for item in important_points
+            ],
+            language,
+            limit=8,
+        ),
+        "missing_clauses": compact_unique_texts(
+            missing_texts,
+            language,
+            limit=5,
+            drop_generic=False,
+        ),
+        "dangerous_patterns": compact_unique_texts(
+            high_risk_texts,
+            language,
+            limit=5,
+        ),
+        "contract_quality_score": int(
+            report.get("confidence_score")
+            if report.get("confidence_score")
+            is not None
+            else 0
+        ),
+        "overall_balance": (
+            overview.get("overall_balance")
+            or not_specified
+        ),
+        "negotiation_priorities": compact_unique_texts(
+            negotiation_texts,
+            language,
+            limit=5,
+        ),
+        "key_risks": compact_unique_texts(
+            all_risk_texts,
+            language,
+            limit=5,
+        ),
+        "practical_decision": finalize_published_text(
+            report.get("fallback_position", ""),
+            language,
+        ),
+        "jurisdiction_detected": (
+            overview.get("jurisdiction_detected")
+            or not_specified
+        ),
+        "jurisdiction_note": finalize_published_text(
+            overview.get("jurisdiction_note", ""),
+            language,
+        ),
+        "recommended_actions": compact_unique_texts(
+            action_texts,
+            language,
+            limit=5,
+        ),
+        "contract_complexity": overview.get(
+            "contract_complexity",
+            "medium",
+        ),
+    }
+
+def to_legacy_simplified_string(
+    report: dict,
+    language: str = "en",
+) -> str:
+    language = normalize_language(language)
+
+    overview = report.get("contract_overview", {}) or {}
+    contract_type = (
+        overview.get("contract_type")
+        or report.get("contract_family")
+        or localized_default("not_specified", language)
+    )
+
+    parties = canonicalize_party_labels(
+        overview.get("parties"),
+        language,
+    )
+    parties_text = ", ".join(parties)
+
+    duration = overview.get("duration")
+    payment_terms = overview.get("payment_terms")
+
+    key_topics = compact_unique_texts(
+        [
+            clause_display_title(kc, language)
+            for kc in report.get("key_clauses", [])
+            if isinstance(kc, dict)
+        ],
+        language,
+        limit=4,
+        drop_generic=True,
+    )
+
+    watch_items = compact_unique_texts(
+        [
+            title_aware_clause_text(
+                {
+                    "title": next(
+                        (
+                            kc.get("title")
+                            for kc in report.get("key_clauses", [])
+                            if isinstance(kc, dict)
+                            and kc.get("id") == risk.get("clause_ref")
+                        ),
+                        risk.get("clause_ref", ""),
+                    ),
+                    "clause_type": "",
+                    "why_it_matters": risk.get("explanation", ""),
+                },
+                language,
+            )
+            for risk in report.get("risks_identified", [])
+            if isinstance(risk, dict)
+            and risk.get("risk_level") in {"medium", "high"}
+        ],
+        language,
+        limit=4,
+        drop_generic=True,
+    )
+
+    templates = {
+        "en": {
+            "intro": (
+                f"This is {english_indefinite_article(contract_type)} "
+                f"{contract_type} involving {parties_text}. "
+                "It sets out the parties' main rights, obligations, and risk allocation."
+            ),
+            "duration": f"The stated contract duration is {duration}.",
+            "payment": f"Payment terms are {payment_terms}.",
+            "topics": "Key topics include: {items}.",
+            "watch": "Things to watch",
+        },
+        "fr": {
+            "intro": (
+                f"Il s'agit d'un contrat de type {contract_type} entre {parties_text}. "
+                "Il fixe les principaux droits, obligations et mécanismes de répartition des risques."
+            ),
+            "duration": f"La durée contractuelle indiquée est {duration}.",
+            "payment": f"Les conditions de paiement sont {payment_terms}.",
+            "topics": "Les principaux sujets comprennent : {items}.",
+            "watch": "Points à surveiller",
+        },
+        "ar": {
+            "intro": (
+                f"هذا عقد من نوع {contract_type} بين {parties_text}. "
+                "ويحدد الحقوق والالتزامات الرئيسية وكيفية توزيع المخاطر بين الأطراف."
+            ),
+            "duration": f"مدة العقد المحددة هي {duration}.",
+            "payment": f"شروط الدفع هي {payment_terms}.",
+            "topics": "تشمل الموضوعات الرئيسية: {items}.",
+            "watch": "نقاط يجب الانتباه لها",
+        },
+    }
+
+    t = templates[language]
+    paragraphs = [t["intro"]]
+
+    if is_substantive_overview_value(duration, language):
+        paragraphs.append(t["duration"])
+
+    if is_substantive_overview_value(payment_terms, language):
+        paragraphs.append(t["payment"])
+
+    if key_topics:
+        separator = "، " if language == "ar" else ", "
+        paragraphs.append(
+            t["topics"].format(items=separator.join(key_topics))
+        )
+
+    output = " ".join(paragraphs).strip()
+
+    if watch_items:
+        output += (
+            f"\n\n{t['watch']}:\n"
+            + "\n".join(f"- {item}" for item in watch_items)
+        )
+
+    return output.strip()
+
+
+# ---------------------------------------------------------------------
+# The ONE small AI call this architecture still needs.
+# ---------------------------------------------------------------------
+
+MISSING_CLAUSES_PROMPT = """
+ROLE: You identify ONLY genuinely absent, family-relevant clauses in a
+contract. You do not summarize, re-analyze, or comment on clauses that
+are present — that has already been done.
+
+The clause types ALREADY DETECTED in this contract are:
+{detected_types}
+
+The contract family is: {family}
+
+TASK: Return JSON with exactly these keys:
+{{
+  "missing_clauses": [
+    {{
+      "clause_type": string,
+      "why_missing": string,
+      "risk_if_missing": string,
+      "business_reason": string,
+      "market_practice": "market_standard | market_favorable | market_uncommon | market_unknown",
+      "priority": "high | medium | low",
+      "recommended_wording": string,
+      "jurisdiction_note": string
+    }}
+  ],
+  "confidence_notes": [string],
+  "fallback_position": string
+}}
+
+RULES:
+- Only list a clause as missing if it is genuinely expected for a "{family}"
+  contract AND its absence creates measurable legal, financial, regulatory,
+  operational, IP, privacy, tax, employment, cybersecurity, or business risk.
+- Never list optional or uncommon clauses as missing merely because they
+  are useful in some contracts.
+- business_reason must be specific to THIS contract family, never generic.
+- risk_if_missing must explain what could realistically go wrong.
+- market_practice must reflect international commercial practice, not one
+  jurisdiction unless the contract expressly states that jurisdiction.
+- recommended_wording must be concise and practical, not a full clause.
+- jurisdiction_note must mention uncertainty where enforceability depends
+  on local mandatory law.
+- confidence_notes: list anything you are uncertain about, including missing
+  schedules, annexes, incomplete arbitration mechanics, undefined terms, or
+  incomplete context.
+- fallback_position: ONE paragraph — if negotiation fails, what is the
+  minimum acceptable position given what's present and absent.
+- Never invent clauses that ARE present under a different name — check
+  the detected list above first.
+- PRIVACY-FIRST: Never reconstruct, infer, restore, request, or output real names, emails, addresses, phone numbers, identifiers, account numbers, or personal data.
+- Preserve anonymized placeholders exactly as received, including [PERSON], [ORGANIZATION], [PARTY_1], [PARTY_2], [PARTY_3], [CLIENT], [SERVICE_PROVIDER], and equivalent placeholders.
+
+{definitions_block}
+
+{arbitration_hint}
+
+Contract text:
+{contract_text}
+""".strip()
+
+
+
+def _generate_missing_clauses_and_notes(
+    contract_text: str,
+    family_detection: dict,
+    clauses: list,
+    language: str,
+) -> tuple[list, list, str]:
+    detected_types = sorted({
+        c.get("clause_type", "other")
+        for c in clauses
+        if isinstance(c, dict)
+    })
+    definitions = extract_definitions(contract_text)
+    arbitration_facts = analyze_arbitration(contract_text) or {}
+
+    family = family_detection.get("family", "General")
+
+    prompt = MISSING_CLAUSES_PROMPT.format(
+        detected_types=", ".join(detected_types) or "none detected",
+        family=family,
+        definitions_block=build_definitions_block(definitions),
+        arbitration_hint=build_arbitration_hint(arbitration_facts),
+        contract_text=contract_text[:14000],
+    )
+    prompt += (
+        f"\n\nOutput language: {language}. Translate all generated text into {language}."
+        "\nPrivacy-first: preserve anonymized placeholders exactly and never output personal data."
+    )
+
+    try:
+        data = call_json_ai(prompt, temperature=0.0)
+    except Exception as e:
+        logger.exception("Missing clauses AI error: %s", e)
+        fallback_notes = {
+            "en": ["Could not generate missing-clause analysis."],
+            "fr": ["Impossible de générer l'analyse des clauses manquantes."],
+            "ar": ["تعذر إنشاء تحليل البنود المفقودة."],
+        }
+        return [], fallback_notes[normalize_language(language)], ""
+
+    raw_missing = [
+        item
+        for item in data.get("missing_clauses", [])
+        if isinstance(item, dict)
+        and normalize_report_text(
+            item.get("business_reason")
+            or item.get("risk_if_missing")
+            or item.get("why_missing")
+        )
+    ]
+
+    missing = filter_family_relevant_missing_clauses(
+        raw_missing,
+        family,
+        clauses,
+    )
+
+    confidence_notes = compact_unique_texts(
+        data.get("confidence_notes", []),
+        language,
+        limit=5,
+        drop_generic=False,
+    )
+
+    fallback_position = normalize_report_text(
+        data.get("fallback_position", "")
+    )
+
+    # Optional/non-core missing clauses must never become the practical
+    # decision driver for a known family.
+    if not missing and fallback_position:
+        fallback_position = ""
+
+    return missing, confidence_notes, fallback_position

@@ -1,0 +1,1071 @@
+[
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "1.2",
+    "source_language": "ar",
+    "source_text": "1.2 الوقت عنصر جوهري. إذا لم يسلم المورد البضائع خلال خمسة (5) أيام عمل من تاريخ التسليم المقرر، يجوز للمشتري، وفقاً لتقديره، إلغاء أمر الشراء المعني دون غرامة والحصول على بضائع بديلة، مع تحميل المورد مسؤولية أي تكاليف بديلة معقولة.",
+    "primary_type": "delivery",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 29,
+            "end": 177,
+            "text": "يسلم المورد البضائع خلال خمسة (5) أيام عمل من تاريخ التسليم المقرر، يجوز للمشتري، وفقاً لتقديره، إلغاء أمر الشراء المعني دون غرامة والحصول على بضائع"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "778c9a3918cf262e91ec392ae9066d0e35836ac584a51fad0503bb2469f41b2c",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 29,
+            "end": 177,
+            "text": "يسلم المورد البضائع خلال خمسة (5) أيام عمل من تاريخ التسليم المقرر، يجوز للمشتري، وفقاً لتقديره، إلغاء أمر الشراء المعني دون غرامة والحصول على بضائع"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "778c9a3918cf262e91ec392ae9066d0e35836ac584a51fad0503bb2469f41b2c",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 خلال المدة، يشتري المشتري ما لا يقل عن سبعين بالمائة (70%) من احتياجاته من البضائع من المورد، شريطة أن يظل المورد منافساً من حيث السعر والجودة وأداء التسليم مقارنة بالسوق.",
+    "primary_type": "pricing",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "pricing",
+        "anchors": [
+          "أن",
+          "احتياجاته",
+          "البضائع",
+          "التسليم",
+          "السعر",
+          "المدة",
+          "المشتري",
+          "المورد",
+          "بالسوق",
+          "بالمائة",
+          "حيث",
+          "خلال",
+          "سبعين",
+          "شريطة",
+          "لا",
+          "ما",
+          "مقارنة",
+          "منافسا",
+          "وأداء",
+          "والجودة",
+          "يشتري",
+          "يظل",
+          "يقل"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "7.1",
+    "source_language": "ar",
+    "source_text": "7.1 لا يتحمل أي طرف المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية. لا تتجاوز المسؤولية الإجمالية للمورد قيمة أمر الشراء الذي نشأت عنه المطالبة.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "LIABILITY_CAP",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية. لا تتجاوز",
+            "start": 20,
+            "end": 86
+          }
+        ]
+      },
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "الأضرار غير المباشرة أو العرضية أو التبعية",
+            "start": 33,
+            "end": 75
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 4,
+            "end": 53,
+            "text": "لا يتحمل أي طرف المسؤولية عن الأضرار غير المباشرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "01f408a0000b60bc2f466bb004206ae5523624bd051fefc8ac8ab1d25a816798",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 77,
+            "end": 152,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمورد قيمة أمر الشراء الذي نشأت عنه المطالبة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "25bdf7b72b248c89b92d73c1c6e33a15e624cd675379e5668112fc19c7603675",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 4,
+            "end": 75,
+            "text": "لا يتحمل أي طرف المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية"
+          },
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 33,
+            "end": 75,
+            "text": "الأضرار غير المباشرة أو العرضية أو التبعية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "53bf4cb6709733c121f9dbbb7492b97bb6989d8672eace9f78531571dbce8924",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 77,
+            "end": 152,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمورد قيمة أمر الشراء الذي نشأت عنه المطالبة"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "25bdf7b72b248c89b92d73c1c6e33a15e624cd675379e5668112fc19c7603675",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "PASS",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 يضمن المورد أن البضائع ستكون خالية من عيوب المواد والصناعة لمدة أربعة وعشرين (24) شهراً من التسليم، وستكون مطابقة للمواصفات.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة أربعة وعشرين (24) شهر",
+            "start": 64,
+            "end": 89
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "أربعة",
+          "أن",
+          "البضائع",
+          "التسليم",
+          "المواد",
+          "المورد",
+          "خالية",
+          "ستكون",
+          "شهرا",
+          "عيوب",
+          "للمواصفات",
+          "لمدة",
+          "مطابقة",
+          "والصناعة",
+          "وستكون",
+          "وعشرين",
+          "يضمن"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة أربعة وعشرين (24) شهر",
+            "start": 64,
+            "end": 89
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يقدم المشتري أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم المطلوب. يسلم المورد بضائع مطابقة للمواصفات في التواريخ المحددة في كل أمر شراء مقبول.",
+    "primary_type": "delivery",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 86,
+            "end": 103,
+            "text": "يسلم المورد بضائع"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "93f1998ccf78e5951d1d97dc3d18bbc6a77a6e660ad5ead87b7646dace07affb",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PURCHASE_ORDER",
+        "rank": 94,
+        "candidate_primary_type": "purchase_order",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 4,
+            "end": 84,
+            "text": "يقدم الطرف الطرف المتعاقد ب أ أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم المطلوب"
+          },
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 17,
+            "end": 76,
+            "text": "أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d182616b18a2ea450bd884e3e0a88246eda6815ec1ff61a36450651b409e774a",
+        "normalized_concept": "PURCHASE_ORDER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "BUYER",
+          "counterparty": "SUPPLIER",
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 60,
+              "unit": "DAYS",
+              "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+              "related_mechanism": "PURCHASE_ORDER"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 86,
+            "end": 103,
+            "text": "يسلم المورد بضائع"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "93f1998ccf78e5951d1d97dc3d18bbc6a77a6e660ad5ead87b7646dace07affb",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PURCHASE_ORDER",
+        "rank": 94,
+        "candidate_primary_type": "purchase_order",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 4,
+            "end": 84,
+            "text": "يقدم الطرف الطرف المتعاقد ب أ أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم المطلوب"
+          },
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 17,
+            "end": 76,
+            "text": "أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d182616b18a2ea450bd884e3e0a88246eda6815ec1ff61a36450651b409e774a",
+        "normalized_concept": "PURCHASE_ORDER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "BUYER",
+          "counterparty": "SUPPLIER",
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 60,
+              "unit": "DAYS",
+              "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+              "related_mechanism": "PURCHASE_ORDER"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 تُحدَّد أسعار البضائع في الملحق أ وتظل ثابتة خلال الاثني عشر (12) شهراً الأولى من المدة، رهناً بعد ذلك بتعديل بحد أقصى مرة واحدة سنوياً بناءً على زيادات موثقة في تكاليف المواد الخام، بحد أقصى 6% سنوياً.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "أسعار",
+          "أقصى",
+          "الأولى",
+          "الاثني",
+          "البضائع",
+          "الخام",
+          "المدة",
+          "الملحق",
+          "المواد",
+          "بتعديل",
+          "بحد",
+          "بعد",
+          "بناء",
+          "تكاليف",
+          "ثابتة",
+          "حد",
+          "خلال",
+          "رهنا",
+          "زيادات",
+          "سنويا",
+          "شهرا",
+          "عشر",
+          "مرة",
+          "موثقة",
+          "واحدة",
+          "وتظل"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "2.2",
+    "source_language": "ar",
+    "source_text": "2.2 يسدد المشتري جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 82,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4fccf778abb49d9519adc226ce3b9217c06053bf019d19763b6618bb1a2b5af3",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 82,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b36b234708096490510d0c79acf02dee08a10daffb1f373fb5512075c636e51c",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 82,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4fccf778abb49d9519adc226ce3b9217c06053bf019d19763b6618bb1a2b5af3",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 82,
+            "text": "يسدد الطرف الطرف المتعاقد ب أ جميع الفواتير غير المتنازع عليها خلال ستين (60) يوماً من استلامها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "b36b234708096490510d0c79acf02dee08a10daffb1f373fb5512075c636e51c",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يحق للمشتري فحص البضائع خلال خمسة عشر (15) يوم عمل من التسليم ورفض أي بضائع غير مطابقة للمواصفات. يستبدل المورد البضائع غير المطابقة على نفقته خلال عشرة (10) أيام عمل.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "REPLACEMENT_REMEDY",
+        "rank": 95,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 102,
+            "end": 136,
+            "text": "يستبدل المورد البضائع غير المطابقة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "35934182fd7a36b0ec486a2b9789ac05adcd99080ecf25e333502c4680f7f56a",
+        "normalized_concept": "REPLACEMENT_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "REPLACE_NON_CONFORMING_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INSPECTION_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "inspection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 4,
+            "end": 100,
+            "text": "يحق للمشتري فحص البضائع خلال خمسة عشر (15) يوم عمل من التسليم ورفض أي بضائع غير مطابقة للمواصفات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "6c84d37cca9cfec9254a2473bd8f169ab7bdbdd5a4ffe9918ab82307c43e0bf7",
+        "normalized_concept": "INSPECTION_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BUYER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "INSPECT",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "REPLACEMENT_REMEDY",
+        "rank": 95,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 102,
+            "end": 136,
+            "text": "يستبدل المورد البضائع غير المطابقة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "35934182fd7a36b0ec486a2b9789ac05adcd99080ecf25e333502c4680f7f56a",
+        "normalized_concept": "REPLACEMENT_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "REPLACE_NON_CONFORMING_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INSPECTION_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "inspection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 4,
+            "end": 100,
+            "text": "يحق للمشتري فحص البضائع خلال خمسة عشر (15) يوم عمل من التسليم ورفض أي بضائع غير مطابقة للمواصفات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "6c84d37cca9cfec9254a2473bd8f169ab7bdbdd5a4ffe9918ab82307c43e0bf7",
+        "normalized_concept": "INSPECTION_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BUYER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "INSPECT",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 مدة هذه الاتفاقية الأولية ثلاث (3) سنوات. يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذه الاتفاقية الأولية ثلاث (3) سنوات",
+            "start": 4,
+            "end": 44
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 46,
+            "end": 163,
+            "text": "يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 61,
+            "end": 163,
+            "text": "إنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "6e089687445700a26b45d225a728e6e5ce98f6a44580ecdd10301818d81f8a1e",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 116,
+            "end": 163,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "f7907ba349c07d57e427944dfc8c04db56162b8211d89dba087efec4bd51e381",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 46,
+            "end": 163,
+            "text": "يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 61,
+            "end": 163,
+            "text": "إنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "6e089687445700a26b45d225a728e6e5ce98f6a44580ecdd10301818d81f8a1e",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 116,
+            "end": 163,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً وفرصة للمعالجة"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "f7907ba349c07d57e427944dfc8c04db56162b8211d89dba087efec4bd51e381",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذه الاتفاقية الأولية ثلاث (3) سنوات",
+            "start": 4,
+            "end": 44
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

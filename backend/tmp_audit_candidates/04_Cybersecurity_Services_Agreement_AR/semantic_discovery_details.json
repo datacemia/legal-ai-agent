@@ -1,0 +1,1102 @@
+[
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "5.2",
+    "source_language": "ar",
+    "source_text": "5.2 يعوض المزود العميل عن مطالبات الأطراف الثالثة والغرامات التنظيمية والتكاليف المعقولة لمراقبة الائتمان والتحقيق الجنائي الناشئة عن حادث أمني يُعزى إلى إخلال المزود بهذه الاتفاقية.",
+    "primary_type": "indemnity",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "indemnity",
+        "anchors": [
+          "أمني",
+          "إخلال",
+          "الأطراف",
+          "الائتمان",
+          "التنظيمية",
+          "الثالثة",
+          "الجنائي",
+          "العميل",
+          "المزود",
+          "المعقولة",
+          "الناشئة",
+          "بهذه",
+          "حادث",
+          "عزى",
+          "لمراقبة",
+          "مطالبات",
+          "والتحقيق",
+          "والتكاليف",
+          "والغرامات",
+          "يعوض"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من العميل، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من المزود.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 230,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "fa3ce9e8bdf13b21346978a0b6b128b7b680d95c51b2f01e08db29f630dba3bf",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 230,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب"
+          },
+          {
+            "label": "LIABILITY_CAP",
+            "start": 14,
+            "end": 230,
+            "text": "المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "18a328a745e255457c6796346d3627c0e70188238817523b3eae9d8e537e3bb4",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 230,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "fa3ce9e8bdf13b21346978a0b6b128b7b680d95c51b2f01e08db29f630dba3bf",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 4,
+            "end": 230,
+            "text": "لا تتجاوز المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب"
+          },
+          {
+            "label": "LIABILITY_CAP",
+            "start": 14,
+            "end": 230,
+            "text": "المسؤولية الإجمالية للمزود عن حادث أمني ناتج عن عدم الوفاء بمستويات الخدمة المحددة في الملحق أ ثلاثة (3) أضعاف الرسوم السنوية المدفوعة من الطرف الطرف المتعاقد ب أ، وتكون غير محدودة في حال الإهمال الجسيم أو سوء التصرف المتعمد من الطرف الطرف المتعاقد ب ب"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "18a328a745e255457c6796346d3627c0e70188238817523b3eae9d8e537e3bb4",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 4,
+            "end": 82,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d09315e0bd25a3e9cf02a68f5cea2f5efc6403c48c15f43386247e5cea21702e",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 126,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4b4d6d87a7b192baa0ebc7735044fed42bbfd0069e16787058a67a9e8ef2a3c3",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 4,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            },
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 4,
+            "end": 82,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d09315e0bd25a3e9cf02a68f5cea2f5efc6403c48c15f43386247e5cea21702e",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SECURITY_INCIDENT_NOTIFICATION",
+        "rank": 91,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_INCIDENT_NOTIFICATION",
+            "start": 4,
+            "end": 126,
+            "text": "يخطر الطرف الطرف المتعاقد ب ب الطرف الطرف المتعاقد ب أ بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4b4d6d87a7b192baa0ebc7735044fed42bbfd0069e16787058a67a9e8ef2a3c3",
+        "normalized_concept": "DATA_BREACH_NOTICE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": null,
+          "beneficiary": "CLIENT",
+          "object": "SECURITY_INCIDENT",
+          "trigger": null,
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 4,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            },
+            {
+              "value": 24,
+              "unit": "HOURS",
+              "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+              "related_mechanism": "DATA_BREACH_NOTICE"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "2.2",
+    "source_language": "ar",
+    "source_text": "2.2 يقدم المزود تحليلاً خطياً للأسباب الجذرية خلال خمسة (5) أيام عمل من حل أي حادث أمني مصنف كخطير أو حرج.",
+    "primary_type": "cybersecurity",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "cybersecurity",
+        "anchors": [
+          "أمني",
+          "أيام",
+          "الجذرية",
+          "المزود",
+          "تحليلا",
+          "حادث",
+          "حرج",
+          "حل",
+          "خطيا",
+          "خلال",
+          "خمسة",
+          "عمل",
+          "كخطير",
+          "للأسباب",
+          "مصنف",
+          "يقدم"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 لا يجوز للمزود التعاقد مع مقاول من الباطن جديد له إمكانية الوصول إلى أنظمة العميل أو بياناته دون موافقة خطية مسبقة من العميل، والتي لا يجوز حجبها دون سبب معقول.",
+    "primary_type": "subcontracting",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 97,
+            "end": 117
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 97,
+            "end": 117,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 101,
+            "end": 117,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "a2609d4f372a36e8cf4c30e1554fbfe8f2c4ec4c99442349ab19242705e984e9",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 101,
+            "end": 111,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "dbe81012163be58561935cc679386203293f40f1432741cb468509bf42a2369c",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 164,
+            "text": "لا يجوز للمزود التعاقد مع مقاول من الباطن جديد له إمكانية الوصول إلى أنظمة الطرف الطرف المتعاقد ب أ أو بياناته دون موافقة خطية مسبقة من الطرف الطرف المتعاقد ب أ، والتي لا يجوز حجبها دون سبب معقول."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "27be78f0997d98093a9c3863ad1779a1f15327348812b5280152dc3376311fb1",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 164,
+            "text": "لا يجوز للمزود التعاقد مع مقاول من الباطن جديد له إمكانية الوصول إلى أنظمة الطرف الطرف المتعاقد ب أ أو بياناته دون موافقة خطية مسبقة من الطرف الطرف المتعاقد ب أ، والتي لا يجوز حجبها دون سبب معقول."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "27be78f0997d98093a9c3863ad1779a1f15327348812b5280152dc3376311fb1",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يحافظ المزود على شهادتي SOC 2 Type II وISO/IEC 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق السارية عند الطلب، بحد أقصى مرة واحدة سنوياً.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 96,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 4,
+            "end": 56,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على شهادتي SOC 2 Type II وISO/IEC 27001"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4b70ae380c167b28d6437f3d81b8e72170a3fabdb72004323ae40155160f9cad",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 10,
+            "end": 108,
+            "text": "الطرف الطرف المتعاقد ب ب على شهادتي SOC 2 Type II وISO/IEC 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "073053e7eab335d7ac3798291d95efe56d1d9c7fad38b58e30f01295dcc30c5b",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": null,
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_MEASURES",
+        "rank": 96,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_MEASURES",
+            "start": 4,
+            "end": 56,
+            "text": "يحافظ الطرف الطرف المتعاقد ب ب على شهادتي SOC 2 Type II وISO/IEC 27001"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4b70ae380c167b28d6437f3d81b8e72170a3fabdb72004323ae40155160f9cad",
+        "normalized_concept": "SECURITY_MEASURES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_SECURITY_CONTROLS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "SERVICE_SCOPE",
+        "rank": 88,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "SERVICE_SCOPE",
+            "start": 10,
+            "end": 108,
+            "text": "الطرف الطرف المتعاقد ب ب على شهادتي SOC 2 Type II وISO/IEC 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "073053e7eab335d7ac3798291d95efe56d1d9c7fad38b58e30f01295dcc30c5b",
+        "normalized_concept": "SERVICE_SCOPE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "PROVIDER",
+          "counterparty": "CLIENT",
+          "beneficiary": "CLIENT",
+          "object": null,
+          "trigger": null,
+          "action": "PERFORM_DEFINED_SERVICES",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يقدم المزود خدمات مراقبة أمنية وكشف تهديدات واستجابة للحوادث على مدار الساعة طوال أيام الأسبوع، على النحو الموصوف في الملحق أ، بما يتوافق مع إطار عمل الأمن السيبراني الصادر عن NIST.",
+    "primary_type": "cybersecurity",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "cybersecurity",
+        "anchors": [
+          "nist",
+          "أمنية",
+          "أيام",
+          "إطار",
+          "الأسبوع",
+          "الأمن",
+          "الساعة",
+          "السيبراني",
+          "الصادر",
+          "المزود",
+          "الملحق",
+          "الموصوف",
+          "النحو",
+          "بما",
+          "تهديدات",
+          "خدمات",
+          "طوال",
+          "عمل",
+          "للحوادث",
+          "مدار",
+          "مراقبة",
+          "واستجابة",
+          "وكشف",
+          "يتوافق",
+          "يقدم"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "REVIEW_REQUIRED",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "3.2",
+    "source_language": "ar",
+    "source_text": "3.2 يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق المزود ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة العميل.",
+    "primary_type": "security",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق الطرف الطرف المتعاقد ب ب ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة الطرف الطرف المتعاقد ب أ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "5e70c70b1d8f4401fde34302374da1322c7cd5984c098ca37f17bb852e187785",
+        "normalized_concept": "SECURITY_AUDIT_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_AUDIT_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "security",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_AUDIT_RIGHT",
+            "start": 4,
+            "end": 156,
+            "text": "يحق للعميل، بإشعار مدته ثلاثون (30) يوماً، إجراء تدقيق أمني ميداني لمرافق الطرف الطرف المتعاقد ب ب ذات الصلة المباشرة بالخدمات، بحد أقصى مرة واحدة سنوياً، على نفقة الطرف الطرف المتعاقد ب أ"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "5e70c70b1d8f4401fde34302374da1322c7cd5984c098ca37f17bb852e187785",
+        "normalized_concept": "SECURITY_AUDIT_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "SERVICE",
+          "trigger": null,
+          "action": null,
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "04_Cybersecurity_Services_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 مدة هذه الاتفاقية الأولية ثلاث (3) سنوات. يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً. يجوز للعميل الإنهاء فوراً، دون غرامة، إذا تعرض المزود لحادث أمني يؤثر على بيانات العميل نتيجة إهماله الجسيم.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذه الاتفاقية الأولية ثلاث (3) سنوات",
+            "start": 4,
+            "end": 44
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 46,
+            "end": 148,
+            "text": "يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 61,
+            "end": 148,
+            "text": "إنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "02156e61411794d919c2629c7a1bbd91aed15381a9ce1cfb263f8f8b654eaa1c",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 150,
+            "end": 257,
+            "text": "يجوز للعميل الإنهاء فوراً، دون غرامة، إذا تعرض الطرف الطرف المتعاقد ب ب لحادث أمني يؤثر على بيانات الطرف الطرف المتعاقد ب أ نتيجة إهماله الجسيم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "57c20d740f8c9b8faf866336fd2649928f67ef06d2d5566758dc48b8c2d011ec",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 116,
+            "end": 148,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "da5fec37ec9b36d9d611ef83a7bd1b40f6245ffeb4f8489a15fcdd8c81118b90",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 46,
+            "end": 148,
+            "text": "يجوز لأي طرف الإنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 61,
+            "end": 148,
+            "text": "إنهاء في حال إخلال جوهري غير معالج من الطرف الآخر، بعد إشعار خطي مدته ثلاثون (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "02156e61411794d919c2629c7a1bbd91aed15381a9ce1cfb263f8f8b654eaa1c",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "IMMEDIATE_TERMINATION",
+        "rank": 92,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "IMMEDIATE_TERMINATION",
+            "start": 150,
+            "end": 257,
+            "text": "يجوز للعميل الإنهاء فوراً، دون غرامة، إذا تعرض الطرف الطرف المتعاقد ب ب لحادث أمني يؤثر على بيانات الطرف الطرف المتعاقد ب أ نتيجة إهماله الجسيم"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "57c20d740f8c9b8faf866336fd2649928f67ef06d2d5566758dc48b8c2d011ec",
+        "normalized_concept": "IMMEDIATE_TERMINATION",
+        "normalized_relation": {
+          "right_holder": "CLIENT",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 116,
+            "end": 148,
+            "text": "إشعار خطي مدته ثلاثون (30) يوماً"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "da5fec37ec9b36d9d611ef83a7bd1b40f6245ffeb4f8489a15fcdd8c81118b90",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذه الاتفاقية الأولية ثلاث (3) سنوات",
+            "start": 4,
+            "end": 44
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

@@ -1,0 +1,9 @@
+====================================================================================================
+V4.1.12 DATA PROTECTION ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 21
+BY LANGUAGE: {'en': 7, 'fr': 7, 'ar': 7}
+BY PIPELINE TYPE: {'security': 5, 'cybersecurity': 7, 'data_processing': 4, 'data_protection': 5}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 14, 'DOMAIN_MECHANISM_NOT_DOMINANT_ENOUGH': 7}
+SIGNAL COUNTS: {'DATA_SUBJECT_RIGHTS': 3}
+NO SIGNAL ROWS: 18

@@ -1,0 +1,15 @@
+NO_TRANSACTIONS    3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   ARABE3.pdf | validated=False tx=330 income=325458.0 expenses=370945.44 expected_income=325458.0 expected_expenses=370995.44 gap_i=0.0 gap_e=50.0 reason=expense_gap=50.0
+NO_TRANSACTIONS    arabe5.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   BANK CHAABI.pdf | validated=False tx=105 income=912747.13 expenses=431707.37 expected_income=912747.13 expected_expenses=431702.87 gap_i=0.0 gap_e=4.5 reason=expense_gap=4.5
+NEEDS_PARSER_FIX   banque d'epagne.pdf | validated=False tx=24 income=500.0 expenses=656.71 expected_income=500.0 expected_expenses=614.02 gap_i=0.0 gap_e=42.69 reason=expense_gap=42.69
+NO_TRANSACTIONS    BANQUE POSTALE (2).pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   cic.pdf | validated=False tx=0 income=0 expenses=0 expected_income=501.03 expected_expenses=501.03 gap_i=501.03 gap_e=501.03 reason=aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03
+NO_TRANSACTIONS    dakar.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    EGPTE.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NO_TRANSACTIONS    EJJAMI12.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   emirate.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.75 gap_i=0.0 gap_e=0.75 reason=aucune transaction candidate extraite; expense_gap=0.75
+NO_TRANSACTIONS    habitat.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
+NEEDS_PARSER_FIX   n26 .1.pdf | validated=False tx=81 income=2975.12 expenses=2997.02 expected_income=2905.12 expected_expenses=2917.02 gap_i=70.0 gap_e=80.0 reason=income_gap=70.0; expense_gap=80.0
+NEEDS_PARSER_FIX   Relevés compte 3.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=6.0 gap_i=0.0 gap_e=6.0 reason=aucune transaction candidate extraite; expense_gap=6.0
+NO_TRANSACTIONS    x.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite

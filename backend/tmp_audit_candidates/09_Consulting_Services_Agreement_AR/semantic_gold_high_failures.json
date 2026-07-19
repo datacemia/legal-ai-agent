@@ -1,0 +1,35 @@
+[
+  {
+    "fixture_id": "09_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 الاستشاري مقاول مستقل وليس موظفاً أو وكيلاً أو شريكاً في مشروع مشترك أو شريكاً للعميل. يتحمل الاستشاري وحده مسؤولية جميع الضرائب والتأمينات والمزايا المعمول بها.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "tax",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INDEPENDENT_CONTRACTOR"
+    ]
+  }
+]

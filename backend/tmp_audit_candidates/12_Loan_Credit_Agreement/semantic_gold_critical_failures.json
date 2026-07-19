@@ -1,0 +1,48 @@
+[
+  {
+    "fixture_id": "12_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "LOAN_DISBURSEMENT",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LOAN_DISBURSEMENT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LOAN_DISBURSEMENT"
+    ],
+    "high": []
+  }
+]

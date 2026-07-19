@@ -1,0 +1,281 @@
+[
+  {
+    "language": "en",
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "clause_5",
+    "source_text": "2.1 Provider shall perform the Services in accordance with the service levels set forth in Exhibit A. The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives.",
+    "pipeline_clause_type": "corporate_governance",
+    "semantic_profile_version": "shadow-p0-v4.1.8-services-wave",
+    "shadow_primary_type": "services",
+    "shadow_primary_type_confidence": 0.9253,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.381,
+    "shadow_dominance_margin": 61.04,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "services",
+        "score": 61.04,
+        "coverage": 0.381,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SERVICE_PERFORMANCE_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9a3bf36677abf095b780abb34574af15e9a679fcb27d145390d8b2e5ba325c46"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9a3bf36677abf095b780abb34574af15e9a679fcb27d145390d8b2e5ba325c46"
+      }
+    ],
+    "semantic_profile_hash": "5c3173625ffeb2ea879f4a0f2aefd874886f5b0d8c98843d9461d0df63518c0d",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "clause_2",
+    "source_text": "2.1 Le Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A. Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue.",
+    "pipeline_clause_type": "corporate_governance",
+    "semantic_profile_version": "shadow-p0-v4.1.8-services-wave",
+    "shadow_primary_type": "services",
+    "shadow_primary_type_confidence": 0.9104,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.3214,
+    "shadow_dominance_margin": 58.54,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "services",
+        "score": 58.54,
+        "coverage": 0.3214,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "SERVICE_PERFORMANCE_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "334a13807fce84f79b3c6b7fadf957de92a23762db903f90f8157677d2c31f3f"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "334a13807fce84f79b3c6b7fadf957de92a23762db903f90f8157677d2c31f3f"
+      }
+    ],
+    "semantic_profile_hash": "c2e201598ee8872f56e2469de99e01e8cf4d0b6330a3b3b551faeadcfbc3e0d9",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+    "reference": "clause_2",
+    "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+    "pipeline_clause_type": "duration",
+    "semantic_profile_version": "shadow-p0-v4.1.8-services-wave",
+    "shadow_primary_type": "services",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.7956,
+    "shadow_dominance_margin": 78.3344,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "services",
+        "score": 78.3344,
+        "coverage": 0.7956,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "TRANSITION_SERVICE_OBLIGATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 36,
+            "end": 180,
+            "text": "خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 36,
+            "end": 180,
+            "text": "خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2a2f81e1989fb5bbf75714e1e19427358755f30ffe86dd72422410a6fcff273"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "TRANSITION_SERVICE_OBLIGATION",
+        "rank": 91,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TRANSITION_SERVICE_OBLIGATION",
+            "start": 36,
+            "end": 180,
+            "text": "خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "e2a2f81e1989fb5bbf75714e1e19427358755f30ffe86dd72422410a6fcff273"
+      }
+    ],
+    "semantic_profile_hash": "288e5f6a09fb467bd3292dbc45316599e604e7dcf2770b9e1249c3504be2ed03",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

@@ -1,0 +1,562 @@
+[
+  {
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "Clause 6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Le présent Accord est régi par le droit de l'État du Delaware, sans égard aux principes de conflits de lois. Tout litige découlant du présent Accord relèvera de la compétence exclusive des tribunaux étatiques et fédéraux situés à Wilmington, Delaware.",
+    "primary_type": "governing_law",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 26,
+            "end": 203,
+            "text": "régi par le droit de l'État du Delaware, sans égard aux principes de conflits de lois. Tout litige découlant du présent Accord relèvera de la compétence exclusive des tribunaux "
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "eee7e6b73cb84e63eb7ebc2e93f2802a180b8f1b639b50fdf858df4e5018dc6f",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "GOVERNING_LAW_SELECTION",
+        "rank": 88,
+        "candidate_primary_type": "governing_law",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "GOVERNING_LAW_SELECTION",
+            "start": 26,
+            "end": 203,
+            "text": "régi par le droit de l'État du Delaware, sans égard aux principes de conflits de lois. Tout litige découlant du présent Accord relèvera de la compétence exclusive des tribunaux "
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "eee7e6b73cb84e63eb7ebc2e93f2802a180b8f1b639b50fdf858df4e5018dc6f",
+        "normalized_concept": "GOVERNING_LAW_SELECTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 Chaque Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles du présent Accord.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "sans consentement écrit préalable",
+            "start": 171,
+            "end": 204
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 171,
+            "end": 204,
+            "text": "sans consentement écrit préalable"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 176,
+            "end": 204,
+            "text": "consentement écrit préalable"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "c0bc14ccd278e44c9d5468aecfc6e5923ef8f073dd5664667ffe3628916d6639",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 176,
+            "end": 194,
+            "text": "consentement écrit"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5d6781562428c05b2cff1a81cc010060d512c39e765399e19a731775f0bb81c4",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "NON_DISCLOSURE",
+        "rank": 97,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 44,
+            "end": 170,
+            "text": "Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers"
+          },
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 11,
+            "end": 170,
+            "text": "Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "cb48e48b95c1369c1110622bec8682e9cfdeccce735f0ae31d2c1157ba7059d0",
+        "normalized_concept": "NON_DISCLOSURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": "DISCLOSE",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 29,
+            "end": 315,
+            "text": "conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles "
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "75f66c23c632b4bfb8352425002c4615ebb9e3513122525e25b46e572a4ad465",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_DISCLOSURE",
+        "rank": 97,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 44,
+            "end": 170,
+            "text": "Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers"
+          },
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 11,
+            "end": 170,
+            "text": "Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "cb48e48b95c1369c1110622bec8682e9cfdeccce735f0ae31d2c1157ba7059d0",
+        "normalized_concept": "NON_DISCLOSURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": "DISCLOSE",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 29,
+            "end": 315,
+            "text": "conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles "
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "75f66c23c632b4bfb8352425002c4615ebb9e3513122525e25b46e572a4ad465",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "MISMATCH",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Les Informations Confidentielles n'incluent pas les informations qui : (a) sont ou deviennent publiquement accessibles sans faute de la Partie Réceptrice ; (b) étaient légitimement connues de la Partie Réceptrice avant leur divulgation ; (c) sont développées indépendamment sans utilisation des Informations Confidentielles ; ou (d) sont légitimement reçues d'un tiers sans obligation de confidentialité.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_EXCLUSION",
+        "rank": 86,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_EXCLUSION",
+            "start": 8,
+            "end": 408,
+            "text": "Informations Confidentielles n'incluent pas les informations qui : (a) sont ou deviennent publiquement accessibles sans faute de la Partie Réceptrice ; (b) étaient légitimement connues de la Partie Réceptrice avant leur divulgation ; (c) sont développées indépendamment sans utilisation des Informations Confidentielles ; ou (d) sont légitimement reçues d'un tiers sans obligation de confidentialité."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "166b064c9d4325878297d00ff0de702f958ca3598913f449316be39bd3332ffa",
+        "normalized_concept": "CONFIDENTIALITY_EXCLUSION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_EXCLUSION",
+        "rank": 86,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_EXCLUSION",
+            "start": 8,
+            "end": 408,
+            "text": "Informations Confidentielles n'incluent pas les informations qui : (a) sont ou deviennent publiquement accessibles sans faute de la Partie Réceptrice ; (b) étaient légitimement connues de la Partie Réceptrice avant leur divulgation ; (c) sont développées indépendamment sans utilisation des Informations Confidentielles ; ou (d) sont légitimement reçues d'un tiers sans obligation de confidentialité."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "166b064c9d4325878297d00ff0de702f958ca3598913f449316be39bd3332ffa",
+        "normalized_concept": "CONFIDENTIALITY_EXCLUSION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 Le présent Accord restera en vigueur pendant deux (2) ans à compter de la Date d'Effet. Les obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard du droit applicable.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 96,
+            "end": 419,
+            "text": "obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "097a686ac821c3e8ab8de0c72dcbd00591aa878e6728b6aa59beb440923e12aa",
+        "normalized_concept": "CONFIDENTIALITY_SURVIVAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 96,
+            "end": 419,
+            "text": "obligations de confidentialité prévues aux présentes survivront pendant une période de cinq (5) ans suivant la divulgation des Informations Confidentielles concernées, sauf pour les secrets commerciaux, pour lesquels ces obligations survivront aussi longtemps que ces informations demeureront un secret commercial au regard"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "097a686ac821c3e8ab8de0c72dcbd00591aa878e6728b6aa59beb440923e12aa",
+        "normalized_concept": "CONFIDENTIALITY_SURVIVAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Chaque Partie reconnaît que la divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution.",
+    "primary_type": "remedies",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 35,
+            "end": 370,
+            "text": "divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "73367650b1761b7dc48fb1a673cfcee8cff8158d4eb111acc04db793fe510b43",
+        "normalized_concept": "CONFIDENTIALITY_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_REMEDY",
+        "rank": 83,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_REMEDY",
+            "start": 35,
+            "end": 370,
+            "text": "divulgation non autorisée d'Informations Confidentielles pourrait causer un préjudice irréparable pour lequel des dommages-intérêts constitueraient un recours insuffisant, et que la Partie non défaillante pourra solliciter une mesure injonctive en complément de tout autre recours disponible, sans obligation de constituer une caution."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "73367650b1761b7dc48fb1a673cfcee8cff8158d4eb111acc04db793fe510b43",
+        "normalized_concept": "CONFIDENTIALITY_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

@@ -1,0 +1,41 @@
+FINANCE_TEXT_PDF_EXTRACTED 2788
+PDF_LINES_DEBUG {'line_count': 64, 'non_empty_line_count': 37, 'max_line_len': 137, 'first_20': ['Smart Access', '', '', '', '', 'Commonwealth Bank of Australia', 'ABN 48 123 123 124 AFSL and', 'Australian credit license 234945', '', '                         Your Statement', '', '', '', '', '', '                                                               Statement                             62.78241-11', 'MR R D GEE', '                                                               Account Number                        5495032', '14 STODA ST', '                                                               Statement Period         11 FEB 2023 – 16 FEB 2022']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+1: Smart Access
+6: Commonwealth Bank of Australia
+7: ABN 48 123 123 124 AFSL and
+8: Australian credit license 234945
+10: Your Statement
+16: Statement 62.78241-11
+17: MR R D GEE
+18: Account Number 5495032
+19: 14 STODA ST
+20: Statement Period 11 FEB 2023 – 16 FEB 2022
+21: HEATHMONT VIC 3135
+22: Closing Balance $27,999.97
+24: Date 15.02.2023
+25: Account Holder: Wladimir Kassner
+26: Field Of Activity: International Financial Services Accounts Name: CAFP -N07
+27: Account Status: Active
+28: Account №: 5495032
+29: Address: Swit zerland Zürich 8152 101a
+33: NOTE:
+34: Withdraw will be completed after status Involved.
+35: Withdraw processing depends on the country and Bank of the recipient of the funds. Average
+36: completion time of withdraw after paying fee 1 to 24 hour.
+37: Fee per Withdraw $2,000.00
+38: Have you checked your statement today? It's easy to find out more information about each of your
+39: transactions by logging on to the CommBank App or NetBank. Should you have any questions on fees
+40: or see an error please contact us on the details above. Cheque proceeds are available when cleared.
+43: S T ATEMENT
+49: STATEMENT № 62.78241-11 FROM 2023-02-11 TO 2023-02-16
+51: Name Surname Account Status Money In Fee Pay Date Withdraw Final Date Balance
+52: Inna Trigub 45**89 Involved $19,153.12 $1,915.31 11.02 $19,153.12 17.02 $0.00
+53: Dmitri Schreitor 31**24 Involved $36,000.00 $3,600.00 13.02 $36,000.00 18.02 $0.00
+54: Elisabeth Tkach 79**32 Involved $11,456.10 $1,145.61 14.02 $11,456.10 19.02 $0.00
+55: Янис Скитов 89**57 Pending $41,524.00 $2,000.00 Hold $0.00 19.02 $41,524.00
+57: Irina Novykova 32**98 Pending $30,098.00 $3,000.00 Hold $0.00 20.02 $30,098.00
+59: Wladimir Kassner 5495032 Pending $27,999.97 $3,000.00 Hold $0.00 20.02 $27,999.97
+61: TOTAL $166,231.19 $14,660.92 $66,609.22 $99,621.97
+64: © 2022 Commonwealth Bank of Australia ABN 48 123 123 124 AFSL and Australian credit license 234945

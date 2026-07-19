@@ -1,0 +1,1326 @@
+====================================================================================================
+CLAUSE TYPE ASSIGNMENT PROBE
+====================================================================================================
+FILE: app\services\contract_agent\contract_agent.py
+
+
+====================================================================================================
+HIT 1
+====================================================================================================
+LINE: 1996
+KIND: ASSIGN analysis[clause_type]
+
+01961:             "exclusivity",
+01962:             "sole provider",
+01963:             "exclusive rights",
+01964: 
+01965:             "exclusivité",
+01966:             "exclusif",
+01967: 
+01968:             "حصري",
+01969:             "حصرية",
+01970:         ],
+01971: 
+01972:         "penalty": [
+01973:             "penalty",
+01974:             "liquidated damages",
+01975:             "fine",
+01976: 
+01977:             "pénalité",
+01978:             "amende",
+01979: 
+01980:             "غرامة",
+01981:         ],
+01982:     }
+01983: 
+01984:     # No validation needed
+01985:     if clause_type not in explicit_patterns:
+01986:         return analysis
+01987: 
+01988:     matched = any(
+01989:         pattern in text
+01990:         for pattern in explicit_patterns[clause_type]
+01991:     )
+01992: 
+01993:     # HARD RESET if unsupported
+01994:     if not matched:
+01995: 
+01996:         analysis["clause_type"] = "other"
+01997: 
+01998:         analysis["red_flag"] = False
+01999: 
+02000:         analysis["red_flag_reason"] = ""
+02001: 
+02002:         analysis["risk_level"] = "low"
+02003: 
+02004:         analysis["confidence"] = "low"
+02005: 
+02006:         analysis["recommendation"] = ""
+02007: 
+02008:         analysis["negotiation_advice"] = ""
+02009: 
+02010:         analysis["safer_alternative"] = ""
+02011: 
+02012:         unsupported_messages = {
+02013:             "en": (
+02014:                 "The clause does not explicitly contain "
+02015:                 "a legally identifiable "
+02016:                 f"{clause_type.replace('_', ' ')} provision."
+02017:             ),
+02018:             "fr": (
+02019:                 "La clause ne contient pas explicitement "
+02020:                 "une disposition juridiquement identifiable de type "
+02021:                 f"{clause_type.replace('_', ' ')}."
+02022:             ),
+02023:             "ar": (
+02024:                 "لا يتضمن هذا البند صراحةً حكماً قانونياً "
+02025:                 f"يمكن تصنيفه على أنه {clause_type.replace('_', ' ')}."
+02026:             ),
+02027:         }
+02028: 
+02029:         analysis["legal_insight"] = unsupported_messages.get(
+02030:             language,
+02031:             unsupported_messages["en"],
+
+====================================================================================================
+STRING / PROMPT CONTEXTS
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 47
+----------------------------------------------------------------------------------------------------
+00039: from app.services.contract_agent.legal_reasoning_templates import (
+00040:     get_reasoning_for_text,
+00041: )
+00042: from app.services.contract_agent.publication_gate import (
+00043:     enforce_final_publication_gate,
+00044:     assert_final_serialization,
+00045: )
+00046: from app.services.contract_agent.contract_taxonomy import (
+00047:     detect_clause_type_candidates,
+00048:     detect_clause_type_from_taxonomy,
+00049:     has_clause_type_signal,
+00050: )
+00051: from app.services.contract_agent.semantic_source_profile import (
+00052:     UNKNOWN as SEMANTIC_UNKNOWN,
+00053:     build_semantic_source_profile,
+00054: )
+00055: from app.services.contract_agent.jurisdiction_profiles import (
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 48
+----------------------------------------------------------------------------------------------------
+00040:     get_reasoning_for_text,
+00041: )
+00042: from app.services.contract_agent.publication_gate import (
+00043:     enforce_final_publication_gate,
+00044:     assert_final_serialization,
+00045: )
+00046: from app.services.contract_agent.contract_taxonomy import (
+00047:     detect_clause_type_candidates,
+00048:     detect_clause_type_from_taxonomy,
+00049:     has_clause_type_signal,
+00050: )
+00051: from app.services.contract_agent.semantic_source_profile import (
+00052:     UNKNOWN as SEMANTIC_UNKNOWN,
+00053:     build_semantic_source_profile,
+00054: )
+00055: from app.services.contract_agent.jurisdiction_profiles import (
+00056:     detect_jurisdiction,
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 49
+----------------------------------------------------------------------------------------------------
+00041: )
+00042: from app.services.contract_agent.publication_gate import (
+00043:     enforce_final_publication_gate,
+00044:     assert_final_serialization,
+00045: )
+00046: from app.services.contract_agent.contract_taxonomy import (
+00047:     detect_clause_type_candidates,
+00048:     detect_clause_type_from_taxonomy,
+00049:     has_clause_type_signal,
+00050: )
+00051: from app.services.contract_agent.semantic_source_profile import (
+00052:     UNKNOWN as SEMANTIC_UNKNOWN,
+00053:     build_semantic_source_profile,
+00054: )
+00055: from app.services.contract_agent.jurisdiction_profiles import (
+00056:     detect_jurisdiction,
+00057: )
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 160
+----------------------------------------------------------------------------------------------------
+00152:         if title.startswith(prefix):
+00153:             title = title[len(prefix):].strip()
+00154:     if title == "[ADDRESS]":
+00155:         return "Contact Information"
+00156: 
+00157:     return title
+00158: 
+00159: 
+00160: ALLOWED_CLAUSE_TYPES = {
+00161:     # Commercial & Financial
+00162:     "payment",
+00163:     "pricing",
+00164:     "invoice",
+00165:     "tax",
+00166:     "late_payment",
+00167:     "refund",
+00168:     "expense_reimbursement",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 208
+----------------------------------------------------------------------------------------------------
+00200:     "ownership",
+00201:     "license",
+00202:     "invention_assignment",
+00203:     "work_product",
+00204:     "moral_rights",
+00205: 
+00206:     # Confidentiality, data & security
+00207:     "confidentiality",
+00208:     "data_protection",
+00209:     "privacy",
+00210:     "data_processing",
+00211:     "security",
+00212:     "cybersecurity",
+00213:     "audit_rights",
+00214: 
+00215:     # Employment / HR
+00216:     "employment",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 212
+----------------------------------------------------------------------------------------------------
+00204:     "moral_rights",
+00205: 
+00206:     # Confidentiality, data & security
+00207:     "confidentiality",
+00208:     "data_protection",
+00209:     "privacy",
+00210:     "data_processing",
+00211:     "security",
+00212:     "cybersecurity",
+00213:     "audit_rights",
+00214: 
+00215:     # Employment / HR
+00216:     "employment",
+00217:     "compensation",
+00218:     "benefits",
+00219:     "vacation",
+00220:     "non_compete",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 338
+----------------------------------------------------------------------------------------------------
+00330:         "labels": {
+00331:             "en": "IP & Licensing",
+00332:             "fr": "Propriété intellectuelle et licences",
+00333:             "ar": "الملكية الفكرية والتراخيص",
+00334:         },
+00335:     },
+00336:     "data_confidentiality": {
+00337:         "types": {
+00338:             "confidentiality", "data_protection", "privacy",
+00339:             "data_processing", "security", "cybersecurity",
+00340:             "audit_rights",
+00341:         },
+00342:         "labels": {
+00343:             "en": "Data & Confidentiality",
+00344:             "fr": "Données et confidentialité",
+00345:             "ar": "البيانات والسرية",
+00346:         },
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 339
+----------------------------------------------------------------------------------------------------
+00331:             "en": "IP & Licensing",
+00332:             "fr": "Propriété intellectuelle et licences",
+00333:             "ar": "الملكية الفكرية والتراخيص",
+00334:         },
+00335:     },
+00336:     "data_confidentiality": {
+00337:         "types": {
+00338:             "confidentiality", "data_protection", "privacy",
+00339:             "data_processing", "security", "cybersecurity",
+00340:             "audit_rights",
+00341:         },
+00342:         "labels": {
+00343:             "en": "Data & Confidentiality",
+00344:             "fr": "Données et confidentialité",
+00345:             "ar": "البيانات والسرية",
+00346:         },
+00347:     },
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1040
+----------------------------------------------------------------------------------------------------
+01032:         language,
+01033:         fallback_text["en"]
+01034:     )
+01035: 
+01036:     return {
+01037:         "clause_title": "",
+01038:         "clause_reference": "",
+01039:         "quoted_text": "",
+01040:         "clause_type": "other",
+01041:         "risk_level": "low",
+01042:         "explanation_simple": t["parse"],
+01043:         "why_it_matters": t["missing"],
+01044:         "legal_insight": "",
+01045:         "favours": "unclear",
+01046:         "market_comparison": "",
+01047:         "red_flag": False,
+01048:         "red_flag_reason": "",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1077
+----------------------------------------------------------------------------------------------------
+01069:             ),
+01070:             ai_result.get("language", "en"),
+01071:         ),
+01072: 
+01073:         "quoted_text": safe_str(
+01074:             ai_result.get("quoted_text")
+01075:         )[:600],
+01076: 
+01077:         "clause_type": clamp_enum(
+01078:             ai_result.get("clause_type"),
+01079:             ALLOWED_CLAUSE_TYPES,
+01080:             "other",
+01081:         ),
+01082: 
+01083:         "risk_level": clamp_enum(
+01084:             ai_result.get("risk_level"),
+01085:             ALLOWED_RISK_LEVELS,
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1078
+----------------------------------------------------------------------------------------------------
+01070:             ai_result.get("language", "en"),
+01071:         ),
+01072: 
+01073:         "quoted_text": safe_str(
+01074:             ai_result.get("quoted_text")
+01075:         )[:600],
+01076: 
+01077:         "clause_type": clamp_enum(
+01078:             ai_result.get("clause_type"),
+01079:             ALLOWED_CLAUSE_TYPES,
+01080:             "other",
+01081:         ),
+01082: 
+01083:         "risk_level": clamp_enum(
+01084:             ai_result.get("risk_level"),
+01085:             ALLOWED_RISK_LEVELS,
+01086:             "low",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1079
+----------------------------------------------------------------------------------------------------
+01071:         ),
+01072: 
+01073:         "quoted_text": safe_str(
+01074:             ai_result.get("quoted_text")
+01075:         )[:600],
+01076: 
+01077:         "clause_type": clamp_enum(
+01078:             ai_result.get("clause_type"),
+01079:             ALLOWED_CLAUSE_TYPES,
+01080:             "other",
+01081:         ),
+01082: 
+01083:         "risk_level": clamp_enum(
+01084:             ai_result.get("risk_level"),
+01085:             ALLOWED_RISK_LEVELS,
+01086:             "low",
+01087:         ),
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1557
+----------------------------------------------------------------------------------------------------
+01549: 
+01550:     if (
+01551:         not safe_str(analysis.get("explanation_simple"))
+01552:         and analysis.get("risk_level") in {"medium", "high"}
+01553:     ):
+01554:         combined = " ".join([
+01555:             safe_str(analysis.get("clause_title")),
+01556:             safe_str(analysis.get("title")),
+01557:             safe_str(analysis.get("clause_type")),
+01558:             safe_str(analysis.get("quoted_text")),
+01559:             safe_str(clause_text),
+01560:         ]).lower()
+01561: 
+01562:         if (
+01563:             "service level" in combined
+01564:             or "uptime" in combined
+01565:             or "niveau de service" in combined
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1655
+----------------------------------------------------------------------------------------------------
+01647:    
+01648: 
+01649:     ai_result = normalized
+01650: 
+01651:     # -------------------------------------------------
+01652:     # Taxonomy fallback classification
+01653:     # -------------------------------------------------
+01654: 
+01655:     _debug_candidates = detect_clause_type_candidates(clause)
+01656: 
+01657:     # print("\n=== TAXONOMY DEBUG ===")
+01658:     # print("CLAUSE:", clause[:1000])
+01659:     # print("AI TYPE:", ai_result.get("clause_type"))
+01660: 
+01661:     # for candidate in _debug_candidates[:10]:
+01662:     #     print(
+01663:     #         candidate["type"],
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1659
+----------------------------------------------------------------------------------------------------
+01651:     # -------------------------------------------------
+01652:     # Taxonomy fallback classification
+01653:     # -------------------------------------------------
+01654: 
+01655:     _debug_candidates = detect_clause_type_candidates(clause)
+01656: 
+01657:     # print("\n=== TAXONOMY DEBUG ===")
+01658:     # print("CLAUSE:", clause[:1000])
+01659:     # print("AI TYPE:", ai_result.get("clause_type"))
+01660: 
+01661:     # for candidate in _debug_candidates[:10]:
+01662:     #     print(
+01663:     #         candidate["type"],
+01664:     #         "score=", candidate["score"],
+01665:     #         "base=", candidate["base_score"],
+01666:     #         "specificity=", candidate["specificity_bonus"],
+01667:     #         "context+=", candidate["context_bonus"],
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1674
+----------------------------------------------------------------------------------------------------
+01666:     #         "specificity=", candidate["specificity_bonus"],
+01667:     #         "context+=", candidate["context_bonus"],
+01668:     #         "context-=", candidate["context_penalty"],
+01669:     #         "signals=", candidate["signals"],
+01670:     #     )
+01671: 
+01672:     # print("=== END TAXONOMY DEBUG ===\n")
+01673: 
+01674:     taxonomy_type = detect_clause_type_from_taxonomy(clause)
+01675: 
+01676:     if taxonomy_type != "other":
+01677:         current_type = ai_result.get("clause_type")
+01678: 
+01679:         if current_type == "other":
+01680:             ai_result["clause_type"] = taxonomy_type
+01681: 
+01682:         elif not has_clause_type_signal(clause, current_type):
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1677
+----------------------------------------------------------------------------------------------------
+01669:     #         "signals=", candidate["signals"],
+01670:     #     )
+01671: 
+01672:     # print("=== END TAXONOMY DEBUG ===\n")
+01673: 
+01674:     taxonomy_type = detect_clause_type_from_taxonomy(clause)
+01675: 
+01676:     if taxonomy_type != "other":
+01677:         current_type = ai_result.get("clause_type")
+01678: 
+01679:         if current_type == "other":
+01680:             ai_result["clause_type"] = taxonomy_type
+01681: 
+01682:         elif not has_clause_type_signal(clause, current_type):
+01683:             ai_result["clause_type"] = taxonomy_type
+01684:             ai_result["confidence"] = "medium"
+01685: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1680
+----------------------------------------------------------------------------------------------------
+01672:     # print("=== END TAXONOMY DEBUG ===\n")
+01673: 
+01674:     taxonomy_type = detect_clause_type_from_taxonomy(clause)
+01675: 
+01676:     if taxonomy_type != "other":
+01677:         current_type = ai_result.get("clause_type")
+01678: 
+01679:         if current_type == "other":
+01680:             ai_result["clause_type"] = taxonomy_type
+01681: 
+01682:         elif not has_clause_type_signal(clause, current_type):
+01683:             ai_result["clause_type"] = taxonomy_type
+01684:             ai_result["confidence"] = "medium"
+01685: 
+01686:     # -------------------------------------------------
+01687:     # Grounded semantic primary-type arbitration
+01688:     # -------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1682
+----------------------------------------------------------------------------------------------------
+01674:     taxonomy_type = detect_clause_type_from_taxonomy(clause)
+01675: 
+01676:     if taxonomy_type != "other":
+01677:         current_type = ai_result.get("clause_type")
+01678: 
+01679:         if current_type == "other":
+01680:             ai_result["clause_type"] = taxonomy_type
+01681: 
+01682:         elif not has_clause_type_signal(clause, current_type):
+01683:             ai_result["clause_type"] = taxonomy_type
+01684:             ai_result["confidence"] = "medium"
+01685: 
+01686:     # -------------------------------------------------
+01687:     # Grounded semantic primary-type arbitration
+01688:     # -------------------------------------------------
+01689:     #
+01690:     # The semantic source profile may override the existing AI + lexical
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1683
+----------------------------------------------------------------------------------------------------
+01675: 
+01676:     if taxonomy_type != "other":
+01677:         current_type = ai_result.get("clause_type")
+01678: 
+01679:         if current_type == "other":
+01680:             ai_result["clause_type"] = taxonomy_type
+01681: 
+01682:         elif not has_clause_type_signal(clause, current_type):
+01683:             ai_result["clause_type"] = taxonomy_type
+01684:             ai_result["confidence"] = "medium"
+01685: 
+01686:     # -------------------------------------------------
+01687:     # Grounded semantic primary-type arbitration
+01688:     # -------------------------------------------------
+01689:     #
+01690:     # The semantic source profile may override the existing AI + lexical
+01691:     # taxonomy result only when it derives a high-confidence, non-abstained
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1726
+----------------------------------------------------------------------------------------------------
+01718:             True,
+01719:         )
+01720:     )
+01721: 
+01722:     semantic_primary_supported = (
+01723:         not semantic_abstained
+01724:         and semantic_type
+01725:         and semantic_type != SEMANTIC_UNKNOWN.lower()
+01726:         and semantic_type in ALLOWED_CLAUSE_TYPES
+01727:         and semantic_confidence >= 0.90
+01728:         and bool(
+01729:             semantic_profile.get(
+01730:                 "supporting_mechanisms"
+01731:             )
+01732:         )
+01733:     )
+01734: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1736
+----------------------------------------------------------------------------------------------------
+01728:         and bool(
+01729:             semantic_profile.get(
+01730:                 "supporting_mechanisms"
+01731:             )
+01732:         )
+01733:     )
+01734: 
+01735:     if semantic_primary_supported:
+01736:         current_type = ai_result.get("clause_type")
+01737: 
+01738:         if current_type != semantic_type:
+01739:             ai_result["clause_type"] = semantic_type
+01740:             ai_result["confidence"] = "high"
+01741: 
+01742:     ai_result["_meta"] = {
+01743:         "risk_modified_by": [],
+01744:         "reasoning_modified_by": [],
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1739
+----------------------------------------------------------------------------------------------------
+01731:             )
+01732:         )
+01733:     )
+01734: 
+01735:     if semantic_primary_supported:
+01736:         current_type = ai_result.get("clause_type")
+01737: 
+01738:         if current_type != semantic_type:
+01739:             ai_result["clause_type"] = semantic_type
+01740:             ai_result["confidence"] = "high"
+01741: 
+01742:     ai_result["_meta"] = {
+01743:         "risk_modified_by": [],
+01744:         "reasoning_modified_by": [],
+01745:         "cleanup_applied": [],
+01746:         "changes": [],
+01747:     }
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1771
+----------------------------------------------------------------------------------------------------
+01763:         clause,
+01764:         language,
+01765:     )
+01766: 
+01767:     reasoning = get_reasoning_for_text(
+01768:         clause,
+01769:         language,
+01770:         title=ai_result.get("clause_title", ""),
+01771:         clause_type=ai_result.get("clause_type"),
+01772:     )
+01773: 
+01774:     if reasoning:
+01775:         if reasoning.get("legal_insight"):
+01776:             ai_result["legal_insight"] = reasoning.get("legal_insight")
+01777: 
+01778:         if reasoning.get("recommendation"):
+01779:             ai_result["recommendation"] = reasoning.get("recommendation")
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1932
+----------------------------------------------------------------------------------------------------
+01924: 
+01925:     return any(
+01926:         pattern in text
+01927:         for pattern in safe_patterns
+01928:     )
+01929: 
+01930: 
+01931: 
+01932: def validate_clause_type(
+01933:     analysis: dict,
+01934:     clause_text: str,
+01935:     language: str = "en",
+01936: ) -> dict:
+01937: 
+01938:     text = clause_text.lower()
+01939: 
+01940:     clause_type = analysis.get("clause_type")
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1940
+----------------------------------------------------------------------------------------------------
+01932: def validate_clause_type(
+01933:     analysis: dict,
+01934:     clause_text: str,
+01935:     language: str = "en",
+01936: ) -> dict:
+01937: 
+01938:     text = clause_text.lower()
+01939: 
+01940:     clause_type = analysis.get("clause_type")
+01941: 
+01942:     explicit_patterns = {
+01943: 
+01944:         "non_compete": [
+01945:             "non-compete",
+01946:             "non compete",
+01947:             "shall not compete",
+01948:             "may not compete",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1985
+----------------------------------------------------------------------------------------------------
+01977:             "pénalité",
+01978:             "amende",
+01979: 
+01980:             "غرامة",
+01981:         ],
+01982:     }
+01983: 
+01984:     # No validation needed
+01985:     if clause_type not in explicit_patterns:
+01986:         return analysis
+01987: 
+01988:     matched = any(
+01989:         pattern in text
+01990:         for pattern in explicit_patterns[clause_type]
+01991:     )
+01992: 
+01993:     # HARD RESET if unsupported
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1990
+----------------------------------------------------------------------------------------------------
+01982:     }
+01983: 
+01984:     # No validation needed
+01985:     if clause_type not in explicit_patterns:
+01986:         return analysis
+01987: 
+01988:     matched = any(
+01989:         pattern in text
+01990:         for pattern in explicit_patterns[clause_type]
+01991:     )
+01992: 
+01993:     # HARD RESET if unsupported
+01994:     if not matched:
+01995: 
+01996:         analysis["clause_type"] = "other"
+01997: 
+01998:         analysis["red_flag"] = False
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 1996
+----------------------------------------------------------------------------------------------------
+01988:     matched = any(
+01989:         pattern in text
+01990:         for pattern in explicit_patterns[clause_type]
+01991:     )
+01992: 
+01993:     # HARD RESET if unsupported
+01994:     if not matched:
+01995: 
+01996:         analysis["clause_type"] = "other"
+01997: 
+01998:         analysis["red_flag"] = False
+01999: 
+02000:         analysis["red_flag_reason"] = ""
+02001: 
+02002:         analysis["risk_level"] = "low"
+02003: 
+02004:         analysis["confidence"] = "low"
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2016
+----------------------------------------------------------------------------------------------------
+02008:         analysis["negotiation_advice"] = ""
+02009: 
+02010:         analysis["safer_alternative"] = ""
+02011: 
+02012:         unsupported_messages = {
+02013:             "en": (
+02014:                 "The clause does not explicitly contain "
+02015:                 "a legally identifiable "
+02016:                 f"{clause_type.replace('_', ' ')} provision."
+02017:             ),
+02018:             "fr": (
+02019:                 "La clause ne contient pas explicitement "
+02020:                 "une disposition juridiquement identifiable de type "
+02021:                 f"{clause_type.replace('_', ' ')}."
+02022:             ),
+02023:             "ar": (
+02024:                 "لا يتضمن هذا البند صراحةً حكماً قانونياً "
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2021
+----------------------------------------------------------------------------------------------------
+02013:             "en": (
+02014:                 "The clause does not explicitly contain "
+02015:                 "a legally identifiable "
+02016:                 f"{clause_type.replace('_', ' ')} provision."
+02017:             ),
+02018:             "fr": (
+02019:                 "La clause ne contient pas explicitement "
+02020:                 "une disposition juridiquement identifiable de type "
+02021:                 f"{clause_type.replace('_', ' ')}."
+02022:             ),
+02023:             "ar": (
+02024:                 "لا يتضمن هذا البند صراحةً حكماً قانونياً "
+02025:                 f"يمكن تصنيفه على أنه {clause_type.replace('_', ' ')}."
+02026:             ),
+02027:         }
+02028: 
+02029:         analysis["legal_insight"] = unsupported_messages.get(
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2025
+----------------------------------------------------------------------------------------------------
+02017:             ),
+02018:             "fr": (
+02019:                 "La clause ne contient pas explicitement "
+02020:                 "une disposition juridiquement identifiable de type "
+02021:                 f"{clause_type.replace('_', ' ')}."
+02022:             ),
+02023:             "ar": (
+02024:                 "لا يتضمن هذا البند صراحةً حكماً قانونياً "
+02025:                 f"يمكن تصنيفه على أنه {clause_type.replace('_', ' ')}."
+02026:             ),
+02027:         }
+02028: 
+02029:         analysis["legal_insight"] = unsupported_messages.get(
+02030:             language,
+02031:             unsupported_messages["en"],
+02032:         )
+02033: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2450
+----------------------------------------------------------------------------------------------------
+02442:     for label, patterns in medium_patterns.items():
+02443:         if any(p in text for p in patterns):
+02444:             return label
+02445: 
+02446:     for label, patterns in low_patterns.items():
+02447:         if any(p in text for p in patterns):
+02448:             return label
+02449: 
+02450:     clause_type = analysis.get("clause_type", "other")
+02451: 
+02452:     if clause_type == "penalty":
+02453:         return "severe_penalties"
+02454: 
+02455:     if clause_type == "non_compete":
+02456:         return "perpetual_non_compete" if "perpetual" in text else "asymmetrical_termination"
+02457: 
+02458:     if clause_type == "intellectual_property":
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2452
+----------------------------------------------------------------------------------------------------
+02444:             return label
+02445: 
+02446:     for label, patterns in low_patterns.items():
+02447:         if any(p in text for p in patterns):
+02448:             return label
+02449: 
+02450:     clause_type = analysis.get("clause_type", "other")
+02451: 
+02452:     if clause_type == "penalty":
+02453:         return "severe_penalties"
+02454: 
+02455:     if clause_type == "non_compete":
+02456:         return "perpetual_non_compete" if "perpetual" in text else "asymmetrical_termination"
+02457: 
+02458:     if clause_type == "intellectual_property":
+02459: 
+02460:         broad_ip_patterns = [
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2455
+----------------------------------------------------------------------------------------------------
+02447:         if any(p in text for p in patterns):
+02448:             return label
+02449: 
+02450:     clause_type = analysis.get("clause_type", "other")
+02451: 
+02452:     if clause_type == "penalty":
+02453:         return "severe_penalties"
+02454: 
+02455:     if clause_type == "non_compete":
+02456:         return "perpetual_non_compete" if "perpetual" in text else "asymmetrical_termination"
+02457: 
+02458:     if clause_type == "intellectual_property":
+02459: 
+02460:         broad_ip_patterns = [
+02461:             "assign any and all rights",
+02462:             "all intellectual property",
+02463:             "irrevocable",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2458
+----------------------------------------------------------------------------------------------------
+02450:     clause_type = analysis.get("clause_type", "other")
+02451: 
+02452:     if clause_type == "penalty":
+02453:         return "severe_penalties"
+02454: 
+02455:     if clause_type == "non_compete":
+02456:         return "perpetual_non_compete" if "perpetual" in text else "asymmetrical_termination"
+02457: 
+02458:     if clause_type == "intellectual_property":
+02459: 
+02460:         broad_ip_patterns = [
+02461:             "assign any and all rights",
+02462:             "all intellectual property",
+02463:             "irrevocable",
+02464:             "perpetual",
+02465:             "cession de tous les droits",
+02466:             "irrévocable",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2481
+----------------------------------------------------------------------------------------------------
+02473:         if any(
+02474:             pattern in text
+02475:             for pattern in broad_ip_patterns
+02476:         ):
+02477:             return "broad_ip_assignment"
+02478: 
+02479:         return "ip_after_payment"
+02480: 
+02481:     if clause_type == "liability":
+02482:         return "limited_liability"
+02483: 
+02484:     if clause_type == "confidentiality":
+02485:         return "standard_confidentiality"
+02486: 
+02487:     if clause_type == "payment":
+02488:         return "payment_schedule"
+02489: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2484
+----------------------------------------------------------------------------------------------------
+02476:         ):
+02477:             return "broad_ip_assignment"
+02478: 
+02479:         return "ip_after_payment"
+02480: 
+02481:     if clause_type == "liability":
+02482:         return "limited_liability"
+02483: 
+02484:     if clause_type == "confidentiality":
+02485:         return "standard_confidentiality"
+02486: 
+02487:     if clause_type == "payment":
+02488:         return "payment_schedule"
+02489: 
+02490:     if clause_type == "termination":
+02491:         return "mutual_termination_notice"
+02492: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2487
+----------------------------------------------------------------------------------------------------
+02479:         return "ip_after_payment"
+02480: 
+02481:     if clause_type == "liability":
+02482:         return "limited_liability"
+02483: 
+02484:     if clause_type == "confidentiality":
+02485:         return "standard_confidentiality"
+02486: 
+02487:     if clause_type == "payment":
+02488:         return "payment_schedule"
+02489: 
+02490:     if clause_type == "termination":
+02491:         return "mutual_termination_notice"
+02492: 
+02493:     return "other"
+02494: 
+02495: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2490
+----------------------------------------------------------------------------------------------------
+02482:         return "limited_liability"
+02483: 
+02484:     if clause_type == "confidentiality":
+02485:         return "standard_confidentiality"
+02486: 
+02487:     if clause_type == "payment":
+02488:         return "payment_schedule"
+02489: 
+02490:     if clause_type == "termination":
+02491:         return "mutual_termination_notice"
+02492: 
+02493:     return "other"
+02494: 
+02495: 
+02496: def apply_conceptual_risk_calibration(
+02497:     analysis: dict,
+02498:     clause_text: str,
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2678
+----------------------------------------------------------------------------------------------------
+02670: 
+02671: def calibrate_risk_level(
+02672:     analysis: dict,
+02673:     clause_text: str,
+02674: ) -> dict:
+02675: 
+02676:     text = clause_text.lower()
+02677: 
+02678:     clause_type = analysis.get("clause_type")
+02679: 
+02680:     red_flag = analysis.get("red_flag")
+02681: 
+02682:     # -------------------
+02683:     # Low-materiality / informational clauses
+02684:     # -------------------
+02685: 
+02686:     low_materiality_patterns = [
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2719
+----------------------------------------------------------------------------------------------------
+02711:     ]
+02712: 
+02713:     informational_types = {
+02714:         "other",
+02715:     }
+02716: 
+02717:     if (
+02718:         not red_flag
+02719:         and clause_type in informational_types
+02720:     ):
+02721: 
+02722:         for pattern in low_materiality_patterns:
+02723: 
+02724:             if pattern in text:
+02725: 
+02726:                 analysis["risk_level"] = "low"
+02727: 
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 2848
+----------------------------------------------------------------------------------------------------
+02840:         "unilatéral",
+02841: 
+02842:         "غرامة",
+02843:         "مسؤولية غير محدودة",
+02844:         "تقديره المطلق",
+02845:     ]
+02846: 
+02847:     if (
+02848:         analysis.get("clause_type") == "payment"
+02849:         and any(
+02850:             p in text
+02851:             for p in payment_calculation_patterns
+02852:         )
+02853:     ):
+02854: 
+02855:         severe_payment_risk = any(
+02856:             p in text
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 3101
+----------------------------------------------------------------------------------------------------
+03093:         return "high"
+03094: 
+03095:     if any(
+03096:         pattern in text
+03097:         for pattern in medium_materiality_patterns
+03098:     ):
+03099:         return "medium"
+03100: 
+03101:     clause_type = analysis.get("clause_type", "other")
+03102: 
+03103:     if clause_type == "confidentiality":
+03104:         return "medium"
+03105: 
+03106:     if clause_type in {
+03107:         "payment",
+03108:         "termination",
+03109:         "intellectual_property",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 3103
+----------------------------------------------------------------------------------------------------
+03095:     if any(
+03096:         pattern in text
+03097:         for pattern in medium_materiality_patterns
+03098:     ):
+03099:         return "medium"
+03100: 
+03101:     clause_type = analysis.get("clause_type", "other")
+03102: 
+03103:     if clause_type == "confidentiality":
+03104:         return "medium"
+03105: 
+03106:     if clause_type in {
+03107:         "payment",
+03108:         "termination",
+03109:         "intellectual_property",
+03110:         "liability",
+03111:         "penalty",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 3106
+----------------------------------------------------------------------------------------------------
+03098:     ):
+03099:         return "medium"
+03100: 
+03101:     clause_type = analysis.get("clause_type", "other")
+03102: 
+03103:     if clause_type == "confidentiality":
+03104:         return "medium"
+03105: 
+03106:     if clause_type in {
+03107:         "payment",
+03108:         "termination",
+03109:         "intellectual_property",
+03110:         "liability",
+03111:         "penalty",
+03112:         "exclusivity",
+03113:         "non_compete",
+03114:     }:
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 3542
+----------------------------------------------------------------------------------------------------
+03534:             language,
+03535:         )
+03536: 
+03537:         analysis = attach_clause_object_metadata(
+03538:             analysis,
+03539:             clause_obj,
+03540:         )
+03541: 
+03542:         analysis = validate_clause_type(
+03543:             analysis,
+03544:             clause,
+03545:             language,
+03546:         )
+03547: 
+03548:         analysis = validate_protective_clause(
+03549:             analysis,
+03550:             clause,
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 3658
+----------------------------------------------------------------------------------------------------
+03650:             analysis["negotiation_priority"] = "low"
+03651: 
+03652:         # Only downgrade generic clauses when the conceptual baseline
+03653:         # is explicitly low-risk. This avoids hiding real medium-risk
+03654:         # "other" clauses that do not match a safe baseline.
+03655:         if (
+03656:             analysis.get("risk_level") == "medium"
+03657:             and not analysis.get("red_flag")
+03658:             and analysis.get("clause_type") == "other"
+03659:             and analysis.get("risk_baseline") in LOW_RISK_CLAUSES
+03660:         ):
+03661:             analysis["risk_level"] = "low"
+03662:             analysis["negotiation_priority"] = "low"
+03663: 
+03664:         title = (
+03665:             analysis.get("clause_title")
+03666:             or extract_clause_title(clause)
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4217
+----------------------------------------------------------------------------------------------------
+04209:             analysis.get("risk_level") == "low"
+04210:             and any(
+04211:                 term in combined_text
+04212:                 for term in medium_risk_terms
+04213:             )
+04214:         ):
+04215:             analysis["risk_level"] = "medium"
+04216: 
+04217:         clause_type_text = f"{title} {clause}".lower()
+04218: 
+04219:         critical_terms = [
+04220:             "termination",
+04221:             "default",
+04222:             "acceleration",
+04223:             "liability",
+04224:             "confidentiality",
+04225:             "data protection",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4278
+----------------------------------------------------------------------------------------------------
+04270: 
+04271:             "الإصلاحات",
+04272: 
+04273:             "التعهدات",
+04274: 
+04275:         ]
+04276: 
+04277:         if any(
+04278:             t in clause_type_text
+04279:             for t in critical_terms
+04280:         ):
+04281: 
+04282:             maintenance_terms = [
+04283:                 "maintenance",
+04284:                 "repair",
+04285:                 "صيانة",
+04286:                 "إصلاح",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4302
+----------------------------------------------------------------------------------------------------
+04294:                 "payment",
+04295:                 "pricing",
+04296:                 "الدفع",
+04297:                 "الأسعار",
+04298:                 "مستوى الخدمة",
+04299:             ]
+04300: 
+04301:             disable_maintenance_override = (
+04302:                 "service level" in clause_type_text
+04303:                 or "uptime" in clause_type_text
+04304:                 or "disponibilité" in clause_type_text
+04305:                 or "مستوى الخدمة" in clause_type_text
+04306:             )
+04307: 
+04308:             if (
+04309:                 not disable_maintenance_override
+04310:                 and any(
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4303
+----------------------------------------------------------------------------------------------------
+04295:                 "pricing",
+04296:                 "الدفع",
+04297:                 "الأسعار",
+04298:                 "مستوى الخدمة",
+04299:             ]
+04300: 
+04301:             disable_maintenance_override = (
+04302:                 "service level" in clause_type_text
+04303:                 or "uptime" in clause_type_text
+04304:                 or "disponibilité" in clause_type_text
+04305:                 or "مستوى الخدمة" in clause_type_text
+04306:             )
+04307: 
+04308:             if (
+04309:                 not disable_maintenance_override
+04310:                 and any(
+04311:                     term in clause_type_text
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4304
+----------------------------------------------------------------------------------------------------
+04296:                 "الدفع",
+04297:                 "الأسعار",
+04298:                 "مستوى الخدمة",
+04299:             ]
+04300: 
+04301:             disable_maintenance_override = (
+04302:                 "service level" in clause_type_text
+04303:                 or "uptime" in clause_type_text
+04304:                 or "disponibilité" in clause_type_text
+04305:                 or "مستوى الخدمة" in clause_type_text
+04306:             )
+04307: 
+04308:             if (
+04309:                 not disable_maintenance_override
+04310:                 and any(
+04311:                     term in clause_type_text
+04312:                     for term in maintenance_terms
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4305
+----------------------------------------------------------------------------------------------------
+04297:                 "الأسعار",
+04298:                 "مستوى الخدمة",
+04299:             ]
+04300: 
+04301:             disable_maintenance_override = (
+04302:                 "service level" in clause_type_text
+04303:                 or "uptime" in clause_type_text
+04304:                 or "disponibilité" in clause_type_text
+04305:                 or "مستوى الخدمة" in clause_type_text
+04306:             )
+04307: 
+04308:             if (
+04309:                 not disable_maintenance_override
+04310:                 and any(
+04311:                     term in clause_type_text
+04312:                     for term in maintenance_terms
+04313:                 )
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4311
+----------------------------------------------------------------------------------------------------
+04303:                 or "uptime" in clause_type_text
+04304:                 or "disponibilité" in clause_type_text
+04305:                 or "مستوى الخدمة" in clause_type_text
+04306:             )
+04307: 
+04308:             if (
+04309:                 not disable_maintenance_override
+04310:                 and any(
+04311:                     term in clause_type_text
+04312:                     for term in maintenance_terms
+04313:                 )
+04314:                 and not any(
+04315:                     term in clause_type_text
+04316:                     for term in excluded_contexts
+04317:                 )
+04318:             ):
+04319:                 analysis["explanation_simple"] = (
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4315
+----------------------------------------------------------------------------------------------------
+04307: 
+04308:             if (
+04309:                 not disable_maintenance_override
+04310:                 and any(
+04311:                     term in clause_type_text
+04312:                     for term in maintenance_terms
+04313:                 )
+04314:                 and not any(
+04315:                     term in clause_type_text
+04316:                     for term in excluded_contexts
+04317:                 )
+04318:             ):
+04319:                 analysis["explanation_simple"] = (
+04320:                     "This clause allocates maintenance and repair "
+04321:                     "responsibilities between the parties."
+04322:                     if language == "en"
+04323:                     else
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4362
+----------------------------------------------------------------------------------------------------
+04354:                     else
+04355:                     "تحدد هذه المادة التزامات تشغيلية أو مسؤوليات "
+04356:                     "صيانة أو التزامات تجارية."
+04357:                 )
+04358: 
+04359:             if (
+04360:                 not analysis.get("recommendation")
+04361:                 and analysis.get("risk_level") in {"medium", "high"}
+04362:                 and analysis.get("clause_type") not in {"other"}
+04363:             ):
+04364:                 analysis["recommendation"] = ""
+04365:         high_risk_terms = [
+04366:             "unlimited liability",
+04367:             "acceleration",
+04368:             "immediate termination",
+04369:             "exclusive jurisdiction",
+04370:             "data breach",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4371
+----------------------------------------------------------------------------------------------------
+04363:             ):
+04364:                 analysis["recommendation"] = ""
+04365:         high_risk_terms = [
+04366:             "unlimited liability",
+04367:             "acceleration",
+04368:             "immediate termination",
+04369:             "exclusive jurisdiction",
+04370:             "data breach",
+04371:             "security incident",
+04372:             "cross default",
+04373: 
+04374:             "responsabilité illimitée",
+04375:             "résiliation immédiate",
+04376:             "violation de données",
+04377: 
+04378:             "مسؤولية غير محدودة",
+04379:             "إنهاء فوري",
+
+----------------------------------------------------------------------------------------------------
+MATCH LINE: 4384
+----------------------------------------------------------------------------------------------------
+04376:             "violation de données",
+04377: 
+04378:             "مسؤولية غير محدودة",
+04379:             "إنهاء فوري",
+04380:             "اختراق البيانات",
+04381:         ]
+04382: 
+04383:         if any(
+04384:             term in clause_type_text
+04385:             for term in high_risk_terms
+04386:         ):
+04387:             analysis["risk_level"] = "high"
+04388: 
+04389:         if (
+04390:             domain_reasoning_allowed
+04391:             and not analysis.get("legal_insight")
+04392:             and domain_reasoning.get("reasoning")

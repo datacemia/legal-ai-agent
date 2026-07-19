@@ -1,0 +1,36 @@
+{
+  "audit_layer": "SOURCE_SIGNAL_DISCOVERY_HEURISTIC_NOT_SEMANTIC_ACCURACY",
+  "files_scanned": 45,
+  "file_errors": [],
+  "clauses_audited": 355,
+  "by_language": {
+    "en": {
+      "clauses_audited": 119,
+      "review_required": 95,
+      "primary_type_mismatch_candidates": 2,
+      "partial_extraction_candidates": 7,
+      "unsupported_grounding_candidates": 0
+    },
+    "fr": {
+      "clauses_audited": 117,
+      "review_required": 101,
+      "primary_type_mismatch_candidates": 3,
+      "partial_extraction_candidates": 7,
+      "unsupported_grounding_candidates": 0
+    },
+    "ar": {
+      "clauses_audited": 119,
+      "review_required": 102,
+      "primary_type_mismatch_candidates": 1,
+      "partial_extraction_candidates": 8,
+      "unsupported_grounding_candidates": 0
+    }
+  },
+  "combined": {
+    "clauses_audited": 355,
+    "review_required": 298,
+    "primary_type_mismatch_candidates": 6,
+    "partial_extraction_candidates": 22,
+    "unsupported_grounding_candidates": 0
+  }
+}

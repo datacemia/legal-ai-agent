@@ -1,0 +1,56 @@
+[
+  {
+    "fixture_id": "06_4_1_fr",
+    "language": "fr",
+    "source_text": "4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "restrictive_covenants",
+      "mechanisms": [
+        "NON_COMPETE"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:NON_COMPETE"
+    ],
+    "high": []
+  }
+]

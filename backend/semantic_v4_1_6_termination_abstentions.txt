@@ -1,0 +1,191 @@
+====================================================================================================
+V4.1.6 TERMINATION ABSTENTION FORENSICS
+====================================================================================================
+ROWS: 15
+
+ROWS: 15
+BY LANGUAGE: {'en': 1, 'fr': 14}
+BY PIPELINE TYPE: {'termination': 14, 'termination_for_convenience': 1}
+ABSTENTION REASONS: {'NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM': 15}
+SIGNAL COUNTS: {'TERMINATION_FOR_CAUSE': 5, 'TERMINATION_FOR_CONVENIENCE': 3, 'IMMEDIATE_TERMINATION': 1, 'TERMINATION_RIGHT': 1, 'NOTICE_PERIOD': 1, 'CURE_PERIOD': 1}
+NO SIGNAL ROWS: 7
+
+====================================================================================================
+[1/15]
+LANG: en
+DOC: 10_Outsourcing_Managed_Services_Agreement.json
+REF: clause_7
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Client or a successor provider, at Client's request and expense at Provider's then-current rates.
+MECHANISMS: []
+
+====================================================================================================
+[2/15]
+LANG: fr
+DOC: 02_Master_Services_Agreement_FR.json
+REF: clause_8
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_FOR_CAUSE']
+SOURCE:
+4.2 Le Prestataire pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite au Client. Le Client ne pourra résilier que pour manquement substantiel non corrigé du Prestataire, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement.
+MECHANISMS: ['NOTICE_PROCEDURE']
+
+====================================================================================================
+[3/15]
+LANG: fr
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_5
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+4.1 Entre les Parties, le Client conserve l'intégralité des droits sur les Données du Client. À la résiliation, Northwind mettra les Données du Client à disposition pour export dans un format standard pendant trente (30) jours, après quoi elles pourront être définitivement supprimées.
+MECHANISMS: []
+
+====================================================================================================
+[4/15]
+LANG: fr
+DOC: 03_SaaS_Cloud_Agreement_FR.json
+REF: clause_7
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_FOR_CONVENIENCE']
+SOURCE:
+7.1 Le Client ne pourra pas résilier le présent Accord pour convenance avant la fin de la Durée d'Abonnement en cours. Northwind pourra résilier le présent Accord pour convenance à tout moment moyennant un préavis écrit de quatre-vingt-dix (90) jours, avec remboursement au prorata des frais prépayés et non utilisés.
+MECHANISMS: []
+
+====================================================================================================
+[5/15]
+LANG: fr
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_8
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+3.2 Le Client aura le droit, moyennant un préavis de trente (30) jours, de procéder à un audit de sécurité sur site des installations du Prestataire directement pertinentes pour les Services, au maximum une fois par an, aux frais du Client.
+MECHANISMS: []
+
+====================================================================================================
+[6/15]
+LANG: fr
+DOC: 04_Cybersecurity_Services_Agreement_FR.json
+REF: clause_9
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_FOR_CAUSE', 'IMMEDIATE_TERMINATION']
+SOURCE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours. Le Client pourra résilier immédiatement, sans pénalité, si le Prestataire subit un Incident de Sécurité affectant les données du Client résultant de sa négligence grave.
+MECHANISMS: []
+
+====================================================================================================
+[7/15]
+LANG: fr
+DOC: 06_Executive_Employment_Agreement.json
+REF: clause_3
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_RIGHT', 'TERMINATION_FOR_CAUSE', 'TERMINATION_FOR_CONVENIENCE']
+SOURCE:
+3.1 The Company may terminate Executive's employment at any time, with or without Cause, subject to the severance provisions herein. If Executive is terminated without Cause or resigns for Good Reason, Executive shall receive twelve (12) months of base salary continuation and twelve (12) months of COBRA premium reimbursement, subject to exécution of a release of claims.
+MECHANISMS: []
+
+====================================================================================================
+[8/15]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_6
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+2.2 Le Concédant aura le droit, moyennant un préavis de trente (30) jours, d'auditer les livres et registres du Licencié relatifs au calcul des redevances, au maximum une fois par an ; si un audit révèle un sous-paiement supérieur à cinq pour cent (5 %), le Licencié supportera le coût raisonnable de l'audit.
+MECHANISMS: []
+
+====================================================================================================
+[9/15]
+LANG: fr
+DOC: 07_Software_Licensing_Agreement_FR.json
+REF: clause_8
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_FOR_CAUSE']
+SOURCE:
+5.1 Le présent Accord se poursuivra pendant cinq (5) ans à compter de la Date d'Effet. Le Concédant pourra résilier le présent Accord immédiatement si le Licencié ne paie pas les redevances dues et ne remédie pas à ce manquement dans un délai de quinze (15) jours suivant une notification écrite.
+MECHANISMS: []
+
+====================================================================================================
+[10/15]
+LANG: fr
+DOC: 08_Procurement_Supply_Agreement_FR.json
+REF: clause_9
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_FOR_CAUSE']
+SOURCE:
+6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier.
+MECHANISMS: []
+
+====================================================================================================
+[11/15]
+LANG: fr
+DOC: 09_Consulting_Services_Agreement_FR.json
+REF: clause_7
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['TERMINATION_FOR_CONVENIENCE', 'NOTICE_PERIOD']
+SOURCE:
+5.1 Le présent Accord se poursuivra jusqu'à l'achèvement des Services décrits dans le bon de commande applicable, sauf résiliation anticipée. Chaque Partie pourra résilier le présent Accord pour convenance moyennant un préavis écrit de trente (30) jours, le Client restant responsable des honoraires acquis jusqu'à la date effective de résiliation.
+MECHANISMS: []
+
+====================================================================================================
+[12/15]
+LANG: fr
+DOC: 10_Outsourcing_Managed_Services_Agreement_FR.json
+REF: clause_6
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+6.1 Le présent Accord a une durée initiale de cinq (5) ans. À l'expiration ou à la résiliation, le Prestataire fournira une assistance raisonnable à la sortie pendant une période pouvant aller jusqu'à cent quatre-vingts (180) jours pour faciliter la transition vers le Client ou un prestataire successeur, à la demande du Client et à ses frais aux tarifs alors en vigueur du Prestataire.
+MECHANISMS: []
+
+====================================================================================================
+[13/15]
+LANG: fr
+DOC: 11_Commercial_Lease_Agreement_FR.json
+REF: clause_2
+PIPELINE: termination_for_convenience
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+5.1 Le Preneur ne pourra céder le présent Bail ni sous-louer les Locaux, en tout ou partie, sans le consentement écrit préalable du Bailleur, lequel ne pourra être refusé, conditionné ou retardé sans motif raisonnable.
+MECHANISMS: ['PRIOR_CONSENT_PREREQUISITE']
+
+====================================================================================================
+[14/15]
+LANG: fr
+DOC: 11_Commercial_Lease_Agreement_FR.json
+REF: clause_4
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: []
+SOURCE:
+1.1 La durée du présent Bail sera de cinq (5) ans, à compter du 1er août 2026 et jusqu'au 31 juillet 2031, sauf résiliation anticipée conformément au présent Bail.
+MECHANISMS: []
+
+====================================================================================================
+[15/15]
+LANG: fr
+DOC: 11_Commercial_Lease_Agreement_FR.json
+REF: clause_8
+PIPELINE: termination
+ABSTAIN REASON: NO_PRIMARY_ELIGIBLE_DOMAIN_MECHANISM
+SIGNALS: ['CURE_PERIOD']
+SOURCE:
+6.1 Si le Preneur ne paie pas le Loyer de Base dans un délai de dix (10) jours suivant son échéance, ou manque à toute autre obligation substantielle du présent Bail sans y remédier dans un délai de trente (30) jours suivant notification écrite, le Bailleur pourra résilier le présent Bail et exercer tous les recours disponibles, y compris le recouvrement du loyer accéléré pour la durée restante du bail, sous réserve de l'obligation du Bailleur de limiter son préjudice.
+MECHANISMS: []

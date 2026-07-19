@@ -39,9 +39,18 @@ from app.services.contract_agent.semantic_negotiation import (
 from app.services.contract_agent.legal_reasoning_templates import (
     get_reasoning_for_text,
 )
+from app.services.contract_agent.publication_gate import (
+    enforce_final_publication_gate,
+    assert_final_serialization,
+)
 from app.services.contract_agent.contract_taxonomy import (
+    detect_clause_type_candidates,
     detect_clause_type_from_taxonomy,
     has_clause_type_signal,
+)
+from app.services.contract_agent.semantic_source_profile import (
+    UNKNOWN as SEMANTIC_UNKNOWN,
+    build_semantic_source_profile,
 )
 from app.services.contract_agent.jurisdiction_profiles import (
     detect_jurisdiction,
@@ -212,6 +221,7 @@ ALLOWED_CLAUSE_TYPES = {
     "non_solicitation",
     "conflict_of_interest",
     "post_termination_obligations",
+    "restrictive_covenants",
 
     # Services / SaaS / operations
     "services",
@@ -276,9 +286,9 @@ ALLOWED_CLAUSE_TYPES = {
 CLAUSE_GROUPS = {
     "commercial_finance": {
         "types": {
-            "payment", "pricing", "invoice", "tax", "late_payment",
-            "refund", "expense_reimbursement", "fees", "commission",
-            "bonus", "royalties",
+            "employment", "compensation", "benefits", "vacation",
+            "non_compete", "non_solicitation", "restrictive_covenants",
+            "conflict_of_interest", "post_termination_obligations",
         },
         "labels": {
             "en": "Commercial & Finance",
@@ -1300,11 +1310,6 @@ def apply_rule_based_risk(
         "trigger"
     )
 
-    print("\nDEBUG FINAL INSIGHT")
-    print("TITLE:", ai_result.get("clause_title"))
-    print("TYPE:", ai_result.get("clause_type"))
-    print("HAS_CONTEXT:", ai_result.get("has_contextual_reasoning"))
-    print("LEGAL:", ai_result.get("legal_insight"))
 
     return ai_result
 
@@ -1625,7 +1630,7 @@ def analyze_clause(
 
     except Exception as e:
 
-        print("CLAUSE AI ERROR:", str(e))
+        print("CLAUSE AI ERROR:", ascii(str(e)))
 
         ai_result = fallback_clause_result(
             language
@@ -1633,27 +1638,38 @@ def analyze_clause(
 
     ai_result["language"] = language
 
-    print(
-        "RAW CLAUSE:",
-        ai_result.get("clause_title"),
-        ai_result.get("clause_type"),
-    )
+   
 
     normalized = normalize_clause_result(
         ai_result
     )
 
-    print(
-        "NORMALIZED:",
-        normalized["clause_title"],
-        normalized["clause_type"],
-    )
+   
 
     ai_result = normalized
 
     # -------------------------------------------------
     # Taxonomy fallback classification
     # -------------------------------------------------
+
+    _debug_candidates = detect_clause_type_candidates(clause)
+
+    # print("\n=== TAXONOMY DEBUG ===")
+    # print("CLAUSE:", clause[:1000])
+    # print("AI TYPE:", ai_result.get("clause_type"))
+
+    # for candidate in _debug_candidates[:10]:
+    #     print(
+    #         candidate["type"],
+    #         "score=", candidate["score"],
+    #         "base=", candidate["base_score"],
+    #         "specificity=", candidate["specificity_bonus"],
+    #         "context+=", candidate["context_bonus"],
+    #         "context-=", candidate["context_penalty"],
+    #         "signals=", candidate["signals"],
+    #     )
+
+    # print("=== END TAXONOMY DEBUG ===\n")
 
     taxonomy_type = detect_clause_type_from_taxonomy(clause)
 
@@ -1666,6 +1682,63 @@ def analyze_clause(
         elif not has_clause_type_signal(clause, current_type):
             ai_result["clause_type"] = taxonomy_type
             ai_result["confidence"] = "medium"
+
+    # -------------------------------------------------
+    # Grounded semantic primary-type arbitration
+    # -------------------------------------------------
+    #
+    # The semantic source profile may override the existing AI + lexical
+    # taxonomy result only when it derives a high-confidence, non-abstained
+    # primary type from exact source evidence.
+    #
+    # Control modifiers such as prohibitions, express rights, mandatory
+    # wording, or prior-consent prerequisites are not primary-type eligible.
+    # If the semantic profiler abstains or cannot run, the existing
+    # classification path above remains unchanged.
+    try:
+        semantic_profile = build_semantic_source_profile(
+            clause,
+            language=language,
+        )
+    except Exception:
+        semantic_profile = {}
+    if semantic_profile:
+        ai_result["_semantic_source_profile"] = semantic_profile
+    semantic_type = safe_str(
+        semantic_profile.get("primary_type")
+    ).lower()
+
+    semantic_confidence = float(
+        semantic_profile.get("confidence")
+        or 0.0
+    )
+
+    semantic_abstained = bool(
+        semantic_profile.get(
+            "abstained",
+            True,
+        )
+    )
+
+    semantic_primary_supported = (
+        not semantic_abstained
+        and semantic_type
+        and semantic_type != SEMANTIC_UNKNOWN.lower()
+        and semantic_type in ALLOWED_CLAUSE_TYPES
+        and semantic_confidence >= 0.90
+        and bool(
+            semantic_profile.get(
+                "supporting_mechanisms"
+            )
+        )
+    )
+
+    if semantic_primary_supported:
+        current_type = ai_result.get("clause_type")
+
+        if current_type != semantic_type:
+            ai_result["clause_type"] = semantic_type
+            ai_result["confidence"] = "high"
 
     ai_result["_meta"] = {
         "risk_modified_by": [],
@@ -1696,6 +1769,7 @@ def analyze_clause(
         clause,
         language,
         title=ai_result.get("clause_title", ""),
+        clause_type=ai_result.get("clause_type"),
     )
 
     if reasoning:
@@ -1727,40 +1801,6 @@ def analyze_clause(
                 "explanation_simple"
             ] = legal_insight
 
-    title_text = ai_result.get("clause_title", "").lower()
-
-    combined_text = f"{title_text} {clause}".lower()
-
-    if (
-        "confidentiality" in combined_text
-        or "confidential information" in combined_text
-        or "confidentialité" in combined_text
-        or "information confidentielle" in combined_text
-        or "السرية" in combined_text
-        or "معلومات سرية" in combined_text
-    ):
-        conf_reasoning = get_reasoning_for_text(
-            clause,
-            language,
-            title="Confidentiality",
-        )
-
-        if conf_reasoning.get("legal_insight"):
-            ai_result["legal_insight"] = (
-                conf_reasoning["legal_insight"]
-            )
-
-        if conf_reasoning.get("recommendation"):
-            ai_result["recommendation"] = (
-                conf_reasoning["recommendation"]
-            )
-
-        if conf_reasoning.get("negotiation"):
-            ai_result["negotiation_advice"] = (
-                conf_reasoning["negotiation"]
-            )
-
-        ai_result["has_contextual_reasoning"] = True
 
     ai_result = remove_speculative_analysis(
         ai_result
@@ -3450,7 +3490,7 @@ def _analyze_contract_clauses_impl(
     print("CLAUSES INPUT LEN:", len(clauses) if clauses else 0, flush=True)
 
     if clauses and isinstance(clauses[0], dict):
-        print("FIRST CLAUSE OBJECT:", clauses[0], flush=True)
+        
         clause_objects = clauses
     else:
         full_text_for_objects = "\n\n".join([
@@ -3484,7 +3524,7 @@ def _analyze_contract_clauses_impl(
 
     results = []
 
-    for clause_obj in clause_objects[:max_clauses]:
+    for clause_obj in clause_objects:
 
         clause = str(
             clause_obj.get("text", "")
@@ -4453,24 +4493,14 @@ def _analyze_contract_clauses_impl(
                 )
 
             elif analysis.get("risk_level") == "low":
-
-                analysis["legal_insight"] = (
-                    "No significant legal imbalance detected."
-                    if language == "en"
-                    else (
-                        "Aucun déséquilibre juridique significatif détecté."
-                        if language == "fr"
-                        else (
-                            "لم يتم رصد اختلال قانوني جوهري."
-                        )
-                    )
-                )
+                analysis["legal_insight"] = ""
 
         if not analysis.get("title"):
             analysis["title"] = "Untitled Clause"
 
         results.append({
             "title": title,
+            "_source_text_exact": clause,
             "original_text": clause[:1000],
             "reasoning_evidence": extract_reasoning_evidence(
                 clause_text
@@ -4639,10 +4669,13 @@ def display_safe_clause_labels(value, language: str = "en"):
 
     if isinstance(value, dict):
         return {
-            key: display_safe_clause_labels(item, language)
+            key: (
+                item
+                if key == "_source_text_exact"
+                else display_safe_clause_labels(item, language)
+            )
             for key, item in value.items()
         }
-
     if not isinstance(value, str):
         return value
 
@@ -4667,10 +4700,12 @@ class ClauseAnalysisPipeline:
         clauses: list[str],
         language: str = "en",
         max_clauses: int = 25,
+        party_roles: dict | None = None,
     ) -> None:
         self.clauses = clauses
         self.language = language
         self.max_clauses = max_clauses
+        self.party_roles = party_roles
 
     def run_detection(self) -> list[dict]:
         return _analyze_contract_clauses_impl(
@@ -4707,7 +4742,7 @@ class ClauseAnalysisPipeline:
             for item in cleaned
         )
 
-        roles = get_display_roles(
+        roles = self.party_roles or get_display_roles(
             contract_type="",
             text=combined_text,
             language=self.language,
@@ -4768,6 +4803,12 @@ class ClauseAnalysisPipeline:
         results = self.run_scoring(results)
         results = self.run_cleanup(results)
 
+        results = enforce_final_publication_gate(
+            results,
+            self.language,
+            final_pass=False,
+        )
+
         contract_timeline = extract_contract_timeline(
             results,
             language=self.language,
@@ -4795,7 +4836,10 @@ class ClauseAnalysisPipeline:
 
         clause_groups = build_clause_groups(results, self.language)
 
-        contradictions = detect_contract_contradictions(results)
+        contradictions = detect_contract_contradictions(
+            results,
+            self.language,
+        )
 
         executive_summary = build_executive_summary(
             results,
@@ -4824,6 +4868,16 @@ class ClauseAnalysisPipeline:
             self.language,
         )
 
+        final_result["clauses"]["results"] = enforce_final_publication_gate(
+            final_result["clauses"]["results"],
+            self.language,
+            final_pass=True,
+        )
+
+        assert_final_serialization(
+            final_result["clauses"]["results"]
+        )
+
         return final_result
 
 
@@ -4831,10 +4885,12 @@ def analyze_contract_clauses(
     clauses: list[str],
     language: str = "en",
     max_clauses: int = 25,
-) -> list[dict]:
+    party_roles: dict | None = None,
+) -> dict:
     return ClauseAnalysisPipeline(
         clauses=clauses,
         language=language,
         max_clauses=max_clauses,
+        party_roles=party_roles,
     ).run()
 

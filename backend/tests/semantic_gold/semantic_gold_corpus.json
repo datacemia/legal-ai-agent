@@ -1,0 +1,4197 @@
+{
+  "schema_version": "1.0",
+  "corpus_status": "FROZEN_CANDIDATE_REQUIRES_HUMAN_SIGNOFF",
+  "gold_independence": {
+    "source": "original source clauses in regression_results_multilang",
+    "derived_from_engine_output": false,
+    "runtime_generation": false,
+    "note": "Expectations were curated from source text only. Human legal reviewer sign-off is still required before calling this a human-reviewed gold corpus."
+  },
+  "clauses": [
+    {
+      "fixture_id": "01_1_1_en",
+      "document": "01_NDA_Confidentiality_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Each Receiving Party shall hold the Disclosing Party's Confidential Information in strict confidence and shall not disclose it to any third party without prior written consent, except to Representatives bound by confidentiality obligations at least as protective as this Agreement.",
+      "primary_type_expectation": {
+        "allowed": [
+          "confidentiality"
+        ],
+        "broad_compatible": [
+          "data_protection"
+        ],
+        "forbidden": [
+          "governing_law",
+          "payment"
+        ]
+      },
+      "required_mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "CONFIDENTIALITY_OBLIGATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "NON_DISCLOSURE",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "CONFIDENTIALITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "01_1_1_fr",
+      "document": "01_NDA_Confidentiality_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Chaque Partie Réceptrice conservera les Informations Confidentielles de la Partie Divulgatrice dans la plus stricte confidentialité et ne les divulguera à aucun tiers sans consentement écrit préalable, sauf à ses Représentants tenus par des obligations de confidentialité au moins aussi protectrices que celles du présent Accord.",
+      "primary_type_expectation": {
+        "allowed": [
+          "confidentiality"
+        ],
+        "broad_compatible": [
+          "data_protection"
+        ],
+        "forbidden": [
+          "governing_law",
+          "payment"
+        ]
+      },
+      "required_mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "CONFIDENTIALITY_OBLIGATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "NON_DISCLOSURE",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "CONFIDENTIALITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "01_1_1_ar",
+      "document": "01_NDA_Confidentiality_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة، باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية.",
+      "primary_type_expectation": {
+        "allowed": [
+          "confidentiality"
+        ],
+        "broad_compatible": [
+          "data_protection"
+        ],
+        "forbidden": [
+          "governing_law",
+          "payment"
+        ]
+      },
+      "required_mechanisms": [
+        "CONFIDENTIALITY_OBLIGATION",
+        "NON_DISCLOSURE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "CONFIDENTIALITY_OBLIGATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "NON_DISCLOSURE",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "CONFIDENTIALITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "01_1_2_en",
+      "document": "01_NDA_Confidentiality_Agreement.json",
+      "clause_reference": "1.2",
+      "language": "en",
+      "source_text": "1.2 Each Receiving Party shall use the Confidential Information solely for the Purpose.",
+      "primary_type_expectation": {
+        "allowed": [
+          "confidentiality"
+        ],
+        "broad_compatible": [],
+        "forbidden": [
+          "payment",
+          "governing_law"
+        ]
+      },
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "CONFIDENTIALITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "01_1_2_fr",
+      "document": "01_NDA_Confidentiality_Agreement_FR.json",
+      "clause_reference": "1.2",
+      "language": "fr",
+      "source_text": "1.2 Chaque Partie Réceptrice n'utilisera les Informations Confidentielles qu'aux fins de l'Objet.",
+      "primary_type_expectation": {
+        "allowed": [
+          "confidentiality"
+        ],
+        "broad_compatible": [],
+        "forbidden": [
+          "payment",
+          "governing_law"
+        ]
+      },
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "CONFIDENTIALITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "01_1_2_ar",
+      "document": "01_NDA_Confidentiality_Agreement_AR.json",
+      "clause_reference": "1.2",
+      "language": "ar",
+      "source_text": "1.2 يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.",
+      "primary_type_expectation": {
+        "allowed": [
+          "confidentiality"
+        ],
+        "broad_compatible": [],
+        "forbidden": [
+          "payment",
+          "governing_law"
+        ]
+      },
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "RECEIVING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "CONFIDENTIALITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "02_4_2_en",
+      "document": "02_Master_Services_Agreement.json",
+      "clause_reference": "4.2",
+      "language": "en",
+      "source_text": "4.2 Provider may terminate this Agreement or any SOW immediately, for any reason or no reason, upon written notice to Client. Client may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure.",
+      "primary_type_expectation": {
+        "allowed": [
+          "termination"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TERMINATION_FOR_CONVENIENCE",
+        "TERMINATION_FOR_CAUSE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [
+        "NOTICE_REQUIRED",
+        "MANUAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "TERMINATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "02_4_2_fr",
+      "document": "02_Master_Services_Agreement_FR.json",
+      "clause_reference": "4.2",
+      "language": "fr",
+      "source_text": "4.2 Le Prestataire pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite au Client. Le Client ne pourra résilier que pour manquement substantiel non corrigé du Prestataire, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement.",
+      "primary_type_expectation": {
+        "allowed": [
+          "termination"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TERMINATION_FOR_CONVENIENCE",
+        "TERMINATION_FOR_CAUSE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [
+        "NOTICE_REQUIRED",
+        "MANUAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "TERMINATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "02_4_2_ar",
+      "document": "02_Master_Services_Agreement_AR.json",
+      "clause_reference": "4.2",
+      "language": "ar",
+      "source_text": "4.2 يجوز للمزود إنهاء هذه الاتفاقية أو أي بيان عمل فوراً، لأي سبب أو دون سبب، بإشعار خطي للعميل. ولا يجوز للعميل الإنهاء إلا بسبب إخلال جوهري غير معالج من المزود، بعد إشعار خطي مدته ستون (60) يوماً وفرصة لمعالجة الإخلال.",
+      "primary_type_expectation": {
+        "allowed": [
+          "termination"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TERMINATION_FOR_CONVENIENCE",
+        "TERMINATION_FOR_CAUSE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [
+        "NOTICE_REQUIRED",
+        "MANUAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "TERMINATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "02_5_1_en",
+      "document": "02_Master_Services_Agreement.json",
+      "clause_reference": "5.1",
+      "language": "en",
+      "source_text": "5.1 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INDEMNIFICATION OBLIGATIONS, IN NO EVENT SHALL PROVIDER'S AGGREGATE LIABILITY EXCEED THE FEES PAID BY CLIENT IN THE THREE (3) MONTHS PRECEDING THE CLAIM. IN NO EVENT SHALL PROVIDER BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.",
+      "primary_type_expectation": {
+        "allowed": [
+          "liability",
+          "limitation_of_liability"
+        ],
+        "broad_compatible": [],
+        "forbidden": [
+          "governing_law",
+          "dispute_resolution"
+        ]
+      },
+      "required_mechanisms": [
+        "LIABILITY_CAP",
+        "EXCLUDED_DAMAGES",
+        "LIABILITY_CARVEOUT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "GOVERNING_LAW",
+        "FORUM_SELECTION"
+      ],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 3,
+          "unit": "MONTHS",
+          "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+          "related_mechanism": "LIABILITY_CAP"
+        }
+      ],
+      "semantic_family": "LIABILITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "02_5_1_fr",
+      "document": "02_Master_Services_Agreement_FR.json",
+      "clause_reference": "5.1",
+      "language": "fr",
+      "source_text": "5.1 SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ OU D'INDEMNISATION, LA RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION. LE PRESTATAIRE NE SERA EN AUCUN CAS RESPONSABLE DE DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS.",
+      "primary_type_expectation": {
+        "allowed": [
+          "liability",
+          "limitation_of_liability"
+        ],
+        "broad_compatible": [],
+        "forbidden": [
+          "governing_law",
+          "dispute_resolution"
+        ]
+      },
+      "required_mechanisms": [
+        "LIABILITY_CAP",
+        "EXCLUDED_DAMAGES",
+        "LIABILITY_CARVEOUT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "GOVERNING_LAW",
+        "FORUM_SELECTION"
+      ],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 3,
+          "unit": "MONTHS",
+          "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+          "related_mechanism": "LIABILITY_CAP"
+        }
+      ],
+      "semantic_family": "LIABILITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "02_5_1_ar",
+      "document": "02_Master_Services_Agreement_AR.json",
+      "clause_reference": "5.1",
+      "language": "ar",
+      "source_text": "5.1 باستثناء الإخلال بالتزامات السرية أو التعويض، لا تتجاوز المسؤولية الإجمالية للمزود بأي حال من الأحوال الرسوم المدفوعة من العميل خلال الأشهر الثلاثة (3) السابقة للمطالبة. لا يتحمل المزود بأي حال المسؤولية عن الأضرار غير المباشرة أو التبعية أو العقابية.",
+      "primary_type_expectation": {
+        "allowed": [
+          "liability",
+          "limitation_of_liability"
+        ],
+        "broad_compatible": [],
+        "forbidden": [
+          "governing_law",
+          "dispute_resolution"
+        ]
+      },
+      "required_mechanisms": [
+        "LIABILITY_CAP",
+        "EXCLUDED_DAMAGES",
+        "LIABILITY_CARVEOUT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "GOVERNING_LAW",
+        "FORUM_SELECTION"
+      ],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 3,
+          "unit": "MONTHS",
+          "semantic_role": "LIABILITY_CAP_LOOKBACK_PERIOD",
+          "related_mechanism": "LIABILITY_CAP"
+        }
+      ],
+      "semantic_family": "LIABILITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "03_1_1_en",
+      "document": "03_SaaS_Cloud_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Subject to the terms of this Agreement, Northwind grants Customer a non-exclusive, non-transferable right to access and use the Platform during the Subscription Term solely for Customer's internal business purposes.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_GRANT",
+        "LICENSE_RESTRICTION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "CUSTOMER",
+          "object": "SERVICE",
+          "action": "ACCESS_AND_USE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "03_1_1_fr",
+      "document": "03_SaaS_Cloud_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Sous réserve des termes du présent Accord, Northwind accorde au Client un droit non exclusif et incessible d'accéder à la Plateforme et de l'utiliser pendant la Durée d'Abonnement, exclusivement à des fins commerciales internes.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_GRANT",
+        "LICENSE_RESTRICTION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "CUSTOMER",
+          "object": "SERVICE",
+          "action": "ACCESS_AND_USE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "03_1_1_ar",
+      "document": "03_SaaS_Cloud_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 رهناً بأحكام هذه الاتفاقية، تمنح Northwind العميل حقاً غير حصري وغير قابل للتحويل للوصول إلى المنصة واستخدامها خلال مدة الاشتراك، حصراً للأغراض التجارية الداخلية للعميل.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_GRANT",
+        "LICENSE_RESTRICTION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "CUSTOMER",
+          "object": "SERVICE",
+          "action": "ACCESS_AND_USE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "03_4_1_en",
+      "document": "03_SaaS_Cloud_Agreement.json",
+      "clause_reference": "4.1",
+      "language": "en",
+      "source_text": "4.1 As between the Parties, Customer retains all right, title, and interest in Customer Data. Upon termination, Northwind shall make Customer Data available for export in a standard format for thirty (30) days, after which it may be permanently deleted.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "OWNERSHIP",
+        "DATA_RETURN",
+        "DATA_DELETION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "OWNERSHIP",
+          "right_holder": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "DATA_OWNERSHIP",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "03_4_1_fr",
+      "document": "03_SaaS_Cloud_Agreement_FR.json",
+      "clause_reference": "4.1",
+      "language": "fr",
+      "source_text": "4.1 Entre les Parties, le Client conserve l'intégralité des droits sur les Données du Client. À la résiliation, Northwind mettra les Données du Client à disposition pour export dans un format standard pendant trente (30) jours, après quoi elles pourront être définitivement supprimées.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "OWNERSHIP",
+        "DATA_RETURN",
+        "DATA_DELETION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "OWNERSHIP",
+          "right_holder": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "DATA_OWNERSHIP",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "03_4_1_ar",
+      "document": "03_SaaS_Cloud_Agreement_AR.json",
+      "clause_reference": "4.1",
+      "language": "ar",
+      "source_text": "4.1 فيما بين الطرفين، يحتفظ العميل بكامل الحقوق في بيانات العميل. عند الإنهاء، تتيح Northwind بيانات العميل للتصدير بصيغة قياسية لمدة ثلاثين (30) يوماً، وبعد ذلك يجوز حذفها نهائياً.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "OWNERSHIP",
+        "DATA_RETURN",
+        "DATA_DELETION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "OWNERSHIP",
+          "right_holder": "CUSTOMER",
+          "object": "CUSTOMER_DATA",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "DATA_OWNERSHIP",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "04_2_1_en",
+      "document": "04_Cybersecurity_Services_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "source_text": "2.1 Provider shall notify Client of any confirmed Security Incident within four (4) hours of confirmation, and of any Critical Vulnerability within twenty-four (24) hours of discovery.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "DATA_BREACH_NOTICE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "DATA_BREACH_NOTICE",
+          "obligated_actor": "PROVIDER",
+          "beneficiary": "CLIENT",
+          "trigger": "CONFIRMED_SECURITY_INCIDENT",
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [
+        "NOTICE_REQUIRED"
+      ],
+      "required_numeric_roles": [
+        {
+          "value": 4,
+          "unit": "HOURS",
+          "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+          "related_mechanism": "DATA_BREACH_NOTICE"
+        }
+      ],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "04_2_1_fr",
+      "document": "04_Cybersecurity_Services_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "source_text": "2.1 Le Prestataire notifiera le Client de tout Incident de Sécurité confirmé dans un délai de quatre (4) heures suivant sa confirmation, et de toute Vulnérabilité Critique dans un délai de vingt-quatre (24) heures suivant sa découverte.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "DATA_BREACH_NOTICE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "DATA_BREACH_NOTICE",
+          "obligated_actor": "PROVIDER",
+          "beneficiary": "CLIENT",
+          "trigger": "CONFIRMED_SECURITY_INCIDENT",
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [
+        "NOTICE_REQUIRED"
+      ],
+      "required_numeric_roles": [
+        {
+          "value": 4,
+          "unit": "HOURS",
+          "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+          "related_mechanism": "DATA_BREACH_NOTICE"
+        }
+      ],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "04_2_1_ar",
+      "document": "04_Cybersecurity_Services_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "source_text": "2.1 يخطر المزود العميل بأي حادث أمني مؤكد خلال أربع (4) ساعات من تأكيده، وبأي ثغرة حرجة خلال أربع وعشرين (24) ساعة من اكتشافها.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "DATA_BREACH_NOTICE",
+        "NOTICE_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "DATA_BREACH_NOTICE",
+          "obligated_actor": "PROVIDER",
+          "beneficiary": "CLIENT",
+          "trigger": "CONFIRMED_SECURITY_INCIDENT",
+          "action": "NOTIFY",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [
+        "NOTICE_REQUIRED"
+      ],
+      "required_numeric_roles": [
+        {
+          "value": 4,
+          "unit": "HOURS",
+          "semantic_role": "DATA_BREACH_NOTICE_DEADLINE",
+          "related_mechanism": "DATA_BREACH_NOTICE"
+        }
+      ],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "04_3_1_en",
+      "document": "04_Cybersecurity_Services_Agreement.json",
+      "clause_reference": "3.1",
+      "language": "en",
+      "source_text": "3.1 Provider shall maintain SOC 2 Type II and ISO/IEC 27001 certification for the duration of this Agreement and shall provide current audit reports to Client upon request, no more than once per year.",
+      "primary_type_expectation": {
+        "allowed": [
+          "services",
+          "security"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_MEASURES",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "04_3_1_fr",
+      "document": "04_Cybersecurity_Services_Agreement_FR.json",
+      "clause_reference": "3.1",
+      "language": "fr",
+      "source_text": "3.1 Le Prestataire maintiendra les certifications SOC 2 Type II et ISO/IEC 27001 pendant toute la durée du présent Accord et fournira au Client les rapports d'audit en vigueur sur demande, au maximum une fois par an.",
+      "primary_type_expectation": {
+        "allowed": [
+          "services",
+          "security"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_MEASURES",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "04_3_1_ar",
+      "document": "04_Cybersecurity_Services_Agreement_AR.json",
+      "clause_reference": "3.1",
+      "language": "ar",
+      "source_text": "3.1 يحافظ المزود على شهادتي SOC 2 Type II وISO/IEC 27001 طوال مدة هذه الاتفاقية، ويقدم للعميل تقارير التدقيق السارية عند الطلب، بحد أقصى مرة واحدة سنوياً.",
+      "primary_type_expectation": {
+        "allowed": [
+          "services",
+          "security"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_MEASURES",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "05_1_1_en",
+      "document": "05_Data_Processing_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Processor shall process Personal Data only on documented instructions from Controller, including with regard to transfers to a third country, unless required to do otherwise by applicable law.",
+      "primary_type_expectation": {
+        "allowed": [
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "PROCESSOR",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "DATA_PROTECTION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "05_1_1_fr",
+      "document": "05_Data_Processing_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Le Sous-traitant ne traitera les Données Personnelles que sur instructions documentées du Responsable du Traitement, y compris en ce qui concerne les transferts vers un pays tiers, sauf obligation contraire du droit applicable.",
+      "primary_type_expectation": {
+        "allowed": [
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "PROCESSOR",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "DATA_PROTECTION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "05_1_1_ar",
+      "document": "05_Data_Processing_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 لا يعالج المعالج البيانات الشخصية إلا بناءً على تعليمات موثقة من المتحكم، بما في ذلك ما يتعلق بالنقل إلى دولة ثالثة، ما لم يقتضِ القانون المعمول به خلاف ذلك.",
+      "primary_type_expectation": {
+        "allowed": [
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURPOSE_LIMITATION",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURPOSE_LIMITATION",
+          "obligated_actor": "PROCESSOR",
+          "object": "PERSONAL_DATA",
+          "trigger": "DOCUMENTED_CONTROLLER_INSTRUCTIONS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "DATA_PROTECTION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "05_4_1_en",
+      "document": "05_Data_Processing_Agreement.json",
+      "clause_reference": "4.1",
+      "language": "en",
+      "source_text": "4.1 Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including pseudonymization and encryption of Personal Data where appropriate.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_MEASURES"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "05_4_1_fr",
+      "document": "05_Data_Processing_Agreement_FR.json",
+      "clause_reference": "4.1",
+      "language": "fr",
+      "source_text": "4.1 Le Sous-traitant mettra en œuvre des mesures techniques et organisationnelles appropriées pour garantir un niveau de sécurité adapté au risque, y compris la pseudonymisation et le chiffrement des Données Personnelles le cas échéant.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_MEASURES"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "05_4_1_ar",
+      "document": "05_Data_Processing_Agreement_AR.json",
+      "clause_reference": "4.1",
+      "language": "ar",
+      "source_text": "4.1 ينفذ المعالج تدابير تقنية وتنظيمية مناسبة لضمان مستوى أمان يتناسب مع المخاطر، بما في ذلك إخفاء الهوية وتشفير البيانات الشخصية عند الاقتضاء.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security",
+          "data_protection"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_MEASURES"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SECURITY",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_2_1_en",
+      "document": "06_Executive_Employment_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "source_text": "2.1 The Company shall pay Executive an annual base salary of $410,000, payable in accordance with the Company's standard payroll practices, subject to annual review by the Board.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BASE_COMPENSATION",
+        "PAY_FREQUENCY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 410000,
+          "unit": "USD",
+          "semantic_role": "ANNUAL_BASE_COMPENSATION",
+          "related_mechanism": "BASE_COMPENSATION"
+        }
+      ],
+      "semantic_family": "COMPENSATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_2_1_fr",
+      "document": "06_Executive_Employment_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "source_text": "2.1 La Société versera à la Dirigeante un salaire de base annuel de 410 000 $, payable selon les pratiques de paie standard de la Société, sous réserve d'un examen annuel par le Conseil d'Administration.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BASE_COMPENSATION",
+        "PAY_FREQUENCY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 410000,
+          "unit": "USD",
+          "semantic_role": "ANNUAL_BASE_COMPENSATION",
+          "related_mechanism": "BASE_COMPENSATION"
+        }
+      ],
+      "semantic_family": "COMPENSATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_2_1_ar",
+      "document": "06_Executive_Employment_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "source_text": "2.1 تدفع الشركة للمديرة التنفيذية راتباً أساسياً سنوياً قدره 410,000 دولار، يُدفع وفقاً لممارسات الرواتب المعتادة للشركة، رهناً بمراجعة سنوية من مجلس الإدارة.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BASE_COMPENSATION",
+        "PAY_FREQUENCY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 410000,
+          "unit": "USD",
+          "semantic_role": "ANNUAL_BASE_COMPENSATION",
+          "related_mechanism": "BASE_COMPENSATION"
+        }
+      ],
+      "semantic_family": "COMPENSATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_2_2_en",
+      "document": "06_Executive_Employment_Agreement.json",
+      "clause_reference": "2.2",
+      "language": "en",
+      "source_text": "2.2 Executive shall be eligible for an annual discretionary bonus of up to 40% of base salary, subject to Board approval, and shall receive an initial equity grant of 150,000 restricted stock units vesting over four (4) years.",
+      "primary_type_expectation": {
+        "allowed": [
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BONUS",
+        "EQUITY_GRANT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 40,
+          "unit": "PERCENT",
+          "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+          "related_mechanism": "BONUS"
+        }
+      ],
+      "semantic_family": "COMPENSATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_2_2_fr",
+      "document": "06_Executive_Employment_Agreement_FR.json",
+      "clause_reference": "2.2",
+      "language": "fr",
+      "source_text": "2.2 La Dirigeante sera éligible à une prime discrétionnaire annuelle pouvant atteindre 40 % du salaire de base, sous réserve de l'approbation du Conseil, et recevra une attribution initiale de 150 000 actions gratuites soumises à une période d'acquisition de quatre (4) ans.",
+      "primary_type_expectation": {
+        "allowed": [
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BONUS",
+        "EQUITY_GRANT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 40,
+          "unit": "PERCENT",
+          "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+          "related_mechanism": "BONUS"
+        }
+      ],
+      "semantic_family": "COMPENSATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_2_2_ar",
+      "document": "06_Executive_Employment_Agreement_AR.json",
+      "clause_reference": "2.2",
+      "language": "ar",
+      "source_text": "2.2 تكون المديرة التنفيذية مؤهلة لمكافأة تقديرية سنوية تصل إلى 40% من الراتب الأساسي، رهناً بموافقة المجلس، وتحصل على منحة أولية قدرها 150,000 سهم مقيد يخضع لفترة استحقاق مدتها أربع (4) سنوات.",
+      "primary_type_expectation": {
+        "allowed": [
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BONUS",
+        "EQUITY_GRANT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 40,
+          "unit": "PERCENT",
+          "semantic_role": "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+          "related_mechanism": "BONUS"
+        }
+      ],
+      "semantic_family": "COMPENSATION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_4_1_en",
+      "document": "06_Executive_Employment_Agreement.json",
+      "clause_reference": "4.1",
+      "language": "en",
+      "source_text": "4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.",
+      "primary_type_expectation": {
+        "allowed": [
+          "restrictive_covenants"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ],
+      "semantic_family": "RESTRICTIVE_COVENANTS",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_4_1_fr",
+      "document": "06_Executive_Employment_Agreement_FR.json",
+      "clause_reference": "4.1",
+      "language": "fr",
+      "source_text": "4.1 Pendant la durée du contrat et pendant dix-huit (18) mois après sa cessation, la Dirigeante ne fournira pas, directement ou indirectement, de services à une entreprise concurrençant directement les programmes de thérapies d'édition génique de la Société aux États-Unis.",
+      "primary_type_expectation": {
+        "allowed": [
+          "restrictive_covenants"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ],
+      "semantic_family": "RESTRICTIVE_COVENANTS",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "06_4_1_ar",
+      "document": "06_Executive_Employment_Agreement_AR.json",
+      "clause_reference": "4.1",
+      "language": "ar",
+      "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+      "primary_type_expectation": {
+        "allowed": [
+          "restrictive_covenants"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ],
+      "semantic_family": "RESTRICTIVE_COVENANTS",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "07_1_1_en",
+      "document": "07_Software_Licensing_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Licensor grants Licensee a non-exclusive, non-transferable, worldwide license to embed, reproduce, and distribute the Licensed Software solely as incorporated into Licensed Products, during the Term.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "07_1_1_fr",
+      "document": "07_Software_Licensing_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Le Concédant accorde au Licencié une licence non exclusive, incessible, mondiale, pour intégrer, reproduire et distribuer le Logiciel Concédé uniquement tel qu'incorporé dans les Produits Concédés, pendant la Durée.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "07_1_1_ar",
+      "document": "07_Software_Licensing_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 يمنح المرخِّص المرخَّص له ترخيصاً غير حصري وغير قابل للتحويل وعالمياً لدمج البرنامج المرخَّص وإعادة إنتاجه وتوزيعه فقط كجزء مدمج في المنتجات المرخَّصة، طوال المدة.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_GRANT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_GRANT",
+          "right_holder": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "07_1_2_en",
+      "document": "07_Software_Licensing_Agreement.json",
+      "clause_reference": "1.2",
+      "language": "en",
+      "source_text": "1.2 Licensee shall not reverse engineer, decompile, or create derivative works of the Licensed Software, except to the extent such restriction is unenforceable under applicable law.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_RESTRICTION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_RESTRICTION",
+          "obligated_actor": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "07_1_2_fr",
+      "document": "07_Software_Licensing_Agreement_FR.json",
+      "clause_reference": "1.2",
+      "language": "fr",
+      "source_text": "1.2 Le Licencié ne procédera à aucune rétro-ingénierie, décompilation, ni création d'œuvre dérivée du Logiciel Concédé, sauf dans la mesure où une telle restriction serait inapplicable en vertu du droit applicable.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_RESTRICTION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_RESTRICTION",
+          "obligated_actor": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "07_1_2_ar",
+      "document": "07_Software_Licensing_Agreement_AR.json",
+      "clause_reference": "1.2",
+      "language": "ar",
+      "source_text": "1.2 لا يجوز للمرخَّص له إجراء هندسة عكسية أو فك تجميع أو إنشاء مصنفات مشتقة من البرنامج المرخَّص، إلا بالقدر الذي يكون فيه هذا القيد غير قابل للتنفيذ بموجب القانون المعمول به.",
+      "primary_type_expectation": {
+        "allowed": [
+          "intellectual_property",
+          "license"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LICENSE_RESTRICTION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LICENSE_RESTRICTION",
+          "obligated_actor": "LICENSEE",
+          "object": "LICENSED_SOFTWARE",
+          "action": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LICENSE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "08_1_1_en",
+      "document": "08_Procurement_Supply_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Buyer shall submit Purchase Orders at least sixty (60) days prior to the requested delivery date. Supplier shall deliver Goods conforming to the Specifications on the dates set forth in each accepted Purchase Order.",
+      "primary_type_expectation": {
+        "allowed": [
+          "delivery",
+          "supply_distribution"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURCHASE_ORDER",
+        "DELIVERY_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURCHASE_ORDER",
+          "obligated_actor": "BUYER",
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "DELIVERY_OBLIGATION",
+          "obligated_actor": "SUPPLIER",
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ],
+      "semantic_family": "PROCUREMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "08_1_1_fr",
+      "document": "08_Procurement_Supply_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 L'Acheteur soumettra les Bons de Commande au moins soixante (60) jours avant la date de livraison souhaitée. Le Fournisseur livrera des Biens conformes aux Spécifications aux dates prévues dans chaque Bon de Commande accepté.",
+      "primary_type_expectation": {
+        "allowed": [
+          "delivery",
+          "supply_distribution"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURCHASE_ORDER",
+        "DELIVERY_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURCHASE_ORDER",
+          "obligated_actor": "BUYER",
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "DELIVERY_OBLIGATION",
+          "obligated_actor": "SUPPLIER",
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ],
+      "semantic_family": "PROCUREMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "08_1_1_ar",
+      "document": "08_Procurement_Supply_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 يقدم المشتري أوامر الشراء قبل ستين (60) يوماً على الأقل من تاريخ التسليم المطلوب. يسلم المورد بضائع مطابقة للمواصفات في التواريخ المحددة في كل أمر شراء مقبول.",
+      "primary_type_expectation": {
+        "allowed": [
+          "delivery",
+          "supply_distribution"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURCHASE_ORDER",
+        "DELIVERY_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PURCHASE_ORDER",
+          "obligated_actor": "BUYER",
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION"
+        },
+        {
+          "concept": "DELIVERY_OBLIGATION",
+          "obligated_actor": "SUPPLIER",
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 60,
+          "unit": "DAYS",
+          "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+          "related_mechanism": "PURCHASE_ORDER"
+        }
+      ],
+      "semantic_family": "PROCUREMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "08_3_1_en",
+      "document": "08_Procurement_Supply_Agreement.json",
+      "clause_reference": "3.1",
+      "language": "en",
+      "source_text": "3.1 Buyer shall have the right to inspect Goods within fifteen (15) business days of delivery and reject any Goods that do not conform to the Specifications. Supplier shall replace non-conforming Goods at its own expense within ten (10) business days.",
+      "primary_type_expectation": {
+        "allowed": [
+          "supply_distribution",
+          "delivery"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INSPECTION_RIGHT",
+        "REPLACEMENT_REMEDY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INSPECTION_RIGHT",
+          "right_holder": "BUYER",
+          "object": "GOODS",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ],
+      "semantic_family": "PROCUREMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "08_3_1_fr",
+      "document": "08_Procurement_Supply_Agreement_FR.json",
+      "clause_reference": "3.1",
+      "language": "fr",
+      "source_text": "3.1 L'Acheteur aura le droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien non conforme aux Spécifications. Le Fournisseur remplacera les Biens non conformes à ses frais dans un délai de dix (10) jours ouvrés.",
+      "primary_type_expectation": {
+        "allowed": [
+          "supply_distribution",
+          "delivery"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INSPECTION_RIGHT",
+        "REPLACEMENT_REMEDY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INSPECTION_RIGHT",
+          "right_holder": "BUYER",
+          "object": "GOODS",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ],
+      "semantic_family": "PROCUREMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "08_3_1_ar",
+      "document": "08_Procurement_Supply_Agreement_AR.json",
+      "clause_reference": "3.1",
+      "language": "ar",
+      "source_text": "3.1 يحق للمشتري فحص البضائع خلال خمسة عشر (15) يوم عمل من التسليم ورفض أي بضائع غير مطابقة للمواصفات. يستبدل المورد البضائع غير المطابقة على نفقته خلال عشرة (10) أيام عمل.",
+      "primary_type_expectation": {
+        "allowed": [
+          "supply_distribution",
+          "delivery"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INSPECTION_RIGHT",
+        "REPLACEMENT_REMEDY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INSPECTION_RIGHT",
+          "right_holder": "BUYER",
+          "object": "GOODS",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 15,
+          "unit": "BUSINESS_DAYS",
+          "semantic_role": "GOODS_INSPECTION_PERIOD",
+          "related_mechanism": "INSPECTION_RIGHT"
+        }
+      ],
+      "semantic_family": "PROCUREMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "09_1_1_en",
+      "document": "09_Consulting_Services_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Consultant is an independent contractor and not an employee, agent, joint venturer, or partner of Client. Consultant shall be solely responsible for all applicable taxes, insurance, and benefits.",
+      "primary_type_expectation": {
+        "allowed": [
+          "employment",
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SERVICES",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "09_1_1_fr",
+      "document": "09_Consulting_Services_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Le Consultant est un prestataire indépendant et non un salarié, mandataire, coentrepreneur ou associé du Client. Le Consultant sera seul responsable de l'ensemble des taxes, assurances et prestations applicables.",
+      "primary_type_expectation": {
+        "allowed": [
+          "employment",
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SERVICES",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "09_1_1_ar",
+      "document": "09_Consulting_Services_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 الاستشاري مقاول مستقل وليس موظفاً أو وكيلاً أو شريكاً في مشروع مشترك أو شريكاً للعميل. يتحمل الاستشاري وحده مسؤولية جميع الضرائب والتأمينات والمزايا المعمول بها.",
+      "primary_type_expectation": {
+        "allowed": [
+          "employment",
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INDEPENDENT_CONTRACTOR"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INDEPENDENT_CONTRACTOR",
+          "obligated_actor": "CONSULTANT",
+          "object": "LEGAL_STATUS",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SERVICES",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "10_1_1_en",
+      "document": "10_Outsourcing_Managed_Services_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred Employees, with minimal disruption to Client's business operations.",
+      "primary_type_expectation": {
+        "allowed": [
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TRANSITION_PLAN",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "TRANSITION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "10_1_1_fr",
+      "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Pendant la Période de Transition, le Prestataire mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations du Client.",
+      "primary_type_expectation": {
+        "allowed": [
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TRANSITION_PLAN",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "TRANSITION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "10_1_1_ar",
+      "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+      "primary_type_expectation": {
+        "allowed": [
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TRANSITION_PLAN",
+        "SERVICE_SCOPE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "TRANSITION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "10_6_1_en",
+      "document": "10_Outsourcing_Managed_Services_Agreement.json",
+      "clause_reference": "6.1",
+      "language": "en",
+      "source_text": "6.1 This Agreement has an initial term of five (5) years. Upon expiration or termination, Provider shall provide reasonable exit assistance for up to one hundred eighty (180) days to facilitate transition to Client or a successor provider, at Client's request and expense at Provider's then-current rates.",
+      "primary_type_expectation": {
+        "allowed": [
+          "termination",
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TERM_DURATION",
+        "EXIT_ASSISTANCE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "TRANSITION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "10_6_1_fr",
+      "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+      "clause_reference": "6.1",
+      "language": "fr",
+      "source_text": "6.1 Le présent Accord a une durée initiale de cinq (5) ans. À l'expiration ou à la résiliation, le Prestataire fournira une assistance raisonnable à la sortie pendant une période pouvant aller jusqu'à cent quatre-vingts (180) jours pour faciliter la transition vers le Client ou un prestataire successeur, à la demande du Client et à ses frais aux tarifs alors en vigueur du Prestataire.",
+      "primary_type_expectation": {
+        "allowed": [
+          "termination",
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TERM_DURATION",
+        "EXIT_ASSISTANCE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "TRANSITION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "10_6_1_ar",
+      "document": "10_Outsourcing_Managed_Services_Agreement_AR.json",
+      "clause_reference": "6.1",
+      "language": "ar",
+      "source_text": "6.1 مدة هذه الاتفاقية الأولية خمس (5) سنوات. عند الانتهاء أو الإنهاء، يقدم المزود مساعدة معقولة للخروج لمدة تصل إلى مائة وثمانين (180) يوماً لتسهيل الانتقال إلى العميل أو مزود خلف، بناءً على طلب العميل وعلى نفقته وفق الأسعار السائدة لدى المزود حينذاك.",
+      "primary_type_expectation": {
+        "allowed": [
+          "termination",
+          "services"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TERM_DURATION",
+        "EXIT_ASSISTANCE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "EXIT_ASSISTANCE",
+          "obligated_actor": "PROVIDER",
+          "trigger": "EXPIRATION_OR_TERMINATION",
+          "action": "PROVIDE_EXIT_ASSISTANCE",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "TRANSITION",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_2_1_en",
+      "document": "11_Commercial_Lease_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "source_text": "2.1 Tenant shall pay Base Rent of $18,500 per month, payable in advance on the first day of each month, subject to an annual escalation of three percent (3%) on each anniversary of the commencement date.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "RENT_OBLIGATION",
+        "PAY_FREQUENCY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ],
+      "semantic_family": "LEASE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_2_1_fr",
+      "document": "11_Commercial_Lease_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "source_text": "2.1 Le Preneur paiera un Loyer de Base de 18 500 $ par mois, payable d'avance le premier jour de chaque mois, sous réserve d'une majoration annuelle de trois pour cent (3 %) à chaque anniversaire de la date de prise d'effet.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "RENT_OBLIGATION",
+        "PAY_FREQUENCY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ],
+      "semantic_family": "LEASE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_2_1_ar",
+      "document": "11_Commercial_Lease_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "source_text": "2.1 يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "RENT_OBLIGATION",
+        "PAY_FREQUENCY"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 18500,
+          "unit": "USD",
+          "semantic_role": "MONTHLY_BASE_RENT",
+          "related_mechanism": "RENT_OBLIGATION"
+        }
+      ],
+      "semantic_family": "LEASE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_2_2_en",
+      "document": "11_Commercial_Lease_Agreement.json",
+      "clause_reference": "2.2",
+      "language": "en",
+      "source_text": "2.2 Tenant shall pay its proportionate share of Operating Expenses, estimated monthly and reconciled annually, with any underpayment due within thirty (30) days of Landlord's reconciliation statement.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "OPERATING_EXPENSES",
+        "PAYMENT_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LEASE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_2_2_fr",
+      "document": "11_Commercial_Lease_Agreement_FR.json",
+      "clause_reference": "2.2",
+      "language": "fr",
+      "source_text": "2.2 Le Preneur paiera sa quote-part des Charges d'Exploitation, estimée mensuellement et régularisée annuellement, tout solde dû devant être réglé dans un délai de trente (30) jours suivant le relevé de régularisation du Bailleur.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "OPERATING_EXPENSES",
+        "PAYMENT_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LEASE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_2_2_ar",
+      "document": "11_Commercial_Lease_Agreement_AR.json",
+      "clause_reference": "2.2",
+      "language": "ar",
+      "source_text": "2.2 يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "OPERATING_EXPENSES",
+        "PAYMENT_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "LEASE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_5_1_en",
+      "document": "11_Commercial_Lease_Agreement.json",
+      "clause_reference": "5.1",
+      "language": "en",
+      "source_text": "5.1 Tenant shall not assign this Lease or sublet the Premises, in whole or in part, without Landlord's prior written consent, which shall not be unreasonably withheld, conditioned, or delayed.",
+      "primary_type_expectation": {
+        "allowed": [
+          "assignment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "ASSIGNMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_5_1_fr",
+      "document": "11_Commercial_Lease_Agreement_FR.json",
+      "clause_reference": "5.1",
+      "language": "fr",
+      "source_text": "5.1 Le Preneur ne pourra céder le présent Bail ni sous-louer les Locaux, en tout ou partie, sans le consentement écrit préalable du Bailleur, lequel ne pourra être refusé, conditionné ou retardé sans motif raisonnable.",
+      "primary_type_expectation": {
+        "allowed": [
+          "assignment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "ASSIGNMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "11_5_1_ar",
+      "document": "11_Commercial_Lease_Agreement_AR.json",
+      "clause_reference": "5.1",
+      "language": "ar",
+      "source_text": "5.1 لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول.",
+      "primary_type_expectation": {
+        "allowed": [
+          "assignment",
+          "lease"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "ASSIGNMENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_1_1_en",
+      "document": "12_Loan_Credit_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.",
+      "primary_type_expectation": {
+        "allowed": [
+          "loan"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_1_1_fr",
+      "document": "12_Loan_Credit_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.",
+      "primary_type_expectation": {
+        "allowed": [
+          "loan"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_1_1_ar",
+      "document": "12_Loan_Credit_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.",
+      "primary_type_expectation": {
+        "allowed": [
+          "loan"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_2_1_en",
+      "document": "12_Loan_Credit_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "source_text": "2.1 As security for Borrower's obligations under this Agreement, Borrower grants Lender a first-priority security interest in the Collateral, and shall execute all documents reasonably necessary to perfect such security interest, including UCC financing statements.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security_interest"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_2_1_fr",
+      "document": "12_Loan_Credit_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "source_text": "2.1 En garantie des obligations de l'Emprunteur au titre du présent Contrat, l'Emprunteur consent au Prêteur une sûreté de premier rang sur les Sûretés, et signera tous les documents raisonnablement nécessaires à la constitution de cette sûreté, y compris les déclarations de financement UCC.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security_interest"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_2_1_ar",
+      "document": "12_Loan_Credit_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "source_text": "2.1 ضماناً لالتزامات المقترض بموجب هذه الاتفاقية، يمنح المقترض المُقرض ضماناً ذا أولوية أولى على الضمانات، ويوقع جميع المستندات اللازمة بشكل معقول لإتمام هذا الضمان، بما في ذلك بيانات التمويل بموجب القانون التجاري الموحد.",
+      "primary_type_expectation": {
+        "allowed": [
+          "security_interest"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "SECURITY_INTEREST"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "SECURITY_INTEREST",
+          "right_holder": "LENDER",
+          "obligated_actor": "BORROWER",
+          "object": "COLLATERAL",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_5_1_en",
+      "document": "12_Loan_Credit_Agreement.json",
+      "clause_reference": "5.1",
+      "language": "en",
+      "source_text": "5.1 Borrower's obligations under this Agreement are guaranteed by Trailhead Holdings Inc., the parent company of Borrower, pursuant to a separate Guarantee Agreement executed concurrently herewith.",
+      "primary_type_expectation": {
+        "allowed": [
+          "guarantee"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "GUARANTEE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_5_1_fr",
+      "document": "12_Loan_Credit_Agreement_FR.json",
+      "clause_reference": "5.1",
+      "language": "fr",
+      "source_text": "5.1 Les obligations de l'Emprunteur au titre du présent Contrat sont garanties par Trailhead Holdings Inc., société mère de l'Emprunteur, en vertu d'un Contrat de Garantie distinct conclu concomitamment aux présentes.",
+      "primary_type_expectation": {
+        "allowed": [
+          "guarantee"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "GUARANTEE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_5_1_ar",
+      "document": "12_Loan_Credit_Agreement_AR.json",
+      "clause_reference": "5.1",
+      "language": "ar",
+      "source_text": "5.1 التزامات المقترض بموجب هذه الاتفاقية مكفولة من قبل شركة Trailhead Holdings Inc.، الشركة الأم للمقترض، بموجب اتفاقية كفالة منفصلة مبرمة بالتزامن مع هذه الاتفاقية.",
+      "primary_type_expectation": {
+        "allowed": [
+          "guarantee"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "GUARANTEE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_4_1_en",
+      "document": "12_Loan_Credit_Agreement.json",
+      "clause_reference": "4.1",
+      "language": "en",
+      "source_text": "4.1 Borrower may prepay the Loan, in whole or in part, at any time without penalty, provided that any partial prepayment shall be applied first to accrued interest and then to outstanding principal.",
+      "primary_type_expectation": {
+        "allowed": [
+          "loan"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PREPAYMENT_RIGHT",
+          "right_holder": "BORROWER",
+          "object": "LOAN",
+          "action": "PREPAY",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_4_1_fr",
+      "document": "12_Loan_Credit_Agreement_FR.json",
+      "clause_reference": "4.1",
+      "language": "fr",
+      "source_text": "4.1 L'Emprunteur pourra rembourser le Prêt par anticipation, en tout ou partie, à tout moment sans pénalité, tout remboursement partiel étant imputé en premier lieu sur les intérêts courus puis sur le principal restant dû.",
+      "primary_type_expectation": {
+        "allowed": [
+          "loan"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PREPAYMENT_RIGHT",
+          "right_holder": "BORROWER",
+          "object": "LOAN",
+          "action": "PREPAY",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "12_4_1_ar",
+      "document": "12_Loan_Credit_Agreement_AR.json",
+      "clause_reference": "4.1",
+      "language": "ar",
+      "source_text": "4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.",
+      "primary_type_expectation": {
+        "allowed": [
+          "loan"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PREPAYMENT_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PREPAYMENT_RIGHT",
+          "right_holder": "BORROWER",
+          "object": "LOAN",
+          "action": "PREPAY",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "FINANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "13_2_1_en",
+      "document": "13_Asset_Purchase_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "source_text": "2.1 The aggregate purchase price for the Purchased Assets shall be $12,750,000, payable as follows: (a) $10,750,000 in cash at Closing; and (b) $2,000,000 held in escrow for eighteen (18) months to secure Seller's indemnification obligations under Section 6.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURCHASE_PRICE",
+        "PAYMENT_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 12750000,
+          "unit": "USD",
+          "semantic_role": "PURCHASE_PRICE",
+          "related_mechanism": "PURCHASE_PRICE"
+        }
+      ],
+      "semantic_family": "M&A",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "13_2_1_fr",
+      "document": "13_Asset_Purchase_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "source_text": "2.1 Le prix d'achat global des Actifs Acquis s'élèvera à 12 750 000 $, payable comme suit : (a) 10 750 000 $ en numéraire à la Clôture ; et (b) 2 000 000 $ déposés sous séquestre pendant dix-huit (18) mois pour garantir les obligations d'indemnisation du Vendeur au titre de l'article 6.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURCHASE_PRICE",
+        "PAYMENT_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 12750000,
+          "unit": "USD",
+          "semantic_role": "PURCHASE_PRICE",
+          "related_mechanism": "PURCHASE_PRICE"
+        }
+      ],
+      "semantic_family": "M&A",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "13_2_1_ar",
+      "document": "13_Asset_Purchase_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "source_text": "2.1 يبلغ إجمالي ثمن شراء الأصول المشتراة 12,750,000 دولار، يُدفع كما يلي: (أ) 10,750,000 دولار نقداً عند الإغلاق؛ و(ب) 2,000,000 دولار تُودع في حساب ضمان لمدة ثمانية عشر (18) شهراً لضمان التزامات تعويض البائع بموجب البند 6.",
+      "primary_type_expectation": {
+        "allowed": [
+          "payment",
+          "compensation"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PURCHASE_PRICE",
+        "PAYMENT_OBLIGATION"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 12750000,
+          "unit": "USD",
+          "semantic_role": "PURCHASE_PRICE",
+          "related_mechanism": "PURCHASE_PRICE"
+        }
+      ],
+      "semantic_family": "M&A",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "13_5_1_en",
+      "document": "13_Asset_Purchase_Agreement.json",
+      "clause_reference": "5.1",
+      "language": "en",
+      "source_text": "5.1 Buyer's obligation to close is subject to the satisfaction of customary conditions, including the accuracy of Seller's representations and warranties as of the Closing Date, receipt of all required third-party consents, and the absence of any material adverse change in the Business.",
+      "primary_type_expectation": {
+        "allowed": [
+          "warranty",
+          "termination"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "CLOSING_OBLIGATION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "M&A",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "13_5_1_fr",
+      "document": "13_Asset_Purchase_Agreement_FR.json",
+      "clause_reference": "5.1",
+      "language": "fr",
+      "source_text": "5.1 L'obligation de clôture de l'Acquéreur est subordonnée à la satisfaction de conditions usuelles, y compris l'exactitude des déclarations et garanties du Vendeur à la Date de Clôture, l'obtention de tous les consentements de tiers requis, et l'absence de changement défavorable significatif affectant l'Activité.",
+      "primary_type_expectation": {
+        "allowed": [
+          "warranty",
+          "termination"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "CLOSING_OBLIGATION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "M&A",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "13_5_1_ar",
+      "document": "13_Asset_Purchase_Agreement_AR.json",
+      "clause_reference": "5.1",
+      "language": "ar",
+      "source_text": "5.1 يخضع التزام المشتري بالإغلاق لاستيفاء الشروط المعتادة، بما في ذلك دقة إقرارات وضمانات البائع كما في تاريخ الإغلاق، والحصول على جميع موافقات الأطراف الثالثة المطلوبة، وعدم وجود أي تغيير جوهري سلبي يؤثر على النشاط.",
+      "primary_type_expectation": {
+        "allowed": [
+          "warranty",
+          "termination"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "CLOSING_OBLIGATION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [],
+      "required_procedural_states": [
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [],
+      "semantic_family": "M&A",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_3_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "3.1",
+      "language": "en",
+      "source_text": "3.1 If holders of a majority of the outstanding Preferred Stock and a majority of the board approve a sale of the Company, all other shareholders shall be required to vote in favor of and consent to such transaction (\"Drag-Along Right\"), subject to customary protections regarding consideration and representations.",
+      "primary_type_expectation": {
+        "allowed": [
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [
+          "assignment"
+        ],
+        "forbidden": [
+          "governing_law",
+          "payment",
+          "confidentiality"
+        ]
+      },
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "OBLIGATION_TO_CONSENT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "TAG_ALONG_RIGHT",
+        "PARTICIPATION_OPTION"
+      ],
+      "required_relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SHARE_TRANSFER",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_3_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "3.1",
+      "language": "fr",
+      "source_text": "3.1 Si les détenteurs de la majorité des Actions Préférentielles en circulation et une majorité du conseil approuvent une cession de la Société, tous les autres actionnaires seront tenus de voter en faveur de cette opération et d'y consentir (« Droit de Cession Forcée »), sous réserve de protections usuelles concernant la contrepartie et les déclarations.",
+      "primary_type_expectation": {
+        "allowed": [
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [
+          "assignment"
+        ],
+        "forbidden": [
+          "governing_law",
+          "payment",
+          "confidentiality"
+        ]
+      },
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "OBLIGATION_TO_CONSENT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "TAG_ALONG_RIGHT",
+        "PARTICIPATION_OPTION"
+      ],
+      "required_relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SHARE_TRANSFER",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_3_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "3.1",
+      "language": "ar",
+      "source_text": "3.1 إذا وافق حاملو أغلبية الأسهم الممتازة القائمة وأغلبية المجلس على بيع الشركة، يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها (\"حق التنازل الإلزامي\")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات.",
+      "primary_type_expectation": {
+        "allowed": [
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [
+          "assignment"
+        ],
+        "forbidden": [
+          "governing_law",
+          "payment",
+          "confidentiality"
+        ]
+      },
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_VOTE_IN_FAVOR",
+        "OBLIGATION_TO_CONSENT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "TAG_ALONG_RIGHT",
+        "PARTICIPATION_OPTION"
+      ],
+      "required_relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "SHARE_TRANSFER",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_3_2_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "3.2",
+      "language": "en",
+      "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\").",
+      "primary_type_expectation": {
+        "allowed": [
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TAG_ALONG_RIGHT",
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "required_relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ],
+      "semantic_family": "SHARE_TRANSFER",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_3_2_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "3.2",
+      "language": "fr",
+      "source_text": "3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).",
+      "primary_type_expectation": {
+        "allowed": [
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TAG_ALONG_RIGHT",
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "required_relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ],
+      "semantic_family": "SHARE_TRANSFER",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_3_2_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "3.2",
+      "language": "ar",
+      "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\").",
+      "primary_type_expectation": {
+        "allowed": [
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "TAG_ALONG_RIGHT",
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION"
+      ],
+      "required_relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ],
+      "semantic_family": "SHARE_TRANSFER",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_2_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "2.1",
+      "language": "en",
+      "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances.",
+      "primary_type_expectation": {
+        "allowed": [
+          "anti_dilution_preemptive_rights",
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "INVESTOR_RIGHTS",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_2_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "2.1",
+      "language": "fr",
+      "source_text": "2.1 L'Investisseur aura le droit d'acquérir sa quote-part proportionnelle de tout nouveau titre émis par la Société, sous réserve des exceptions usuelles pour les émissions au titre des plans d'intéressement, les acquisitions et les émissions liées à une Introduction en Bourse Qualifiée.",
+      "primary_type_expectation": {
+        "allowed": [
+          "anti_dilution_preemptive_rights",
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "INVESTOR_RIGHTS",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_2_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "2.1",
+      "language": "ar",
+      "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل.",
+      "primary_type_expectation": {
+        "allowed": [
+          "anti_dilution_preemptive_rights",
+          "share_transfer_rights"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [],
+      "semantic_family": "INVESTOR_RIGHTS",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_1_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "1.1",
+      "language": "en",
+      "source_text": "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.",
+      "primary_type_expectation": {
+        "allowed": [
+          "governance"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BOARD_COMPOSITION",
+        "APPOINTMENT_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ],
+      "semantic_family": "GOVERNANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_1_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "1.1",
+      "language": "fr",
+      "source_text": "1.1 Le conseil d'administration de la Société sera composé de cinq (5) membres : deux (2) désignés par les fondateurs, un (1) désigné par l'Investisseur tant que celui-ci détiendra au moins 5 % du capital pleinement dilué de la Société, et deux (2) administrateurs indépendants désignés d'un commun accord entre les fondateurs et l'Investisseur.",
+      "primary_type_expectation": {
+        "allowed": [
+          "governance"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BOARD_COMPOSITION",
+        "APPOINTMENT_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ],
+      "semantic_family": "GOVERNANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_1_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "1.1",
+      "language": "ar",
+      "source_text": "1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.",
+      "primary_type_expectation": {
+        "allowed": [
+          "governance"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "BOARD_COMPOSITION",
+        "APPOINTMENT_RIGHT"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [
+        "SUBCONTRACTING_CONTROL"
+      ],
+      "required_relations": [],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ],
+      "semantic_family": "GOVERNANCE",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_4_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "4.1",
+      "language": "en",
+      "source_text": "4.1 For so long as the Investor holds at least 3% of the Company's fully-diluted capitalization, the Company shall deliver to the Investor audited annual financial statements within ninety (90) days of fiscal year end, and unaudited quarterly financial statements within forty-five (45) days of each fiscal quarter end.",
+      "primary_type_expectation": {
+        "allowed": [
+          "investor_information_rights",
+          "financial_reporting"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "optional_mechanisms": [
+        "ANNUAL_FINANCIAL_STATEMENTS",
+        "AUDITED_REPORTING",
+        "QUARTERLY_FINANCIAL_STATEMENTS",
+        "UNAUDITED_REPORTING"
+      ],
+      "forbidden_mechanisms": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "required_relations": [
+        {
+          "concept": "FINANCIAL_REPORTING_OBLIGATION",
+          "obligated_actor": "COMPANY",
+          "beneficiary": "INVESTOR",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 3,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 90,
+          "unit": "DAYS",
+          "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 45,
+          "unit": "DAYS",
+          "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        }
+      ],
+      "semantic_family": "FINANCIAL_REPORTING",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_4_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "4.1",
+      "language": "fr",
+      "source_text": "4.1 Tant que l'Investisseur détiendra au moins 3 % du capital pleinement dilué de la Société, la Société lui remettra des états financiers annuels audités dans un délai de quatre-vingt-dix (90) jours suivant la fin de l'exercice fiscal, et des états financiers trimestriels non audités dans un délai de quarante-cinq (45) jours suivant la fin de chaque trimestre fiscal.",
+      "primary_type_expectation": {
+        "allowed": [
+          "investor_information_rights",
+          "financial_reporting"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "optional_mechanisms": [
+        "ANNUAL_FINANCIAL_STATEMENTS",
+        "AUDITED_REPORTING",
+        "QUARTERLY_FINANCIAL_STATEMENTS",
+        "UNAUDITED_REPORTING"
+      ],
+      "forbidden_mechanisms": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "required_relations": [
+        {
+          "concept": "FINANCIAL_REPORTING_OBLIGATION",
+          "obligated_actor": "COMPANY",
+          "beneficiary": "INVESTOR",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 3,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 90,
+          "unit": "DAYS",
+          "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 45,
+          "unit": "DAYS",
+          "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        }
+      ],
+      "semantic_family": "FINANCIAL_REPORTING",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_4_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "4.1",
+      "language": "ar",
+      "source_text": "4.1 طالما احتفظ المستثمر بنسبة لا تقل عن 3% من رأس المال المخفف بالكامل للشركة، تقدم الشركة له بيانات مالية سنوية مدققة خلال تسعين (90) يوماً من نهاية السنة المالية، وبيانات مالية ربع سنوية غير مدققة خلال خمسة وأربعين (45) يوماً من نهاية كل ربع سنة مالية.",
+      "primary_type_expectation": {
+        "allowed": [
+          "investor_information_rights",
+          "financial_reporting"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "FINANCIAL_REPORTING_OBLIGATION"
+      ],
+      "optional_mechanisms": [
+        "ANNUAL_FINANCIAL_STATEMENTS",
+        "AUDITED_REPORTING",
+        "QUARTERLY_FINANCIAL_STATEMENTS",
+        "UNAUDITED_REPORTING"
+      ],
+      "forbidden_mechanisms": [
+        "BOARD_COMPOSITION",
+        "DEADLOCK_RESOLUTION"
+      ],
+      "required_relations": [
+        {
+          "concept": "FINANCIAL_REPORTING_OBLIGATION",
+          "obligated_actor": "COMPANY",
+          "beneficiary": "INVESTOR",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "required_procedural_states": [],
+      "required_numeric_roles": [
+        {
+          "value": 3,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 90,
+          "unit": "DAYS",
+          "semantic_role": "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        },
+        {
+          "value": 45,
+          "unit": "DAYS",
+          "semantic_role": "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+          "related_mechanism": "FINANCIAL_REPORTING_OBLIGATION"
+        }
+      ],
+      "semantic_family": "FINANCIAL_REPORTING",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_6_1_en",
+      "document": "14_Shareholders_Agreement.json",
+      "clause_reference": "6.1",
+      "language": "en",
+      "source_text": "6.1 For so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, the Company shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebtedness in excess of $2,000,000, other than in the ordinary course of business.",
+      "primary_type_expectation": {
+        "allowed": [
+          "governance"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INVESTOR_CONSENT_RIGHT",
+        "CONSENT_PREREQUISITE",
+        "RESERVED_MATTER"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ],
+      "semantic_family": "CONSENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_6_1_fr",
+      "document": "14_Shareholders_Agreement_FR.json",
+      "clause_reference": "6.1",
+      "language": "fr",
+      "source_text": "6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires.",
+      "primary_type_expectation": {
+        "allowed": [
+          "governance"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INVESTOR_CONSENT_RIGHT",
+        "CONSENT_PREREQUISITE",
+        "RESERVED_MATTER"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ],
+      "semantic_family": "CONSENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    },
+    {
+      "fixture_id": "14_6_1_ar",
+      "document": "14_Shareholders_Agreement_AR.json",
+      "clause_reference": "6.1",
+      "language": "ar",
+      "source_text": "6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.",
+      "primary_type_expectation": {
+        "allowed": [
+          "governance"
+        ],
+        "broad_compatible": [],
+        "forbidden": []
+      },
+      "required_mechanisms": [
+        "INVESTOR_CONSENT_RIGHT",
+        "CONSENT_PREREQUISITE",
+        "RESERVED_MATTER"
+      ],
+      "optional_mechanisms": [],
+      "forbidden_mechanisms": [],
+      "required_relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "required_procedural_states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "required_numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ],
+      "semantic_family": "CONSENT",
+      "review_metadata": {
+        "review_status": "AI_CURATED_REQUIRES_HUMAN_SIGNOFF",
+        "expectation_basis": "ORIGINAL_SOURCE_CLAUSE_ONLY",
+        "engine_output_used_to_define_gold": false
+      }
+    }
+  ]
+}

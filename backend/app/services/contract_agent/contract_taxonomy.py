@@ -15,6 +15,8 @@ Reduce duplicated mappings and keep multilingual clause classification
 consistent across 1000+ contracts.
 """
 
+import re
+
 
 SUPPORTED_LANGUAGES = {"en", "fr", "ar"}
 
@@ -31,6 +33,7 @@ def build_clause_type(
     critical: bool = False,
     negotiation_type: str | None = None,
     excluded_contexts: list[str] | None = None,
+    description: dict | None = None,
 ) -> dict:
     definition = {
         "label": {
@@ -43,6 +46,7 @@ def build_clause_type(
         "materiality": materiality,
         "reasoning_key": reasoning_key,
         "critical": critical,
+        "description": description or {},
     }
 
     if negotiation_type:
@@ -212,11 +216,36 @@ CLAUSE_TYPES = {
         critical=True,
     ),
 
+    "pricing_adjustment": build_clause_type(
+        "Pricing Adjustment",
+        "Ajustement tarifaire",
+        "تعديل الأسعار",
+        [
+            "increase fees", "increase the fees", "fee increase",
+            "price increase", "adjust pricing", "pricing adjustment",
+            "unilaterally increase", "raise fees", "raise prices",
+            "augmenter les frais", "augmentation des frais",
+            "augmentation tarifaire", "ajustement tarifaire",
+            "ajustement des prix", "hausse unilatérale", "unilatéralement",
+            "زيادة الرسوم", "رفع الرسوم", "تعديل الأسعار", "زيادة الأسعار",
+        ],
+        risk_default="medium",
+        materiality="high",
+        reasoning_key="payment",
+    ),
+
+
     "automatic_renewal": build_clause_type(
         "Automatic Renewal",
         "Renouvellement automatique",
         "التجديد التلقائي",
-        ["automatic renewal", "renews automatically", "auto-renewal", "renouvellement automatique", "se renouvelle automatiquement", "تجديد تلقائي", "يتجدد تلقائيا"],
+        [
+            "automatic renewal", "renews automatically", "renewing automatically",
+            "auto-renewal", "shall automatically renew",
+            "renouvellement automatique", "se renouvelle automatiquement",
+            "se renouvelant automatiquement", "reconduction automatique",
+            "تجديد تلقائي", "يتجدد تلقائيا", "يتجدد تلقائياً", "تلقائياً",
+        ],
         risk_default="medium",
         materiality="high",
         reasoning_key="termination",
@@ -260,13 +289,15 @@ CLAUSE_TYPES = {
         "Responsabilité",
         "المسؤولية",
         [
-            "liability", "liability cap", "limitation of liability",
-            "unlimited liability", "indirect damages", "financial exposure",
-            "responsabilité", "plafond de responsabilité",
+            "liability", "liable", "liability cap", "limitation of liability",
+            "unlimited liability", "indirect damages", "consequential damages",
+            "incidental damages", "punitive damages", "financial exposure",
+            "responsabilité", "responsable", "plafond de responsabilité",
             "limitation de responsabilité", "responsabilité illimitée",
-            "dommages indirects", "exposition financière",
-            "المسؤولية", "حد المسؤولية", "مسؤولية غير محدودة",
-            "الأضرار غير المباشرة", "تعرض مالي",
+            "dommages indirects", "dommages consécutifs", "dommages accessoires",
+            "exposition financière",
+            "المسؤولية", "مسؤول", "حد المسؤولية", "مسؤولية غير محدودة",
+            "الأضرار غير المباشرة", "الأضرار التبعية", "تعرض مالي",
         ],
         risk_default="medium",
         materiality="high",
@@ -286,11 +317,41 @@ CLAUSE_TYPES = {
         critical=True,
     ),
 
+    "limitation_of_liability_exceptions": build_clause_type(
+        "Limitation of Liability Exceptions",
+        "Exceptions à la limitation de responsabilité",
+        "استثناءات الحد من المسؤولية",
+        [
+            "shall not apply to",
+            "not subject to the limitation",
+            "excluded from the limitation",
+            "exceptions to limitation of liability",
+            "carve-out from liability cap",
+            "the limitation in section",
+            "la limitation ne s'applique pas",
+            "non soumise à la limitation",
+            "exceptions à la limitation de responsabilité",
+            "لا ينطبق الحد",
+            "لا تخضع لحد المسؤولية",
+            "استثناءات الحد من المسؤولية",
+        ],
+        risk_default="high",
+        materiality="high",
+        reasoning_key="liability",
+        negotiation_type="liability",
+        critical=True,
+        description={
+            "en": "This clause identifies situations where liability limitations do not apply and may significantly increase each party's financial exposure.",
+            "fr": "Cette clause identifie les situations dans lesquelles les limitations de responsabilité ne s'appliquent pas et peuvent augmenter fortement l'exposition financière de chaque partie.",
+            "ar": "يحدد هذا البند الحالات التي لا تنطبق فيها حدود المسؤولية وقد يزيد بشكل كبير من التعرض المالي لكل طرف.",
+        },
+    ),
+
     "warranty": build_clause_type(
         "Warranty",
         "Garantie",
         "الضمان",
-        ["warranty", "warranties", "represents and warrants", "garantie", "garanties", "déclare et garantit", "ضمان", "يقر ويضمن"],
+        ["warranty", "warranties", "represents and warrants", "garantie", "garanties", "déclare et garantit", "يقر ويضمن"],
         risk_default="medium",
         materiality="medium",
         reasoning_key="general",
@@ -334,7 +395,7 @@ CLAUSE_TYPES = {
         "Confidentialité",
         "السرية",
         ["confidentiality", "confidential information", "trade secret", "survive termination", "confidentialité", "information confidentielle", "secret commercial", "السرية", "معلومات سرية", "سر تجاري"],
-        risk_default="medium",
+        risk_default="low",
         materiality="medium",
         reasoning_key="confidentiality",
         critical=True,
@@ -344,7 +405,19 @@ CLAUSE_TYPES = {
         "Intellectual Property",
         "Propriété intellectuelle",
         "الملكية الفكرية",
-        ["intellectual property", "ip rights", "ownership", "assignment", "license", "invention", "patent", "work product", "propriété intellectuelle", "droits de propriété intellectuelle", "cession", "licence", "brevet", "création", "الملكية الفكرية", "حقوق الملكية الفكرية", "التنازل", "ترخيص", "اختراع", "براءة اختراع"],
+        [
+            "intellectual property", "ip rights", "ownership", "assignment",
+            "license", "invention", "patent", "work product",
+            "right, title, and interest", "title and interest",
+            "pre-existing tools", "methodologies and know-how",
+            "propriété intellectuelle", "droits de propriété intellectuelle",
+            "cession", "licence", "brevet", "création",
+            "tous droits, titres et intérêts", "titre et intérêt",
+            "savoir-faire préexistant",
+            "الملكية الفكرية", "حقوق الملكية الفكرية", "ترخيص",
+            "اختراع", "براءة اختراع",
+            "الحقوق والملكية والمصلحة", "الدراية الفنية",
+        ],
         risk_default="medium",
         materiality="high",
         reasoning_key="intellectual_property",
@@ -433,10 +506,16 @@ CLAUSE_TYPES = {
         "Traitement des données",
         "معالجة البيانات",
         ["data processing", "processor", "controller", "traitement des données", "sous-traitant", "responsable du traitement", "معالجة البيانات", "معالج البيانات"],
-        risk_default="medium",
+        risk_default="low",
         materiality="high",
         reasoning_key="data",
         critical=True,
+
+        description={
+            "en": "This clause defines how personal or business data may be collected, processed, stored, transferred, and protected.",
+            "fr": "Cette clause définit la manière dont les données personnelles ou commerciales peuvent être collectées, traitées, stockées, transférées et protégées.",
+            "ar": "يحدد هذا البند كيفية جمع البيانات الشخصية أو التجارية ومعالجتها وتخزينها ونقلها وحمايتها.",
+        },
     ),
 
     "security": build_clause_type(
@@ -444,7 +523,7 @@ CLAUSE_TYPES = {
         "Sécurité",
         "الأمن",
         ["security", "safeguards", "security measures", "sécurité", "mesures de sécurité", "أمن", "تدابير أمنية"],
-        risk_default="medium",
+        risk_default="low",
         materiality="high",
         reasoning_key="data",
         critical=True,
@@ -455,7 +534,7 @@ CLAUSE_TYPES = {
         "Cybersécurité",
         "الأمن السيبراني",
         ["cybersecurity", "cyber security", "security incident", "cybersécurité", "incident de sécurité", "الأمن السيبراني", "حادث أمني"],
-        risk_default="medium",
+        risk_default="low",
         materiality="high",
         reasoning_key="data",
         critical=True,
@@ -498,10 +577,51 @@ CLAUSE_TYPES = {
         "Exclusivity",
         "Exclusivité",
         "الحصرية",
-        ["exclusive", "exclusivity", "sole provider", "non-exclusive", "territory", "exclusif", "exclusivité", "fournisseur unique", "non exclusif", "territoire", "حصري", "حصرية", "مزود وحيد", "غير حصري", "منطقة"],
+        [
+            "exclusivity", "sole provider", "sole and exclusive right to sell",
+            "exclusive distributor", "exclusive dealing", "exclusive supplier",
+            "exclusively engage", "exclusive rights to distribute",
+            "exclusive territory", "territory",
+            "exclusivité", "fournisseur unique", "distributeur exclusif",
+            "fournisseur exclusif", "territoire exclusif", "territoire",
+            "حصرية", "مزود وحيد", "موزع حصري", "مورد حصري", "منطقة حصرية", "منطقة",
+        ],
         risk_default="medium",
         materiality="high",
         reasoning_key="exclusivity",
+        critical=True,
+    ),
+
+    "restrictive_covenants": build_clause_type(
+        "Restrictive Covenants",
+        "Clauses restrictives",
+        "القيود التعاقدية",
+        [
+            "non-compete", "non compete", "not compete",
+            "non-solicitation", "non solicitation", "solicit employees",
+            "non-dealing", "non dealing", "non-circumvention",
+            "non circumvention", "exclusive dealing", "restraint of trade",
+            "restrictive covenant", "customer solicitation",
+            "employee solicitation", "poaching",
+            "similar services to", "similar to the services to",
+            "direct competitor", "direct competitors", "named competitor",
+            "named competitors", "competitors of client", "competitors of company",
+
+            "non-concurrence", "ne pas concurrencer",
+            "non-sollicitation", "non sollicitation",
+            "solliciter les employés", "non-détournement",
+            "non détournement", "non-contournement",
+            "non contournement", "exclusivité",
+            "clause restrictive", "concurrents directs", "concurrents nommés",
+
+            "عدم المنافسة", "عدم التنافس", "عدم الاستقطاب",
+            "استقطاب الموظفين", "عدم التعامل", "عدم الالتفاف",
+            "الحصرية", "قيد تعاقدي", "قيود تعاقدية",
+            "منافسين مباشرين", "منافسين محددين",
+        ],
+        risk_default="medium",
+        materiality="high",
+        reasoning_key="restrictive_covenants",
         critical=True,
     ),
 
@@ -512,7 +632,7 @@ CLAUSE_TYPES = {
         ["non-compete", "non compete", "not compete", "restriction on competition", "non-concurrence", "ne pas concurrencer", "عدم المنافسة", "عدم التنافس"],
         risk_default="medium",
         materiality="high",
-        reasoning_key="employment",
+        reasoning_key="restrictive_covenants",
         critical=True,
     ),
 
@@ -542,8 +662,14 @@ CLAUSE_TYPES = {
         "Governing Law",
         "Droit applicable",
         "القانون الواجب التطبيق",
-        ["governing law", "applicable law", "laws of", "state of", "jurisdiction", "venue", "courts", "droit applicable", "juridiction", "tribunaux compétents", "tribunaux", "القانون الواجب التطبيق", "الاختصاص", "المحاكم", "محكمة"],
-        risk_default="medium",
+        [
+            "governing law", "governed by the laws of", "state of",
+            "jurisdiction", "venue", "courts",
+            "droit applicable", "régi par les lois de", "juridiction",
+            "tribunaux compétents", "tribunaux",
+            "القانون الواجب التطبيق", "لقوانين", "الاختصاص", "المحاكم", "محكمة",
+        ],
+        risk_default="low",
         materiality="high",
         reasoning_key="governing_law",
         critical=True,
@@ -554,7 +680,7 @@ CLAUSE_TYPES = {
         "Juridiction",
         "الاختصاص القضائي",
         ["jurisdiction", "court", "courts", "venue", "juridiction", "tribunal", "tribunaux", "محكمة", "المحاكم", "الاختصاص"],
-        risk_default="medium",
+        risk_default="low",
         materiality="high",
         reasoning_key="governing_law",
         critical=True,
@@ -565,7 +691,7 @@ CLAUSE_TYPES = {
         "Tribunal compétent",
         "مكان الاختصاص",
         ["venue", "place of jurisdiction", "courts of", "tribunal compétent", "lieu de juridiction", "مكان الاختصاص", "محاكم"],
-        risk_default="medium",
+        risk_default="low",
         materiality="medium",
         reasoning_key="governing_law",
     ),
@@ -575,7 +701,7 @@ CLAUSE_TYPES = {
         "Arbitrage",
         "التحكيم",
         ["arbitration", "arbitrator", "arbitral tribunal", "arbitrage", "arbitre", "tribunal arbitral", "تحكيم", "محكم", "هيئة التحكيم"],
-        risk_default="medium",
+        risk_default="low",
         materiality="high",
         reasoning_key="governing_law",
         critical=True,
@@ -586,7 +712,7 @@ CLAUSE_TYPES = {
         "Résolution des litiges",
         "تسوية النزاعات",
         ["dispute resolution", "dispute", "mediation", "settlement", "résolution des litiges", "litige", "médiation", "règlement", "تسوية النزاعات", "نزاع", "وساطة", "تسوية"],
-        risk_default="medium",
+        risk_default="low",
         materiality="high",
         reasoning_key="governing_law",
         critical=True,
@@ -697,7 +823,7 @@ CLAUSE_TYPES = {
         "Employment",
         "Emploi",
         "العمل",
-        ["employee", "employer", "employment", "salary", "bonus", "benefits", "vacation", "executive", "employé", "employeur", "emploi", "salaire", "prime", "avantages", "congés", "موظف", "صاحب العمل", "عمل", "راتب", "مكافأة", "مزايا"],
+        ["employee", "employer", "employment", "salary", "bonus", "benefits", "vacation", "executive", "employé", "employeur", "emploi", "salaire", "prime", "avantages", "congés", "موظف", "صاحب العمل", "راتب", "مكافأة", "مزايا"],
         risk_default="low",
         materiality="medium",
         reasoning_key="general",
@@ -736,7 +862,7 @@ CLAUSE_TYPES = {
         "Corporate Governance",
         "Gouvernance d'entreprise",
         "حوكمة الشركات",
-        ["board", "director", "shareholder", "approval", "consent", "voting", "corporate governance", "conseil", "administrateur", "actionnaire", "approbation", "consentement", "vote", "gouvernance", "مجلس الإدارة", "مدير", "مساهم", "موافقة", "تصويت", "حوكمة"],
+        ["board", "director", "shareholder", "approval", "consent", "voting", "corporate governance", "governance committee", "joint committee", "steering committee", "meeting quarterly", "meet quarterly", "review committee", "conseil", "administrateur", "actionnaire", "approbation", "consentement", "vote", "gouvernance", "comité de gouvernance", "comité conjoint", "comité de pilotage", "réunion trimestrielle", "مجلس الإدارة", "مدير", "مساهم", "موافقة", "تصويت", "حوكمة", "لجنة الحوكمة", "لجنة مشتركة", "اجتماع ربع سنوي"],
         materiality="medium",
         reasoning_key="general",
     ),
@@ -779,6 +905,85 @@ CLAUSE_TYPES = {
         risk_default="medium",
         materiality="medium",
         reasoning_key="payment",
+    ),
+
+    "anti_dilution_preemptive_rights": build_clause_type(
+        "Preemptive Rights",
+        "Droits de préemption sur nouvelles émissions",
+        "حقوق الأولوية في الاكتتاب",
+        [
+            "pro rata share", "new securities issued", "preemptive right",
+            "preemptive rights", "anti-dilution", "right to purchase its pro rata",
+            "participate in future issuances", "right to subscribe",
+
+            "part au prorata", "nouveaux titres émis", "droit préférentiel de souscription",
+            "droit préférentiel de souscription", "anti-dilution",
+            "participer aux futures émissions", "droit de souscrire",
+
+            "حصة نسبية", "أوراق مالية جديدة", "حق الأولوية في الاكتتاب",
+            "حق الاكتتاب التفضيلي", "مكافحة التخفيف", "الحق في الاشتراك",
+        ],
+        risk_default="medium",
+    ),
+
+    "share_transfer_rights": build_clause_type(
+        "Share Transfer Rights",
+        "Droits de cession de titres",
+        "حقوق نقل الأسهم",
+        [
+            "drag-along", "drag along", "tag-along", "tag along",
+            "right of first refusal", "rofr", "transfer of shares",
+            "transfer shares", "share transfer", "capital stock",
+            "outstanding shares", "shareholder shall transfer",
+            "cession forcée", "droit de sortie conjointe",
+            "droit de préemption", "cession d'actions",
+            "transfert d'actions", "actions de la société",
+            "الحق في البيع المشترك", "حق الشراء الإجباري",
+            "حق الأفضلية", "نقل الأسهم", "تحويل الأسهم",
+        ],
+        risk_default="medium",
+        materiality="high",
+        reasoning_key="ownership",
+        critical=True,
+    ),
+
+    "investor_information_rights": build_clause_type(
+        "Investor Information Rights",
+        "Droits d'information de l'investisseur",
+        "حقوق الاطلاع على المعلومات للمستثمر",
+        [
+            "information rights", "financial statements", "audited annual",
+            "unaudited quarterly", "fiscal year end", "fiscal quarter end",
+            "inspection rights", "books and records",
+            "droits à l'information", "états financiers",
+            "états financiers audités", "exercice fiscal",
+            "droit d'inspection", "livres et registres",
+            "حقوق الاطلاع", "القوائم المالية", "القوائم المالية المدققة",
+            "نهاية السنة المالية", "حق التفتيش",
+        ],
+        risk_default="low",
+        materiality="medium",
+        reasoning_key="general",
+    ),
+
+    "trademark_branding": build_clause_type(
+        "Trademark and Branding Usage",
+        "Utilisation de marques et d'image de marque",
+        "استخدام العلامات التجارية والهوية التجارية",
+        [
+            "trademark", "trade name", "trademarks", "branding",
+            "brand guidelines", "logo", "co-branding",
+            "publicity", "press release", "marketing material",
+            "marque", "marques", "nom commercial", "image de marque",
+            "charte graphique", "logo", "cobranding",
+            "communiqué de presse", "matériel marketing", "publicité",
+            "العلامة التجارية", "العلامات التجارية", "الاسم التجاري",
+            "الهوية التجارية", "الشعار", "البيان الصحفي",
+            "المواد التسويقية", "الدعاية",
+        ],
+        risk_default="low",
+        materiality="medium",
+        reasoning_key="general",
     ),
 
     "real_estate": build_clause_type(
@@ -845,7 +1050,7 @@ CLAUSE_TYPES = {
         "Loan and Finance",
         "Prêt et financement",
         "القرض والتمويل",
-        ["loan", "credit", "principal", "interest", "repayment", "lender", "borrower", "prêt", "crédit", "capital", "intérêt", "remboursement", "prêteur", "emprunteur", "قرض", "ائتمان", "رأس المال", "فائدة", "سداد", "مقرض", "مقترض"],
+        ["loan", "credit", "principal", "interest", "repayment", "lender", "borrower", "prêt", "crédit", "capital", "intérêt", "remboursement", "prêteur", "emprunteur", "قرض", "ائتمان", "فائدة", "سداد", "مقرض", "مقترض"],
         risk_default="medium",
         materiality="high",
         reasoning_key="payment",
@@ -855,7 +1060,7 @@ CLAUSE_TYPES = {
         "Loan",
         "Prêt",
         "القرض",
-        ["loan", "credit facility", "principal", "prêt", "crédit", "capital", "قرض", "تسهيل ائتماني", "رأس المال"],
+        ["loan", "credit facility", "principal", "prêt", "crédit", "قرض", "تسهيل ائتماني"],
         risk_default="medium",
         materiality="high",
         reasoning_key="payment",
@@ -866,7 +1071,12 @@ CLAUSE_TYPES = {
         "Interest",
         "Intérêt",
         "الفائدة",
-        ["interest", "interest rate", "taux d'intérêt", "intérêt", "فائدة", "سعر الفائدة"],
+        [
+            "interest rate", "accrue interest", "late payment interest",
+            "per annum", "interest per month", "interest charges",
+            "taux d'intérêt", "intérêts de retard", "intérêts moratoires",
+            "فائدة", "سعر الفائدة", "فوائد التأخير",
+        ],
         risk_default="medium",
         materiality="high",
         reasoning_key="payment",
@@ -886,9 +1096,14 @@ CLAUSE_TYPES = {
 
     "collateral": build_clause_type(
         "Collateral",
-        "Garantie",
+        "Garantie (sûreté)",
         "الضمان",
-        ["collateral", "pledge", "gage", "garantie", "nantissement", "ضمان", "رهن"],
+        [
+            "collateral", "pledge",
+            "gage", "nantissement", "sûreté", "garantie bancaire",
+            "garantie de bonne fin", "garantie financière",
+            "رهن", "ضمان مالي", "خطاب ضمان",
+        ],
         risk_default="medium",
         materiality="high",
         reasoning_key="general",
@@ -984,7 +1199,7 @@ CLAUSE_TYPES = {
         "Audit Rights",
         "Droits d'audit",
         "حقوق التدقيق",
-        ["audit rights", "audit", "inspection rights", "droits d'audit", "droit d'inspection", "حقوق التدقيق", "تدقيق", "حق التفتيش"],
+        ["audit rights", "right to audit", "to audit", "conduct an audit", "inspect books and records", "inspection rights", "droits d'audit", "droit d'inspection", "conduire un audit", "à auditer", "حقوق التدقيق", "حق إجراء تدقيق", "حق التفتيش", "أن يدقق"],
         risk_default="medium",
         materiality="medium",
         reasoning_key="compliance",
@@ -998,6 +1213,11 @@ CLAUSE_TYPES = {
         risk_default="medium",
         materiality="medium",
         reasoning_key="general",
+        description={
+            "en": "This clause governs whether contractual rights or obligations may be transferred to another party, and under what conditions consent is required.",
+            "fr": "Cette clause encadre la possibilité de transférer les droits ou obligations contractuels à une autre partie, ainsi que les conditions de consentement applicables.",
+            "ar": "ينظم هذا البند إمكانية نقل الحقوق أو الالتزامات التعاقدية إلى طرف آخر والشروط التي تتطلب الحصول على الموافقة.",
+        },
     ),
 
     "amendment": build_clause_type(
@@ -1108,7 +1328,7 @@ CLAUSE_TYPES = {
         ["non solicitation", "non-solicitation", "solicit employees", "non-sollicitation", "solliciter les employés", "عدم الاستقطاب", "استقطاب الموظفين"],
         risk_default="medium",
         materiality="medium",
-        reasoning_key="employment",
+        reasoning_key="restrictive_covenants",
     ),
 
     "default": build_clause_type(
@@ -1149,12 +1369,14 @@ CLAUSE_PRIORITY_ORDER = [
     "remedies",
     "liquidated_damages",
     "penalty",
+    "limitation_of_liability_exceptions",
     "limitation_of_liability",
     "liability",
     "indemnity",
     "guarantee",
     "security_interest",
     "collateral",
+    "pricing_adjustment",
 
     "automatic_renewal",
     "termination_for_convenience",
@@ -1177,6 +1399,7 @@ CLAUSE_PRIORITY_ORDER = [
     "security",
     "data_protection",
 
+    "restrictive_covenants",
     "non_compete",
     "non_solicitation",
     "exclusivity",
@@ -1214,6 +1437,10 @@ CLAUSE_PRIORITY_ORDER = [
     "vacation",
     "employment",
     "equity_compensation",
+    "share_transfer_rights",
+    "anti_dilution_preemptive_rights",
+    "investor_information_rights",
+    "trademark_branding",
 
     "anti_bribery",
     "sanctions",
@@ -1405,6 +1632,23 @@ SIGNAL_WEIGHTS = {
     "résiliation de convenance": 6,
     "résiliation pour motif": 6,
 
+    "drag-along": 6,
+    "drag along": 6,
+    "tag-along": 6,
+    "tag along": 6,
+    "right of first refusal": 6,
+    "droit de sortie conjointe": 6,
+    "cession forcée": 6,
+    "حق البيع المشترك": 6,
+    "حق الشراء الإجباري": 6,
+
+    "nantissement": 5,
+    "gage": 5,
+    "sûreté": 5,
+    "garantie bancaire": 5,
+    "خطاب ضمان": 5,
+    "ضمان مالي": 5,
+
     "limitation of liability": 6,
     "liability cap": 6,
     "unlimited liability": 6,
@@ -1438,12 +1682,18 @@ SIGNAL_WEIGHTS = {
 
     "non-compete": 5,
     "non compete": 5,
+    "non-solicitation": 4,
+    "non solicitation": 4,
+    "restrictive covenant": 4,
     "non-concurrence": 5,
+    "non-sollicitation": 4,
+    "non sollicitation": 4,
     "عدم المنافسة": 5,
+    "عدم الاستقطاب": 4,
 
-    "arbitration": 4,
-    "arbitrage": 4,
-    "تحكيم": 4,
+    "arbitration": 2,
+    "arbitrage": 2,
+    "تحكيم": 2,
 
     "payment": 2,
     "pay": 2,
@@ -1475,9 +1725,15 @@ TYPE_SPECIFICITY_BONUS = {
     "liquidated_damages": 6,
     "automatic_renewal": 6,
     "termination_for_convenience": 6,
+    "force_majeure": 6,
+    "audit_rights": 4,
     "termination_for_cause": 6,
+    "share_transfer_rights": 5,
     "limitation_of_liability": 5,
     "ip_assignment": 5,
+    "collateral": 5,
+    "pricing_adjustment": 4,
+    "warranty": 5,
     "work_product": 4,
     "moral_rights": 4,
     "security_interest": 4,
@@ -1495,6 +1751,9 @@ TYPE_SPECIFICITY_BONUS = {
     "data_protection": 3,
     "privacy": 3,
     "cybersecurity": 3,
+    "restrictive_covenants": 4,
+    "non_compete": 4,
+    "non_solicitation": 4,
     "liability": 3,
     "termination": 3,
     "late_payment": 3,
@@ -1509,13 +1768,40 @@ TYPE_SPECIFICITY_BONUS = {
 }
 
 
+TYPE_STRONG_SIGNALS = {
+    "indemnity": {
+        "indemnity",
+        "indemnify",
+        "hold harmless",
+        "indemnification",
+        "third party claims",
+        "indemnisation",
+        "indemniser",
+        "tenir indemne",
+        "تعويضات",
+        "مطالبات",
+        "خسائر",
+        "يعوض",
+    },
+}
+
+
 TYPE_CONTEXT_ANCHORS = {
     "employment": [
         "employee", "employer", "employment", "salary", "bonus",
         "benefits", "vacation", "position", "duties", "executive",
         "employé", "employeur", "emploi", "salaire", "prime",
         "avantages", "congés", "poste", "fonctions",
-        "موظف", "صاحب العمل", "عمل", "راتب", "مكافأة", "مزايا",
+        "موظف", "صاحب العمل", "راتب", "مكافأة", "مزايا",
+    ],
+    "restrictive_covenants": [
+        "non-compete", "non compete", "non-solicitation",
+        "non solicitation", "restrictive covenant", "exclusive dealing",
+        "restraint of trade", "customer solicitation",
+        "employee solicitation", "poaching",
+        "non-concurrence", "non-sollicitation", "non sollicitation",
+        "clause restrictive", "exclusivité",
+        "عدم المنافسة", "عدم الاستقطاب", "الحصرية", "قيود تعاقدية",
     ],
     "corporate_governance": [
         "board", "director", "shareholder", "voting", "governance",
@@ -1525,7 +1811,7 @@ TYPE_CONTEXT_ANCHORS = {
         "مجلس الإدارة", "مدير", "مساهم", "تصويت", "حوكمة",
     ],
     "services": [
-        "services", "service provider", "scope of work", "deliverables",
+        "master services agreement", "service agreement", "services", "service provider", "client", "scope of work", "deliverables",
         "support", "implementation", "consulting",
         "prestations", "assistance", "livrables", "mise en œuvre",
         "خدمات", "نطاق العمل", "الدعم", "التنفيذ", "الاستشارات",
@@ -1575,7 +1861,7 @@ def count_context_matches(
     return sum(
         1
         for term in terms
-        if term.lower() in normalized
+        if re.search(r"(?<!\w)" + re.escape(term.lower()) + r"(?!\w)", normalized)
     )
 
 
@@ -1641,7 +1927,7 @@ def score_clause_type(
     matched_signals = []
 
     if any(
-        excluded.lower() in normalized
+        re.search(r"(?<!\w)" + re.escape(excluded.lower()) + r"(?!\w)", normalized)
         for excluded in excluded_contexts
     ):
         return {
@@ -1659,7 +1945,9 @@ def score_clause_type(
     for signal in signals:
         signal_normalized = signal.lower()
 
-        if signal_normalized in normalized:
+        pattern = r"(?<!\w)" + re.escape(signal_normalized) + r"(?!\w)"
+
+        if re.search(pattern, normalized):
             matched_signals.append(signal)
             base_score += SIGNAL_WEIGHTS.get(
                 signal_normalized,
@@ -1669,10 +1957,27 @@ def score_clause_type(
     specificity_bonus = 0
 
     if matched_signals:
-        specificity_bonus = TYPE_SPECIFICITY_BONUS.get(
+        strong_signals = TYPE_STRONG_SIGNALS.get(
             clause_type,
-            0,
         )
+
+        if strong_signals is None:
+            specificity_bonus = TYPE_SPECIFICITY_BONUS.get(
+                clause_type,
+                0,
+            )
+
+        else:
+            matched_normalized = {
+                str(signal).lower()
+                for signal in matched_signals
+            }
+
+            if matched_normalized & strong_signals:
+                specificity_bonus = TYPE_SPECIFICITY_BONUS.get(
+                    clause_type,
+                    0,
+                )
 
     context_bonus = context_bonus_for_clause_type(
         text,
@@ -1841,4 +2146,62 @@ def is_critical_clause_text(text: str) -> bool:
     return any(
         term.lower() in normalized
         for term in get_all_critical_terms()
+    )
+
+
+
+def normalize_taxonomy_role_context(
+    clause_type: str,
+    contract_family: str = "generic",
+) -> str:
+    """
+    Standard international taxonomy guard.
+
+    Restrictive covenants such as non-compete and non-solicitation are not
+    automatically Employment & HR. They remain Restrictive Covenants unless
+    the whole contract family is employment.
+    """
+    family = str(contract_family or "generic").lower().replace(" ", "_")
+    ctype = str(clause_type or "other").lower().strip()
+
+    if family != "employment" and ctype in {
+        "non_compete",
+        "non_solicitation",
+        "restrictive_covenants",
+        "post_termination_obligations",
+        "conflict_of_interest",
+        "exclusivity",
+    }:
+        return "restrictive_covenants"
+
+    if family != "employment" and ctype in {
+        "employment",
+        "compensation",
+        "benefits",
+        "vacation",
+    }:
+        return "other"
+
+    return ctype
+
+def get_clause_type_description(
+    clause_type: str,
+    language: str = "en",
+) -> str:
+    """
+    Retourne la description officielle d'un type de clause
+    dans la langue demandée.
+    """
+
+    definition = CLAUSE_TYPES.get(clause_type)
+
+    if not definition:
+        return ""
+
+    language = language if language in ("en", "fr", "ar") else "en"
+
+    return (
+        definition
+        .get("description", {})
+        .get(language, "")
     )

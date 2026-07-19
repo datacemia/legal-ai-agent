@@ -1,0 +1,1192 @@
+[
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "Clause 7.1",
+    "source_language": "fr",
+    "source_text": "7.1 Aucune des Parties ne sera responsable des dommages indirects, accessoires ou consécutifs. La responsabilité globale du Fournisseur n'excédera pas la valeur du Bon de Commande à l'origine de la réclamation.",
+    "primary_type": "liability",
+    "expected_source_mechanisms": [
+      {
+        "concept": "EXCLUDED_DAMAGES",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "dommages indirects, accessoires ou consécutifs",
+            "start": 47,
+            "end": 93
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "EXCLUDED_DAMAGES",
+        "rank": 97,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGES",
+            "start": 23,
+            "end": 65,
+            "text": "ne sera responsable des dommages indirects"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITION",
+        "evidence_hash": "95d0d58d6c888df41ae719c4e25c46abd6e4ef4c01b822a56bf32fcbab7d0cef",
+        "normalized_concept": "EXCLUDED_DAMAGES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "EXCLUDE_DAMAGE_CATEGORY",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "EXCLUDED_DAMAGE_CATEGORY",
+        "rank": 94,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "EXCLUDED_DAMAGE_CATEGORY",
+            "start": 47,
+            "end": 93,
+            "text": "dommages indirects, accessoires ou consécutifs"
+          }
+        ],
+        "grounded": true,
+        "polarity": "EXCLUDED",
+        "evidence_hash": "6466c48b61fa459d317745f7ec1fc58f494e48db1e27930cea058f429c78b14d",
+        "normalized_concept": "EXCLUDED_DAMAGE_CATEGORY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 98,
+            "end": 209,
+            "text": "responsabilité globale du Fournisseur n'excédera pas la valeur du Bon de Commande à l'origine de la réclamation"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "1ad75d0063c23157f3481ffc7348afcad78c20f0ae088b804d2ade642cfb01a5",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "LIABILITY_CAP",
+        "rank": 93,
+        "candidate_primary_type": "liability",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "LIABILITY_CAP",
+            "start": 98,
+            "end": 209,
+            "text": "responsabilité globale du Fournisseur n'excédera pas la valeur du Bon de Commande à l'origine de la réclamation"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "1ad75d0063c23157f3481ffc7348afcad78c20f0ae088b804d2ade642cfb01a5",
+        "normalized_concept": "LIABILITY_CAP",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "LIMIT_LIABILITY",
+          "polarity": "RESTRICTION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RESTRICTION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "5.1",
+    "source_language": "fr",
+    "source_text": "5.1 Pendant la Durée, l'Acheteur achètera au moins soixante-dix pour cent (70 %) de ses besoins en Biens auprès du Fournisseur, sous réserve que ce dernier demeure compétitif en termes de prix, de qualité et de performance de livraison par rapport au marché.",
+    "primary_type": "pricing",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "Durée, l'Acheteur achètera au moins soixan",
+            "start": 15,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "pricing",
+        "anchors": [
+          "acheteur",
+          "achètera",
+          "au",
+          "auprè",
+          "besoin",
+          "biens",
+          "ce",
+          "cent",
+          "compétitif",
+          "demeure",
+          "dernier",
+          "dix",
+          "durée",
+          "en",
+          "fournisseur",
+          "livraison",
+          "marché",
+          "moins",
+          "pendant",
+          "performance",
+          "prix",
+          "qualité",
+          "que",
+          "rapport",
+          "réserve",
+          "soixante",
+          "sous",
+          "terme"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "Durée, l'Acheteur achètera au moins soixan",
+            "start": 15,
+            "end": 57
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "1.1",
+    "source_language": "fr",
+    "source_text": "1.1 L'Acheteur soumettra les Bons de Commande au moins soixante (60) jours avant la date de livraison souhaitée. Le Fournisseur livrera des Biens conformes aux Spécifications aux dates prévues dans chaque Bon de Commande accepté.",
+    "primary_type": "delivery",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 116,
+            "end": 145,
+            "text": "Fournisseur livrera des Biens"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "180e2307186e36ef04961e5bc5b9b78f2ce128d9d03b55be29e15841cd78bbc6",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PURCHASE_ORDER",
+        "rank": 94,
+        "candidate_primary_type": "purchase_order",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 6,
+            "end": 111,
+            "text": "Acheteur soumettra les Bons de Commande au moins soixante (60) jours avant la date de livraison souhaitée"
+          },
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 29,
+            "end": 101,
+            "text": "Bons de Commande au moins soixante (60) jours avant la date de livraison"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a34c18f4cbddf6122bf0a738920d1cacbfda7aea201b406f95dbeae405bf2aa2",
+        "normalized_concept": "PURCHASE_ORDER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "BUYER",
+          "counterparty": "SUPPLIER",
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 60,
+              "unit": "DAYS",
+              "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+              "related_mechanism": "PURCHASE_ORDER"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "DELIVERY_OBLIGATION",
+        "rank": 96,
+        "candidate_primary_type": "delivery",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DELIVERY_OBLIGATION",
+            "start": 116,
+            "end": 145,
+            "text": "Fournisseur livrera des Biens"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "180e2307186e36ef04961e5bc5b9b78f2ce128d9d03b55be29e15841cd78bbc6",
+        "normalized_concept": "DELIVERY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": "BUYER",
+          "beneficiary": "BUYER",
+          "object": "GOODS",
+          "trigger": null,
+          "action": "DELIVER_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PURCHASE_ORDER",
+        "rank": 94,
+        "candidate_primary_type": "purchase_order",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 6,
+            "end": 111,
+            "text": "Acheteur soumettra les Bons de Commande au moins soixante (60) jours avant la date de livraison souhaitée"
+          },
+          {
+            "label": "PURCHASE_ORDER",
+            "start": 29,
+            "end": 101,
+            "text": "Bons de Commande au moins soixante (60) jours avant la date de livraison"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "a34c18f4cbddf6122bf0a738920d1cacbfda7aea201b406f95dbeae405bf2aa2",
+        "normalized_concept": "PURCHASE_ORDER",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "BUYER",
+          "counterparty": "SUPPLIER",
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "SUBMIT_PURCHASE_ORDER",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 60,
+              "unit": "DAYS",
+              "semantic_role": "PURCHASE_ORDER_LEAD_TIME",
+              "related_mechanism": "PURCHASE_ORDER"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "Clause 2.1",
+    "source_language": "fr",
+    "source_text": "2.1 Les prix des Biens sont fixés à l'Annexe A et resteront inchangés pendant les douze (12) premiers mois de la Durée, sous réserve ensuite d'un ajustement au maximum une fois par an fondé sur des augmentations documentées des coûts de matières premières, plafonné à 6 % par an.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRICING_ADJUSTMENT",
+        "rank": 88,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRICING_ADJUSTMENT",
+            "start": 8,
+            "end": 278,
+            "text": "prix des Biens sont fixés à l'Annexe A et resteront inchangés pendant les douze (12) premiers mois de la Durée, sous réserve ensuite d'un ajustement au maximum une fois par an fondé sur des augmentations documentées des coûts de matières premières, plafonné à 6 % par an"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "9c234b12b494827ae863c92867379caa3e75af465384aa0c1f2e1b8fc04cf7c1",
+        "normalized_concept": "PRICING_ADJUSTMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PRICING_ADJUSTMENT",
+        "rank": 88,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PRICING_ADJUSTMENT",
+            "start": 8,
+            "end": 278,
+            "text": "prix des Biens sont fixés à l'Annexe A et resteront inchangés pendant les douze (12) premiers mois de la Durée, sous réserve ensuite d'un ajustement au maximum une fois par an fondé sur des augmentations documentées des coûts de matières premières, plafonné à 6 % par an"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "9c234b12b494827ae863c92867379caa3e75af465384aa0c1f2e1b8fc04cf7c1",
+        "normalized_concept": "PRICING_ADJUSTMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "Clause 2.2",
+    "source_language": "fr",
+    "source_text": "2.2 L'Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 6,
+            "end": 116,
+            "text": "Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "09e70d5decc1e5e64917db3e4c4de2b3d050f084e3777dcfcdfc55e5f851d985",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 6,
+            "end": 116,
+            "text": "Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "09e70d5decc1e5e64917db3e4c4de2b3d050f084e3777dcfcdfc55e5f851d985",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 15,
+            "end": 116,
+            "text": "paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1028cde704fbca104d987e0cb3fd99ef23b7206247493d77fbcd2c70f27855e4",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 95,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 6,
+            "end": 116,
+            "text": "Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "09e70d5decc1e5e64917db3e4c4de2b3d050f084e3777dcfcdfc55e5f851d985",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 6,
+            "end": 116,
+            "text": "Acheteur paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "09e70d5decc1e5e64917db3e4c4de2b3d050f084e3777dcfcdfc55e5f851d985",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 15,
+            "end": 116,
+            "text": "paiera toutes les factures non contestées dans un délai de soixante (60) jours suivant leur réception"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "1028cde704fbca104d987e0cb3fd99ef23b7206247493d77fbcd2c70f27855e4",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "3.1",
+    "source_language": "fr",
+    "source_text": "3.1 L'Acheteur aura le droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien non conforme aux Spécifications. Le Fournisseur remplacera les Biens non conformes à ses frais dans un délai de dix (10) jours ouvrés.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "REPLACEMENT_REMEDY",
+        "rank": 95,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 176,
+            "end": 222,
+            "text": "Fournisseur remplacera les Biens non conformes"
+          },
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 188,
+            "end": 234,
+            "text": "remplacera les Biens non conformes à ses frais"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "325c70133cbd60987380db02c170ec4e52b4826a609648dd530c18b868d705e0",
+        "normalized_concept": "REPLACEMENT_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "REPLACE_NON_CONFORMING_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INSPECTION_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "inspection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 6,
+            "end": 171,
+            "text": "Acheteur aura le droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien non conforme aux Spécifications"
+          },
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 23,
+            "end": 139,
+            "text": "droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "6f9008ac77fc5f36294d561108a73c1b1df3ab58bd8ad8abda6c2d5d497f399c",
+        "normalized_concept": "INSPECTION_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BUYER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "INSPECT",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "REPLACEMENT_REMEDY",
+        "rank": 95,
+        "candidate_primary_type": "remedies",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 176,
+            "end": 222,
+            "text": "Fournisseur remplacera les Biens non conformes"
+          },
+          {
+            "label": "REPLACEMENT_REMEDY",
+            "start": 188,
+            "end": 234,
+            "text": "remplacera les Biens non conformes à ses frais"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "325c70133cbd60987380db02c170ec4e52b4826a609648dd530c18b868d705e0",
+        "normalized_concept": "REPLACEMENT_REMEDY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "SUPPLIER",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "REPLACE_NON_CONFORMING_GOODS",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "INSPECTION_RIGHT",
+        "rank": 94,
+        "candidate_primary_type": "inspection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 6,
+            "end": 171,
+            "text": "Acheteur aura le droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien non conforme aux Spécifications"
+          },
+          {
+            "label": "INSPECTION_RIGHT",
+            "start": 23,
+            "end": 139,
+            "text": "droit d'inspecter les Biens dans un délai de quinze (15) jours ouvrés suivant leur livraison et de refuser tout Bien"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PERMITTED",
+        "evidence_hash": "6f9008ac77fc5f36294d561108a73c1b1df3ab58bd8ad8abda6c2d5d497f399c",
+        "normalized_concept": "INSPECTION_RIGHT",
+        "normalized_relation": {
+          "right_holder": "BUYER",
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "GOODS",
+          "trigger": null,
+          "action": "INSPECT",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 15,
+              "unit": "BUSINESS_DAYS",
+              "semantic_role": "GOODS_INSPECTION_PERIOD",
+              "related_mechanism": "INSPECTION_RIGHT"
+            }
+          ]
+        },
+        "normalized_polarity": "RIGHT"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "08_Procurement_Supply_Agreement_FR.json",
+    "reference": "Clause 6.1",
+    "source_language": "fr",
+    "source_text": "6.1 Le présent Accord a une durée initiale de trois (3) ans. Chaque Partie pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier.",
+    "primary_type": "termination",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée initiale de trois (3) an",
+            "start": 28,
+            "end": 58
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 164,
+            "end": 230,
+            "text": "préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0b8a3082bf4f125eee835008847f7890b703966c382c1cfacb36e4b46b0ab073",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 75,
+            "end": 230,
+            "text": "pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 82,
+            "end": 230,
+            "text": "résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "b55341f37b6d3385cb40386c6069a69f51c80a5bfa0b891a4a729ffa40ae8050",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 101,
+            "end": 230,
+            "text": "manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "e001aa80daaa7175fc1b7002782dc7d2c86ba024737f79d5e8d07d5ba3522240",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 164,
+            "end": 230,
+            "text": "préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "3c904644ddb9ffbedf05e6c8a6a21b05f93a97f829181a4a05f9de2e864e82dd",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NOTICE_PREREQUISITE",
+        "rank": 96,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NOTICE_PREREQUISITE",
+            "start": 164,
+            "end": 230,
+            "text": "préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "0b8a3082bf4f125eee835008847f7890b703966c382c1cfacb36e4b46b0ab073",
+        "normalized_concept": "NOTICE_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "MANUAL",
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "TERMINATION_FOR_CAUSE",
+        "rank": 94,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 75,
+            "end": 230,
+            "text": "pourra résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          },
+          {
+            "label": "TERMINATION_FOR_CAUSE",
+            "start": 82,
+            "end": 230,
+            "text": "résilier en cas de manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "b55341f37b6d3385cb40386c6069a69f51c80a5bfa0b891a4a729ffa40ae8050",
+        "normalized_concept": "TERMINATION_FOR_CAUSE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "RIGHT"
+      },
+      {
+        "kind": "TERMINATION_CURE_PERIOD",
+        "rank": 84,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_CURE_PERIOD",
+            "start": 101,
+            "end": 230,
+            "text": "manquement substantiel non corrigé de l'autre Partie, après un préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "CURE_PERIOD",
+        "evidence_hash": "e001aa80daaa7175fc1b7002782dc7d2c86ba024737f79d5e8d07d5ba3522240",
+        "normalized_concept": "TERMINATION_CURE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "AGREEMENT",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "TERMINATION_NOTICE_PERIOD",
+        "rank": 82,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_NOTICE_PERIOD",
+            "start": 164,
+            "end": 230,
+            "text": "préavis écrit de trente (30) jours et une possibilité d'y remédier"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "NOTICE_PERIOD",
+        "evidence_hash": "3c904644ddb9ffbedf05e6c8a6a21b05f93a97f829181a4a05f9de2e864e82dd",
+        "normalized_concept": "TERMINATION_NOTICE_PERIOD",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "NOTICE_REQUIRED"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "durée initiale de trois (3) an",
+            "start": 28,
+            "end": 58
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

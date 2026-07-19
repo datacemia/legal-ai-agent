@@ -1,0 +1,66 @@
+========================================================================================
+SEMANTIC GOLD CORPUS BUILDER
+========================================================================================
+EXACT FIXTURE FILES: 45
+CLAUSES TOTAL: 355
+FILE ERRORS: 0
+LANGUAGES: {'en': 119, 'fr': 117, 'ar': 119}
+SHADOW ABSTENTIONS: 329
+ABSTENTIONS BY LANGUAGE: {'en': 103, 'fr': 114, 'ar': 112}
+REVIEW SET SIZE: 262
+REVIEW LANGUAGES: {'ar': 85, 'en': 86, 'fr': 91}
+FULL GOLD TEMPLATE: semantic_gold\gold_all_355.jsonl
+REVIEW GOLD TEMPLATE: semantic_gold\gold_review_set.jsonl
+SUMMARY: semantic_gold\gold_builder_summary.json
+
+TOP REVIEW TYPES
+  12  confidentiality
+  12  data_protection
+  12  intellectual_property
+  12  loan
+  12  payment
+  12  termination
+  10  dispute_resolution
+  10  employment
+  10  indemnity
+  10  liability
+   8  corporate_governance
+   8  renewal
+   8  security
+   8  services
+   7  other
+   7  warranty
+   6  cybersecurity
+   6  delivery
+   5  pricing
+   5  share_transfer_rights
+   5  supply_distribution
+   4  assignment
+   4  subcontracting
+   4  term
+   4  data_processing
+   4  lease
+   4  security_interest
+   3  maintenance
+   3  trademark_branding
+   3  fees
+   3  notice
+   2  anti_dilution_preemptive_rights
+   2  covenant
+   2  deposit
+   2  duration
+   2  guarantee
+   2  insurance
+   2  ownership
+   2  penalty
+   2  restrictive_covenants
+   2  royalties
+   2  compensation
+   2  remedies
+   2  service_level
+   2  investor_information_rights
+   1  collateral
+   1  compliance
+   1  invoice
+   1  tax
+   1  audit_rights

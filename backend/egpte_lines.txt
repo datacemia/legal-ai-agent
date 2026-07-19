@@ -1,0 +1,498 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+1:                                                                                     PAGE 001
+2:      ZIYAD N A ALMUTAIRI
+3:      P O BOX 0                                                                  300002471110003
+4:      0                 0
+5:                                                                                 24021800165743566
+6: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥١
+7: 15-Feb-24
+8:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+9:      05/03/24                      10,956.00                         547.80
+10:      547.80                         547.80                           0.00
+11:      10,956.00                      10,956.00                        0.00
+12:      10,956.00                      10,956.00                        0.00
+13: 
+14:                                                                                     PAGE 002
+15:      ZIYAD N A ALMUTAIRI
+16:      P O BOX 0
+17:      0                 0
+18:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+19:                                                  0
+20:                                                  0
+21:                                                  0
+22:                                                  0
+23:                                                  0
+24: 
+25:                                                                                     PAGE 003
+26:      ZIYAD N A ALMUTAIRI
+27:      P O BOX 0
+28:      0                 0
+29:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+30:                                                B/F AS OF 15/01/24                      601.50
+31:                                                    4302 58XX XXXX 9928
+32:     29-JAN-24         29-JAN-24        CASH TRANSFER                                4,500.00
+33: ٤٢-ﻳﻨﺎﻳﺮ-٩٢
+34: ٤٢-ﻳﻨﺎﻳﺮ-٩٢
+35: 29-JAN-24         30-JAN-24        INT PURCH      gotogate_sa_ar_MSV2H        1,127.08
+36: ٤٢-ﻳﻨﺎﻳﺮ-٩٢
+37: ٤٢-ﻳﻨﺎﻳﺮ-٠٣
+38: ONLINE                  SAR
+39:                                                                      1,122.57
+40:                                        %15
+41: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+42: VAT       4.51
+43:                                        <STANDARD RATE>
+44:     03-FEB-24         05-FEB-24        INT PURCH      ALDEASA KUWAIT FDS            200.18
+45: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣٠
+46: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥٠
+47: KUWAIT                  KWD       15.900
+48:                                        EXCHANGE RATE                     12.2038
+49:                                                                 SAR       194.04
+50: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+51: MARK UPSAR         5.34
+52:                                                                 SAR       199.38
+53:                                        %15
+54: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+55: VAT SAR      0.80
+56:                                        <STANDARD RATE>
+57:     04-FEB-24         05-FEB-24        Apple INT PURCH TRUE D&S 80002410_TR           76.97
+58: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤٠
+59: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥٠
+60: SAMUTPRAKAN             THB       699.00
+61:                                        EXCHANGE RATE                      0.1068
+62:                                                                 SAR        74.61
+63: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+64: MARK UPSAR         2.05
+65:                                                                 SAR        76.66
+66:                                        %15
+67: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+68: VAT SAR      0.31
+69:                                        <STANDARD RATE>
+70:     05-FEB-24         07-FEB-24        Apple INT PURCH HIPPIE ROAD AND REST           46.23
+71: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥٠
+72: ٤٢-ﻓﺒﺮﺍﻳﺮ-٧٠
+73: PHUKET                  THB       420.00
+74:                                        EXCHANGE RATE                      0.1068
+75:                                                                 SAR        44.82
+76: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+77: MARK UPSAR         1.23
+78:                                                                 SAR        46.05
+79:                                        %15
+80: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+81: VAT SAR      0.18
+82:                                        <STANDARD RATE>
+83: 
+84:                                                                                     PAGE 004
+85:      ZIYAD N A ALMUTAIRI
+86:      P O BOX 0
+87:      0                 0
+88:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+89:                                               B/F AS OF PREVIOUS PAGE                6,551.96
+90:     05-FEB-24         07-FEB-24        Apple INT PURCH ORIENT RESTAURANT 1            91.41
+91: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥٠
+92: ٤٢-ﻓﺒﺮﺍﻳﺮ-٧٠
+93: PHUKET                  THB       830.00
+94:                                        EXCHANGE RATE                      0.1068
+95:                                                                 SAR        88.60
+96: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+97: MARK UPSAR         2.44
+98:                                                                 SAR        91.04
+99:                                        %15
+100: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+101: VAT SAR      0.37
+102:                                        <STANDARD RATE>
+103:     08-FEB-24         09-FEB-24        Apple INT PURCH PHUKET KART SPEEDWAY           224.95
+104: ٤٢-ﻓﺒﺮﺍﻳﺮ-٨٠
+105: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+106: PHUKET                  THB     2,060.00
+107:                                        EXCHANGE RATE                      0.1059
+108:                                                                 SAR       218.05
+109: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+110: MARK UPSAR         6.00
+111:                                                                 SAR       224.05
+112:                                        %15
+113: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+114: VAT SAR      0.90
+115:                                        <STANDARD RATE>
+116:     08-FEB-24         09-FEB-24        LOCAL. ECOMM. RHotel at Booking.com         1,636.11-
+117: ٤٢-ﻓﺒﺮﺍﻳﺮ-٨٠
+118: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+119: Amsterdam               THB    15,558.48
+120:                                        EXCHANGE RATE                      1.0000
+121:                                                                 SAR     1,636.11
+122: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+123: MARK UPSAR         0.00
+124:     08-FEB-24         09-FEB-24        Apple INT PURCH ILLUZION                    1,146.49
+125: ٤٢-ﻓﺒﺮﺍﻳﺮ-٨٠
+126: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+127: PHUKET                  THB    10,500.00
+128:                                        EXCHANGE RATE                      0.1059
+129:                                                                 SAR     1,111.35
+130: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+131: MARK UPSAR        30.56
+132:                                                                 SAR     1,141.91
+133:                                        %15
+134: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+135: VAT SAR      4.58
+136:                                        <STANDARD RATE>
+137: 
+138:                                                                                     PAGE 005
+139:      ZIYAD N A ALMUTAIRI
+140:      P O BOX 0
+141:      0                 0
+142:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+143:                                               B/F AS OF PREVIOUS PAGE                6,378.70
+144:     08-FEB-24         09-FEB-24        INT. E-COMMERCE Partners on Booking         1,446.86
+145: ٤٢-ﻓﺒﺮﺍﻳﺮ-٨٠
+146: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+147: Amsterdam               THB    13,250.75
+148:                                        EXCHANGE RATE                      0.1059
+149:                                                                 SAR     1,402.50
+150: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+151: MARK UPSAR        38.57
+152:                                                                 SAR     1,441.07
+153:                                        %15
+154: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+155: VAT SAR      5.79
+156:                                        <STANDARD RATE>
+157:     08-FEB-24         09-FEB-24        Apple INT PURCH KATHU SPORT OF SHOOT          303.64
+158: ٤٢-ﻓﺒﺮﺍﻳﺮ-٨٠
+159: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+160: PHUKET                  THB     2,781.00
+161:                                        EXCHANGE RATE                      0.1059
+162:                                                                 SAR       294.34
+163: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+164: MARK UPSAR         8.09
+165:                                                                 SAR       302.43
+166:                                        %15
+167: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+168: VAT SAR      1.21
+169:                                        <STANDARD RATE>
+170:     08-FEB-24         09-FEB-24        INT. E-COMMERCE Hotel at Booking.com         1,698.84
+171: ٤٢-ﻓﺒﺮﺍﻳﺮ-٨٠
+172: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+173: Amsterdam               THB    15,558.48
+174:                                        EXCHANGE RATE                      0.1059
+175:                                                                 SAR     1,646.76
+176: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+177: MARK UPSAR        45.29
+178:                                                                 SAR     1,692.05
+179:                                        %15
+180: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+181: VAT SAR      6.79
+182:                                        <STANDARD RATE>
+183:     09-FEB-24         10-FEB-24        Apple INT PURCH ILLUZION                       72.05
+184: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+185: ٤٢-ﻓﺒﺮﺍﻳﺮ-٠١
+186: PHUKET                  THB       660.00
+187:                                        EXCHANGE RATE                      0.1059
+188:                                                                 SAR        69.84
+189: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+190: MARK UPSAR         1.92
+191:                                                                 SAR        71.76
+192:                                        %15
+193: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+194: VAT SAR      0.29
+195:                                        <STANDARD RATE>
+196: 
+197:                                                                                     PAGE 006
+198:      ZIYAD N A ALMUTAIRI
+199:      P O BOX 0
+200:      0                 0
+201:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+202:                                               B/F AS OF PREVIOUS PAGE                9,900.09
+203:     09-FEB-24         10-FEB-24        Apple INT PURCH ILLUZION                       75.65
+204: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+205: ٤٢-ﻓﺒﺮﺍﻳﺮ-٠١
+206: PHUKET                  THB       693.00
+207:                                        EXCHANGE RATE                      0.1059
+208:                                                                 SAR        73.33
+209: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+210: MARK UPSAR         2.02
+211:                                                                 SAR        75.35
+212:                                        %15
+213: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+214: VAT SAR      0.30
+215:                                        <STANDARD RATE>
+216:     09-FEB-24         10-FEB-24        Apple INT PURCH ILLUZION                       61.92
+217: ٤٢-ﻓﺒﺮﺍﻳﺮ-٩٠
+218: ٤٢-ﻓﺒﺮﺍﻳﺮ-٠١
+219: PHUKET                  THB       567.00
+220:                                        EXCHANGE RATE                      0.1059
+221:                                                                 SAR        60.02
+222: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+223: MARK UPSAR         1.65
+224:                                                                 SAR        61.67
+225:                                        %15
+226: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+227: VAT SAR      0.25
+228:                                        <STANDARD RATE>
+229:     10-FEB-24         11-FEB-24        Apple INT PURCH RASSANEE MASSAGE               43.26
+230: ٤٢-ﻓﺒﺮﺍﻳﺮ-٠١
+231: ٤٢-ﻓﺒﺮﺍﻳﺮ-١١
+232: PHUKET                  THB       400.00
+233:                                        EXCHANGE RATE                      0.1049
+234:                                                                 SAR        41.94
+235: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+236: MARK UPSAR         1.15
+237:                                                                 SAR        43.09
+238:                                        %15
+239: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+240: VAT SAR      0.17
+241:                                        <STANDARD RATE>
+242:     10-FEB-24         11-FEB-24        Apple INT PURCH RASSANEE MASSAGE              237.86
+243: ٤٢-ﻓﺒﺮﺍﻳﺮ-٠١
+244: ٤٢-ﻓﺒﺮﺍﻳﺮ-١١
+245: PHUKET                  THB     2,200.00
+246:                                        EXCHANGE RATE                      0.1049
+247:                                                                 SAR       230.57
+248: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+249: MARK UPSAR         6.34
+250:                                                                 SAR       236.91
+251:                                        %15
+252: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+253: VAT SAR      0.95
+254:                                        <STANDARD RATE>
+255: 
+256:                                                                                     PAGE 007
+257:      ZIYAD N A ALMUTAIRI
+258:      P O BOX 0
+259:      0                 0
+260:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+261:                                               B/F AS OF PREVIOUS PAGE               10,318.78
+262:     11-FEB-24         12-FEB-24        Apple INT PURCH MCD-00147CENTRAL FES           29.18
+263: ٤٢-ﻓﺒﺮﺍﻳﺮ-١١
+264: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+265: PHUKET                  THB       270.00
+266:                                        EXCHANGE RATE                      0.1048
+267:                                                                 SAR        28.28
+268: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+269: MARK UPSAR         0.78
+270:                                                                 SAR        29.06
+271:                                        %15
+272: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+273: VAT SAR      0.12
+274:                                        <STANDARD RATE>
+275:     11-FEB-24         13-FEB-24        Apple INT PURCH ANNYKEBAB                      57.97
+276: ٤٢-ﻓﺒﺮﺍﻳﺮ-١١
+277: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+278: PHUKET                  THB       536.00
+279:                                        EXCHANGE RATE                      0.1049
+280:                                                                 SAR        56.19
+281: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+282: MARK UPSAR         1.55
+283:                                                                 SAR        57.74
+284:                                        %15
+285: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+286: VAT SAR      0.23
+287:                                        <STANDARD RATE>
+288:     12-FEB-24         13-FEB-24        Apple INT PURCH THE PAR PHUKET HOTEL           334.11
+289: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+290: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+291: PHUKET                  THB     3,090.00
+292:                                        EXCHANGE RATE                      0.1049
+293:                                                                 SAR       323.86
+294: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+295: MARK UPSAR         8.91
+296:                                                                 SAR       332.77
+297:                                        %15
+298: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+299: VAT SAR      1.34
+300:                                        <STANDARD RATE>
+301:     12-FEB-24         13-FEB-24        Apple INT PURCH TARBOOSH KEBAB                154.83
+302: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+303: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+304: PHUKET                  THB     1,432.00
+305:                                        EXCHANGE RATE                      0.1049
+306:                                                                 SAR       150.08
+307: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+308: MARK UPSAR         4.13
+309:                                                                 SAR       154.21
+310:                                        %15
+311: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+312: VAT SAR      0.62
+313:                                        <STANDARD RATE>
+314: 
+315:                                                                                     PAGE 008
+316:      ZIYAD N A ALMUTAIRI
+317:      P O BOX 0
+318:      0                 0
+319:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+320:                                               B/F AS OF PREVIOUS PAGE               10,894.87
+321:     12-FEB-24         14-FEB-24        Apple INT PURCH WHITE WOLF RESTAURAN           94.08
+322: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+323: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+324: PHUKET                  THB       870.00
+325:                                        EXCHANGE RATE                      0.1049
+326:                                                                 SAR        91.19
+327: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+328: MARK UPSAR         2.51
+329:                                                                 SAR        93.70
+330:                                        %15
+331: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+332: VAT SAR      0.38
+333:                                        <STANDARD RATE>
+334:     12-FEB-24         14-FEB-24        Apple INT PURCH LANKHAIKEUXK                   37.84
+335: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+336: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+337: PHUKET                  THB       350.00
+338:                                        EXCHANGE RATE                      0.1048
+339:                                                                 SAR        36.68
+340: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+341: MARK UPSAR         1.01
+342:                                                                 SAR        37.69
+343:                                        %15
+344: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+345: VAT SAR      0.15
+346:                                        <STANDARD RATE>
+347:     12-FEB-24         14-FEB-24        Apple INT PURCH GOLDEN BOLLS PHUKET            90.82
+348: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+349: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+350: PHUKET                  THB       840.00
+351:                                        EXCHANGE RATE                      0.1049
+352:                                                                 SAR        88.04
+353: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+354: MARK UPSAR         2.42
+355:                                                                 SAR        90.46
+356:                                        %15
+357: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+358: VAT SAR      0.36
+359:                                        <STANDARD RATE>
+360:     12-FEB-24         14-FEB-24        Apple INT PURCH 7-11 PHRABARAMI 2              30.07
+361: ٤٢-ﻓﺒﺮﺍﻳﺮ-٢١
+362: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+363: PATONG KATHU            THB       278.00
+364:                                        EXCHANGE RATE                      0.1049
+365:                                                                 SAR        29.15
+366: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+367: MARK UPSAR         0.80
+368:                                                                 SAR        29.95
+369:                                        %15
+370: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+371: VAT SAR      0.12
+372:                                        <STANDARD RATE>
+373: 
+374:                                                                                     PAGE 009
+375:      ZIYAD N A ALMUTAIRI
+376:      P O BOX 0
+377:      0                 0
+378:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+379:                                               B/F AS OF PREVIOUS PAGE               11,147.68
+380:     13-FEB-24         14-FEB-24        Apple INT PURCH GHL*EMERALD ISLE (PH           32.42
+381: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+382: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+383: BANGKOK                 THB       300.00
+384:                                        EXCHANGE RATE                      0.1048
+385:                                                                 SAR        31.43
+386: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+387: MARK UPSAR         0.86
+388:                                                                 SAR        32.29
+389:                                        %15
+390: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+391: VAT SAR      0.13
+392:                                        <STANDARD RATE>
+393:     13-FEB-24         14-FEB-24        Apple INT PURCH ILLUZION                      113.53
+394: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+395: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+396: PHUKET                  THB     1,050.00
+397:                                        EXCHANGE RATE                      0.1049
+398:                                                                 SAR       110.05
+399: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+400: MARK UPSAR         3.03
+401:                                                                 SAR       113.08
+402:                                        %15
+403: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+404: VAT SAR      0.45
+405:                                        <STANDARD RATE>
+406:     13-FEB-24         14-FEB-24        Apple INT PURCH TARBOOSH KEBAB                 55.68
+407: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+408: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+409: PHUKET                  THB       515.00
+410:                                        EXCHANGE RATE                      0.1049
+411:                                                                 SAR        53.98
+412: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+413: MARK UPSAR         1.48
+414:                                                                 SAR        55.46
+415:                                        %15
+416: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+417: VAT SAR      0.22
+418:                                        <STANDARD RATE>
+419:     13-FEB-24         14-FEB-24        Apple INT PURCH ANNYKEBAB                      62.26
+420: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+421: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+422: PHUKET                  THB       576.00
+423:                                        EXCHANGE RATE                      0.1048
+424:                                                                 SAR        60.35
+425: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+426: MARK UPSAR         1.66
+427:                                                                 SAR        62.01
+428:                                        %15
+429: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+430: VAT SAR      0.25
+431:                                        <STANDARD RATE>
+432: 
+433:                                                                                     PAGE 010
+434:      ZIYAD N A ALMUTAIRI
+435:      P O BOX 0
+436:      0                 0
+437:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+438:                                               B/F AS OF PREVIOUS PAGE               11,411.57
+439:     13-FEB-24         14-FEB-24        Apple INT PURCH ILLUZION                       68.11
+440: ٤٢-ﻓﺒﺮﺍﻳﺮ-٣١
+441: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+442: PHUKET                  THB       630.00
+443:                                        EXCHANGE RATE                      0.1048
+444:                                                                 SAR        66.02
+445: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+446: MARK UPSAR         1.82
+447:                                                                 SAR        67.84
+448:                                        %15
+449: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+450: VAT SAR      0.27
+451:                                        <STANDARD RATE>
+452:     14-FEB-24         15-FEB-24        Apple INT PURCH KUDO HOTEL                     34.75
+453: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+454: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥١
+455: PHUKET                  THB       320.00
+456:                                        EXCHANGE RATE                      0.1053
+457:                                                                 SAR        33.68
+458: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+459: MARK UPSAR         0.93
+460:                                                                 SAR        34.61
+461:                                        %15
+462: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+463: VAT SAR      0.14
+464:                                        <STANDARD RATE>
+465:     14-FEB-24         15-FEB-24        Apple INT PURCH THE PAR PHUKET HOTEL            43.07
+466: ٤٢-ﻓﺒﺮﺍﻳﺮ-٤١
+467: ٤٢-ﻓﺒﺮﺍﻳﺮ-٥١
+468: PHUKET                  THB       396.55
+469:                                        EXCHANGE RATE                      0.1053
+470:                                                                 SAR        41.75
+471: ﺭﺳﻮﻡ ﺗﺤﻮﻳﻞ ﺍﻟﻌﻤﻠﺔ
+472: MARK UPSAR         1.15
+473:                                                                 SAR        42.90
+474:                                        %15
+475: ﺿﺮﻳﺒﺔ ﺍﻟﻘﻴﻤﺔ ﺍﻟﻤﻀﺎﻓﺔ
+476: VAT SAR      0.17
+477:                                        <STANDARD RATE>
+478:                                                     CHARGES / PAYMENTS
+479:     28-JAN-24         28-JAN-24        BRANCH PAY     CREDIT CARD PAYMENT             601.50-
+480: ٤٢-ﻳﻨﺎﻳﺮ-٨٢
+481: ٤٢-ﻳﻨﺎﻳﺮ-٨٢
+482: YOU MAY PAY YOUR BILL VIA SADAD THAT
+483:                                           IS AVAILABLE FROM BANKS CHANNELS.
+484:                                           KINDLY USE CC SADAD # 4389268560
+485: 
+486:                                                                                     PAGE 011
+487:      ZIYAD N A ALMUTAIRI
+488:      P O BOX 0
+489:      0                 0
+490:      4302 58XX XXXX 9928           Visa Al Fursan Platinum           15,000
+491:                                               B/F AS OF PREVIOUS PAGE               10,956.00
+492:                                           IF YOU ONLY MAKE A MINIMUM MONTHLY
+493:                                           REPAYMENT OF 5% OF AN OUTSTANDING
+494:                                           AMOUNT OF SR7000, AND IF THERE ARE
+495:                                           NO NEW TRANSACTIONS ON YOUR CARD, IT
+496:                                           WOULD TAKE YOU 49 MONTHS TO PAY OFF
+497:                                           THE FULL AMOUNT.

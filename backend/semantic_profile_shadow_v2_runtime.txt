@@ -1,0 +1,16 @@
+========================================================================================
+SEMANTIC SOURCE PROFILE — SHADOW AUDIT
+========================================================================================
+EXACT FIXTURE FILES: 45
+CLAUSES AUDITED: 355
+FILE ERRORS: 0
+LANGUAGES: {'en': 117, 'fr': 119, 'ar': 119}
+TYPE VERDICTS: {'MATCH': 24, 'ABSTAINED': 329, 'DIVERGENCE': 2}
+EVIDENCE INTEGRITY FAILURES: 0
+TYPE DIVERGENCES: 2
+RANKED MECHANISMS: {'PRIOR_CONSENT_PREREQUISITE': 21, 'PROHIBITION': 28, 'CONFIDENTIALITY_DUTY': 4, 'AUTOMATIC_RENEWAL': 6, 'EXCLUDED_DAMAGE_CATEGORY': 9, 'LIABILITY_CAP': 8, 'MANDATORY_OBLIGATION': 2, 'EXPRESS_RIGHT': 5, 'FINANCIAL_REPORTING_OBLIGATION': 4, 'MANDATORY_CONJUNCTION': 6, 'BOARD_COMPOSITION_STRUCTURE': 2, 'AUTOMATIC_EVENT_TRANSITION': 2}
+SUMMARY: semantic_profile_shadow_v2\shadow_summary.json
+
+TOP TYPE DIVERGENCES
+EN | 09_Consulting_Services_Agreement.json | clause_6 | pipeline=services | shadow=confidentiality | mechanisms=['PRIOR_CONSENT_PREREQUISITE', 'PROHIBITION', 'CONFIDENTIALITY_DUTY']
+AR | 14_Shareholders_Agreement_AR.json | clause_8 | pipeline=automatic_renewal | shadow=termination | mechanisms=['AUTOMATIC_EVENT_TRANSITION']

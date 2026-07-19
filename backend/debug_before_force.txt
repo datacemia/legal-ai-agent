@@ -1,0 +1,2 @@
+parties AVANT: ['Company', 'Employee']
+party_roles: {'party_a': 'Employer', 'party_b': 'Employee', 'family': 'employment', 'anonymized': True}

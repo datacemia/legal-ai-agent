@@ -1,0 +1,703 @@
+========== PII_REDACTOR V2 LOADED ==========
+C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\huggingface_hub\utils\_validators.py:189: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+  warnings.warn(
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 3999.34it/s]
+========================================================================================================================
+V4.1.22 PII REDACTION DAMAGE PROBE
+========================================================================================================================
+FILE: regression_docs\04_Cybersecurity_Services_Agreement_FR.docx
+CLEANED LENGTH: 3463
+REDACTED LENGTH: 3387
+
+FAMILY BEFORE:
+{
+  "family": "Cybersecurity",
+  "confidence": "medium",
+  "co_occurring_families": [
+    "MSA"
+  ],
+  "scores": {
+    "MSA": 134,
+    "Cybersecurity": 140,
+    "Data Processing": 3,
+    "Outsourcing": 1,
+    "Construction": 6,
+    "Manufacturing": 24,
+    "Corporate Resolution": 1
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      },
+      {
+        "term": "client",
+        "count": 13,
+        "weight": 1,
+        "points": 13
+      },
+      {
+        "term": "client",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "prestataire",
+        "count": 12,
+        "weight": 1,
+        "points": 12
+      },
+      {
+        "term": "prestataire",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "iso/iec 27001",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "soc 2",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "cybersécurité",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "cybersécurité",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 6,
+        "weight": 3,
+        "points": 18
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "vulnérabilité",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "vulnérabilité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "sécurité",
+        "count": 8,
+        "weight": 1,
+        "points": 8
+      },
+      {
+        "term": "sécurité",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      }
+    ],
+    "Data Processing": [
+      {
+        "term": "sous-traitant",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Outsourcing": [
+      {
+        "term": "niveaux de service",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Construction": [
+      {
+        "term": "site",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "sous-traitant",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Manufacturing": [
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "délai",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "délai",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Corporate Resolution": [
+      {
+        "term": "approbation",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "Cybersecurity",
+      140
+    ],
+    [
+      "MSA",
+      134
+    ],
+    [
+      "Manufacturing",
+      24
+    ],
+    [
+      "Construction",
+      6
+    ],
+    [
+      "Data Processing",
+      3
+    ],
+    [
+      "Outsourcing",
+      1
+    ],
+    [
+      "Corporate Resolution",
+      1
+    ]
+  ]
+}
+
+FAMILY AFTER:
+{
+  "family": "MSA",
+  "confidence": "medium",
+  "co_occurring_families": [
+    "Cybersecurity"
+  ],
+  "scores": {
+    "MSA": 134,
+    "Cybersecurity": 132,
+    "Data Processing": 3,
+    "Outsourcing": 1,
+    "Construction": 6,
+    "Manufacturing": 24,
+    "Corporate Resolution": 1
+  },
+  "evidence": {
+    "MSA": [
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      },
+      {
+        "term": "client",
+        "count": 13,
+        "weight": 1,
+        "points": 13
+      },
+      {
+        "term": "client",
+        "count": 4,
+        "weight": 5,
+        "points": 20,
+        "zone": "title"
+      },
+      {
+        "term": "prestataire",
+        "count": 12,
+        "weight": 1,
+        "points": 12
+      },
+      {
+        "term": "prestataire",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "services",
+        "count": 7,
+        "weight": 1,
+        "points": 7
+      },
+      {
+        "term": "services",
+        "count": 6,
+        "weight": 5,
+        "points": 30,
+        "zone": "title"
+      }
+    ],
+    "Cybersecurity": [
+      {
+        "term": "iso/iec 27001",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "soc 2",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "cybersécurité",
+        "count": 2,
+        "weight": 3,
+        "points": 6
+      },
+      {
+        "term": "cybersécurité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 6,
+        "weight": 3,
+        "points": 18
+      },
+      {
+        "term": "incident de sécurité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "détection des menaces",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "vulnérabilité",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "vulnérabilité",
+        "count": 2,
+        "weight": 5,
+        "points": 10,
+        "zone": "title"
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 3,
+        "weight": 3,
+        "points": 9
+      },
+      {
+        "term": "réponse aux incidents",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "surveillance de sécurité",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "sécurité",
+        "count": 8,
+        "weight": 1,
+        "points": 8
+      },
+      {
+        "term": "sécurité",
+        "count": 3,
+        "weight": 5,
+        "points": 15,
+        "zone": "title"
+      }
+    ],
+    "Data Processing": [
+      {
+        "term": "sous-traitant",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Outsourcing": [
+      {
+        "term": "niveaux de service",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ],
+    "Construction": [
+      {
+        "term": "site",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "sous-traitant",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      }
+    ],
+    "Manufacturing": [
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 3,
+        "points": 3
+      },
+      {
+        "term": "production",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      },
+      {
+        "term": "délai",
+        "count": 3,
+        "weight": 1,
+        "points": 3
+      },
+      {
+        "term": "délai",
+        "count": 1,
+        "weight": 5,
+        "points": 5,
+        "zone": "title"
+      }
+    ],
+    "Corporate Resolution": [
+      {
+        "term": "approbation",
+        "count": 1,
+        "weight": 1,
+        "points": 1
+      }
+    ]
+  },
+  "ranked_families": [
+    [
+      "MSA",
+      134
+    ],
+    [
+      "Cybersecurity",
+      132
+    ],
+    [
+      "Manufacturing",
+      24
+    ],
+    [
+      "Construction",
+      6
+    ],
+    [
+      "Data Processing",
+      3
+    ],
+    [
+      "Outsourcing",
+      1
+    ],
+    [
+      "Corporate Resolution",
+      1
+    ]
+  ]
+}
+
+========================================================================================================================
+REDACTION MARKER INVENTORY
+========================================================================================================================
+'[ORGANIZATION]' => 2
+'[PARTY_1],' => 1
+'[LOCATION]' => 1
+'[PARTY_2],' => 1
+'[ORGANIZATION].' => 1
+
+========================================================================================================================
+LINE-BY-LINE CHANGES
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+CHANGE: 1
+TAG: replace
+CLEAN RANGE: 1 2
+REDACTED RANGE: 1 2
+
+BEFORE:
+"Le présent Accord de Services de Cybersécurité Gérés (l'« Accord ») est conclu à la date du 6 juillet 2026, entre Obsidian Threat Defense LLC, une société à responsabilité limitée du Delaware (le « Prestataire »), et Cascadia Regional Bank, une banque agréée par l'État de Washington (le « Client »), pour la fourniture de services de détection et de réponse gérées, de gestion des vulnérabilités et de réponse aux incidents (les « Services »)."
+
+AFTER:
+"Le présent Accord de Services de Cybersécurité Gérés (l'« Accord ») est conclu à la date du 6 juillet 2026, entre [PARTY_1], une société à responsabilité limitée du [LOCATION] (le « Prestataire »), et [PARTY_2], une banque agréée par l'État de Washington (le « Client »), pour la fourniture de services de détection et de réponse gérées, de gestion des vulnérabilités et de réponse aux incidents (les « Services »)."
+
+------------------------------------------------------------------------------------------------------------------------
+CHANGE: 2
+TAG: replace
+CLEAN RANGE: 5 6
+REDACTED RANGE: 5 6
+
+BEFORE:
+"1.1 Le Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au Cadre de Cybersécurité du NIST."
+
+AFTER:
+"1.1 Le Prestataire fournira une surveillance de sécurité, une détection des menaces et des services de réponse aux incidents 24 heures sur 24, 7 jours sur 7, tels que décrits à l'Annexe A, conformément au [ORGANIZATION]."
+
+------------------------------------------------------------------------------------------------------------------------
+CHANGE: 3
+TAG: replace
+CLEAN RANGE: 21 22
+REDACTED RANGE: 21 22
+
+BEFORE:
+'Pour Obsidian Threat Defense LLC :'
+
+AFTER:
+'[ORGANIZATION] :'
+
+------------------------------------------------------------------------------------------------------------------------
+CHANGE: 4
+TAG: replace
+CLEAN RANGE: 23 24
+REDACTED RANGE: 23 24
+
+BEFORE:
+'Pour Cascadia Regional Bank :'
+
+AFTER:
+'[ORGANIZATION] :'
+
+========================================================================================================================
+WORD TOKEN DAMAGE
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+TOKEN CHANGE: 1
+TAG: replace
+BEFORE: ["Obsidian", "Threat", "Defense", "LLC,"]
+AFTER: ["[PARTY_1],"]
+
+------------------------------------------------------------------------------------------------------------------------
+TOKEN CHANGE: 2
+TAG: replace
+BEFORE: ["Delaware"]
+AFTER: ["[LOCATION]"]
+
+------------------------------------------------------------------------------------------------------------------------
+TOKEN CHANGE: 3
+TAG: replace
+BEFORE: ["Cascadia", "Regional", "Bank,"]
+AFTER: ["[PARTY_2],"]
+
+------------------------------------------------------------------------------------------------------------------------
+TOKEN CHANGE: 4
+TAG: replace
+BEFORE: ["Cadre", "de", "Cybersécurité", "du", "NIST."]
+AFTER: ["[ORGANIZATION]."]
+
+------------------------------------------------------------------------------------------------------------------------
+TOKEN CHANGE: 5
+TAG: replace
+BEFORE: ["Pour", "Obsidian", "Threat", "Defense", "LLC"]
+AFTER: ["[ORGANIZATION]"]
+
+------------------------------------------------------------------------------------------------------------------------
+TOKEN CHANGE: 6
+TAG: replace
+BEFORE: ["Pour", "Cascadia", "Regional", "Bank"]
+AFTER: ["[ORGANIZATION]"]
+
+========================================================================================================================
+FAMILY INDICATOR SURVIVAL
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FAMILY: Cybersecurity
+WEIGHT: 3 | TERM: 'cybersécurité' | BEFORE: 3 | AFTER: 2 | DELTA: -1
+WEIGHT: 1 | TERM: 'sécurité' | BEFORE: 11 | AFTER: 10 | DELTA: -1
+
+------------------------------------------------------------------------------------------------------------------------
+FAMILY: MSA
+
+========================================================================================================================
+END
+========================================================================================================================

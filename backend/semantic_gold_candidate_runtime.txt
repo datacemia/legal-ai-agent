@@ -1,0 +1,59 @@
+========================================================================================
+SOURCE-ONLY GOLD CANDIDATE ANNOTATOR
+========================================================================================
+INPUT ROWS: 60
+CANDIDATE ROWS: 60
+LANGUAGES: {'en': 20, 'fr': 20, 'ar': 20}
+UNRESOLVED PRIMARY TYPES: 2
+PRIMARY TYPE DISAGREEMENTS: 17
+EVIDENCE INTEGRITY FAILURES: 0
+APPROVED GOLD ROWS: 0
+JSONL: semantic_gold\review_pack_60_gold_candidate\review_pack_60_gold_candidate.jsonl
+CSV: semantic_gold\review_pack_60_gold_candidate\review_pack_60_gold_candidate.csv
+SUMMARY: semantic_gold\review_pack_60_gold_candidate\review_pack_60_gold_candidate_summary.json
+
+CANDIDATE PRIMARY TYPES
+   7  payment
+   7  data_protection
+   4  intellectual_property
+   3  termination
+   3  renewal
+   3  liability
+   3  indemnity
+   3  confidentiality
+   2  data_processing
+   2  security_interest
+   2  guarantee
+   2  employment
+   2  covenant
+   2  services
+   2  supply_distribution
+   2  work_product
+   2  UNRESOLVED
+   2  restrictive_covenants
+   1  pricing
+   1  fees
+   1  license
+   1  service_level
+   1  delivery
+   1  anti_dilution_preemptive_rights
+   1  share_transfer_rights
+
+PRIMARY TYPE DISAGREEMENTS
+EN | 03_SaaS_Cloud_Agreement.json | 5.1 | pipeline=security | candidate=data_protection | mechanisms=['NOTICE_REQUIREMENT', 'BREACH_NOTIFICATION', 'SECURITY_SAFEGUARD_OBLIGATION']
+EN | 12_Loan_Credit_Agreement.json | 1.1 | pipeline=loan | candidate=payment | mechanisms=['PAYMENT_OBLIGATION', 'INTEREST_ACCRUAL', 'LOAN_DISBURSEMENT', 'CONDITIONS_PRECEDENT']
+EN | 13_Asset_Purchase_Agreement.json | 4.1 | pipeline=compensation | candidate=covenant | mechanisms=['OPERATIONAL_COVENANT']
+FR | 08_Procurement_Supply_Agreement_FR.json | 5.1 | pipeline=pricing | candidate=supply_distribution | mechanisms=['PURCHASE_COMMITMENT']
+FR | 11_Commercial_Lease_Agreement_FR.json | 2.2 | pipeline=fees | candidate=payment | mechanisms=['PAYMENT_OBLIGATION']
+FR | 03_SaaS_Cloud_Agreement_FR.json | 5.1 | pipeline=security | candidate=data_protection | mechanisms=['NOTICE_REQUIREMENT', 'BREACH_NOTIFICATION', 'SECURITY_SAFEGUARD_OBLIGATION']
+FR | 12_Loan_Credit_Agreement_FR.json | 1.1 | pipeline=loan | candidate=payment | mechanisms=['PAYMENT_OBLIGATION', 'INTEREST_ACCRUAL', 'LOAN_DISBURSEMENT', 'CONDITIONS_PRECEDENT']
+FR | 13_Asset_Purchase_Agreement_FR.json | 4.1 | pipeline=compensation | candidate=covenant | mechanisms=['OPERATIONAL_COVENANT']
+AR | 02_Master_Services_Agreement_AR.json | 3.2 | pipeline=payment | candidate=work_product | mechanisms=['WORK_PRODUCT_OWNERSHIP_TRANSFER']
+AR | 08_Procurement_Supply_Agreement_AR.json | 5.1 | pipeline=pricing | candidate=supply_distribution | mechanisms=['PURCHASE_COMMITMENT']
+AR | 10_Outsourcing_Managed_Services_Agreement_AR.json | 5.1 | pipeline=security | candidate=data_protection | mechanisms=['NOTICE_REQUIREMENT', 'BREACH_NOTIFICATION', 'SECURITY_SAFEGUARD_OBLIGATION']
+AR | 03_SaaS_Cloud_Agreement_AR.json | 5.1 | pipeline=cybersecurity | candidate=data_protection | mechanisms=['NOTICE_REQUIREMENT', 'BREACH_NOTIFICATION', 'SECURITY_SAFEGUARD_OBLIGATION']
+AR | 12_Loan_Credit_Agreement_AR.json | 1.1 | pipeline=loan | candidate=payment | mechanisms=['PAYMENT_OBLIGATION', 'INTEREST_ACCRUAL', 'LOAN_DISBURSEMENT', 'CONDITIONS_PRECEDENT']
+AR | 06_Executive_Employment_Agreement_AR.json | 4.2 | pipeline=employment | candidate=restrictive_covenants | mechanisms=['NON_SOLICITATION_RESTRICTION']
+AR | 06_Executive_Employment_Agreement_AR.json | 4.1 | pipeline=services | candidate=restrictive_covenants | mechanisms=['NON_COMPETE_RESTRICTION']
+AR | 06_Executive_Employment_Agreement_AR.json | 2.1 | pipeline=corporate_governance | candidate=payment | mechanisms=['PAYMENT_OBLIGATION', 'BASE_COMPENSATION']
+AR | 14_Shareholders_Agreement_AR.json | 3.2 | pipeline=assignment | candidate=share_transfer_rights | mechanisms=['TAG_ALONG_RIGHT']

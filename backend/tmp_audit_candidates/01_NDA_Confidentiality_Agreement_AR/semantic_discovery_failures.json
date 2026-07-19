@@ -1,0 +1,636 @@
+[
+  {
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة، باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية",
+            "start": 4,
+            "end": 56
+          }
+        ]
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 122,
+            "end": 142
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 122,
+            "end": 142,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 126,
+            "end": 142,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "e7d9ce5fb237499491e4e087d2250856b70b0b05af6f2ecbb33e2cf1a111bed7",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 126,
+            "end": 136,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "836f234da938d1ec966bbe8a553cb094f95da680cdd8edca8d2a52fb1676f0e0",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "NON_DISCLOSURE",
+        "rank": 97,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 40,
+            "end": 121,
+            "text": "المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث"
+          },
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 13,
+            "end": 121,
+            "text": "طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "b7078270410f89ae7f0ee6d79d4ad14eb06cec9492a905c60ca3dd0307fbda44",
+        "normalized_concept": "NON_DISCLOSURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": "DISCLOSE",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "MANDATORY_CONJUNCTION",
+        "rank": 94,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 4,
+            "end": 218,
+            "text": "يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة، باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "arguments": [
+          {
+            "text": "يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان",
+            "tokens": [
+              "يلتزم",
+              "طرف",
+              "متلق",
+              "بالحفاظ",
+              "على",
+              "سرية",
+              "المعلومات",
+              "السرية",
+              "للطرف",
+              "المفصح",
+              "بأقصى",
+              "درجات",
+              "الكتمان"
+            ]
+          },
+          {
+            "text": "عدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة",
+            "tokens": [
+              "عدم",
+              "الإفصاح",
+              "عنها",
+              "لأي",
+              "طرف",
+              "ثالث",
+              "دون",
+              "موافقة",
+              "خطية",
+              "مسبقة"
+            ]
+          },
+          {
+            "text": "باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية.",
+            "tokens": [
+              "باستثناء",
+              "الممثلين",
+              "الملتزمين",
+              "بالتزامات",
+              "سرية",
+              "تقل",
+              "حماية",
+              "هذه",
+              "الاتفاقية"
+            ]
+          }
+        ],
+        "evidence_hash": "82cfc66001a464670cd050b308ed8e4e6a25338e57c9c84d79df1a4623d676e8",
+        "normalized_concept": "MANDATORY_CONJUNCTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "CONFIDENTIALITY_DUTY",
+        "rank": 88,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_DUTY",
+            "start": 4,
+            "end": 218,
+            "text": "يلتزم كل طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث دون موافقة خطية مسبقة، باستثناء الممثلين الملتزمين بالتزامات سرية لا تقل حماية عن هذه الاتفاقية."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "04d807a369a46cf18aa295b3c6261717c6fd2cf247a47fd12d288e391b0bd365",
+        "normalized_concept": "CONFIDENTIALITY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": null,
+          "trigger": null,
+          "action": "MAINTAIN_CONFIDENTIALITY",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "NON_DISCLOSURE",
+        "rank": 97,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 40,
+            "end": 121,
+            "text": "المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث"
+          },
+          {
+            "label": "NON_DISCLOSURE",
+            "start": 13,
+            "end": 121,
+            "text": "طرف متلقٍ بالحفاظ على سرية المعلومات السرية للطرف المفصح بأقصى درجات الكتمان، وعدم الإفصاح عنها لأي طرف ثالث"
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "b7078270410f89ae7f0ee6d79d4ad14eb06cec9492a905c60ca3dd0307fbda44",
+        "normalized_concept": "NON_DISCLOSURE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": "DISCLOSING_PARTY",
+          "beneficiary": "DISCLOSING_PARTY",
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": "DISCLOSE",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "1.2",
+    "source_language": "ar",
+    "source_text": "1.2 يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "يلتزم كل طرف متلقٍ باستخدام المعلومات السرية",
+            "start": 4,
+            "end": 48
+          }
+        ]
+      },
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "حصراً لأغراض الغرض",
+            "start": 49,
+            "end": 67
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIAL_USE_RESTRICTION",
+        "rank": 87,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIAL_USE_RESTRICTION",
+            "start": 23,
+            "end": 75,
+            "text": "باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد."
+          }
+        ],
+        "grounded": true,
+        "polarity": "RESTRICTED",
+        "evidence_hash": "2cab2535b2ae6cc5c88bb2097209db08563ca5fa46b2527c67b2ebbda6a4205a",
+        "normalized_concept": "PURPOSE_LIMITATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "RECEIVING_PARTY",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": "USE_FOR_DEFINED_PURPOSE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "MANDATORY_OBLIGATION",
+        "rank": 72,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 4,
+            "end": 75,
+            "text": "يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5a0d34b686da1a10e68017b82a117455a5c308622ef94b70955cf46b8bc75e58",
+        "normalized_concept": "MANDATORY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "MANDATORY_OBLIGATION",
+        "rank": 72,
+        "candidate_primary_type": "mandatory_obligation",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "MANDATORY_CONJUNCTION",
+            "start": 4,
+            "end": 75,
+            "text": "يلتزم كل طرف متلقٍ باستخدام المعلومات السرية حصراً لأغراض الغرض المحدد."
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "5a0d34b686da1a10e68017b82a117455a5c308622ef94b70955cf46b8bc75e58",
+        "normalized_concept": "MANDATORY_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "CONFIDENTIALITY_OBLIGATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "يلتزم كل طرف متلقٍ باستخدام المعلومات السرية",
+            "start": 4,
+            "end": 48
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "SUPPORTED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 لا تشمل المعلومات السرية المعلومات التي: (أ) أصبحت متاحة للجمهور دون تقصير من الطرف المتلقي؛ (ب) كانت معروفة لدى الطرف المتلقي بشكل مشروع قبل الإفصاح عنها؛ (ج) طُورت بشكل مستقل دون استخدام المعلومات السرية؛ أو (د) وردت بشكل مشروع من طرف ثالث دون التزام بالسرية.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_EXCLUSION",
+        "rank": 86,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_EXCLUSION",
+            "start": 4,
+            "end": 265,
+            "text": "لا تشمل المعلومات السرية المعلومات التي: (أ) أصبحت متاحة للجمهور دون تقصير من الطرف المتلقي؛ (ب) كانت معروفة لدى الطرف المتلقي بشكل مشروع قبل الإفصاح عنها؛ (ج) طُورت بشكل مستقل دون استخدام المعلومات السرية؛ أو (د) وردت بشكل مشروع من طرف ثالث دون التزام بالسرية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f363204d7d168d62c1dc80efa56c1f1c2ad070cae0db1dbe12c56f9664059701",
+        "normalized_concept": "CONFIDENTIALITY_EXCLUSION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_EXCLUSION",
+        "rank": 86,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_EXCLUSION",
+            "start": 4,
+            "end": 265,
+            "text": "لا تشمل المعلومات السرية المعلومات التي: (أ) أصبحت متاحة للجمهور دون تقصير من الطرف المتلقي؛ (ب) كانت معروفة لدى الطرف المتلقي بشكل مشروع قبل الإفصاح عنها؛ (ج) طُورت بشكل مستقل دون استخدام المعلومات السرية؛ أو (د) وردت بشكل مشروع من طرف ثالث دون التزام بالسرية."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "f363204d7d168d62c1dc80efa56c1f1c2ad070cae0db1dbe12c56f9664059701",
+        "normalized_concept": "CONFIDENTIALITY_EXCLUSION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "CONFIDENTIAL_INFORMATION",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "01_NDA_Confidentiality_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به.",
+    "primary_type": "confidentiality",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة خمس (5) سنوات",
+            "start": 109,
+            "end": 126
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 4,
+            "end": 290,
+            "text": "تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "69b80aa4c9f00d9005df4b1f8600161d8e807b12c922553acbcafd56ac2111ad",
+        "normalized_concept": "CONFIDENTIALITY_SURVIVAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "CONFIDENTIALITY_SURVIVAL",
+        "rank": 84,
+        "candidate_primary_type": "confidentiality",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "CONFIDENTIALITY_SURVIVAL",
+            "start": 4,
+            "end": 290,
+            "text": "تظل هذه الاتفاقية سارية المفعول لمدة سنتين (2) من تاريخ النفاذ. تستمر التزامات السرية المنصوص عليها هنا لمدة خمس (5) سنوات بعد الإفصاح عن المعلومات السرية المعنية، باستثناء الأسرار التجارية التي تستمر التزامات السرية بشأنها طالما ظلت تلك المعلومات سراً تجارياً بموجب القانون المعمول به."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "69b80aa4c9f00d9005df4b1f8600161d8e807b12c922553acbcafd56ac2111ad",
+        "normalized_concept": "CONFIDENTIALITY_SURVIVAL",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة خمس (5) سنوات",
+            "start": 109,
+            "end": 126
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "MISMATCH",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

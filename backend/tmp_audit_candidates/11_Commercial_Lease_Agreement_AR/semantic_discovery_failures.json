@@ -1,0 +1,1152 @@
+[
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "5.1",
+    "source_language": "ar",
+    "source_text": "5.1 لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول.",
+    "primary_type": "assignment",
+    "expected_source_mechanisms": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "دون موافقة خطية مسبق",
+            "start": 87,
+            "end": 107
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "PRIOR_CONSENT_PREREQUISITE",
+        "rank": 100,
+        "candidate_primary_type": "consent_control",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 87,
+            "end": 107,
+            "text": "دون موافقة خطية مسبق"
+          },
+          {
+            "label": "PRIOR_CONSENT_PREREQUISITE",
+            "start": 91,
+            "end": 107,
+            "text": "موافقة خطية مسبق"
+          }
+        ],
+        "grounded": true,
+        "procedural_state": "PRIOR_CONSENT",
+        "evidence_hash": "7c10c9326bebc846f105ef55d75b0e5e057885388b3bcd0a9c08ea38fd3082a1",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "CONSENT_PREREQUISITE",
+        "rank": 97,
+        "candidate_primary_type": "procedure",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "CONSENT_PREREQUISITE",
+            "start": 91,
+            "end": 101,
+            "text": "موافقة خطي"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "945856da497a0f6b7134b644fd39298604c7b97d94fdd0ccedcba471acc382c3",
+        "normalized_concept": "CONSENT_PREREQUISITE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [
+            "PRIOR_APPROVAL"
+          ],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 176,
+            "text": "لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "6262f444811172da416d2e7b4b3dc7e65042b569b5c6567adf91638b34faec20",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 21,
+            "end": 41,
+            "text": "التنازل عن هذا العقد"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "251d72e91c59739449cbb5b83c41d831af8b367aa3365bd5dfcaa1e39cb8b70d",
+        "normalized_concept": "ASSIGNMENT_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "TENANT",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PROHIBITION",
+        "rank": 92,
+        "candidate_primary_type": "prohibition",
+        "semantic_role": "CONTROL_MODIFIER",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PROHIBITION",
+            "start": 4,
+            "end": 176,
+            "text": "لا يجوز للمستأجر التنازل عن هذا العقد أو تأجير المباني من الباطن، كلياً أو جزئياً، دون موافقة خطية مسبقة من المؤجر، والتي لا يجوز حجبها أو تقييدها أو تأخيرها دون سبب معقول."
+          }
+        ],
+        "grounded": true,
+        "polarity": "PROHIBITED",
+        "evidence_hash": "6262f444811172da416d2e7b4b3dc7e65042b569b5c6567adf91638b34faec20",
+        "normalized_concept": "PROHIBITION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      },
+      {
+        "kind": "ASSIGNMENT_TRANSFER",
+        "rank": 82,
+        "candidate_primary_type": "assignment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ASSIGNMENT_TRANSFER",
+            "start": 21,
+            "end": 41,
+            "text": "التنازل عن هذا العقد"
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "251d72e91c59739449cbb5b83c41d831af8b367aa3365bd5dfcaa1e39cb8b70d",
+        "normalized_concept": "ASSIGNMENT_RESTRICTION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": "TENANT",
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "PROHIBITION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "1.1",
+    "source_language": "ar",
+    "source_text": "1.1 مدة هذا العقد خمس (5) سنوات، تبدأ في 1 أغسطس 2026 وتنتهي في 31 يوليو 2031، ما لم يُنهَ العقد مبكراً وفقاً لأحكامه.",
+    "primary_type": "term",
+    "expected_source_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذا العقد خمس (5) سنوات",
+            "start": 4,
+            "end": 31
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "term",
+        "anchors": [
+          "terminate",
+          "أغسطس",
+          "العقد",
+          "تبدأ",
+          "خمس",
+          "سنوات",
+          "لأحكامه",
+          "لم",
+          "ما",
+          "مبكرا",
+          "مدة",
+          "نه",
+          "وفقا",
+          "يوليو"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "TERM_DURATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "مدة هذا العقد خمس (5) سنوات",
+            "start": 4,
+            "end": 31
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "2.1",
+    "source_language": "ar",
+    "source_text": "2.1 يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 176,
+            "text": "يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c470ede1b8aef6756392eaa1b6d4b11efe76bd54a1f65657542d955fd5376683",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18500,
+              "unit": "USD",
+              "semantic_role": "MONTHLY_BASE_RENT",
+              "related_mechanism": "RENT_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 60,
+            "end": 97,
+            "text": "يُدفع مقدماً في اليوم الأول من كل شهر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "04d487b3111526047242b4df42e9a7a55521af653efc94904df284c045228d04",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 176,
+            "text": "يسدد المستأجر إيجاراً أساسياً قدره 18,500 دولار شهرياً، يُدفع مقدماً في اليوم الأول من كل شهر، رهناً بزيادة سنوية قدرها ثلاثة بالمائة (3%) في كل ذكرى سنوية لتاريخ بدء العقد"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "c470ede1b8aef6756392eaa1b6d4b11efe76bd54a1f65657542d955fd5376683",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": [
+            {
+              "value": 18500,
+              "unit": "USD",
+              "semantic_role": "MONTHLY_BASE_RENT",
+              "related_mechanism": "RENT_OBLIGATION"
+            }
+          ]
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAY_FREQUENCY",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_SECONDARY",
+        "primary_eligible": false,
+        "source_evidence": [
+          {
+            "label": "PAY_FREQUENCY",
+            "start": 60,
+            "end": 97,
+            "text": "يُدفع مقدماً في اليوم الأول من كل شهر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "04d487b3111526047242b4df42e9a7a55521af653efc94904df284c045228d04",
+        "normalized_concept": "PAY_FREQUENCY",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": "PAY_ON_SCHEDULE",
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "2.2",
+    "source_language": "ar",
+    "source_text": "2.2 يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 98,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 154,
+            "text": "يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "94e9b26fdc9303f789deeb16b641836dd8c68b321b7f49b0596259dd6502ae88",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "OPERATING_EXPENSES",
+        "rank": 97,
+        "candidate_primary_type": "real_estate",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 36,
+            "end": 154,
+            "text": "نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر"
+          },
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 9,
+            "end": 41,
+            "text": "المستأجر حصته التناسبية من نفقات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "65ce9df519688b60c1b6568fb9f90c165028d4a7321db97b17cd1978289e1b87",
+        "normalized_concept": "OPERATING_EXPENSES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 154,
+            "text": "يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ee8014a398b648c6821aaf6880a495a7e2a6948eac84fdad591954365d423f5a",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 98,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 154,
+            "text": "يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "94e9b26fdc9303f789deeb16b641836dd8c68b321b7f49b0596259dd6502ae88",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "OPERATING_EXPENSES",
+        "rank": 97,
+        "candidate_primary_type": "real_estate",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 36,
+            "end": 154,
+            "text": "نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر"
+          },
+          {
+            "label": "OPERATING_EXPENSES",
+            "start": 9,
+            "end": 41,
+            "text": "المستأجر حصته التناسبية من نفقات"
+          }
+        ],
+        "grounded": true,
+        "polarity": "OBLIGATION",
+        "evidence_hash": "65ce9df519688b60c1b6568fb9f90c165028d4a7321db97b17cd1978289e1b87",
+        "normalized_concept": "OPERATING_EXPENSES",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 154,
+            "text": "يسدد المستأجر حصته التناسبية من نفقات التشغيل، المقدرة شهرياً والمُسوَّاة سنوياً، مع استحقاق أي رصيد مستحق خلال ثلاثين (30) يوماً من بيان تسوية المؤجر"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "ee8014a398b648c6821aaf6880a495a7e2a6948eac84fdad591954365d423f5a",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": null,
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "3.1",
+    "source_language": "ar",
+    "source_text": "3.1 يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "SECURITY_DEPOSIT_PAYMENT",
+        "rank": 91,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_DEPOSIT_PAYMENT",
+            "start": 4,
+            "end": 206,
+            "text": "يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4bcc47f2976cc331eaf78d9aee767b0d696064bac1444b8fc9b67663e3a0fd16",
+        "normalized_concept": "SECURITY_DEPOSIT_PAYMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 206,
+            "text": "يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "58e2f2f78ca066f6993dedf902391c50379e12da5572567db532a02d553a18c7",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 206,
+            "text": "يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "36031f9d1a877e9602aaac44ee3b7a8246d2406f74fea037b4a5ea14d2f5960f",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "SECURITY_DEPOSIT_PAYMENT",
+        "rank": 91,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SECURITY_DEPOSIT_PAYMENT",
+            "start": 4,
+            "end": 206,
+            "text": "يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "4bcc47f2976cc331eaf78d9aee767b0d696064bac1444b8fc9b67663e3a0fd16",
+        "normalized_concept": "SECURITY_DEPOSIT_PAYMENT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 4,
+            "end": 206,
+            "text": "يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "58e2f2f78ca066f6993dedf902391c50379e12da5572567db532a02d553a18c7",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 4,
+            "end": 206,
+            "text": "يدفع المستأجر وديعة ضمان تعادل شهرين (2) من الإيجار الأساسي عند توقيع هذا العقد، يحتفظ بها المؤجر كضمان لأداء التزامات المستأجر وتُرد خلال ثلاثين (30) يوماً بعد انتهاء المدة، بعد خصم أي استقطاعات مشروعة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "36031f9d1a877e9602aaac44ee3b7a8246d2406f74fea037b4a5ea14d2f5960f",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "4.1",
+    "source_language": "ar",
+    "source_text": "4.1 يستخدم المستأجر المباني حصراً لأغراض المكاتب العامة واستوديو التصميم، ويحافظ على داخل المباني في حالة جيدة، باستثناء التآكل الناتج عن الاستخدام العادي.",
+    "primary_type": "other",
+    "expected_source_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "حصراً لأغراض",
+            "start": 28,
+            "end": 40
+          }
+        ]
+      }
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "SOURCE_PROFILE",
+        "primary_type": "other",
+        "anchors": [
+          "الاستخدام",
+          "التآكل",
+          "التصميم",
+          "العادي",
+          "العامة",
+          "المباني",
+          "المستأجر",
+          "المكاتب",
+          "الناتج",
+          "باستثناء",
+          "جيدة",
+          "حالة",
+          "حصرا",
+          "داخل",
+          "لأغراض",
+          "واستوديو",
+          "ويحافظ",
+          "يستخدم"
+        ]
+      }
+    ],
+    "unsupported_extracted_mechanisms": [],
+    "missing_high_confidence_mechanisms": [
+      {
+        "concept": "PURPOSE_LIMITATION",
+        "confidence": 0.95,
+        "source_evidence": [
+          {
+            "text": "حصراً لأغراض",
+            "start": 28,
+            "end": 40
+          }
+        ]
+      }
+    ],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "PARTIAL",
+    "grounding_verdict": "PASS"
+  },
+  {
+    "document": "11_Commercial_Lease_Agreement_AR.json",
+    "reference": "6.1",
+    "source_language": "ar",
+    "source_text": "6.1 إذا لم يسدد المستأجر الإيجار الأساسي خلال عشرة (10) أيام من استحقاقه، أو أخل بأي شرط جوهري آخر من هذا العقد ولم يعالج ذلك خلال ثلاثين (30) يوماً من إشعار خطي، يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار المعجل للمدة المتبقية، رهناً بواجب المؤجر في تخفيف الأضرار.",
+    "primary_type": "payment",
+    "expected_source_mechanisms": [],
+    "extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 163,
+            "end": 312,
+            "text": "يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار المعجل للمدة المتبقية، رهناً بواجب المؤجر في تخفيف الأضرار."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fd385f9bc985541d58c2d5ca793272b36fc8ba06f95432bbe373900f1adeea78",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 11,
+            "end": 252,
+            "text": "يسدد المستأجر الإيجار الأساسي خلال عشرة (10) أيام من استحقاقه، أو أخل بأي شرط جوهري آخر من هذا العقد ولم يعالج ذلك خلال ثلاثين (30) يوماً من إشعار خطي، يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "585a4edb40f7ce22cbc8f48cf5192acc5af2e0ff56144a60437c7553988c2158",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 11,
+            "end": 268,
+            "text": "يسدد المستأجر الإيجار الأساسي خلال عشرة (10) أيام من استحقاقه، أو أخل بأي شرط جوهري آخر من هذا العقد ولم يعالج ذلك خلال ثلاثين (30) يوماً من إشعار خطي، يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار المعجل للمدة ال"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "362a08591fb3d9cd57b7620104a2ba296ec34e50b0987c4bbc3259a3e4b52f03",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "unsupported_extracted_mechanisms": [
+      {
+        "kind": "TERMINATION_RIGHT",
+        "rank": 91,
+        "candidate_primary_type": "termination",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "TERMINATION_RIGHT",
+            "start": 163,
+            "end": 312,
+            "text": "يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار المعجل للمدة المتبقية، رهناً بواجب المؤجر في تخفيف الأضرار."
+          }
+        ],
+        "grounded": true,
+        "evidence_hash": "fd385f9bc985541d58c2d5ca793272b36fc8ba06f95432bbe373900f1adeea78",
+        "normalized_concept": "TERMINATION_RIGHT",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "UNKNOWN",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "UNKNOWN"
+      },
+      {
+        "kind": "PAYMENT_OBLIGATION",
+        "rank": 90,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_OBLIGATION",
+            "start": 11,
+            "end": 252,
+            "text": "يسدد المستأجر الإيجار الأساسي خلال عشرة (10) أيام من استحقاقه، أو أخل بأي شرط جوهري آخر من هذا العقد ولم يعالج ذلك خلال ثلاثين (30) يوماً من إشعار خطي، يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "585a4edb40f7ce22cbc8f48cf5192acc5af2e0ff56144a60437c7553988c2158",
+        "normalized_concept": "PAYMENT_OBLIGATION",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      },
+      {
+        "kind": "PAYMENT_DEADLINE",
+        "rank": 89,
+        "candidate_primary_type": "payment",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "PAYMENT_DEADLINE",
+            "start": 11,
+            "end": 268,
+            "text": "يسدد المستأجر الإيجار الأساسي خلال عشرة (10) أيام من استحقاقه، أو أخل بأي شرط جوهري آخر من هذا العقد ولم يعالج ذلك خلال ثلاثين (30) يوماً من إشعار خطي، يجوز للمؤجر إنهاء هذا العقد ومتابعة جميع سبل الانتصاف المتاحة، بما في ذلك استرداد الإيجار المعجل للمدة ال"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "362a08591fb3d9cd57b7620104a2ba296ec34e50b0987c4bbc3259a3e4b52f03",
+        "normalized_concept": "PAYMENT_DEADLINE",
+        "normalized_relation": {
+          "right_holder": null,
+          "obligated_actor": null,
+          "counterparty": null,
+          "beneficiary": null,
+          "object": "LEASE",
+          "trigger": null,
+          "action": null,
+          "polarity": "OBLIGATION",
+          "procedural_states": [],
+          "numeric_semantic_roles": []
+        },
+        "normalized_polarity": "OBLIGATION"
+      }
+    ],
+    "missing_high_confidence_mechanisms": [],
+    "material_mechanisms_without_evidence": [],
+    "primary_type_verdict": "REVIEW_REQUIRED",
+    "mechanism_extraction_verdict": "FAIL",
+    "grounding_verdict": "PASS"
+  }
+]

@@ -1,0 +1,188 @@
+[
+  {
+    "language": "fr",
+    "document": "05_Data_Processing_Agreement_FR.json",
+    "reference": "clause_7",
+    "source_text": "2.1 Le Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité.",
+    "pipeline_clause_type": "confidentiality",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9608,
+    "shadow_dominance_margin": 84.9129,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 84.9129,
+        "coverage": 0.9608,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "AUTHORIZED_PERSON_CONFIDENTIALITY"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 7,
+            "end": 203,
+            "text": "Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 7,
+            "end": 203,
+            "text": "Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "68b35d47a1f7948196e678c1ee641d107a16b3dfcad48b50571390e01ca728a2"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+        "rank": 88,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "AUTHORIZED_PERSON_CONFIDENTIALITY",
+            "start": 7,
+            "end": 203,
+            "text": "Sous-traitant veillera à ce que les personnes autorisées à traiter les Données Personnelles s'engagent à la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "68b35d47a1f7948196e678c1ee641d107a16b3dfcad48b50571390e01ca728a2"
+      }
+    ],
+    "semantic_profile_hash": "8b47f06383b6c40a8fc08bbb84d8c266d5a435f7c1c5a6adedeeb55bb7351c5c",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "05_Data_Processing_Agreement_AR.json",
+    "reference": "clause_8",
+    "source_text": "8.1 يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية.",
+    "pipeline_clause_type": "compliance",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "data_protection",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.9774,
+    "shadow_dominance_margin": 85.4898,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "data_protection",
+        "score": 85.4898,
+        "coverage": 0.9774,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "DATA_PROTECTION_AUDIT_COOPERATION"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 220,
+            "text": "يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 220,
+            "text": "يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d5bc6549ae35dd4fd8b90640ca11cc1b334fccecf87e0208773900b4b651f973"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "DATA_PROTECTION_AUDIT_COOPERATION",
+        "rank": 87,
+        "candidate_primary_type": "data_protection",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "DATA_PROTECTION_AUDIT_COOPERATION",
+            "start": 4,
+            "end": 220,
+            "text": "يتيح المعالج للمتحكم جميع المعلومات اللازمة لإثبات الامتثال لهذه الاتفاقية، ويسمح بإجراء عمليات التدقيق، بما في ذلك التفتيش، من قبل المتحكم أو مدقق مفوض من قبله، بحد أقصى مرة واحدة سنوياً في غياب خرق للبيانات الشخصية"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d5bc6549ae35dd4fd8b90640ca11cc1b334fccecf87e0208773900b4b651f973"
+      }
+    ],
+    "semantic_profile_hash": "a6562992e2edb3a8cf4f77cca7e4945e2602610846fc6609ff481e08d8512f49",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

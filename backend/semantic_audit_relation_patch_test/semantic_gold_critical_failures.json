@@ -1,0 +1,391 @@
+[
+  {
+    "fixture_id": "06_4_1_en",
+    "language": "en",
+    "source_text": "4.1 During employment and for eighteen (18) months thereafter, Executive shall not, directly or indirectly, provide services to any business that directly competes with the Company's gene-editing therapeutics programs within the United States.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "restrictive_covenants",
+      "mechanisms": [
+        "NON_COMPETE",
+        "PROHIBITION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:NON_COMPETE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "06_4_1_ar",
+    "language": "ar",
+    "source_text": "4.1 خلال مدة العمل ولمدة ثمانية عشر (18) شهراً بعد انتهائه، تمتنع المديرة التنفيذية، بشكل مباشر أو غير مباشر، عن تقديم خدمات لأي جهة تنافس مباشرة برامج الشركة لعلاجات تحرير الجينات داخل الولايات المتحدة.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NON_COMPETE"
+      ],
+      "relations": [
+        {
+          "concept": "NON_COMPETE",
+          "obligated_actor": "EXECUTIVE",
+          "action": "COMPETE",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "restrictive_covenants",
+      "mechanisms": [
+        "NON_COMPETE"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 18,
+          "unit": "MONTHS",
+          "semantic_role": "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+          "related_mechanism": "NON_COMPETE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "NON_COMPETE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:NON_COMPETE"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_1_1_en",
+    "language": "en",
+    "source_text": "1.1 During the Transition Period, Provider shall implement the transition plan set forth in Exhibit C, including knowledge transfer, system access provisioning, and onboarding of Transferred Employees, with minimal disruption to Client's business operations.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Pendant la Période de Transition, le Prestataire mettra en œuvre le plan de transition prévu à l'Annexe C, incluant le transfert de connaissances, la fourniture d'accès aux systèmes et l'intégration des Salariés Transférés, avec un minimum de perturbation pour les opérations du Client.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "10_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 خلال فترة الانتقال، ينفذ المزود خطة الانتقال المحددة في الملحق ج، بما في ذلك نقل المعرفة وتوفير الوصول إلى الأنظمة وإدماج الموظفين المنقولين، بأقل قدر من التعطيل لعمليات العميل.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "relations": [
+        {
+          "concept": "TRANSITION_PLAN",
+          "obligated_actor": "PROVIDER",
+          "action": "IMPLEMENT_TRANSITION_PLAN",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "services",
+      "mechanisms": [
+        "SERVICE_SCOPE",
+        "TRANSITION_PLAN"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "TRANSITION_PLAN",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "SERVICE_SCOPE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:TRANSITION_PLAN"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_1_1_en",
+    "language": "en",
+    "source_text": "1.1 Lender shall disburse the principal amount of the Loan to Borrower upon satisfaction of the conditions precedent set forth in Exhibit A. The Loan shall bear interest at a fixed rate of 8.25% per annum, payable monthly, with principal amortized over the term of the Loan.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "LOAN_DISBURSEMENT",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LOAN_DISBURSEMENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LOAN_DISBURSEMENT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Le Prêteur décaissera le montant en principal du Prêt à l'Emprunteur sous réserve de la satisfaction des conditions préalables prévues à l'Annexe A. Le Prêt portera intérêt à un taux fixe de 8,25 % par an, payable mensuellement, le principal étant amorti sur la durée du Prêt.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "LOAN_DISBURSEMENT",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LOAN_DISBURSEMENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LOAN_DISBURSEMENT"
+    ],
+    "high": []
+  },
+  {
+    "fixture_id": "12_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 يصرف المُقرض المبلغ الأصلي للقرض إلى المقترض رهناً باستيفاء الشروط المسبقة المحددة في الملحق أ. يحمل القرض فائدة بمعدل ثابت قدره 8.25% سنوياً، تُدفع شهرياً، مع إطفاء المبلغ الأصلي على مدى فترة القرض.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "LOAN_DISBURSEMENT"
+      ],
+      "relations": [
+        {
+          "concept": "LOAN_DISBURSEMENT",
+          "obligated_actor": "LENDER",
+          "beneficiary": "BORROWER",
+          "trigger": "CONDITIONS_PRECEDENT_SATISFIED",
+          "polarity": "OBLIGATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "LOAN_DISBURSEMENT",
+        "PAY_FREQUENCY"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "LOAN_DISBURSEMENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PAY_FREQUENCY",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [
+      "WRONG_MATERIAL_ACTOR:LOAN_DISBURSEMENT"
+    ],
+    "high": []
+  }
+]

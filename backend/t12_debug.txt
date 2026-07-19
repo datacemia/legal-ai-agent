@@ -1,0 +1,473 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+FINANCE_TEXT_PDF_EXTRACTED 4031
+PDF_LINES_DEBUG {'line_count': 73, 'non_empty_line_count': 45, 'max_line_len': 153, 'first_20': ['MARIA SALPIETRA', ' 7008 FRANCIS ST', ' LINCOLN , NE 68505', '', ' Account Number 26841920380056', ' Routing Number  103100195', '', '', '', ' STATEMENT PERIOD  01/20/23 TO 02/21/23', '', '', '', '', ' BEGINNING BALANCE                                                                           $1,110.00', '  DEPOSITS & OTHER ADDITIONS                                                                 $1,001.30', '  WITHDRAWALS & OTHER SUBTRACTIONS                                                       $1,000.65', ' ENDING BALANCE                                                                               $1,110.65', '', ' ANNUAL PERCENTAGE YIELD EARNED 01/20/23 - 02/21/23                                                    0.01%']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+CM_POSITION_LINES_SAMPLE {'count': 0, 'first_20': []}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+CM_POSITION_LINES_SMALL_EXPENSES []
+SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG {'sections': []}
+SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0}
+SECTIONED_DW_INDICES_DEBUG {'dep_i': 13, 'dep_line': 'INTEREST NOT AVAILABLE UNTIL CREDITED', 'wd_i': 14, 'wd_line': 'DEPOSITS   WITHDRAWALS', 'bal_i': -1, 'bal_line': None}
+SECTIONED_DW_STATEMENT_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'balance_rows_excluded': 0, 'balance_samples': []}
+WESTPAC_GUARD_DEBUG {'has_westpac': False, 'has_header': False, 'has_total_credits': False, 'has_total_debits': False}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+VALUE_DATE_GUARD_DEBUG {'has_date': True, 'has_operation': False, 'has_reference': False, 'has_valeur': False, 'has_debit': False, 'has_credit': True}
+DEBIT_CREDIT_BALANCE_HEADER_CHECK {'has_headers': False, 'has_debit': False, 'has_credit': True, 'has_balance': True, 'preview': 'maria salpietra\n 7008 francis st\n lincoln , ne 68505\n\n account number 26841920380056\n routing number  103100195\n\n\n\n statement period  01/20/23 to 02/21/23\n\n\n\n\n beginning balance                                                                           $1,110.00\n  deposits & other additions          '}
+MONTH_NAME_LEDGER_VERSION v5-dedup-pending-context
+WDB_PRE_ROUTE_DEBUG {'has_deposits_additions': False, 'has_withdrawals_subtractions': False, 'has_ending_daily': False, 'has_transaction_history': False}
+WDB_CANDIDATE_LINE '20/23 TO'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 BEGINNING BALANCE $1,110.00 DEPOSITS & OTHER ADDITIONS $1,001.30 WITHDRAWALS & OTHER SUBTRACTIONS $1,000.65 ENDING BALANCE $1,110.65 ANNUAL PERCENTAGE YIELD EARNED'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '20/23 -'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '21/23 0.01% INTEREST EARNED THIS PERIOD $0.01 AVERAGE DAILY BALANCE $1,006.96 INTEREST NOT AVAILABLE UNTIL CREDITED DEPOSITS WITHDRAWALS DATE & OTHER & OTHER POSTED DESCRIPTION OF TRANSACTIONS ADDITIONS SUBTRACTIONS BALANCE'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.23 $1,110.65 ACH PAYMENT TO CITI SECURED APP-ACCT VERIF 0.65 $1,110.00'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65'
+WDB_MATCH False
+WDB_CANDIDATE_LINE '19/23 ENDING BALANCE $1,110.65 All deposited items are credited subject to final payment. Please examine your statement at once. If you change your address, please notify us of your new address. Stride Bank, N.A. (Rev. 2/2023) yMs Page 1 of 1 For Consumer Accounts Only: IN CASE OF ERRORS OR QUESTIONS ABOUT YOUR ELECTRONIC TRANSFERS Electronic transfers (called transfers below) means a) deposits, withdrawals, or payments made at an ATM or store terminal, b) bill payer transfers c) all other electronic transfers (e.g., payroll deposits, Social Security deposits, insurance payments, etc.). If you think your statement or receipt is wrong, or if you need more information about a transfer on the statement or receipt, TELEPHONE US OR WRITE TO US AS SOON AS YOU CAN -- USE THE TELEPHONE NUMBER OR ADDRESS ON THE FRONT OF THIS STATEMENT. We must hear from you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared. (1) Tell us your name and account number (if any). (2) Describe the error or the transfer you are unsure about, and explain as clearly as you can why you believe there is an error or why you need more information. (3) Tell us the dollar amount of the suspected error. We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have the use of the money during the time it takes to complete our investigation. © 2021 HSBC Bank USA, National Association HSBC Bank USA, National Association Member FDIC. Page 2 of 2'
+WDB_MATCH False
+WDB_MULTILINE_TX_SAMPLE []
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_MULTILINE_TOTALS_TARGET {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_LINE_SEMANTIC_DEBUG {'candidate_date_lines': 6, 'sample_date_lines': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+WDB_OCR_LINE_SEMANTIC_EXTRA {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WDB_SEGMENT_RECONSTRUCTOR_DEBUG {'raw_date_lines': 6, 'samples': ['01/21/23 OPENING BALANCE $1,110.00', '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', '02/19/23 ENDING BALANCE $1,110.65']}
+BNP_AMOUNT_DEBUG {'line': '01/21/23 OPENING BALANCE $1,110.00', 'nums': ['1,110.00'], 'normalized': '1,110.00', 'parsed': 1110.0}
+SEGMENT_SKIP_UNKNOWN_TYPE '01/21/23 OPENING BALANCE $1,110.00'
+BNP_AMOUNT_DEBUG {'line': '01/24/23 ACH DEPOSIT FROM CITI SECURED APP-ACCT VERIF 0.42 $1,110.42', 'nums': ['1,110.42'], 'normalized': '1,110.42', 'parsed': 1110.42}
+BNP_AMOUNT_DEBUG {'line': '01/29/23 MISCELLANEOUS ELECTRONIC CREDIT 0.65 $1,110.65', 'nums': ['1,110.65'], 'normalized': '1,110.65', 'parsed': 1110.65}
+BNP_AMOUNT_DEBUG {'line': '02/12/23 ACH PAYMENT TO CITI NA SECURED-ACCT FUND 1,000.00 $110.65', 'nums': ['1,000.00', '110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+BNP_AMOUNT_DEBUG {'line': '02/15/23 MISCELLANEOUS ELECTRONIC CREDIT 1,000.00 $1,110.65', 'nums': ['1,000.00', '1,110.65'], 'normalized': '1,000.00', 'parsed': 1000.0}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 2221.3, 'expense_total': 1221.07, 'before_gap': 1000.0, 'after_gap': 3221.3}
+WDB_SEGMENT_RECONSTRUCTOR_REJECTED
+WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+WITHDRAW_DEPOSIT_BALANCE_EXTRACTED {'transactions': 4, 'income': 2, 'expenses': 2}
+WDB_PRE_ROUTE_RESULT {'transactions': 4, 'income': 2, 'expenses': 2}
+STATEMENT_LAYOUT_DETECTED withdraw_deposit_balance
+WITHDRAW_DEPOSIT_BALANCE_ROUTE {'transactions': 4, 'income': 2, 'expenses': 2, 'income_total': 1000.65, 'expense_total': 1000.42}
+STANDARD_CHECKING_SUMMARY_EARLY_RETURN {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1110.0, 'deposits': 0.65, 'ending_balance': 1110.65}
+WDB_ROUTE_RECON_GUARD {'expected_income': 0.65, 'parsed_income': 1000.65, 'income_gap': 1000.0, 'expected_expense': None, 'parsed_expense': 1000.42, 'expense_gap': None}
+WDB_ROUTE_REJECTED_BY_RECONCILIATION
+GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED {'transactions': 0, 'income': 0, 'expenses': 0, 'income_total': 0, 'expense_total': 0, 'opening_balance': None, 'sample': []}
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parse_riyad_position_lines_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+V11_CANDIDATE_AUDIT [{'parser': 'parser_riyad_arabe1', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v13', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3_v12', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_anb_arabe3', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_of_america_credit_card', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_banque_postale_multiline', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_bank_chaabi', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parser_us_fintech_deposit_column_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}, {'parser': 'parse_riyad_position_lines_statement', 'count': 0, 'income_total': 0, 'expense_total': 0}]
+SUSPICIOUS t12.pdf | tx=0 income=0 expenses=0 expected_income=0.65 expected_expenses=None summary_ok=True real_ok=None opening=1110.0 ending=1110.65 gap=None reason=NO_TRANSACTIONS

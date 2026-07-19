@@ -1,0 +1,20 @@
+RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
+Traceback (most recent call last):
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_one_finance_real.py", line 11, in <module>
+    r = test_file(Path(sys.argv[1]))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\tools\test_finance_real_reconciliation.py", line 35, in test_file
+    text = extract_statement_text_from_path(str(path))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\statement_parser.py", line 710, in extract_statement_text_from_path
+    text = _extract_text_with_scan_fallback(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\statement_parser.py", line 668, in _extract_text_with_scan_fallback
+    text = _extract_text_from_pdf_path(file_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\finance_agent\statement_parser.py", line 159, in _extract_text_from_pdf_path
+    with fitz.open(file_path) as doc:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\pymupdf\__init__.py", line 2992, in __init__
+    raise FileNotFoundError(f"no such file: '{filename}'")
+pymupdf.FileNotFoundError: no such file: 'ejjami\Relevés compte 3.pdf'

@@ -1,0 +1,3166 @@
+========================================================================================================================
+V4.1.15 DETERMINISTIC SUMMARY HARDENING PROBE
+========================================================================================================================
+
+========================================================================================================================
+FILE: app\services\contract_agent\unified_report_from_pipeline.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: extract_contract_duration
+LINES: 363 - 397
+TOKENS: ['duration']
+00358:         r"(?:المدة|مدة\s+العقد|مدة\s+الاتفاقية)\s+الأولية\s+(?:هي|تكون)\s+([^.;؛!؟\n]{2,120})",
+00359:     ),
+00360: }
+00361: 
+00362: 
+00363: def extract_contract_duration(
+00364:     contract_text: str,
+00365:     language: str = "en",
+00366: ) -> str | None:
+00367:     """
+00368:     Conservative document-level term extraction.
+00369: 
+00370:     Only agreement/contract-term wording is eligible. Periods attached to
+00371:     confidentiality survival, cure, notice, payment, vesting, non-compete,
+00372:     audit frequency, or data retention are not treated as contract duration.
+00373:     """
+00374:     language = normalize_language(language)
+00375:     text = str(contract_text or "")
+00376: 
+00377:     for pattern in CONTRACT_DURATION_PATTERNS[language]:
+00378:         match = re.search(pattern, text, flags=re.IGNORECASE)
+00379:         if not match:
+00380:             continue
+00381: 
+00382:         value = " ".join(match.group(1).strip().split())
+00383: 
+00384:         # Stop at common clause continuations without interpreting them.
+00385:         value = re.split(
+00386:             r"\b(?:unless|except|provided\s+that|but)\b"
+00387:             r"|\b(?:sauf|à\s+moins\s+que|a\s+moins\s+que|mais)\b"
+00388:             r"|(?:ما\s+لم|باستثناء|ولكن)",
+00389:             value,
+00390:             maxsplit=1,
+00391:             flags=re.IGNORECASE,
+00392:         )[0].strip(" ,،")
+00393: 
+00394:         if 2 <= len(value) <= 120:
+00395:             return value
+00396: 
+00397:     return None
+00398: 
+00399: 
+00400: def infer_exposure_dimensions(clause: dict, risk_level: str) -> dict:
+00401:     text = safe_get_text(
+00402:         clause.get("clause_type"),
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_contract_quality_score
+LINES: 708 - 789
+TOKENS: ['manual review', 'مراجعة يدوية']
+00703:             return value
+00704: 
+00705:     return None
+00706: 
+00707: 
+00708: def build_contract_quality_score(
+00709:     pipeline_result: dict,
+00710:     clauses: list,
+00711: ) -> int:
+00712:     """
+00713:     Deterministic analysis-quality score.
+00714: 
+00715:     This is intentionally independent from contractual risk. It measures
+00716:     analysis coverage and confidence, so a low-risk contract cannot be
+00717:     mislabeled as a low-quality contract merely because both use 0-100 scales.
+00718:     """
+00719:     if not clauses:
+00720:         return 0
+00721: 
+00722:     confidence_points = {
+00723:         "high": 1.0,
+00724:         "medium": 0.72,
+00725:         "low": 0.35,
+00726:     }
+00727: 
+00728:     confidence_values = [
+00729:         confidence_points.get(
+00730:             str(clause.get("confidence") or "medium").lower(),
+00731:             0.55,
+00732:         )
+00733:         for clause in clauses
+00734:         if isinstance(clause, dict)
+00735:     ]
+00736: 
+00737:     average_confidence = (
+00738:         sum(confidence_values) / len(confidence_values)
+00739:         if confidence_values else 0.0
+00740:     )
+00741: 
+00742:     total_detected = (
+00743:         pipeline_result.get("total_clauses_detected")
+00744:         or len(clauses)
+00745:     )
+00746:     analyzed = (
+00747:         pipeline_result.get("clauses_analyzed")
+00748:         or len(clauses)
+00749:     )
+00750: 
+00751:     try:
+00752:         coverage = min(
+00753:             1.0,
+00754:             max(0.0, float(analyzed) / max(float(total_detected), 1.0)),
+00755:         )
+00756:     except (TypeError, ValueError, ZeroDivisionError):
+00757:         coverage = 1.0
+00758: 
+00759:     fidelity_failures = sum(
+00760:         1
+00761:         for clause in clauses
+00762:         if isinstance(clause, dict)
+00763:         and any(
+00764:             marker in safe_get_text(
+00765:                 clause.get("legal_insight"),
+00766:                 clause.get("recommendation"),
+00767:                 clause.get("negotiation_advice"),
+00768:                 clause.get("safer_alternative"),
+00769:             ).lower()
+00770:             for marker in (
+00771:                 "manual review required",
+00772:                 "examen manuel requis",
+00773:                 "مراجعة يدوية مطلوبة",
+00774:             )
+00775:         )
+00776:     )
+00777: 
+00778:     fidelity_ratio = max(
+00779:         0.0,
+00780:         1.0 - (fidelity_failures / max(len(clauses), 1)),
+00781:     )
+00782: 
+00783:     score = round(
+00784:         (average_confidence * 60)
+00785:         + (coverage * 25)
+00786:         + (fidelity_ratio * 15)
+00787:     )
+00788: 
+00789:     return max(0, min(100, score))
+00790: 
+00791: 
+00792: CORE_MISSING_CLAUSE_EXPECTATIONS = {
+00793:     "nda": {
+00794:         "confidentiality",
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_contract_overview
+LINES: 929 - 1027
+TOKENS: ['duration', 'party_roles', 'build_contract_overview', 'contract_overview']
+00924:         output.append(item)
+00925: 
+00926:     return output
+00927: 
+00928: 
+00929: def build_contract_overview(
+00930:     pipeline_result: dict,
+00931:     family_detection: dict,
+00932:     contract_text: str = "",
+00933:     party_roles: dict | None = None,
+00934:     language: str = "en",
+00935: ) -> dict:
+00936:     """
+00937:     Defensive, family-aware overview with non-destructive fact resolution.
+00938: 
+00939:     Structured values already resolved upstream are preserved. Conservative
+00940:     document-level extractors only fill gaps and never overwrite a substantive
+00941:     value with a localized "Not specified" placeholder.
+00942:     """
+00943:     language = normalize_language(language)
+00944:     not_specified = localized_default("not_specified", language)
+00945:     not_applicable = localized_default("not_applicable", language)
+00946: 
+00947:     exec_summary = pipeline_result.get("executive_summary", {}) or {}
+00948:     exec_report = pipeline_result.get("executive_report", {}) or {}
+00949:     overview = exec_report.get("contract_overview", {}) or {}
+00950: 
+00951:     family = family_detection.get("family", "General")
+00952:     optional_fields = get_optional_fields_for_family(family)
+00953: 
+00954:     payment_terms = exec_summary.get("payment_terms")
+00955:     duration = (
+00956:         exec_summary.get("duration")
+00957:         or overview.get("duration")
+00958:         or extract_contract_duration(contract_text, language)
+00959:     )
+00960: 
+00961:     if "payment_terms" in optional_fields and not payment_terms:
+00962:         payment_terms = not_applicable
+00963: 
+00964:     if "duration" in optional_fields and not duration:
+00965:         duration = not_applicable
+00966: 
+00967:     arbitration_facts = analyze_arbitration(contract_text or "") or {}
+00968: 
+00969:     jurisdiction_candidates = [
+00970:         exec_summary.get("jurisdiction_detected"),
+00971:         overview.get("jurisdiction_detected"),
+00972:         extract_document_jurisdiction(contract_text, language),
+00973:         arbitration_facts.get("seat"),
+00974:         arbitration_facts.get("place"),
+00975:         arbitration_facts.get("country"),
+00976:     ]
+00977: 
+00978:     jurisdiction_detected = next(
+00979:         (
+00980:             value
+00981:             for value in jurisdiction_candidates
+00982:             if is_substantive_overview_value(value, language)
+00983:         ),
+00984:         not_specified,
+00985:     )
+00986: 
+00987:     parties = exec_summary.get("parties") or overview.get("parties")
+00988: 
+00989:     if isinstance(party_roles, dict):
+00990:         detected_roles = [
+00991:             str(party_roles.get(key) or "").strip()
+00992:             for key in ("party_a", "party_b")
+00993:             if str(party_roles.get(key) or "").strip()
+00994:         ]
+00995: 
+00996:         if len(detected_roles) >= 2:
+00997:             parties = detected_roles
+00998: 
+00999:     parties = canonicalize_party_labels(
+01000:         parties,
+01001:         language,
+01002:     )
+01003: 
+01004:     return {
+01005:         "contract_type": family,
+01006:         "parties": parties or [not_specified],
+01007:         "duration": duration or not_specified,
+01008:         "payment_terms": payment_terms or not_specified,
+01009:         "jurisdiction_detected": jurisdiction_detected,
+01010:         "jurisdiction_note": (
+01011:             exec_summary.get("jurisdiction_note")
+01012:             or overview.get("jurisdiction_note")
+01013:             or ""
+01014:         ),
+01015:         "contract_complexity": (
+01016:             exec_summary.get("contract_complexity")
+01017:             or overview.get("contract_complexity")
+01018:             or "medium"
+01019:         ),
+01020:         "overall_balance": (
+01021:             exec_summary.get("overall_balance")
+01022:             or overview.get("overall_balance")
+01023:             or not_specified
+01024:         ),
+01025:         "family_hint": build_family_hint(family_detection),
+01026:         "_clauses_analyzed": overview.get("clauses_analyzed"),
+01027:     }
+01028: 
+01029: 
+01030: 
+01031: 
+01032: def select_clause_report_text(
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: select_clause_report_text
+LINES: 1032 - 1058
+TOKENS: ['select_clause_report_text']
+01027:     }
+01028: 
+01029: 
+01030: 
+01031: 
+01032: def select_clause_report_text(
+01033:     clause: dict,
+01034:     language: str = "en",
+01035:     *,
+01036:     purpose: str = "explanation",
+01037: ) -> str:
+01038:     """Select one already-produced clause field using purpose-aware provenance."""
+01039:     language = normalize_language(language)
+01040:     field_orders = {
+01041:         "explanation": (
+01042:             "explanation_simple", "why_it_matters", "legal_insight",
+01043:             "business_impact", "commercial_impact", "operational_impact",
+01044:         ),
+01045:         "risk": (
+01046:             "risk_reason", "business_impact", "commercial_impact",
+01047:             "operational_impact", "legal_insight", "explanation_simple",
+01048:             "why_it_matters",
+01049:         ),
+01050:         "action": (
+01051:             "recommendation", "negotiation_advice", "safer_alternative",
+01052:         ),
+01053:     }
+01054:     for field in field_orders.get(purpose, field_orders["explanation"]):
+01055:         value = normalize_report_text(clause.get(field, ""))
+01056:         if value and not is_generic_report_text(value, language):
+01057:             return value
+01058:     return ""
+01059: 
+01060: 
+01061: def build_key_clauses(clauses: list, language: str = "en") -> list:
+01062:     key_clauses = []
+01063:     language = normalize_language(language)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_key_clauses
+LINES: 1061 - 1075
+TOKENS: ['select_clause_report_text']
+01056:         if value and not is_generic_report_text(value, language):
+01057:             return value
+01058:     return ""
+01059: 
+01060: 
+01061: def build_key_clauses(clauses: list, language: str = "en") -> list:
+01062:     key_clauses = []
+01063:     language = normalize_language(language)
+01064:     for i, clause in enumerate(clauses):
+01065:         why = select_clause_report_text(clause, language, purpose="explanation")
+01066:         if not why:
+01067:             continue
+01068:         key_clauses.append({
+01069:             "id": _clause_id(clause, i),
+01070:             "clause_type": clause.get("clause_type", "other"),
+01071:             "title": clause.get("clause_title") or clause.get("title", ""),
+01072:             "why_it_matters": why,
+01073:             "risk_level": clause.get("risk_level", "low"),
+01074:         })
+01075:     return key_clauses
+01076: 
+01077: 
+01078: def build_risks_identified(clauses: list, language: str = "en") -> list:
+01079:     risks = []
+01080:     language = normalize_language(language)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_risks_identified
+LINES: 1078 - 1100
+TOKENS: ['select_clause_report_text']
+01073:             "risk_level": clause.get("risk_level", "low"),
+01074:         })
+01075:     return key_clauses
+01076: 
+01077: 
+01078: def build_risks_identified(clauses: list, language: str = "en") -> list:
+01079:     risks = []
+01080:     language = normalize_language(language)
+01081:     for i, clause in enumerate(clauses):
+01082:         risk_level = str(clause.get("risk_level", "low")).lower()
+01083:         if risk_level == "low" and not clause.get("red_flag"):
+01084:             continue
+01085:         explanation = select_clause_report_text(clause, language, purpose="risk")
+01086:         if not explanation:
+01087:             continue
+01088:         risks.append({
+01089:             "id": f"risk_{_clause_id(clause, i)}",
+01090:             "clause_ref": _clause_id(clause, i),
+01091:             "title": clause.get("clause_title") or clause.get("title") or "",
+01092:             "clause_type": clause.get("clause_type", "other"),
+01093:             "risk_level": risk_level,
+01094:             "market_practice": infer_market_practice(clause),
+01095:             "market_practice_score": clause.get("market_practice_score"),
+01096:             "exposure": infer_exposure_dimensions(clause, risk_level),
+01097:             "explanation": explanation,
+01098:             "red_flag": bool(clause.get("red_flag")),
+01099:         })
+01100:     return risks
+01101: 
+01102: 
+01103: def build_negotiation_priorities(clauses: list) -> list:
+01104:     priorities = []
+01105: 
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_action_checklist
+LINES: 1144 - 1166
+TOKENS: ['select_clause_report_text']
+01139:             "negotiation_alternative": clause.get("negotiation_advice", ""),
+01140:         })
+01141:     return wording
+01142: 
+01143: 
+01144: def build_action_checklist(clauses: list, language: str = "en") -> list:
+01145:     """Publish actionable fields only; red_flag_reason is never an action."""
+01146:     actions = []
+01147:     language = normalize_language(language)
+01148:     for clause in clauses:
+01149:         priority = str(clause.get("negotiation_priority", "low")).lower()
+01150:         action = select_clause_report_text(clause, language, purpose="action")
+01151:         if not action:
+01152:             continue
+01153:         urgency = (
+01154:             "immediate"
+01155:             if clause.get("red_flag") and priority == "high"
+01156:             else URGENCY_BY_PRIORITY.get(priority, "monitor")
+01157:         )
+01158:         actions.append({
+01159:             "action": action,
+01160:             "urgency": urgency,
+01161:             "owner": infer_action_owner(clause),
+01162:             "deadline": infer_action_deadline(urgency),
+01163:             "category": infer_action_category(clause),
+01164:             "clause_ref": clause.get("clause_id", ""),
+01165:         })
+01166:     return actions
+01167: 
+01168: 
+01169: 
+01170: RISK_SCORE_POINTS = {
+01171:     "low": 0,
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_unified_report_from_pipeline
+LINES: 1367 - 1430
+TOKENS: ['party_roles', 'build_contract_overview', 'contract_overview']
+01362:     }
+01363: 
+01364: 
+01365: 
+01366: 
+01367: def build_unified_report_from_pipeline(
+01368:     pipeline_result: dict,
+01369:     contract_text: str,
+01370:     language: str = "en",
+01371:     party_roles: dict | None = None,
+01372: ) -> dict:
+01373:     language = normalize_language(language)
+01374:     """
+01375:     Main entrypoint. Aggregates the report from one clause-analysis truth.
+01376:     The only small AI call is limited to genuinely absent family-core clauses
+01377:     and confidence notes.
+01378:     """
+01379:     clauses = _get_clause_list(pipeline_result)
+01380:     family_detection = detect_contract_family(contract_text)
+01381: 
+01382:     key_clauses = build_key_clauses(clauses, language)
+01383:     risks = build_risks_identified(clauses, language)
+01384:     negotiation_priorities = build_negotiation_priorities(clauses)
+01385:     suggested_wording = build_suggested_wording(clauses)
+01386:     action_checklist = build_action_checklist(clauses, language)
+01387:     risk_score = build_risk_score(pipeline_result, risks)
+01388:     contract_overview = build_contract_overview(
+01389:         pipeline_result,
+01390:         family_detection,
+01391:         contract_text,
+01392:         party_roles,
+01393:         language,
+01394:     )
+01395: 
+01396:     executive_summary_text = (
+01397:         pipeline_result.get("executive_risk_narrative")
+01398:         or pipeline_result.get("executive_report", {}).get("executive_narrative", "")
+01399:         or ""
+01400:     )
+01401: 
+01402:     missing_clauses, confidence_notes, fallback_position = (
+01403:         _generate_missing_clauses_and_notes(
+01404:             contract_text,
+01405:             family_detection,
+01406:             clauses,
+01407:             language,
+01408:         )
+01409:     )
+01410: 
+01411:     quality_score = build_contract_quality_score(
+01412:         pipeline_result,
+01413:         clauses,
+01414:     )
+01415: 
+01416:     return {
+01417:         "contract_family": family_detection.get("family", "General"),
+01418:         "contract_overview": contract_overview,
+01419:         "executive_summary": executive_summary_text,
+01420:         "key_clauses": key_clauses,
+01421:         "risks_identified": risks,
+01422:         "negotiation_priorities": negotiation_priorities,
+01423:         "suggested_wording": suggested_wording,
+01424:         "fallback_position": fallback_position,
+01425:         "action_checklist": action_checklist,
+01426:         "risk_score": risk_score,
+01427:         "confidence_score": quality_score,
+01428:         "missing_clauses": missing_clauses,
+01429:         "confidence_notes": confidence_notes,
+01430:     }
+01431: 
+01432: 
+01433: 
+01434: # ---------------------------------------------------------------------
+01435: # Pure-Python legacy adapters.
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: to_legacy_summary_data
+LINES: 1705 - 1843
+TOKENS: ['duration', 'to_legacy_summary_data', 'contract_overview']
+01700:         return "an"
+01701: 
+01702:     return "an" if word[0].lower() in "aeiou" else "a"
+01703: 
+01704: 
+01705: def to_legacy_summary_data(
+01706:     report: dict,
+01707:     language: str = "en",
+01708: ) -> dict:
+01709:     language = normalize_language(language)
+01710:     not_specified = localized_default("not_specified", language)
+01711: 
+01712:     overview = report.get("contract_overview", {}) or {}
+01713:     negotiation = report.get("negotiation_priorities", []) or []
+01714:     risks = report.get("risks_identified", []) or []
+01715: 
+01716:     contract_family = (
+01717:         report.get("contract_family")
+01718:         or overview.get("contract_type")
+01719:         or ""
+01720:     )
+01721:     optional_fields = get_optional_fields_for_family(contract_family)
+01722: 
+01723:     parties = canonicalize_party_labels(
+01724:         overview.get("parties"),
+01725:         language,
+01726:     )
+01727: 
+01728:     payment_terms = overview.get("payment_terms")
+01729:     if not payment_terms:
+01730:         payment_terms = (
+01731:             localized_default("not_applicable", language)
+01732:             if "payment_terms" in optional_fields
+01733:             else not_specified
+01734:         )
+01735: 
+01736:     main_obligations, important_points = build_legacy_clause_sections(
+01737:         report,
+01738:         language,
+01739:     )
+01740: 
+01741:     action_texts = [
+01742:         action.get("action", "")
+01743:         for action in report.get("action_checklist", [])
+01744:         if isinstance(action, dict)
+01745:     ]
+01746: 
+01747:     high_risk_texts = [
+01748:         title_aware_clause_text({
+01749:             "title": risk.get("title", ""),
+01750:             "clause_type": risk.get("clause_type", "other"),
+01751:             "why_it_matters": risk.get("explanation", ""),
+01752:         }, language)
+01753:         for risk in risks
+01754:         if isinstance(risk, dict) and risk.get("risk_level") == "high"
+01755:     ]
+01756: 
+01757:     all_risk_texts = [
+01758:         title_aware_clause_text({
+01759:             "title": risk.get("title", ""),
+01760:             "clause_type": risk.get("clause_type", "other"),
+01761:             "why_it_matters": risk.get("explanation", ""),
+01762:         }, language)
+01763:         for risk in risks
+01764:         if isinstance(risk, dict)
+01765:     ]
+01766: 
+01767:     negotiation_texts = [
+01768:         item.get("what_should_change", "")
+01769:         for item in negotiation
+01770:         if isinstance(item, dict)
+01771:     ]
+01772: 
+01773:     missing_texts = [
+01774:         (
+01775:             f"{item.get('clause_type', 'unknown')}: "
+01776:             f"{item.get('business_reason') or item.get('risk_if_missing') or item.get('why_missing') or ''}"
+01777:         ).strip()
+01778:         for item in report.get("missing_clauses", [])
+01779:         if isinstance(item, dict)
+01780:     ]
+01781: 
+01782:     return {
+01783:         "contract_type": (
+01784:             overview.get("contract_type")
+01785:             or report.get("contract_family")
+01786:             or not_specified
+01787:         ),
+01788:         "parties": parties,
+01789:         "duration": overview.get("duration") or not_specified,
+01790:         "payment_terms": payment_terms,
+01791:         "main_obligations": main_obligations,
+01792:         "global_summary": normalize_report_text(
+01793:             report.get("executive_summary", "")
+01794:         ),
+01795:         "important_points": important_points,
+01796:         "missing_clauses": compact_unique_texts(
+01797:             missing_texts,
+01798:             language,
+01799:             limit=5,
+01800:             drop_generic=False,
+01801:         ),
+01802:         "dangerous_patterns": compact_unique_texts(
+01803:             high_risk_texts,
+01804:             language,
+01805:             limit=5,
+01806:         ),
+01807:         "contract_quality_score": int(
+01808:             report.get("confidence_score")
+01809:             if report.get("confidence_score") is not None
+01810:             else 0
+01811:         ),
+01812:         "overall_balance": (
+01813:             overview.get("overall_balance")
+01814:             or not_specified
+01815:         ),
+01816:         "negotiation_priorities": compact_unique_texts(
+01817:             negotiation_texts,
+01818:             language,
+01819:             limit=5,
+01820:         ),
+01821:         "key_risks": compact_unique_texts(
+01822:             all_risk_texts,
+01823:             language,
+01824:             limit=5,
+01825:         ),
+01826:         "practical_decision": normalize_report_text(
+01827:             report.get("fallback_position", "")
+01828:         ),
+01829:         "jurisdiction_detected": (
+01830:             overview.get("jurisdiction_detected")
+01831:             or not_specified
+01832:         ),
+01833:         "jurisdiction_note": overview.get("jurisdiction_note", ""),
+01834:         "recommended_actions": compact_unique_texts(
+01835:             action_texts,
+01836:             language,
+01837:             limit=5,
+01838:         ),
+01839:         "contract_complexity": overview.get(
+01840:             "contract_complexity",
+01841:             "medium",
+01842:         ),
+01843:     }
+01844: 
+01845: 
+01846: def to_legacy_simplified_string(
+01847:     report: dict,
+01848:     language: str = "en",
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: to_legacy_simplified_string
+LINES: 1846 - 1963
+TOKENS: ['duration', 'durée', 'مدة', 'contract_overview']
+01841:             "medium",
+01842:         ),
+01843:     }
+01844: 
+01845: 
+01846: def to_legacy_simplified_string(
+01847:     report: dict,
+01848:     language: str = "en",
+01849: ) -> str:
+01850:     language = normalize_language(language)
+01851: 
+01852:     overview = report.get("contract_overview", {}) or {}
+01853:     contract_type = (
+01854:         overview.get("contract_type")
+01855:         or report.get("contract_family")
+01856:         or localized_default("not_specified", language)
+01857:     )
+01858: 
+01859:     parties = canonicalize_party_labels(
+01860:         overview.get("parties"),
+01861:         language,
+01862:     )
+01863:     parties_text = ", ".join(parties)
+01864: 
+01865:     duration = overview.get("duration")
+01866:     payment_terms = overview.get("payment_terms")
+01867: 
+01868:     key_topics = compact_unique_texts(
+01869:         [
+01870:             clause_display_title(kc, language)
+01871:             for kc in report.get("key_clauses", [])
+01872:             if isinstance(kc, dict)
+01873:         ],
+01874:         language,
+01875:         limit=4,
+01876:         drop_generic=True,
+01877:     )
+01878: 
+01879:     watch_items = compact_unique_texts(
+01880:         [
+01881:             title_aware_clause_text(
+01882:                 {
+01883:                     "title": next(
+01884:                         (
+01885:                             kc.get("title")
+01886:                             for kc in report.get("key_clauses", [])
+01887:                             if isinstance(kc, dict)
+01888:                             and kc.get("id") == risk.get("clause_ref")
+01889:                         ),
+01890:                         risk.get("clause_ref", ""),
+01891:                     ),
+01892:                     "clause_type": "",
+01893:                     "why_it_matters": risk.get("explanation", ""),
+01894:                 },
+01895:                 language,
+01896:             )
+01897:             for risk in report.get("risks_identified", [])
+01898:             if isinstance(risk, dict)
+01899:             and risk.get("risk_level") in {"medium", "high"}
+01900:         ],
+01901:         language,
+01902:         limit=4,
+01903:         drop_generic=True,
+01904:     )
+01905: 
+01906:     templates = {
+01907:         "en": {
+01908:             "intro": (
+01909:                 f"This is {english_indefinite_article(contract_type)} "
+01910:                 f"{contract_type} involving {parties_text}. "
+01911:                 "It sets out the parties' main rights, obligations, and risk allocation."
+01912:             ),
+01913:             "duration": f"The stated contract duration is {duration}.",
+01914:             "payment": f"Payment terms are {payment_terms}.",
+01915:             "topics": "Key topics include: {items}.",
+01916:             "watch": "Things to watch",
+01917:         },
+01918:         "fr": {
+01919:             "intro": (
+01920:                 f"Il s'agit d'un contrat de type {contract_type} entre {parties_text}. "
+01921:                 "Il fixe les principaux droits, obligations et mécanismes de répartition des risques."
+01922:             ),
+01923:             "duration": f"La durée contractuelle indiquée est {duration}.",
+01924:             "payment": f"Les conditions de paiement sont {payment_terms}.",
+01925:             "topics": "Les principaux sujets comprennent : {items}.",
+01926:             "watch": "Points à surveiller",
+01927:         },
+01928:         "ar": {
+01929:             "intro": (
+01930:                 f"هذا عقد من نوع {contract_type} بين {parties_text}. "
+01931:                 "ويحدد الحقوق والالتزامات الرئيسية وكيفية توزيع المخاطر بين الأطراف."
+01932:             ),
+01933:             "duration": f"مدة العقد المحددة هي {duration}.",
+01934:             "payment": f"شروط الدفع هي {payment_terms}.",
+01935:             "topics": "تشمل الموضوعات الرئيسية: {items}.",
+01936:             "watch": "نقاط يجب الانتباه لها",
+01937:         },
+01938:     }
+01939: 
+01940:     t = templates[language]
+01941:     paragraphs = [t["intro"]]
+01942: 
+01943:     if is_substantive_overview_value(duration, language):
+01944:         paragraphs.append(t["duration"])
+01945: 
+01946:     if is_substantive_overview_value(payment_terms, language):
+01947:         paragraphs.append(t["payment"])
+01948: 
+01949:     if key_topics:
+01950:         separator = "، " if language == "ar" else ", "
+01951:         paragraphs.append(
+01952:             t["topics"].format(items=separator.join(key_topics))
+01953:         )
+01954: 
+01955:     output = " ".join(paragraphs).strip()
+01956: 
+01957:     if watch_items:
+01958:         output += (
+01959:             f"\n\n{t['watch']}:\n"
+01960:             + "\n".join(f"- {item}" for item in watch_items)
+01961:         )
+01962: 
+01963:     return output.strip()
+01964: 
+01965: 
+01966: # ---------------------------------------------------------------------
+01967: # The ONE small AI call this architecture still needs.
+01968: # ---------------------------------------------------------------------
+
+DIRECT MATCHES:
+00018:       suggested_wording, action_checklist, risk_score, contract_overview
+00029: unified_summary_service.py draft. to_legacy_summary_data() /
+00091:     "Corporate Resolution": {"payment_terms", "duration"},
+00102:     "Minutes": {"payment_terms", "duration"},
+00103:     "Shareholder Resolution": {"payment_terms", "duration"},
+00105:     "Board Resolution": {"payment_terms", "duration"},
+00323:     "corporate_resolution": {"payment_terms", "duration"},
+00324:     "board_resolution": {"payment_terms", "duration"},
+00325:     "shareholder_resolution": {"payment_terms", "duration"},
+00330:     "minutes": {"payment_terms", "duration"},
+00342: CONTRACT_DURATION_PATTERNS = {
+00352:         r"\bdurée\s+initiale\s+(?:sera|est)\s+de\s+([^.;\n]{2,120})",
+00353:         r"\bduree\s+initiale\s+(?:sera|est)\s+de\s+([^.;\n]{2,120})",
+00356:         r"(?:تظل|تبقى)\s+(?:هذه\s+)?(?:الاتفاقية|العقد)\s+(?:سارية|نافذة)\s+لمدة\s+([^.;؛!؟\n]{2,120})",
+00357:         r"(?:يستمر|تستمر)\s+(?:هذا\s+)?(?:العقد|الاتفاقية)\s+لمدة\s+([^.;؛!؟\n]{2,120})",
+00358:         r"(?:المدة|مدة\s+العقد|مدة\s+الاتفاقية)\s+الأولية\s+(?:هي|تكون)\s+([^.;؛!؟\n]{2,120})",
+00363: def extract_contract_duration(
+00372:     audit frequency, or data retention are not treated as contract duration.
+00377:     for pattern in CONTRACT_DURATION_PATTERNS[language]:
+00570:         "manual review required",
+00584:         "مراجعة يدوية مطلوبة",
+00771:                 "manual review required",
+00773:                 "مراجعة يدوية مطلوبة",
+00929: def build_contract_overview(
+00933:     party_roles: dict | None = None,
+00949:     overview = exec_report.get("contract_overview", {}) or {}
+00955:     duration = (
+00956:         exec_summary.get("duration")
+00957:         or overview.get("duration")
+00958:         or extract_contract_duration(contract_text, language)
+00964:     if "duration" in optional_fields and not duration:
+00965:         duration = not_applicable
+00989:     if isinstance(party_roles, dict):
+00991:             str(party_roles.get(key) or "").strip()
+00993:             if str(party_roles.get(key) or "").strip()
+01007:         "duration": duration or not_specified,
+01032: def select_clause_report_text(
+01065:         why = select_clause_report_text(clause, language, purpose="explanation")
+01085:         explanation = select_clause_report_text(clause, language, purpose="risk")
+01150:         action = select_clause_report_text(clause, language, purpose="action")
+01371:     party_roles: dict | None = None,
+01388:     contract_overview = build_contract_overview(
+01392:         party_roles,
+01418:         "contract_overview": contract_overview,
+01473:     "duration",
+01705: def to_legacy_summary_data(
+01712:     overview = report.get("contract_overview", {}) or {}
+01789:         "duration": overview.get("duration") or not_specified,
+01852:     overview = report.get("contract_overview", {}) or {}
+01865:     duration = overview.get("duration")
+01913:             "duration": f"The stated contract duration is {duration}.",
+01923:             "duration": f"La durée contractuelle indiquée est {duration}.",
+01933:             "duration": f"مدة العقد المحددة هي {duration}.",
+01943:     if is_substantive_overview_value(duration, language):
+01944:         paragraphs.append(t["duration"])
+
+========================================================================================================================
+FILE: app\services\contract_agent\summary_service.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: party_roles_are_anonymized
+LINES: 71 - 81
+TOKENS: ['party_roles']
+00066: def contains_anonymized_placeholder(value) -> bool:
+00067:     text = str(value or "")
+00068:     return any(token in text for token in ANONYMIZED_PLACEHOLDERS)
+00069: 
+00070: 
+00071: def party_roles_are_anonymized(party_roles: dict | None) -> bool:
+00072:     if not isinstance(party_roles, dict):
+00073:         return False
+00074: 
+00075:     if party_roles.get("anonymized") is True:
+00076:         return True
+00077: 
+00078:     return (
+00079:         contains_anonymized_placeholder(party_roles.get("party_a"))
+00080:         or contains_anonymized_placeholder(party_roles.get("party_b"))
+00081:     )
+00082: 
+00083: 
+00084: def safe_apply_display_roles(value, party_roles: dict | None, language: str = "en"):
+00085:     """
+00086:     Privacy-first role display.
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: safe_apply_display_roles
+LINES: 84 - 98
+TOKENS: ['party_roles']
+00079:         contains_anonymized_placeholder(party_roles.get("party_a"))
+00080:         or contains_anonymized_placeholder(party_roles.get("party_b"))
+00081:     )
+00082: 
+00083: 
+00084: def safe_apply_display_roles(value, party_roles: dict | None, language: str = "en"):
+00085:     """
+00086:     Privacy-first role display.
+00087: 
+00088:     apply_display_roles() is allowed only when party_roles are confirmed
+00089:     anonymized. This prevents real party names or inferred role replacements
+00090:     from being injected back into summaries or prompts.
+00091:     """
+00092:     if not party_roles_are_anonymized(party_roles):
+00093:         return value
+00094: 
+00095:     try:
+00096:         return apply_display_roles(value, party_roles, language)
+00097:     except Exception:
+00098:         return value
+00099: 
+00100: 
+00101: 
+00102: 
+00103: 
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: is_employment_contract_context
+LINES: 104 - 145
+TOKENS: ['party_roles']
+00099: 
+00100: 
+00101: 
+00102: 
+00103: 
+00104: def is_employment_contract_context(party_roles: dict | None = None) -> bool:
+00105:     """
+00106:     Contract-family guard used for international party-role safety.
+00107: 
+00108:     Employer/Employee labels are allowed only when the detected contract
+00109:     context is actually employment-related or when the detected party roles
+00110:     themselves explicitly contain employment roles.
+00111:     """
+00112:     if not isinstance(party_roles, dict):
+00113:         return False
+00114: 
+00115:     text = " ".join(
+00116:         str(party_roles.get(key) or "")
+00117:         for key in [
+00118:             "contract_family",
+00119:             "contract_type",
+00120:             "party_a",
+00121:             "party_b",
+00122:             "party_a_role",
+00123:             "party_b_role",
+00124:         ]
+00125:     ).lower()
+00126: 
+00127:     employment_terms = [
+00128:         "employment",
+00129:         "employee",
+00130:         "employer",
+00131:         "employment agreement",
+00132:         "employment contract",
+00133:         "contrat de travail",
+00134:         "contrat d'emploi",
+00135:         "emploi",
+00136:         "employeur",
+00137:         "salarié",
+00138:         "salarie",
+00139:         "عقد عمل",
+00140:         "صاحب العمل",
+00141:         "الموظف",
+00142:         "العامل",
+00143:     ]
+00144: 
+00145:     return any(term in text for term in employment_terms)
+00146: 
+00147: 
+00148: def build_party_registry_prompt(language: str, party_roles: dict | None = None) -> str:
+00149:     """
+00150:     Standard international party registry instruction.
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_party_registry_prompt
+LINES: 148 - 207
+TOKENS: ['party_roles']
+00143:     ]
+00144: 
+00145:     return any(term in text for term in employment_terms)
+00146: 
+00147: 
+00148: def build_party_registry_prompt(language: str, party_roles: dict | None = None) -> str:
+00149:     """
+00150:     Standard international party registry instruction.
+00151: 
+00152:     The LLM must not choose roles from a generic catalogue. It must use only
+00153:     the roles already detected for the contract. This works across domains
+00154:     and across EN / FR / AR because the business logic uses detected roles,
+00155:     not hard-coded role names.
+00156:     """
+00157:     language = normalize_language(language)
+00158: 
+00159:     if not isinstance(party_roles, dict):
+00160:         return """
+00161: PARTY REGISTRY RULES:
+00162: - Use only party roles or party labels that appear in the contract text.
+00163: - Never invent Employer, Employee, Buyer, Seller, Vendor, Supplier, Client, Provider, Customer, Controller, Processor, Lessor, Lessee, Licensor, Licensee, or any other role.
+00164: - If a role is unclear, use neutral labels: Party A / Party B in English, Partie A / Partie B in French, الطرف أ / الطرف ب in Arabic.
+00165: """.strip()
+00166: 
+00167:     party_a = str(
+00168:         party_roles.get("party_a")
+00169:         or party_roles.get("party_a_role")
+00170:         or ""
+00171:     ).strip()
+00172:     party_b = str(
+00173:         party_roles.get("party_b")
+00174:         or party_roles.get("party_b_role")
+00175:         or ""
+00176:     ).strip()
+00177:     contract_family = str(
+00178:         party_roles.get("contract_family")
+00179:         or party_roles.get("contract_type")
+00180:         or ""
+00181:     ).strip()
+00182: 
+00183:     lines = [
+00184:         "PARTY REGISTRY - STRICT:",
+00185:     ]
+00186: 
+00187:     if party_a:
+00188:         lines.append(f"- Party A role: {party_a}")
+00189:     if party_b:
+00190:         lines.append(f"- Party B role: {party_b}")
+00191:     if contract_family:
+00192:         lines.append(f"- Detected contract family/type: {contract_family}")
+00193: 
+00194:     if not party_a and not party_b:
+00195:         lines.append("- No reliable party role was detected; use neutral Party A / Party B labels only.")
+00196: 
+00197:     lines.extend([
+00198:         "",
+00199:         "MANDATORY PARTY RULES:",
+00200:         "1. Use only the roles listed in this Party Registry or neutral Party A / Party B labels.",
+00201:         "2. Never introduce Employer / Employee unless the Party Registry or the contract text explicitly shows an employment contract.",
+00202:         "3. Never introduce Buyer / Seller, Vendor / Supplier, Client / Provider, Customer, Controller / Processor, Lessor / Lessee, Licensor / Licensee, or any other role unless it appears in the Party Registry or the source contract.",
+00203:         "4. Do not translate or rewrite party roles into a different legal relationship.",
+00204:         "5. Every obligation must keep the same responsible party as the source clause.",
+00205:     ])
+00206: 
+00207:     return "\n".join(lines).strip()
+00208: 
+00209: 
+00210: def scrub_unsupported_employment_roles(value, language: str = "en", party_roles: dict | None = None):
+00211:     """
+00212:     Last-mile role-leakage guard.
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: scrub_unsupported_employment_roles
+LINES: 210 - 283
+TOKENS: ['party_roles']
+00205:     ])
+00206: 
+00207:     return "\n".join(lines).strip()
+00208: 
+00209: 
+00210: def scrub_unsupported_employment_roles(value, language: str = "en", party_roles: dict | None = None):
+00211:     """
+00212:     Last-mile role-leakage guard.
+00213: 
+00214:     If a non-employment contract still contains Employer/Employee language,
+00215:     replace it with a neutral contractual-party label instead of guessing
+00216:     whether it means Party A or Party B. This avoids false role attribution
+00217:     across SaaS, MSA, NDA, lease, loan, franchise, procurement, IP, data,
+00218:     construction, insurance, and other contract families in EN / FR / AR.
+00219:     """
+00220:     language = normalize_language(language)
+00221: 
+00222:     if is_employment_contract_context(party_roles):
+00223:         return value
+00224: 
+00225:     neutral = {
+00226:         "en": "the relevant contractual party",
+00227:         "fr": "la partie contractuelle concernée",
+00228:         "ar": "الطرف التعاقدي المعني",
+00229:     }.get(language, "the relevant contractual party")
+00230: 
+00231:     if isinstance(value, list):
+00232:         return [
+00233:             scrub_unsupported_employment_roles(item, language, party_roles)
+00234:             for item in value
+00235:         ]
+00236: 
+00237:     if isinstance(value, dict):
+00238:         return {
+00239:             key: scrub_unsupported_employment_roles(item, language, party_roles)
+00240:             for key, item in value.items()
+00241:         }
+00242: 
+00243:     if not isinstance(value, str):
+00244:         return value
+00245: 
+00246:     output = value
+00247: 
+00248:     replacements = [
+00249:         (r"\bEmployers'\b", f"{neutral}'s"),
+00250:         (r"\bEmployer's\b", f"{neutral}'s"),
+00251:         (r"\bEmployer’s\b", f"{neutral}'s"),
+00252:         (r"\bEmployees'\b", f"{neutral}'s"),
+00253:         (r"\bEmployee's\b", f"{neutral}'s"),
+00254:         (r"\bEmployee’s\b", f"{neutral}'s"),
+00255:         (r"\bEmployers\b", neutral),
+00256:         (r"\bEmployer\b", neutral),
+00257:         (r"\bEmployees\b", neutral),
+00258:         (r"\bEmployee\b", neutral),
+00259:     ]
+00260: 
+00261:     for pattern, replacement in replacements:
+00262:         output = re.sub(pattern, replacement, output)
+00263: 
+00264:     fr_replacements = {
+00265:         "Employeur": neutral,
+00266:         "employeur": neutral,
+00267:         "Salarié": neutral,
+00268:         "salarié": neutral,
+00269:         "Salarie": neutral,
+00270:         "salarie": neutral,
+00271:     }
+00272: 
+00273:     ar_replacements = {
+00274:         "صاحب العمل": neutral,
+00275:         "الموظف": neutral,
+00276:         "الموظفين": neutral,
+00277:         "العامل": neutral,
+00278:     }
+00279: 
+00280:     for old, new in {**fr_replacements, **ar_replacements}.items():
+00281:         output = output.replace(old, new)
+00282: 
+00283:     return output
+00284: 
+00285: 
+00286: def ensure_ai_input_is_anonymized(contract_text: str) -> str:
+00287:     """
+00288:     Last-mile privacy guard.
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: get_labels
+LINES: 1023 - 1099
+TOKENS: ['duration', 'durée', 'مدة']
+01018: 
+01019:     return data
+01020: 
+01021: 
+01022: 
+01023: def get_labels(language: str = "en") -> dict:
+01024:     labels = {
+01025:         "en": {
+01026:             "type": "Type",
+01027:             "parties": "Parties",
+01028:             "duration": "Duration",
+01029:             "payment": "Payment",
+01030:             "summary": "Summary",
+01031:             "main_obligations": "Main obligations",
+01032:             "key_points": "Key points",
+01033:             "things_to_watch": "Things to watch",
+01034:             "no_text": "No text found.",
+01035:             "summary_unavailable": "Summary unavailable. Preview:",
+01036:             "simplified_unavailable": "Simplified version unavailable. Preview:",
+01037:             "contract_quality_score": "Contract Quality",
+01038:             "contract_complexity": "Contract Complexity",
+01039:             "overall_balance": "Overall Balance",
+01040:             "jurisdiction": "Jurisdiction",
+01041:             "jurisdiction_note": "Jurisdiction Note",
+01042:             "missing_clauses": "Missing Clauses",
+01043:             "dangerous_patterns": "Dangerous Patterns",
+01044:             "key_risks": "Key Risks",
+01045:             "negotiation_priorities": "Negotiation Priorities",
+01046:             "recommended_actions": "Recommended Actions",
+01047:             "practical_decision": "Practical Decision",
+01048:         },
+01049:         "fr": {
+01050:             "type": "Type",
+01051:             "parties": "Parties",
+01052:             "duration": "Durée",
+01053:             "payment": "Paiement",
+01054:             "summary": "Résumé",
+01055:             "main_obligations": "Obligations principales",
+01056:             "key_points": "Points clés",
+01057:             "things_to_watch": "Points à surveiller",
+01058:             "no_text": "Aucun texte trouvé.",
+01059:             "summary_unavailable": "Résumé indisponible. Aperçu :",
+01060:             "simplified_unavailable": "Version simplifiée indisponible. Aperçu :",
+01061:             "contract_quality_score": "Qualité du contrat",
+01062:             "contract_complexity": "Complexité du contrat",
+01063:             "overall_balance": "Équilibre du contrat",
+01064:             "jurisdiction": "Juridiction",
+01065:             "jurisdiction_note": "Note sur la juridiction",
+01066:             "missing_clauses": "Clauses manquantes",
+01067:             "dangerous_patterns": "Schémas dangereux",
+01068:             "key_risks": "Risques clés",
+01069:             "negotiation_priorities": "Priorités de négociation",
+01070:             "recommended_actions": "Actions recommandées",
+01071:             "practical_decision": "Décision pratique",
+01072:         },
+01073:         "ar": {
+01074:             "type": "النوع",
+01075:             "parties": "الأطراف",
+01076:             "duration": "المدة",
+01077:             "payment": "الدفع",
+01078:             "summary": "ملخص",
+01079:             "main_obligations": "الالتزامات الرئيسية",
+01080:             "key_points": "النقاط الرئيسية",
+01081:             "things_to_watch": "نقاط يجب الانتباه لها",
+01082:             "no_text": "لم يتم العثور على نص.",
+01083:             "summary_unavailable": "الملخص غير متاح. معاينة:",
+01084:             "simplified_unavailable": "النسخة المبسطة غير متاحة. معاينة:",
+01085:             "contract_quality_score": "جودة العقد",
+01086:             "contract_complexity": "تعقيد العقد",
+01087:             "overall_balance": "توازن العقد",
+01088:             "jurisdiction": "الاختصاص القضائي",
+01089:             "jurisdiction_note": "ملاحظة الاختصاص",
+01090:             "missing_clauses": "البنود المفقودة",
+01091:             "dangerous_patterns": "الأنماط الخطيرة",
+01092:             "key_risks": "المخاطر الرئيسية",
+01093:             "negotiation_priorities": "أولويات التفاوض",
+01094:             "recommended_actions": "الإجراءات الموصى بها",
+01095:             "practical_decision": "القرار العملي",
+01096:         },
+01097:     }
+01098: 
+01099:     return labels.get(language, labels["en"])
+01100: 
+01101: 
+01102: def translate_complexity(value: str, language: str) -> str:
+01103:     mapping = {
+01104:         "en": {"low": "Low", "medium": "Medium", "high": "High"},
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: build_empty_summary
+LINES: 1112 - 1137
+TOKENS: ['duration']
+01107:     }
+01108: 
+01109:     return mapping.get(language, mapping["en"]).get(value, value)
+01110: 
+01111: 
+01112: def build_empty_summary(language: str = "en") -> dict:
+01113:     ns = get_not_specified(language)
+01114: 
+01115:     return normalize_contract_summary(
+01116:         {
+01117:             "contract_type": ns,
+01118:             "parties": [ns],
+01119:             "duration": ns,
+01120:             "payment_terms": ns,
+01121:             "main_obligations": [],
+01122:             "global_summary": ns,
+01123:             "important_points": [],
+01124:             "missing_clauses": [],
+01125:             "dangerous_patterns": [],
+01126:             "contract_quality_score": 0,
+01127:             "overall_balance": ns,
+01128:             "negotiation_priorities": [],
+01129:             "key_risks": [],
+01130:             "practical_decision": ns,
+01131:             "jurisdiction_detected": ns,
+01132:             "jurisdiction_note": ns,
+01133:             "recommended_actions": [],
+01134:             "contract_complexity": "medium",
+01135:         },
+01136:         language,
+01137:     )
+01138: 
+01139: 
+01140: def generate_summary_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+01141:     language = normalize_language(language)
+01142:     """
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: generate_summary_data
+LINES: 1140 - 1384
+TOKENS: ['duration', 'party_roles', 'normalize_ai_role_words']
+01135:         },
+01136:         language,
+01137:     )
+01138: 
+01139: 
+01140: def generate_summary_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+01141:     language = normalize_language(language)
+01142:     """
+01143:     New structured summary function.
+01144: 
+01145:     Returns a clean dict that can later be rendered by the frontend.
+01146:     generate_summary() below still returns text for backward compatibility.
+01147:     """
+01148: 
+01149:     if not text or not text.strip():
+01150:         return build_empty_summary(language)
+01151: 
+01152:     prompt_template = load_prompt("summary_prompt.txt")
+01153:     contract_text = ensure_ai_input_is_anonymized(text[:MAX_SUMMARY_CHARS])
+01154:     party_registry_block = build_party_registry_prompt(language, party_roles)
+01155: 
+01156:     prompt = f"""
+01157: {prompt_template}
+01158: 
+01159: Output language: {language}
+01160: 
+01161: {party_registry_block}
+01162: 
+01163: SUMMARY PURPOSE:
+01164: 
+01165: Produce a structured legal summary suitable for lawyers, business users,
+01166: and contract reviewers.
+01167: 
+01168: Requirements:
+01169: - Summarize the contract objectively.
+01170: - Identify the principal obligations of each party.
+01171: - Summarize important commercial terms.
+01172: - Mention the principal legal risks.
+01173: - Mention missing or ambiguous clauses when relevant.
+01174: - Provide practical negotiation priorities.
+01175: - Do not repeat the Executive Narrative.
+01176: - Do not explain the contract in simplified language.
+01177: - Do not produce marketing language.
+01178: 
+01179: CRITICAL:
+01180: Translate every generated JSON value into this output language.
+01181: The contract source language may be different.
+01182: Do not copy source-language sentences into generated fields.
+01183: Preserve anonymized party identities exactly as provided.
+01184: 
+01185: Anonymized entities may include:
+01186: 
+01187: [PERSON]
+01188: [ORGANIZATION]
+01189: [PARTY_1]
+01190: [PARTY_2]
+01191: [PARTY_3]
+01192: 
+01193: These labels represent legal parties.
+01194: 
+01195: Do not reconstruct, infer, restore, request, or replace real names or personal data.
+01196: 
+01197: If rights, ownership, payments,
+01198: confidentiality obligations,
+01199: termination rights,
+01200: intellectual property rights,
+01201: or liabilities belong to an anonymized party,
+01202: preserve the recipient exactly as written.
+01203: 
+01204: Never transfer a right or obligation
+01205: from one anonymized party to another.
+01206: Dates, amounts, article references, and court names must remain accurate.
+01207: 
+01208: LANGUAGE CONSISTENCY ENFORCEMENT:
+01209: Before returning JSON, verify every generated value.
+01210: For output language "fr", generated values must be in French.
+01211: For output language "en", generated values must be in English.
+01212: For output language "ar", generated values must be in Arabic.
+01213: Do not copy source-language sentences into generated fields.
+01214: Clause titles, contract type, duration, payment terms, obligations, summaries, risks, and practical decision must be translated into the requested output language.
+01215: Mixed-language explanatory output is forbidden.
+01216: 
+01217: Contract text:
+01218: {contract_text}
+01219: """.strip()
+01220: 
+01221:     try:
+01222:         data = call_json_ai(prompt)
+01223:     except Exception as e:
+01224:         logger.debug("SUMMARY AI ERROR: %s", e)
+01225:         return build_empty_summary(language)
+01226: 
+01227:     data = repair_summary_language(
+01228:         data,
+01229:         language,
+01230:     )
+01231: 
+01232:     if party_roles:
+01233:         data = normalize_ai_role_words(
+01234:             data,
+01235:             party_roles,
+01236:             language,
+01237:         )
+01238: 
+01239:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01240: 
+01241:     if language == "ar":
+01242:         data["main_obligations"] = [
+01243:             item
+01244:             .replace("يلتزم الطرف بتقديم", "يلتزم الطرف ب بتقديم")
+01245:             .replace("يلتزم الطرف بالحفاظ", "يلتزم الطرف ب بالحفاظ")
+01246:             for item in data.get("main_obligations", [])
+01247:         ]
+01248:    
+01249: 
+01250:     protections = detect_balancing_protections(
+01251:         [text]
+01252:     )
+01253: 
+01254:     data = apply_balancing_protections(
+01255:         data,
+01256:         protections,
+01257:     )
+01258: 
+01259:     jurisdiction_data = extract_jurisdiction(text)
+01260: 
+01261:     if jurisdiction_data["governing_law"]:
+01262:         data["jurisdiction_detected"] = (
+01263:             jurisdiction_data["governing_law"]
+01264:         )
+01265: 
+01266:         data["jurisdiction_note"] = build_jurisdiction_note(
+01267:             jurisdiction_data.get("governing_law"),
+01268:             jurisdiction_data.get("dispute_location"),
+01269:             language,
+01270:             jurisdiction_data.get("arbitration_center"),
+01271:         )
+01272: 
+01273:         missing = data.get("missing_clauses", [])
+01274: 
+01275:         filtered = []
+01276: 
+01277:         for item in missing:
+01278:             item_lower = item.lower()
+01279: 
+01280:             if "governing law" in item_lower:
+01281:                 continue
+01282: 
+01283:             if "juridiction" in item_lower:
+01284:                 continue
+01285: 
+01286:             if "القانون" in item_lower:
+01287:                 continue
+01288: 
+01289:             filtered.append(item)
+01290: 
+01291:         data["missing_clauses"] = filtered
+01292: 
+01293:     if jurisdiction_data["dispute_location"]:
+01294:         data["jurisdiction_note"] = build_jurisdiction_note(
+01295:             jurisdiction_data.get("governing_law"),
+01296:             jurisdiction_data.get("dispute_location"),
+01297:             language,
+01298:             jurisdiction_data.get("arbitration_center"),
+01299:         )
+01300: 
+01301:         missing = data.get("missing_clauses", [])
+01302: 
+01303:         filtered = []
+01304: 
+01305:         for item in missing:
+01306:             item_lower = item.lower()
+01307: 
+01308:             if "dispute" in item_lower:
+01309:                 continue
+01310: 
+01311:             if "arbitration" in item_lower:
+01312:                 continue
+01313: 
+01314:             if "litige" in item_lower:
+01315:                 continue
+01316: 
+01317:             if "نزاع" in item_lower:
+01318:                 continue
+01319: 
+01320:             filtered.append(item)
+01321: 
+01322:         data["missing_clauses"] = filtered
+01323: 
+01324:     if (
+01325:         jurisdiction_data.get("governing_law")
+01326:         or jurisdiction_data.get("dispute_location")
+01327:     ):
+01328:         data = remove_jurisdiction_false_actions(data)
+01329: 
+01330:     data = remove_protective_constructive_termination_danger(
+01331:         data,
+01332:         text,
+01333:     )
+01334: 
+01335:     data = remove_balanced_termination_dangers(
+01336:         data,
+01337:         text,
+01338:     )
+01339: 
+01340:     data = remove_false_missing_payment_deadline(
+01341:         data,
+01342:         text,
+01343:     )
+01344: 
+01345:     data = display_safe_party_labels(data, language, party_roles)
+01346:     data = force_generic_parties(data, language, party_roles)
+01347:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01348:     data = normalize_contract_summary(data, language)
+01349: 
+01350:     if party_roles:
+01351:         data = normalize_ai_role_words(
+01352:             data,
+01353:             party_roles,
+01354:             language,
+01355:         )
+01356: 
+01357:     if (
+01358:         "contract_quality_score" not in data
+01359:         and "contract_score" in data
+01360:     ):
+01361:         data["contract_quality_score"] = data.pop(
+01362:             "contract_score"
+01363:         )
+01364: 
+01365:     data = remove_alarmist_language(
+01366:         data,
+01367:         data.get("contract_quality_score", 0),
+01368:     )
+01369: 
+01370:     if party_roles:
+01371:         data = safe_apply_display_roles(data, party_roles, language)
+01372:         data = normalize_ai_role_words(
+01373:             data,
+01374:             party_roles,
+01375:             language,
+01376:         )
+01377: 
+01378:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01379: 
+01380:     quality_check = validate_contract_result(data)
+01381: 
+01382:     data["quality_check"] = quality_check
+01383: 
+01384:     return data
+01385: 
+01386: 
+01387: def display_safe_party_labels(value, language: str = "en", party_roles: dict | None = None):
+01388:     """
+01389:     Security-safe party display.
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: display_safe_party_labels
+LINES: 1387 - 1528
+TOKENS: ['party_roles']
+01382:     data["quality_check"] = quality_check
+01383: 
+01384:     return data
+01385: 
+01386: 
+01387: def display_safe_party_labels(value, language: str = "en", party_roles: dict | None = None):
+01388:     """
+01389:     Security-safe party display.
+01390: 
+01391:     International rule:
+01392:     - Preserve real contractual roles when they are already generic/legal roles:
+01393:       Client, Supplier, Provider, Buyer, Seller, Lender, Borrower, Lessor,
+01394:       Lessee, Licensor, Licensee, Employer, Employee, etc.
+01395:     - Replace only anonymized placeholders such as [PARTY_1], [PARTY_2],
+01396:       [ORGANIZATION], [PERSON].
+01397:     - Do not reconstruct real names.
+01398:     - Do not force every contract into Party A / Party B unless the source
+01399:       itself is anonymized.
+01400:     """
+01401: 
+01402:     language = normalize_language(language)
+01403: 
+01404:     role_party_a = None
+01405:     role_party_b = None
+01406:     if isinstance(party_roles, dict):
+01407:         role_party_a = str(party_roles.get("party_a") or "").strip() or None
+01408:         role_party_b = str(party_roles.get("party_b") or "").strip() or None
+01409: 
+01410:     labels = {
+01411:         "en": {
+01412:             "[PARTY_1]": "Contracting Party A",
+01413:             "[PARTY_2]": "Contracting Party B",
+01414:             "[PARTY_3]": "Contracting Party C",
+01415:             "[ORGANIZATION]": "Organization",
+01416:             "[PERSON]": "Person",
+01417:             "[COMPANY]": "Company",
+01418:             "[CLIENT]": "Client",
+01419:             "[SERVICE_PROVIDER]": "Service Provider",
+01420:             "[SUPPLIER]": "Supplier",
+01421:             "[VENDOR]": "Vendor",
+01422:             "[BUYER]": "Buyer",
+01423:             "[SELLER]": "Seller",
+01424:             "[LENDER]": "Lender",
+01425:             "[BORROWER]": "Borrower",
+01426:             "[LESSOR]": "Lessor",
+01427:             "[LESSEE]": "Lessee",
+01428:             "[LICENSOR]": "Licensor",
+01429:             "[LICENSEE]": "Licensee",
+01430:             "[EMPLOYER]": "Employer",
+01431:             "[EMPLOYEE]": "Employee",
+01432:         },
+01433:         "fr": {
+01434:             "[PARTY_1]": "Partie contractante A",
+01435:             "[PARTY_2]": "Partie contractante B",
+01436:             "[PARTY_3]": "Partie contractante C",
+01437:             "[ORGANIZATION]": "Organisation",
+01438:             "[PERSON]": "Personne",
+01439:             "[COMPANY]": "Société",
+01440:             "[CLIENT]": "Client",
+01441:             "[SERVICE_PROVIDER]": "Prestataire",
+01442:             "[SUPPLIER]": "Fournisseur",
+01443:             "[VENDOR]": "Fournisseur",
+01444:             "[BUYER]": "Acheteur",
+01445:             "[SELLER]": "Vendeur",
+01446:             "[LENDER]": "Prêteur",
+01447:             "[BORROWER]": "Emprunteur",
+01448:             "[LESSOR]": "Bailleur",
+01449:             "[LESSEE]": "Locataire",
+01450:             "[LICENSOR]": "Concédant",
+01451:             "[LICENSEE]": "Licencié",
+01452:             "[EMPLOYER]": "Employeur",
+01453:             "[EMPLOYEE]": "Salarié",
+01454:         },
+01455:         "ar": {
+01456:             "[PARTY_1]": "الطرف أ",
+01457:             "[PARTY_2]": "الطرف ب",
+01458:             "[PARTY_3]": "الطرف ج",
+01459:             "[ORGANIZATION]": "المنظمة",
+01460:             "[PERSON]": "الشخص",
+01461:             "[COMPANY]": "الشركة",
+01462:             "[CLIENT]": "العميل",
+01463:             "[SERVICE_PROVIDER]": "مقدم الخدمة",
+01464:             "[SUPPLIER]": "المورّد",
+01465:             "[VENDOR]": "المورّد",
+01466:             "[BUYER]": "المشتري",
+01467:             "[SELLER]": "البائع",
+01468:             "[LENDER]": "المقرض",
+01469:             "[BORROWER]": "المقترض",
+01470:             "[LESSOR]": "المؤجر",
+01471:             "[LESSEE]": "المستأجر",
+01472:             "[LICENSOR]": "المرخِّص",
+01473:             "[LICENSEE]": "المرخَّص له",
+01474:             "[EMPLOYER]": "صاحب العمل",
+01475:             "[EMPLOYEE]": "الموظف",
+01476:         },
+01477:     }
+01478: 
+01479:     mapping = dict(labels.get(language, labels["en"]))
+01480: 
+01481:     if role_party_a:
+01482:         mapping["[PARTY_1]"] = role_party_a
+01483:         mapping["[PARTY_A]"] = role_party_a
+01484:     if role_party_b:
+01485:         mapping["[PARTY_2]"] = role_party_b
+01486:         mapping["[PARTY_B]"] = role_party_b
+01487: 
+01488:     # International safety rule:
+01489:     # Employer / Employee are not generic placeholders. They are valid only
+01490:     # for real employment contracts. For all other contract families, avoid
+01491:     # displaying employment labels because they create false legal roles.
+01492:     if not is_employment_contract_context(party_roles):
+01493:         neutral_party = {
+01494:             "en": "the relevant contractual party",
+01495:             "fr": "la partie contractuelle concernée",
+01496:             "ar": "الطرف التعاقدي المعني",
+01497:         }.get(language, "the relevant contractual party")
+01498:         mapping["[EMPLOYER]"] = neutral_party
+01499:         mapping["[EMPLOYEE]"] = neutral_party
+01500: 
+01501:     if isinstance(value, list):
+01502:         return [display_safe_party_labels(item, language, party_roles) for item in value]
+01503: 
+01504:     if isinstance(value, dict):
+01505:         return {
+01506:             key: display_safe_party_labels(item, language, party_roles)
+01507:             for key, item in value.items()
+01508:         }
+01509: 
+01510:     if not isinstance(value, str):
+01511:         return value
+01512: 
+01513:     output = value
+01514: 
+01515:     for old, new in mapping.items():
+01516:         output = output.replace(old, new)
+01517: 
+01518:     if language == "ar":
+01519:         cleanup = {
+01520:             "الطرف الطرف أ": "الطرف أ",
+01521:             "الطرف الطرف ب": "الطرف ب",
+01522:             "الطرف الطرف ج": "الطرف ج",
+01523:         }
+01524: 
+01525:         for old, new in cleanup.items():
+01526:             output = output.replace(old, new)
+01527: 
+01528:     return output
+01529: 
+01530: 
+01531: 
+01532: def force_generic_parties(data: dict, language: str, party_roles: dict | None = None) -> dict:
+01533:     """
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: force_generic_parties
+LINES: 1532 - 1680
+TOKENS: ['party_roles']
+01527: 
+01528:     return output
+01529: 
+01530: 
+01531: 
+01532: def force_generic_parties(data: dict, language: str, party_roles: dict | None = None) -> dict:
+01533:     """
+01534:     Preserve security without destroying contract roles.
+01535: 
+01536:     Use Party A / Party B only when the party list is anonymized or generic.
+01537:     Never replace explicit legal roles such as Client, Provider, Buyer, Seller,
+01538:     Lender, Borrower, Lessor, Lessee, Licensor, Licensee, Employer, Employee,
+01539:     Supplier, Vendor, Contractor, Consultant, Distributor, Franchisee, etc.
+01540:     """
+01541: 
+01542:     language = normalize_language(language)
+01543: 
+01544:     # If the caller already detected contract-family roles such as
+01545:     # Client / Service Provider, Buyer / Seller, etc., never force the
+01546:     # summary back to Contracting Party A / B.
+01547:     if isinstance(party_roles, dict):
+01548:         detected_a = str(party_roles.get("party_a") or "").strip()
+01549:         detected_b = str(party_roles.get("party_b") or "").strip()
+01550:         if detected_a and detected_b:
+01551:             parties = data.get("parties")
+01552: 
+01553:             # The LLM sometimes produces no "parties" key at all (not
+01554:             # even a placeholder list) -- confirmed real case. Treat
+01555:             # this the same as a placeholder-only list: use the
+01556:             # already-known, reliable party_roles labels rather than
+01557:             # leaving the field empty/absent.
+01558:             if not isinstance(parties, list) or not parties:
+01559:                 data["parties"] = [detected_a, detected_b]
+01560:                 return data
+01561: 
+01562:             if isinstance(parties, list):
+01563:                 joined = " ".join(str(p) for p in parties).lower()
+01564:                 generic_markers = [
+01565:                     "contracting party a", "contracting party b",
+01566:                     "partie contractante a", "partie contractante b",
+01567:                     "الطرف أ", "الطرف ب",
+01568:                     "[party_1]", "[party_2]",
+01569:                     # "Not specified" (and its FR/AR equivalents) is the
+01570:                     # actual placeholder text the LLM produces for a
+01571:                     # party it could not resolve -- confirmed real case.
+01572:                     # Without recognizing it here, this fast-path (which
+01573:                     # runs whenever party_roles IS available, i.e. the
+01574:                     # common case) silently returned early without ever
+01575:                     # replacing it, even though a reliable, already-
+01576:                     # detected label (party_a/party_b) was sitting right
+01577:                     # there unused.
+01578:                     "not specified", "non spécifié", "non specifie",
+01579:                     "غير محدد",
+01580:                     # The LLM commonly produces a bare, generic noun like
+01581:                     # "Company" instead of "Not specified" or a bracketed
+01582:                     # placeholder -- confirmed via direct debug trace on a
+01583:                     # real contract. "Company" is a generic structural
+01584:                     # term (the kind that survives PII redaction, e.g.
+01585:                     # from '(the "Company")' in the source text), not a
+01586:                     # specific role or an identifying name, yet it was
+01587:                     # previously invisible to this fast-path. Left
+01588:                     # unrecognized here, it fell through unchanged to
+01589:                     # normalize_parties() downstream, which rejects it
+01590:                     # (it is not in that function's own safe-role
+01591:                     # whitelist) and replaces it with "Not specified" --
+01592:                     # destroying information that was actually
+01593:                     # recoverable right here, using the already-known,
+01594:                     # reliable party_roles labels. Covers the equivalent
+01595:                     # generic organizational nouns in all three
+01596:                     # languages, not just "company" specifically.
+01597:                     "company", "société", "societe", "entreprise",
+01598:                     "الشركة", "المؤسسة",
+01599:                 ]
+01600:                 if any(marker in joined for marker in generic_markers):
+01601:                     data["parties"] = [detected_a, detected_b]
+01602:             return data
+01603: 
+01604:     generic_labels = {
+01605:         "en": ["Contracting Party A", "Contracting Party B"],
+01606:         "fr": ["Partie contractante A", "Partie contractante B"],
+01607:         "ar": ["الطرف أ", "الطرف ب"],
+01608:     }
+01609: 
+01610:     parties = data.get("parties")
+01611: 
+01612:     if not isinstance(parties, list):
+01613:         return data
+01614: 
+01615:     if len(parties) < 2:
+01616:         return data
+01617: 
+01618:     role_terms = {
+01619:         "client", "customer", "provider", "service provider", "supplier",
+01620:         "vendor", "buyer", "seller", "lender", "borrower", "lessor",
+01621:         "lessee", "licensor", "licensee", "employer", "employee",
+01622:         "contractor", "consultant", "distributor", "franchisee",
+01623:         "franchisor", "controller", "processor",
+01624: 
+01625:         "client", "prestataire", "fournisseur", "acheteur", "vendeur",
+01626:         "prêteur", "preteur", "emprunteur", "bailleur", "locataire",
+01627:         "concédant", "concedant", "licencié", "licencie", "employeur",
+01628:         "salarié", "salarie", "entrepreneur", "consultant",
+01629:         "distributeur", "franchisé", "franchise",
+01630: 
+01631:         "العميل", "مقدم الخدمة", "المورّد", "المورد", "المشتري",
+01632:         "البائع", "المقرض", "المقترض", "المؤجر", "المستأجر",
+01633:         "المرخِّص", "المرخص", "المرخَّص له", "صاحب العمل",
+01634:         "الموظف", "المقاول", "المستشار", "الموزع",
+01635:     }
+01636: 
+01637:     joined = " ".join(str(p) for p in parties).lower()
+01638: 
+01639:     has_explicit_role = any(
+01640:         role in joined
+01641:         for role in role_terms
+01642:     )
+01643: 
+01644:     if has_explicit_role:
+01645:         return data
+01646: 
+01647:     anonymized_tokens = [
+01648:         "[PARTY_1]",
+01649:         "[PARTY_2]",
+01650:         "[PARTY_3]",
+01651:         "[ORGANIZATION]",
+01652:         "[PERSON]",
+01653:         "contracting party a",
+01654:         "contracting party b",
+01655:         "partie contractante a",
+01656:         "partie contractante b",
+01657:         "الطرف أ",
+01658:         "الطرف ب",
+01659:         "الطرف ج",
+01660:         "not specified",
+01661:         "non spécifié",
+01662:         "non specifie",
+01663:         "غير محدد",
+01664:         "company",
+01665:         "société",
+01666:         "societe",
+01667:         "entreprise",
+01668:         "الشركة",
+01669:         "المؤسسة",
+01670:     ]
+01671: 
+01672:     anonymized_or_generic = any(
+01673:         token.lower() in joined
+01674:         for token in anonymized_tokens
+01675:     )
+01676: 
+01677:     if anonymized_or_generic:
+01678:         data["parties"] = generic_labels.get(language, generic_labels["en"])[:2]
+01679: 
+01680:     return data
+01681: 
+01682: 
+01683: 
+01684: def render_summary_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+01685:     language = normalize_language(language)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: render_summary_text
+LINES: 1684 - 1781
+TOKENS: ['duration', 'party_roles', 'get_display_roles', 'normalize_ai_role_words']
+01679: 
+01680:     return data
+01681: 
+01682: 
+01683: 
+01684: def render_summary_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+01685:     language = normalize_language(language)
+01686:     """
+01687:     Backward-compatible text renderer.
+01688: 
+01689:     Keep this while your frontend still expects a formatted string.
+01690:     Later, your frontend should render generate_summary_data() directly.
+01691:     """
+01692: 
+01693:     t = get_labels(language)
+01694: 
+01695:     if party_roles:
+01696:         data = normalize_ai_role_words(
+01697:             data,
+01698:             party_roles,
+01699:             language,
+01700:         )
+01701: 
+01702:     data = display_safe_party_labels(data, language, party_roles)
+01703:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01704: 
+01705:     if party_roles:
+01706:         data = safe_apply_display_roles(data, party_roles, language)
+01707:         data = normalize_ai_role_words(
+01708:             data,
+01709:             party_roles,
+01710:             language,
+01711:         )
+01712:     elif language != "ar":
+01713:         roles = get_display_roles(
+01714:             contract_type=data.get("contract_type", ""),
+01715:             text=data.get("global_summary", ""),
+01716:             language=language,
+01717:         )
+01718:         data = safe_apply_display_roles(data, roles, language)
+01719: 
+01720:     output = ""
+01721:     output += f"{t['type']}: {data['contract_type']}\n"
+01722:     if language == "ar":
+01723:         display_parties = data["parties"]
+01724:     else:
+01725:         display_parties = [
+01726:             strip_role_articles(p, language)
+01727:             for p in data["parties"]
+01728:         ]
+01729: 
+01730:     output += f"{t['parties']}: {', '.join(display_parties)}\n"
+01731:     output += f"{t['duration']}: {data['duration']}\n"
+01732:     output += f"{t['payment']}: {data['payment_terms']}\n\n"
+01733: 
+01734:     global_summary = str(data.get("global_summary") or "").strip()
+01735:     global_summary_lower = global_summary.lower()
+01736: 
+01737:     executive_like_markers = [
+01738:         "this contract contains",
+01739:         "ce contrat présente",
+01740:         "يتضمن هذا العقد",
+01741:         "the most sensitive clauses",
+01742:         "les clauses les plus sensibles",
+01743:         "تتركز البنود الأكثر حساسية",
+01744:     ]
+01745: 
+01746:     if global_summary and not any(
+01747:         marker in global_summary_lower for marker in executive_like_markers
+01748:     ):
+01749:         output += f"{t['summary']}:\n{global_summary}\n\n"
+01750:     output += f"{t['contract_quality_score']}: {data['contract_quality_score']}/100\n"
+01751:     output += (
+01752:         f"{t['contract_complexity']}: "
+01753:         f"{translate_complexity(data['contract_complexity'], language)}\n"
+01754:     )
+01755:     output += f"{t['overall_balance']}: {data['overall_balance']}\n"
+01756:     output += f"{t['jurisdiction']}: {data['jurisdiction_detected']}\n"
+01757: 
+01758:     if data.get("jurisdiction_note"):
+01759:         output += f"{t['jurisdiction_note']}: {data['jurisdiction_note']}\n"
+01760: 
+01761:     sections = [
+01762:         ("main_obligations", "main_obligations"),
+01763:         ("important_points", "key_points"),
+01764:         ("missing_clauses", "missing_clauses"),
+01765:         ("dangerous_patterns", "dangerous_patterns"),
+01766:         ("key_risks", "key_risks"),
+01767:         ("negotiation_priorities", "negotiation_priorities"),
+01768:         ("recommended_actions", "recommended_actions"),
+01769:     ]
+01770: 
+01771:     for data_key, label_key in sections:
+01772:         items = data.get(data_key, [])
+01773:         if items:
+01774:             output += f"\n{t[label_key]}:\n"
+01775:             output += "\n".join([f"- {item}" for item in items])
+01776:             output += "\n"
+01777: 
+01778:     if data.get("practical_decision"):
+01779:         output += f"\n{t['practical_decision']}:\n"
+01780:         output += data["practical_decision"]
+01781:     return output.strip()
+01782: 
+01783: 
+01784: def generate_summary(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+01785:     language = normalize_language(language)
+01786:     """
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: generate_summary
+LINES: 1784 - 1793
+TOKENS: ['party_roles']
+01779:         output += f"\n{t['practical_decision']}:\n"
+01780:         output += data["practical_decision"]
+01781:     return output.strip()
+01782: 
+01783: 
+01784: def generate_summary(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+01785:     language = normalize_language(language)
+01786:     """
+01787:     Backward-compatible function.
+01788: 
+01789:     Your current app can keep calling this and receiving a string.
+01790:     """
+01791: 
+01792:     data = generate_summary_data(text, language, party_roles)
+01793:     return render_summary_text(data, language, party_roles)
+01794: 
+01795: 
+01796: def build_empty_simplified(language: str = "en") -> dict:
+01797:     language = normalize_language(language)
+01798:     ns = get_not_specified(language)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: generate_simplified_version_data
+LINES: 1810 - 1923
+TOKENS: ['duration', 'party_roles', 'normalize_ai_role_words']
+01805:         },
+01806:         language,
+01807:     )
+01808: 
+01809: 
+01810: def generate_simplified_version_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+01811:     language = normalize_language(language)
+01812:     """
+01813:     Structured simplification result.
+01814:     """
+01815: 
+01816:     if not text or not text.strip():
+01817:         return build_empty_simplified(language)
+01818: 
+01819:     prompt_template = load_prompt("simplification_prompt.txt")
+01820:     contract_text = ensure_ai_input_is_anonymized(text[:MAX_SIMPLIFICATION_CHARS])
+01821:     party_registry_block = build_party_registry_prompt(language, party_roles)
+01822: 
+01823:     prompt = f"""
+01824: {prompt_template}
+01825: 
+01826: Output language: {language}
+01827: 
+01828: {party_registry_block}
+01829: 
+01830: SIMPLIFIED VERSION PURPOSE:
+01831: Explain the contract in plain language for a non-lawyer.
+01832: 
+01833: The simplified version must be different from the executive narrative and from the legal summary.
+01834: 
+01835: Rules:
+01836: - Use short, simple sentences.
+01837: - Avoid legal jargon.
+01838: - Explain what the contract is about.
+01839: - Explain what each party mainly has to do.
+01840: - Explain the most practical consequences.
+01841: - Mention only the most important risks in everyday language.
+01842: - Do not repeat risk counts.
+01843: - Do not mention internal scoring, clause relationships, graphs or technical analysis.
+01844: 
+01845: CRITICAL:
+01846: Translate every generated JSON value into this output language.
+01847: The contract source language may be different.
+01848: Do not copy source-language sentences into generated fields.
+01849: Preserve anonymized party identities exactly as provided.
+01850: 
+01851: Anonymized entities may include:
+01852: 
+01853: [PERSON]
+01854: [ORGANIZATION]
+01855: [PARTY_1]
+01856: [PARTY_2]
+01857: [PARTY_3]
+01858: 
+01859: These labels represent legal parties.
+01860: 
+01861: Do not reconstruct, infer, restore, request, or replace real names or personal data.
+01862: 
+01863: If rights, ownership, payments,
+01864: confidentiality obligations,
+01865: termination rights,
+01866: intellectual property rights,
+01867: or liabilities belong to an anonymized party,
+01868: preserve the recipient exactly as written.
+01869: 
+01870: Never transfer a right or obligation
+01871: from one anonymized party to another.
+01872: Dates, amounts, article references, and court names must remain accurate.
+01873: 
+01874: LANGUAGE CONSISTENCY ENFORCEMENT:
+01875: Before returning JSON, verify every generated value.
+01876: For output language "fr", generated values must be in French.
+01877: For output language "en", generated values must be in English.
+01878: For output language "ar", generated values must be in Arabic.
+01879: Do not copy source-language sentences into generated fields.
+01880: Clause titles, contract type, duration, payment terms, obligations, summaries, risks, and practical decision must be translated into the requested output language.
+01881: Mixed-language explanatory output is forbidden.
+01882: 
+01883: Contract text:
+01884: {contract_text}
+01885: """.strip()
+01886: 
+01887:     try:
+01888:         data = call_json_ai(prompt)
+01889:     except Exception as e:
+01890:         logger.debug("SIMPLIFICATION AI ERROR: %s", e)
+01891:         return build_empty_simplified(language)
+01892: 
+01893:     data = repair_simplified_language(
+01894:         data,
+01895:         language,
+01896:     )
+01897: 
+01898:     if party_roles:
+01899:         data = normalize_ai_role_words(
+01900:             data,
+01901:             party_roles,
+01902:             language,
+01903:         )
+01904: 
+01905:     data = display_safe_party_labels(data, language, party_roles)
+01906:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01907: 
+01908:     if party_roles:
+01909:         data = safe_apply_display_roles(data, party_roles, language)
+01910:         data = normalize_ai_role_words(
+01911:             data,
+01912:             party_roles,
+01913:             language,
+01914:         )
+01915: 
+01916:     if party_roles:
+01917:         data = normalize_ai_role_words(
+01918:             data,
+01919:             party_roles,
+01920:             language,
+01921:         )
+01922: 
+01923:     return normalize_simplified_contract(data, language)
+01924: 
+01925: 
+01926: def render_simplified_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+01927:     language = normalize_language(language)
+01928:     t = get_labels(language)
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: render_simplified_text
+LINES: 1926 - 1963
+TOKENS: ['party_roles', 'get_display_roles', 'normalize_ai_role_words']
+01921:         )
+01922: 
+01923:     return normalize_simplified_contract(data, language)
+01924: 
+01925: 
+01926: def render_simplified_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+01927:     language = normalize_language(language)
+01928:     t = get_labels(language)
+01929: 
+01930:     if party_roles:
+01931:         data = normalize_ai_role_words(
+01932:             data,
+01933:             party_roles,
+01934:             language,
+01935:         )
+01936: 
+01937:     data = display_safe_party_labels(data, language, party_roles)
+01938:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01939: 
+01940:     if party_roles:
+01941:         data = safe_apply_display_roles(data, party_roles, language)
+01942:         data = normalize_ai_role_words(
+01943:             data,
+01944:             party_roles,
+01945:             language,
+01946:         )
+01947:     elif language != "ar":
+01948:         roles = get_display_roles(
+01949:             contract_type=data.get("contract_type", ""),
+01950:             text=data.get("simplified_version", ""),
+01951:             language=language,
+01952:         )
+01953:         data = safe_apply_display_roles(data, roles, language)
+01954: 
+01955:     output = data.get("simplified_version", "")
+01956: 
+01957:     # key_points intentionally hidden in simplified rendering.
+01958: 
+01959:     if data.get("things_to_watch"):
+01960:         output += f"\n\n{t['things_to_watch']}:\n"
+01961:         output += "\n".join([f"- {item}" for item in data["things_to_watch"]])
+01962: 
+01963:     return output.strip()
+01964: 
+01965: 
+01966: def generate_simplified_version(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+01967:     language = normalize_language(language)
+01968:     """
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: generate_simplified_version
+LINES: 1966 - 1975
+TOKENS: ['party_roles']
+01961:         output += "\n".join([f"- {item}" for item in data["things_to_watch"]])
+01962: 
+01963:     return output.strip()
+01964: 
+01965: 
+01966: def generate_simplified_version(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+01967:     language = normalize_language(language)
+01968:     """
+01969:     Backward-compatible function.
+01970: 
+01971:     Your current app can keep calling this and receiving a string.
+01972:     """
+01973: 
+01974:     data = generate_simplified_version_data(text, language, party_roles)
+01975:     return render_simplified_text(data, language, party_roles)
+01976: 
+01977: 
+01978: def calculate_global_risk(clause_results):
+01979:     if isinstance(clause_results, dict):
+01980:         if isinstance(clause_results.get("results"), list):
+
+DIRECT MATCHES:
+00012:     get_display_roles,
+00015:     normalize_ai_role_words,
+00071: def party_roles_are_anonymized(party_roles: dict | None) -> bool:
+00072:     if not isinstance(party_roles, dict):
+00075:     if party_roles.get("anonymized") is True:
+00079:         contains_anonymized_placeholder(party_roles.get("party_a"))
+00080:         or contains_anonymized_placeholder(party_roles.get("party_b"))
+00084: def safe_apply_display_roles(value, party_roles: dict | None, language: str = "en"):
+00088:     apply_display_roles() is allowed only when party_roles are confirmed
+00092:     if not party_roles_are_anonymized(party_roles):
+00096:         return apply_display_roles(value, party_roles, language)
+00104: def is_employment_contract_context(party_roles: dict | None = None) -> bool:
+00112:     if not isinstance(party_roles, dict):
+00116:         str(party_roles.get(key) or "")
+00148: def build_party_registry_prompt(language: str, party_roles: dict | None = None) -> str:
+00159:     if not isinstance(party_roles, dict):
+00168:         party_roles.get("party_a")
+00169:         or party_roles.get("party_a_role")
+00173:         party_roles.get("party_b")
+00174:         or party_roles.get("party_b_role")
+00178:         party_roles.get("contract_family")
+00179:         or party_roles.get("contract_type")
+00210: def scrub_unsupported_employment_roles(value, language: str = "en", party_roles: dict | None = None):
+00222:     if is_employment_contract_context(party_roles):
+00233:             scrub_unsupported_employment_roles(item, language, party_roles)
+00239:             key: scrub_unsupported_employment_roles(item, language, party_roles)
+00393:     "duration",
+01028:             "duration": "Duration",
+01052:             "duration": "Durée",
+01076:             "duration": "المدة",
+01119:             "duration": ns,
+01140: def generate_summary_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+01154:     party_registry_block = build_party_registry_prompt(language, party_roles)
+01214: Clause titles, contract type, duration, payment terms, obligations, summaries, risks, and practical decision must be translated into the requested output language.
+01232:     if party_roles:
+01233:         data = normalize_ai_role_words(
+01235:             party_roles,
+01239:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01345:     data = display_safe_party_labels(data, language, party_roles)
+01346:     data = force_generic_parties(data, language, party_roles)
+01347:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01350:     if party_roles:
+01351:         data = normalize_ai_role_words(
+01353:             party_roles,
+01370:     if party_roles:
+01371:         data = safe_apply_display_roles(data, party_roles, language)
+01372:         data = normalize_ai_role_words(
+01374:             party_roles,
+01378:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01387: def display_safe_party_labels(value, language: str = "en", party_roles: dict | None = None):
+01406:     if isinstance(party_roles, dict):
+01407:         role_party_a = str(party_roles.get("party_a") or "").strip() or None
+01408:         role_party_b = str(party_roles.get("party_b") or "").strip() or None
+01492:     if not is_employment_contract_context(party_roles):
+01502:         return [display_safe_party_labels(item, language, party_roles) for item in value]
+01506:             key: display_safe_party_labels(item, language, party_roles)
+01532: def force_generic_parties(data: dict, language: str, party_roles: dict | None = None) -> dict:
+01547:     if isinstance(party_roles, dict):
+01548:         detected_a = str(party_roles.get("party_a") or "").strip()
+01549:         detected_b = str(party_roles.get("party_b") or "").strip()
+01556:             # already-known, reliable party_roles labels rather than
+01573:                     # runs whenever party_roles IS available, i.e. the
+01594:                     # reliable party_roles labels. Covers the equivalent
+01684: def render_summary_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+01695:     if party_roles:
+01696:         data = normalize_ai_role_words(
+01698:             party_roles,
+01702:     data = display_safe_party_labels(data, language, party_roles)
+01703:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01705:     if party_roles:
+01706:         data = safe_apply_display_roles(data, party_roles, language)
+01707:         data = normalize_ai_role_words(
+01709:             party_roles,
+01713:         roles = get_display_roles(
+01731:     output += f"{t['duration']}: {data['duration']}\n"
+01784: def generate_summary(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+01792:     data = generate_summary_data(text, language, party_roles)
+01793:     return render_summary_text(data, language, party_roles)
+01810: def generate_simplified_version_data(text: str, language: str = "en", party_roles: dict | None = None) -> dict:
+01821:     party_registry_block = build_party_registry_prompt(language, party_roles)
+01880: Clause titles, contract type, duration, payment terms, obligations, summaries, risks, and practical decision must be translated into the requested output language.
+01898:     if party_roles:
+01899:         data = normalize_ai_role_words(
+01901:             party_roles,
+01905:     data = display_safe_party_labels(data, language, party_roles)
+01906:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01908:     if party_roles:
+01909:         data = safe_apply_display_roles(data, party_roles, language)
+01910:         data = normalize_ai_role_words(
+01912:             party_roles,
+01916:     if party_roles:
+01917:         data = normalize_ai_role_words(
+01919:             party_roles,
+01926: def render_simplified_text(data: dict, language: str = "en", party_roles: dict | None = None) -> str:
+01930:     if party_roles:
+01931:         data = normalize_ai_role_words(
+01933:             party_roles,
+01937:     data = display_safe_party_labels(data, language, party_roles)
+01938:     data = scrub_unsupported_employment_roles(data, language, party_roles)
+01940:     if party_roles:
+01941:         data = safe_apply_display_roles(data, party_roles, language)
+01942:         data = normalize_ai_role_words(
+01944:             party_roles,
+01948:         roles = get_display_roles(
+01966: def generate_simplified_version(text: str, language: str = "en", party_roles: dict | None = None) -> str:
+01974:     data = generate_simplified_version_data(text, language, party_roles)
+01975:     return render_simplified_text(data, language, party_roles)
+
+========================================================================================================================
+FILE: app\services\contract_agent\party_role_detector.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: get_display_roles
+LINES: 458 - 485
+TOKENS: ['get_display_roles']
+00453:             return family
+00454: 
+00455:     return "generic"
+00456: 
+00457: 
+00458: def get_display_roles(
+00459:     contract_type: str = "",
+00460:     text: str = "",
+00461:     language: str = "en",
+00462:     anonymized: bool = False,
+00463: ) -> dict:
+00464:     """
+00465:     Return display-role suggestions.
+00466: 
+00467:     By default anonymized=False to prevent accidental replacement.
+00468:     Set anonymized=True only when the caller confirms the text uses
+00469:     anonymized placeholders and role mapping is safe.
+00470:     """
+00471:     language = normalize_language(language)
+00472:     family = normalize_role_family_key(
+00473:         detect_role_family(contract_type, text)
+00474:     )
+00475:     party_a, party_b = ROLE_LABELS.get(
+00476:         family,
+00477:         ROLE_LABELS["generic"],
+00478:     )[language]
+00479: 
+00480:     return {
+00481:         "party_a": party_a,
+00482:         "party_b": party_b,
+00483:         "family": family,
+00484:         "anonymized": bool(anonymized),
+00485:     }
+00486: 
+00487: 
+00488: def get_anonymized_display_roles(
+00489:     contract_type: str = "",
+00490:     text: str = "",
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: get_anonymized_display_roles
+LINES: 488 - 501
+TOKENS: ['get_display_roles']
+00483:         "family": family,
+00484:         "anonymized": bool(anonymized),
+00485:     }
+00486: 
+00487: 
+00488: def get_anonymized_display_roles(
+00489:     contract_type: str = "",
+00490:     text: str = "",
+00491:     language: str = "en",
+00492: ) -> dict:
+00493:     """
+00494:     Convenience helper for callers that already know the text is anonymized.
+00495:     """
+00496:     return get_display_roles(
+00497:         contract_type=contract_type,
+00498:         text=text,
+00499:         language=language,
+00500:         anonymized=True,
+00501:     )
+00502: 
+00503: 
+00504: def _build_replacements(roles: dict, language: str) -> dict[str, str]:
+00505:     language = normalize_language(language)
+00506: 
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: normalize_ai_role_words
+LINES: 743 - 881
+TOKENS: ['normalize_ai_role_words']
+00738:     for source, target in sorted(replacements.items(), key=lambda item: len(item[0]), reverse=True):
+00739:         output = output.replace(source, target)
+00740: 
+00741:     return output
+00742: 
+00743: def normalize_ai_role_words(value, roles: dict, language: str = "en"):
+00744:     """
+00745:     Recursively normalize AI-generated role labels for any contract family.
+00746: 
+00747:     International standard:
+00748:     - works for any supported contract family / industry;
+00749:     - supports EN / FR / AR;
+00750:     - keeps Employer / Employee only for real employment contracts;
+00751:     - maps generic role wording to ROLE_LABELS[family][language];
+00752:     - preserves privacy-first architecture;
+00753:     - does not reconstruct, infer, or expose personal data.
+00754: 
+00755:     Important:
+00756:     This function is NOT a party identity resolver. It only corrects generic
+00757:     role words generated by the AI so a services, sale, lease, finance,
+00758:     licensing, NDA, insurance, construction, or other contract is not displayed
+00759:     as if it were an employment contract.
+00760:     """
+00761:     language = normalize_language(language)
+00762: 
+00763:     if isinstance(value, list):
+00764:         return [
+00765:             normalize_ai_role_words(item, roles, language)
+00766:             for item in value
+00767:         ]
+00768: 
+00769:     if isinstance(value, dict):
+00770:         protected_keys = {
+00771:             "original_text",
+00772:             "original_clause",
+00773:             "quoted_text",
+00774:             "excerpt",
+00775:             "clause_text",
+00776:             "text",
+00777:             "source_text",
+00778:             "raw_text",
+00779:         }
+00780: 
+00781:         return {
+00782:             key: (
+00783:                 item
+00784:                 if str(key).lower() in protected_keys
+00785:                 else normalize_ai_role_words(item, roles, language)
+00786:             )
+00787:             for key, item in value.items()
+00788:         }
+00789: 
+00790:     if not isinstance(value, str):
+00791:         return value
+00792: 
+00793:     if not isinstance(roles, dict):
+00794:         return value
+00795: 
+00796:     family = normalize_role_family_key(
+00797:         roles.get("family")
+00798:         or roles.get("contract_family")
+00799:         or "generic"
+00800:     )
+00801: 
+00802:     # Real employment contracts should keep employment terminology.
+00803:     if family == "employment":
+00804:         return value
+00805:     # For non-employment contracts, never allow hallucinated Employer/Employee
+00806: # labels to survive. This is universal across EN / FR / AR and all domains.
+00807:     if family != "employment":
+00808:         neutral = {
+00809:             "en": "the relevant party",
+00810:             "fr": "la partie concernée",
+00811:             "ar": "الطرف المعني",
+00812:         }.get(language, "the relevant party")
+00813: 
+00814:         neutral_possessive = {
+00815:             "en": "the relevant party's",
+00816:             "fr": "de la partie concernée",
+00817:             "ar": "الخاصة بالطرف المعني",
+00818:         }.get(language, "the relevant party's")
+00819: 
+00820:         replacements = {
+00821:             "Employer's": neutral_possessive,
+00822:             "Employer’s": neutral_possessive,
+00823:             "Employers'": neutral_possessive,
+00824:             "Employer": neutral,
+00825:             "Employee's": neutral_possessive,
+00826:             "Employee’s": neutral_possessive,
+00827:             "Employees'": neutral_possessive,
+00828:             "Employee": "personnel",
+00829:             "Employees": "personnel",
+00830:             "Employeur": neutral,
+00831:             "Salarié": "personnel",
+00832:             "Salariés": "personnel",
+00833:             "Employé": "personnel",
+00834:             "Employés": "personnel",
+00835:             "صاحب العمل": neutral,
+00836:             "الموظف": "الموظفين",
+00837:             "الموظفون": "الموظفين",
+00838:         }
+00839: 
+00840:         for old, new in sorted(
+00841:             replacements.items(),
+00842:             key=lambda item: len(item[0]),
+00843:             reverse=True,
+00844:         ):
+00845:             value = value.replace(old, new)
+00846: 
+00847:     party_a = str(
+00848:         roles.get("party_a")
+00849:         or ROLE_LABELS["generic"][language][0]
+00850:     )
+00851: 
+00852:     party_b = str(
+00853:         roles.get("party_b")
+00854:         or ROLE_LABELS["generic"][language][1]
+00855:     )
+00856: 
+00857:     value = normalize_anonymized_placeholders_to_roles(
+00858:         value,
+00859:         roles,
+00860:         language,
+00861:     )
+00862: 
+00863:     if language == "fr":
+00864:         return _normalize_generated_role_text_fr(
+00865:             value,
+00866:             party_a,
+00867:             party_b,
+00868:         )
+00869: 
+00870:     if language == "ar":
+00871:         return _normalize_generated_role_text_ar(
+00872:             value,
+00873:             party_a,
+00874:             party_b,
+00875:         )
+00876:     
+00877:     return _normalize_generated_role_text_en(
+00878:         value,
+00879:         party_a,
+00880:         party_b,
+00881:     )
+00882: 
+00883: def apply_display_roles(value, roles: dict, language: str = "en"):
+00884:     """
+00885:     Apply display roles only when roles are confirmed anonymized.
+00886: 
+
+DIRECT MATCHES:
+00016: - get_display_roles() returns suggested roles for UI/helper usage, but they
+00458: def get_display_roles(
+00496:     return get_display_roles(
+00563: # normalize_ai_role_words():
+00743: def normalize_ai_role_words(value, roles: dict, language: str = "en"):
+00765:             normalize_ai_role_words(item, roles, language)
+00785:                 else normalize_ai_role_words(item, roles, language)
+
+========================================================================================================================
+FILE: app\services\contract_agent\publication_gate.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: _blocked_text
+LINES: 765 - 769
+TOKENS: ['manual review', 'revue manuelle', 'مراجعة يدوية', 'fidélité à la source', 'validation de fidélité']
+00760:             reasons.append("FINAL_TEXT_SOURCE_CONTAMINATION")
+00761: 
+00762:     return list(dict.fromkeys(reasons)), coverage
+00763: 
+00764: 
+00765: def _blocked_text(language: str) -> str:
+00766:     return {
+00767:         "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
+00768:         "ar": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.",
+00769:     }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
+00770: 
+00771: 
+00772: def _issue(field: str, reason: str) -> dict:
+00773:     high_markers = ("POLARITY", "PROCEDURAL", "CONSENT", "ACTOR", "CONTAMINATION")
+00774:     return {
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: enforce_final_publication_gate
+LINES: 782 - 883
+TOKENS: ['publication_gate', 'BLOCK_AND_REPLACE']
+00777:         "severity": "high" if any(marker in reason for marker in high_markers) else "medium",
+00778:         "note": reason,
+00779:     }
+00780: 
+00781: 
+00782: def enforce_final_publication_gate(
+00783:     results: list[dict],
+00784:     language: str = "en",
+00785:     *,
+00786:     final_pass: bool = False,
+00787: ) -> list[dict]:
+00788:     """Validate and fail closed. A final pass emits exact-text receipts."""
+00789:     for item in results:
+00790:         if not isinstance(item, dict):
+00791:             continue
+00792: 
+00793:         source = str(
+00794:             item.get("_source_text_exact")
+00795:             or item.get("original_text")
+00796:             or item.get("clause_text")
+00797:             or item.get("quoted_text")
+00798:             or ""
+00799:         )
+00800:         profile = build_source_evidence_model(source)
+00801:         history = item.setdefault("_publication_validation_history", {})
+00802:         emitted: list[dict] = []
+00803:         current_failures: list[str] = []
+00804: 
+00805:         for field in PROTECTED_FIELDS:
+00806:             text = str(item.get(field) or "")
+00807:             if not text.strip():
+00808:                 continue
+00809: 
+00810:             reasons, coverage = validate_source_grounding(source, text, field, profile)
+00811:             if reasons:
+00812:                 history[field] = {
+00813:                     "input_text": text,
+00814:                     "input_text_hash": _hash(text),
+00815:                     "validation_reasons": reasons,
+00816:                     "semantic_coverage": coverage,
+00817:                 }
+00818:                 item[field] = _blocked_text(language)
+00819:                 current_failures.extend(reasons)
+00820:                 emitted.extend(_issue(field, reason) for reason in reasons)
+00821: 
+00822:         positive_field = str(item.get("legal_insight") or "")
+00823:         positive_low = positive_field.lower()
+00824:         prior_failures = [
+00825:             reason
+00826:             for entry in history.values()
+00827:             for reason in entry.get("validation_reasons", [])
+00828:         ]
+00829:         if any(marker in positive_low for marker in _POSITIVE_SAFE) and (current_failures or prior_failures):
+00830:             reason = "UNKNOWN_IS_NOT_SAFE_POSITIVE_CONCLUSION"
+00831:             history["legal_insight"] = {
+00832:                 "input_text": positive_field,
+00833:                 "input_text_hash": _hash(positive_field),
+00834:                 "validation_reasons": [reason],
+00835:                 "semantic_coverage": _semantic_coverage(source, positive_field),
+00836:             }
+00837:             item["legal_insight"] = _blocked_text(language)
+00838:             emitted.append(_issue("legal_insight", reason))
+00839: 
+00840:         if emitted:
+00841:             existing = item.setdefault("fidelity_issues", [])
+00842:             existing.extend(emitted)
+00843:             item["negotiation_fidelity_warning"] = True
+00844:             item["negotiation_fidelity_note"] = emitted[0]["note"]
+00845: 
+00846:         item["source_evidence_model"] = profile
+00847: 
+00848:         if final_pass:
+00849:             receipts: dict[str, dict] = {}
+00850:             for field in PROTECTED_FIELDS:
+00851:                 final_text = str(item.get(field) or "")
+00852:                 if not final_text.strip():
+00853:                     continue
+00854: 
+00855:                 final_reasons, final_coverage = validate_source_grounding(
+00856:                     source, final_text, field, profile
+00857:                 )
+00858:                 if final_reasons:
+00859:                     raise AssertionError(
+00860:                         f"final publication field failed validation: {field}: {final_reasons}"
+00861:                     )
+00862: 
+00863:                 prior = history.get(field, {})
+00864:                 prior_reasons = list(prior.get("validation_reasons", []))
+00865:                 receipts[field] = {
+00866:                     "field": field,
+00867:                     "field_policy": _FIELD_POLICIES.get(field, "relevance"),
+00868:                     "publication_gate_called": True,
+00869:                     "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
+00870:                     "validation_reasons": prior_reasons,
+00871:                     "semantic_coverage": final_coverage,
+00872:                     "semantic_profile_hash": profile["semantic_profile_hash"],
+00873:                     "validated_text_hash": _hash(final_text),
+00874:                     "final_text_hash": _hash(final_text),
+00875:                     "source_text_hash": _hash(source),
+00876:                     "input_text_hash": prior.get("input_text_hash", _hash(final_text)),
+00877:                     "text_before_validation": prior.get("input_text", final_text),
+00878:                     "successful": True,
+00879:                     "post_gate_mutators": [],
+00880:                 }
+00881:             item["validation_receipts"] = receipts
+00882: 
+00883:     return results
+00884: 
+00885: 
+00886: def assert_final_serialization(results: list[dict]) -> None:
+00887:     """Assert exact final-text and semantic-profile receipt integrity."""
+00888:     for item in results:
+
+DIRECT MATCHES:
+00118:     "manual review required",
+00119:     "manual review is required",
+00120:     "revue manuelle requise",
+00121:     "une revue manuelle est requise",
+00122:     "مراجعة يدوية مطلوبة",
+00123:     "تتطلب مراجعة يدوية",
+00767:         "fr": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source.",
+00768:         "ar": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر.",
+00769:     }.get(language, "Manual review required: generated text did not pass source-fidelity validation.")
+00782: def enforce_final_publication_gate(
+00868:                     "publication_gate_called": True,
+00869:                     "gate_result": "BLOCK_AND_REPLACE_REVALIDATED" if prior_reasons else "PASS",
+
+========================================================================================================================
+FILE: app\workers\handlers\contract_handler.py
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+FUNCTION: handle_contract_ai
+LINES: 158 - 602
+TOKENS: ['duration', 'party_roles', 'get_display_roles', 'normalize_ai_role_words', 'to_legacy_summary_data', 'contract_overview']
+00153:         language = "en"
+00154: 
+00155:     return recommendations[language]
+00156: 
+00157: 
+00158: def handle_contract_ai(job: Job, db):
+00159:     input_data = get_job_input(job)
+00160: 
+00161:     document_id = input_data.get("document_id")
+00162:     output_language = input_data.get("output_language", "en")
+00163:     access_type = input_data.get("access_type")
+00164:     credits_used = input_data.get("credits_used", 0)
+00165:     storage_path = input_data.get("storage_path")
+00166: 
+00167:     if output_language not in SUPPORTED_LANGUAGES:
+00168:         output_language = "en"
+00169: 
+00170:     update_job_progress(
+00171:         job,
+00172:         db,
+00173:         10,
+00174:         legal_progress_message("loading", output_language),
+00175:     )
+00176: 
+00177:     document = db.query(Document).filter(Document.id == document_id).first()
+00178: 
+00179:     if not document:
+00180:         raise ValueError("Document not found")
+00181: 
+00182:     downloaded_temp_file_path = None
+00183: 
+00184:     # Everything that touches the downloaded/temp file or the cloud
+00185:     # storage object is wrapped in try/finally so cleanup always runs
+00186:     # exactly once -- on success, on early rejection (unsupported
+00187:     # document), and on any unexpected exception. Previously, cleanup
+00188:     # only happened on the success path, leaking the temp file and the
+00189:     # cloud storage object whenever the document was rejected or any
+00190:     # step raised.
+00191:     try:
+00192:         update_job_progress(
+00193:             job,
+00194:             db,
+00195:             20,
+00196:             legal_progress_message("extracting", output_language),
+00197:         )
+00198: 
+00199:         file_path = document.file_path
+00200: 
+00201:         if storage_path:
+00202:             downloaded_temp_file_path = download_api_file_from_cloud(
+00203:                 storage_path=str(storage_path),
+00204:                 suffix=f".{document.file_type}",
+00205:             )
+00206:             file_path = downloaded_temp_file_path
+00207: 
+00208:         raw_text = extract_text(
+00209:             file_path,
+00210:             document.file_type,
+00211:         )
+00212: 
+00213:         cleaned_text = clean_text(raw_text)
+00214:         cleaned_text = redact_sensitive_data(cleaned_text)
+00215:         with open("debug_cleaned_text.txt", "w", encoding="utf-8") as f:
+00216:            f.write(cleaned_text)
+00217: 
+00218:         if not is_probably_contract(cleaned_text):
+00219:             document.status = "rejected"
+00220:             db.commit()
+00221: 
+00222:             return {
+00223:                 "error": "unsupported_document",
+00224:                 "message": {
+00225:                     "en": "The file was uploaded successfully, but its content does not appear to be a contract or legal agreement. Please upload a contract document.",
+00226:                     "fr": "Le fichier a bien été importé, mais son contenu ne semble pas être un contrat ou un accord juridique. Veuillez importer un document contractuel.",
+00227:                     "ar": "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. يرجى رفع مستند تعاقدي.",
+00228:                 }.get(output_language, "Unsupported document"),
+00229:             }
+00230: 
+00231:         detected_language = detect_language(cleaned_text)
+00232: 
+00233:         update_job_progress(
+00234:             job,
+00235:             db,
+00236:             35,
+00237:             legal_progress_message("splitting", output_language),
+00238:         )
+00239: 
+00240:         clauses = split_into_clauses(cleaned_text)
+00241: 
+00242:         if not clauses:
+00243:             clauses = [cleaned_text]
+00244: 
+00245:         update_job_progress(
+00246:             job,
+00247:             db,
+00248:             50,
+00249:             legal_progress_message("analyzing", output_language),
+00250:         )
+00251: 
+00252:         # Detect party roles ONCE for the entire document, from the raw
+00253:         # contract text, and reuse it across all 3 pipelines below (clause
+00254:         # analysis, summary, simplified version). Without this, each
+00255:         # pipeline independently redetects roles from its own
+00256:         # already-processed text -- the root cause of "Client"/"Service
+00257:         # Provider" vs "Employer"/"Employee" inconsistency across sections
+00258:         # of the same report.
+00259:         party_roles = get_display_roles(
+00260:             contract_type="",
+00261:             text=cleaned_text[:2000],
+00262:             language=output_language,
+00263:             anonymized=True,
+00264:         )
+00265: 
+00266:         clause_results = analyze_contract_clauses(
+00267:             clauses,
+00268:             output_language,
+00269:             party_roles=party_roles,
+00270:         )
+00271: 
+00272:         # Document-level clause-coverage transparency, computed inside
+00273:         # analyze_contract_clauses() but previously never copied out of
+00274:         # the nested clause_results dict -- so a caller inspecting the
+00275:         # top-level response had no way to know whether every detected
+00276:         # clause was actually analyzed, or some were silently dropped
+00277:         # past the internal max_clauses cap.
+00278:         total_clauses_detected = clause_results.get("total_clauses_detected")
+00279:         clauses_analyzed = clause_results.get("clauses_analyzed")
+00280:         clauses_truncated = clause_results.get("clauses_truncated", False)
+00281: 
+00282:         clauses_obj = clause_results.get("clauses")
+00283: 
+00284:         if isinstance(clauses_obj, dict):
+00285:             clauses_list = (
+00286:                 clauses_obj.get("results")
+00287:                 or clauses_obj.get("items")
+00288:                 or clauses_obj.get("clauses")
+00289:                 or []
+00290:             )
+00291:         else:
+00292:             clauses_list = clauses_obj or []
+00293: 
+00294:         clause_results = normalize_ai_role_words(
+00295:             clause_results,
+00296:             party_roles,
+00297:             output_language,
+00298:         )
+00299: 
+00300:         unified_report = build_unified_report_from_pipeline(
+00301:             clause_results,
+00302:             cleaned_text,
+00303:             output_language,
+00304:             party_roles=party_roles,
+00305:         )
+00306: 
+00307:         risk_score = unified_report.get("risk_score", {})
+00308: 
+00309:         if isinstance(risk_score, dict):
+00310:             explanation = risk_score.get("explanation", "")
+00311: 
+00312:             if (
+00313:                 "risk_node_" in explanation
+00314:                 or "Score reflects" in explanation
+00315:                 or "The score is mainly influenced" in explanation
+00316:             ):
+00317:                 safe_clauses_list = (
+00318:                     clauses_list
+00319:                     if isinstance(clauses_list, list)
+00320:                     else []
+00321:                 )
+00322: 
+00323:                 high_titles_all = [
+00324:                     c.get("display_title")
+00325:                     or c.get("localized_title")
+00326:                     or c.get("clause_title")
+00327:                     or c.get("title")
+00328:                     or c.get("clause_type")
+00329:                     for c in safe_clauses_list
+00330:                     if isinstance(c, dict)
+00331:                     and str(c.get("risk_level", "")).lower() == "high"
+00332:                 ]
+00333: 
+00334:                 high_titles_all = [t for t in high_titles_all if t]
+00335: 
+00336:                 # The narrative only NAMES the top 3 for readability, but
+00337:                 # the COUNT stated in the sentence must reflect the true
+00338:                 # total -- previously len() was computed on the
+00339:                 # already-truncated list, so a contract with 4+ high-risk
+00340:                 # clauses had its explanation silently understate the
+00341:                 # real count (and drop any clause beyond the first 3
+00342:                 # entirely, with no indication more existed).
+00343:                 high_titles_total = len(high_titles_all)
+00344:                 high_titles = high_titles_all[:3]
+00345:                 high_titles_omitted = high_titles_total - len(high_titles)
+00346: 
+00347:                 medium_count = sum(
+00348:                     1
+00349:                     for c in safe_clauses_list
+00350:                     if isinstance(c, dict)
+00351:                     and str(c.get("risk_level", "")).lower() == "medium"
+00352:                 )
+00353: 
+00354:                 if output_language == "fr":
+00355:                     if high_titles:
+00356:                         omitted_note = (
+00357:                             f", et {high_titles_omitted} autre(s)"
+00358:                             if high_titles_omitted
+00359:                             else ""
+00360:                         )
+00361:                         risk_score["explanation"] = (
+00362:                             f"Le score est principalement influencé par "
+00363:                             f"{high_titles_total} clause(s) à risque élevé : "
+00364:                             f"{', '.join(high_titles)}{omitted_note}. "
+00365:                             f"{medium_count} clause(s) à risque moyen contribuent également au score."
+00366:                         )
+00367:                     elif medium_count:
+00368:                         risk_score["explanation"] = (
+00369:                             f"Le score est principalement basé sur "
+00370:                             f"{medium_count} clause(s) à risque moyen, "
+00371:                             f"aucune clause à risque élevé n'ayant été identifiée."
+00372:                         )
+00373:                     else:
+00374:                         risk_score["explanation"] = (
+00375:                             "Le contrat ne contient que des clauses à faible risque."
+00376:                         )
+00377: 
+00378:                 elif output_language == "ar":
+00379:                     if high_titles:
+00380:                         omitted_note = (
+00381:                             f"، و{high_titles_omitted} بند إضافي"
+00382:                             if high_titles_omitted
+00383:                             else ""
+00384:                         )
+00385:                         risk_score["explanation"] = (
+00386:                             f"تعتمد النتيجة بشكل أساسي على "
+00387:                             f"{high_titles_total} بند عالي المخاطر: "
+00388:                             f"{'، '.join(high_titles)}{omitted_note}. "
+00389:                             f"كما ساهم {medium_count} بند متوسط المخاطر في احتساب النتيجة."
+00390:                         )
+00391:                     elif medium_count:
+00392:                         risk_score["explanation"] = (
+00393:                             f"تعتمد النتيجة بشكل أساسي على "
+00394:                             f"{medium_count} بند متوسط المخاطر، "
+00395:                             f"دون وجود أي بند عالي المخاطر."
+00396:                         )
+00397:                     else:
+00398:                         risk_score["explanation"] = (
+00399:                             "لا يحتوي العقد إلا على بنود منخفضة المخاطر."
+00400:                         )
+00401: 
+00402:                 else:
+00403:                     if high_titles:
+00404:                         omitted_note = (
+00405:                             f", and {high_titles_omitted} more"
+00406:                             if high_titles_omitted
+00407:                             else ""
+00408:                         )
+00409:                         risk_score["explanation"] = (
+00410:                             f"The score is mainly influenced by "
+00411:                             f"{high_titles_total} high-risk clause(s): "
+00412:                             f"{', '.join(high_titles)}{omitted_note}. "
+00413:                             f"{medium_count} medium-risk clause(s) also contributed."
+00414:                         )
+00415:                     elif medium_count:
+00416:                         risk_score["explanation"] = (
+00417:                             f"The score is based primarily on "
+00418:                             f"{medium_count} medium-risk clause(s), "
+00419:                             f"as no high-risk clauses were identified."
+00420:                         )
+00421:                     else:
+00422:                         risk_score["explanation"] = (
+00423:                             "The contract contains only low-risk clauses."
+00424:                         )
+00425: 
+00426:                 unified_report["risk_score"] = risk_score
+00427: 
+00428:         unified_report = normalize_ai_role_words(
+00429:             unified_report,
+00430:             party_roles,
+00431:             output_language,
+00432:         )
+00433: 
+00434:         global_risk = calculate_global_risk(clause_results)
+00435: 
+00436:         update_job_progress(
+00437:             job,
+00438:             db,
+00439:             70,
+00440:             legal_progress_message("summary", output_language),
+00441:         )
+00442: 
+00443:         jurisdiction_detection = detect_jurisdiction(
+00444:             cleaned_text,
+00445:             output_language,
+00446:         )
+00447: 
+00448:         jurisdiction_fields = format_jurisdiction_fields(
+00449:             jurisdiction_detection,
+00450:             output_language,
+00451:         )
+00452: 
+00453:         # Single analysis truth: enrich the unified report once, then render
+00454:         # all legacy/user-facing views from the same structured overview.
+00455:         overview = unified_report.get("contract_overview", {}) or {}
+00456: 
+00457:         resolved_jurisdiction = str(
+00458:             overview.get("jurisdiction_detected") or ""
+00459:         ).strip()
+00460:         detector_jurisdiction = str(
+00461:             jurisdiction_fields.get("jurisdiction") or ""
+00462:         ).strip()
+00463: 
+00464:         localized_unknowns = {
+00465:             "",
+00466:             "Not specified",
+00467:             "Non spécifié",
+00468:             "غير محدد",
+00469:         }
+00470: 
+00471:         # Non-destructive fact merge: a weak detector result must never erase
+00472:         # a substantive governing-law/jurisdiction value already resolved by
+00473:         # the unified report.
+00474:         if (
+00475:             detector_jurisdiction not in localized_unknowns
+00476:             or resolved_jurisdiction in localized_unknowns
+00477:         ):
+00478:             overview["jurisdiction_detected"] = detector_jurisdiction
+00479: 
+00480:         if jurisdiction_detection.get("confidence") == "low" and not any([
+00481:             jurisdiction_detection.get("governing_law"),
+00482:             jurisdiction_detection.get("dispute_forum"),
+00483:             jurisdiction_detection.get("arbitration_seat"),
+00484:             jurisdiction_detection.get("arbitration_institution"),
+00485:         ]):
+00486:             overview["jurisdiction_note"] = ""
+00487:         else:
+00488:             overview["jurisdiction_note"] = jurisdiction_fields[
+00489:                 "jurisdiction_note"
+00490:             ]
+00491: 
+00492:         unified_report["contract_overview"] = overview
+00493: 
+00494:         legacy_summary_data = to_legacy_summary_data(
+00495:             unified_report,
+00496:             output_language,
+00497:         )
+00498: 
+00499:         # Preserve the exact values resolved by the unified pipeline.
+00500:         overview = unified_report.get("contract_overview", {}) or {}
+00501: 
+00502:         for source_key, legacy_key in [
+00503:             ("duration", "duration"),
+00504:             ("payment_terms", "payment_terms"),
+00505:             ("jurisdiction_detected", "jurisdiction_detected"),
+00506:             ("jurisdiction_note", "jurisdiction_note"),
+00507:         ]:
+00508:             if source_key in overview:
+00509:                 legacy_summary_data[legacy_key] = overview[source_key]
+00510: 
+00511:         summary = render_summary_text(
+00512:             legacy_summary_data,
+00513:             output_language,
+00514:             party_roles=party_roles,
+00515:         )
+00516: 
+00517:         update_job_progress(
+00518:             job,
+00519:             db,
+00520:             82,
+00521:             legal_progress_message("simplified", output_language),
+00522:         )
+00523: 
+00524:         simplified = to_legacy_simplified_string(
+00525:             unified_report,
+00526:             output_language,
+00527:         )
+00528: 
+00529:         recommendations = get_default_recommendations(output_language)
+00530: 
+00531:         update_job_progress(
+00532:             job,
+00533:             db,
+00534:             90,
+00535:             legal_progress_message("saving", output_language),
+00536:         )
+00537: 
+00538:         analysis = AnalysisResult(
+00539:             document_id=document.id,
+00540:             summary=summary,
+00541:             clauses=json.dumps(clause_results, ensure_ascii=False),
+00542:             risk_level=global_risk["risk_level"],
+00543:             risk_score=global_risk["risk_score"],
+00544:             simplified_version=simplified,
+00545:             recommendations=json.dumps(recommendations, ensure_ascii=False),
+00546:             access_type=access_type,
+00547:             credits_used=credits_used,
+00548:         )
+00549: 
+00550:         document.language = detected_language
+00551:         document.status = "completed"
+00552: 
+00553:         db.add(analysis)
+00554:         db.commit()
+00555:         db.refresh(analysis)
+00556: 
+00557:         overview = unified_report.get("contract_overview", {})
+00558: 
+00559:         response = {
+00560:             "id": analysis.id,
+00561:             "document_id": analysis.document_id,
+00562:             "summary": analysis.summary,
+00563:             "clauses": clause_results,
+00564:             "risk_level": analysis.risk_level,
+00565:             "risk_score": unified_report.get("risk_score", analysis.risk_score),
+00566:             "simplified_version": analysis.simplified_version,
+00567:             "recommendations": recommendations,
+00568:             "unified_report": unified_report,
+00569:             "created_at": analysis.created_at.isoformat() if analysis.created_at else None,
+00570:             "contract_quality_score": unified_report.get("confidence_score"),
+00571:             "overall_balance": overview.get("overall_balance"),
+00572:             "contract_complexity": overview.get("contract_complexity"),
+00573:             "jurisdiction_detected": overview.get("jurisdiction_detected"),
+00574:             "total_clauses_detected": total_clauses_detected,
+00575:             "clauses_analyzed": clauses_analyzed,
+00576:             "clauses_truncated": clauses_truncated,
+00577:         }
+00578: 
+00579:         response = normalize_ai_role_words(
+00580:             response,
+00581:             party_roles,
+00582:             output_language,
+00583:         )
+00584: 
+00585:         response["quality_check"] = validate_contract_result(response)
+00586: 
+00587:         update_job_progress(
+00588:             job,
+00589:             db,
+00590:             95,
+00591:             legal_progress_message("finalizing", output_language),
+00592:         )
+00593: 
+00594:         with open("last_analysis.json", "w", encoding="utf-8") as f:
+00595:             json.dump(response, f, ensure_ascii=False, indent=2)
+00596: 
+00597:         return response
+00598: 
+00599:     finally:
+00600:         delete_api_file_from_cloud(storage_path)
+00601:         delete_local_file_safely(downloaded_temp_file_path)
+00602:         delete_local_file_safely(document.file_path)
+
+DIRECT MATCHES:
+00019:     to_legacy_summary_data,
+00033:     get_display_roles,
+00034:     normalize_ai_role_words,
+00259:         party_roles = get_display_roles(
+00269:             party_roles=party_roles,
+00294:         clause_results = normalize_ai_role_words(
+00296:             party_roles,
+00304:             party_roles=party_roles,
+00428:         unified_report = normalize_ai_role_words(
+00430:             party_roles,
+00455:         overview = unified_report.get("contract_overview", {}) or {}
+00492:         unified_report["contract_overview"] = overview
+00494:         legacy_summary_data = to_legacy_summary_data(
+00500:         overview = unified_report.get("contract_overview", {}) or {}
+00503:             ("duration", "duration"),
+00514:             party_roles=party_roles,
+00557:         overview = unified_report.get("contract_overview", {})
+00579:         response = normalize_ai_role_words(
+00581:             party_roles,
+
+========================================================================================================================
+END PROBE
+========================================================================================================================

@@ -1,0 +1,101 @@
+FINANCE_TEXT_PDF_EXTRACTED 9183
+PDF_LINES_DEBUG {'line_count': 142, 'non_empty_line_count': 98, 'max_line_len': 352, 'first_20': ['Crédit Industriel et Commercial', '', '                                     CRÉDIT INDUSTRIEL ET COMMERCIAL', '                                          CIC ETAMPES 44 RUE SAINTE CROIX', '                              01 69 16 19 52 FAX 01 69 92 19 00      10824@cic.fr BIC : CMCIFRPP', '', '', '', '', '', '                                                                                                                                                             30066', '                                                                                                                                                             10824', '', '', '                                                  MME OU M NIAMEY DRAME', '                                                   32 RUE PIERRE CURIE', '                                                 93380 PIERREFITTE SUR SEINE', '', '', '']}
+BRED_POSITION_LINES_TOTALS_DEBUG {'count': 0, 'income_total': 0, 'expense_total': 0}
+1: Crédit Industriel et Commercial
+3: CRÉDIT INDUSTRIEL ET COMMERCIAL
+4: CIC ETAMPES 44 RUE SAINTE CROIX
+5: 01 69 16 19 52 FAX 01 69 92 19 00 10824@cic.fr BIC : CMCIFRPP
+11: 30066
+12: 10824
+15: MME OU M NIAMEY DRAME
+16: 32 RUE PIERRE CURIE
+17: 93380 PIERREFITTE SUR SEINE
+23: VOTRE CONSEILLER : Mme Hanane KHALLADI
+25: RELEVE ET INFORMATIONS BANCAIRES Agence 10824
+26: 30 Mai 2024
+30: COMPTE COURANT PRIVE EUR EUR N° 00020210702 en euros (GD)
+31: TITULAIRE(S) : M OU MME SIDY DRAME
+33: Date Date valeur Opération Débit EUROS Crédit EUROS
+35: SOLDE CREDITEUR AU 30/04/2024 4.742,36
+37: 30/04/2024 30/04/2024 METRO FRANCE CARTE 1716383241 92,10
+38: 05/05/2024 05/05/2024 PAIEMENT CB 3004 SEVR 59,97
+39: MONOPRIX CARTE 171638321
+40: 06/05/2024 06/05/2024 PAIEMENT CB 0605 LAMBERSAR 18,02
+41: LAMBERSAR CARTE 171638321
+42: 07/05/2024 07/05/2024 VIR INST ICF HABITAT LOYER MAI 627,66
+43: 08/05/2024 08/05/2024. PAIEMENT CB 0705 TABAC 19,59
+44: JULES CARTE 171638321
+45: 09/05/2024 09/05/2024 PRLV SEPA EDF clients particuliers 125,00
+46: Numero de client : 5035218354 – Numero de compte
+47: 21 xxx 005026501668
+48: 00 09/05/2024 09/05/2024 PRLV SEPA SFR FIXE ADSL 39,25
+49: XX SFR FIXE ADSL - 167M1PJNV 002910845182
+50: FR44ZZZ332801
+51: ++GP20131020647658184
+52: 0701682522300000000001812935473
+53: 11/05/2024 12/05/2024 VIR SEPA ABDOUNI ALI ALPHA PAR 1 500,00
+54: 12/05/2024 09/05/2024 METRO FRANCE CARTE 1716383241 99,57
+56: 13/05/2024 13/05/2024 BELISOFT CARTE 1305 49,98
+57: BLS CARTE171638321
+58: 14/05/2024 14/05/2024 PAIEMENT CB 1305 STAINS 34,29
+59: ALDI CARTE 171638321
+60: 15/05/2024 15/05/2024 PAIEMENT CB 1405 STAINS 32,10
+61: POINT B CARTE 171638321
+63: <<Suite au verso>>KV.20240501.034714.5005.0032.19353KV.20240501.034714.5005.0032.19353 Information sur la protection des comptes : Page 1
+64: (GE) : protégé par la Garantie de l’Etat, (GD) : protégé par la Garantie des Dépôts
+65: Remarque : le livret réglementé relève de la garantie de l’Etat et le(s) livret(s) ordinaire(s) de dépassement associé(s) de la garantie des Dépôts.
+66: www.garantiedesdepots.fr
+70: CREDIT INDUSTRIEL ET COMMERCIAL (CIC) - Banque régie par les articles L.511-1 et suivants du Code Monétaire et Financier - SA au capital de 611 858 064 €
+71: 6, avenue de Provence 75009 Paris - Adresse postale : 75452 Paris cedex 09 - tél 01 45 96 96 96 - swift CMCIFRPP - www.cic.fr - 542 016 381 RCS Paris - TVA intracommunautaire : FR34542016381
+72: Médiateur du CIC : 63 chemin Antoine Pardon 69160 Tassin la demi lune - www.lemediateur-cic.fr
+73: Pour les opérations effectuées en sa qualité d’intermédiaire en opérations d’assurance : ORIAS 07 025 723 (www.orias.fr)
+74: Pour toute demande sur la bonne exécution du contrat ou réclamation d’un consommateur : 09 69 32 06 06 (appel non surtaxé)
+75: Agence 10220
+76: RELEVE ET INFORMATIONS BANCAIRES
+77: 30 Mai 2024
+79: COMPTE COURANT PROFESSIONNEL EUR N° 00020210702 en euros (GD)
+80: TITULAIRE(S) : M OU MME SIDY DRAME
+83: Date Date valeur Opération Débit EUROS Crédit EUROS
+85: 17/05/2024 18/05/2024 PAIEMENT CB 1905 SEVRAN 149,00
+86: APPLE STORE CARTE 171638321
+87: 19/05/2024 19/05/2024 PAIEMENT CB 1805 STAINS 55,00
+88: BAZARRE CARTE 171638321
+89: 20/05/2024 20/05/2024. PAIEMENT CB 2005 STAINS 24,87
+90: AUCHAN CARTE 171638321
+91: 22/05/2024 22/05/2024 PAIEMENT CB 2105 PARIS 134,57
+92: AUCHAN CARTE 171638321
+93: 23/05/2024 23/05/2024 PAIEMENT CB 2205 PARIS 14,73
+94: AUCHAN CARTE 171638321
+95: 24/05/2024 24/05/2024 PRLV SEPA FREE MOBILE 52,14
+96: FR07ZZZ891885
+97: ++FM-19457385-1
+98: fmpmt-1795628195
+99: 24/05/2024 24/05/2024 PAIEMENT CB 2305 NANTERRE 74,10
+100: NIKE CARTE 171638321
+101: 24/05/2024 24/05/2024 PAIEMENT CB 2305 ENGHIEN 39,99
+102: JD SPORT CARTE 171638321
+103: 25/05/2024 25/05/2024 PAIEMENT CB 2405 CRETEIL 34,42
+104: LIDL CARTE 171638321
+105: 26/05/2024 26/05/2024 VIR INST NIAMEY PLAN EPARGNE 2.500,00
+106: 29/05/2024 29/05/2024 VIR ORANGE SALAIRE DRAME SIDY 3.342,05
+107: PAIE MAI 2024
+108: 30/05/2023 30/05/2024 VIR CLIN ALLIANCE NIAMEY DRAME 2.187,81
+109: SALAIRE MAI 2024
+111: Total des mouvements 5.776,35 5.529,86
+113: SOLDE CREDITEUR AU 30/05/2024 4.495,87
+116: QXBAN : QX94 CMCI FRPP XXX PZ7G 415B JKDO 79A0 7NN IBAN : FR76 3006 6102 2000 0202 1070 297
+119: Vous disposez d’une carte de paiement : pour simplifier la lecture de vos relevés, vos paiements de moins de 10 EUR effectués auprès d’un
+120: même commerçant sont désor Mai s présentés de manière regroupée. Retrouvez facilement le détail de ces opérations dans votre
+121: V espace client sur www.cic.fr ou auprès de votre guichet
+123: 0
+124: X SITUATION DE VOS AUTRES COMPTES en euros au 30 Mai 2024
+127: Numéro Opération Solde
+129: 00020210704 LIVRET DEVELOPPEMENT DURABLE ET SOLIDAIRE +14.355,50
+130: 00020210703 PLAN EPARGNE LOGEMENT +41.771,78
+131: 00020210701 LIVRET A SUP +24.201,21
+132: KV.20231001.034714.5005.0032.19353
+138: Information sur la protection des comptes :
+139: (GE) : protégé par la Garantie de l’Etat, (GD) : protégé par la Garantie des Dépôts
+140: Remarque : le livret réglementé relève de la garantie de l’Etat et le(s) livret(s) ordinaire(s) de dépassement associé(s) de la garantie des Dépôts.
+141: www.garantiedesdepots.fr
+142: Page 2

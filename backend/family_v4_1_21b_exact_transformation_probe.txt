@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<stdin>", line 11, in <module>
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\contract_agent\contract_parser.py", line 13, in <module>
+    from app.services.shared.ocr_service import (
+  File "C:\Users\rachi\legal-ai-agent\backend\app\services\shared\ocr_service.py", line 12, in <module>
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\openai\_client.py", line 158, in __init__
+    raise OpenAIError(
+openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable

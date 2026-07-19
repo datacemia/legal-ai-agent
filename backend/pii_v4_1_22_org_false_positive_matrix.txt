@@ -1,0 +1,64 @@
+========== PII_REDACTOR V2 LOADED ==========
+C:\Users\rachi\legal-ai-agent\backend\venv\Lib\site-packages\huggingface_hub\utils\_validators.py:189: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+  warnings.warn(
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<?, ?it/s]
+
+========================================================================================================================
+EN NIST
+BEFORE: The Provider shall comply with the NIST Cybersecurity Framework.
+AFTER : The Provider shall comply with the [PARTY_1].
+
+========================================================================================================================
+EN ISO
+BEFORE: The Provider shall maintain ISO/IEC 27001 certification.
+AFTER : The Provider shall maintain ISO/IEC 27001 certification.
+
+========================================================================================================================
+EN IFRS
+BEFORE: Financial statements shall be prepared in accordance with IFRS.
+AFTER : Financial statements shall be prepared in accordance with IFRS.
+
+========================================================================================================================
+EN REAL ORG
+BEFORE: Acme Technology Holdings LLC shall provide the Services.
+AFTER : [PARTY_1] shall provide the Services.
+
+========================================================================================================================
+FR NIST
+BEFORE: Le Prestataire respecte le Cadre de Cybersécurité du NIST.
+AFTER : Le Prestataire respecte le [PARTY_1].
+
+========================================================================================================================
+FR ISO
+BEFORE: Le Prestataire maintient une certification ISO/IEC 27001.
+AFTER : Le Prestataire maintient une certification ISO/IEC 27001.
+
+========================================================================================================================
+FR IFRS
+BEFORE: Les états financiers sont établis conformément aux IFRS.
+AFTER : Les états financiers sont établis conformément aux IFRS.
+
+========================================================================================================================
+FR REAL ORG
+BEFORE: Technologies Atlantique SAS fournit les Services.
+AFTER : [PARTY_1] fournit les Services.
+
+========================================================================================================================
+AR NIST
+BEFORE: يلتزم مقدم الخدمة بإطار الأمن السيبراني الصادر عن NIST.
+AFTER : يلتزم مقدم الخدمة بإطار الأمن السيبراني الصادر عن [PARTY_1].
+
+========================================================================================================================
+AR ISO
+BEFORE: يحافظ مقدم الخدمة على شهادة ISO/IEC 27001.
+AFTER : يحافظ مقدم الخدمة على شهادة ISO/IEC 27001.
+
+========================================================================================================================
+AR IFRS
+BEFORE: تعد القوائم المالية وفقاً لمعايير IFRS.
+AFTER : تعد [PARTY_1] وفقاً لمعايير IFRS.
+
+========================================================================================================================
+AR REAL ORG
+BEFORE: تقدم شركة الأطلس للتقنيات ذ.م.م الخدمات.
+AFTER : تقدم [PARTY_1] الخدمات.

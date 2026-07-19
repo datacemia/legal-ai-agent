@@ -1,0 +1,26 @@
+ACCORD-CADRE DE SERVICES
+Le présent Accord-cadre de Services (l'« Accord ») est conclu à la date du 6 juillet 2026, entre [PARTY_1], une société de droit du Delaware (le « Prestataire »), et [PARTY_2], une société de droit du Nevada (le « Client »). Cet Accord établit les conditions générales selon lesquelles le Prestataire fournira des services au Client en vertu d'un ou plusieurs bons de commande (« Bons de Commande »).
+« Livrables » désigne les travaux, rapports et documents spécifiquement identifiés comme livrables dans un Bon de Commande applicable.
+« Bon de Commande » désigne un document faisant référence au présent Accord qui décrit des services, honoraires et calendriers spécifiques, signé par les deux Parties.
+1. SERVICES ET BONS DE COMMANDE
+1.1 Le Prestataire exécutera les services décrits dans chaque Bon de Commande de manière professionnelle, conformément aux normes généralement admises du secteur.
+1.2 En cas de conflit entre le présent Accord et un Bon de Commande, le présent Accord prévaudra, sauf si le Bon de Commande indique expressément une intention de déroger à une disposition spécifique.
+2. HONORAIRES ET PAIEMENT
+2.1 Le Client paiera l'ensemble des honoraires prévus dans chaque Bon de Commande dans un délai de quarante-cinq (45) jours à compter de la date de facturation. Tout montant impayé après soixante (60) jours portera intérêt au taux de 1 % par mois.
+2.2 Le Prestataire se réserve le droit d'augmenter unilatéralement les honoraires pour toute période de renouvellement jusqu'à quinze pour cent (15 %), moyennant un préavis écrit de trente (30) jours, sans nécessiter le consentement du Client.
+3. PROPRIÉTÉ INTELLECTUELLE
+3.1 Le Prestataire conserve l'intégralité des droits sur ses outils, méthodologies et savoir-faire préexistants utilisés pour fournir les services.
+3.2 Tous les Livrables seront réputés créés dans le cadre d'une commande (« œuvre de commande ») et deviendront la propriété exclusive du Client dès le paiement intégral des honoraires applicables.
+4. DURÉE ET RÉSILIATION
+4.1 Le présent Accord prendra effet à la Date d'Effet et se poursuivra pour une durée initiale de deux (2) ans, se renouvelant automatiquement pour des périodes successives d'un (1) an, sauf si l'[PERSON] notifie par écrit son intention de ne pas renouveler au moins quatre-vingt-dix (90) jours à l'avance.
+4.2 Le Prestataire pourra résilier le présent Accord ou tout Bon de Commande immédiatement, pour quelque raison que ce soit ou sans raison, moyennant notification écrite au Client. Le Client ne pourra résilier que pour manquement substantiel non corrigé du Prestataire, après un préavis écrit de soixante (60) jours et une possibilité de remédier au manquement.
+5. LIMITATION DE RESPONSABILITÉ
+5.1 SAUF EN CAS DE VIOLATION DES OBLIGATIONS DE CONFIDENTIALITÉ OU D'INDEMNISATION, LA RESPONSABILITÉ GLOBALE DU PRESTATAIRE N'EXCÉDERA EN AUCUN CAS LES HONORAIRES PAYÉS PAR LE CLIENT AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION. LE PRESTATAIRE NE SERA EN AUCUN CAS RESPONSABLE DE DOMMAGES INDIRECTS, CONSÉCUTIFS OU PUNITIFS.
+6. RÈGLEMENT DES LITIGES
+6.1 Les Parties tenteront d'abord de résoudre tout litige par la négociation de bonne foi entre cadres dirigeants pendant trente (30) jours. À défaut de résolution, tout litige sera définitivement tranché par arbitrage contraignant administré par l'American Arbitration Association selon son Règlement d'Arbitrage Commercial, siégeant à [LOCATION], devant un [PERSON], en langue anglaise.
+SIGNATURES
+EN FOI DE QUOI, les parties ont signé le présent Accord à la Date d'Effet.
+[ORGANIZATION] :
+Nom / Fonction :
+[ORGANIZATION] :
+Nom / Fonction :

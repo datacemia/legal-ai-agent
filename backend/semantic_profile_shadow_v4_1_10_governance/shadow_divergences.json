@@ -1,0 +1,348 @@
+[
+  {
+    "language": "en",
+    "document": "10_Outsourcing_Managed_Services_Agreement.json",
+    "reference": "clause_5",
+    "source_text": "2.1 Provider shall perform the Services in accordance with the service levels set forth in Exhibit A. The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4.1.10-governance-wave",
+    "shadow_primary_type": "governance",
+    "shadow_primary_type_confidence": 0.9248,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.5913,
+    "shadow_dominance_margin": 8.9533,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "governance",
+        "score": 69.9933,
+        "coverage": 0.5913,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "services",
+        "score": 61.04,
+        "coverage": 0.381,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "JOINT_GOVERNANCE_COMMITTEE"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 102,
+            "end": 251,
+            "text": "The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 251,
+            "text": "joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 102,
+            "end": 251,
+            "text": "The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 251,
+            "text": "joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3cb688ca779f4a60d120afdb8d64b66b6d5c743899cd97be70d5d28775f4413b"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9a3bf36677abf095b780abb34574af15e9a679fcb27d145390d8b2e5ba325c46"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 102,
+            "end": 251,
+            "text": "The Parties shall establish a joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 251,
+            "text": "joint governance committee, meeting monthly, to review performance, escalations, and continuous improvement initiatives"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "3cb688ca779f4a60d120afdb8d64b66b6d5c743899cd97be70d5d28775f4413b"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 4,
+            "end": 100,
+            "text": "Provider shall perform the Services in accordance with the service levels set forth in Exhibit A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "9a3bf36677abf095b780abb34574af15e9a679fcb27d145390d8b2e5ba325c46"
+      }
+    ],
+    "semantic_profile_hash": "da1a672196634bfc579a141176adfe7647c3114bc0e8c47f72bfe44377e4bd1a",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "fr",
+    "document": "10_Outsourcing_Managed_Services_Agreement_FR.json",
+    "reference": "clause_2",
+    "source_text": "2.1 Le Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A. Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue.",
+    "pipeline_clause_type": "services",
+    "semantic_profile_version": "shadow-p0-v4.1.10-governance-wave",
+    "shadow_primary_type": "governance",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.6429,
+    "shadow_dominance_margin": 13.62,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "governance",
+        "score": 72.16,
+        "coverage": 0.6429,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      },
+      {
+        "type": "services",
+        "score": 58.54,
+        "coverage": 0.3214,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "JOINT_GOVERNANCE_COMMITTEE"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 99,
+            "end": 279,
+            "text": "Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 279,
+            "text": "comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 99,
+            "end": 279,
+            "text": "Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 279,
+            "text": "comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d2e39dfaa475195f5dac3c2694dd3e6bcb938a3b2a4168b108e136b8d2fa8838"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "334a13807fce84f79b3c6b7fadf957de92a23762db903f90f8157677d2c31f3f"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "JOINT_GOVERNANCE_COMMITTEE",
+        "rank": 93,
+        "candidate_primary_type": "governance",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 99,
+            "end": 279,
+            "text": "Les Parties mettront en place un comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          },
+          {
+            "label": "JOINT_GOVERNANCE_COMMITTEE",
+            "start": 132,
+            "end": 279,
+            "text": "comité de gouvernance conjoint, se réunissant mensuellement, pour examiner la performance, les escalades et les initiatives d'amélioration continue"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "d2e39dfaa475195f5dac3c2694dd3e6bcb938a3b2a4168b108e136b8d2fa8838"
+      },
+      {
+        "kind": "SERVICE_PERFORMANCE_OBLIGATION",
+        "rank": 92,
+        "candidate_primary_type": "services",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "SERVICE_PERFORMANCE_OBLIGATION",
+            "start": 7,
+            "end": 97,
+            "text": "Prestataire exécutera les Services conformément aux niveaux de service prévus à l'Annexe A"
+          }
+        ],
+        "grounded": true,
+        "polarity": "REQUIRED",
+        "evidence_hash": "334a13807fce84f79b3c6b7fadf957de92a23762db903f90f8157677d2c31f3f"
+      }
+    ],
+    "semantic_profile_hash": "31f14eaef625041ca7fbdb7d9a0bc71ae3c85801ff11c031ff678d8a3a18ad98",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

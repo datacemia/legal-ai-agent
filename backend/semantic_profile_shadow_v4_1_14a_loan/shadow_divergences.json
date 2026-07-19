@@ -1,0 +1,188 @@
+[
+  {
+    "language": "en",
+    "document": "12_Loan_Credit_Agreement.json",
+    "reference": "clause_1",
+    "source_text": "6.2 Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due and payable and may exercise all rights and remedies available under the Security Agreement and applicable law, including foreclosure on the Collateral.",
+    "pipeline_clause_type": "remedies",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "loan",
+    "shadow_primary_type_confidence": 0.93,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.4053,
+    "shadow_dominance_margin": 62.6627,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "loan",
+        "score": 62.6627,
+        "coverage": 0.4053,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "ACCELERATION_ON_DEFAULT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "ACCELERATION_ON_DEFAULT",
+        "rank": 97,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ACCELERATION_ON_DEFAULT",
+            "start": 4,
+            "end": 111,
+            "text": "Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "ACCELERATION_ON_DEFAULT",
+        "rank": 97,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ACCELERATION_ON_DEFAULT",
+            "start": 4,
+            "end": 111,
+            "text": "Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "96d186635ca105c20b685038745076491764d2683da8486f144349af281617e3"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "ACCELERATION_ON_DEFAULT",
+        "rank": 97,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "ACCELERATION_ON_DEFAULT",
+            "start": 4,
+            "end": 111,
+            "text": "Upon an Event of Default, Lender may declare all outstanding principal and accrued interest immediately due"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "96d186635ca105c20b685038745076491764d2683da8486f144349af281617e3"
+      }
+    ],
+    "semantic_profile_hash": "d85d86df85d9785d11f683a1ca79e7a2fd8485247404a6bd57ec50107a96f485",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  },
+  {
+    "language": "ar",
+    "document": "12_Loan_Credit_Agreement_AR.json",
+    "reference": "clause_2",
+    "source_text": "4.1 يجوز للمقترض سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة، على أن يُطبَّق أي سداد جزئي أولاً على الفوائد المتراكمة ثم على المبلغ الأصلي المتبقي.",
+    "pipeline_clause_type": "penalty",
+    "semantic_profile_version": "shadow-p0-v4.1.12-cybersecurity",
+    "shadow_primary_type": "loan",
+    "shadow_primary_type_confidence": 0.9165,
+    "shadow_abstained": false,
+    "shadow_abstention_reason": null,
+    "shadow_candidate_primary_type": null,
+    "shadow_candidate_coverage": null,
+    "shadow_primary_evidence_coverage": 0.3459,
+    "shadow_dominance_margin": 59.6883,
+    "shadow_candidate_margin": null,
+    "shadow_dominance_scores": [
+      {
+        "type": "loan",
+        "score": 59.6883,
+        "coverage": 0.3459,
+        "independent_support": 1,
+        "core_count": 1,
+        "secondary_count": 0,
+        "procedural_count": 0
+      }
+    ],
+    "shadow_supporting_mechanisms": [
+      "VOLUNTARY_PREPAYMENT_RIGHT"
+    ],
+    "extracted_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 72,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT"
+      }
+    ],
+    "grounded_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 72,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "0735d24360e4b6508ed75ecd7a3f25672c7daab98e2f13f4797ac1976128be9f"
+      }
+    ],
+    "ranked_material_mechanisms": [
+      {
+        "kind": "VOLUNTARY_PREPAYMENT_RIGHT",
+        "rank": 93,
+        "candidate_primary_type": "loan",
+        "semantic_role": "DOMAIN_CORE",
+        "primary_eligible": true,
+        "source_evidence": [
+          {
+            "label": "VOLUNTARY_PREPAYMENT_RIGHT",
+            "start": 17,
+            "end": 72,
+            "text": "سداد القرض مبكراً، كلياً أو جزئياً، في أي وقت دون غرامة"
+          }
+        ],
+        "grounded": true,
+        "polarity": "RIGHT",
+        "evidence_hash": "0735d24360e4b6508ed75ecd7a3f25672c7daab98e2f13f4797ac1976128be9f"
+      }
+    ],
+    "semantic_profile_hash": "fcacc827a808b521f03db65487ecbbe5ee4a47c5ade43b3921aef540f3ec7cdc",
+    "type_verdict": "DIVERGENCE",
+    "evidence_errors": []
+  }
+]

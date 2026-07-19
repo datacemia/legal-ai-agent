@@ -1,0 +1,59 @@
+========================================================================================
+SHADOW P0 V1 — GAP INVENTORY
+========================================================================================
+ROWS: 355
+ABSTAINED: 281
+ABSTAIN RATE: 79.15%
+ABSTAIN BY LANGUAGE: {'en': 82, 'fr': 103, 'ar': 96}
+DIVERGENCES: 53
+GENERIC-ONLY PRIMARY OVERRIDES: 41
+MIXED GENERIC+DOMAIN DIVERGENCES: 9
+DOMAIN CONFLICT CANDIDATES: 3
+REPORT: semantic_profile_shadow\shadow_gap_inventory.json
+
+TOP ABSTAINED PIPELINE TYPES
+  27  termination
+  22  payment
+  21  intellectual_property
+  17  data_protection
+  15  confidentiality
+  14  other
+  11  services
+  11  liability
+  10  dispute_resolution
+  10  employment
+   8  security
+   8  indemnity
+   8  loan
+   7  delivery
+   7  warranty
+   6  renewal
+   6  cybersecurity
+   5  pricing
+   4  term
+   4  supply_distribution
+   4  corporate_governance
+   4  security_interest
+   3  notice
+   3  data_processing
+   3  restrictive_covenants
+   3  lease
+   3  maintenance
+   3  fees
+   2  service_level
+   2  insurance
+   2  remedies
+   2  guarantee
+   2  share_transfer_rights
+   2  royalties
+   2  ownership
+   2  duration
+   2  deposit
+   2  penalty
+   2  covenant
+   1  audit_rights
+
+DOMAIN CONFLICT CANDIDATES
+EN | 12_Loan_Credit_Agreement.json | clause_4 | pipeline=loan | shadow=financial_reporting | mechanisms=['FINANCIAL_REPORTING_OBLIGATION']
+FR | 12_Loan_Credit_Agreement_FR.json | clause_2 | pipeline=loan | shadow=financial_reporting | mechanisms=['FINANCIAL_REPORTING_OBLIGATION']
+AR | 14_Shareholders_Agreement_AR.json | clause_8 | pipeline=automatic_renewal | shadow=termination | mechanisms=['AUTOMATIC_EVENT_TRANSITION']
