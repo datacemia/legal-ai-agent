@@ -4352,6 +4352,37 @@ def _hf_augment_profile(profile, source_text, language=None):
             procedural_state="CONSENT_REQUIRED",
         )
 
+    # Add PURPOSE_LIMITATION as an additive, idempotent mechanism.
+    #
+    # Keep this detector outside the historical extraction and primary-type
+    # derivation logic. _hf_append_ranked_mechanism() already prevents a
+    # duplicate when PURPOSE_LIMITATION was extracted elsewhere.
+    from .semantic_detection import detect_purpose_limitation
+
+    purpose_matches = detect_purpose_limitation(
+        source_text,
+        language,
+    )
+
+    if purpose_matches:
+        purpose_evidence = [
+            {
+                "text": match.evidence,
+                "start": match.start,
+                "end": match.end,
+            }
+            for match in purpose_matches
+        ]
+
+        _hf_append_ranked_mechanism(
+            profile,
+            kind="PURPOSE_LIMITATION",
+            evidence=purpose_evidence,
+            semantic_role="CONTROL_MODIFIER",
+            candidate_primary_type="other",
+            polarity="RESTRICTION",
+        )
+
     return profile
 
 
