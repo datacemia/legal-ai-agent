@@ -3619,11 +3619,7 @@ def _hf_search(pattern, text):
     return _hf_re.search(
         pattern,
         text,
-        flags=(
-            _hf_re.IGNORECASE
-            | _hf_re.UNICODE
-            | _hf_re.VERBOSE
-        ),
+        flags=_hf_re.IGNORECASE | _hf_re.UNICODE,
     )
 
 
@@ -3779,7 +3775,7 @@ def _hf_detect_preemptive_right(source_text):
             |
             \bquote-part\b
             |
-            حص(?:ة|ته|تها|تهم|تهن)\s+التناسبية
+            حصة(?:ه|ها|هم|هن)?\s+التناسبية
             |
             بنسبة\s+تتناسب
             |
@@ -4228,7 +4224,7 @@ def _hf_detect_reserved_matter_consent(source_text):
             |
             إنشاء
             |
-            تحمل\s+(?:أي\s+)?مديونية
+            تحمل\s+مديونية
             |
             اقتراض
             |

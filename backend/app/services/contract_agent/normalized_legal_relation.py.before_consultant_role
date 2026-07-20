@@ -1,0 +1,2491 @@
+"""Language-neutral normalized legal relation materialization.
+
+This module projects already-grounded canonical source mechanisms into a
+stable relation schema. It does not classify clauses or generate legal text.
+"""
+
+from __future__ import annotations
+
+import re
+from typing import Any
+
+
+UNKNOWN = "UNKNOWN"
+
+
+_CONCEPT_NORMALIZATION = {
+    "CONFIDENTIALITY_DUTY": "CONFIDENTIALITY_OBLIGATION",
+    "CONFIDENTIAL_USE_RESTRICTION": "PURPOSE_LIMITATION",
+    "SECURITY_INCIDENT_NOTIFICATION": "DATA_BREACH_NOTICE",
+    "PERSONAL_DATA_BREACH_NOTIFICATION": "DATA_BREACH_NOTICE",
+    "VOLUNTARY_PREPAYMENT_RIGHT": "PREPAYMENT_RIGHT",
+    "BOARD_COMPOSITION_STRUCTURE": "BOARD_COMPOSITION",
+    "PRIOR_CONSENT_PREREQUISITE": "CONSENT_PREREQUISITE",
+    "PROCESSING_INSTRUCTION_LIMIT": "PURPOSE_LIMITATION",
+    "NON_COMPETE_RESTRICTION": "NON_COMPETE",
+    "LOAN_PRINCIPAL_DISBURSEMENT": "LOAN_DISBURSEMENT",
+    "TRANSITION_SERVICE_OBLIGATION": "TRANSITION_PLAN",
+}
+
+
+_POLARITY_NORMALIZATION = {
+    "REQUIRED": "OBLIGATION",
+    "MANDATORY": "OBLIGATION",
+    "RESTRICTED": "PROHIBITION",
+    "PROHIBITED": "PROHIBITION",
+    "RIGHT": "RIGHT",
+    "OPTIONAL": "OPTION",
+    "EXCLUDED": "PROHIBITION",
+}
+
+
+_ROLE_PATTERNS: dict[str, tuple[str, ...]] = {
+    "RECEIVING_PARTY": (
+        r"\breceiving party\b",
+        r"\bpartie (?:destinataire|r[eé]ceptrice)\b",
+        r"(?:الطرف\s+المتلقي|طرف\s+متلق)",
+    ),
+    "DISCLOSING_PARTY": (
+        r"\bdisclosing party\b",
+        r"\bpartie divulgatrice\b",
+        r"(?:الطرف\s+المفصح|طرف\s+مفصح)",
+    ),
+    "PROVIDER": (
+        r"\bprovider\b",
+        r"\bprestataire\b",
+        r"(?:مقدم\s+الخدمة|المزود)",
+    ),
+    "CLIENT": (
+        r"\bclient\b",
+        r"\bclient\b",
+        r"(?:العميل)",
+    ),
+    "CUSTOMER": (
+        r"\bcustomer\b",
+        r"\bclient\b",
+        r"(?:العميل)",
+    ),
+    "LICENSOR": (
+        r"\blicensor\b",
+        r"\b(?:conc[eé]dant|donneur de licence)\b",
+        (
+            r"(?<![\u0621-\u064A])"
+            r"(?:و|ف)?"
+            r"(?:"
+            r"(?:ال)?مرخ[\u064B-\u065F\u0670]*ص"
+            r"(?!"
+            r"[\u064B-\u065F\u0670]*"
+            r"\s+له"
+            r")"
+            r"(?="
+            r"[^.;؛!?]{0,100}"
+            r"(?:"
+            r"يمنح|تمنح|يرخص|ترخص|"
+            r"يلتزم|وافق|يوافق|"
+            r"منح|ترخيص"
+            r")"
+            r")"
+            r"|مانح\s+الترخيص"
+            r")"
+            r"(?![\u0621-\u064A])"
+        ),
+    ),
+    "LICENSEE": (
+        r"\blicensee\b",
+        r"\b(?:licenci[eé]e?|cessionnaire de licence)\b",
+        (
+            r"(?<![\u0621-\u064A])"
+            r"(?:و|ف)?"
+            r"(?:"
+            r"المرخ[\u064B-\u065F\u0670]*ص"
+            r"[\u064B-\u065F\u0670]*\s+له"
+            r"|للمرخ[\u064B-\u065F\u0670]*ص"
+            r"[\u064B-\u065F\u0670]*\s+له"
+            r"|بالمرخ[\u064B-\u065F\u0670]*ص"
+            r"[\u064B-\u065F\u0670]*\s+له"
+            r"|كالمرخ[\u064B-\u065F\u0670]*ص"
+            r"[\u064B-\u065F\u0670]*\s+له"
+            r"|حامل\s+الترخيص"
+            r"|لحامل\s+الترخيص"
+            r")"
+            r"(?![\u0621-\u064A])"
+        ),
+    ),
+    "BORROWER": (
+        r"\bborrower\b",
+        r"\bemprunteur\b",
+        r"(?:المقترض)",
+    ),
+    "LENDER": (
+        r"\blender\b",
+        r"\bpr[eê]teur\b",
+        # Match المقرض and vocalized forms such as المُقرض.
+        r"(?:الم[\u064B-\u065F\u0670]*قرض)",
+    ),
+    "TENANT": (
+        r"\b(?:tenant|lessee)\b",
+        r"\b(?:preneur|locataire)\b",
+        r"(?:المستأجر)",
+    ),
+    "LANDLORD": (
+        r"\b(?:landlord|lessor)\b",
+        r"\bbailleur\b",
+        r"(?:المؤجر)",
+    ),
+    "COMPANY": (
+        r"\bcompany\b",
+        r"\bsoci[eé]t[eé]\b",
+        r"(?:الشركة)",
+    ),
+    "INVESTOR": (
+        r"\binvestor\b",
+        r"\binvestisseur\b",
+        r"(?:المستثمر)",
+    ),
+    "BUYER": (
+        r"\bbuyer\b",
+        r"\bacheteur\b",
+        (
+            r"(?<![\u0621-\u064A])"
+            r"(?:و|ف)?"
+            r"(?:"
+            r"مشتري"
+            r"|المشتري"
+            r"|للمشتري"
+            r"|بالمشتري"
+            r"|كالمشتري"
+            r")"
+            r"(?![\u0621-\u064A])"
+        ),
+    ),
+    "SUPPLIER": (
+        r"\bsupplier\b",
+        r"\bfournisseur\b",
+        r"(?:المورد)",
+    ),
+    "PROCESSOR": (
+        r"\bprocessor\b",
+        r"\bsous-traitant\b",
+        r"(?:المعالج)",
+    ),
+    "CONTROLLER": (
+        r"\bcontroller\b",
+        r"\bresponsable\s+du\s+traitement\b",
+        r"(?:المتحكم)",
+    ),
+}
+
+
+_OBJECT_PATTERNS: dict[str, tuple[str, ...]] = {
+    "CONFIDENTIAL_INFORMATION": (
+        r"\bconfidential information\b",
+        r"\binformations? confidentielles?\b",
+        r"(?:المعلومات\s+السرية)",
+    ),
+    "LICENSED_SOFTWARE": (
+        r"\blicensed software\b",
+        r"\blogiciel sous licence\b|\blogiciel conc[eé]d[eé]\b",
+        (
+            r"(?:"
+            r"البرنامج\s+المرخ[\u064B-\u065F\u0670]*ص"
+            r"|البرمجيات\s+المرخ[\u064B-\u065F\u0670]*صة"
+            r")"
+        ),
+    ),
+    "LOAN": (
+        r"\bloan\b",
+        r"\bpr[eê]t\b",
+        r"(?:القرض)",
+    ),
+    "SECURITY_INCIDENT": (
+        r"\bsecurity incident\b",
+        r"\bincident de s[eé]curit[eé]\b",
+        r"(?:حادث\s+أمني)",
+    ),
+    "FINANCIAL_STATEMENTS": (
+        r"\bfinancial statements?\b",
+        r"\b[eé]tats? financiers?\b",
+        r"(?:القوائم\s+المالية|البيانات\s+المالية)",
+    ),
+    "GOODS": (
+        r"\b(?:goods|products?|materials?|equipment)\b",
+        r"\b(?:biens?|produits?|marchandises?|mat[eé]riels?|équipements?)\b",
+        (
+            r"(?<![\u0621-\u064A])"
+            r"(?:(?:ال)?بضائع|(?:ال)?سلع|(?:ال)?منتجات|"
+            r"(?:ال)?مواد|(?:ال)?معدات)"
+            r"(?![\u0621-\u064A])"
+        ),
+    ),
+    "LEASE": (
+        r"\blease\b",
+        r"\bbail\b|\bcontrat de location\b",
+        r"(?:عقد\s+الإيجار|هذا\s+العقد)",
+    ),
+    "PREMISES": (
+        r"\bpremises\b",
+        r"\blocaux\b",
+        r"(?:المباني|العقار)",
+    ),
+    "AGREEMENT": (
+        r"\bagreement\b",
+        r"\baccord\b|\bcontrat\b",
+        r"(?:الاتفاقية)",
+    ),
+    "SOW": (
+        r"\bstatement of work\b|\bSOW\b",
+        r"\b[eé]nonc[eé] des travaux\b",
+        r"(?:بيان\s+عمل)",
+    ),
+    "SERVICE": (
+        r"\b(?:platform|service|application|system)\b",
+        r"\b(?:plateforme|service|application|syst[eè]me)\b",
+        (
+            r"(?:"
+            r"المنصة|الخدمة|الخدمات|التطبيق|النظام|الأنظمة"
+            r")"
+        ),
+    ),
+    "PERSONAL_DATA": (
+        r"\bpersonal\s+data\b",
+        r"\bdonn[eé]es\s+personnelles\b",
+        r"(?:البيانات\s+الشخصية)",
+    ),
+    "SECURITY_CONTROLS": (
+        r"\b(?:security\s+controls?|security\s+measures?|"
+        r"SOC\s*2|ISO(?:/IEC)?\s*27001)\b",
+        r"\b(?:contr[oô]les?\s+de\s+s[eé]curit[eé]|"
+        r"mesures?\s+de\s+s[eé]curit[eé]|"
+        r"SOC\s*2|ISO(?:/IEC)?\s*27001)\b",
+        r"(?:ضوابط?\s+الأمن|تدابير?\s+الأمن|"
+        r"SOC\s*2|ISO(?:/IEC)?\s*27001)",
+    ),
+    "CUSTOMER_DATA": (
+        r"\b(?:customer\s+data|client\s+data)\b",
+        r"\bdonn[eé]es\s+du\s+client\b",
+        r"(?:بيانات\s+العميل)",
+    ),
+}
+
+
+_ACTION_BY_CONCEPT = {
+    "CONFIDENTIALITY_OBLIGATION": "MAINTAIN_CONFIDENTIALITY",
+    "PURPOSE_LIMITATION": "USE_FOR_DEFINED_PURPOSE",
+    "DATA_BREACH_NOTICE": "NOTIFY",
+    "TERMINATION_FOR_CAUSE": "TERMINATE",
+    "TERMINATION_FOR_CONVENIENCE": "TERMINATE",
+    "IMMEDIATE_TERMINATION": "TERMINATE",
+    "NON_PAYMENT_TERMINATION": "TERMINATE",
+    "LICENSE_GRANT": "GRANT_LICENSE",
+    "LICENSE_RESTRICTION": "REVERSE_ENGINEER_OR_DERIVATIVE_WORKS",
+    "PREPAYMENT_RIGHT": "PREPAY",
+    "FINANCIAL_REPORTING_OBLIGATION": "DELIVER",
+    "ASSIGNMENT_RESTRICTION": "ASSIGN_OR_SUBLET",
+    "PURCHASE_ORDER": "SUBMIT_PURCHASE_ORDER",
+    "PURCHASE_ORDER_OBLIGATION": "SUBMIT_PURCHASE_ORDER",
+    "PURCHASE_ORDER_SUBMISSION": "SUBMIT_PURCHASE_ORDER",
+    "INSPECTION_RIGHT": "INSPECT",
+    "TAG_ALONG_RIGHT": "PARTICIPATE_IN_SALE",
+    "NON_DISCLOSURE": "DISCLOSE",
+    "DELIVERY_OBLIGATION": "DELIVER_GOODS",
+    "REPLACEMENT_REMEDY": "REPLACE_NON_CONFORMING_GOODS",
+    "PAY_FREQUENCY": "PAY_ON_SCHEDULE",
+    "SERVICE_SCOPE": "PERFORM_DEFINED_SERVICES",
+    "SECURITY_MEASURES": "MAINTAIN_SECURITY_CONTROLS",
+    "OWNERSHIP": "OWN",
+    "DATA_RETURN": "RETURN_DATA",
+    "DATA_DELETION": "DELETE_DATA",
+    "LIABILITY_CAP": "LIMIT_LIABILITY",
+    "LIABILITY_CARVEOUT": "EXCLUDE_FROM_LIABILITY_LIMIT",
+    "EXCLUDED_DAMAGES": "EXCLUDE_DAMAGE_CATEGORY",
+}
+
+
+def normalize_concept(kind: str | None) -> str:
+    value = str(kind or "").strip().upper()
+    return _CONCEPT_NORMALIZATION.get(value, value or UNKNOWN)
+
+
+def normalize_polarity(value: str | None) -> str:
+    raw = str(value or "").strip().upper()
+    return _POLARITY_NORMALIZATION.get(raw, UNKNOWN)
+
+
+def normalize_relation_polarity(
+    normalized_concept: str,
+    raw_polarity: str | None,
+) -> str:
+    """Normalize polarity using concept semantics after source grounding."""
+    if normalized_concept == "PURPOSE_LIMITATION":
+        return "OBLIGATION"
+
+    if normalized_concept == "LICENSE_GRANT":
+        return "RIGHT"
+
+    if normalized_concept == "LIABILITY_CAP":
+        return "RESTRICTION"
+
+    if normalized_concept == "LIABILITY_CARVEOUT":
+        return "EXCEPTION"
+
+    if normalized_concept == "EXCLUDED_DAMAGES":
+        return "PROHIBITION"
+
+    if normalized_concept == "OWNERSHIP":
+        return "RIGHT"
+
+    if normalized_concept in {
+        "DATA_RETURN",
+        "DATA_DELETION",
+    }:
+        return "OBLIGATION"
+
+    if normalized_concept == "LICENSE_RESTRICTION":
+        return "PROHIBITION"
+
+    if normalized_concept in {
+        "SECURITY_MEASURES",
+        "SERVICE_SCOPE",
+    }:
+        return "OBLIGATION"
+
+    if normalized_concept == "ASSIGNMENT_RESTRICTION":
+        return "PROHIBITION"
+
+    if normalized_concept in {
+        "PURCHASE_ORDER",
+        "PURCHASE_ORDER_OBLIGATION",
+        "PURCHASE_ORDER_SUBMISSION",
+    }:
+        return "OBLIGATION"
+
+    if normalized_concept in {
+        "INSPECTION_RIGHT",
+        "TAG_ALONG_RIGHT",
+    }:
+        return "RIGHT"
+
+    if normalized_concept == "NON_DISCLOSURE":
+        return "PROHIBITION"
+
+    if normalized_concept in {
+        "DELIVERY_OBLIGATION",
+        "REPLACEMENT_REMEDY",
+        "PAY_FREQUENCY",
+    }:
+        return "OBLIGATION"
+
+    return normalize_polarity(raw_polarity)
+
+
+def _relation_context(
+    mechanism: dict[str, Any],
+    source_text: str,
+    *,
+    left_context: int = 120,
+    right_context: int = 80,
+) -> str:
+    """Return source-derived local context around validated evidence spans.
+
+    Relation arguments such as the grammatical subject may occur immediately
+    before a regex evidence span. The context is still taken exclusively from
+    the original source clause.
+    """
+    source = str(source_text or "")
+    spans = [
+        span
+        for span in mechanism.get("source_evidence") or []
+        if isinstance(span, dict)
+    ]
+
+    if not spans:
+        return ""
+
+    valid_spans = []
+
+    for span in spans:
+        try:
+            start = int(span.get("start"))
+            end = int(span.get("end"))
+        except (TypeError, ValueError):
+            continue
+
+        if start < 0 or end <= start or end > len(source):
+            continue
+
+        if source[start:end] != str(span.get("text") or ""):
+            continue
+
+        valid_spans.append((start, end))
+
+    if not valid_spans:
+        return " ".join(
+            str(span.get("text") or "")
+            for span in spans
+        )
+
+    start = max(
+        0,
+        min(item[0] for item in valid_spans) - left_context,
+    )
+    end = min(
+        len(source),
+        max(item[1] for item in valid_spans) + right_context,
+    )
+
+    return source[start:end]
+
+
+def _normalize_arabic_role_context(text: str) -> str:
+    """Normalize attached Arabic prepositions for legal-role matching.
+
+    The original evidence is never modified. This creates only a temporary
+    matching view.
+
+    Examples:
+    للطرف -> الطرف
+    للمستثمر -> المستثمر
+    للعميل -> العميل
+    بالمقرض -> المقرض
+    بالشركة -> الشركة
+    """
+    normalized = str(text or "")
+
+    role_stems = (
+        "طرف",
+        "مستثمر",
+        "عميل",
+        "مقرض",
+        "مقترض",
+        "مؤجر",
+        "مستأجر",
+        "شركة",
+        "مزود",
+        "مقدم",
+        "معالج",
+        "متحكم",
+    )
+
+    stems = "|".join(
+        re.escape(stem)
+        for stem in role_stems
+    )
+
+    # Arabic contraction: لـ + الـ -> لل
+    # Example: للطرف is represented as للطرف / للطرف depending on spelling.
+    normalized = re.sub(
+        rf"(?<!\\w)لل(?=(?:{stems}))",
+        "ال",
+        normalized,
+    )
+
+    # Attached preposition followed by explicit definite article.
+    # Examples: بالطرف, كالمستثمر.
+    normalized = re.sub(
+        rf"(?<!\\w)[لبك](?=ال(?:{stems}))",
+        "",
+        normalized,
+    )
+
+    return normalized
+
+def _relation_span_score(
+    normalized_concept: str,
+    span_text: str,
+) -> int:
+    """Score an evidence span for compatibility with a normalized concept."""
+    text = str(span_text or "")
+    score = 0
+
+    if normalized_concept == "TERMINATION_FOR_CAUSE":
+        cause_patterns = (
+            r"\buncured\s+material\s+breach\b",
+            r"\bmaterial\s+breach\b.{0,80}\buncured\b",
+            r"\bmanquement\s+(?:substantiel|grave)\s+non\s+corrig[eé]\b",
+            r"(?:إخلال\s+جوهري).{0,50}(?:غير\s+معالج|غير\s+مصحح)",
+            r"(?:إلا|فقط).{0,50}(?:بسبب|لسبب)",
+        )
+
+        convenience_patterns = (
+            r"\bany\s+reason\b",
+            r"\bno\s+reason\b",
+            r"\bat\s+any\s+time\b",
+            r"\bà\s+tout\s+moment\b",
+            r"\bquelque\s+raison\b",
+            r"(?:لأي\s+سبب|دون\s+سبب)",
+        )
+
+        if any(
+            re.search(pattern, text, flags=re.IGNORECASE)
+            for pattern in cause_patterns
+        ):
+            score += 100
+
+        if any(
+            re.search(pattern, text, flags=re.IGNORECASE)
+            for pattern in convenience_patterns
+        ):
+            score -= 100
+
+    elif normalized_concept == "TERMINATION_FOR_CONVENIENCE":
+        convenience_patterns = (
+            r"\bany\s+reason\b",
+            r"\bno\s+reason\b",
+            r"\bat\s+any\s+time\b",
+            r"\bfor\s+convenience\b",
+            r"\bà\s+tout\s+moment\b",
+            r"\bquelque\s+raison\b",
+            r"(?:لأي\s+سبب|دون\s+سبب)",
+        )
+
+        cause_patterns = (
+            r"\buncured\s+material\s+breach\b",
+            r"\bmanquement\s+(?:substantiel|grave)\s+non\s+corrig[eé]\b",
+            r"(?:إخلال\s+جوهري).{0,50}(?:غير\s+معالج|غير\s+مصحح)",
+        )
+
+        if any(
+            re.search(pattern, text, flags=re.IGNORECASE)
+            for pattern in convenience_patterns
+        ):
+            score += 100
+
+        if any(
+            re.search(pattern, text, flags=re.IGNORECASE)
+            for pattern in cause_patterns
+        ):
+            score -= 100
+
+    return score
+
+
+def _structural_decimal_boundary_positions(
+    text: str,
+) -> set[int]:
+    """Return dot offsets that belong to structural clause numbering.
+
+    Legal clause identifiers such as 2.1, 4.1, 3.1, and 2.3.4 are
+    structural metadata, not sentence boundaries. The rule is deliberately
+    language- and domain-independent.
+    """
+    source = str(text or "")
+    positions: set[int] = set()
+
+    for match in re.finditer(
+        r"(?<!\w)\d+(?:\.\d+)+(?!\w)",
+        source,
+    ):
+        positions.update(
+            index
+            for index in range(
+                match.start(),
+                match.end(),
+            )
+            if source[index] == "."
+        )
+
+    return positions
+
+
+def _primary_evidence_sentence(
+    mechanism: dict[str, Any],
+    source_text: str,
+    normalized_concept: str | None = None,
+) -> str:
+    """Return relation-local source context for the best compatible evidence span."""
+    source = str(source_text or "")
+    structural_decimal_boundaries = (
+        _structural_decimal_boundary_positions(
+            source
+        )
+    )
+
+    spans = [
+        span
+        for span in mechanism.get("source_evidence") or []
+        if isinstance(span, dict)
+    ]
+
+    if not spans:
+        return ""
+
+    concept = str(
+        normalized_concept
+        or mechanism.get("normalized_concept")
+        or mechanism.get("kind")
+        or ""
+    ).upper()
+
+    valid_candidates = []
+
+    for span in spans:
+        try:
+            span_start = int(span.get("start"))
+            span_end = int(span.get("end"))
+        except (TypeError, ValueError):
+            continue
+
+        span_text = str(span.get("text") or "")
+
+        if (
+            span_start < 0
+            or span_end <= span_start
+            or span_end > len(source)
+            or source[span_start:span_end] != span_text
+        ):
+            continue
+
+        semantic_score = _relation_span_score(
+            concept,
+            span_text,
+        )
+
+        valid_candidates.append(
+            (
+                -semantic_score,
+                span_end - span_start,
+                span_start,
+                span_end,
+            )
+        )
+
+    if not valid_candidates:
+        return str(spans[0].get("text") or "")
+
+    _, _, start, end = min(valid_candidates)
+
+    sentence_start = start
+
+    while sentence_start > 0:
+        boundary_position = (
+            sentence_start - 1
+        )
+
+        char = source[
+            boundary_position
+        ]
+
+        if (
+            char in ".;!?؟؛\n"
+            and (
+                char != "."
+                or boundary_position
+                not in structural_decimal_boundaries
+            )
+        ):
+            break
+
+        sentence_start -= 1
+
+    sentence_end = end
+
+    while sentence_end < len(source):
+        boundary_position = sentence_end
+
+        char = source[
+            boundary_position
+        ]
+
+        if (
+            char in ".;!?؟؛\n"
+            and (
+                char != "."
+                or boundary_position
+                not in structural_decimal_boundaries
+            )
+        ):
+            break
+
+        sentence_end += 1
+
+    return source[
+        sentence_start:sentence_end
+    ].strip()
+
+
+
+def _matched_roles(text: str) -> list[str]:
+    roles: list[str] = []
+
+    matching_text = _normalize_arabic_role_context(text)
+
+    for role, patterns in _ROLE_PATTERNS.items():
+        if any(
+            re.search(
+                pattern,
+                matching_text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in patterns
+        ):
+            roles.append(role)
+
+    return roles
+
+
+def _matched_objects(text: str) -> list[str]:
+    objects: list[str] = []
+
+    for obj, patterns in _OBJECT_PATTERNS.items():
+        if any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns):
+            objects.append(obj)
+
+    return objects
+
+
+_NUMERIC_TOKEN_PATTERN = re.compile(
+    r"""
+    (?<![\w])
+    (?:
+        \$\s*
+    )?
+    (
+        \d{1,3}(?:[,\s]\d{3})+
+        |
+        \d+(?:[.,]\d+)?
+    )
+    \s*
+    (%|percent|pour\s+cent|بالمائة|في\s+المائة)?
+    """,
+    flags=re.IGNORECASE | re.VERBOSE,
+)
+
+
+def _numeric_value(raw: str) -> int | float | None:
+    """Parse a source-grounded Arabic/Latin numeric token conservatively."""
+    value = str(raw or "").strip()
+
+    if not value:
+        return None
+
+    compact = re.sub(r"[\s,]", "", value)
+
+    try:
+        number = float(compact)
+    except ValueError:
+        return None
+
+    if number.is_integer():
+        return int(number)
+
+    return number
+
+
+def _numeric_candidates(
+    text: str,
+) -> list[dict[str, Any]]:
+    """Return explicit numeric tokens with source-local character positions."""
+    source = str(text or "")
+    candidates: list[dict[str, Any]] = []
+
+    for match in _NUMERIC_TOKEN_PATTERN.finditer(source):
+        value = _numeric_value(match.group(1))
+
+        if value is None:
+            continue
+
+        percent_marker = str(
+            match.group(2) or ""
+        ).strip()
+
+        candidates.append(
+            {
+                "value": value,
+                "start": match.start(),
+                "end": match.end(),
+                "raw": match.group(0),
+                "is_percent": bool(percent_marker),
+            }
+        )
+
+    return candidates
+
+
+def _numeric_candidate_is_residual_clause_prefix(
+    local_text: str,
+    relation_text: str,
+    candidate: dict[str, Any],
+) -> bool:
+    """Detect a clause-number tail left by local evidence segmentation.
+
+    Example:
+        relation text: "2.1 The Company shall pay..."
+        local text:    "1 The Company shall pay..."
+
+    The initial "1" is structural, not a contractual numeric value.
+
+    A standalone contractual value such as "1 month" or "USD 1"
+    remains valid because this guard requires corroborating dotted
+    numbering in the broader relation text.
+    """
+    local = str(local_text or "")
+    relation = str(relation_text or "")
+
+    start = int(candidate["start"])
+    end = int(candidate["end"])
+
+    if start != 0:
+        return False
+
+    raw = str(
+        candidate.get("raw") or ""
+    ).strip()
+
+    if not re.fullmatch(
+        r"\d+",
+        raw,
+    ):
+        return False
+
+    local_tail = local[end:]
+
+    if not re.match(
+        r"\s+[^\d\s]",
+        local_tail,
+    ):
+        return False
+
+    dotted_prefix = re.match(
+        r"\s*(\d+(?:\.\d+)+)\s+",
+        relation,
+    )
+
+    if not dotted_prefix:
+        return False
+
+    final_component = (
+        dotted_prefix
+        .group(1)
+        .split(".")[-1]
+    )
+
+    return raw == final_component
+
+
+def _numeric_candidate_is_clause_number(
+    text: str,
+    candidate: dict[str, Any],
+) -> bool:
+    """Return whether a numeric candidate is structural clause numbering.
+
+    Section identifiers such as 2.1, 4.1, 3.1, 2.3.4 and similar dotted
+    legal-document numbering are structural coordinates, not contractual
+    numeric values.
+
+    The guard is deliberately language-independent and position-aware.
+    """
+    source = str(text or "")
+    start = int(candidate["start"])
+    end = int(candidate["end"])
+
+    raw = str(
+        candidate.get("raw") or ""
+    ).strip()
+
+    if not raw:
+        return False
+
+    if not re.fullmatch(
+        r"\d+(?:\.\d+)+\.?",
+        raw,
+    ):
+        return False
+
+    prefix = source[
+        max(0, start - 40):
+        start
+    ]
+
+    line_prefix = prefix.rsplit(
+        "\n",
+        1,
+    )[-1]
+
+    if not line_prefix.strip():
+        return True
+
+    structural_prefix_patterns = (
+        r"(?:section|clause|article)\s*$",
+        r"(?:section|clause|article)\s+no\.?\s*$",
+        r"(?:section|clause|article)\s+number\s*$",
+        r"(?:section|clause|article)\s+n[°ºo]\s*$",
+        r"(?:section|clause|article)\s+num[eé]ro\s*$",
+        r"(?:القسم|البند|المادة|الفقرة)\s*$",
+        r"(?:القسم|البند|المادة|الفقرة)\s+رقم\s*$",
+    )
+
+    return any(
+        re.search(
+            pattern,
+            line_prefix,
+            flags=re.IGNORECASE,
+        )
+        for pattern in structural_prefix_patterns
+    )
+
+
+def _numeric_window(
+    text: str,
+    candidate: dict[str, Any],
+    *,
+    left: int = 100,
+    right: int = 100,
+) -> str:
+    source = str(text or "")
+
+    start = max(
+        0,
+        int(candidate["start"]) - left,
+    )
+    end = min(
+        len(source),
+        int(candidate["end"]) + right,
+    )
+
+    return source[start:end]
+
+
+def _numeric_segment_context(
+    text: str,
+    candidate: dict[str, Any],
+) -> str:
+    """Return the coordinated legal segment containing a numeric candidate.
+
+    This is narrower than a generic character window and prevents a number in
+    one coordinated obligation from inheriting semantic markers belonging to
+    the next obligation.
+    """
+    source = str(text or "")
+
+    start = int(candidate["start"])
+    end = int(candidate["end"])
+
+    segment_start = start
+
+    while segment_start > 0:
+        char = source[segment_start - 1]
+
+        if char in ".;!?؟؛":
+            break
+
+        segment_start -= 1
+
+    segment_end = end
+
+    while segment_end < len(source):
+        char = source[segment_end]
+
+        if char in ".;!?؟؛":
+            break
+
+        segment_end += 1
+
+    segment = source[
+        segment_start:segment_end
+    ]
+
+    candidate_offset = start - segment_start
+
+    separators = (
+        r",\s+and\s+",
+        r",\s+et\s+",
+        r"،\s*و",
+    )
+
+    left_boundary = 0
+    right_boundary = len(segment)
+
+    for pattern in separators:
+        for match in re.finditer(
+            pattern,
+            segment,
+            flags=re.IGNORECASE,
+        ):
+            if match.end() <= candidate_offset:
+                left_boundary = max(
+                    left_boundary,
+                    match.end(),
+                )
+            elif match.start() >= candidate_offset:
+                right_boundary = min(
+                    right_boundary,
+                    match.start(),
+                )
+                break
+
+    return segment[
+        left_boundary:right_boundary
+    ].strip()
+
+
+def _numeric_candidate_has_local_unit(
+    text: str,
+    candidate: dict[str, Any],
+    unit_patterns: tuple[str, ...],
+    *,
+    right_context: int = 40,
+) -> bool:
+    """Require the unit to be locally attached to the numeric candidate."""
+    source = str(text or "")
+
+    start = int(candidate["start"])
+    end = min(
+        len(source),
+        int(candidate["end"]) + right_context,
+    )
+
+    local = source[start:end]
+
+    return any(
+        re.search(
+            pattern,
+            local,
+            flags=re.IGNORECASE,
+        )
+        for pattern in unit_patterns
+    )
+
+
+def _numeric_concept_matches(
+    normalized_concept: str,
+    *concepts: str,
+) -> bool:
+    """Match a grounded concept against a conservative numeric family.
+
+    Numeric role extraction may receive a broader grounded mechanism than
+    the specialized numeric role family. Local role patterns remain the
+    final evidence gate, so this helper only broadens branch dispatch and
+    does not assign a numeric role by itself.
+    """
+    concept = str(
+        normalized_concept or ""
+    ).strip().upper()
+
+    return concept in {
+        str(item or "").strip().upper()
+        for item in concepts
+        if str(item or "").strip()
+    }
+
+
+_NUMERIC_ROLE_RELATED_MECHANISM = {
+    "ANNUAL_BASE_COMPENSATION": "BASE_COMPENSATION",
+    "BONUS_CAP_PERCENT_OF_BASE_SALARY": "BONUS",
+    "NON_COMPETE_POST_EMPLOYMENT_DURATION": "NON_COMPETE",
+    "GOODS_INSPECTION_PERIOD": "INSPECTION_RIGHT",
+    "PURCHASE_PRICE": "PURCHASE_PRICE",
+    "SHARE_TRANSFER_TRIGGER": "TAG_ALONG_RIGHT",
+}
+
+
+def _numeric_role_related_mechanism(
+    semantic_role: str,
+    fallback_mechanism: str,
+) -> str:
+    """Return the canonical semantic owner of a numeric role.
+
+    Numeric extraction may be entered through a broader grounded mechanism,
+    while the numeric role belongs to a narrower legal mechanism. Preserve
+    the grounded mechanism itself and canonicalize only numeric-role
+    ownership.
+    """
+    normalized_role = str(
+        semantic_role or ""
+    ).strip().upper()
+
+    return _NUMERIC_ROLE_RELATED_MECHANISM.get(
+        normalized_role,
+        fallback_mechanism,
+    )
+
+
+def _numeric_candidate_has_local_left_context(
+    text: str,
+    candidate: dict[str, Any],
+    patterns: tuple[str, ...],
+    *,
+    left_context: int = 100,
+    right_context: int = 12,
+) -> bool:
+    """Require a semantic phrase to govern the numeric candidate locally."""
+    source = str(text or "")
+
+    start = int(candidate["start"])
+    end = int(candidate["end"])
+
+    local_text = source[
+        max(0, start - left_context):
+        min(
+            len(source),
+            end + right_context,
+        )
+    ]
+
+    return any(
+        re.search(
+            pattern,
+            local_text,
+            flags=re.IGNORECASE,
+        )
+        for pattern in patterns
+    )
+
+
+def _numeric_context_matches(
+    text: str,
+    patterns: tuple[str, ...],
+) -> bool:
+    return any(
+        re.search(
+            pattern,
+            text,
+            flags=re.IGNORECASE,
+        )
+        for pattern in patterns
+    )
+
+
+def _numeric_role(
+    *,
+    value: int | float,
+    unit: str,
+    semantic_role: str,
+    related_mechanism: str,
+) -> dict[str, Any]:
+    return {
+        "value": value,
+        "unit": unit,
+        "semantic_role": semantic_role,
+        "related_mechanism": related_mechanism,
+    }
+
+
+def _normalized_numeric_semantic_roles(
+    normalized_concept: str,
+    local_text: str,
+    relation_text: str,
+) -> list[dict[str, Any]]:
+    """Materialize only high-confidence source-grounded numeric legal roles.
+
+    Numeric meaning is resolved from the normalized legal concept plus
+    multilingual source context. Ambiguous numbers are intentionally ignored.
+    """
+    if normalized_concept in {
+        "INVESTOR_CONSENT_RIGHT",
+        "CONSENT_PREREQUISITE",
+    }:
+        text = str(
+            relation_text
+            or local_text
+            or ""
+        )
+    else:
+        text = str(
+            local_text
+            or relation_text
+            or ""
+        )
+
+    candidates = [
+        candidate
+        for candidate in _numeric_candidates(text)
+        if (
+            not _numeric_candidate_is_clause_number(
+                text,
+                candidate,
+            )
+            and not _numeric_candidate_is_residual_clause_prefix(
+                text,
+                relation_text,
+                candidate,
+            )
+        )
+    ]
+
+    if not candidates:
+        return []
+
+    roles: list[dict[str, Any]] = []
+    seen: set[
+        tuple[
+            int | float,
+            str,
+            str,
+            str,
+        ]
+    ] = set()
+
+    def add(
+        candidate: dict[str, Any],
+        unit: str,
+        semantic_role: str,
+        related_mechanism: str | None = None,
+    ) -> None:
+        mechanism = _numeric_role_related_mechanism(
+            semantic_role,
+            (
+                related_mechanism
+                or normalized_concept
+            ),
+        )
+
+        key = (
+            candidate["value"],
+            unit,
+            semantic_role,
+            mechanism,
+        )
+
+        if key in seen:
+            return
+
+        seen.add(key)
+
+        roles.append(
+            _numeric_role(
+                value=candidate["value"],
+                unit=unit,
+                semantic_role=semantic_role,
+                related_mechanism=mechanism,
+            )
+        )
+
+    for candidate in candidates:
+        window = _numeric_window(
+            text,
+            candidate,
+        )
+
+        segment = _numeric_segment_context(
+            text,
+            candidate,
+        )
+
+        value = candidate["value"]
+
+        if normalized_concept == "LIABILITY_CAP":
+            lookback_patterns = (
+                r"\bmonths?\s+(?:preceding|prior\s+to)\b",
+                r"\b(?:preceding|prior)\s+\w*\s*months?\b",
+                r"\bmois\s+pr[eé]c[eé]dant\b",
+                r"\b(?:au\s+cours\s+des|pendant\s+les).{0,40}\bmois\b",
+                r"(?:الأشهر|الشهور).{0,50}(?:السابقة|التي\s+تسبق)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                lookback_patterns,
+            ):
+                add(
+                    candidate,
+                    "MONTHS",
+                    "LIABILITY_CAP_LOOKBACK_PERIOD",
+                )
+
+        elif normalized_concept == "DATA_BREACH_NOTICE":
+            notice_patterns = (
+                r"\b(?:within|no\s+later\s+than)\b.{0,40}\bhours?\b",
+                r"\bdans\s+un\s+d[eé]lai\s+de\b.{0,40}\bheures?\b",
+                r"(?:خلال|في\s+غضون).{0,40}(?:ساعة|ساعات)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                notice_patterns,
+            ):
+                add(
+                    candidate,
+                    "HOURS",
+                    "DATA_BREACH_NOTICE_DEADLINE",
+                )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "BASE_COMPENSATION",
+            "PAYMENT_OBLIGATION",
+        ):
+            compensation_patterns = (
+                r"\bannual\s+base\s+salary\b",
+                r"\bsalaire\s+de\s+base\s+annuel\b",
+                r"(?:راتب(?:اً)?\s+أساسي(?:اً)?\s+سنوي(?:اً)?)",
+            )
+
+            rent_patterns = (
+                r"\bbase\s+rent\b.{0,60}\bper\s+month\b",
+                r"\bloyer\s+de\s+base\b.{0,60}\bpar\s+mois\b",
+                r"(?:إيجار(?:اً)?\s+أساسي(?:اً)?).{0,60}(?:شهرياً|شهريًا)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                compensation_patterns,
+            ):
+                add(
+                    candidate,
+                    "USD",
+                    "ANNUAL_BASE_COMPENSATION",
+                )
+
+            elif (
+                normalized_concept
+                == "PAYMENT_OBLIGATION"
+                and _numeric_context_matches(
+                    window,
+                    rent_patterns,
+                )
+            ):
+                add(
+                    candidate,
+                    "USD",
+                    "MONTHLY_BASE_RENT",
+                    "RENT_OBLIGATION",
+                )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "BONUS",
+            "INCENTIVE_COMPENSATION",
+        ):
+            bonus_patterns = (
+                r"\bbonus\b.{0,60}\b(?:base\s+salary|salary)\b",
+                r"\bprime\b.{0,60}\bsalaire\s+de\s+base\b",
+                r"(?:مكافأة).{0,60}(?:الراتب\s+الأساسي)",
+            )
+
+            if (
+                candidate["is_percent"]
+                and _numeric_context_matches(
+                    window,
+                    bonus_patterns,
+                )
+            ):
+                add(
+                    candidate,
+                    "PERCENT",
+                    "BONUS_CAP_PERCENT_OF_BASE_SALARY",
+                )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "NON_COMPETE",
+            "NON_COMPETE_RESTRICTION",
+        ):
+            duration_patterns = (
+                r"\bmonths?\s+(?:thereafter|after|following)\b",
+                r"\bfor\b.{0,30}\bmonths?\b.{0,30}\bthereafter\b",
+                r"\bmois\s+apr[eè]s\b",
+                r"\bmois\s+suivant\b",
+                r"(?:شهراً|شهرًا|أشهر).{0,40}(?:بعد|عقب)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                duration_patterns,
+            ):
+                add(
+                    candidate,
+                    "MONTHS",
+                    "NON_COMPETE_POST_EMPLOYMENT_DURATION",
+                )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "PURCHASE_ORDER",
+            "PURCHASE_ORDER_OBLIGATION",
+            "PURCHASE_ORDER_SUBMISSION",
+        ):
+            lead_time_patterns = (
+                r"\b(?:days?)\s+prior\s+to\b",
+                r"\bat\s+least\b.{0,30}\bdays?\s+prior\b",
+                r"\bjours?\s+avant\b",
+                r"\bau\s+moins\b.{0,30}\bjours?\s+avant\b",
+                r"(?:يوماً|يومًا|يوما|يوم|أيام).{0,40}(?:قبل)",
+                r"(?:قبل).{0,50}(?:يوماً|يومًا|يوما|يوم|أيام)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                lead_time_patterns,
+            ):
+                add(
+                    candidate,
+                    "DAYS",
+                    "PURCHASE_ORDER_LEAD_TIME",
+                )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "INSPECTION_RIGHT",
+            "EXPRESS_RIGHT",
+        ):
+            inspection_patterns = (
+                r"\binspect\b.{0,50}\b(?:business\s+days?|days?)\b",
+                r"\bright\s+to\s+inspect\b",
+                r"\bdroit\s+d['’]inspecter\b",
+                r"\binspecter\b.{0,50}\bjours?\s+ouvr[eé]s\b",
+                r"(?:يحق).{0,50}(?:فحص).{0,50}(?:يوم\s+عمل|أيام\s+عمل)",
+                r"(?:فحص).{0,50}(?:يوم\s+عمل|أيام\s+عمل)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                inspection_patterns,
+            ):
+                add(
+                    candidate,
+                    "BUSINESS_DAYS",
+                    "GOODS_INSPECTION_PERIOD",
+                )
+
+        elif normalized_concept == "RENT_OBLIGATION":
+            rent_patterns = (
+                r"\bbase\s+rent\b.{0,60}\bper\s+month\b",
+                r"\bloyer\s+de\s+base\b.{0,60}\bpar\s+mois\b",
+                r"(?:إيجار(?:اً)?\s+أساسي(?:اً)?).{0,60}(?:شهرياً|شهريًا)",
+            )
+
+            if _numeric_context_matches(
+                window,
+                rent_patterns,
+            ):
+                add(
+                    candidate,
+                    "USD",
+                    "MONTHLY_BASE_RENT",
+                )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "PURCHASE_PRICE",
+            "PURCHASE_PRICE_PAYMENT_SCHEDULE",
+        ):
+            purchase_price_patterns = (
+                r"\baggregate\s+purchase\s+price\b",
+                r"\bpurchase\s+price\b",
+                r"\bprix\s+d['’]achat\s+global\b",
+                r"\bprix\s+d['’]achat\b",
+                r"(?:إجمالي\s+ثمن\s+شراء|إجمالي\s+ثمن\s+الشراء)",
+                r"(?:إجمالي\s+سعر\s+شراء|إجمالي\s+سعر\s+الشراء)",
+                r"(?:ثمن\s+شراء|ثمن\s+الشراء)",
+                r"(?:سعر\s+شراء|سعر\s+الشراء)",
+            )
+
+            allocation_markers = (
+                r"\bpayable\s+as\s+follows\b",
+                r"\bas\s+follows\b",
+                r"\bpayable\s+in\b",
+                r"\bpayable\s+at\b",
+                r"\bpayable\s+upon\b",
+                r"\bpayable\s+on\b",
+                r"\bcomme\s+suit\b",
+                r"\bpayable\s+comme\s+suit\b",
+                r"\bvers[eé]\s+comme\s+suit\b",
+                r"(?:يُدفع|يدفع)\s+كما\s+يلي",
+                r"(?:على\s+النحو\s+التالي)",
+            )
+
+            phrase_ends = []
+
+            for pattern in purchase_price_patterns:
+                match = re.search(
+                    pattern,
+                    text,
+                    flags=re.IGNORECASE,
+                )
+
+                if match:
+                    phrase_ends.append(
+                        match.end()
+                    )
+
+            if phrase_ends:
+                governing_end = min(
+                    phrase_ends
+                )
+
+                allocation_starts = []
+
+                for pattern in allocation_markers:
+                    match = re.search(
+                        pattern,
+                        text[governing_end:],
+                        flags=re.IGNORECASE,
+                    )
+
+                    if match:
+                        allocation_starts.append(
+                            governing_end
+                            + match.start()
+                        )
+
+                allocation_start = (
+                    min(allocation_starts)
+                    if allocation_starts
+                    else len(text)
+                )
+
+                if (
+                    candidate["start"] >= governing_end
+                    and candidate["start"] < allocation_start
+                ):
+                    add(
+                        candidate,
+                        "USD",
+                        "PURCHASE_PRICE",
+                    )
+
+        elif _numeric_concept_matches(
+            normalized_concept,
+            "TAG_ALONG_RIGHT",
+            "ASSIGNMENT_TRANSFER",
+            "EXPRESS_RIGHT",
+        ):
+            transfer_patterns = (
+                r"\bshares?\s+representing\s+more\s+than\b",
+                r"\bmore\s+than\b.{0,30}\bcapital\s+stock\b",
+                r"\bactions?\s+repr[eé]sentant\s+plus\s+de\b",
+                r"\bplus\s+de\b.{0,30}\bcapital\s+social\b",
+                r"(?:أسهم).{0,40}(?:تمثل).{0,40}(?:أكثر\s+من)",
+            )
+
+            if (
+                candidate["is_percent"]
+                and _numeric_context_matches(
+                    window,
+                    transfer_patterns,
+                )
+            ):
+                add(
+                    candidate,
+                    "PERCENT",
+                    "SHARE_TRANSFER_TRIGGER",
+                )
+
+        elif normalized_concept == "BOARD_COMPOSITION":
+            board_patterns = (
+                r"\bboard\s+of\s+directors\b.{0,60}\bconsist\s+of\b",
+                r"\bboard\b.{0,60}\bmembers?\b",
+                r"\bconseil\s+d['’]administration\b.{0,60}\bcompos[eé]\s+de\b",
+                r"\bconseil\b.{0,60}\bmembres?\b",
+                r"(?:مجلس\s+إدارة|مجلس\s+الإدارة|مجلس\s+الادارة).{0,80}(?:يتكون|يتألف|يضم|مكون)",
+                r"(?:يتكون|يتألف|يضم).{0,80}(?:مجلس\s+إدارة|مجلس\s+الإدارة|مجلس\s+الادارة)",
+            )
+
+            board_member_unit_patterns = (
+                r"\)\s*members?\b",
+                r"\)\s*membres?\b",
+                r"\)\s*(?:عضو|أعضاء)",
+            )
+
+            has_local_member_unit = (
+                not candidate["is_percent"]
+                and _numeric_candidate_has_local_unit(
+                    text,
+                    candidate,
+                    board_member_unit_patterns,
+                    right_context=24,
+                )
+            )
+
+            if (
+                has_local_member_unit
+                and _numeric_context_matches(
+                    window,
+                    board_patterns,
+                )
+            ):
+                add(
+                    candidate,
+                    "MEMBERS",
+                    "BOARD_SIZE",
+                )
+
+                # Only the total board-size number is locally attached to
+                # the canonical member unit. Designation counts and investor
+                # thresholds remain unclassified as BOARD_SIZE.
+                break
+
+        elif normalized_concept == "FINANCIAL_REPORTING_OBLIGATION":
+            reporting_context = (
+                segment
+                if segment
+                else window
+            )
+
+            if candidate["is_percent"]:
+                holding_patterns = (
+                    r"\binvestor\s+holds?\s+at\s+least\b",
+                    r"\bfor\s+so\s+long\s+as\s+the\s+investor\s+holds\b",
+                    r"\binvestisseur\b.{0,40}\bd[eé]tiendra\b.{0,30}\bau\s+moins\b",
+                    r"\btant\s+que\s+l['’]investisseur\b.{0,50}\bau\s+moins\b",
+                    r"(?:طالما|ما\s+دام).{0,40}(?:المستثمر).{0,50}(?:لا\s+تقل\s+عن)",
+                )
+
+                if _numeric_context_matches(
+                    reporting_context,
+                    holding_patterns,
+                ):
+                    add(
+                        candidate,
+                        "PERCENT",
+                        "INVESTOR_HOLDING_THRESHOLD",
+                    )
+
+            annual_patterns = (
+                r"\bannual\s+financial\s+statements?\b.{0,60}\bwithin\b",
+                r"\bwithin\b.{0,30}\bdays?\b.{0,60}\bfiscal\s+year\s+end\b",
+                r"\b[eé]tats?\s+financiers?\s+annuels?\b.{0,60}\bd[eé]lai\b",
+                r"\bdans\s+un\s+d[eé]lai\b.{0,30}\bjours?\b.{0,60}\bfin\s+de\s+l['’]exercice\b",
+                r"(?:بيانات|قوائم)\s+مالية\s+سنوية.{0,60}(?:خلال).{0,30}(?:يوماً|يومًا|أيام)",
+            )
+
+            quarterly_patterns = (
+                r"\bquarterly\s+financial\s+statements?\b.{0,60}\bwithin\b",
+                r"\bwithin\b.{0,30}\bdays?\b.{0,60}\bfiscal\s+quarter\s+end\b",
+                r"\b[eé]tats?\s+financiers?\s+trimestriels?\b.{0,60}\bd[eé]lai\b",
+                r"\bdans\s+un\s+d[eé]lai\b.{0,30}\bjours?\b.{0,60}\btrimestre\b",
+                r"(?:بيانات|قوائم)\s+مالية\s+ربع\s+سنوية.{0,60}(?:خلال).{0,30}(?:يوماً|يومًا|أيام)",
+            )
+
+            day_unit_patterns = (
+                r"\)\s*days?\b",
+                r"\bdays?\b",
+                r"\)\s*jours?\b",
+                r"\bjours?\b",
+                r"\)\s*(?:يوماً|يومًا|يوما|يوم|أيام)\b",
+                r"(?:يوماً|يومًا|يوما|يوم|أيام)",
+            )
+
+            has_local_day_unit = (
+                not candidate["is_percent"]
+                and _numeric_candidate_has_local_unit(
+                    text,
+                    candidate,
+                    day_unit_patterns,
+                )
+            )
+
+            if (
+                has_local_day_unit
+                and _numeric_context_matches(
+                    reporting_context,
+                    annual_patterns,
+                )
+            ):
+                add(
+                    candidate,
+                    "DAYS",
+                    "ANNUAL_FINANCIAL_REPORTING_DEADLINE",
+                )
+
+            if (
+                has_local_day_unit
+                and _numeric_context_matches(
+                    reporting_context,
+                    quarterly_patterns,
+                )
+            ):
+                add(
+                    candidate,
+                    "DAYS",
+                    "QUARTERLY_FINANCIAL_REPORTING_DEADLINE",
+                )
+
+        elif normalized_concept in {
+            "INVESTOR_CONSENT_RIGHT",
+            "CONSENT_PREREQUISITE",
+        }:
+            consent_numeric_context = (
+                segment
+                if segment
+                else window
+            )
+
+            if candidate["is_percent"]:
+                holding_patterns = (
+                    r"\binvestor\s+holds?\s+at\s+least\b",
+                    r"\bfor\s+so\s+long\s+as\s+the\s+investor\s+holds\b",
+                    r"\binvestisseur\b.{0,40}\bd[eé]tiendra\b.{0,30}\bau\s+moins\b",
+                    r"\btant\s+que\s+l['’]investisseur\b.{0,50}\bau\s+moins\b",
+                    r"(?:طالما|ما\s+دام).{0,40}(?:المستثمر).{0,50}(?:لا\s+تقل\s+عن)",
+                )
+
+                if _numeric_context_matches(
+                    window,
+                    holding_patterns,
+                ):
+                    add(
+                        candidate,
+                        "PERCENT",
+                        "INVESTOR_HOLDING_THRESHOLD",
+                        "INVESTOR_CONSENT_RIGHT",
+                    )
+
+            indebtedness_patterns = (
+                r"\bincur\s+indebtedness\s+in\s+excess\s+of\b",
+                r"\bindebtedness\s+in\s+excess\s+of\b",
+                r"\bcontracter\s+un\s+endettement\s+sup[eé]rieur\s+[àa]\b",
+                r"(?:تحمل\s+مديونية|مديونية).{0,40}(?:تتجاوز|تفوق)",
+            )
+
+            if _numeric_context_matches(
+                consent_numeric_context,
+                indebtedness_patterns,
+            ):
+                add(
+                    candidate,
+                    "USD",
+                    "INDEBTEDNESS_CONSENT_THRESHOLD",
+                    "CONSENT_PREREQUISITE",
+                )
+
+    return roles
+
+
+
+# LOT5_PROCEDURAL_STATE_ENRICHMENT
+def _normalized_procedural_states(
+    mechanism: dict[str, Any],
+    normalized_concept: str | None = None,
+    local_text: str = "",
+) -> list[str]:
+    raw = str(
+        mechanism.get("procedural_state")
+        or ""
+    ).strip().upper()
+
+    mapping = {
+        "PRIOR_CONSENT": [
+            "CONSENT_REQUIRED",
+            "PRIOR_APPROVAL",
+        ],
+        "AUTOMATIC_EVENT": [
+            "AUTOMATIC",
+        ],
+        "AUTOMATIC_RENEWAL": [
+            "AUTOMATIC",
+            "OPT_OUT",
+        ],
+        "TERMINATION_FOR_CONVENIENCE": [],
+        "CURE_PERIOD": [],
+        "NOTICE_PERIOD": [
+            "NOTICE_REQUIRED",
+        ],
+    }
+
+    states = set(
+        mapping.get(
+            raw,
+            [],
+        )
+    )
+
+    concept = str(
+        normalized_concept
+        or mechanism.get("normalized_concept")
+        or mechanism.get("kind")
+        or ""
+    ).strip().upper()
+
+    text = str(
+        local_text
+        or ""
+    )
+
+    if concept == "NOTICE_PREREQUISITE":
+        states.add(
+            "NOTICE_REQUIRED"
+        )
+
+        manual_patterns = (
+            r"\b(?:prior\s+|advance\s+)?written\s+notice\b",
+            r"\bnotice\s+in\s+writing\b",
+            r"\bsigned\s+notice\b",
+
+            r"\b(?:notification|pr[eé]avis|avis)\s+[eé]crit\b",
+            r"\bnotification\s+par\s+[eé]crit\b",
+            r"\bavis\s+sign[eé]\b",
+
+            r"(?:إشعار|إخطار)\s+(?:خطي|كتابي)",
+            r"(?:إشعار|إخطار)\s+موقع",
+        )
+
+        if any(
+            re.search(
+                pattern,
+                text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in manual_patterns
+        ):
+            states.add(
+                "MANUAL"
+            )
+
+    if concept == "CONSENT_PREREQUISITE":
+        states.add(
+            "PRIOR_APPROVAL"
+        )
+
+    return sorted(states)
+
+
+
+def _termination_right_holder(
+    local_text: str,
+) -> str | None:
+    """Extract the explicit termination right holder from the subject zone.
+
+    Only the source text before the termination modal/action is considered.
+    This prevents an actor mentioned inside the breach trigger from becoming
+    the right holder.
+    """
+    text = _normalize_arabic_role_context(
+        str(local_text or "")
+    )
+
+    subject_patterns = (
+        # EN
+        (
+            r"^\s*(?:the\s+)?"
+            r"(provider|client|customer|borrower|lender|tenant|landlord|"
+            r"company|investor)\b"
+            r"(?=.{0,80}\b(?:may|shall\s+have\s+the\s+right\s+to)\s+terminate\b)",
+            {
+                "provider": "PROVIDER",
+                "client": "CLIENT",
+                "customer": "CUSTOMER",
+                "borrower": "BORROWER",
+                "lender": "LENDER",
+                "tenant": "TENANT",
+                "landlord": "LANDLORD",
+                "company": "COMPANY",
+                "investor": "INVESTOR",
+            },
+        ),
+
+        # FR
+        (
+            r"^\s*(?:le|la|l['’])?\s*"
+            r"(prestataire|client|emprunteur|pr[eê]teur|preneur|locataire|"
+            r"bailleur|soci[eé]t[eé]|investisseur)\b"
+            r"(?=.{0,80}\b(?:peut|pourra|a\s+le\s+droit\s+de)\s+r[eé]silier\b)",
+            {
+                "prestataire": "PROVIDER",
+                "client": "CLIENT",
+                "emprunteur": "BORROWER",
+                "prêteur": "LENDER",
+                "preteur": "LENDER",
+                "preneur": "TENANT",
+                "locataire": "TENANT",
+                "bailleur": "LANDLORD",
+                "société": "COMPANY",
+                "societe": "COMPANY",
+                "investisseur": "INVESTOR",
+            },
+        ),
+    )
+
+    for pattern, mapping in subject_patterns:
+        match = re.search(
+            pattern,
+            text,
+            flags=re.IGNORECASE,
+        )
+
+        if match:
+            raw = match.group(1).lower()
+            return mapping.get(raw)
+
+    # AR — resolve the party exercising the termination right.
+    #
+    # Positive right:
+    # يجوز للعميل الإنهاء
+    #
+    # Limited right / negative-except construction:
+    # لا يجوز للعميل الإنهاء إلا بسبب ...
+    #
+    # In the second construction, CLIENT remains the right holder of the
+    # narrowly limited termination right.
+    limited_arabic_patterns = (
+        (
+            r"(?:و?لا\s+يجوز|لا\s+يحق)\s+"
+            r"(?:ل)?العميل.{0,80}"
+            r"(?:الإنهاء|إنهاء|الفسخ|فسخ).{0,80}"
+            r"(?:إلا|فقط)",
+            "CLIENT",
+        ),
+        (
+            r"(?:و?لا\s+يجوز|لا\s+يحق)\s+"
+            r"(?:ل)?المزود.{0,80}"
+            r"(?:الإنهاء|إنهاء|الفسخ|فسخ).{0,80}"
+            r"(?:إلا|فقط)",
+            "PROVIDER",
+        ),
+        (
+            r"(?:و?لا\s+يجوز|لا\s+يحق)\s+"
+            r"(?:ل)?المقترض.{0,80}"
+            r"(?:الإنهاء|إنهاء|الفسخ|فسخ).{0,80}"
+            r"(?:إلا|فقط)",
+            "BORROWER",
+        ),
+        (
+            r"(?:و?لا\s+يجوز|لا\s+يحق)\s+"
+            r"(?:ل)?المقرض.{0,80}"
+            r"(?:الإنهاء|إنهاء|الفسخ|فسخ).{0,80}"
+            r"(?:إلا|فقط)",
+            "LENDER",
+        ),
+    )
+
+    for pattern, role in limited_arabic_patterns:
+        if re.search(pattern, text):
+            return role
+
+    # Ordinary positive Arabic termination-right constructions.
+    arabic_patterns = (
+        (
+            r"(?:يجوز|يحق)\s+ل?(مقدم\s+الخدمة|المزود)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "PROVIDER",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(العميل)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "CLIENT",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(المقترض)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "BORROWER",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(المقرض)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "LENDER",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(المستأجر)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "TENANT",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(المؤجر)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "LANDLORD",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(الشركة)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "COMPANY",
+        ),
+        (
+            r"(?:يجوز|يحق)\s+ل?(المستثمر)"
+            r"(?=.{0,80}(?:إنهاء|فسخ))",
+            "INVESTOR",
+        ),
+    )
+
+    for pattern, role in arabic_patterns:
+        if re.search(pattern, text):
+            return role
+
+    return None
+
+
+def _explicit_right_holder(
+    normalized_concept: str,
+    local_text: str,
+) -> str | None:
+    """Resolve explicit right holders from relation-local source context."""
+    text = _normalize_arabic_role_context(
+        str(local_text or "")
+    )
+
+    if normalized_concept == "PREPAYMENT_RIGHT":
+        patterns = (
+            (r"\bborrower\b.{0,80}\bmay\s+prepay\b", "BORROWER"),
+            (r"\bemprunteur\b.{0,80}\b(?:peut|pourra)\s+rembourser\b", "BORROWER"),
+            (r"(?:يجوز|يحق)\s+(?:ل)?المقترض.{0,80}(?:سداد|السداد)", "BORROWER"),
+        )
+
+        for pattern, role in patterns:
+            if re.search(pattern, text, flags=re.IGNORECASE):
+                return role
+
+    if normalized_concept == "LICENSE_GRANT":
+        patterns = (
+            (r"\blicensor\b.{0,80}\bgrants?\s+licensee\b", "LICENSEE"),
+            (r"\bconc[eé]dant\b.{0,80}\baccorde\s+au\s+licenci[eé]\b", "LICENSEE"),
+            (r"(?:المرخ[ِّ]?ص|مانح\s+الترخيص).{0,80}(?:يمنح|منح).{0,80}(?:المرخ[َّ]?ص\s+له)", "LICENSEE"),
+        )
+
+        for pattern, role in patterns:
+            if re.search(pattern, text, flags=re.IGNORECASE):
+                return role
+
+    return None
+
+
+def _contextual_normalized_concept(
+    raw_kind: str | None,
+    normalized_concept: str,
+    local_text: str,
+) -> str:
+    """Refine a broad canonical mechanism using source-grounded local semantics."""
+    kind = str(raw_kind or "").strip().upper()
+
+    if kind != "ASSIGNMENT_TRANSFER":
+        return normalized_concept
+
+    text = _normalize_arabic_role_context(
+        str(local_text or "")
+    )
+
+    restriction_patterns = (
+        # EN
+        r"\b(?:shall\s+not|may\s+not|must\s+not|cannot)\b.{0,140}\bassign\b",
+        r"\bassign\b.{0,140}\bwithout\s+(?:prior\s+)?(?:written\s+)?consent\b",
+
+        # FR
+        r"\b(?:ne\s+peut|ne\s+pourra|ne\s+doit)\b.{0,140}\b(?:c[eé]der|transf[eé]rer)\b",
+        r"\b(?:c[eé]der|cession|transf[eé]rer)\b.{0,140}\bsans\s+consentement\b",
+
+        # AR
+        r"(?:لا\s+يجوز|يحظر).{0,140}(?:التنازل|التحويل)",
+        r"(?:التنازل|التحويل).{0,140}دون\s+موافقة(?:\s+خطية)?(?:\s+مسبقة)?",
+    )
+
+    if any(
+        re.search(
+            pattern,
+            text,
+            flags=re.IGNORECASE,
+        )
+        for pattern in restriction_patterns
+    ):
+        return "ASSIGNMENT_RESTRICTION"
+
+    return normalized_concept
+
+
+def _normalized_trigger(
+    normalized_concept: str,
+    local_text: str,
+) -> str | None:
+    text = str(local_text or "")
+
+    if normalized_concept == "TERMINATION_FOR_CAUSE":
+        patterns = (
+            r"\buncured\s+material\s+breach\b",
+            r"\bmaterial\s+breach\b.{0,80}\buncured\b",
+            r"\bmanquement\s+(?:substantiel|grave)\s+non\s+corrig[eé]\b",
+            r"(?:إخلال\s+جوهري).{0,40}(?:غير\s+معالج|غير\s+مصحح)",
+        )
+
+        if any(
+            re.search(
+                pattern,
+                text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in patterns
+        ):
+            return "UNCURED_MATERIAL_BREACH"
+
+    if normalized_concept == "PURPOSE_LIMITATION":
+        instruction_patterns = (
+            r"\bdocumented\s+instructions?\s+from\s+(?:the\s+)?controller\b",
+            r"\binstructions?\s+document[eé]es?\s+du\s+responsable\s+du\s+traitement\b",
+            r"(?:تعليمات\s+موثقة).{0,60}(?:المتحكم)",
+        )
+
+        if any(
+            re.search(
+                pattern,
+                text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in instruction_patterns
+        ):
+            return "DOCUMENTED_CONTROLLER_INSTRUCTIONS"
+
+    if normalized_concept in {
+        "DATA_RETURN",
+        "DATA_DELETION",
+    }:
+        lifecycle_patterns = (
+            r"\bupon\s+(?:termination|expiration)\b",
+            r"\b[àa]\s+la\s+(?:r[eé]siliation|expiration)\b",
+            r"(?:عند\s+الإنهاء|عند\s+انتهاء\s+الاتفاقية)",
+        )
+
+        if any(
+            re.search(
+                pattern,
+                text,
+                flags=re.IGNORECASE,
+            )
+            for pattern in lifecycle_patterns
+        ):
+            return "CONTRACT_TERMINATION_OR_EXPIRATION"
+
+    return None
+
+
+def _relation_roles(
+    normalized_concept: str,
+    roles: list[str],
+) -> tuple[str | None, str | None, str | None, str | None]:
+    right_holder = None
+    obligated_actor = None
+    counterparty = None
+    beneficiary = None
+
+    role_set = set(roles)
+
+    if normalized_concept == "CONFIDENTIALITY_OBLIGATION":
+        if "RECEIVING_PARTY" in role_set:
+            obligated_actor = "RECEIVING_PARTY"
+        if "DISCLOSING_PARTY" in role_set:
+            counterparty = "DISCLOSING_PARTY"
+            beneficiary = "DISCLOSING_PARTY"
+
+    elif normalized_concept == "PURPOSE_LIMITATION":
+        if "PROCESSOR" in role_set:
+            obligated_actor = "PROCESSOR"
+        elif "RECEIVING_PARTY" in role_set:
+            obligated_actor = "RECEIVING_PARTY"
+
+        if "CONTROLLER" in role_set:
+            counterparty = "CONTROLLER"
+            beneficiary = "CONTROLLER"
+        elif "DISCLOSING_PARTY" in role_set:
+            counterparty = "DISCLOSING_PARTY"
+            beneficiary = "DISCLOSING_PARTY"
+
+    elif normalized_concept in {
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE",
+        "IMMEDIATE_TERMINATION",
+        "NON_PAYMENT_TERMINATION",
+    }:
+        for candidate in (
+            "PROVIDER",
+            "CLIENT",
+            "CUSTOMER",
+            "BORROWER",
+            "LENDER",
+            "TENANT",
+            "LANDLORD",
+            "COMPANY",
+            "INVESTOR",
+        ):
+            if candidate in role_set:
+                right_holder = candidate
+                break
+
+    elif normalized_concept == "ASSIGNMENT_RESTRICTION":
+        for candidate in (
+            "TENANT",
+            "LICENSEE",
+            "CLIENT",
+            "CUSTOMER",
+            "BORROWER",
+            "COMPANY",
+        ):
+            if candidate in role_set:
+                obligated_actor = candidate
+                break
+
+    elif normalized_concept == "PREPAYMENT_RIGHT":
+        if "BORROWER" in role_set:
+            right_holder = "BORROWER"
+
+    elif normalized_concept == "LOAN_DISBURSEMENT":
+        if "LENDER" in role_set:
+            obligated_actor = "LENDER"
+
+        if "BORROWER" in role_set:
+            counterparty = "BORROWER"
+            beneficiary = "BORROWER"
+
+    elif normalized_concept == "LICENSE_GRANT":
+        for candidate in (
+            "LICENSEE",
+            "CUSTOMER",
+            "CLIENT",
+        ):
+            if candidate in role_set:
+                right_holder = candidate
+                break
+
+        for candidate in (
+            "LICENSOR",
+            "PROVIDER",
+            "COMPANY",
+        ):
+            if candidate in role_set:
+                counterparty = candidate
+                break
+
+    elif normalized_concept == "LICENSE_RESTRICTION":
+        for candidate in (
+            "LICENSEE",
+            "CUSTOMER",
+            "CLIENT",
+        ):
+            if candidate in role_set:
+                obligated_actor = candidate
+                break
+
+    elif normalized_concept == "DATA_BREACH_NOTICE":
+        for candidate in ("PROVIDER", "COMPANY"):
+            if candidate in role_set:
+                obligated_actor = candidate
+                break
+
+        for candidate in ("CLIENT", "CUSTOMER", "INVESTOR"):
+            if candidate in role_set:
+                beneficiary = candidate
+                break
+
+    elif normalized_concept == "FINANCIAL_REPORTING_OBLIGATION":
+        if "COMPANY" in role_set:
+            obligated_actor = "COMPANY"
+        if "INVESTOR" in role_set:
+            beneficiary = "INVESTOR"
+
+    elif normalized_concept in {
+        "PURCHASE_ORDER",
+        "PURCHASE_ORDER_OBLIGATION",
+        "PURCHASE_ORDER_SUBMISSION",
+    }:
+        if "BUYER" in role_set:
+            obligated_actor = "BUYER"
+
+        if "SUPPLIER" in role_set:
+            counterparty = "SUPPLIER"
+
+    elif normalized_concept == "INSPECTION_RIGHT":
+        if "BUYER" in role_set:
+            right_holder = "BUYER"
+
+        if "SUPPLIER" in role_set:
+            counterparty = "SUPPLIER"
+
+    elif normalized_concept == "TAG_ALONG_RIGHT":
+        if "INVESTOR" in role_set:
+            right_holder = "INVESTOR"
+
+        if "COMPANY" in role_set:
+            counterparty = "COMPANY"
+
+    elif normalized_concept == "NON_DISCLOSURE":
+        if "RECEIVING_PARTY" in role_set:
+            obligated_actor = "RECEIVING_PARTY"
+
+        if "DISCLOSING_PARTY" in role_set:
+            counterparty = "DISCLOSING_PARTY"
+            beneficiary = "DISCLOSING_PARTY"
+
+    elif normalized_concept in {
+        "DELIVERY_OBLIGATION",
+        "REPLACEMENT_REMEDY",
+    }:
+        if "SUPPLIER" in role_set:
+            obligated_actor = "SUPPLIER"
+
+        if "BUYER" in role_set:
+            counterparty = "BUYER"
+            beneficiary = "BUYER"
+
+    elif normalized_concept in {
+        "SECURITY_MEASURES",
+        "SERVICE_SCOPE",
+    }:
+        for candidate in (
+            "PROVIDER",
+            "PROCESSOR",
+            "COMPANY",
+        ):
+            if candidate in role_set:
+                obligated_actor = candidate
+                break
+
+        for candidate in (
+            "CLIENT",
+            "CUSTOMER",
+            "CONTROLLER",
+        ):
+            if candidate in role_set:
+                counterparty = candidate
+                beneficiary = candidate
+                break
+
+    elif normalized_concept == "OWNERSHIP":
+        for candidate in (
+            "CUSTOMER",
+            "CLIENT",
+            "CONTROLLER",
+        ):
+            if candidate in role_set:
+                right_holder = candidate
+                break
+
+    elif normalized_concept in {
+        "DATA_RETURN",
+        "DATA_DELETION",
+    }:
+        for candidate in (
+            "PROVIDER",
+            "PROCESSOR",
+            "COMPANY",
+        ):
+            if candidate in role_set:
+                obligated_actor = candidate
+                break
+
+        for candidate in (
+            "CUSTOMER",
+            "CLIENT",
+            "CONTROLLER",
+        ):
+            if candidate in role_set:
+                counterparty = candidate
+                beneficiary = candidate
+                break
+
+    return right_holder, obligated_actor, counterparty, beneficiary
+
+
+def materialize_normalized_relation(
+    mechanism: dict[str, Any],
+    source_text: str,
+) -> dict[str, Any]:
+    item = dict(mechanism)
+
+    normalized_concept = normalize_concept(item.get("kind"))
+    text = _relation_context(
+        item,
+        source_text,
+    )
+
+    local_text = _primary_evidence_sentence(
+        item,
+        source_text,
+        normalized_concept,
+    )
+
+    normalized_concept = _contextual_normalized_concept(
+        item.get("kind"),
+        normalized_concept,
+        local_text,
+    )
+
+    explicit_right_holder = None
+
+    if normalized_concept in {
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE",
+        "IMMEDIATE_TERMINATION",
+        "NON_PAYMENT_TERMINATION",
+    }:
+        explicit_right_holder = _termination_right_holder(
+            local_text
+        )
+    else:
+        explicit_right_holder = _explicit_right_holder(
+            normalized_concept,
+            local_text,
+        )
+
+    role_text = (
+        local_text
+        if normalized_concept in {
+            "TERMINATION_FOR_CAUSE",
+            "TERMINATION_FOR_CONVENIENCE",
+            "IMMEDIATE_TERMINATION",
+            "NON_PAYMENT_TERMINATION",
+            "INSPECTION_RIGHT",
+        }
+        else text
+    )
+
+    roles = _matched_roles(role_text)
+
+    objects = _matched_objects(text)
+
+    (
+        right_holder,
+        obligated_actor,
+        counterparty,
+        beneficiary,
+    ) = _relation_roles(normalized_concept, roles)
+
+    if explicit_right_holder is not None:
+        right_holder = explicit_right_holder
+
+    normalized_polarity = normalize_relation_polarity(
+        normalized_concept,
+        item.get("polarity"),
+    )
+
+    numeric_relation_text = (
+        source_text
+        if normalized_concept in {
+            "INVESTOR_CONSENT_RIGHT",
+            "CONSENT_PREREQUISITE",
+        }
+        else text
+    )
+
+    relation = {
+        "right_holder": right_holder,
+        "obligated_actor": obligated_actor,
+        "counterparty": counterparty,
+        "beneficiary": beneficiary,
+        "object": objects[0] if len(objects) == 1 else None,
+        "trigger": (
+            item.get("trigger")
+            or _normalized_trigger(
+                normalized_concept,
+                local_text,
+            )
+        ),
+        "action": _ACTION_BY_CONCEPT.get(normalized_concept),
+        "polarity": normalized_polarity,
+        "procedural_states": _normalized_procedural_states(
+                item,
+                normalized_concept,
+                local_text,
+            ),
+        "numeric_semantic_roles": (
+            _normalized_numeric_semantic_roles(
+                normalized_concept,
+                local_text,
+                numeric_relation_text,
+            )
+        ),
+    }
+
+    item["normalized_concept"] = normalized_concept
+
+    item["normalized_relation"] = relation
+    item["normalized_polarity"] = normalized_polarity
+
+    return item
+
+
+def materialize_normalized_relations(
+    mechanisms: list[dict[str, Any]],
+    source_text: str,
+) -> list[dict[str, Any]]:
+    return [
+        materialize_normalized_relation(
+            mechanism,
+            source_text,
+        )
+        for mechanism in mechanisms
+    ]
+

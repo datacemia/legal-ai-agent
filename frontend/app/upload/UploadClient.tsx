@@ -12,7 +12,6 @@ import ExecutiveDashboard from "../../components/ExecutiveDashboard";
 
 type Locale = "en" | "fr" | "ar";
 
-// Runexa Legal Agent UI supports EN / FR / AR only.
 
 const safeGetLocalStorage = (key: string, fallback = "") => {
   if (typeof window === "undefined") return fallback;
@@ -94,7 +93,6 @@ const labels: any = {
     qualityScore: "Analysis quality score",
     qualityValid: "Analysis output validated",
     qualityIssues: "Analysis quality issues",
-    contradictionsDetected: "Contradictions Detected",
     summary: "Summary",
     simplified: "Simplified Version",
     clauses: "Clauses Analysis",
@@ -103,13 +101,6 @@ const labels: any = {
     negotiationAdvice: "Negotiation Advice",
     saferAlternative: "Safer Alternative",
     negotiationPriority: "Negotiation Priority",
-    marketPractice: "Market Practice",
-    fallbackWording: "Fallback Wording",
-    draftWording: "Draft Wording",
-    sectorNote: "Sector Note",
-    negotiable: "Negotiable",
-    acceptableCompromise: "Acceptable Compromise",
-    neverAccept: "Never Accept",
     favours: "Favours",
     legalInsight: "Legal Insight",
     marketComparison: "Market Comparison",
@@ -117,7 +108,7 @@ const labels: any = {
     limitedNotice:
       "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
     heroStats:
-      "Clause-level legal intelligence • Structured legal analysis",
+      "OCR-ready • Clause-level legal intelligence • Structured legal analysis",
     trustedTitle: "Trusted by founders, consultants and legal teams",
     trustedItems: [
       "Contract risk scoring",
@@ -128,29 +119,12 @@ const labels: any = {
     ],
     methodologyTitle: "How Runexa analyzes contracts",
     methodologyItems: [
-      "Upload the contract",
-      "Run clause-level legal analysis",
-      "Review the executive report",
-    ],
-    supportedContractsTitle: "Contract types supported",
-    supportedContractsSubtitle:
-      "Runexa is designed for a broad range of commercial, legal and operational agreements.",
-    supportedContracts: [
-      "NDA / Confidentiality Agreements",
-      "Master Services Agreements",
-      "SaaS / Cloud Agreements",
-      "Cybersecurity Agreements",
-      "Data Processing Agreements",
-      "Employment Agreements",
-      "Licensing Agreements",
-      "Procurement / Supply Agreements",
-      "Consulting Agreements",
-      "Outsourcing / Managed Services",
-      "Real Estate / Lease Agreements",
-      "Finance / Lending Agreements",
-      "Sale / Purchase Agreements",
-      "Investment / Shareholder Agreements",
-      "General Commercial Contracts",
+      "Extracts text from PDF, DOCX, or OCR documents",
+      "Detects legal clauses and obligations",
+      "Assesses legal and operational risks",
+      "Compares clauses against common contract patterns",
+      "Generates negotiation recommendations",
+      "Produces an executive legal report",
     ],
     realExampleTitle: "Realistic contract example",
     realExampleType: "Employment Agreement",
@@ -183,11 +157,6 @@ const labels: any = {
       "Runexa highlights risk exposure, practical obligations, and negotiation priorities before signing.",
     viewDetails: "View details",
     hideDetails: "Hide details",
-    advancedGraphs: "Advanced graphs",
-    additionalSummaries: "Additional summaries",
-    scoreMethodology: "Score methodology",
-    scoreFactors: "Score Factors",
-    notProvided: "Not provided",
   },
   fr: {
     pageTitle: "Analyser votre contrat",
@@ -247,7 +216,6 @@ const labels: any = {
     qualityScore: "Score qualité de l’analyse",
     qualityValid: "Résultat d’analyse validé",
     qualityIssues: "Points qualité détectés",
-    contradictionsDetected: "Contradictions détectées",
     summary: "Résumé",
     simplified: "Version simplifiée",
     clauses: "Analyse des clauses",
@@ -256,13 +224,6 @@ const labels: any = {
     negotiationAdvice: "Conseil de négociation",
     saferAlternative: "Alternative plus sûre",
     negotiationPriority: "Priorité de négociation",
-    marketPractice: "Pratique du marché",
-    fallbackWording: "Formulation alternative",
-    draftWording: "Proposition de rédaction",
-    sectorNote: "Remarque sectorielle",
-    negotiable: "Négociable",
-    acceptableCompromise: "Compromis acceptable",
-    neverAccept: "À ne jamais accepter",
     favours: "Favorise",
     legalInsight: "Analyse juridique",
     marketComparison: "Comparaison avec le marché",
@@ -270,7 +231,7 @@ const labels: any = {
     limitedNotice:
       "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
     heroStats:
-      "Intelligence juridique par clause • Analyse juridique structurée",
+      "OCR-ready • Intelligence juridique par clause • Analyse juridique structurée",
     trustedTitle: "Utilisé par des fondateurs, consultants et équipes juridiques",
     trustedItems: [
       "Score de risque contractuel",
@@ -281,29 +242,12 @@ const labels: any = {
     ],
     methodologyTitle: "Comment Runexa analyse les contrats",
     methodologyItems: [
-      "Importez le contrat",
-      "Lancez l’analyse juridique par clause",
-      "Consultez le rapport exécutif",
-    ],
-    supportedContractsTitle: "Types de contrats pris en charge",
-    supportedContractsSubtitle:
-      "Runexa est conçu pour analyser un large éventail de contrats commerciaux, juridiques et opérationnels.",
-    supportedContracts: [
-      "NDA / Accords de confidentialité",
-      "Contrats-cadres de services",
-      "Contrats SaaS / Cloud",
-      "Contrats de cybersécurité",
-      "Accords de traitement des données",
-      "Contrats de travail",
-      "Contrats de licence",
-      "Contrats d’achat / d’approvisionnement",
-      "Contrats de conseil",
-      "Externalisation / services gérés",
-      "Baux / contrats immobiliers",
-      "Contrats de financement / prêt",
-      "Contrats de vente / achat",
-      "Pactes d’actionnaires / investissement",
-      "Contrats commerciaux généraux",
+      "Extrait le texte des documents PDF, DOCX ou OCR",
+      "Détecte les clauses juridiques et les obligations",
+      "Évalue les risques juridiques et opérationnels",
+      "Compare les clauses aux modèles contractuels courants",
+      "Génère des recommandations de négociation",
+      "Produit un rapport juridique exécutif",
     ],
     realExampleTitle: "Exemple concret de contrat",
     realExampleType: "Contrat de travail",
@@ -336,11 +280,6 @@ const labels: any = {
       "Runexa met en évidence l’exposition au risque, les obligations pratiques et les priorités de négociation avant signature.",
     viewDetails: "Voir les détails",
     hideDetails: "Masquer les détails",
-    advancedGraphs: "Graphiques avancés",
-    additionalSummaries: "Résumés complémentaires",
-    scoreMethodology: "Méthodologie du score",
-    scoreFactors: "Facteurs du score",
-    notProvided: "Non fourni",
   },
   ar: {
     pageTitle: "تحليل العقد",
@@ -400,7 +339,6 @@ const labels: any = {
     qualityScore: "درجة جودة التحليل",
     qualityValid: "تم التحقق من نتيجة التحليل",
     qualityIssues: "ملاحظات جودة التحليل",
-    contradictionsDetected: "التناقضات المكتشفة",
     summary: "الملخص",
     simplified: "نسخة مبسطة",
     clauses: "تحليل البنود",
@@ -409,13 +347,6 @@ const labels: any = {
     negotiationAdvice: "نصيحة تفاوض",
     saferAlternative: "صياغة أكثر أماناً",
     negotiationPriority: "أولوية التفاوض",
-    marketPractice: "ممارسة السوق",
-    fallbackWording: "صياغة بديلة",
-    draftWording: "صياغة مقترحة",
-    sectorNote: "ملاحظة قطاعية",
-    negotiable: "قابل للتفاوض",
-    acceptableCompromise: "حل وسط مقبول",
-    neverAccept: "لا يجب قبوله",
     favours: "يميل لصالح",
     legalInsight: "تحليل قانوني",
     marketComparison: "مقارنة بالسوق",
@@ -423,7 +354,7 @@ const labels: any = {
     limitedNotice:
       "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
     heroStats:
-      "ذكاء قانوني على مستوى البنود • تحليل قانوني منظم",
+      "جاهز للتعرف الضوئي OCR • ذكاء قانوني على مستوى البنود • تحليل قانوني منظم",
     trustedTitle: "موثوق به من قبل مؤسسين ومستشارين وفرق قانونية",
     trustedItems: [
       "تقييم مخاطر العقود",
@@ -434,29 +365,12 @@ const labels: any = {
     ],
     methodologyTitle: "كيف يحلل Runexa العقود",
     methodologyItems: [
-      "ارفع العقد",
-      "شغّل التحليل القانوني على مستوى البنود",
-      "راجع التقرير التنفيذي",
-    ],
-    supportedContractsTitle: "أنواع العقود المدعومة",
-    supportedContractsSubtitle:
-      "تم تصميم Runexa لتحليل مجموعة واسعة من العقود التجارية والقانونية والتشغيلية.",
-    supportedContracts: [
-      "اتفاقيات عدم الإفصاح / السرية",
-      "اتفاقيات الخدمات الرئيسية",
-      "عقود SaaS / السحابة",
-      "عقود الأمن السيبراني",
-      "اتفاقيات معالجة البيانات",
-      "عقود العمل",
-      "عقود الترخيص",
-      "عقود الشراء / التوريد",
-      "عقود الاستشارات",
-      "الاستعانة بمصادر خارجية / الخدمات المدارة",
-      "عقود الإيجار / العقارات",
-      "عقود التمويل / القروض",
-      "عقود البيع / الشراء",
-      "اتفاقيات الاستثمار / المساهمين",
-      "العقود التجارية العامة",
+      "يستخرج النص من ملفات PDF أو DOCX أو مستندات OCR",
+      "يكتشف البنود القانونية والالتزامات",
+      "يقيّم المخاطر القانونية والتشغيلية",
+      "يقارن البنود بأنماط العقود الشائعة",
+      "ينشئ توصيات تفاوضية",
+      "ينتج تقريراً قانونياً تنفيذياً",
     ],
     realExampleTitle: "مثال واقعي لعقد",
     realExampleType: "عقد عمل",
@@ -489,11 +403,6 @@ const labels: any = {
       "تُبرز Runexa التعرض للمخاطر والالتزامات العملية وأولويات التفاوض قبل التوقيع.",
     viewDetails: "عرض التفاصيل",
     hideDetails: "إخفاء التفاصيل",
-    advancedGraphs: "رسوم بيانية متقدمة",
-    additionalSummaries: "ملخصات إضافية",
-    scoreMethodology: "منهجية الدرجة",
-    scoreFactors: "عوامل النتيجة",
-    notProvided: "غير متوفر",
   },
 };
 
@@ -560,6 +469,7 @@ const translateJobStatus = (
   return jobText(normalized, language);
 };
 
+
 const translateEnum = (value: string, language: string) => {
   const normalized = String(value || "").toLowerCase().trim();
 
@@ -576,11 +486,6 @@ const translateEnum = (value: string, language: string) => {
       vendor: "Vendor",
       client: "Client",
       unclear: "Unclear",
-      standard: "Standard",
-      aggressive: "Aggressive",
-      customer_friendly: "Customer-friendly",
-      vendor_friendly: "Vendor-friendly",
-      unusual: "Unusual",
     },
     fr: {
       low: "Faible",
@@ -594,11 +499,6 @@ const translateEnum = (value: string, language: string) => {
       vendor: "Fournisseur",
       client: "Client",
       unclear: "Peu clair",
-      standard: "Standard",
-      aggressive: "Agressif",
-      customer_friendly: "Favorable au client",
-      vendor_friendly: "Favorable au fournisseur",
-      unusual: "Inhabituel",
     },
     ar: {
       low: "منخفض",
@@ -612,23 +512,13 @@ const translateEnum = (value: string, language: string) => {
       vendor: "المورّد",
       client: "العميل",
       unclear: "غير واضح",
-      standard: "قياسي",
-      aggressive: "متشدد",
-      customer_friendly: "لصالح العميل",
-      vendor_friendly: "لصالح المورد",
-      unusual: "غير معتاد",
     },
   };
 
   return map[language]?.[normalized] || value;
 };
 
-const translateBoolean = (value: boolean, language: string) => {
-  if (language === "fr") return value ? "Oui" : "Non";
-  if (language === "ar") return value ? "نعم" : "لا";
 
-  return value ? "Yes" : "No";
-};
 
 const UI_TRANSLATIONS: any = {
   en: {
@@ -797,6 +687,7 @@ const getClientLocale = (
   return normalizeLocale(getSavedLocale(), fallback);
 };
 
+
 const EnterpriseIcon = ({ index }: { index: number }) => {
   const paths = [
     <path key="doc" d="M7 3.75h6.25L18 8.5v11.75H7A2.25 2.25 0 0 1 4.75 18V6A2.25 2.25 0 0 1 7 3.75Zm6 0V8.5h5" />,
@@ -820,78 +711,6 @@ const EnterpriseIcon = ({ index }: { index: number }) => {
     </svg>
   );
 };
-
-const hasDisplayableLegalText = (value: unknown) => {
-  const normalized = String(value || "")
-    .trim()
-    .toLowerCase();
-
-  if (!normalized) {
-    return false;
-  }
-
-  const hiddenValues = new Set([
-    "not provided",
-    "non fourni",
-    "non fournie",
-    "غير متوفر",
-    "غير متوفرة",
-  ]);
-
-  return !hiddenValues.has(normalized);
-};
-
-const removeUnavailableSummaryLines = (value: unknown) => {
-  const text = String(value || "");
-
-  if (!text.trim()) {
-    return "";
-  }
-
-  const unavailableValues = new Set([
-    "not provided",
-    "not specified",
-    "unspecified",
-    "non fourni",
-    "non fournie",
-    "non spécifié",
-    "non spécifiée",
-    "non specifie",
-    "non specifiee",
-    "غير متوفر",
-    "غير متوفرة",
-    "غير محدد",
-    "غير محددة",
-  ]);
-
-  return text
-    .split(/\r?\n/)
-    .filter((line) => {
-      const trimmedLine = line.trim();
-
-      if (!trimmedLine) {
-        return true;
-      }
-
-      const separatorMatch = trimmedLine.match(/^(.+?)\s*[:：]\s*(.+)$/);
-
-      if (!separatorMatch) {
-        return true;
-      }
-
-      const fieldValue = separatorMatch[2]
-        .trim()
-        .toLowerCase()
-        .replace(/[.;،。]+$/, "")
-        .trim();
-
-      return !unavailableValues.has(fieldValue);
-    })
-    .join("\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-};
-
 
 export default function UploadClient({
   initialLocale = "en",
@@ -1016,12 +835,6 @@ export default function UploadClient({
   }, [initialLocale, lockInitialLocale]);
 
   const t = labels[language] || labels.en;
-
-  const supportedContractsForLanguage =
-    Array.isArray(t.supportedContracts)
-      ? t.supportedContracts
-      : labels.en.supportedContracts;
-
 
   useEffect(() => {
     if (!loading || !analysisStartedAt) return;
@@ -1405,7 +1218,7 @@ export default function UploadClient({
           let attempts = 0;
           let completed = false;
 
-          while (attempts < 1800 && !completed) {
+          while (attempts < 120 && !completed) {
             await new Promise((resolve) =>
               setTimeout(resolve, 2000)
             );
@@ -1471,14 +1284,9 @@ export default function UploadClient({
           }
 
           if (!completed) {
-            const timeoutMessage =
-              language === "fr"
-                ? "L’analyse prend plus de temps que prévu. Vous pouvez patienter encore un moment ou réessayer."
-                : language === "ar"
-                ? "يستغرق التحليل وقتًا أطول من المتوقع. يمكنك الانتظار قليلاً أو إعادة المحاولة."
-                : "The legal analysis is taking longer than expected. Please wait a little longer or try again.";
-
-            throw new Error(timeoutMessage);
+            throw new Error(
+              "Legal analysis timeout"
+            );
           }
         }
 
@@ -1580,31 +1388,6 @@ export default function UploadClient({
     clauses = [];
   }
 
-  let contradictions: any[] = [];
-
-  try {
-    if (result && !result?.authRequired) {
-      if (Array.isArray(result.contradictions)) {
-        contradictions = result.contradictions;
-      } else if (Array.isArray(result?.clauses?.contradictions)) {
-        contradictions = result.clauses.contradictions;
-      } else if (Array.isArray(result?.clauses?.clauses?.contradictions)) {
-        contradictions = result.clauses.clauses.contradictions;
-      } else if (typeof result.contradictions === "string") {
-        const parsed = JSON.parse(result.contradictions);
-
-        if (Array.isArray(parsed)) {
-          contradictions = parsed;
-        }
-      }
-    }
-  } catch (e) {
-    console.error("Contradiction parsing error:", e);
-    contradictions = [];
-  }
-
-  const displayedRiskScore = result?.unified_report?.risk_score || result?.risk_score;
-
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
@@ -1623,6 +1406,26 @@ export default function UploadClient({
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-500">
             {t.heroStats}
+          </div>
+
+          <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-slate-200 bg-white p-5 text-left shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              {t.trustedTitle}
+            </p>
+
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {t.trustedItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-slate-600"
+                >
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-bold text-green-700">
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -1845,64 +1648,227 @@ export default function UploadClient({
           )}
         </div>
 
-        {!result && (
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
             <p className="text-sm font-medium text-blue-600">
               {t.methodologyTitle}
             </p>
 
-            <div className="mt-5 grid gap-3 md:grid-cols-3">
+            <div className="mt-5 space-y-3">
               {t.methodologyItems.map((item: string, index: number) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-slate-100 bg-slate-50 p-4"
+                  className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
                     {index + 1}
                   </div>
-                  <p className="mt-4 text-sm font-medium leading-6 text-slate-800">
+                  <p className="text-sm leading-6 text-slate-700">
                     {item}
                   </p>
                 </div>
               ))}
             </div>
           </section>
-        )}
 
-        {!result && (
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div>
-              <p className="text-sm font-medium text-blue-600">
-                {t.supportedContractsTitle}
-              </p>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
-                {t.supportedContractsSubtitle}
-              </p>
-            </div>
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <p className="text-sm font-medium text-blue-600">
+              {t.realExampleTitle}
+            </p>
 
-            <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {supportedContractsForLanguage.map((item: string) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700"
-                >
-                  {item}
+            <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xl font-semibold text-slate-900">
+                  {t.realExampleType}
+                </h2>
+
+                <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                  {t.realExampleRiskScore}
+                </span>
+              </div>
+
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {t.realExampleIssuesTitle}
+                  </p>
+
+                  <ul className="mt-3 space-y-2">
+                    {t.realExampleIssues.map((item: string) => (
+                      <li key={item} className="text-sm leading-6 text-slate-700">
+                        - {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
+
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {t.realExampleRecommendationsTitle}
+                  </p>
+
+                  <ul className="mt-3 space-y-2">
+                    {t.realExampleRecommendations.map((item: string) => (
+                      <li key={item} className="text-sm leading-6 text-slate-700">
+                        - {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
-        )}
+        </div>
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-medium text-blue-600">
+                {t.sampleOutputTitle}
+              </p>
+
+              <h2 className="mt-1 text-xl font-semibold text-slate-900">
+                {t.whatYouGet}
+              </h2>
+
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
+                {t.sampleOutputSubtitle}
+              </p>
+            </div>
+
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+              {uiText("enterpriseGrade", language)}
+            </span>
+          </div>
+
+          <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5">
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                {t.sampleRiskScore}
+              </p>
+              {!result && (
+              <div className="mt-4 flex items-end gap-2">
+                <span className="text-4xl font-bold text-amber-600">62</span>
+                <span className="mb-1 text-sm text-slate-500">/100</span>
+              </div>
+              )}
+
+              <p className="mt-2 text-sm font-semibold text-amber-700">
+                {t.sampleRiskLevel}
+              </p>
+
+              <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs leading-5 text-amber-800">
+                {t.sampleSummaryText}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 lg:col-span-1">
+              <p className="text-sm font-bold text-amber-900">
+                {t.sampleClauseTitle}
+              </p>
+
+              <div className="mt-4 rounded-xl border-l-4 border-amber-500 bg-white p-4 text-sm leading-7 text-slate-700">
+                “{t.sampleClauseText}”
+              </div>
+
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-amber-700">
+                {language === "fr"
+                  ? "Signal de risque"
+                  : language === "ar"
+                  ? "إشارة مخاطر"
+                  : "Risk signal"}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
+              <p className="text-sm font-bold text-blue-900">
+                {t.sampleAdviceTitle}
+              </p>
+
+              <p className="mt-3 text-sm leading-6 text-blue-800">
+                {t.sampleAdviceText}
+              </p>
+
+              <div className="mt-4 rounded-xl border border-green-200 bg-green-50 p-3">
+                <p className="text-xs font-semibold text-green-800">
+                  {language === "fr"
+                    ? "Extraction des obligations"
+                    : language === "ar"
+                    ? "استخراج الالتزامات"
+                    : "Obligation extraction"}
+                </p>
+
+                <p className="mt-1 text-xs leading-5 text-green-700">
+                  {language === "fr"
+                    ? "Période de préavis, droits de résiliation, possibilité de correction et exigences d’approbation écrite."
+                    : language === "ar"
+                    ? "فترة الإشعار، حقوق الإنهاء، إمكانية المعالجة، ومتطلبات الموافقة الكتابية."
+                    : "Notice period, termination rights, cure opportunity, and written approval requirements."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {result && !result.authRequired && (
           <div className="space-y-6">
+            {result?.quality_check && (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm mb-6">
 
-            <RiskScore score={displayedRiskScore} language={language} />
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">
+                    {t.quality}
+                  </h3>
+
+                  <div className="flex items-center">
+                    <span
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${
+                        result.quality_check.valid
+                          ? "bg-green-100 text-green-700"
+                          : "bg-yellow-100 text-yellow-700"
+                      }`}
+                    >
+                      {result.quality_check.score}/100
+                    </span>
+
+                    {result.quality_check.score >= 90 && (
+                      <span className="ml-2 rounded-full bg-green-100 px-2 py-1 text-xs text-green-700">
+                        {uiText("enterpriseGrade", language)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p className="mt-3 text-sm text-slate-600">
+                  {result.quality_check.valid
+                    ? t.qualityValid
+                    : t.qualityIssues}
+                </p>
+
+                {result.quality_check.issues?.length > 0 && (
+                  <ul className="mt-3 space-y-2">
+                    {result.quality_check.issues.map(
+                      (issue: string, index: number) => (
+                        <li
+                          key={index}
+                          className="text-sm text-slate-500"
+                        >
+                          • {issue}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                )}
+              </div>
+            )}
+
+            <RiskScore score={result.risk_score} language={language} />
 
             <div className="flex flex-wrap gap-2 mb-6">
               {[
                 ["overview", uiText("overview", language)],
                 ["clauses", `${uiText("clauses", language)} (${clauses.length})`],
-                ["graphs", t.advancedGraphs],
+                ["graphs", uiText("graphs", language)],
               ].map(([key, label]) => (
                 <button
                   key={key}
@@ -1925,75 +1891,19 @@ export default function UploadClient({
                   showGraphs={false}
                 />
 
-                {contradictions.length > 0 && (
-                  <div className="bg-white p-6 rounded-3xl border shadow-sm">
-                    <h2 className="text-xl font-semibold mb-4">{t.contradictionsDetected}</h2>
-                    <div className="space-y-3">
-                      {contradictions.map((c: any, i: number) => (
-                        <div
-                          key={c.id ? `${c.id}-${i}` : i}
-                          className={`rounded-2xl border p-4 ${
-                            c.severity === "high"
-                              ? "border-red-200 bg-red-50"
-                              : c.severity === "low"
-                              ? "border-slate-200 bg-slate-50"
-                              : "border-amber-200 bg-amber-50"
-                          }`}
-                        >
-                          <div className="flex items-center justify-between gap-3">
-                            <h4 className={`font-semibold ${
-                              c.severity === "high" ? "text-red-900" :
-                              c.severity === "low" ? "text-slate-700" : "text-amber-900"
-                            }`}>
-                              {c.label || c.id}
-                            </h4>
-                            {c.severity && (
-                              <span className={`rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${
-                                c.severity === "high" ? "bg-red-100 text-red-800" :
-                                c.severity === "low" ? "bg-slate-100 text-slate-700" :
-                                "bg-amber-100 text-amber-800"
-                              }`}>
-                                {c.severity}
-                              </span>
-                            )}
-                          </div>
-                          <p className={`mt-2 text-sm ${
-                            c.severity === "high" ? "text-red-800" :
-                            c.severity === "low" ? "text-slate-600" : "text-amber-800"
-                          }`}>
-                            {c.message}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                <div className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-slate-50 p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-slate-900">{t.simplified}</h2>
+                  <div className="mt-4 whitespace-pre-wrap text-sm leading-8 text-slate-700">
+                    {result.simplified_version}
                   </div>
-                )}
+                </div>
 
-                {(result.simplified_version || result.summary) && (
-                  <details className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <summary className="cursor-pointer text-xl font-semibold text-slate-900">
-                      {t.additionalSummaries}
-                    </summary>
-
-                    {result.simplified_version && (
-                      <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50/50 p-4">
-                        <h2 className="text-lg font-semibold text-slate-900">{t.simplified}</h2>
-                        <div className="mt-3 whitespace-pre-wrap text-sm leading-8 text-slate-700">
-                          {removeUnavailableSummaryLines(result.simplified_version)}
-                        </div>
-                      </div>
-                    )}
-
-                    {result.summary && (
-                      <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                        <h2 className="text-lg font-semibold text-slate-900">{t.summary}</h2>
-                        <div className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-700">
-                          {removeUnavailableSummaryLines(result.summary)}
-                        </div>
-                      </div>
-                    )}
-                  </details>
-                )}
+                <div className="bg-white p-6 rounded-3xl border shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+                  <h2 className="text-xl font-semibold">{t.summary}</h2>
+                  <div className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700">
+                    {result.summary}
+                  </div>
+                </div>
               </>
             )}
 
@@ -2004,6 +1914,7 @@ export default function UploadClient({
                 showGraphs={true}
               />
             )}
+
 
             {activeTab === "clauses" && (
               <div className="bg-white p-6 rounded-3xl border shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
@@ -2048,7 +1959,6 @@ export default function UploadClient({
                   })
                   .map((clause: any, index: number) => {
                   const isOpen = openIndex === index;
-                  const hasClauseDetails = true;
                   const localizedTitle =
                     clause.title === "Document Preamble"
                       ? uiText("documentPreamble", language)
@@ -2149,7 +2059,7 @@ export default function UploadClient({
                       {clause.explanation_simple}
                     </p>
 
-                    {hasClauseDetails && (
+                    {clause.has_details && (
                       <button
                         type="button"
                         onClick={() =>
@@ -2161,43 +2071,10 @@ export default function UploadClient({
                       </button>
                     )}
 
-                    {isOpen && hasClauseDetails && (
+                    {isOpen && clause.has_details && (
                     <div className="mt-4 space-y-4 text-sm">
 
-                        {hasDisplayableLegalText(clause.legal_insight) && (
-                          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
-                            <div className="font-semibold text-blue-900">
-                              {t.legalInsight}
-                            </div>
-                            <div className="mt-1 text-sm text-blue-800">
-                              {clause.legal_insight}
-                            </div>
-                          </div>
-                        )}
-
-                        {hasDisplayableLegalText(clause.market_comparison) && (
-                          <div className="mt-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
-                            <div className="font-semibold text-purple-900">
-                              {t.marketComparison}
-                            </div>
-                            <div className="mt-1 text-sm text-purple-800">
-                              {clause.market_comparison}
-                            </div>
-                          </div>
-                        )}
-
-                        {hasDisplayableLegalText(clause.safer_alternative) && (
-                          <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-                            <h4 className="font-semibold text-green-900">
-                              {t.saferAlternative}
-                            </h4>
-                            <div className="whitespace-pre-wrap text-green-800 mt-2 text-[13px] leading-6">
-                              {clause.safer_alternative}
-                            </div>
-                          </div>
-                        )}
-
-                        {hasDisplayableLegalText(clause.recommendation) &&
+                        {clause.recommendation &&
                          !clause.recommendation.includes("Confirm that the clause is consistent") && (
                           <div>
                             <h4 className="font-semibold text-slate-900">
@@ -2210,7 +2087,7 @@ export default function UploadClient({
                           </div>
                         )}
 
-                        {hasDisplayableLegalText(clause.negotiation_advice) && (
+                        {clause.negotiation_advice && (
                           <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
                             <h4 className="font-semibold text-amber-900">
                               {t.negotiationAdvice}
@@ -2222,95 +2099,41 @@ export default function UploadClient({
                           </div>
                         )}
 
-                        {clause.market_practice && (
-                          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                            <h4 className="font-semibold text-slate-900">
-                              {t.marketPractice}
-                            </h4>
+                        {clause.legal_insight &&
+                         !clause.legal_insight.includes("No significant legal imbalance detected") &&
+                         !clause.legal_insight.includes("This clause creates contractual obligations") && (
+                          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
+                            <div className="font-semibold text-blue-900">
+                              {t.legalInsight}
+                            </div>
 
-                            <p className="mt-1 text-slate-600">
-                              {translateEnum(clause.market_practice, language)}
-                            </p>
+                            <div className="mt-1 text-sm text-blue-800">
+                              {clause.legal_insight}
+                            </div>
                           </div>
                         )}
 
-                        {clause.fallback_wording && (
-                          <div className="rounded-xl border border-blue-200 bg-blue-50 p-3">
-                            <h4 className="font-semibold text-blue-900">
-                              {t.fallbackWording}
-                            </h4>
+                        {clause.market_comparison && (
+                          <div className="mt-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
+                            <div className="font-semibold text-purple-900">
+                              {t.marketComparison}
+                            </div>
 
-                            <p className="mt-1 whitespace-pre-wrap text-blue-800 text-[13px] leading-6">
-                              {clause.fallback_wording}
-                            </p>
+                            <div className="mt-1 text-sm text-purple-800">
+                              {clause.market_comparison}
+                            </div>
                           </div>
                         )}
 
-                        {clause.draft_wording_template && (
-                          <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3">
-                            <h4 className="font-semibold text-emerald-900">
-                              {t.draftWording}
+                        {clause.safer_alternative && (
+                          <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+                            <h4 className="font-semibold text-green-900">
+                              {t.saferAlternative}
                             </h4>
 
-                            <p className="mt-1 whitespace-pre-wrap text-emerald-800 text-[13px] leading-6">
-                              {clause.draft_wording_template}
-                            </p>
-
-                            {clause.draft_wording_disclaimer && (
-                              <p className="mt-2 text-xs text-emerald-700">
-                                {clause.draft_wording_disclaimer}
-                              </p>
-                            )}
-                          </div>
-                        )}
-
-                        {clause.sector_note && (
-                          <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-3">
-                            <h4 className="font-semibold text-indigo-900">
-                              {t.sectorNote}
-                            </h4>
-
-                            <p className="mt-1 whitespace-pre-wrap text-indigo-800 text-[13px] leading-6">
-                              {typeof clause.sector_note === "string"
-                                ? clause.sector_note
-                                : JSON.stringify(clause.sector_note, null, 2)}
-                            </p>
-                          </div>
-                        )}
-
-                        {typeof clause.negotiable === "boolean" && (
-                          <div className="rounded-xl border border-slate-200 bg-white p-3">
-                            <h4 className="font-semibold text-slate-900">
-                              {t.negotiable}
-                            </h4>
-
-                            <p className="mt-1 text-slate-600">
-                              {translateBoolean(clause.negotiable, language)}
-                            </p>
-                          </div>
-                        )}
-
-                        {clause.acceptable_compromise && (
-                          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
-                            <h4 className="font-semibold text-amber-900">
-                              {t.acceptableCompromise}
-                            </h4>
-
-                            <p className="mt-1 text-amber-800 text-[13px] leading-6">
-                              {clause.acceptable_compromise}
-                            </p>
-                          </div>
-                        )}
-
-                        {clause.never_accept && (
-                          <div className="rounded-xl border border-red-200 bg-red-50 p-3">
-                            <h4 className="font-semibold text-red-900">
-                              {t.neverAccept}
-                            </h4>
-
-                            <p className="mt-1 text-red-700 text-[13px] leading-6">
-                              {clause.never_accept}
-                            </p>
+                            <div className="whitespace-pre-wrap text-green-800 mt-2 text-[13px] leading-6">
+                              {clause.safer_alternative}
+                            </div>
                           </div>
                         )}
 

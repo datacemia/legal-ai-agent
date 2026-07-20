@@ -16,7 +16,6 @@ consistent across 1000+ contracts.
 """
 
 import re
-from functools import lru_cache
 
 
 SUPPORTED_LANGUAGES = {"en", "fr", "ar"}
@@ -1853,41 +1852,6 @@ TYPE_CONTEXT_PENALTIES = {
 }
 
 
-@lru_cache(maxsize=None)
-def _compiled_literal_term_pattern(
-    normalized_term: str,
-) -> re.Pattern[str]:
-    """
-    Compile and cache a literal taxonomy term.
-
-    The matching semantics remain identical to the previous
-    inline re.search implementation.
-    """
-
-    return re.compile(
-        r"(?<!\w)"
-        + re.escape(normalized_term)
-        + r"(?!\w)"
-    )
-
-
-def _literal_term_matches(
-    normalized_text: str,
-    term: object,
-) -> bool:
-    normalized_term = str(term or "").lower()
-
-    if not normalized_term:
-        return False
-
-    return (
-        _compiled_literal_term_pattern(
-            normalized_term,
-        ).search(normalized_text)
-        is not None
-    )
-
-
 def count_context_matches(
     text: str,
     terms: list[str],
@@ -1897,10 +1861,7 @@ def count_context_matches(
     return sum(
         1
         for term in terms
-        if _literal_term_matches(
-            normalized,
-            term,
-        )
+        if re.search(r"(?<!\w)" + re.escape(term.lower()) + r"(?!\w)", normalized)
     )
 
 
@@ -1966,10 +1927,7 @@ def score_clause_type(
     matched_signals = []
 
     if any(
-        _literal_term_matches(
-            normalized,
-            excluded,
-        )
+        re.search(r"(?<!\w)" + re.escape(excluded.lower()) + r"(?!\w)", normalized)
         for excluded in excluded_contexts
     ):
         return {
@@ -1985,12 +1943,11 @@ def score_clause_type(
     base_score = 0
 
     for signal in signals:
-        signal_normalized = str(signal or "").lower()
+        signal_normalized = signal.lower()
 
-        if _literal_term_matches(
-            normalized,
-            signal_normalized,
-        ):
+        pattern = r"(?<!\w)" + re.escape(signal_normalized) + r"(?!\w)"
+
+        if re.search(pattern, normalized):
             matched_signals.append(signal)
             base_score += SIGNAL_WEIGHTS.get(
                 signal_normalized,
