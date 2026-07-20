@@ -251,8 +251,10 @@ export default function ExecutiveDashboard({
     : [];
 
   const dependencyCount =
-    (dependencyGraph?.edges?.length || 0) +
-    (legalRelationGraph?.edges?.length || 0);
+    dependencyGraph?.edges?.length ||
+    executive?.dependency_summary?.edges_count ||
+    source?.dependency_insights?.edges_count ||
+    0;
 
   const narrative =
     source?.executive_risk_narrative || "";
@@ -558,12 +560,20 @@ export default function ExecutiveDashboard({
                 index: number
               ) => (
                 <div
-                  key={index}
+                  key={item.id ? `${item.id}-${index}` : index}
                   className="rounded-2xl border border-red-200 bg-red-50 p-4"
                 >
 
-                  <div className="font-semibold text-red-700">
-                    {item.id}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="font-semibold text-red-700">
+                      {item.label || item.id}
+                    </div>
+
+                    {item.severity && (
+                      <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold uppercase text-red-800">
+                        {item.severity}
+                      </span>
+                    )}
                   </div>
 
                   <p className="mt-2 text-sm text-red-600">
