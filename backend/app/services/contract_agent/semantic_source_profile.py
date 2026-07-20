@@ -682,6 +682,133 @@ RULES: tuple[MechanismRule, ...] = (
        ),
        91, "financial_reporting", DOMAIN_CORE, True, polarity="REQUIRED"),
 
+    # Additive multilingual reporting qualifiers.
+    # These mechanisms enrich FINANCIAL_REPORTING_OBLIGATION but cannot
+    # become the primary clause type.
+
+    _r(
+        "ANNUAL_FINANCIAL_STATEMENTS",
+        (
+            r"\bannual\s+(?:financial\s+statements?|accounts?|financial\s+reports?)\b",
+            r"\b(?:financial\s+statements?|accounts?|financial\s+reports?)"
+            r"\s+(?:for\s+each|for\s+the)\s+(?:financial|fiscal)\s+year\b",
+        ),
+        (
+            r"\b(?:[eé]tats?\s+financiers?|comptes?|rapports?\s+financiers?)"
+            r"\s+annuels?\b",
+            r"\b(?:comptes?\s+annuels?|rapport\s+financier\s+annuel)\b",
+        ),
+        (
+            r"(?:القوائم|البيانات|التقارير)\s+المالية\s+السنوية",
+            r"(?:الحسابات|القوائم)\s+السنوية",
+        ),
+        86,
+        "financial_reporting",
+        DOMAIN_SECONDARY,
+        False,
+    ),
+
+    _r(
+        "QUARTERLY_FINANCIAL_STATEMENTS",
+        (
+            r"\bquarterly\s+(?:financial\s+statements?|accounts?|financial\s+reports?)\b",
+            r"\b(?:financial\s+statements?|accounts?|financial\s+reports?)"
+            r"\s+(?:for\s+each|for\s+the)\s+(?:financial|fiscal)\s+quarter\b",
+        ),
+        (
+            r"\b(?:[eé]tats?\s+financiers?|comptes?|rapports?\s+financiers?)"
+            r"\s+trimestriels?\b",
+            r"\brapport\s+financier\s+trimestriel\b",
+        ),
+        (
+            r"(?:القوائم|البيانات|التقارير)\s+المالية\s+ربع\s+السنوية",
+            r"(?:القوائم|البيانات|التقارير)\s+المالية\s+الفصلية",
+        ),
+        86,
+        "financial_reporting",
+        DOMAIN_SECONDARY,
+        False,
+    ),
+
+    _r(
+        "AUDITED_REPORTING",
+        (
+            r"\baudited\s+(?:annual\s+|quarterly\s+)?"
+            r"(?:financial\s+statements?|accounts?|financial\s+reports?)\b",
+            r"\b(?:financial\s+statements?|accounts?|financial\s+reports?)"
+            r"\s+(?:duly\s+)?audited\b",
+        ),
+        (
+            (
+                r"\b(?:[eé]tats?\s+financiers?|comptes?|"
+                r"rapports?\s+financiers?)"
+                r"(?:\s+(?:annuels?|trimestriels?|semestriels?))?"
+                r"\s+(?<!non\s)(?:audit[eé]s?|certifi[eé]s?)\b"
+            ),
+            (
+                r"\b(?:audit[eé]s?|certifi[eé]s?)\s+"
+                r"(?:[eé]tats?\s+financiers?|comptes?|"
+                r"rapports?\s+financiers?)\b"
+            ),
+        ),
+        (
+            (
+                r"(?:القوائم|البيانات|التقارير)\s+المالية"
+                r"(?:\s+(?:السنوية|ربع\s+السنوية|الفصلية|نصف\s+السنوية))?"
+                r"\s+(?<!غير\s)(?:المدققة|المراجعة|المعتمدة)"
+            ),
+            (
+                r"(?:القوائم|البيانات|التقارير)"
+                r"(?:\s+(?:السنوية|ربع\s+السنوية|الفصلية))?"
+                r"\s+(?<!غير\s)(?:المدققة|المراجعة)"
+                r"\s+المالية"
+            ),
+        ),
+        87,
+        "financial_reporting",
+        DOMAIN_SECONDARY,
+        False,
+    ),
+
+    _r(
+        "UNAUDITED_REPORTING",
+        (
+            r"\bunaudited\s+(?:annual\s+|quarterly\s+)?"
+            r"(?:financial\s+statements?|accounts?|financial\s+reports?)\b",
+            r"\b(?:financial\s+statements?|accounts?|financial\s+reports?)"
+            r"\s+(?:that\s+are\s+)?unaudited\b",
+        ),
+        (
+            (
+                r"\b(?:[eé]tats?\s+financiers?|comptes?|"
+                r"rapports?\s+financiers?)"
+                r"(?:\s+(?:annuels?|trimestriels?|semestriels?))?"
+                r"\s+non[\s-]+audit[eé]s?\b"
+            ),
+            (
+                r"\bnon[\s-]+audit[eé]s?\s+"
+                r"(?:[eé]tats?\s+financiers?|comptes?|"
+                r"rapports?\s+financiers?)\b"
+            ),
+        ),
+        (
+            (
+                r"(?:القوائم|البيانات|التقارير)\s+المالية"
+                r"(?:\s+(?:السنوية|ربع\s+السنوية|الفصلية|نصف\s+السنوية))?"
+                r"\s+غير\s+(?:المدققة|المراجعة)"
+            ),
+            (
+                r"(?:قوائم|بيانات|تقارير)"
+                r"(?:\s+(?:سنوية|ربع\s+سنوية|فصلية))?"
+                r"\s+مالية\s+غير\s+(?:مدققة|مراجعة)"
+            ),
+        ),
+        87,
+        "financial_reporting",
+        DOMAIN_SECONDARY,
+        False,
+    ),
+
     _r("BOARD_COMPOSITION_STRUCTURE",
        (r"\bboard\s+of\s+directors\b.{0,100}\b(?:consist\s+of|comprise|composed\s+of)\b.{0,220}",),
        (r"\bconseil\s+d['’]administration\b.{0,100}\b(?:compos[eé]|comprend|constitu[eé])\b.{0,220}",),
@@ -3631,16 +3758,52 @@ def _hf_has(pattern, text):
     return _hf_search(pattern, text) is not None
 
 
-def _hf_evidence(pattern, source_text):
-    match = _hf_search(pattern, source_text)
+def _hf_evidence(pattern, search_text, canonical_source_text=None):
+    """
+    Return evidence offsets grounded in the canonical source text.
+
+    search_text may be whitespace-normalized for detection, but published
+    offsets must always refer to canonical_source_text.
+    """
+    match = _hf_search(pattern, search_text)
 
     if match is None:
         return []
 
+    evidence_text = match.group(0)
+    canonical_source = str(
+        canonical_source_text
+        if canonical_source_text is not None
+        else search_text
+    )
+
+    # Fast path: the detector searched the canonical source directly.
+    start = match.start()
+    end = match.end()
+    if (
+        0 <= start < end <= len(canonical_source)
+        and canonical_source[start:end] == evidence_text
+    ):
+        return [{
+            "text": evidence_text,
+            "start": start,
+            "end": end,
+        }]
+
+    # Rebase only an exact, unique occurrence. Ambiguous or mutated
+    # evidence fails closed and is not published.
+    first = canonical_source.find(evidence_text)
+    if first < 0:
+        return []
+
+    second = canonical_source.find(evidence_text, first + 1)
+    if second >= 0:
+        return []
+
     return [{
-        "text": match.group(0),
-        "start": match.start(),
-        "end": match.end(),
+        "text": evidence_text,
+        "start": first,
+        "end": first + len(evidence_text),
     }]
 
 
@@ -3680,6 +3843,9 @@ def _hf_append_ranked_mechanism(
     polarity=None,
     procedural_state=None,
 ):
+    if not isinstance(evidence, list) or not evidence:
+        return
+
     if kind in _hf_existing_mechanism_kinds(profile):
         return
 
@@ -3836,11 +4002,11 @@ def _hf_detect_preemptive_right(source_text):
         )
     """
 
-    return _hf_evidence(evidence_pattern, text) or [{
-        "text": text,
-        "start": 0,
-        "end": len(text),
-    }]
+    return _hf_evidence(
+        evidence_pattern,
+        text,
+        source_text,
+    )
 
 
 def _hf_detect_appointment_right(source_text):
@@ -3978,11 +4144,11 @@ def _hf_detect_appointment_right(source_text):
         )
     """
 
-    return _hf_evidence(evidence_pattern, text) or [{
-        "text": text,
-        "start": 0,
-        "end": len(text),
-    }]
+    return _hf_evidence(
+        evidence_pattern,
+        text,
+        source_text,
+    )
 
 
 def _hf_detect_tag_participation(source_text):
@@ -4081,11 +4247,11 @@ def _hf_detect_tag_participation(source_text):
         )
     """
 
-    return _hf_evidence(evidence_pattern, text) or [{
-        "text": text,
-        "start": 0,
-        "end": len(text),
-    }]
+    return _hf_evidence(
+        evidence_pattern,
+        text,
+        source_text,
+    )
 
 
 def _hf_detect_reserved_matter_consent(source_text):
@@ -4271,11 +4437,11 @@ def _hf_detect_reserved_matter_consent(source_text):
         )
     """
 
-    return _hf_evidence(evidence_pattern, text) or [{
-        "text": text,
-        "start": 0,
-        "end": len(text),
-    }]
+    return _hf_evidence(
+        evidence_pattern,
+        text,
+        source_text,
+    )
 
 
 def _hf_augment_profile(profile, source_text, language=None):
@@ -4350,6 +4516,68 @@ def _hf_augment_profile(profile, source_text, language=None):
             candidate_primary_type="governance",
             polarity="RESTRICTION",
             procedural_state="CONSENT_REQUIRED",
+        )
+
+    # Add PURPOSE_LIMITATION as an additive, idempotent mechanism.
+    #
+    # Keep this detector outside the historical extraction and primary-type
+    # derivation logic. _hf_append_ranked_mechanism() already prevents a
+    # duplicate when PURPOSE_LIMITATION was extracted elsewhere.
+    from .semantic_detection import (
+        detect_purpose_limitation,
+        detect_term_duration,
+    )
+
+    purpose_matches = detect_purpose_limitation(
+        source_text,
+        language,
+    )
+
+    if purpose_matches:
+        purpose_evidence = [
+            {
+                "text": match.evidence,
+                "start": match.start,
+                "end": match.end,
+            }
+            for match in purpose_matches
+        ]
+
+        _hf_append_ranked_mechanism(
+            profile,
+            kind="PURPOSE_LIMITATION",
+            evidence=purpose_evidence,
+            semantic_role="CONTROL_MODIFIER",
+            candidate_primary_type="other",
+            polarity="RESTRICTION",
+        )
+
+    # Add TERM_DURATION as an additive, idempotent mechanism.
+    #
+    # Keep the historical TERM_DURATION rule active during equivalence
+    # validation. _hf_append_ranked_mechanism() prevents duplicate mechanisms.
+    term_matches = detect_term_duration(
+        source_text,
+        language,
+    )
+
+    if term_matches:
+        term_evidence = [
+            {
+                "text": match.evidence,
+                "start": match.start,
+                "end": match.end,
+            }
+            for match in term_matches
+        ]
+
+        _hf_append_ranked_mechanism(
+            profile,
+            kind="TERM_DURATION",
+            evidence=term_evidence,
+            semantic_role=DOMAIN_SECONDARY,
+            candidate_primary_type="termination",
+            polarity="DURATION",
         )
 
     return profile

@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.before*
+*.bak
+semantic_specs.bak/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
