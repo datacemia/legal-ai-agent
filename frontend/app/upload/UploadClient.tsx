@@ -687,6 +687,49 @@ const UI_TRANSLATIONS: any = {
   },
 };
 
+const RECOMMENDATION_FALLBACKS: any = {
+  en: {
+    manualReview:
+      "Review this clause manually before relying on it.",
+  },
+  fr: {
+    manualReview:
+      "Examinez cette clause manuellement avant de vous y fier.",
+  },
+  ar: {
+    manualReview:
+      "يُنصح بمراجعة هذا البند يدوياً قبل الاعتماد عليه.",
+  },
+};
+
+const getRecommendationText = (
+  recommendation: string,
+  language: string
+) => {
+  const text = String(recommendation || "").trim();
+
+  const technicalMessages = [
+    "generated text did not pass source-fidelity validation",
+    "source-fidelity validation",
+    "manual review required",
+    "grounding failed",
+    "unsupported grounding",
+  ];
+
+  const normalized = text.toLowerCase();
+
+  if (
+    technicalMessages.some(msg => normalized.includes(msg))
+  ) {
+    return (
+      RECOMMENDATION_FALLBACKS[language]?.manualReview ??
+      RECOMMENDATION_FALLBACKS.en.manualReview
+    );
+  }
+
+  return text;
+};
+
 const GROUP_TRANSLATIONS: any = {
   en: {
     other: "Other",
@@ -2205,7 +2248,7 @@ export default function UploadClient({
                             </h4>
 
                             <p className="text-slate-600 mt-1">
-                              {clause.recommendation}
+                              {getRecommendationText(clause.recommendation, language)}
                             </p>
                           </div>
                         )}
