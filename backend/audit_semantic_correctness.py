@@ -16,6 +16,13 @@ for stream in (sys.stdout, sys.stderr):
 
 GENERIC = {"SOURCE_ANCHORS", "SOURCE_PROFILE", "PREREQUISITE", "PROCEDURAL_STATE", "MANDATORY_CONJUNCTION"}
 
+GROUNDING_VERDICT_PRIORITY = {
+    "NO_EVIDENCE": 0,
+    "UNSUPPORTED": 1,
+    "WEAKLY_GROUNDED": 2,
+    "GROUNDED": 3,
+}
+
 # Discovery-only source signals. These are heuristics, never gold truth.
 RULES = {
     "CONFIDENTIALITY_OBLIGATION": [r"\b(?:hold|keep|maintain).{0,50}confiden", r"(?:garder|tenir|maintenir).{0,50}confident", r"(?:يحافظ|الحفاظ|يلتزم).{0,60}(?:سرية|سري)"],
@@ -592,10 +599,31 @@ def gold_audit(gold: dict[str, Any], lookup: dict[tuple[str, str], dict[str, Any
 
         grounding = []
         title = str(item.get("title") or item.get("clause_title") or "")
+
+        # The gold audit evaluates mechanisms at normalized-concept level.
+        # Multiple persisted mechanism objects may normalize to the same concept,
+        # so retain the strongest evidence-backed verdict for that concept.
+        grounding_by_concept: dict[str, str] = {}
+
         for mech in material:
+            con = concept(mech)
             gv = grounding_verdict(mech, row["source_text"], title)
+
+            previous = grounding_by_concept.get(con)
+            if (
+                previous is None
+                or GROUNDING_VERDICT_PRIORITY[gv]
+                > GROUNDING_VERDICT_PRIORITY[previous]
+            ):
+                grounding_by_concept[con] = gv
+
+        for con in sorted(grounding_by_concept):
+            gv = grounding_by_concept[con]
             grounding_counts[gv] += 1
-            grounding.append({"concept": concept(mech), "verdict": gv})
+            grounding.append({
+                "concept": con,
+                "verdict": gv,
+            })
 
         attr_results = {"actor": [], "object": [], "trigger": [], "polarity": []}
         for rel in fixture.get("required_relations", []):
