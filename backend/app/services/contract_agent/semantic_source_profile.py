@@ -3872,36 +3872,64 @@ def _hf_append_ranked_mechanism(
 
 def _hf_detect_preemptive_right(source_text):
     """
-    International pre-emptive / subscription right.
+    Detect a multilingual pre-emptive or subscription right.
 
-    Required cumulative structure:
-    1. legal right or entitlement;
-    2. acquisition or subscription;
-    3. proportional or pro-rata allocation;
-    4. newly issued securities.
+    The rule is contract-domain agnostic and requires the cumulative
+    presence of four semantic components:
+
+    1. a legal right or entitlement;
+    2. a purchase, acquisition or subscription action;
+    3. a proportional or pro-rata allocation;
+    4. newly issued shares, securities or equivalent instruments.
+
+    Supported languages:
+    - English;
+    - French;
+    - Arabic.
+
+    The detector deliberately fails closed when one of the four
+    components is absent, limiting false positives from ordinary
+    purchases or historical securities issuances.
     """
     text = _hf_normalize_text(source_text)
+
+    if not text:
+        return None
 
     right = _hf_has(
         r"""
         (?:
             \bright\s+to\b
             |
+            \b(?:has|have|shall\s+have)\s+the\s+right\s+to\b
+            |
+            \bis\s+entitled\s+to\b
+            |
             \bentitled\s+to\b
             |
-            \bshall\s+have\s+the\s+right\b
+            \bmay\s+(?:purchase|buy|acquire|subscribe)\b
             |
-            \bdroit\s+(?:de|d['’])\b
+            \bdroit\s+(?:de|à|d['’])\b
             |
-            \baura\s+le\s+droit\b
+            \b(?:a|aura|dispose|disposera)\s+
+            (?:du|d['’]un|d['’]une)?\s*droit\b
             |
-            \best\s+en\s+droit\b
+            \bb[ée]n[ée]ficie(?:ra)?\s+
+            (?:du|d['’]un|d['’]une)?\s*droit\b
+            |
+            \best\s+en\s+droit\s+de\b
+            |
+            \bpeut\s+(?:acheter|acqu[ée]rir|souscrire)\b
             |
             يحق\s+ل
             |
-            له\s+الحق
+            يجوز\s+ل
             |
-            يكون\s+له\s+الحق
+            ل(?:ه|ها|هم|هن)\s+الحق
+            |
+            يكون\s+ل(?:ه|ها|هم|هن)\s+الحق
+            |
+            حق\s+(?:الشراء|الاكتتاب|الأولوية|الافضلية|الأفضلية)
         )
         """,
         text,
@@ -3910,23 +3938,39 @@ def _hf_detect_preemptive_right(source_text):
     acquisition = _hf_has(
         r"""
         (?:
-            \bpurchas(?:e|ing)\b
+            \bpurchas(?:e|es|ed|ing)\b
             |
-            \bsubscrib(?:e|ing)\b
+            \bbuy(?:s|ing)?\b
             |
-            \bacquir(?:e|ing)\b
+            \bacquir(?:e|es|ed|ing)\b
+            |
+            \bsubscrib(?:e|es|ed|ing)\s+(?:for|to)?\b
+            |
+            \btake\s+up\b
             |
             \bacheter\b
             |
-            \bacqu[eé]rir\b
+            \bacqu[ée]rir\b
             |
             \bsouscrire\b
             |
+            \bparticiper\s+à\s+l['’][ée]mission\b
+            |
             شراء
+            |
+            يشتري
+            |
+            تشتري
+            |
+            الاكتتاب
+            |
+            يكتتب
+            |
+            تكتتب
             |
             اكتساب
             |
-            الاكتتاب
+            اقتناء
         )
         """,
         text,
@@ -3937,19 +3981,47 @@ def _hf_detect_preemptive_right(source_text):
         (?:
             \bpro[\s-]?rata\b
             |
-            \bproportion(?:al|ate)\b
+            \bproportion(?:al|ate)\s+
+            (?:share|portion|interest|part)?\b
             |
-            \bproportionnelle?\b
+            \bin\s+proportion\s+to\b
+            |
+            \baccording\s+to\s+
+            (?:its|their|his|her)\s+(?:ownership|holding)\b
+            |
+            \bmaintain\s+
+            (?:its|their|his|her)\s+
+            (?:ownership\s+)?percentage\b
             |
             \bau\s+prorata\b
             |
-            \bquote-part\b
+            \bquote[\s-]?part\b
             |
-            حص(?:ة|ته|تها|تهم|تهن)\s+التناسبية
+            \bpart\s+proportionnelle?\b
             |
-            بنسبة\s+تتناسب
+            \bproportionnelle?\b
             |
-            على\s+أساس\s+نسبي
+            \bà\s+proportion\s+de\b
+            |
+            \ben\s+proportion\s+de\b
+            |
+            \bselon\s+(?:sa|leur)\s+participation\b
+            |
+            حص(?:ة|ته|تها|تهم|تهن)\s+
+            (?:التناسبية|النسبية)
+            |
+            نصيب(?:ه|ها|هم|هن)?\s+
+            (?:التناسبي|النسبي)
+            |
+            (?:بنسبة|وفقا\s+لنسبة|وفقاً\s+لنسبة)\s+
+            (?:ملكيته|ملكيتها|ملكيتهم|ملكيتهمن)
+            |
+            بما\s+يتناسب\s+مع\s+
+            (?:ملكيته|ملكيتها|ملكيتهم|حصته|حصتها|حصتهم)
+            |
+            على\s+أساس\s+(?:نسبي|تناسبي)
+            |
+            بالتناسب
         )
         """,
         text,
@@ -3962,19 +4034,51 @@ def _hf_detect_preemptive_right(source_text):
             |
             \bnew(?:ly)?\s+(?:issued\s+)?shares?\b
             |
+            \bnew(?:ly)?\s+(?:issued\s+)?stock\b
+            |
+            \bnew(?:ly)?\s+(?:issued\s+)?equity\s+securities\b
+            |
+            \bsecurit(?:y|ies)\s+(?:newly\s+)?issued\b
+            |
+            \bshares?\s+(?:newly\s+)?issued\b
+            |
             \bfuture\s+issuances?\b
             |
-            \bnouveaux?\s+titres?\b
+            \bproposed\s+issuance\b
+            |
+            \bissuance\s+of\s+(?:new\s+)?
+            (?:shares?|stock|securities)\b
+            |
+            \bnouveaux?\s+
+            (?:titres?|actions?|instruments?)\b
+            |
+            \bnouvelles?\s+
+            (?:actions?|valeurs?\s+mobili[èe]res?)\b
             |
             \btitres?\s+nouvellement\s+[ée]mis\b
             |
-            \bnouvelles?\s+actions?\b
+            \b[ée]mission\s+(?:future\s+)?(?:de\s+)?
+            (?:nouveaux?\s+|nouvelles?\s+)?
+            (?:titres?|actions?|valeurs?\s+mobili[èe]res?)\b
             |
-            أوراق\s+مالية\s+جديدة
+            \btout\s+nouveau\s+titre\b
             |
-            أسهم\s+جديدة
+            (?:ال)?(?:أوراق|اوراق)\s+(?:ال)?مالية\s+(?:ال)?جديدة
             |
-            إصدارات?\s+جديدة
+            (?:ال)?(?:أسهم|اسهم)\s+(?:ال)?جديدة
+            |
+            (?:ال)?(?:حصص|وحدات)\s+(?:ال)?جديدة
+            |
+            (?:ال)?(?:أوراق|اوراق)\s+(?:ال)?مالية\s+
+            (?:تُصدر|تصدر|ستصدر|مصدرة)
+            |
+            (?:ال)?(?:أسهم|اسهم)\s+
+            (?:تُصدر|تصدر|ستصدر|مصدرة)
+            |
+            (?:ال)?(?:إصدارات|اصدارات)\s+(?:ال)?جديدة
+            |
+            (?:إصدار|اصدار)\s+(?:جديد|جديدة)\s+
+            (?:للأسهم|للاسهم|للأوراق\s+المالية|للاوراق\s+المالية)
         )
         """,
         text,
@@ -3988,25 +4092,222 @@ def _hf_detect_preemptive_right(source_text):
     ):
         return None
 
+    # This pattern extracts one coherent source span after the four
+    # independent semantic requirements have already been established.
+    #
+    # English and French allow either the proportional language or the
+    # new-securities language to appear first. Arabic explicitly supports
+    # inflected forms such as حصته التناسبية and حصتها النسبية.
     evidence_pattern = r"""
         (?:
-            right\s+to.{0,120}pro[\s-]?rata.{0,120}
-            (?:new|issued).{0,40}(?:securities|shares)
+            (?:
+                (?:right\s+to|entitled\s+to|
+                   shall\s+have\s+the\s+right\s+to|
+                   has\s+the\s+right\s+to|
+                   have\s+the\s+right\s+to|
+                   may)
+                .{0,100}?
+                (?:purchase|buy|acquire|subscribe)
+                .{0,160}?
+                (?:
+                    pro[\s-]?rata|
+                    proportion(?:al|ate)|
+                    in\s+proportion\s+to
+                )
+                .{0,160}?
+                (?:
+                    new(?:ly)?\s+(?:issued\s+)?
+                    (?:securities|shares|stock)|
+                    securities\s+(?:newly\s+)?issued|
+                    shares\s+(?:newly\s+)?issued|
+                    future\s+issuance
+                )
+            )
             |
-            droit.{0,120}(?:quote-part|prorata|proportionnelle?).{0,120}
-            (?:nouveau|nouveaux|nouvelle|nouvelles).{0,40}
-            (?:titre|titres|action|actions)
+            (?:
+                (?:right\s+to|entitled\s+to|
+                   shall\s+have\s+the\s+right\s+to|
+                   has\s+the\s+right\s+to|
+                   have\s+the\s+right\s+to|
+                   may)
+                .{0,100}?
+                (?:purchase|buy|acquire|subscribe)
+                .{0,160}?
+                (?:
+                    new(?:ly)?\s+(?:issued\s+)?
+                    (?:securities|shares|stock)|
+                    securities\s+(?:newly\s+)?issued|
+                    shares\s+(?:newly\s+)?issued|
+                    future\s+issuance
+                )
+                .{0,160}?
+                (?:
+                    pro[\s-]?rata|
+                    proportion(?:al|ate)|
+                    in\s+proportion\s+to
+                )
+            )
             |
-            يحق.{0,120}(?:حصة|بنسبة).{0,120}
-            (?:أوراق\s+مالية\s+جديدة|أسهم\s+جديدة|إصدارات?\s+جديدة)
+            (?:
+                (?:
+                    droit|
+                    aura\s+le\s+droit|
+                    est\s+en\s+droit|
+                    b[ée]n[ée]ficie(?:ra)?\s+du\s+droit|
+                    peut
+                )
+                .{0,100}?
+                (?:acheter|acqu[ée]rir|souscrire)
+                .{0,160}?
+                (?:
+                    quote[\s-]?part|
+                    prorata|
+                    proportionnelle?|
+                    à\s+proportion\s+de
+                )
+                .{0,160}?
+                (?:
+                    nouveaux?\s+(?:titres?|actions?)|
+                    nouvelles?\s+(?:actions?|valeurs?\s+mobili[èe]res?)|
+                    titres?\s+nouvellement\s+[ée]mis|
+                    [ée]mission\s+(?:de\s+)?(?:nouveaux?\s+|nouvelles?\s+)?
+                    (?:titres?|actions?)
+                )
+            )
+            |
+            (?:
+                (?:
+                    droit|
+                    aura\s+le\s+droit|
+                    est\s+en\s+droit|
+                    b[ée]n[ée]ficie(?:ra)?\s+du\s+droit|
+                    peut
+                )
+                .{0,100}?
+                (?:acheter|acqu[ée]rir|souscrire)
+                .{0,160}?
+                (?:
+                    nouveaux?\s+(?:titres?|actions?)|
+                    nouvelles?\s+(?:actions?|valeurs?\s+mobili[èe]res?)|
+                    titres?\s+nouvellement\s+[ée]mis
+                )
+                .{0,160}?
+                (?:
+                    quote[\s-]?part|
+                    prorata|
+                    proportionnelle?|
+                    à\s+proportion\s+de
+                )
+            )
+            |
+            (?:
+                (?:
+                    يحق\s+ل|
+                    يجوز\s+ل|
+                    ل(?:ه|ها|هم|هن)\s+الحق|
+                    يكون\s+ل(?:ه|ها|هم|هن)\s+الحق
+                )
+                .{0,100}?
+                (?:
+                    شراء|
+                    يشتري|
+                    تشتري|
+                    الاكتتاب|
+                    يكتتب|
+                    تكتتب|
+                    اكتساب|
+                    اقتناء
+                )
+                .{0,160}?
+                (?:
+                    حص(?:ة|ته|تها|تهم|تهن)\s+
+                    (?:التناسبية|النسبية)|
+                    نصيب(?:ه|ها|هم|هن)?\s+
+                    (?:التناسبي|النسبي)|
+                    بنسبة\s+(?:ملكيته|ملكيتها|ملكيتهم)|
+                    بما\s+يتناسب\s+مع
+                )
+                .{0,160}?
+                (?:
+                    (?:ال)?(?:أوراق|اوراق)\s+(?:ال)?مالية\s+(?:ال)?جديدة|
+                    (?:ال)?(?:أسهم|اسهم)\s+(?:ال)?جديدة|
+                    (?:ال)?(?:حصص|وحدات)\s+(?:ال)?جديدة|
+                    (?:ال)?(?:إصدارات|اصدارات)\s+(?:ال)?جديدة|
+                    (?:أوراق|اوراق)\s+مالية\s+
+                    (?:تُصدر|تصدر|ستصدر|مصدرة)|
+                    (?:أسهم|اسهم)\s+
+                    (?:تُصدر|تصدر|ستصدر|مصدرة)
+                )
+            )
+            |
+            (?:
+                (?:
+                    يحق\s+ل|
+                    يجوز\s+ل|
+                    ل(?:ه|ها|هم|هن)\s+الحق|
+                    يكون\s+ل(?:ه|ها|هم|هن)\s+الحق
+                )
+                .{0,100}?
+                (?:
+                    شراء|
+                    يشتري|
+                    تشتري|
+                    الاكتتاب|
+                    يكتتب|
+                    تكتتب|
+                    اكتساب|
+                    اقتناء
+                )
+                .{0,160}?
+                (?:
+                    (?:ال)?(?:أوراق|اوراق)\s+(?:ال)?مالية\s+(?:ال)?جديدة|
+                    (?:ال)?(?:أسهم|اسهم)\s+(?:ال)?جديدة|
+                    (?:ال)?(?:حصص|وحدات)\s+(?:ال)?جديدة|
+                    (?:ال)?(?:إصدارات|اصدارات)\s+(?:ال)?جديدة
+                )
+                .{0,160}?
+                (?:
+                    حص(?:ة|ته|تها|تهم|تهن)\s+
+                    (?:التناسبية|النسبية)|
+                    نصيب(?:ه|ها|هم|هن)?\s+
+                    (?:التناسبي|النسبي)|
+                    بنسبة\s+(?:ملكيته|ملكيتها|ملكيتهم)|
+                    بما\s+يتناسب\s+مع
+                )
+            )
         )
     """
 
-    return _hf_evidence(
+    evidence = _hf_evidence(
         evidence_pattern,
         text,
         source_text,
     )
+
+    if evidence:
+        return evidence
+
+    # The cumulative detector has already established all four required
+    # semantic components. If whitespace normalization prevents exact
+    # rebasing of the compact span, retry against the canonical source.
+    #
+    # This fallback still fails closed: it publishes evidence only when
+    # the entire non-empty clause is the canonical source itself.
+    canonical_source = str(source_text or "")
+    if not canonical_source.strip():
+        return None
+
+    leading = len(canonical_source) - len(canonical_source.lstrip())
+    trailing = len(canonical_source.rstrip())
+
+    if leading >= trailing:
+        return None
+
+    return [{
+        "text": canonical_source[leading:trailing],
+        "start": leading,
+        "end": trailing,
+    }]
 
 
 def _hf_detect_appointment_right(source_text):
