@@ -4885,6 +4885,117 @@ def _hf_augment_profile(profile, source_text, language=None):
 
 
 # Wrap the existing public function without changing its original logic.
+
+
+# --- BEGIN GENERIC MULTILINGUAL LEGAL ARGUMENT ENRICHMENT V1 ---
+
+_HF_ARGUMENT_PROFILE_LIST_KEYS = (
+    "extracted_mechanisms",
+    "grounded_mechanisms",
+    "ranked_material_mechanisms",
+    "supporting_mechanisms",
+    "material_mechanisms",
+)
+
+
+def _hf_text_matches_any(source_text: str, patterns: tuple[str, ...]) -> bool:
+    return any(re.search(pattern, source_text, flags=re.IGNORECASE | re.DOTALL) for pattern in patterns)
+
+
+def _hf_detect_investor_right_holder(source_text: str) -> str | None:
+    patterns = (
+        r"\binvestors?\b",
+        r"\bl['’]investisseur(?:s)?\b",
+        r"\binvestisseur(?:s)?\b",
+        r"(?:^|[\s،؛:])(?:المستثمر|للمستثمر|بالمستثمر|كالمستثمر)(?:ين|ون|ان)?(?:$|[\s،؛:])",
+    )
+    return "INVESTOR" if _hf_text_matches_any(source_text, patterns) else None
+
+
+def _hf_detect_new_securities_object(source_text: str) -> str | None:
+    patterns = (
+        r"\bnew\s+(?:shares?|securities?|equity|stock|units?|interests?)\b",
+        r"\b(?:shares?|securities?|equity|stock|units?|interests?)\s+(?:newly\s+)?issued\b",
+        r"\bnouve(?:au|aux|elle|elles)\s+(?:titre|titres|action|actions|valeur|valeurs|part|parts)\b",
+        r"\b(?:titre|titres|action|actions|valeur|valeurs|part|parts)\s+nouvellement\s+[ée]mis",
+        r"(?:أوراق\s+مالية|أسهم|حصص)\s+جديدة",
+        r"(?:إصدار|تصدر|إصدارها).{0,40}(?:أوراق\s+مالية|أسهم|حصص)",
+    )
+    return "NEW_SECURITIES" if _hf_text_matches_any(source_text, patterns) else None
+
+
+def _hf_has_reserved_matter_consent_structure(source_text: str) -> bool:
+    patterns = (
+        r"\b(?:shall|may|must)\s+not\b.{0,500}\bwithout\s+(?:the\s+)?(?:prior\s+)?(?:written\s+)?(?:consent|approval)\b",
+        r"\bsubject\s+to\s+(?:the\s+)?prior\s+(?:written\s+)?(?:consent|approval)\b",
+        r"\bne\s+(?:pourra|peut|devra)\b.{0,500}\bsans\s+(?:le\s+)?consentement\s+(?:écrit\s+)?préalable\b",
+        r"\bsous\s+réserve\s+du\s+consentement\s+(?:écrit\s+)?préalable\b",
+        r"(?:لا\s+يجوز|لا\s+يحق|يمتنع).{0,500}(?:دون|بدون)\s+(?:الحصول\s+على\s+)?موافقة\s+(?:خطية\s+)?مسبقة",
+        r"رهناً\s+بالحصول\s+على\s+موافقة\s+(?:خطية\s+)?مسبقة",
+    )
+    return _hf_text_matches_any(source_text, patterns)
+
+
+def _hf_set_missing_argument(mechanism: dict, key: str, value: str | None) -> None:
+    if not value:
+        return
+    if mechanism.get(key) in (None, ""):
+        mechanism[key] = value
+    arguments = mechanism.get("arguments")
+    if not isinstance(arguments, dict):
+        arguments = {}
+        mechanism["arguments"] = arguments
+    if arguments.get(key) in (None, ""):
+        arguments[key] = value
+
+
+def _hf_enrich_legal_arguments(profile: dict, source_text: str) -> dict:
+    if not isinstance(profile, dict):
+        return profile
+
+    source = str(source_text or "")
+    investor = _hf_detect_investor_right_holder(source)
+    new_securities = _hf_detect_new_securities_object(source)
+    reserved_consent = _hf_has_reserved_matter_consent_structure(source)
+
+    for list_key in _HF_ARGUMENT_PROFILE_LIST_KEYS:
+        mechanisms = profile.get(list_key)
+        if not isinstance(mechanisms, list):
+            continue
+        for mechanism in mechanisms:
+            if not isinstance(mechanism, dict):
+                continue
+
+            kind = str(mechanism.get("kind") or mechanism.get("concept") or "").upper()
+
+            if kind == "PREEMPTIVE_RIGHT":
+                _hf_set_missing_argument(mechanism, "right_holder", investor)
+                _hf_set_missing_argument(mechanism, "object", new_securities)
+            elif kind == "PARTICIPATION_OPTION":
+                _hf_set_missing_argument(mechanism, "right_holder", investor)
+            elif kind == "INVESTOR_CONSENT_RIGHT":
+                _hf_set_missing_argument(mechanism, "right_holder", investor)
+                if reserved_consent:
+                    _hf_set_missing_argument(mechanism, "object", "RESERVED_MATTER")
+
+    hash_helper = globals().get("_hash_json")
+    if callable(hash_helper):
+        try:
+            profile["semantic_profile_hash"] = hash_helper({
+                "source_language": profile.get("source_language"),
+                "primary_type": profile.get("primary_type"),
+                "confidence": profile.get("confidence"),
+                "ranked_material_mechanisms": profile.get("ranked_material_mechanisms"),
+                "supporting_mechanisms": profile.get("supporting_mechanisms"),
+            })
+        except Exception:
+            pass
+
+    return profile
+
+# --- END GENERIC MULTILINGUAL LEGAL ARGUMENT ENRICHMENT V1 ---
+
+
 _hf_original_build_semantic_source_profile = (
     build_semantic_source_profile
 )
@@ -4903,11 +5014,12 @@ def build_semantic_source_profile(
         **kwargs,
     )
 
-    return _hf_augment_profile(
+    profile = _hf_augment_profile(
         profile,
         source_text,
-        language=language,
+        language,
     )
+    return _hf_enrich_legal_arguments(profile, source_text)
 
 
 # END PATCH HIGH_FAILURES_MULTILANG_V1
