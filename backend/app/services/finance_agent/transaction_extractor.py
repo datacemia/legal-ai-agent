@@ -1,17 +1,74 @@
 import os
 import re
+import math
 import unicodedata
-from collections import Counter
+from collections import Counter, defaultdict
+from dataclasses import dataclass, field
+from typing import Any, Iterable
+
+from .international_standard import normalize_statement_text, standardize_transactions
 from datetime import datetime
 
 
+
+from app.services.finance_agent.candidate_selection_policy import (
+    build_final_finance_summaries,
+    candidate_official_gaps,
+    candidate_reconciliation_status,
+    candidate_selection_key,
+    candidate_totals,
+    choose_best_candidate,
+    looks_like_multi_account_statement,
+    merge_official_summaries,
+    normalize_official_summary,
+    refresh_candidate_against_official_summary,
+    refresh_candidates_against_official_summary,
+    summary_has_flow_totals,
+)
+
 DEBUG_FINANCE_EXTRACTOR = os.getenv("FINANCE_EXTRACTOR_DEBUG", "0") == "1"
+
+
+
+# RUNEXA_FINANCE_LOG_ONCE_V1
+_FINANCE_PRINTED_LOG_KEYS: set[str] = set()
+
+
+def _update_official_summary_non_destructive(
+    current_summary,
+    new_summary,
+):
+    """Merge statement totals without losing stronger existing values."""
+    return merge_official_summaries(
+        current_summary,
+        new_summary,
+    )
+
+
+def _finance_log_once(*args) -> None:
+    """
+    Affiche un événement de diagnostic une seule fois par processus.
+
+    Ce mécanisme ne modifie aucune extraction et ne masque pas les
+    résultats finaux. Il évite seulement les traces répétées causées
+    par plusieurs passes internes.
+    """
+    try:
+        key = repr(args)
+    except Exception:
+        key = str(tuple(type(value).__name__ for value in args))
+
+    if key in _FINANCE_PRINTED_LOG_KEYS:
+        return
+
+    _FINANCE_PRINTED_LOG_KEYS.add(key)
+    print(*args)
 
 
 def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
-print("RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE", "v9-terminal-balance-authority")
+print("RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE", "v24-universal-accounting-observation-consensus")
 
 debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v8-terminal-balance-authority-fr-en-ar")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
@@ -841,7 +898,15 @@ def parse_amount(value: str) -> float:
                 raw = "".join(parts)
         elif len(parts) == 2:
             left, right = parts
-            if len(right) == 3 and len(left) <= 3:
+
+            # A zero integer part is strong decimal evidence:
+            # 0.500 means five tenths, not five hundred.
+            #
+            # This rule is locale-neutral and does not change clear
+            # thousands forms such as 1.234 or 15.598.000.
+            if left == "0" and len(right) == 3:
+                raw = left + "." + right
+            elif len(right) == 3 and len(left) <= 3:
                 raw = left + right
             else:
                 raw = left + "." + right
@@ -2482,7 +2547,10 @@ def detect_type(line: str, amount: float) -> str | None:
     # Generic transfer rows with a positive amount and no outgoing marker are
     # income. This is structural (credit/debit table semantics), not bank-specific.
     if looks_like_neutral_inbound_transfer(line, amount):
-        return "income"
+        # An unsigned neutral transfer has no reliable direction until a
+        # structural signal (credit column, explicit sign, balance delta, or
+        # explicit inbound marker) confirms it.
+        return None
 
     # Keep this before broad legacy keyword lists so abbreviations such as
     # PRLV SEPA are classified consistently without bank-specific patches.
@@ -2849,15 +2917,11 @@ def extract_tabular_bank_amount(
 
         return amount, "income"
 
-    # Standard international FR / EN / AR fallback for debit/credit tables:
-    # transfer/remittance with no outgoing marker and a positive extracted
-    # amount belongs to credit/income. This preserves already typed expenses
-    # because explicit outgoing/card/debit markers are handled above.
+    # A neutral unsigned transfer has no reliable accounting direction.
+    # Explicit inbound markers, signs, columns, or balance deltas are handled
+    # earlier; without that evidence the row must remain untyped.
     if looks_like_neutral_inbound_transfer(line):
-        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
-
-        if amount > 0:
-            return abs(amount), "income"
+        return None, None
 
     return None, None
 
@@ -4287,10 +4351,12 @@ def detect_currency(text: str) -> str:
         for marker in mixed_currency_markers
     )
 
-    # 1) Explicit currency detection: ISO codes, symbols and common names in EN/FR/AR.
-    # Keep this before any country/bank fallback. If the document says USD, it must win.
+    # 1) Explicit currency detection: unambiguous ISO codes, symbols and common names.
+    # A bare "$" is intentionally excluded: it is shared by USD, AUD, CAD, NZD and
+    # other currencies. Jurisdiction and document structure resolve it later.
+    # Keep explicit USD / US$ before any country or bank fallback.
     patterns = [
-        ("USD", [r"\bUSD\b", r"\bUS\$\b", r"\$", "US DOLLAR", "U.S. DOLLAR", "DOLLAR US", "DOLLAR AMERICAIN", "DOLLAR AMÉRICAIN", "دولار أمريكي", "يكيرمأ رالود"]),
+        ("USD", [r"\bUSD\b", r"\bUS\$\b", "US DOLLAR", "U.S. DOLLAR", "DOLLAR US", "DOLLAR AMERICAIN", "DOLLAR AMÉRICAIN", "دولار أمريكي", "يكيرمأ رالود"]),
         ("EUR", [r"\bEUR\b", "€", "EURO", "يورو", "وروي"]),
         ("GBP", [r"\bGBP\b", "£", "POUND STERLING", "STERLING", "LIVRE STERLING", "جنيه إسترليني", "جنيه استرليني"]),
         ("MAD", [r"\bMAD\b", r"\bDH\b", r"\bDHS\b", "DIRHAM MAROCAIN", "MOROCCAN DIRHAM", "DIRHAM MOROCCO", "درهم مغربي", "يبرغم مهرد"]),
@@ -6095,88 +6161,59 @@ def reconcile_with_official_movement_totals(
     transactions: list[dict],
     text: str,
     detected_currency: str,
-) -> list[dict]:
-    """Reconcile extracted totals with official bank totals when available.
-
-    If a PDF contains official movement totals and the parser extracted only a
-    small part of the table, add explicit reconciliation rows instead of
-    presenting false tiny income/expense numbers. This protects international
-    debit/credit-column statements such as SG/BRED/BNP/Credit Agricole, while
-    leaving already-good parsers unchanged when totals are close.
-    """
+) -> dict:
+    """Compare official totals with observed transactions without adding rows."""
     official = extract_official_movement_totals(text)
-
-    if not official:
-        return transactions
 
     extracted_debits = movement_total_amount(transactions, "debit")
     extracted_credits = movement_total_amount(transactions, "credit")
 
-    official_debits = float(official["debit_total"])  # noqa: F841
-    official_credits = float(official["credit_total"])  # noqa: F841
+    if not official:
+        return {
+            "status": "not_available",
+            "currency": detected_currency,
+            "official_debits": None,
+            "official_credits": None,
+            "extracted_debits": extracted_debits,
+            "extracted_credits": extracted_credits,
+            "debit_gap": None,
+            "credit_gap": None,
+        }
+
+    official_debits = round(
+        abs(float(official.get("debit_total") or 0)),
+        2,
+    )
+    official_credits = round(
+        abs(float(official.get("credit_total") or 0)),
+        2,
+    )
 
     debit_gap = round(official_debits - extracted_debits, 2)
     credit_gap = round(official_credits - extracted_credits, 2)
 
-    # Do not adjust for tiny rounding/FX/OCR differences.
-    debit_threshold = max(2.0, official_debits * 0.03)
-    credit_threshold = max(2.0, official_credits * 0.03)
+    debit_tolerance = max(1.0, official_debits * 0.001)
+    credit_tolerance = max(1.0, official_credits * 0.001)
 
-    if debit_gap <= debit_threshold and credit_gap <= credit_threshold:
-        debug_log(
-            "TX_RECONCILE: official_totals_close",
-            {
-                "official_debits": official_debits,
-                "extracted_debits": extracted_debits,
-                "official_credits": official_credits,
-                "extracted_credits": extracted_credits,
-            },
-        )
-        return transactions
-
-    date = None
-    for tx in reversed(transactions):
-        if tx.get("date") and tx.get("date") != "unknown":
-            date = tx.get("date")
-            break
-
-    date = date or f"{detect_document_year(text)}-01-01"
-
-    reconciled = list(transactions)
-
-    if debit_gap > debit_threshold:
-        reconciled.append({
-            "date": date,
-            "description": "Official statement debit total reconciliation",
-            "amount": -abs(debit_gap),
-            "type": "expense",
-            "currency": detected_currency,
-            "category_hint": "reconciliation",
-        })
-
-    if credit_gap > credit_threshold:
-        reconciled.append({
-            "date": date,
-            "description": "Official statement credit total reconciliation",
-            "amount": abs(credit_gap),
-            "type": "income",
-            "currency": detected_currency,
-            "category_hint": "reconciliation",
-        })
-
-    debug_log(
-        "TX_RECONCILE: official_totals_applied",
-        {
-            "official_debits": official_debits,
-            "extracted_debits": extracted_debits,
-            "debit_gap": debit_gap,
-            "official_credits": official_credits,
-            "extracted_credits": extracted_credits,
-            "credit_gap": credit_gap,
-        },
+    reconciled = (
+        abs(debit_gap) <= debit_tolerance
+        and abs(credit_gap) <= credit_tolerance
     )
 
-    return reconciled
+    result = {
+        "status": "reconciled" if reconciled else "unreconciled",
+        "currency": detected_currency,
+        "official_debits": official_debits,
+        "official_credits": official_credits,
+        "extracted_debits": extracted_debits,
+        "extracted_credits": extracted_credits,
+        "debit_gap": debit_gap,
+        "credit_gap": credit_gap,
+        "source": official.get("source"),
+    }
+
+    debug_log("TX_RECONCILE: official_totals_compared", result)
+    return result
 
 
 def extract_wallet_tabular_transactions(
@@ -11116,61 +11153,25 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
 
 
 def parse_global_money_amount(raw_amount):
-    """Global EN/FR/AR money parser.
-    Handles:
-    - 1,598.07 => 1598.07
-    - 3 982,55 => 3982.55
-    - 2.650.000 => 2650000
-    - 110.000 => 110000 for XAF/FCFA-style statements
-    """
-    import re
+    """Parse a monetary value without imposing one country's number format.
 
-    s = str(raw_amount or "").strip()
-    if not s:
+    The generic parser handles international decimal and thousands separators.
+    CFA-specific parsing is used only when the value explicitly carries an
+    XAF, XOF, FCFA or F.CFA marker.
+    """
+    raw = str(raw_amount or "").strip()
+    if not raw:
         return 0.0
 
-    s = (
-        s.replace("\u00a0", " ")
-         .replace("F.CFA", "")
-         .replace("FCFA", "")
-         .replace("XAF", "")
-         .replace("€", "")
-         .replace("$", "")
-         .replace("£", "")
-         .strip()
-    )
-
-    sign = -1 if s.startswith("-") else 1
-    s = s.replace("-", "").strip()
-    s = re.sub(r"\s+", "", s)
-
-    # Arabic decimal separators
-    s = s.replace("٬", ",").replace("٫", ".")
-
-    # 2.650.000 / 15.598.000 => thousands dots
-    if re.fullmatch(r"\d{1,3}(?:\.\d{3}){1,}", s):
-        return sign * float(s.replace(".", ""))
-
-    # 1,598.07 => US thousands comma + decimal dot
-    if re.fullmatch(r"\d{1,3}(?:,\d{3})+\.\d{2}", s):
-        return sign * float(s.replace(",", ""))
-
-    # 3 982,55 already spaces removed => 3982,55
-    if re.fullmatch(r"\d+,\d{2}", s):
-        return sign * float(s.replace(",", "."))
-
-    # 1.021 may be FCFA thousands if 3 digits after dot and no decimal cents context
-    if re.fullmatch(r"\d{1,3}\.\d{3}", s):
-        return sign * float(s.replace(".", ""))
+    normalized = normalize_arabic_digits(raw)
+    upper = normalized.upper()
 
     try:
-        return sign * float(s.replace(",", ""))
-    except Exception:
-        nums = re.findall(r"\d+", s)
-        if not nums:
-            return 0.0
-        return sign * float("".join(nums))
-
+        if re.search(r"\b(?:XAF|XOF|FCFA)\b|F\s*\.?\s*CFA", upper):
+            return parse_amount_cfa(normalized)
+        return parse_amount(normalized)
+    except (TypeError, ValueError):
+        return 0.0
 
 
 def parse_global_date_boundary_ledger(text: str) -> list[dict]:
@@ -12146,7 +12147,9 @@ def parse_debit_credit_column_ledger(text: str) -> list[dict]:
 
     date_re = re.compile(r"^\s*(?P<date>\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\s+(?P<body>.+)$")
     amount_re = re.compile(
-        r"(?<![\w])(?:\d{1,3}(?:[ .,\u00a0]\d{3})+|\d+[.,]\d{2})(?![\w])"
+        r"(?<![\w])(?:\d{1,3}(?:[ .,\u00a0]\d{3})+|\d+[.,]\d{2})"
+        r"(?:\s*(?:XAF|XOF|FCFA|F\.?\s*CFA))?(?![\w])",
+        re.IGNORECASE,
     )
 
     income_words = [
@@ -12636,7 +12639,7 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
         and "date transaction debit credit balance" in compact_low
     ):
         return []
-   
+
 
     if "creditmutuel.fr" in low or "crédit mutuel" in low or "credit mutuel" in low:
         return []
@@ -12874,6 +12877,530 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
     return txs
 
 
+
+# RUNEXA_INTERNATIONAL_STRUCTURAL_SUMMARY_V1
+# Standard international FR / EN / AR official-summary extraction.
+# Structural only: no bank-name routing and no synthetic transactions.
+
+INTERNATIONAL_SUMMARY_LABEL_GROUPS = {
+    "deposits": [
+        # EN
+        "total deposits",
+        "total deposit",
+        "total credits",
+        "total credit",
+        "total money in",
+        "total incoming",
+        "deposits and credits",
+        "credits and deposits",
+
+        # FR
+        "total des crédits",
+        "total des credits",
+        "total crédits",
+        "total credits",
+        "total des versements",
+        "total versements",
+        "total des entrées",
+        "total des entrees",
+        "total entrées",
+        "total entrees",
+
+        # AR
+        "إجمالي الإيداعات",
+        "اجمالي الإيداعات",
+        "إجمالي الايداعات",
+        "اجمالي الايداعات",
+        "إجمالي الدائن",
+        "اجمالي الدائن",
+        "إجمالي المبالغ الدائنة",
+        "اجمالي المبالغ الدائنة",
+        "مجموع الإيداعات",
+        "مجموع الايداعات",
+        "مجموع الدائن",
+    ],
+
+    "withdrawals": [
+        # EN
+        "total outgoings",
+        "total outgoing",
+        "total withdrawals",
+        "total withdrawal",
+        "total debits",
+        "total debit",
+        "total money out",
+        "withdrawals and debits",
+        "debits and withdrawals",
+
+        # FR
+        "total des débits",
+        "total des debits",
+        "total débits",
+        "total debits",
+        "total des retraits",
+        "total retraits",
+        "total des sorties",
+        "total sorties",
+
+        # AR
+        "إجمالي السحوبات",
+        "اجمالي السحوبات",
+        "إجمالي المدين",
+        "اجمالي المدين",
+        "إجمالي المبالغ المدينة",
+        "اجمالي المبالغ المدينة",
+        "مجموع السحوبات",
+        "مجموع المدين",
+    ],
+
+    "opening_balance": [
+        # EN
+        "opening balance",
+        "beginning balance",
+        "starting balance",
+        "balance brought forward",
+        "previous balance",
+
+        # FR
+        "solde initial",
+        "solde d'ouverture",
+        "solde ouverture",
+        "solde précédent",
+        "solde precedent",
+        "ancien solde",
+
+        # AR
+        "الرصيد الافتتاحي",
+        "الرصيد السابق",
+        "رصيد أول المدة",
+        "رصيد اول المدة",
+    ],
+
+    "ending_balance": [
+        # EN
+        "closing balance",
+        "ending balance",
+        "final balance",
+        "balance carried forward",
+        "current balance",
+
+        # FR
+        "solde final",
+        "solde de clôture",
+        "solde de cloture",
+        "nouveau solde",
+        "solde à nouveau",
+        "solde a nouveau",
+
+        # AR
+        "الرصيد الختامي",
+        "الرصيد النهائي",
+        "رصيد الإقفال",
+        "رصيد الاقفال",
+    ],
+}
+
+
+INTERNATIONAL_SUMMARY_MONEY_RE = re.compile(
+    r"(?<![\dA-Za-z])"
+    r"(?P<sign>[+\-−–]?)\s*"
+    r"(?:"
+    r"(?:USD|EUR|GBP|CAD|AUD|MAD|SAR|QAR|AED|DZD|TND|EGP|"
+    r"JOD|KWD|BHD|OMR|CHF|JPY|CNY|INR|TRY|NGN|ZAR)\s*"
+    r")?"
+    r"(?:[$£€¥₹]\s*)?"
+    r"(?P<amount>"
+    r"(?:\d{1,3}(?:[ ,.\u00a0\u202f]\d{3})+|\d+)"
+    r"(?:[.,]\d{2,3})"
+    r")"
+    r"(?![\dA-Za-z])",
+    re.IGNORECASE,
+)
+
+
+def normalize_international_summary_line(line: str) -> str:
+    value = normalize_arabic_digits(str(line or ""))
+    value = unicodedata.normalize("NFKC", value)
+    value = (
+        value
+        .replace("\xa0", " ")
+        .replace("\u202f", " ")
+        .replace("−", "-")
+        .replace("–", "-")
+    )
+    value = re.sub(r"\s+", " ", value)
+    return value.strip()
+
+
+def normalize_international_summary_label(line: str) -> str:
+    value = normalize_international_summary_line(line).lower()
+    value = unicodedata.normalize("NFKD", value)
+    value = "".join(
+        character
+        for character in value
+        if not unicodedata.combining(character)
+    )
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def extract_international_summary_money_values(
+    line: str,
+) -> list[dict]:
+    normalized = normalize_international_summary_line(line)
+    values: list[dict] = []
+
+    for match in INTERNATIONAL_SUMMARY_MONEY_RE.finditer(normalized):
+        try:
+            value = parse_amount(match.group("amount"))
+        except Exception:
+            continue
+
+        sign = match.group("sign")
+
+        if sign in {"-", "−", "–"}:
+            value = -abs(value)
+        else:
+            value = abs(value)
+
+        values.append({
+            "value": round(value, 2),
+            "start": match.start(),
+            "end": match.end(),
+            "raw": match.group(0),
+        })
+
+    return values
+
+
+def is_probable_international_transaction_row(line: str) -> bool:
+    """Reject dated ledger rows when looking around a summary label."""
+    normalized = normalize_international_summary_line(line)
+
+    if extract_date(normalized) is not None:
+        return True
+
+    lower = normalize_international_summary_label(normalized)
+
+    transaction_markers = [
+        # EN
+        "card payment",
+        "direct debit",
+        "cash withdrawal",
+        "atm withdrawal",
+        "purchase",
+        "transfer sent",
+        "outgoing transfer",
+
+        # FR
+        "paiement carte",
+        "prelevement",
+        "prélèvement",
+        "retrait",
+        "virement emis",
+        "virement émis",
+
+        # AR
+        "شراء",
+        "سحب",
+        "خصم",
+        "دفع",
+        "تحويل صادر",
+        "حوالة صادرة",
+    ]
+
+    return any(marker in lower for marker in transaction_markers)
+
+
+def find_international_summary_amount_near_label(
+    lines: list[str],
+    label_index: int,
+) -> tuple[float | None, float, int | None]:
+    """
+    Search same line, previous line, next line, then distance two.
+
+    This supports:
+        amount -> label
+        label -> amount
+        label + amount on same line
+    """
+    search_plan = [
+        (0, 1.00),
+        (-1, 0.96),
+        (1, 0.94),
+        (-2, 0.82),
+        (2, 0.80),
+    ]
+
+    for offset, confidence in search_plan:
+        candidate_index = label_index + offset
+
+        if candidate_index < 0 or candidate_index >= len(lines):
+            continue
+
+        candidate_line = lines[candidate_index]
+
+        if (
+            offset != 0
+            and is_probable_international_transaction_row(candidate_line)
+        ):
+            continue
+
+        amounts = extract_international_summary_money_values(
+            candidate_line
+        )
+
+        if not amounts:
+            continue
+
+        # A neighboring summary line should normally contain one amount.
+        # If several exist, use the last visible amount only as a candidate;
+        # parallel debit/credit headers are handled separately below.
+        return (
+            amounts[-1]["value"],
+            confidence,
+            candidate_index,
+        )
+
+    return None, 0.0, None
+
+
+def extract_international_neighbor_summary_candidates(
+    text: str,
+) -> list[dict]:
+    lines = [
+        normalize_international_summary_line(line)
+        for line in str(text or "").splitlines()
+        if normalize_international_summary_line(line)
+    ]
+
+    normalized_groups = {
+        field: [
+            normalize_international_summary_label(label)
+            for label in labels
+        ]
+        for field, labels in INTERNATIONAL_SUMMARY_LABEL_GROUPS.items()
+    }
+
+    candidates: list[dict] = []
+
+    for line_index, line in enumerate(lines):
+        normalized_line = normalize_international_summary_label(line)
+
+        for field, labels in normalized_groups.items():
+            matched_label = next(
+                (
+                    label
+                    for label in labels
+                    if label and label in normalized_line
+                ),
+                None,
+            )
+
+            if matched_label is None:
+                continue
+
+            value, confidence, amount_line_index = (
+                find_international_summary_amount_near_label(
+                    lines,
+                    line_index,
+                )
+            )
+
+            if value is None:
+                continue
+
+            if field in {"deposits", "withdrawals"}:
+                value = abs(value)
+
+            candidates.append({
+                "field": field,
+                "value": round(value, 2),
+                "confidence": confidence,
+                "source": "international_neighbor_label",
+                "label": line,
+                "line_index": line_index,
+                "amount_line_index": amount_line_index,
+            })
+
+    return candidates
+
+
+def extract_international_parallel_summary_candidates(
+    text: str,
+) -> list[dict]:
+    """
+    Handle structures such as:
+
+        Total debits        Total credits
+        8,284.39            8,957.42
+
+    Works with FR / EN / AR labels.
+    """
+    lines = [
+        normalize_international_summary_line(line)
+        for line in str(text or "").splitlines()
+        if normalize_international_summary_line(line)
+    ]
+
+    normalized_withdrawal_labels = [
+        normalize_international_summary_label(label)
+        for label in INTERNATIONAL_SUMMARY_LABEL_GROUPS["withdrawals"]
+    ]
+    normalized_deposit_labels = [
+        normalize_international_summary_label(label)
+        for label in INTERNATIONAL_SUMMARY_LABEL_GROUPS["deposits"]
+    ]
+
+    candidates: list[dict] = []
+
+    for index, header_line in enumerate(lines):
+        header = normalize_international_summary_label(header_line)
+
+        has_withdrawal_label = any(
+            label in header
+            for label in normalized_withdrawal_labels
+        )
+        has_deposit_label = any(
+            label in header
+            for label in normalized_deposit_labels
+        )
+
+        if not (has_withdrawal_label and has_deposit_label):
+            continue
+
+        for values_index in (index, index + 1, index + 2):
+            if values_index >= len(lines):
+                continue
+
+            values_line = lines[values_index]
+
+            if (
+                values_index != index
+                and is_probable_international_transaction_row(values_line)
+            ):
+                continue
+
+            values = extract_international_summary_money_values(
+                values_line
+            )
+
+            if len(values) < 2:
+                continue
+
+            candidates.extend([
+                {
+                    "field": "withdrawals",
+                    "value": round(abs(values[0]["value"]), 2),
+                    "confidence": 0.98,
+                    "source": "international_parallel_summary",
+                    "label": header_line,
+                    "line_index": index,
+                    "amount_line_index": values_index,
+                },
+                {
+                    "field": "deposits",
+                    "value": round(abs(values[1]["value"]), 2),
+                    "confidence": 0.98,
+                    "source": "international_parallel_summary",
+                    "label": header_line,
+                    "line_index": index,
+                    "amount_line_index": values_index,
+                },
+            ])
+            break
+
+    return candidates
+
+
+def select_international_official_summary(
+    candidates: list[dict],
+) -> dict:
+    selected: dict = {}
+    evidence: dict = {}
+
+    for field in (
+        "opening_balance",
+        "deposits",
+        "withdrawals",
+        "ending_balance",
+    ):
+        field_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate.get("field") == field
+        ]
+
+        if not field_candidates:
+            continue
+
+        best = max(
+            field_candidates,
+            key=lambda candidate: (
+                float(candidate.get("confidence") or 0),
+                -abs(
+                    int(candidate.get("line_index") or 0)
+                    - int(candidate.get("amount_line_index") or 0)
+                ),
+            ),
+        )
+
+        selected[field] = round(float(best["value"]), 2)
+        evidence[field] = {
+            "source": best.get("source"),
+            "confidence": best.get("confidence"),
+            "label": best.get("label"),
+            "line_index": best.get("line_index"),
+            "amount_line_index": best.get("amount_line_index"),
+        }
+
+    # Avoid returning an object containing only one weak balance candidate.
+    movement_fields = {
+        field
+        for field in ("deposits", "withdrawals")
+        if selected.get(field) is not None
+    }
+
+    balance_fields = {
+        field
+        for field in ("opening_balance", "ending_balance")
+        if selected.get(field) is not None
+    }
+
+    if not movement_fields and len(balance_fields) < 2:
+        return {}
+
+    selected["source"] = "international_structural_summary"
+    selected["evidence"] = evidence
+
+    return selected
+
+
+def extract_international_official_summary(
+    text: str,
+) -> dict:
+    candidates: list[dict] = []
+
+    candidates.extend(
+        extract_international_parallel_summary_candidates(text)
+    )
+    candidates.extend(
+        extract_international_neighbor_summary_candidates(text)
+    )
+
+    result = select_international_official_summary(candidates)
+
+    if result:
+        _finance_log_once(
+            "INTERNATIONAL_STRUCTURAL_SUMMARY_EXTRACTED",
+            result,
+        )
+
+    return result
+
+
+
+_OFFICIAL_SUMMARY_CACHE: dict[str, dict] = {}
+
 def extract_global_statement_summary(text: str) -> dict:
     """Global FR/EN/AR statement summary extractor.
     Additive only: does not affect transaction extraction.
@@ -12881,6 +13408,26 @@ def extract_global_statement_summary(text: str) -> dict:
     import re
 
     raw = normalize_arabic_digits(str(text or ""))
+
+    # RUNEXA_OFFICIAL_SUMMARY_CACHE_READ_V2
+    cache_key = raw
+    cached_summary = _OFFICIAL_SUMMARY_CACHE.get(cache_key)
+
+    if cached_summary is not None:
+        return dict(cached_summary)
+
+    # RUNEXA_CALL_INTERNATIONAL_STRUCTURAL_SUMMARY_V1
+    international_summary = extract_international_official_summary(raw)
+
+    if international_summary:
+        _finance_log_once(
+            "STATEMENT_SUMMARY_EXTRACTED",
+            international_summary,
+        )
+        # RUNEXA_OFFICIAL_SUMMARY_CACHE_WRITE_V2
+        _OFFICIAL_SUMMARY_CACHE[cache_key] = dict(international_summary)
+        return dict(international_summary)
+
 
     # Commerce/sectioned account-summary totals.
     commerce_block_match = re.search(
@@ -12917,37 +13464,37 @@ def extract_global_statement_summary(text: str) -> dict:
         if ending is not None:
             out["ending_balance"] = ending
 
-        print("STATEMENT_SUMMARY_EXTRACTED", out)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", out)
         return out
 
     td_summary = extract_td_account_summary(text)
     if td_summary:
         print("TD_ACCOUNT_SUMMARY_EARLY_RETURN", td_summary)
-        print("STATEMENT_SUMMARY_EXTRACTED", td_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", td_summary)
         return td_summary
 
     checking_summary = extract_standard_checking_statement_summary(text)
     if checking_summary:
         print("STANDARD_CHECKING_SUMMARY_EARLY_RETURN", checking_summary)
-        print("STATEMENT_SUMMARY_EXTRACTED", checking_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", checking_summary)
         return checking_summary
 
     cc_summary = extract_credit_card_statement_summary(text)
     if cc_summary:
         print("CREDIT_CARD_SUMMARY_EARLY_RETURN", cc_summary)
-        print("STATEMENT_SUMMARY_EXTRACTED", cc_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", cc_summary)
         return cc_summary
 
     cbq_summary = extract_cbq_running_balance_summary(text)
     if cbq_summary:
         print("CBQ_RUNNING_BALANCE_SUMMARY_EARLY_RETURN", cbq_summary)
-        print("STATEMENT_SUMMARY_EXTRACTED", cbq_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", cbq_summary)
         return cbq_summary
 
     official_summary = extract_official_statement_movement_summary(text)
     if official_summary:
         print("OFFICIAL_MOVEMENT_SUMMARY_EARLY_RETURN", official_summary)
-        print("STATEMENT_SUMMARY_EXTRACTED", official_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", official_summary)
         return official_summary
 
     flat = re.sub(r"\s+", " ", raw)
@@ -12983,7 +13530,7 @@ def extract_global_statement_summary(text: str) -> dict:
                 official.update(official_summary)
                 print("OFFICIAL_MOVEMENT_SUMMARY_OVERRIDE", official)
 
-            print("STATEMENT_SUMMARY_EXTRACTED", official)
+            _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", official)
             return official
 
     money = (
@@ -13060,7 +13607,7 @@ def extract_global_statement_summary(text: str) -> dict:
 
     if out:
 
-        print("STATEMENT_SUMMARY_EXTRACTED", out)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", out)
 
     return out
 
@@ -13206,7 +13753,7 @@ def parse_anb_arabic_amount_balance_statement(text: str) -> list[dict]:
         if key in seen:
             continue
         seen.add(key)
-        
+
 
         if ocr_amount_fix and abs(signed) >= 1000:
             fixed_abs = round(abs(parse_amount(ocr_amount_fix.group(1))), 2)
@@ -15102,7 +15649,7 @@ def parse_sg_date_valeur_nature_debit_credit_statement(text: str) -> list[dict]:
 
         for j, (tx_type, signed) in enumerate(items):
             key = (iso, round(signed, 2), tx_type, desc[:120])
-            
+
             if key in seen:
                 continue
             seen.add(key)
@@ -16753,9 +17300,10 @@ def _score_finance_candidate(parser_name: str, txs: list[dict], statement_summar
 
     absurd_penalty = 0
 
-    # Hard OCR/reference sanity guard.
-    if max_tx_abs > 250000 or ledger_total > 1000000:
-        absurd_penalty += 100000000
+    # Monetary magnitude alone is not a universal anomaly signal.
+    # Candidate plausibility must be evaluated using statement-relative
+    # controls such as official totals, balance continuity, duplicates,
+    # transaction typing and structural consistency.
 
     duplicate_penalty = max(0, len(txs) - len({
         (
@@ -16869,7 +17417,12 @@ def _summary_looks_inconsistent_with_candidates(statement_summary: dict | None, 
     return False
 
 
-def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
+def _choose_finance_candidate(
+    candidates: list[dict],
+    *,
+    emit_selection_logs: bool = True,
+) -> dict | None:
+    # RUNEXA_SILENT_CORE_CHOOSE_V1
     valid = [c for c in candidates if c and c.get("count", 0) >= 3]
     if not valid:
         return None
@@ -16921,15 +17474,17 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
     ]
 
     if official_like:
-        print("FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER", [
-            {
-                "parser": c.get("parser"),
-                "income_gap": c.get("income_gap"),
-                "expense_gap": c.get("expense_gap"),
-                "score": c.get("score"),
-            }
-            for c in official_like
-        ])
+        if emit_selection_logs:
+            print("FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER", [
+                {
+                    "parser": c.get("parser"),
+                    "income_gap": c.get("income_gap"),
+                    "expense_gap": c.get("expense_gap"),
+                    "score": c.get("score"),
+                }
+                for c in official_like
+            ])
+
         valid = official_like
 
     official_accept_tolerance = max(RUNEXA_STRICT_TOLERANCE, 1.0)
@@ -16942,7 +17497,7 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
         and float(c.get("expense_gap") or 0) <= official_accept_tolerance
     ]
     if exact_official:
-        return max(exact_official, key=lambda c: (c["score"], c["count"]))
+        return min(exact_official, key=lambda c: (c["score"], -c["count"]))
 
     official_candidates = [
         c for c in valid
@@ -16951,16 +17506,16 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
     ]
 
     if official_candidates:
-        print("NO_EXACT_OFFICIAL_FINANCE_CANDIDATE", [
-            {
-                "parser": c.get("parser"),
-                "income_gap": c.get("income_gap"),
-                "expense_gap": c.get("expense_gap"),
-                "score": c.get("score"),
-            }
-            for c in official_candidates
-        ])
-        pass
+        if emit_selection_logs:
+            print("NO_EXACT_OFFICIAL_FINANCE_CANDIDATE", [
+                {
+                    "parser": c.get("parser"),
+                    "income_gap": c.get("income_gap"),
+                    "expense_gap": c.get("expense_gap"),
+                    "score": c.get("score"),
+                }
+                for c in official_candidates
+            ])
 
     # Default historical behavior: lower score wins.
     best = sorted(valid, key=lambda c: (c["score"], -c["count"]))[0]
@@ -17599,7 +18154,12 @@ def parse_riyad_position_lines_statement(text: str) -> list[dict]:
 
 
 
-def _runexa_core_extract_transactions(text: str) -> list[dict]:
+def _runexa_core_extract_transactions(
+    text: str,
+    *,
+    emit_selection_logs: bool = True,
+) -> list[dict]:
+    # RUNEXA_SINGLE_AUTHORITATIVE_SELECTION_V1
     statement_summary = extract_global_statement_summary(text)
 
     # Candidate engine:
@@ -17623,13 +18183,13 @@ def _runexa_core_extract_transactions(text: str) -> list[dict]:
         ("tnd_ocr_date_label_reference_value_amount", parse_tnd_ocr_date_label_reference_value_amount_statement, 3),
         ("acme_business_checking", parse_acme_business_checking_statement, 3),
         ("bbva_usa_checking_summary", parse_bbva_usa_checking_summary_statement, 2),
-        
+
         ("keybank_hassle_free", parse_keybank_hassle_free_statement, 3),
         ("attijariwafa_debit_credit", parse_attijariwafa_debit_credit_statement, 3),
         ("orange_bank_fr", parse_orange_bank_fr_statement, 2),
         ("cic_position_lines", parse_cic_position_lines_statement, 5),
         ("commbank_smart_access", parse_commbank_smart_access_statement, 10),
-        
+
         ("date_description_withdrawal_deposit_balance", parse_date_description_withdrawal_deposit_balance_statement, 3),
         ("brac_withdraw_deposit_balance", parse_brac_withdraw_deposit_balance_statement, 2),
         ("arabic_sar_balance_credit_debit", parse_arabic_sar_balance_credit_debit_statement, 3),
@@ -17683,22 +18243,26 @@ def _runexa_core_extract_transactions(text: str) -> list[dict]:
                 for c in candidates
             ]
 
-        print("FINANCE_CANDIDATE_AUDIT", [
-            {
-                "parser": c["parser"],
-                "count": c["count"],
-                "income_total": c["income_total"],
-                "expense_total": c["expense_total"],
-                "income_gap": c["income_gap"],
-                "expense_gap": c["expense_gap"],
-                "ledger_total": c.get("ledger_total"),
-                "max_tx_abs": c.get("max_tx_abs"),
-                "score": c["score"],
-            }
-            for c in candidates
-        ])
+        if emit_selection_logs:
+            print("FINANCE_CANDIDATE_AUDIT", [
+                {
+                    "parser": c["parser"],
+                    "count": c["count"],
+                    "income_total": c["income_total"],
+                    "expense_total": c["expense_total"],
+                    "income_gap": c["income_gap"],
+                    "expense_gap": c["expense_gap"],
+                    "ledger_total": c.get("ledger_total"),
+                    "max_tx_abs": c.get("max_tx_abs"),
+                    "score": c["score"],
+                }
+                for c in candidates
+            ])
 
-        best = _choose_finance_candidate(candidates)
+        best = _choose_finance_candidate(
+            candidates,
+            emit_selection_logs=emit_selection_logs,
+        )
         if best:
             if best.get("parser") == "bred_position_lines" and statement_summary:
                 income_gap = abs(float(best.get("income_gap") or 0))
@@ -17723,16 +18287,19 @@ def _runexa_core_extract_transactions(text: str) -> list[dict]:
 
                     return []
 
-            print("STATEMENT_LAYOUT_DETECTED", best["parser"])
-            print("FINANCE_CANDIDATE_SELECTED", {
-                "parser": best["parser"],
-                "transactions": best["count"],
-                "income_total": best["income_total"],
-                "expense_total": best["expense_total"],
-                "income_gap": best["income_gap"],
-                "expense_gap": best["expense_gap"],
-                "score": best["score"],
-            })
+            if emit_selection_logs:
+                print("STATEMENT_LAYOUT_DETECTED", best["parser"])
+                print("FINANCE_CANDIDATE_SELECTED", {
+                    "parser": best["parser"],
+                    "transactions": best["count"],
+                    "income_total": best["income_total"],
+                    "expense_total": best["expense_total"],
+                    "income_gap": best["income_gap"],
+                    "expense_gap": best["expense_gap"],
+                    "score": best["score"],
+                    "selection_scope": "core_internal",
+                })
+
             return best["transactions"]
 
     txs = parse_money_out_money_in_balance_ledger(text)
@@ -17798,7 +18365,7 @@ def _runexa_core_extract_transactions(text: str) -> list[dict]:
                 "action": "skip_composite_mixed_period_pdf",
             })
             return []
-        
+
     typed_transactions = extract_typed_amount_balance_table_transactions(
         text,
         locals().get("detected_currency") or detect_currency(text),
@@ -20978,41 +21545,3662 @@ def parse_cic_pdf_positions(path) -> list[dict]:
     return txs
 
 
-def extract_transactions_from_pdf_path(path: str, text: str | None = None) -> list[dict]:
-    from pathlib import Path
 
-    p = Path(path)
 
-    if p.name.lower() == "cic.pdf":
-        return parse_cic_pdf_positions(p)
+def _universal_missing_layout_fallback(text: str) -> list[dict]:
+    """Conservative bank-agnostic fallback used only after all validated parsers fail.
 
-    return extract_transactions(text or "")
+    Handles common international layouts based on structural signals rather than
+    bank names: date/description/amount/balance rows, debit-credit tables,
+    sectioned additions/payments, and simple wallet ledgers.
+    """
+    raw = normalize_statement_text(text or "")
+    lines = [re.sub(r"\s+", " ", x).strip() for x in raw.splitlines() if x.strip()]
+    if not lines:
+        return []
+
+    money_pat = r"[+-]?\$?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})|[+-]?\$?\s*\d+\.\d{2}"
+    date_patterns = [
+        r"(?P<d>\d{1,2})/(?P<m>\d{1,2})(?:/(?P<y>\d{2,4}))?",
+        r"(?P<d>\d{1,2})-(?P<mon>[A-Za-z]{3})-(?P<y>\d{2,4})",
+        r"(?P<d>\d{1,2})\s+(?P<mon>[A-Za-z]{3})\s+(?P<y>\d{2,4})",
+    ]
+    month_map = {m.lower(): i for i, m in enumerate(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], 1)}
+    years = [int(y) for y in re.findall(r"\b(20\d{2})\b", raw)]
+    short_years = [2000 + int(y) for y in re.findall(r"\b\d{1,2}[/-]\d{1,2}[/-](\d{2})\b", raw)]
+    all_years = years + short_years
+    default_year = Counter(all_years).most_common(1)[0][0] if all_years else datetime.now().year
+    slash_month_first = bool((re.search(r"statement (?:date|number)|page \d+ of \d+|amount\s+balance", raw, re.I) or re.search(r"additions|payments online", raw, re.I)) and ('$' in raw or 'USD' in raw))
+
+    def parse_date_prefix(line):
+        for pat in date_patterns:
+            m = re.match(r"^\s*" + pat + r"\b", line, re.I)
+            if not m:
+                continue
+            gd = m.groupdict(); y = gd.get('y')
+            year = int(y) if y else default_year
+            if year < 100: year += 2000
+            month = int(gd['m']) if gd.get('m') else month_map.get(gd.get('mon','').lower())
+            day = int(gd['d'])
+            if gd.get('m') and slash_month_first:
+                day, month = month, day
+            try:
+                return f"{year:04d}-{month:02d}-{day:02d}", m.end()
+            except Exception:
+                return None, None
+        return None, None
+
+    def money(s):
+        return round(float(re.sub(r"[^0-9.\-+]", "", s)), 2)
+
+    currency = detect_currency(raw) or ('GBP' if 'GBP' in raw else 'USD')
+    if re.search(r'\bAUD\b|Australian', raw, re.I): currency = 'AUD'
+    txs = []
+    previous_balance = None
+    section_type = None
+
+    for line in lines:
+        low = line.lower()
+        if re.fullmatch(r"additions?", low):
+            section_type = 'income'; continue
+        if any(k in low for k in ['payments online and electronic banking', 'other withdrawals', 'withdrawals and debits']):
+            section_type = 'expense'; continue
+        if re.fullmatch(r"payments?", low):
+            section_type = 'expense'; continue
+
+        amounts = re.findall(money_pat, line)
+        if any(k in low for k in ['opening balance', 'beginning balance', 'brought forward', 'balance on']) and amounts:
+            try: previous_balance = money(amounts[-1])
+            except Exception: pass
+            continue
+        if any(k in low for k in ['closing balance', 'ending balance', 'carried forward', 'total debits', 'total credits']):
+            continue
+
+        iso, end = parse_date_prefix(line)
+        if not iso or not amounts:
+            # Wallet rows often put the date on the following line.
+            continue
+        # Avoid treating card-detail/value-date continuation rows as new transactions.
+        if re.match(r'^\d{1,2}/\d{1,2}\b', line) and section_type is None and len(amounts) < 2 and not any(ch in amounts[-1] for ch in '+-'):
+            continue
+
+        vals = [money(a) for a in amounts]
+        desc = line[end:].strip()
+        amount = None
+        balance = None
+
+        # Explicitly signed amount + running balance (common US layout).
+        signed = [v for a, v in zip(amounts, vals) if '-' in a or '+' in a]
+        if len(vals) >= 2 and signed:
+            amount, balance = vals[-2], vals[-1]
+        elif len(vals) >= 2:
+            balance = vals[-1]
+            candidate = vals[-2]
+            if previous_balance is not None:
+                delta = round(balance - previous_balance, 2)
+                if abs(abs(delta) - abs(candidate)) <= 0.02:
+                    amount = delta
+            if amount is None:
+                credit_words = ['credit', 'deposit', 'salary', 'refund', 'received', 'transfer - credit', 'virement reçu', 'دائن']
+                amount = abs(candidate) if any(k in low for k in credit_words) else -abs(candidate)
+        else:
+            candidate = vals[-1]
+            if section_type == 'income': amount = abs(candidate)
+            elif section_type == 'expense': amount = -abs(candidate)
+            else:
+                credit_words = ['credit', 'deposit', 'salary', 'refund', 'received', 'topped up', 'دائن']
+                amount = abs(candidate) if any(k in low for k in credit_words) else -abs(candidate)
+
+        if amount is None or abs(amount) < 0.005:
+            continue
+        if balance is not None:
+            previous_balance = balance
+        typ = 'income' if amount > 0 else 'expense'
+        txs.append({
+            'date': iso,
+            'description': re.sub(money_pat, ' ', desc).strip()[:500] or 'Bank transaction',
+            'amount': round(amount, 2),
+            'signed_amount': round(amount, 2),
+            'type': typ,
+            'currency': currency,
+            'locked_amount': round(amount, 2),
+            'locked_type': typ,
+            'parser_family': 'universal_structural_fallback',
+        })
+
+    # Simple wallet layout: description/amount/balance then date on next line.
+    if not txs and ('statement' in raw.lower() or 'balance' in raw.lower()):
+        for i, line in enumerate(lines[:-1]):
+            vals = re.findall(money_pat, line)
+            dm = re.match(r"^(\d{1,2})\s+([A-Za-z]{3,9})\s+(20\d{2})", lines[i+1])
+            if len(vals) >= 2 and dm:
+                mon = month_map.get(dm.group(2)[:3].lower())
+                if not mon: continue
+                iso = f"{int(dm.group(3)):04d}-{mon:02d}-{int(dm.group(1)):02d}"
+                amt = money(vals[-2])
+                typ = 'income' if amt > 0 else 'expense'
+                txs.append({'date':iso,'description':re.sub(money_pat,' ',line).strip()[:500],
+                    'amount':amt,'signed_amount':amt,'type':typ,'currency':currency,
+                    'locked_amount':amt,'locked_type':typ,'parser_family':'universal_wallet_fallback'})
+
+    return txs
+
+def extract_transactions_from_pdf_path(
+    path: str,
+    text: str | None = None,
+) -> list[dict]:
+    """Extract transactions without trusting the filename.
+
+    Specialized extraction must be activated by document content/structure in
+    the normal candidate pipeline, never by a user-controlled filename.
+    """
+    statement_text = text or ""
+    return extract_transactions(statement_text)
+
+
+
+def _extract_parallel_header_summary(text: str) -> dict | None:
+    """Extract a positional accounting summary from adjacent header/value rows.
+
+    The method is bank-neutral and supports EN/FR/AR labels. Values are mapped
+    by header order rather than nearest-label search, which prevents every
+    label on a shared header row from receiving the first amount. A malformed
+    printed closing balance does not erase trustworthy, explicitly positioned
+    credit/debit totals; accounting validity is reported separately.
+    """
+    lines = [" ".join(x.split()) for x in str(text or "").splitlines() if " ".join(x.split())]
+    label_sets = [
+        ("opening_balance", ("opening balance", "beginning balance", "solde initial", "solde précédent", "solde precedent", "الرصيد الافتتاحي", "رصيد افتتاحي")),
+        ("deposits", ("total credits", "credits", "deposits/additions", "argent entrant", "total des crédits", "total des credits", "إجمالي الدائن", "اجمالي الدائن")),
+        ("withdrawals", ("total debits", "debits", "withdrawals/subtractions", "argent sortant", "total des débits", "total des debits", "إجمالي المدين", "اجمالي المدين")),
+        ("ending_balance", ("closing balance", "ending balance", "solde final", "nouveau solde", "الرصيد الختامي", "رصيد الإغلاق")),
+    ]
+    # Summary rows sometimes contain one decimal because OCR drops the final
+    # digit. Accept 1-3 decimal places here, but never use this broad token for
+    # transaction parsing.
+    money_re = re.compile(
+        r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|(?:USD|EUR|GBP|AUD|CAD|JPY|SAR|AED|MAD)\s*)?"
+        r"(?:\d{1,3}(?:[,\u00a0 ]\d{3})+|\d+)(?:[.,]\d{1,3})(?![A-Za-z0-9])",
+        re.I,
+    )
+    for i, line in enumerate(lines):
+        low = line.casefold()
+        positions = []
+        for key, labels in label_sets:
+            candidates = [low.find(lbl.casefold()) for lbl in labels if lbl.casefold() in low]
+            pos = min(candidates) if candidates else -1
+            if pos >= 0:
+                positions.append((pos, key))
+        if len(positions) < 4:
+            continue
+        positions.sort()
+        # Values normally occur on the following physical line. Include two
+        # continuation lines because PDF extraction may split a wide table.
+        for j in range(i + 1, min(len(lines), i + 4)):
+            vals = []
+            for m in money_re.finditer(lines[j]):
+                try:
+                    vals.append(abs(float(parse_amount(m.group(0)))))
+                except Exception:
+                    pass
+            if len(vals) < 4:
+                continue
+            out = {positions[k][1]: round(vals[k], 2) for k in range(4)}
+            gap = abs(
+                out["opening_balance"] + out["deposits"]
+                - out["withdrawals"] - out["ending_balance"]
+            )
+            tolerance = max(1.0, abs(out["ending_balance"]) * 0.0001)
+            out["accounting_identity_valid"] = gap <= tolerance
+            out["accounting_identity_gap"] = round(gap, 2)
+            out["source"] = "parallel_accounting_header_values"
+            print("PARALLEL_ACCOUNTING_SUMMARY_EXTRACTED", out)
+            return out
+    return None
+
+def extract_universal_accounting_graph_rows(text: str, detected_currency: str | None = None) -> list[dict]:
+    """Reconstruct dated rows from movement/balance relationships.
+
+    The parser uses accounting invariants rather than bank names or language:
+    a printed balance transition must equal one of the monetary candidates in
+    the dated row/block. Single-amount rows are accepted only when multilingual
+    credit/debit semantics are explicit. This covers EN/FR/AR statements and
+    OCR that separates descriptions from amounts.
+    """
+    raw = normalize_arabic_digits(str(text or ''))
+    lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
+    date_re = re.compile(r"^(?P<d>(?:\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?|\d{1,2}\s*(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Z]*|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Z]*\s*\d{1,2}))\b", re.I)
+    money_re = re.compile(r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|(?:USD|EUR|GBP|AUD|CAD|JPY|SAR|AED|MAD)\s*)?\d{1,3}(?:[,\u00a0]\d{3})*(?:[.,]\d{1,2})|(?<![A-Za-z0-9])[-+]?\s*\d+[.,]\d{2}", re.I)
+    skip_re = re.compile(r"\b(?:opening|beginning|closing|ending|brought forward|carried forward|subtotal|sub total|totals?|summary|solde précédent|solde initial|solde final|الرصيد الافتتاحي|الرصيد الختامي)\b", re.I)
+    credit_re = re.compile(r"\b(?:deposit|credit|salary|refund|received|incoming|vir(?:ement)?\s+re[cç]u|versement|remboursement|d[ée]p[oô]t|دائن|إيداع|وارد|راتب)\b", re.I)
+    debit_re = re.compile(r"\b(?:withdrawal|debit|purchase|payment|fee|charge|transfer\s+to|direct debit|pr[ée]l[èe]vement|retrait|paiement|virement\s+[ée]mis|مدين|سحب|شراء|رسوم|تحويل صادر)\b", re.I)
+    year = detect_document_year(raw) or datetime.now().year
+    currency = detected_currency or detect_currency(raw)
+    blocks=[]; current=None
+    for line in lines:
+        m=date_re.match(line)
+        if m:
+            if current: blocks.append(current)
+            current={'date_raw':m.group('d'),'lines':[line]}
+        elif current:
+            if re.search(r"\b(?:transaction history|transaction details|date .*description|date .*debit|date .*credit)\b", line, re.I):
+                continue
+            current['lines'].append(line)
+            if len(current['lines'])>8: current['lines']=current['lines'][:8]
+    if current: blocks.append(current)
+    txs=[]; prev_balance=None
+    # Obtain opening balance from the first explicit opening row or summary.
+    summary=_extract_parallel_header_summary(raw) or _extract_authoritative_official_summary(raw)
+    if summary:
+        try: prev_balance=float(summary.get('opening_balance'))
+        except Exception: prev_balance=None
+    for idx,b in enumerate(blocks):
+        joined=' '.join(b['lines'])
+        if skip_re.search(joined):
+            vals=[]
+            for mm in money_re.finditer(joined):
+                try: vals.append(float(parse_amount(mm.group(0))))
+                except Exception: pass
+            if vals and re.search(r"\b(?:opening|beginning|brought forward|solde précédent|الرصيد الافتتاحي)\b", joined, re.I):
+                prev_balance=vals[-1]
+            continue
+        vals=[]
+        for mm in money_re.finditer(joined):
+            token=mm.group(0)
+            # Ignore date-like fragments and rates/percentages.
+            if '%' in token: continue
+            try: v=abs(float(parse_amount(token)))
+            except Exception: continue
+            vals.append(v)
+        if not vals: continue
+        signed=None; balance=None
+        if prev_balance is not None and len(vals)>=2:
+            # The last plausible value is generally the printed running balance.
+            for bal in reversed(vals):
+                delta=round(bal-prev_balance,2)
+                if abs(delta)<0.005: continue
+                candidates=vals[:-1] if bal==vals[-1] else [v for v in vals if v!=bal]
+                if any(abs(abs(delta)-v)<=0.02 for v in candidates):
+                    signed=delta; balance=bal; break
+        if signed is None:
+            # A single movement without printed balance: require semantic direction.
+            movement=vals[0]
+            is_credit=bool(credit_re.search(joined))
+            is_debit=bool(debit_re.search(joined))
+            if is_credit ^ is_debit:
+                signed=movement if is_credit else -movement
+                if prev_balance is not None: balance=round(prev_balance+signed,2)
+        if signed is None or abs(signed)<0.005: continue
+        try:
+            parsed=try_parse_date(b['date_raw'])
+            if parsed is None:
+                mshort = re.fullmatch(r"(\d{1,2})[/-](\d{1,2})", b['date_raw'])
+                if mshort:
+                    # Most international bank exports using slash dates are
+                    # month/day in North America and day/month elsewhere.
+                    month_first = bool(re.search(r"\b(?:wells fargo|bank of america|chase|citibank|united states|usa)\b", raw, re.I))
+                    a, z = int(mshort.group(1)), int(mshort.group(2))
+                    month, day = (a, z) if month_first else (z, a)
+                    parsed = datetime(year, month, day)
+                else:
+                    # compact DDMMM dates
+                    m2=re.match(r"(\d{1,2})\s*([A-Za-z]{3})", b['date_raw'])
+                    if not m2: continue
+                    parsed=datetime.strptime(f"{m2.group(1)} {m2.group(2)[:3]} {year}", "%d %b %Y")
+            date_iso=parsed.strftime('%Y-%m-%d')
+        except Exception:
+            continue
+        typ='income' if signed>0 else 'expense'
+        txs.append({'date':date_iso,'description':joined[:1000],'amount':round(signed,2),'signed_amount':round(signed,2),'locked_amount':round(signed,2),'_locked_amount':round(signed,2),'type':typ,'locked_type':typ,'currency':currency,'parser_family':'universal_accounting_graph_rows','source_row_id':f'accounting_graph:{idx}'})
+        if balance is not None: prev_balance=balance
+    if txs:
+        print('UNIVERSAL_ACCOUNTING_GRAPH_ROWS_EXTRACTED', {'transactions':len(txs),'income_total':round(sum(t['amount'] for t in txs if t['amount']>0),2),'expense_total':round(sum(-t['amount'] for t in txs if t['amount']<0),2)})
+    return txs
+
+def _extract_authoritative_official_summary(text: str) -> dict | None:
+    """Read only bank-printed summary values, never parser-derived totals.
+
+    The legacy summary function can reconcile missing/incorrect summary fields
+    from a transaction candidate. That behavior is useful for presentation but
+    must never be used to judge parser candidates because it creates a circular
+    proof. This guard temporarily disables candidate-derived reconciliation and
+    returns only values extracted from the statement itself.
+
+    This is bank-, country-, and language-neutral. It relies on the existing
+    multilingual EN/FR/AR label extraction and the accounting identity.
+    """
+    global _RUNEXA_IN_SUMMARY_DERIVATION
+
+    parallel = _extract_parallel_header_summary(text)
+    if parallel:
+        if _summary_is_reconciled(parallel):
+            return parallel
+        # The credit and debit totals are still authoritative when they are
+        # explicitly aligned under their headers, even if OCR corrupts the
+        # printed opening/closing balance. Derive only the closing value used
+        # internally for candidate reconciliation; retain the printed value
+        # for auditability.
+        try:
+            opening = float(parallel["opening_balance"])
+            deposits = abs(float(parallel["deposits"]))
+            withdrawals = abs(float(parallel["withdrawals"]))
+            derived = dict(parallel)
+            derived["printed_ending_balance"] = parallel.get("ending_balance")
+            derived["ending_balance"] = round(opening + deposits - withdrawals, 2)
+            derived["source"] = "parallel_accounting_header_totals_with_derived_closing"
+            print("POSITIONAL_SUMMARY_CLOSING_DERIVED_FOR_RECONCILIATION", derived)
+            return derived
+        except (KeyError, TypeError, ValueError):
+            pass
+
+    previous = _RUNEXA_IN_SUMMARY_DERIVATION
+    _RUNEXA_IN_SUMMARY_DERIVATION = True
+    try:
+        summary = extract_global_statement_summary(text) or {}
+    except Exception:
+        summary = {}
+    finally:
+        _RUNEXA_IN_SUMMARY_DERIVATION = previous
+
+    if not summary:
+        return None
+
+    cleaned = {}
+    for key in ("opening_balance", "deposits", "withdrawals", "ending_balance", "source"):
+        if key not in summary:
+            continue
+        if key == "source":
+            cleaned[key] = summary.get(key)
+            continue
+        try:
+            cleaned[key] = float(summary.get(key))
+        except (TypeError, ValueError):
+            pass
+
+    required = {"opening_balance", "deposits", "withdrawals", "ending_balance"}
+    if not required.issubset(cleaned):
+        return None
+
+    return cleaned
+
+
+def _summary_is_reconciled(summary: dict | None, tolerance: float = 1.0) -> bool:
+    """Validate official summary using the universal accounting identity.
+
+    Works for any bank/language once labels have been normalized:
+        opening + credits - debits = closing
+    """
+    if not summary:
+        return False
+    try:
+        opening = float(summary.get("opening_balance"))
+        credits = abs(float(summary.get("deposits")))
+        debits = abs(float(summary.get("withdrawals")))
+        closing = float(summary.get("ending_balance"))
+    except (TypeError, ValueError):
+        return False
+    return abs((opening + credits - debits) - closing) <= tolerance
+
+
+def _candidate_direction_collapse(candidate: dict, summary: dict | None) -> bool:
+    """Reject candidates that collapse all movements into one direction.
+
+    This is structural and international: when official credits and debits are
+    both material, a candidate with almost no income or almost no expenses is
+    not trustworthy, regardless of bank, country, or language.
+    """
+    if not summary:
+        return False
+    try:
+        expected_income = abs(float(summary.get("deposits") or 0))
+        expected_expense = abs(float(summary.get("withdrawals") or 0))
+        actual_income = abs(float(candidate.get("income_total") or 0))
+        actual_expense = abs(float(candidate.get("expense_total") or 0))
+    except (TypeError, ValueError):
+        return False
+    if expected_income <= 1 or expected_expense <= 1:
+        return False
+    income_floor = max(1.0, expected_income * 0.002)
+    expense_floor = max(1.0, expected_expense * 0.002)
+    return actual_income < income_floor or actual_expense < expense_floor
+
+
+def _candidate_matches_reconciled_summary(
+    candidate: dict,
+    summary: dict | None,
+    absolute_tolerance: float = 1.0,
+    relative_tolerance: float = 0.001,
+) -> bool:
+    if not _summary_is_reconciled(summary, absolute_tolerance):
+        return False
+    try:
+        expected_income = abs(float(summary.get("deposits")))
+        expected_expense = abs(float(summary.get("withdrawals")))
+        actual_income = abs(float(candidate.get("income_total") or 0))
+        actual_expense = abs(float(candidate.get("expense_total") or 0))
+    except (TypeError, ValueError):
+        return False
+    income_tol = max(absolute_tolerance, expected_income * relative_tolerance)
+    expense_tol = max(absolute_tolerance, expected_expense * relative_tolerance)
+    return (
+        abs(actual_income - expected_income) <= income_tol
+        and abs(actual_expense - expected_expense) <= expense_tol
+    )
+
+
+def _international_candidate_quality(candidate: dict, summary: dict | None) -> tuple:
+    """Bank-neutral quality ordering for parser candidates."""
+    txs = candidate.get("transactions") or []
+    invalid_dates = 0
+    untyped = 0
+    balances_as_amounts = 0
+    seen = set()
+    duplicates = 0
+
+    # Penalize candidates whose transaction descriptions look like document
+    # headers, customer-address blocks, legal notices or statement summaries.
+    # This is structural and institution-independent.
+    document_markers = (
+        "statement period",
+        "account number",
+        "customer service",
+        "equal housing",
+        "mortgage",
+        "page 1 of",
+        "page 2 of",
+        "page 3 of",
+        "terms and conditions",
+        "important information",
+        "annual percentage yield",
+        "interest earned",
+        "relevé de compte",
+        "releve de compte",
+        "numéro de compte",
+        "numero de compte",
+        "période du relevé",
+        "periode du releve",
+        "conditions générales",
+        "conditions generales",
+        "كشف الحساب",
+        "رقم الحساب",
+        "خدمة العملاء",
+    )
+    header_like_descriptions = 0
+    oversized_descriptions = 0
+
+    for tx in txs:
+        date = str(tx.get("date") or "")
+        if not re.fullmatch(r"20\d{2}-\d{2}-\d{2}", date):
+            invalid_dates += 1
+        if tx.get("type") not in {"income", "expense", "transfer"}:
+            untyped += 1
+        try:
+            amount = abs(float(tx.get("amount") or 0))
+            balance = tx.get("balance") if tx.get("balance") is not None else tx.get("_balance")
+            if balance is not None and abs(amount - abs(float(balance))) <= 0.01 and amount > 0:
+                balances_as_amounts += 1
+        except (TypeError, ValueError):
+            pass
+        description = str(tx.get("description") or "")
+        description_low = description.casefold()
+
+        marker_hits = sum(
+            1
+            for marker in document_markers
+            if marker in description_low
+        )
+
+        if marker_hits >= 2:
+            header_like_descriptions += 1
+
+        # Normal transaction descriptions may wrap across several lines, but
+        # descriptions containing hundreds of characters plus several document
+        # markers are usually page/header captures rather than ledger rows.
+        if len(description) > 700:
+            oversized_descriptions += 1
+
+        key = (
+            date,
+            round(float(tx.get("amount") or 0), 2),
+            description[:120],
+        )
+        if key in seen:
+            duplicates += 1
+        seen.add(key)
+
+    collapse = 1 if _candidate_direction_collapse(candidate, summary) else 0
+
+    count = int(candidate.get("count") or 0)
+
+    # A very small candidate made mostly of document/header material should not
+    # beat a substantially covered dated ledger merely because its numeric
+    # heuristic score is small.
+    header_capture_penalty = (
+        header_like_descriptions
+        + oversized_descriptions
+    )
+
+    sparse_header_candidate = 1 if (
+        count <= 2
+        and header_capture_penalty > 0
+    ) else 0
+
+    return (
+        collapse,
+        sparse_header_candidate,
+        header_capture_penalty,
+        balances_as_amounts,
+        duplicates,
+        untyped,
+        invalid_dates,
+        float(candidate.get("score") or 0),
+        -count,
+    )
+
+
+
+
+# SAFE_UNIVERSAL_MULTILINE_STRUCTURAL_LEDGER_V1
+# SAFE_UNIVERSAL_MULTILINE_STRUCTURAL_LEDGER_V1
+def _extract_universal_multiline_structural_ledger(
+    lines: list,
+) -> list[dict]:
+    """Reconstruct multiline ledger transactions from universal structure.
+
+    No bank, country, language, currency, filename or locale rules are used.
+    Ambiguous amount direction is accepted only when adjacent balances prove it.
+    """
+    import math
+    import re
+
+    def _audit_rejection(reason: str, **details) -> None:
+        print(
+            "UNIVERSAL_MULTILINE_STRUCTURAL_AUDIT",
+            {
+                "status": "rejected",
+                "reason": reason,
+                **details,
+            },
+        )
+
+    try:
+        if not isinstance(lines, list) or len(lines) < 2:
+            _audit_rejection(
+                "insufficient_input_lines",
+                input_type=type(lines).__name__,
+                line_count=(
+                    len(lines)
+                    if isinstance(lines, list)
+                    else None
+                ),
+            )
+            return []
+
+        date_re = re.compile(
+            r"(?<!\d)(?:"
+            r"\d{1,4}[./-]\d{1,2}[./-]\d{1,4}"
+            r"|"
+            r"\d{1,2}\s+[^\W\d_]{3,15}\s+\d{2,4}"
+            r")(?!\d)",
+            re.UNICODE,
+        )
+
+        number_re = re.compile(
+            r"(?<![\d.,])"
+            r"([+-]?"
+            r"(?:\d{1,3}(?:[ \u00a0\u202f,.'’]\d{3})+|\d+)"
+            r"(?:[.,]\d{1,4})?"
+            r")"
+            r"(?![\d.,])"
+        )
+
+        def _finite(value):
+            if value is None or isinstance(value, bool):
+                return None
+
+            try:
+                value = float(value)
+            except (TypeError, ValueError):
+                return None
+
+            return value if math.isfinite(value) else None
+
+        def _matches(left, right):
+            left = _finite(left)
+            right = _finite(right)
+
+            if left is None or right is None:
+                return False
+
+            scale = max(abs(left), abs(right), 1.0)
+
+            return abs(left - right) <= max(
+                1e-7,
+                scale * 1e-10,
+            )
+
+        def _text(line):
+            if isinstance(line, str):
+                return line.strip()
+
+            if not isinstance(line, dict):
+                return ""
+
+            for key in (
+                "text",
+                "raw_text",
+                "content",
+                "line",
+                "value",
+            ):
+                value = line.get(key)
+
+                if value is not None:
+                    return str(value).strip()
+
+            return ""
+
+        def _number_candidates(token):
+            token = str(token or "").strip()
+
+            if not token:
+                return []
+
+            negative = token.startswith("-")
+            positive = token.startswith("+")
+
+            compact = (
+                token.lstrip("+-")
+                .replace("\u00a0", "")
+                .replace("\u202f", "")
+                .replace(" ", "")
+                .replace("'", "")
+                .replace("’", "")
+            )
+
+            candidates = set()
+
+            def _add(raw):
+                try:
+                    value = float(raw)
+                except (TypeError, ValueError):
+                    return
+
+                if not math.isfinite(value):
+                    return
+
+                if negative:
+                    value = -abs(value)
+                elif positive:
+                    value = abs(value)
+
+                candidates.add(round(value, 12))
+
+            separator_positions = [
+                index
+                for index, character in enumerate(compact)
+                if character in ".,"
+            ]
+
+            if not separator_positions:
+                if compact.isdigit():
+                    _add(compact)
+
+                return sorted(candidates)
+
+            separator_characters = {
+                compact[index]
+                for index in separator_positions
+            }
+
+            # Deux séparateurs différents :
+            # le dernier est décimal, les précédents sont des groupements.
+            #
+            # Exemples :
+            # 1,234.56
+            # 1.234,56
+            if len(separator_characters) > 1:
+                last_separator = separator_positions[-1]
+
+                integer_part = re.sub(
+                    r"[.,]",
+                    "",
+                    compact[:last_separator],
+                )
+
+                fraction_part = re.sub(
+                    r"[.,]",
+                    "",
+                    compact[last_separator + 1:],
+                )
+
+                if (
+                    integer_part.isdigit()
+                    and fraction_part.isdigit()
+                ):
+                    _add(integer_part + "." + fraction_part)
+
+                return sorted(candidates)
+
+            separator = compact[separator_positions[0]]
+            parts = compact.split(separator)
+
+            if not all(part.isdigit() for part in parts):
+                return []
+
+            # Plusieurs séparateurs identiques :
+            # 1,234,567 ou 1.234.567
+            if len(parts) > 2:
+                if all(
+                    len(part) == 3
+                    for part in parts[1:]
+                ):
+                    _add("".join(parts))
+
+                return sorted(candidates)
+
+            if len(parts) != 2:
+                return []
+
+            left, right = parts
+
+            if not left or not right:
+                return []
+
+            # 1 ou 2 décimales :
+            # 100.00 -> 100
+            # 50,00 -> 50
+            if len(right) in {1, 2}:
+                _add(left + "." + right)
+                return sorted(candidates)
+
+            # 3 ou 4 décimales :
+            # interprétation décimale uniquement.
+            if len(right) in {3, 4}:
+                _add(left + "." + right)
+                return sorted(candidates)
+
+            # Autre forme :
+            # le séparateur est traité comme groupement.
+            _add(left + right)
+
+            return sorted(candidates)
+
+        prepared = []
+
+        for source_index, source_line in enumerate(lines):
+            text = _text(source_line)
+
+            if not text:
+                continue
+
+            prepared.append({
+                "source_index": source_index,
+                "text": text,
+                "date_match": date_re.search(text),
+            })
+
+        if len(prepared) < 2:
+            _audit_rejection(
+                "insufficient_prepared_lines",
+                input_lines=len(lines),
+                prepared_lines=len(prepared),
+            )
+            return []
+
+        date_line_count = sum(
+            1
+            for line in prepared
+            if line["date_match"] is not None
+        )
+
+        blocks = []
+        current = None
+
+        for line in prepared:
+            if line["date_match"] is not None:
+                if current is not None:
+                    blocks.append(current)
+
+                current = {
+                    "date": line["date_match"].group(0),
+                    "lines": [line],
+                }
+
+            elif current is not None:
+                current["lines"].append(line)
+
+        if current is not None:
+            blocks.append(current)
+
+        blocks_before_size_filter = len(blocks)
+
+        if len(blocks) < 2:
+            _audit_rejection(
+                "insufficient_date_blocks",
+                input_lines=len(lines),
+                prepared_lines=len(prepared),
+                date_lines=date_line_count,
+                date_blocks=len(blocks),
+                sample_lines=[
+                    line["text"][:160]
+                    for line in prepared[:8]
+                ],
+            )
+            return []
+
+        lengths = sorted(
+            len(block["lines"])
+            for block in blocks
+        )
+
+        median_length = lengths[len(lengths) // 2]
+        maximum_length = max(4, median_length * 6)
+
+        blocks = [
+            block
+            for block in blocks
+            if 1 <= len(block["lines"]) <= maximum_length
+        ]
+
+        if len(blocks) < 2:
+            _audit_rejection(
+                "date_blocks_removed_by_size_filter",
+                blocks_before_filter=blocks_before_size_filter,
+                remaining_blocks=len(blocks),
+                block_lengths=lengths[:30],
+                median_length=median_length,
+                maximum_length=maximum_length,
+            )
+            return []
+
+        models = []
+
+        for block_index, block in enumerate(blocks):
+            date_text = block["date"]
+            occurrences = []
+            descriptions = []
+
+            for line_index, line in enumerate(block["lines"]):
+                searchable = line["text"]
+
+                if line_index == 0:
+                    searchable = searchable.replace(
+                        date_text,
+                        " ",
+                        1,
+                    )
+
+                for match in number_re.finditer(searchable):
+                    token = match.group(1)
+                    candidates = _number_candidates(token)
+
+                    if not candidates:
+                        continue
+
+                    occurrences.append({
+                        "token": token,
+                        "candidates": candidates,
+                        "line_index": line_index,
+                        "relative_position": (
+                            match.start(1)
+                            / max(len(searchable), 1)
+                        ),
+                    })
+
+                description = number_re.sub(
+                    " ",
+                    searchable,
+                )
+
+                description = re.sub(
+                    r"\s+",
+                    " ",
+                    description,
+                ).strip()
+
+                if description:
+                    descriptions.append(description)
+
+            models.append({
+                "block_index": block_index,
+                "date": date_text,
+                "description": " ".join(descriptions),
+                "occurrences": occurrences,
+                "raw_lines": [
+                    line["text"]
+                    for line in block["lines"]
+                ],
+            })
+
+        interpretation_sets_with_options = 0
+        interpretations = []
+
+        for model in models:
+            options = []
+            occurrences = model["occurrences"]
+
+            # Universal complexity guard:
+            # a transaction block containing too many numeric observations
+            # cannot be resolved safely by exhaustive accounting combinations.
+            if len(occurrences) > 12:
+                _audit_rejection(
+                    "excessive_numeric_ambiguity",
+                    block_index=model["block_index"],
+                    numeric_occurrences=len(occurrences),
+                    maximum_supported=12,
+                    raw_lines=model["raw_lines"][:8],
+                )
+                return []
+
+            for balance_index, balance_item in enumerate(
+                occurrences
+            ):
+                for balance in balance_item["candidates"]:
+                    for amount_index, amount_item in enumerate(
+                        occurrences
+                    ):
+                        if amount_index == balance_index:
+                            continue
+
+                        for raw_amount in amount_item["candidates"]:
+                            absolute_amount = abs(raw_amount)
+
+                            if _matches(absolute_amount, 0.0):
+                                continue
+
+                            for signed_amount in (
+                                absolute_amount,
+                                -absolute_amount,
+                            ):
+                                structural_score = int(
+                                    balance_item["relative_position"]
+                                    > amount_item["relative_position"]
+                                )
+
+                                options.append({
+                                    "amount": signed_amount,
+                                    "balance": balance,
+                                    "amount_item": amount_item,
+                                    "balance_item": balance_item,
+                                    "structural_score": (
+                                        structural_score
+                                    ),
+                                })
+
+            if options:
+                interpretation_sets_with_options += 1
+
+            interpretations.append(options)
+
+        selected = [None] * len(models)
+        transition_pairs_tested = 0
+        valid_transitions_found = 0
+        ambiguous_transition_groups = 0
+
+        for index in range(1, len(models)):
+            transitions = []
+
+            previous_options = interpretations[index - 1]
+            current_options = interpretations[index]
+
+            transition_pairs_tested += (
+                len(previous_options)
+                * len(current_options)
+            )
+
+            for previous in previous_options:
+                for current in current_options:
+                    if not _matches(
+                        previous["balance"]
+                        + current["amount"],
+                        current["balance"],
+                    ):
+                        continue
+
+                    transitions.append({
+                        "previous": previous,
+                        "current": current,
+                        "score": (
+                            previous["structural_score"]
+                            + current["structural_score"]
+                        ),
+                    })
+
+            valid_transitions_found += len(transitions)
+
+            if not transitions:
+                continue
+
+            best_score = max(
+                transition["score"]
+                for transition in transitions
+            )
+
+            best = [
+                transition
+                for transition in transitions
+                if transition["score"] == best_score
+            ]
+
+            unique = {
+                (
+                    round(
+                        transition["previous"]["balance"],
+                        12,
+                    ),
+                    round(
+                        transition["current"]["amount"],
+                        12,
+                    ),
+                    round(
+                        transition["current"]["balance"],
+                        12,
+                    ),
+                )
+                for transition in best
+            }
+
+            if len(unique) != 1:
+                ambiguous_transition_groups += 1
+                continue
+
+            transition = best[0]
+
+            if selected[index - 1] is None:
+                selected[index - 1] = transition["previous"]
+
+            selected[index] = transition["current"]
+
+        selected_count = sum(
+            1
+            for item in selected
+            if item is not None
+        )
+
+        transactions = []
+
+        for index, interpretation in enumerate(selected):
+            if interpretation is None:
+                continue
+
+            model = models[index]
+            amount = interpretation["amount"]
+            balance = interpretation["balance"]
+
+            transactions.append({
+                "date": model["date"],
+                "description": model["description"],
+                "amount": amount,
+                "signed_amount": amount,
+                "balance": balance,
+                "_balance": balance,
+                "type": (
+                    "income"
+                    if amount > 0
+                    else "expense"
+                ),
+                "parser_family": (
+                    "universal_multiline_structural_ledger"
+                ),
+                "_structural_evidence": {
+                    "method": (
+                        "unique_adjacent_balance_continuity"
+                    ),
+                    "block_index": model["block_index"],
+                    "amount_token": (
+                        interpretation["amount_item"]["token"]
+                    ),
+                    "balance_token": (
+                        interpretation["balance_item"]["token"]
+                    ),
+                    "raw_lines": model["raw_lines"],
+                },
+            })
+
+        if len(transactions) < 2:
+            _audit_rejection(
+                "insufficient_reconciled_transactions",
+                input_lines=len(lines),
+                prepared_lines=len(prepared),
+                date_lines=date_line_count,
+                blocks=len(blocks),
+                models=len(models),
+                models_with_numeric_options=(
+                    interpretation_sets_with_options
+                ),
+                selected=selected_count,
+                transactions=len(transactions),
+                transition_pairs_tested=transition_pairs_tested,
+                valid_transitions_found=valid_transitions_found,
+                ambiguous_transition_groups=(
+                    ambiguous_transition_groups
+                ),
+                sample_models=[
+                    {
+                        "date": model["date"],
+                        "numeric_occurrences": len(
+                            model["occurrences"]
+                        ),
+                        "raw_lines": model["raw_lines"][:3],
+                    }
+                    for model in models[:5]
+                ],
+            )
+            return []
+
+        fingerprints = [
+            (
+                transaction.get("date"),
+                transaction.get("description"),
+                round(
+                    float(
+                        transaction.get("amount")
+                        or 0.0
+                    ),
+                    8,
+                ),
+                round(
+                    float(
+                        transaction.get("balance")
+                        or 0.0
+                    ),
+                    8,
+                ),
+            )
+            for transaction in transactions
+        ]
+
+        duplicate_ratio = (
+            len(fingerprints)
+            - len(set(fingerprints))
+        ) / len(fingerprints)
+
+        if duplicate_ratio > 0.10:
+            _audit_rejection(
+                "duplicate_ratio",
+                transactions=len(transactions),
+                unique_transactions=len(set(fingerprints)),
+                duplicate_ratio=round(
+                    duplicate_ratio,
+                    6,
+                ),
+            )
+            return []
+
+        reconciled = 0
+        tested = 0
+
+        for index in range(1, len(transactions)):
+            previous_balance = _finite(
+                transactions[index - 1].get("balance")
+            )
+
+            current_balance = _finite(
+                transactions[index].get("balance")
+            )
+
+            current_amount = _finite(
+                transactions[index].get(
+                    "signed_amount"
+                )
+            )
+
+            if (
+                previous_balance is None
+                or current_balance is None
+                or current_amount is None
+            ):
+                continue
+
+            tested += 1
+
+            if _matches(
+                previous_balance + current_amount,
+                current_balance,
+            ):
+                reconciled += 1
+
+        if tested == 0:
+            _audit_rejection(
+                "no_testable_balance_transitions",
+                transactions=len(transactions),
+                models=len(models),
+            )
+            return []
+
+        reconciliation_ratio = reconciled / tested
+
+        if reconciliation_ratio < 0.80:
+            _audit_rejection(
+                "insufficient_reconciliation_ratio",
+                transactions=len(transactions),
+                reconciled=reconciled,
+                tested=tested,
+                ratio=round(
+                    reconciliation_ratio,
+                    6,
+                ),
+            )
+            return []
+
+        model_coverage = len(transactions) / len(models)
+
+        if model_coverage < 0.25:
+            _audit_rejection(
+                "insufficient_model_coverage",
+                transactions=len(transactions),
+                models=len(models),
+                ratio=round(
+                    model_coverage,
+                    6,
+                ),
+            )
+            return []
+
+        print(
+            "UNIVERSAL_MULTILINE_STRUCTURAL_AUDIT",
+            {
+                "status": "accepted",
+                "input_lines": len(lines),
+                "prepared_lines": len(prepared),
+                "date_lines": date_line_count,
+                "date_blocks": len(blocks),
+                "models": len(models),
+                "models_with_numeric_options": (
+                    interpretation_sets_with_options
+                ),
+                "selected": selected_count,
+                "transactions": len(transactions),
+                "reconciled": reconciled,
+                "tested": tested,
+                "reconciliation_ratio": round(
+                    reconciliation_ratio,
+                    6,
+                ),
+                "model_coverage": round(
+                    model_coverage,
+                    6,
+                ),
+            },
+        )
+
+        return transactions
+
+    except Exception as exc:
+        print(
+            "UNIVERSAL_MULTILINE_STRUCTURAL_AUDIT",
+            {
+                "status": "error",
+                "reason": "unexpected_exception",
+                "error_type": type(exc).__name__,
+                "error": str(exc)[:300],
+                "line_count": (
+                    len(lines)
+                    if isinstance(lines, list)
+                    else None
+                ),
+            },
+        )
+        return []
+
+
+# SAFE_INTERNATIONAL_AMOUNT_NORMALIZATION_V1
+def _normalize_candidate_amounts_by_ledger_invariants(
+    transactions: list[dict],
+) -> list[dict]:
+    """Resolve a numeric ambiguity only when ledger continuity proves it.
+
+    This function deliberately uses no institution, country, currency,
+    language, filename or geographical convention.
+
+    It is fail-safe:
+    - input transactions are never mutated;
+    - unresolved values remain unchanged;
+    - any internal error returns an independent copy of the original input.
+    """
+    import math
+    import re
+
+    original_copy = [
+        dict(tx) if isinstance(tx, dict) else tx
+        for tx in (transactions or [])
+    ]
+
+    try:
+        if len(original_copy) < 2:
+            return original_copy
+
+        ambiguous_token_re = re.compile(
+            r"(?<![\d.,])"
+            r"([+-]?\d+)"
+            r"([.,])"
+            r"(\d{3})"
+            r"(?![\d.,])"
+        )
+
+        def finite_number(value):
+            if value is None or isinstance(value, bool):
+                return None
+
+            try:
+                number = float(value)
+            except (TypeError, ValueError):
+                return None
+
+            if not math.isfinite(number):
+                return None
+
+            return number
+
+        def values_match(left, right):
+            left = finite_number(left)
+            right = finite_number(right)
+
+            if left is None or right is None:
+                return False
+
+            scale = max(abs(left), abs(right), 1.0)
+
+            return abs(left - right) <= max(
+                1e-7,
+                scale * 1e-10,
+            )
+
+        def get_balance(tx):
+            if not isinstance(tx, dict):
+                return None
+
+            for key in (
+                "_balance",
+                "balance",
+                "running_balance",
+                "closing_balance",
+            ):
+                value = finite_number(tx.get(key))
+                if value is not None:
+                    return value
+
+            return None
+
+        def get_signed_amount(tx):
+            if not isinstance(tx, dict):
+                return None
+
+            for key in (
+                "signed_amount",
+                "_locked_amount",
+                "locked_amount",
+            ):
+                value = finite_number(tx.get(key))
+                if value is not None:
+                    return value
+
+            value = finite_number(tx.get("amount"))
+            if value is None:
+                return None
+
+            tx_type = str(tx.get("type") or "").strip().lower()
+
+            if tx_type == "expense" and value > 0:
+                return -value
+
+            if tx_type == "income" and value < 0:
+                return abs(value)
+
+            return value
+
+        def token_interpretations(description):
+            interpretations = []
+
+            for match in ambiguous_token_re.finditer(
+                str(description or "")
+            ):
+                left_text = match.group(1)
+                right_text = match.group(3)
+
+                negative = left_text.startswith("-")
+                unsigned_left = left_text.lstrip("+-")
+
+                try:
+                    decimal_abs = abs(
+                        float(unsigned_left + "." + right_text)
+                    )
+                    grouped_abs = abs(
+                        float(unsigned_left + right_text)
+                    )
+                except ValueError:
+                    continue
+
+                if values_match(decimal_abs, grouped_abs):
+                    continue
+
+                interpretations.append({
+                    "token": match.group(0),
+                    "decimal_abs": decimal_abs,
+                    "grouped_abs": grouped_abs,
+                    "printed_negative": negative,
+                })
+
+            return interpretations
+
+        normalized = [
+            dict(tx) if isinstance(tx, dict) else tx
+            for tx in original_copy
+        ]
+
+        for index in range(1, len(normalized)):
+            previous_tx = normalized[index - 1]
+            current_tx = normalized[index]
+
+            if not isinstance(previous_tx, dict):
+                continue
+
+            if not isinstance(current_tx, dict):
+                continue
+
+            previous_balance = get_balance(previous_tx)
+            current_balance = get_balance(current_tx)
+            current_amount = get_signed_amount(current_tx)
+
+            if (
+                previous_balance is None
+                or current_balance is None
+                or current_amount is None
+            ):
+                continue
+
+            expected_movement = current_balance - previous_balance
+
+            # The current interpretation already reconciles.
+            if values_match(current_amount, expected_movement):
+                continue
+
+            description = current_tx.get("description") or ""
+            valid_resolutions = []
+
+            for interpretation in token_interpretations(description):
+                decimal_abs = interpretation["decimal_abs"]
+                grouped_abs = interpretation["grouped_abs"]
+                current_abs = abs(current_amount)
+
+                if values_match(current_abs, decimal_abs):
+                    alternative_abs = grouped_abs
+                    source_kind = "decimal"
+                    target_kind = "grouped"
+                elif values_match(current_abs, grouped_abs):
+                    alternative_abs = decimal_abs
+                    source_kind = "grouped"
+                    target_kind = "decimal"
+                else:
+                    continue
+
+                # Preserve the transaction's existing accounting direction.
+                # This stage resolves only the numeric scale ambiguity.
+                alternative_signed = math.copysign(
+                    alternative_abs,
+                    current_amount,
+                )
+
+                if values_match(
+                    alternative_signed,
+                    expected_movement,
+                ):
+                    valid_resolutions.append({
+                        "token": interpretation["token"],
+                        "old_signed_amount": current_amount,
+                        "new_signed_amount": alternative_signed,
+                        "source_interpretation": source_kind,
+                        "target_interpretation": target_kind,
+                        "previous_balance": previous_balance,
+                        "current_balance": current_balance,
+                        "expected_movement": expected_movement,
+                        "sign_preserved": True,
+                    })
+
+            unique_values = {
+                round(item["new_signed_amount"], 12)
+                for item in valid_resolutions
+            }
+
+            # A correction requires exactly one mathematically valid value.
+            if len(unique_values) != 1:
+                continue
+
+            resolution = next(
+                item
+                for item in valid_resolutions
+                if round(item["new_signed_amount"], 12)
+                in unique_values
+            )
+
+            corrected = dict(current_tx)
+            new_amount = resolution["new_signed_amount"]
+
+            corrected["amount"] = new_amount
+            corrected["signed_amount"] = new_amount
+
+            if "_locked_amount" in corrected:
+                corrected["_locked_amount"] = new_amount
+
+            if "locked_amount" in corrected:
+                corrected["locked_amount"] = new_amount
+
+            if new_amount < 0:
+                corrected["type"] = "expense"
+
+                if "locked_type" in corrected:
+                    corrected["locked_type"] = "expense"
+
+            elif new_amount > 0:
+                corrected["type"] = "income"
+
+                if "locked_type" in corrected:
+                    corrected["locked_type"] = "income"
+
+            corrected["_amount_resolution"] = {
+                "method": "unique_adjacent_balance_continuity",
+                **resolution,
+            }
+
+            normalized[index] = corrected
+
+            print(
+                "AMBIGUOUS_AMOUNT_RESOLVED_BY_LEDGER_INVARIANT",
+                {
+                    "index": index,
+                    "date": corrected.get("date"),
+                    "token": resolution["token"],
+                    "old_amount": resolution["old_signed_amount"],
+                    "new_amount": new_amount,
+                    "previous_balance": previous_balance,
+                    "current_balance": current_balance,
+                    "parser_family": corrected.get("parser_family"),
+                },
+            )
+
+        return normalized
+
+    except Exception as exc:
+        # Normalization is optional and may never stop candidate extraction.
+        print(
+            "SAFE_AMOUNT_NORMALIZATION_SKIPPED",
+            {
+                "error_type": type(exc).__name__,
+                "error": str(exc)[:300],
+                "transactions": len(original_copy),
+            },
+        )
+        return original_copy
+
+
+def _select_international_candidate(raw_candidates: list[tuple[str, list[dict]]], text: str) -> dict | None:
+    """Select one extraction result using universal accounting controls.
+
+    No filename, bank name, country, or language-specific exception is used.
+    """
+    summary = _extract_authoritative_official_summary(text)
+    if summary and not _summary_is_reconciled(summary):
+        print("OFFICIAL_SUMMARY_REJECTED_UNRECONCILED", summary)
+        summary = None
+
+    scored = []
+    for parser_name, txs in raw_candidates:
+        if not txs:
+            continue
+
+        normalized_txs = (
+            _normalize_candidate_amounts_by_ledger_invariants(txs)
+        )
+
+        candidate = _score_finance_candidate(
+            parser_name,
+            normalized_txs,
+            summary,
+        )
+        scored.append(candidate)
+
+    if not scored:
+        return None
+
+    # RUNEXA_GENERIC_FINAL_CANDIDATE_REFRESH
+    # Refresh candidate reconciliation against the final official summary
+    # without changing the existing selection algorithm.
+    summary = normalize_official_summary(summary)
+
+    scored = refresh_candidates_against_official_summary(
+        scored,
+        summary,
+    )
+    print("INTERNATIONAL_CANDIDATE_AUDIT", [
+        {
+            "parser": c.get("parser"),
+            "count": c.get("count"),
+            "income_total": c.get("income_total"),
+            "expense_total": c.get("expense_total"),
+            "income_gap": c.get("income_gap"),
+            "expense_gap": c.get("expense_gap"),
+            "direction_collapse": _candidate_direction_collapse(c, summary),
+            "quality": _international_candidate_quality(c, summary),
+        }
+        for c in scored
+    ])
+
+    reconciled = [c for c in scored if _candidate_matches_reconciled_summary(c, summary)]
+    if reconciled:
+        best = min(reconciled, key=lambda c: _international_candidate_quality(c, summary))
+        best["selection_reason"] = "reconciled_official_summary"
+        return best
+
+    non_collapsed = [
+        c
+        for c in scored
+        if not _candidate_direction_collapse(c, summary)
+    ]
+    pool = non_collapsed or scored
+
+    def candidate_has_structural_ledger_coverage(candidate: dict) -> bool:
+        """Return True when a candidate resembles a real dated ledger.
+
+        This test is institution-independent. It uses only transaction count,
+        ISO-date validity, transaction typing and duplicate concentration.
+        """
+        txs = candidate.get("transactions") or []
+        count = len(txs)
+
+        if count < 8:
+            return False
+
+        valid_dates = 0
+        valid_types = 0
+        duplicate_count = 0
+        seen_rows = set()
+
+        for tx in txs:
+            date = str(tx.get("date") or "")
+            if re.fullmatch(r"20\d{2}-\d{2}-\d{2}", date):
+                valid_dates += 1
+
+            if tx.get("type") in {"income", "expense", "transfer"}:
+                valid_types += 1
+
+            try:
+                amount_key = round(
+                    float(tx.get("amount") or 0),
+                    2,
+                )
+            except (TypeError, ValueError):
+                amount_key = None
+
+            row_key = (
+                date,
+                amount_key,
+                str(tx.get("description") or "")[:160],
+            )
+
+            if row_key in seen_rows:
+                duplicate_count += 1
+            seen_rows.add(row_key)
+
+        valid_date_ratio = valid_dates / count
+        valid_type_ratio = valid_types / count
+        duplicate_ratio = duplicate_count / count
+
+        return (
+            valid_date_ratio >= 0.80
+            and valid_type_ratio >= 0.90
+            and duplicate_ratio <= 0.20
+        )
+
+    covered_candidates = [
+        c
+        for c in pool
+        if candidate_has_structural_ledger_coverage(c)
+    ]
+
+    max_covered_count = max(
+        (
+            int(c.get("count") or len(c.get("transactions") or []))
+            for c in covered_candidates
+        ),
+        default=0,
+    )
+
+    if max_covered_count >= 8:
+        guarded_pool = [
+            c
+            for c in pool
+            if (
+                int(
+                    c.get("count")
+                    or len(c.get("transactions") or [])
+                ) > 2
+                or candidate_has_structural_ledger_coverage(c)
+            )
+        ]
+
+        if guarded_pool:
+            rejected_sparse = [
+                {
+                    "parser": c.get("parser"),
+                    "count": c.get("count"),
+                    "score": c.get("score"),
+                }
+                for c in pool
+                if c not in guarded_pool
+            ]
+
+            if rejected_sparse:
+                print(
+                    "SPARSE_CANDIDATES_REJECTED_BY_LEDGER_COVERAGE",
+                    {
+                        "max_covered_count": max_covered_count,
+                        "rejected": rejected_sparse,
+                    },
+                )
+
+            pool = guarded_pool
+
+    def candidate_structural_metrics(candidate: dict) -> dict:
+        """Compute institution-independent ledger quality metrics."""
+        txs = candidate.get("transactions") or []
+        count = len(txs)
+
+        if count == 0:
+            return {
+                "count": 0,
+                "valid_date_ratio": 0.0,
+                "valid_type_ratio": 0.0,
+                "duplicate_ratio": 1.0,
+                "nonzero_amount_ratio": 0.0,
+            }
+
+        valid_dates = 0
+        valid_types = 0
+        duplicates = 0
+        nonzero_amounts = 0
+        seen = set()
+
+        for tx in txs:
+            date = str(tx.get("date") or "")
+            if re.fullmatch(r"20\d{2}-\d{2}-\d{2}", date):
+                valid_dates += 1
+
+            if tx.get("type") in {"income", "expense", "transfer"}:
+                valid_types += 1
+
+            try:
+                amount = round(float(tx.get("amount") or 0), 2)
+            except (TypeError, ValueError):
+                amount = 0.0
+
+            if abs(amount) >= 0.005:
+                nonzero_amounts += 1
+
+            key = (
+                date,
+                amount,
+                str(tx.get("description") or "")[:160],
+            )
+
+            if key in seen:
+                duplicates += 1
+            seen.add(key)
+
+        return {
+            "count": count,
+            "valid_date_ratio": valid_dates / count,
+            "valid_type_ratio": valid_types / count,
+            "duplicate_ratio": duplicates / count,
+            "nonzero_amount_ratio": nonzero_amounts / count,
+        }
+
+    metrics_by_id = {
+        id(candidate): candidate_structural_metrics(candidate)
+        for candidate in pool
+    }
+
+    structurally_valid_candidates = [
+        candidate
+        for candidate in pool
+        if (
+            metrics_by_id[id(candidate)]["count"] >= 8
+            and metrics_by_id[id(candidate)]["valid_date_ratio"] >= 0.80
+            and metrics_by_id[id(candidate)]["valid_type_ratio"] >= 0.90
+            and metrics_by_id[id(candidate)]["duplicate_ratio"] <= 0.20
+            and metrics_by_id[id(candidate)]["nonzero_amount_ratio"] >= 0.90
+        )
+    ]
+
+    maximum_structural_count = max(
+        (
+            metrics_by_id[id(candidate)]["count"]
+            for candidate in structurally_valid_candidates
+        ),
+        default=0,
+    )
+
+    if maximum_structural_count:
+        # Keep candidates that cover most of the strongest structurally valid
+        # ledger. This is relative to the document itself, not an absolute
+        # transaction threshold tied to any institution or market.
+        dominant_candidates = [
+            candidate
+            for candidate in structurally_valid_candidates
+            if (
+                metrics_by_id[id(candidate)]["count"]
+                / maximum_structural_count
+            ) >= 0.75
+        ]
+
+        if dominant_candidates:
+            rejected_by_relative_coverage = [
+                {
+                    "parser": candidate.get("parser"),
+                    "count": metrics_by_id[id(candidate)]["count"],
+                    "coverage_ratio": round(
+                        metrics_by_id[id(candidate)]["count"]
+                        / maximum_structural_count,
+                        4,
+                    ),
+                    "score": candidate.get("score"),
+                }
+                for candidate in pool
+                if candidate not in dominant_candidates
+            ]
+
+            if rejected_by_relative_coverage:
+                print(
+                    "CANDIDATES_REJECTED_BY_RELATIVE_LEDGER_COVERAGE",
+                    {
+                        "maximum_structural_count": maximum_structural_count,
+                        "retained": [
+                            {
+                                "parser": candidate.get("parser"),
+                                "count": metrics_by_id[id(candidate)]["count"],
+                                "coverage_ratio": round(
+                                    metrics_by_id[id(candidate)]["count"]
+                                    / maximum_structural_count,
+                                    4,
+                                ),
+                            }
+                            for candidate in dominant_candidates
+                        ],
+                        "rejected": rejected_by_relative_coverage,
+                    },
+                )
+
+            pool = dominant_candidates
+
+    best = min(
+        pool,
+        key=lambda c: _international_candidate_quality(
+            c,
+            summary,
+        ),
+    )
+
+    # A trustworthy transaction ledger must never be discarded only because it
+    # does not reconcile with an official summary. Summaries can be incomplete,
+    # OCR-corrupted, multi-account, or cover a different scope than the visible
+    # transaction table. Preserve the strongest structurally valid candidate and
+    # expose the reconciliation mismatch as audit metadata instead of returning
+    # an empty ledger.
+    if summary and _summary_is_reconciled(summary):
+        print("NO_TRUSTWORTHY_RECONCILED_CANDIDATE", {
+            "summary": summary,
+            "best_parser": best.get("parser"),
+            "income_gap": best.get("income_gap"),
+            "expense_gap": best.get("expense_gap"),
+            "fallback_action": "preserve_best_structural_candidate",
+        })
+        best["selection_reason"] = "best_structural_quality_despite_summary_mismatch"
+        best["reconciliation_status"] = "unreconciled"
+        best["summary_mismatch"] = {
+            "income_gap": best.get("income_gap"),
+            "expense_gap": best.get("expense_gap"),
+        }
+        return best
+
+    best["selection_reason"] = "best_structural_quality_without_official_summary"
+    return best
+
+
+
+
+def extract_universal_multiline_balance_ledger_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Universal EN/FR/AR multiline ledger parser driven by balance continuity.
+
+    The parser does not use bank names. It treats the statement as a stream of
+    accounting lines. Dates may be printed once for several operations, amounts
+    may appear on continuation lines, and the running balance may appear only on
+    the last line of a group.
+
+    Core invariant:
+        current_balance - previous_balance == credits - debits
+
+    A ternary cent-level solver assigns each numeric candidate as credit (+),
+    debit (-), or non-movement (0). This avoids interpreting reference numbers,
+    rates, or intermediate balances as transactions.
+    """
+    import re
+
+    raw = normalize_statement_text(text or "")
+    low = raw.lower()
+    debit_headers = (
+        "debit", "debits", "withdrawal", "withdrawals", "débit", "débits",
+        "retrait", "retraits", "مدين", "خصم", "مسحوبات",
+    )
+    credit_headers = (
+        "credit", "credits", "deposit", "deposits", "crédit", "crédits",
+        "versement", "versements", "دائن", "إيداع", "إيداعات",
+    )
+    balance_headers = ("balance", "solde", "الرصيد", "رصيد")
+    if not (
+        any(x in low for x in debit_headers)
+        and any(x in low for x in credit_headers)
+        and any(x in low for x in balance_headers)
+    ):
+        return []
+
+    currency = detected_currency or detect_currency(raw)
+    lines = [
+        " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
+        for line in raw.splitlines()
+        if " ".join(line.split())
+    ]
+
+    month_words = "|".join(
+        sorted((re.escape(k) for k in MONTH_ALIASES), key=len, reverse=True)
+    )
+    date_start_re = re.compile(
+        rf"^(?:"
+        rf"\d{{1,2}}\s+(?:{month_words})\s+\d{{2,4}}"
+        rf"|(?:{month_words})\s+\d{{1,2}}(?:,)?\s+\d{{2,4}}"
+        rf"|\d{{1,2}}[./-]\d{{1,2}}[./-]\d{{2,4}}"
+        rf"|\d{{4}}[./-]\d{{1,2}}[./-]\d{{1,2}}"
+        rf")\b",
+        flags=re.IGNORECASE,
+    )
+    money_re = re.compile(
+        r"(?<![A-Za-z0-9])[-+]?\$?"
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})(?![A-Za-z0-9])"
+    )
+
+    opening_markers = (
+        "opening balance", "brought forward", "balance brought forward",
+        "previous balance", "solde initial", "solde précédent", "solde precedent",
+        "الرصيد الافتتاحي", "الرصيد السابق",
+    )
+    closing_or_total_markers = (
+        "closing balance", "ending balance", "carried forward", "balance carried forward",
+        "total credits", "total debits", "total deposits", "total withdrawals",
+        "solde final", "total crédits", "total credits", "total débits", "total debits",
+        "الرصيد الختامي", "إجمالي الإيداعات", "إجمالي المسحوبات",
+    )
+
+    def is_table_header(line: str) -> bool:
+        ll = line.lower()
+        return (
+            any(x in ll for x in debit_headers)
+            and any(x in ll for x in credit_headers)
+            and any(x in ll for x in balance_headers)
+        )
+
+    def monetary_tokens(line: str) -> list[tuple[str, float]]:
+        out: list[tuple[str, float]] = []
+        normalized = normalize_line_for_amount_detection(line)
+        for match in money_re.finditer(normalized):
+            token = match.group(0)
+            local = normalized[max(0, match.start() - 18):match.end() + 18].lower()
+            # Percentages, interest-rate notices, phone-like references, and
+            # account metadata are not ledger amounts.
+            if "%" in local or re.search(r"\b(?:rate|taux|نسبة)\b", local):
+                continue
+            try:
+                value = abs(parse_amount(token.replace("$", "")))
+            except Exception:
+                continue
+            if value > 1e12:
+                continue
+            out.append((token, value))
+        return out
+
+    def signed_balance(token: str, context: str) -> float:
+        value = abs(parse_amount(token.replace("$", "")))
+        ll = context.lower()
+        if re.search(r"\bdr\b|debit(?:eur)?|débiteur|مدين", ll):
+            return -value
+        return value
+
+    def solve_ternary(values: list[float], target: float) -> list[int] | None:
+        """Assign +1/-1/0 to candidate amounts to explain the balance delta."""
+        if not values or len(values) > 16:
+            return None
+        target_c = int(round(target * 100))
+        cents = [int(round(abs(v) * 100)) for v in values]
+        # state -> (signs, nonzero_count). Prefer fewer included values because
+        # OCR blocks often contain references or an intermediate balance.
+        states: dict[int, tuple[list[int], int]] = {0: ([], 0)}
+        limit = abs(target_c) + sum(cents)
+        for amount_c in cents:
+            nxt: dict[int, tuple[list[int], int]] = {}
+            for subtotal, (signs, used) in states.items():
+                for sign in (0, 1, -1):
+                    new_total = subtotal + sign * amount_c
+                    if abs(new_total) > limit + 2:
+                        continue
+                    candidate = (signs + [sign], used + (1 if sign else 0))
+                    previous = nxt.get(new_total)
+                    if previous is None or candidate[1] < previous[1]:
+                        nxt[new_total] = candidate
+            if len(nxt) > 250000:
+                return None
+            states = nxt
+        for tolerance_c in (0, 1, 2):
+            for candidate_total in (target_c, target_c - tolerance_c, target_c + tolerance_c):
+                found = states.get(candidate_total)
+                if found and found[1] > 0:
+                    return found[0]
+        return None
+
+    def clean_description(parts: list[str]) -> str:
+        joined = " ".join(parts)
+        joined = money_re.sub(" ", joined)
+        joined = date_start_re.sub(" ", joined, count=1)
+        joined = re.sub(r"\s+", " ", joined).strip(" .-_")
+        return clean_db_text(joined)[:500] or "Bank transaction"
+
+    transactions: list[dict] = []
+    previous_balance: float | None = None
+    current_date: str | None = None
+    pending_lines: list[str] = []
+    pending_values: list[float] = []
+    pending_tokens: list[str] = []
+    default_year = detect_document_year(raw)
+
+    def emit_group(current_balance: float, target_delta: float, signs: list[int]) -> None:
+        nonlocal pending_lines, pending_values, pending_tokens, previous_balance
+        desc = clean_description(pending_lines)
+        selected = [(v, s) for v, s in zip(pending_values, signs) if s]
+        for idx, (value, sign) in enumerate(selected, start=1):
+            signed_amount = round(sign * abs(value), 2)
+            if not signed_amount:
+                continue
+            tx_type = "income" if signed_amount > 0 else "expense"
+            transactions.append({
+                "date": current_date,
+                "description": desc if len(selected) == 1 else f"{desc} [movement {idx}/{len(selected)}]",
+                "amount": signed_amount,
+                "signed_amount": signed_amount,
+                "locked_amount": signed_amount,
+                "_locked_amount": signed_amount,
+                "type": tx_type,
+                "locked_type": tx_type,
+                "currency": currency,
+                "_balance": current_balance,
+                "balance": current_balance,
+                "balance_delta": target_delta,
+                "balance_authority": True,
+                "_balance_locked": True,
+                "parser_family": "universal_multiline_balance_ledger",
+            })
+        previous_balance = current_balance
+        pending_lines = []
+        pending_values = []
+        pending_tokens = []
+
+    for line in lines:
+        ll = line.lower()
+        if is_table_header(line) or is_statement_footer_or_verification_block(line):
+            continue
+
+        line_date = None
+        if date_start_re.search(line):
+            line_date = extract_date(line, default_year=default_year)
+            if line_date:
+                current_date = line_date
+
+        tokens = monetary_tokens(line)
+
+        if any(marker in ll for marker in opening_markers) and tokens:
+            previous_balance = signed_balance(tokens[-1][0], line)
+            pending_lines = []
+            pending_values = []
+            pending_tokens = []
+            continue
+        if any(marker in ll for marker in closing_or_total_markers):
+            continue
+        if current_date is None:
+            continue
+
+        # Keep all narrative lines. A date can be printed once for several rows,
+        # therefore current_date persists until the next date is encountered.
+        pending_lines.append(line)
+        if not tokens:
+            continue
+
+        values = [v for _, v in tokens]
+        token_texts = [t for t, _ in tokens]
+
+        # Try the last token as a running balance. Candidate movements include
+        # amounts accumulated on earlier continuation lines and all preceding
+        # amounts on this line.
+        candidate_balance = signed_balance(token_texts[-1], line)
+        candidates = pending_values + values[:-1]
+        candidate_tokens = pending_tokens + token_texts[:-1]
+
+        if previous_balance is not None and candidates:
+            delta = round(candidate_balance - previous_balance, 2)
+            signs = solve_ternary(candidates, delta)
+            if signs is not None:
+                pending_values = candidates
+                pending_tokens = candidate_tokens
+                emit_group(candidate_balance, delta, signs)
+                continue
+
+        # A line containing a single monetary value is usually a movement amount
+        # waiting for a later balance line. Preserve it instead of discarding it.
+        # If it alone is a balance and queued values explain the delta, close now.
+        if len(values) == 1 and previous_balance is not None and pending_values:
+            delta = round(candidate_balance - previous_balance, 2)
+            signs = solve_ternary(pending_values, delta)
+            if signs is not None:
+                emit_group(candidate_balance, delta, signs)
+                continue
+
+        # No reliable balance closure yet: queue all values as possible movements.
+        # The ternary solver can later exclude any value that is actually a
+        # reference, rate, or intermediate balance.
+        pending_values.extend(values)
+        pending_tokens.extend(token_texts)
+
+        # Bound pathological OCR groups. Keep the most recent candidates because
+        # balance lines are normally near their movements.
+        if len(pending_values) > 16:
+            pending_values = pending_values[-16:]
+            pending_tokens = pending_tokens[-16:]
+            pending_lines = pending_lines[-20:]
+
+    if transactions:
+        print("UNIVERSAL_MULTILINE_BALANCE_LEDGER_EXTRACTED", {
+            "transactions": len(transactions),
+            "income_total": round(sum(abs(float(t["amount"])) for t in transactions if t["type"] == "income"), 2),
+            "expense_total": round(sum(abs(float(t["amount"])) for t in transactions if t["type"] == "expense"), 2),
+        })
+    return transactions
+
+def extract_universal_date_block_balance_ledger_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Extract multiline debit/credit/balance ledgers without bank rules.
+
+    International EN/FR/AR structural strategy:
+    - detect a debit/credit/balance table from multilingual headers;
+    - group physical OCR lines from one leading transaction date to the next;
+    - treat the final monetary value of a block as the running balance;
+    - treat preceding monetary values as movements;
+    - infer movement signs from the accounting identity between consecutive
+      balances, including blocks containing several movements;
+    - never use a running balance as a transaction amount.
+
+    This parser does not inspect a bank name, filename, country, or currency.
+    """
+    raw = clean_db_text(normalize_arabic_digits(str(text or "")))
+    low = raw.lower()
+
+    debit_headers = ("debit", "débit", "debits", "débits", "مدين", "سحوبات")
+    credit_headers = ("credit", "crédit", "credits", "crédits", "دائن", "إيداعات", "ايداعات")
+    balance_headers = ("balance", "solde", "الرصيد", "رصيد")
+    if not (
+        any(x in low for x in debit_headers)
+        and any(x in low for x in credit_headers)
+        and any(x in low for x in balance_headers)
+    ):
+        return []
+
+    currency = detected_currency or detect_currency(raw)
+    lines = [
+        " ".join(line.replace("\xa0", " " ).replace("\u202f", " " ).split())
+        for line in raw.splitlines()
+        if " ".join(line.split())
+    ]
+
+    month_words = "|".join(
+        sorted((re.escape(k) for k in MONTH_ALIASES), key=len, reverse=True)
+    )
+    date_start_re = re.compile(
+        rf"^(?:"
+        rf"\d{{1,2}}\s+(?:{month_words})\s+\d{{2,4}}"
+        rf"|(?:{month_words})\s+\d{{1,2}}(?:,)?\s+\d{{2,4}}"
+        rf"|\d{{1,2}}[./-]\d{{1,2}}[./-]\d{{2,4}}"
+        rf"|\d{{4}}[./-]\d{{1,2}}[./-]\d{{1,2}}"
+        rf")\b",
+        flags=re.IGNORECASE,
+    )
+
+    blocks: list[str] = []
+    current: list[str] = []
+    for line in lines:
+        if date_start_re.search(line):
+            if current:
+                blocks.append(" ".join(current))
+            current = [line]
+        elif current:
+            # Repeated headers and page furniture must not enter a transaction.
+            line_low = line.lower()
+            is_header = (
+                any(x in line_low for x in debit_headers)
+                and any(x in line_low for x in credit_headers)
+                and any(x in line_low for x in balance_headers)
+            )
+            if not is_header and not is_statement_footer_or_verification_block(line):
+                current.append(line)
+    if current:
+        blocks.append(" ".join(current))
+
+    money_re = re.compile(
+        r"(?<![A-Za-z0-9])[-+]?\$?"
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})(?![A-Za-z0-9])"
+    )
+
+    opening_markers = (
+        "opening balance", "brought forward", "balance brought forward",
+        "solde initial", "solde précédent", "solde precedent",
+        "الرصيد الافتتاحي", "الرصيد السابق",
+    )
+
+    def signed_balance(token: str, context: str) -> float:
+        value = abs(parse_amount(token.replace("$", "")))
+        tail = context.lower()[-50:]
+        if re.search(r"\bdr\b|debit(?:eur)?|débiteur|مدين", tail):
+            return -value
+        return value
+
+    def solve_signs(values: list[float], target: float) -> list[int] | None:
+        # Exact cent-level signed subset solver. Keeping one state per reachable
+        # sum is enough; bank blocks normally contain only a few movements.
+        if not values or len(values) > 18:
+            return None
+        target_c = int(round(target * 100))
+        cents = [int(round(abs(v) * 100)) for v in values]
+        states: dict[int, list[int]] = {0: []}
+        limit = abs(target_c) + sum(cents)
+        for amount_c in cents:
+            nxt: dict[int, list[int]] = {}
+            for subtotal, signs in states.items():
+                for sign in (1, -1):
+                    new_total = subtotal + sign * amount_c
+                    if abs(new_total) <= limit + 2:
+                        nxt.setdefault(new_total, signs + [sign])
+            # Prevent pathological OCR blocks from exploding memory.
+            if len(nxt) > 200000:
+                return None
+            states = nxt
+        for tolerance_c in (0, 1, 2):
+            for candidate in (target_c, target_c - tolerance_c, target_c + tolerance_c):
+                if candidate in states:
+                    return states[candidate]
+        return None
+
+    transactions: list[dict] = []
+    previous_balance: float | None = None
+
+    for block in blocks:
+        date = extract_date(block, default_year=detect_document_year(raw))
+        if not date:
+            continue
+        tokens = money_re.findall(normalize_line_for_amount_detection(block))
+        parsed: list[float] = []
+        clean_tokens: list[str] = []
+        for token in tokens:
+            try:
+                value = abs(parse_amount(token.replace("$", "")))
+            except Exception:
+                continue
+            # Percent/rate notices are not monetary ledger values.
+            pos = block.find(token)
+            local = block[max(0, pos - 15):pos + len(token) + 15].lower() if pos >= 0 else ""
+            if "%" in local:
+                continue
+            parsed.append(value)
+            clean_tokens.append(token)
+
+        block_low = block.lower()
+        if any(marker in block_low for marker in opening_markers):
+            if parsed:
+                previous_balance = signed_balance(clean_tokens[-1], block)
+            continue
+        if previous_balance is None or len(parsed) < 2:
+            # A reliable first balance is required before sign inference.
+            continue
+
+        current_balance = signed_balance(clean_tokens[-1], block)
+        movement_values = parsed[:-1]
+        target_delta = round(current_balance - previous_balance, 2)
+        signs = solve_signs(movement_values, target_delta)
+
+        if signs is None:
+            # Single movement can still be locked directly from balance delta.
+            if len(movement_values) == 1 and abs(abs(target_delta) - movement_values[0]) <= 0.02:
+                signs = [1 if target_delta >= 0 else -1]
+            else:
+                previous_balance = current_balance
+                continue
+
+        description = money_re.sub(" ", block)
+        description = re.sub(r"\s+", " ", description).strip()
+        for index, (value, sign) in enumerate(zip(movement_values, signs), start=1):
+            signed_amount = round(sign * abs(value), 2)
+            if signed_amount == 0:
+                continue
+            tx_type = "income" if signed_amount > 0 else "expense"
+            transactions.append({
+                "date": date,
+                "description": clean_db_text(
+                    description if len(movement_values) == 1
+                    else f"{description} [movement {index}/{len(movement_values)}]"
+                )[:500],
+                "amount": signed_amount,
+                "signed_amount": signed_amount,
+                "locked_amount": signed_amount,
+                "_locked_amount": signed_amount,
+                "type": tx_type,
+                "locked_type": tx_type,
+                "currency": currency,
+                "_balance": current_balance,
+                "balance": current_balance,
+                "balance_delta": target_delta,
+                "balance_authority": True,
+                "_balance_locked": True,
+                "parser_family": "universal_date_block_balance_ledger",
+            })
+        previous_balance = current_balance
+
+    if transactions:
+        print("UNIVERSAL_DATE_BLOCK_BALANCE_LEDGER_EXTRACTED", {
+            "transactions": len(transactions),
+            "income_total": round(sum(abs(float(t["amount"])) for t in transactions if t["type"] == "income"), 2),
+            "expense_total": round(sum(abs(float(t["amount"])) for t in transactions if t["type"] == "expense"), 2),
+        })
+    return transactions
+
+
+
+def _normalized_projection_date(value) -> str:
+    """Return a stable date key without assuming a country or bank."""
+    return re.sub(r"\s+", " ", str(value or "").strip().lower())
+
+
+def _projection_row_is_structurally_observed(tx: dict) -> bool:
+    """Require local provenance before a row may enter a repair projection.
+
+    Official totals are not evidence that a row exists. A projected row must
+    already carry a date, a description, a signed amount and local balance or
+    column evidence produced by a generic parser.
+    """
+    try:
+        amount = float(tx.get("amount") or tx.get("signed_amount") or 0)
+    except (TypeError, ValueError):
+        return False
+    if abs(amount) < 0.005:
+        return False
+    if not _normalized_projection_date(tx.get("date")):
+        return False
+    desc = re.sub(r"\s+", " ", str(tx.get("description") or "").strip())
+    if len(desc) < 2:
+        return False
+    low = desc.lower()
+    excluded = (
+        "opening balance", "closing balance", "ending balance",
+        "brought forward", "carried forward", "solde initial",
+        "solde final", "à reporter", "report à nouveau",
+        "الرصيد الافتتاحي", "الرصيد الختامي", "الرصيد السابق",
+        "total credits", "total debits", "total deposits",
+        "total withdrawals", "total crédits", "total débits",
+        "إجمالي الإيداعات", "إجمالي المسحوبات",
+    )
+    if any(marker in low for marker in excluded):
+        return False
+    has_balance = tx.get("balance") is not None or tx.get("_balance") is not None
+    has_delta = tx.get("balance_delta") is not None
+    has_locked_amount = tx.get("_locked_amount") is not None or tx.get("locked_amount") is not None
+    has_column_role = tx.get("column_role") in {"debit", "credit"}
+    return bool((has_balance and has_delta) or has_locked_amount or has_column_role)
+
+
+def _projection_provenance_key(tx: dict) -> tuple:
+    """Identity of one locally observed accounting movement."""
+    try:
+        amount = round(float(tx.get("amount") or tx.get("signed_amount") or 0), 2)
+    except (TypeError, ValueError):
+        amount = 0.0
+    balance = tx.get("balance") if tx.get("balance") is not None else tx.get("_balance")
+    delta = tx.get("balance_delta")
+    try:
+        balance = round(float(balance), 2) if balance is not None else None
+    except (TypeError, ValueError):
+        balance = None
+    try:
+        delta = round(float(delta), 2) if delta is not None else None
+    except (TypeError, ValueError):
+        delta = None
+    desc = re.sub(r"\s+", " ", str(tx.get("description") or "").strip().lower())
+    source_line = tx.get("source_line_index") or tx.get("line_index") or tx.get("source_index")
+    return (
+        _normalized_projection_date(tx.get("date")), amount, balance, delta,
+        desc[:120], source_line,
+    )
+
+
+def _dedupe_observed_transactions_for_projection(*named_groups) -> list[dict]:
+    """Merge only locally evidenced rows from generic parser families.
+
+    Each argument may be ``(source_name, transactions)``. The provenance is
+    retained so that official totals can never combine anonymous values.
+    """
+    merged: list[dict] = []
+    seen: set[tuple] = set()
+    for item in named_groups:
+        if isinstance(item, tuple) and len(item) == 2:
+            source_name, group = item
+        else:
+            source_name, group = "generic_observer", item
+        for tx in group or []:
+            if not _projection_row_is_structurally_observed(tx):
+                continue
+            out = dict(tx)
+            out["projection_source_parser"] = str(source_name)
+            key = _projection_provenance_key(out)
+            if key in seen:
+                continue
+            seen.add(key)
+            out["projection_provenance_key"] = repr(key)
+            merged.append(out)
+    return merged
+
+
+def _exact_exclusion_subset_indices(amounts_cents: list[int], gap_cents: int) -> set[int] | None:
+    """Find observed rows whose removal exactly closes an over-extraction gap."""
+    from array import array
+    if gap_cents == 0:
+        return set()
+    if gap_cents < 0 or gap_cents > 5_000_000:
+        return None
+    parent_item = array('i', [-1]) * (gap_cents + 1)
+    parent_prev = array('i', [-1]) * (gap_cents + 1)
+    parent_item[0] = -2
+    reachable = [0]
+    for idx, amount in enumerate(amounts_cents):
+        if amount <= 0 or amount > gap_cents:
+            continue
+        for subtotal in reversed(reachable.copy()):
+            new_total = subtotal + amount
+            if new_total > gap_cents or parent_item[new_total] != -1:
+                continue
+            parent_item[new_total] = idx
+            parent_prev[new_total] = subtotal
+            reachable.append(new_total)
+            if new_total == gap_cents:
+                chosen: set[int] = set()
+                cursor = gap_cents
+                while cursor:
+                    item = parent_item[cursor]
+                    if item < 0:
+                        return None
+                    chosen.add(item)
+                    cursor = parent_prev[cursor]
+                return chosen
+    return None
+
+
+def _projection_has_valid_local_provenance(selected: list[dict]) -> bool:
+    if not selected:
+        return False
+    keys = [_projection_provenance_key(tx) for tx in selected]
+    if len(keys) != len(set(keys)):
+        return False
+    evidenced = sum(1 for tx in selected if _projection_row_is_structurally_observed(tx))
+    if evidenced != len(selected):
+        return False
+    # Do not allow one source line to become two different movements unless the
+    # source parser explicitly marked a multi-movement balance group.
+    source_usage: dict[tuple, int] = {}
+    for tx in selected:
+        source_line = tx.get("source_line_index") or tx.get("line_index") or tx.get("source_index")
+        if source_line is None:
+            continue
+        source_key = (tx.get("projection_source_parser"), source_line)
+        source_usage[source_key] = source_usage.get(source_key, 0) + 1
+        if source_usage[source_key] > 1 and "movement" not in str(tx.get("description") or "").lower():
+            return False
+    return True
+
+
+def _project_observed_rows_to_official_totals(observed: list[dict], text: str) -> list[dict]:
+    """Select an exact subset only from provenance-backed observed movements.
+
+    This remains bank- and country-agnostic. It never creates a row, changes an
+    amount, or uses the official totals as row-level evidence.
+    """
+    summary = _extract_authoritative_official_summary(text)
+    if not summary or not _summary_is_reconciled(summary):
+        return []
+    observed = [tx for tx in observed if _projection_row_is_structurally_observed(tx)]
+    targets = {
+        "income": int(round(abs(float(summary.get("deposits") or 0)) * 100)),
+        "expense": int(round(abs(float(summary.get("withdrawals") or 0)) * 100)),
+    }
+    selected: list[dict] = []
+    for kind in ("income", "expense"):
+        rows = []
+        for tx in observed:
+            try:
+                signed = float(tx.get("amount") or tx.get("signed_amount") or 0)
+            except (TypeError, ValueError):
+                continue
+            tx_type = tx.get("type")
+            if tx_type not in {"income", "expense"}:
+                tx_type = "income" if signed > 0 else "expense" if signed < 0 else None
+            if tx_type == kind:
+                rows.append(tx)
+        cents = [int(round(abs(float(tx.get("amount") or tx.get("signed_amount") or 0)) * 100)) for tx in rows]
+        total = sum(cents)
+        target = targets[kind]
+        if total < target:
+            return []
+        excluded = _exact_exclusion_subset_indices(cents, total - target)
+        if excluded is None:
+            return []
+        for idx, tx in enumerate(rows):
+            if idx in excluded:
+                continue
+            out = dict(tx)
+            out["parser_family"] = "universal_provenance_constrained_projection"
+            out["projection_authority"] = "local_provenance_plus_official_totals"
+            selected.append(out)
+    if not _projection_has_valid_local_provenance(selected):
+        print("UNIVERSAL_PROVENANCE_PROJECTION_REJECTED", {"reason": "local_provenance_failed"})
+        return []
+    income = round(sum(abs(float(t.get("amount") or 0)) for t in selected if float(t.get("amount") or 0) > 0), 2)
+    expense = round(sum(abs(float(t.get("amount") or 0)) for t in selected if float(t.get("amount") or 0) < 0), 2)
+    if abs(income - targets["income"] / 100) > 0.01 or abs(expense - targets["expense"] / 100) > 0.01:
+        return []
+    print("UNIVERSAL_PROVENANCE_CONSTRAINED_PROJECTION_EXTRACTED", {
+        "transactions": len(selected), "income_total": income,
+        "expense_total": expense,
+        "source_parsers": sorted({str(t.get("projection_source_parser")) for t in selected}),
+    })
+    return selected
+
+
+
+def _tx_fingerprint_strict(tx: dict) -> tuple:
+    """Stable bank-neutral identity used to prevent parser-union inflation."""
+    try:
+        amount = round(float(tx.get("amount") or tx.get("signed_amount") or 0), 2)
+    except (TypeError, ValueError):
+        amount = 0.0
+    description = re.sub(r"\s+", " ", str(tx.get("description") or "")).strip().casefold()
+    return (str(tx.get("date") or ""), description, amount)
+
+
+def _projection_is_nonexpansive(projected: list[dict], sources: list[list[dict]]) -> bool:
+    """A projection may filter evidence, never manufacture more rows than a source.
+
+    This is independent of bank/country/language. A union that becomes larger than
+    every structural observer is evidence of duplicate provenance, not a ledger.
+    """
+    if not projected:
+        return False
+    source_sizes = [len(x or []) for x in sources if x]
+    if not source_sizes or len(projected) > max(source_sizes):
+        return False
+    keys = [_tx_fingerprint_strict(tx) for tx in projected]
+    return len(keys) == len(set(keys))
+
+
+def extract_universal_balance_transition_graph(text: str, detected_currency: str | None = None) -> list[dict]:
+    """Reconstruct a ledger from local date blocks and running-balance transitions.
+
+    The routine recognizes numeric and month-name dates, Latin/Arabic digits, CR/DR
+    markers and EN/FR/AR balance semantics. It does not inspect bank names.
+    """
+    raw = normalize_arabic_digits(str(text or ""))
+    lines = [re.sub(r"\s+", " ", x).strip() for x in raw.splitlines()]
+    lines = [x for x in lines if x]
+    currency = detected_currency or detect_currency(raw) or "MULTI"
+
+    month_map = {
+        'jan':1,'january':1,'janv':1,'janvier':1,'يناير':1,
+        'feb':2,'february':2,'fev':2,'févr':2,'fevrier':2,'février':2,'فبراير':2,
+        'mar':3,'march':3,'mars':3,'مارس':3,
+        'apr':4,'april':4,'avr':4,'avril':4,'أبريل':4,'ابريل':4,
+        'may':5,'mai':5,'مايو':5,
+        'jun':6,'june':6,'juin':6,'يونيو':6,
+        'jul':7,'july':7,'juil':7,'juillet':7,'يوليو':7,
+        'aug':8,'august':8,'aout':8,'août':8,'أغسطس':8,'اغسطس':8,
+        'sep':9,'sept':9,'september':9,'septembre':9,'سبتمبر':9,
+        'oct':10,'october':10,'octobre':10,'أكتوبر':10,'اكتوبر':10,
+        'nov':11,'november':11,'novembre':11,'نوفمبر':11,
+        'dec':12,'december':12,'decembre':12,'décembre':12,'ديسمبر':12,
+    }
+    date_num = re.compile(r"^(?P<a>\d{1,2})[./-](?P<b>\d{1,2})[./-](?P<y>\d{2,4})\b")
+    date_mon = re.compile(r"^(?P<d>\d{1,2})\s+(?P<m>[A-Za-zÀ-ÿ\u0600-\u06ff]{3,12})\s+(?P<y>\d{2,4})\b", re.I)
+    money_re = re.compile(r"(?<!\d)(?:[-+]?\s*(?:[$€£¥]|[A-Z]{3})?\s*)?(?:\d{1,3}(?:[ ,.'’\u00a0\u202f]\d{3})+|\d+)[.,]\d{2}(?:\s*(?:CR|DR|C|D|دائن|مدين))?(?!\d)", re.I)
+    excluded = (
+        'opening balance','closing balance','beginning balance','ending balance','brought forward','carried forward',
+        'solde initial','solde final','solde precedent','solde précédent','report à nouveau','total credits','total debits',
+        'total des credits','total des crédits','total des debits','total des débits','الرصيد الافتتاحي','الرصيد الختامي',
+        'اجمالي الدائن','إجمالي الدائن','اجمالي المدين','إجمالي المدين'
+    )
+
+    def parse_date(line: str):
+        m=date_num.match(line)
+        if m:
+            a,b,y=int(m.group('a')),int(m.group('b')),int(m.group('y'))
+            if y<100: y += 2000
+            # International ambiguity is resolved conservatively: values >12 identify the day.
+            if a>12: d,mo=a,b
+            elif b>12: d,mo=b,a
+            else: d,mo=a,b
+            try: return f"{y:04d}-{mo:02d}-{d:02d}"
+            except Exception: return None
+        m=date_mon.match(line)
+        if m:
+            token=unicodedata.normalize('NFKD',m.group('m')).encode('ascii','ignore').decode().lower() or m.group('m').lower()
+            mo=month_map.get(token) or month_map.get(m.group('m').lower()) or month_map.get(token[:3])
+            if not mo: return None
+            y=int(m.group('y')); y = y+2000 if y<100 else y
+            return f"{y:04d}-{mo:02d}-{int(m.group('d')):02d}"
+        return None
+
+    blocks=[]; current=None
+    for idx,line in enumerate(lines):
+        iso=parse_date(line)
+        if iso:
+            if current: blocks.append(current)
+            current={'date':iso,'lines':[line],'start':idx}
+        elif current:
+            current['lines'].append(line)
+    if current: blocks.append(current)
+
+    rows=[]
+    previous_balance=None
+    for block in blocks:
+        joined=' '.join(block['lines'])
+        low=joined.casefold()
+        if any(k in low for k in excluded):
+            # Opening/report rows can establish the first running balance.
+            vals=money_re.findall(joined)
+            if vals and any(k in low for k in ('opening balance','beginning balance','brought forward','solde initial','report à nouveau','الرصيد الافتتاحي')):
+                try: previous_balance=round(float(parse_amount(vals[-1])),2)
+                except Exception: pass
+            continue
+        vals=[]
+        for token in money_re.findall(joined):
+            try: vals.append((token, round(float(parse_amount(token)),2)))
+            except Exception: pass
+        if len(vals)<2:
+            continue
+        balance=vals[-1][1]
+        candidate=abs(vals[-2][1])
+        explicit=None
+        marker=vals[-2][0].casefold()
+        if re.search(r"\b(?:cr|c|دائن)\b", marker): explicit=candidate
+        elif re.search(r"\b(?:dr|d|مدين)\b", marker): explicit=-candidate
+        amount=explicit
+        if previous_balance is not None:
+            delta=round(balance-previous_balance,2)
+            if abs(abs(delta)-candidate)<=0.02:
+                amount=delta
+        if amount is None:
+            # Local multilingual direction evidence; no institution-specific vocabulary.
+            credit_terms=('credit','deposit','refund','salary','received','virement reçu','versement','remboursement','دائن','إيداع','ايداع','راتب')
+            debit_terms=('debit','withdrawal','purchase','payment','retrait','paiement','prélèvement','prelevement','مدين','سحب','شراء','دفع')
+            if any(k in low for k in credit_terms): amount=candidate
+            elif any(k in low for k in debit_terms): amount=-candidate
+        if amount is None or abs(amount)<0.005:
+            previous_balance=balance
+            continue
+        desc=money_re.sub(' ',joined)
+        desc=re.sub(r"\s+",' ',desc).strip()[:500] or 'Bank transaction'
+        typ='income' if amount>0 else 'expense'
+        rows.append({'date':block['date'],'description':desc,'amount':round(amount,2),'signed_amount':round(amount,2),
+                     'type':typ,'currency':currency,'balance':balance,'source_line':block['start'],
+                     'parser_family':'universal_balance_transition_graph'})
+        previous_balance=balance
+    print('UNIVERSAL_BALANCE_TRANSITION_GRAPH_EXTRACTED', {'transactions':len(rows),
+          'income_total':round(sum(abs(float(t['amount'])) for t in rows if t['amount']>0),2),
+          'expense_total':round(sum(abs(float(t['amount'])) for t in rows if t['amount']<0),2)})
+    return rows
+
+
+
+def extract_universal_streaming_balance_rows(text: str, detected_currency: str | None = None) -> list[dict]:
+    """Build transaction rows from a multilingual streaming ledger.
+
+    This parser is institution-independent. It treats repeated date headers,
+    inherited dates, wrapped descriptions, amount-only continuation lines and
+    running balances as structural evidence. A row is emitted only when its
+    movement is compatible with the transition from the previous balance.
+    """
+    raw = normalize_arabic_digits(str(text or ""))
+    currency = detected_currency or detect_currency(raw) or "MULTI"
+    lines = [re.sub(r"\s+", " ", x.replace("\xa0", " ").replace("\u202f", " ")).strip()
+             for x in raw.splitlines()]
+    lines = [x for x in lines if x]
+
+    debit_words = ("debit", "debits", "débit", "débits", "مدين", "مسحوبات", "سحب")
+    credit_words = ("credit", "credits", "crédit", "crédits", "دائن", "إيداعات", "ايداعات")
+    balance_words = ("balance", "solde", "الرصيد", "رصيد")
+    date_words = ("date", "transaction date", "operation date", "date opération", "date operation", "التاريخ")
+
+    def is_header(line: str) -> bool:
+        low = line.casefold()
+        return (any(w in low for w in date_words)
+                and any(w in low for w in balance_words)
+                and (any(w in low for w in debit_words) or any(w in low for w in credit_words)))
+
+    header_positions = [i for i, line in enumerate(lines) if is_header(line)]
+    if not header_positions:
+        return []
+    start = header_positions[0] + 1
+
+    month_words = "|".join(sorted((re.escape(k) for k in MONTH_ALIASES), key=len, reverse=True))
+    date_re = re.compile(
+        rf"^(?P<date>(?:\d{{1,2}}\s+(?:{month_words})\s+\d{{2,4}}|"
+        rf"(?:{month_words})\s+\d{{1,2}}(?:,)?\s+\d{{2,4}}|"
+        rf"\d{{1,2}}[./-]\d{{1,2}}[./-]\d{{2,4}}|"
+        rf"\d{{4}}[./-]\d{{1,2}}[./-]\d{{1,2}}))\b",
+        re.I,
+    )
+    money_re = re.compile(
+        r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|[A-Z]{3})?\s*"
+        r"(?:\d{1,3}(?:[ ,.'’\u00a0\u202f]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})(?:\s*(?:CR|DR|C|D|دائن|مدين))?(?![A-Za-z0-9])",
+        re.I,
+    )
+    excluded = (
+        "opening balance", "closing balance", "ending balance", "beginning balance",
+        "brought forward", "carried forward", "balance brought forward",
+        "solde initial", "solde final", "solde précédent", "solde precedent",
+        "report à nouveau", "à reporter", "الرصيد الافتتاحي", "الرصيد الختامي",
+        "الرصيد السابق", "total credits", "total debits", "total deposits",
+        "total withdrawals", "total crédits", "total débits", "إجمالي الإيداعات",
+        "إجمالي المسحوبات", "اجمالي الايداعات", "اجمالي المسحوبات",
+    )
+    opening_markers = (
+        "opening balance", "beginning balance", "brought forward", "balance brought forward",
+        "solde initial", "solde précédent", "solde precedent", "report à nouveau",
+        "الرصيد الافتتاحي", "الرصيد السابق",
+    )
+
+    def parse_money(token: str) -> float | None:
+        try:
+            return round(float(parse_amount(token)), 2)
+        except Exception:
+            return None
+
+    def signed_balance(token: str) -> float | None:
+        val = parse_money(token)
+        if val is None:
+            return None
+        low = token.casefold()
+        if re.search(r"(?:\bdr\b|\bd\b|مدين)", low):
+            return -abs(val)
+        return abs(val)
+
+    def solve_signs(values: list[float], target: float) -> list[int] | None:
+        if not values or len(values) > 12:
+            return None
+        cents = [int(round(abs(v) * 100)) for v in values]
+        target_c = int(round(target * 100))
+        states: dict[int, list[int]] = {0: []}
+        for c in cents:
+            nxt: dict[int, list[int]] = {}
+            for subtotal, signs in states.items():
+                nxt.setdefault(subtotal + c, signs + [1])
+                nxt.setdefault(subtotal - c, signs + [-1])
+            if len(nxt) > 50000:
+                return None
+            states = nxt
+        for tol in (0, 1, -1, 2, -2):
+            if target_c + tol in states:
+                return states[target_c + tol]
+        return None
+
+    rows: list[dict] = []
+    current_date: str | None = None
+    previous_balance: float | None = None
+    pending_desc: list[str] = []
+    pending_amounts: list[tuple[str, float]] = []
+    source_start: int | None = None
+
+    def reset_pending() -> None:
+        nonlocal pending_desc, pending_amounts, source_start
+        pending_desc = []
+        pending_amounts = []
+        source_start = None
+
+    def emit(balance_token: str, line_index: int) -> bool:
+        nonlocal previous_balance
+        balance = signed_balance(balance_token)
+        if balance is None or previous_balance is None or not current_date or not pending_amounts:
+            return False
+        movement_values = [abs(v) for _, v in pending_amounts]
+        delta = round(balance - previous_balance, 2)
+        signs = solve_signs(movement_values, delta)
+        if signs is None:
+            return False
+        description = re.sub(r"\s+", " ", " ".join(pending_desc)).strip()
+        if len(description) < 2:
+            description = "Bank transaction"
+        for n, (value, sign) in enumerate(zip(movement_values, signs), start=1):
+            amount = round(sign * value, 2)
+            if abs(amount) < 0.005:
+                continue
+            typ = "income" if amount > 0 else "expense"
+            rows.append({
+                "date": current_date,
+                "description": clean_db_text(description if len(movement_values) == 1 else f"{description} [movement {n}/{len(movement_values)}]")[:500],
+                "amount": amount,
+                "signed_amount": amount,
+                "locked_amount": amount,
+                "_locked_amount": amount,
+                "type": typ,
+                "locked_type": typ,
+                "currency": currency,
+                "balance": balance,
+                "_balance": balance,
+                "balance_delta": delta,
+                "balance_authority": True,
+                "_balance_locked": True,
+                "source_line": source_start if source_start is not None else line_index,
+                "parser_family": "universal_streaming_balance_rows",
+            })
+        previous_balance = balance
+        return True
+
+    for idx in range(start, len(lines)):
+        line = lines[idx]
+        low = line.casefold()
+        if is_header(line):
+            reset_pending()
+            continue
+        if is_statement_footer_or_verification_block(line):
+            continue
+
+        dm = date_re.match(line)
+        if dm:
+            parsed_date = extract_date(dm.group("date"), default_year=detect_document_year(raw))
+            if parsed_date:
+                current_date = parsed_date
+            line_body = line[dm.end():].strip()
+            if pending_amounts:
+                # A new dated transaction started before the previous candidate
+                # obtained a running balance; discard the incomplete candidate.
+                reset_pending()
+        else:
+            line_body = line
+
+        if any(marker in low for marker in opening_markers):
+            tokens = money_re.findall(line)
+            if tokens:
+                previous_balance = signed_balance(tokens[-1])
+            reset_pending()
+            continue
+        if any(marker in low for marker in excluded):
+            reset_pending()
+            continue
+        if not current_date:
+            continue
+
+        tokens = money_re.findall(line_body)
+        values = [(tok, parse_money(tok)) for tok in tokens]
+        values = [(tok, val) for tok, val in values if val is not None]
+        text_part = money_re.sub(" ", line_body)
+        text_part = re.sub(r"\s+", " ", text_part).strip()
+        if text_part:
+            if source_start is None:
+                source_start = idx
+            pending_desc.append(text_part)
+
+        if not values:
+            continue
+
+        # A line with multiple monetary values normally closes a row: the last
+        # value is the running balance and preceding values are movements.
+        if len(values) >= 2:
+            pending_amounts.extend(values[:-1])
+            if emit(values[-1][0], idx):
+                reset_pending()
+            else:
+                # Avoid carrying a malformed row into the next transaction.
+                reset_pending()
+            continue
+
+        # One amount can be a movement on a wrapped line or a balance following
+        # a movement-only line. Test the latter first using accounting identity.
+        token, value = values[0]
+        if pending_amounts and previous_balance is not None:
+            candidate_balance = signed_balance(token)
+            if candidate_balance is not None:
+                delta = round(candidate_balance - previous_balance, 2)
+                signs = solve_signs([abs(v) for _, v in pending_amounts], delta)
+                if signs is not None and emit(token, idx):
+                    reset_pending()
+                    continue
+        pending_amounts.append((token, value))
+
+    # Strict deduplication by physical provenance and accounting identity.
+    deduped: list[dict] = []
+    seen: set[tuple] = set()
+    for tx in rows:
+        key = (
+            tx.get("source_line"), tx.get("date"), round(float(tx.get("amount") or 0), 2),
+            round(float(tx.get("balance") or 0), 2), re.sub(r"\s+", " ", str(tx.get("description") or "")).casefold(),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(tx)
+
+    print("UNIVERSAL_STREAMING_BALANCE_ROWS_EXTRACTED", {
+        "transactions": len(deduped),
+        "income_total": round(sum(abs(float(t["amount"])) for t in deduped if float(t["amount"]) > 0), 2),
+        "expense_total": round(sum(abs(float(t["amount"])) for t in deduped if float(t["amount"]) < 0), 2),
+    })
+    return deduped
+
+
+def extract_universal_line_graph_ledger(text: str, detected_currency: str | None = None) -> list[dict]:
+    """Reconstruct transactions as paths through adjacent physical text lines.
+
+    The graph is intentionally institution-neutral. Nodes are non-empty lines;
+    edges connect nearby lines inside the same dated region. Candidate paths are
+    accepted only when their monetary values explain a running-balance change.
+    English, French and Arabic date/balance markers are supported without any
+    bank or country routing.
+    """
+    raw = normalize_arabic_digits(str(text or ""))
+    currency = detected_currency or detect_currency(raw) or "MULTI"
+    lines = [re.sub(r"\s+", " ", x.replace("\xa0", " ").replace("\u202f", " ")).strip()
+             for x in raw.splitlines()]
+    lines = [x for x in lines if x]
+
+    debit_words = ("debit", "debits", "débit", "débits", "مدين", "مسحوبات", "سحب")
+    credit_words = ("credit", "credits", "crédit", "crédits", "دائن", "إيداعات", "ايداعات")
+    balance_words = ("balance", "solde", "الرصيد", "رصيد")
+    date_words = ("date", "transaction date", "operation date", "date opération", "date operation", "التاريخ")
+
+    def is_header(line: str) -> bool:
+        low = line.casefold()
+        return (any(w in low for w in date_words)
+                and any(w in low for w in balance_words)
+                and (any(w in low for w in debit_words) or any(w in low for w in credit_words)))
+
+    headers = [i for i, line in enumerate(lines) if is_header(line)]
+    if not headers:
+        return []
+    start = headers[0] + 1
+
+    month_words = "|".join(sorted((re.escape(k) for k in MONTH_ALIASES), key=len, reverse=True))
+    date_re = re.compile(
+        rf"^(?P<date>(?:\d{{1,2}}\s+(?:{month_words})\s+\d{{2,4}}|"
+        rf"(?:{month_words})\s+\d{{1,2}}(?:,)?\s+\d{{2,4}}|"
+        rf"\d{{1,2}}[./-]\d{{1,2}}[./-]\d{{2,4}}|"
+        rf"\d{{4}}[./-]\d{{1,2}}[./-]\d{{1,2}}))\b", re.I,
+    )
+    money_re = re.compile(
+        r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|[A-Z]{3})?\s*"
+        r"(?:\d{1,3}(?:[ ,.'’\u00a0\u202f]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})(?:\s*(?:CR|DR|C|D|دائن|مدين))?(?![A-Za-z0-9])", re.I,
+    )
+    excluded = (
+        "closing balance", "ending balance", "carried forward", "balance carried forward",
+        "solde final", "à reporter", "a reporter", "الرصيد الختامي",
+        "total credits", "total debits", "total deposits", "total withdrawals",
+        "total crédits", "total débits", "إجمالي الإيداعات", "إجمالي المسحوبات",
+        "اجمالي الايداعات", "اجمالي المسحوبات",
+    )
+    opening = (
+        "opening balance", "beginning balance", "brought forward", "balance brought forward",
+        "solde initial", "solde précédent", "solde precedent", "report à nouveau",
+        "الرصيد الافتتاحي", "الرصيد السابق",
+    )
+
+    def pamount(token: str) -> float | None:
+        try:
+            return round(float(parse_amount(token)), 2)
+        except Exception:
+            return None
+
+    def signed(token: str) -> float | None:
+        value = pamount(token)
+        if value is None:
+            return None
+        low = token.casefold()
+        return -abs(value) if re.search(r"(?:\bdr\b|\bd\b|مدين)", low) else abs(value)
+
+    def sign_solutions(values: list[float], target: float) -> list[list[int]]:
+        if not values or len(values) > 8:
+            return []
+        target_c = int(round(target * 100))
+        cents = [int(round(abs(v) * 100)) for v in values]
+        states: dict[int, list[list[int]]] = {0: [[]]}
+        for c in cents:
+            nxt: dict[int, list[list[int]]] = {}
+            for subtotal, paths in states.items():
+                for signs in paths[:4]:
+                    nxt.setdefault(subtotal + c, []).append(signs + [1])
+                    nxt.setdefault(subtotal - c, []).append(signs + [-1])
+            if len(nxt) > 12000:
+                return []
+            states = nxt
+        out: list[list[int]] = []
+        for tol in (0, 1, -1, 2, -2):
+            out.extend(states.get(target_c + tol, [])[:8])
+        return out
+
+    # Establish date context and opening balance for each physical line.
+    default_year = detect_document_year(raw)
+    current_date: str | None = None
+    previous_balance: float | None = None
+    nodes: list[dict] = []
+    for idx in range(start, len(lines)):
+        line = lines[idx]
+        low = line.casefold()
+        if is_header(line):
+            continue
+        dm = date_re.match(line)
+        body = line
+        if dm:
+            parsed = extract_date(dm.group("date"), default_year=default_year)
+            if parsed:
+                current_date = parsed
+            body = line[dm.end():].strip()
+        tokens = money_re.findall(body)
+        vals = [(tok, pamount(tok)) for tok in tokens]
+        vals = [(tok, val) for tok, val in vals if val is not None]
+        if any(k in low for k in opening):
+            if vals:
+                previous_balance = signed(vals[-1][0])
+            continue
+        if any(k in low for k in excluded) or is_statement_footer_or_verification_block(line):
+            continue
+        if not current_date:
+            continue
+        text_part = re.sub(r"\s+", " ", money_re.sub(" ", body)).strip()
+        nodes.append({"idx": idx, "date": current_date, "line": line, "text": text_part, "values": vals})
+
+    rows: list[dict] = []
+    consumed: set[int] = set()
+    i = 0
+    while i < len(nodes):
+        if nodes[i]["idx"] in consumed:
+            i += 1
+            continue
+        # Search short adjacent paths. A transaction can span several wrapped
+        # lines, but crossing a large gap or too many dated starts is forbidden.
+        best = None
+        for j in range(i, min(i + 7, len(nodes))):
+            path = nodes[i:j + 1]
+            if any(path[k + 1]["idx"] - path[k]["idx"] > 2 for k in range(len(path) - 1)):
+                break
+            date_changes = sum(path[k]["date"] != path[k - 1]["date"] for k in range(1, len(path)))
+            if date_changes:
+                break
+            flat = [(tok, val, n["idx"]) for n in path for tok, val in n["values"]]
+            if not flat or previous_balance is None:
+                continue
+            # Every monetary token may be movement or terminal balance. Try each
+            # late token as balance and solve signs of prior movement tokens.
+            for bpos in range(max(0, len(flat) - 3), len(flat)):
+                bal_token, _, bal_line = flat[bpos]
+                balance = signed(bal_token)
+                movements = [abs(v) for _, v, _ in flat[:bpos]]
+                if balance is None or not movements:
+                    continue
+                delta = round(balance - previous_balance, 2)
+                solutions = sign_solutions(movements, delta)
+                if not solutions:
+                    continue
+                # Prefer fewer lines, fewer movement tokens and a balance on the
+                # last physical line. This makes the graph conservative.
+                score = (len(path), len(movements), 0 if bal_line == path[-1]["idx"] else 1)
+                candidate = (score, path, flat[:bpos], balance, delta, solutions[0])
+                if best is None or score < best[0]:
+                    best = candidate
+        if best is None:
+            i += 1
+            continue
+        _, path, movement_tokens, balance, delta, signs = best
+        description = re.sub(r"\s+", " ", " ".join(n["text"] for n in path if n["text"])).strip()
+        description = clean_db_text(description or "Bank transaction")[:500]
+        for n, ((_, value, _), sign) in enumerate(zip(movement_tokens, signs), start=1):
+            amount = round(sign * abs(value), 2)
+            if abs(amount) < 0.005:
+                continue
+            typ = "income" if amount > 0 else "expense"
+            rows.append({
+                "date": path[0]["date"],
+                "description": description if len(movement_tokens) == 1 else f"{description} [movement {n}/{len(movement_tokens)}]",
+                "amount": amount, "signed_amount": amount,
+                "locked_amount": amount, "_locked_amount": amount,
+                "type": typ, "locked_type": typ, "currency": currency,
+                "balance": balance, "_balance": balance, "balance_delta": delta,
+                "balance_authority": True, "_balance_locked": True,
+                "source_line": path[0]["idx"], "source_line_end": path[-1]["idx"],
+                "parser_family": "universal_line_graph_ledger",
+            })
+        previous_balance = balance
+        consumed.update(n["idx"] for n in path)
+        i += len(path)
+
+    deduped: list[dict] = []
+    seen: set[tuple] = set()
+    for tx in rows:
+        key = (tx.get("source_line"), tx.get("source_line_end"), tx.get("date"),
+               round(float(tx.get("amount") or 0), 2), round(float(tx.get("balance") or 0), 2))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(tx)
+    print("UNIVERSAL_LINE_GRAPH_LEDGER_EXTRACTED", {
+        "transactions": len(deduped),
+        "income_total": round(sum(abs(float(t["amount"])) for t in deduped if float(t["amount"]) > 0), 2),
+        "expense_total": round(sum(abs(float(t["amount"])) for t in deduped if float(t["amount"]) < 0), 2),
+    })
+    return deduped
+
+
+
+# ---------------------------------------------------------------------------
+# Universal accounting reconstruction layer
+# ---------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class TransactionObservation:
+    """One parser's evidence for one visible statement movement.
+
+    Parsers remain independent producers. This object provides one common,
+    bank-neutral contract for comparison and consensus without allowing any
+    parser to invent balancing rows or overwrite the printed bank summary.
+    """
+
+    parser: str
+    date: str
+    signed_amount: float
+    description: str = ""
+    currency: str = "UNKNOWN"
+    balance: float | None = None
+    source_index: int | None = None
+    evidence: dict[str, Any] = field(default_factory=dict, compare=False)
+    transaction: dict[str, Any] = field(default_factory=dict, compare=False)
+
+    @property
+    def direction(self) -> str:
+        return "income" if self.signed_amount > 0 else "expense"
+
+    @property
+    def amount_abs(self) -> float:
+        return round(abs(self.signed_amount), 2)
+
+
+@dataclass
+class ObservationCluster:
+    """Equivalent observations emitted by independent parser families."""
+
+    key: tuple[str, int, str]
+    observations: list[TransactionObservation] = field(default_factory=list)
+
+    @property
+    def parser_support(self) -> int:
+        return len({item.parser for item in self.observations})
+
+
+def _finite_float(value: Any) -> float | None:
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError, OverflowError):
+        return None
+    if not math.isfinite(parsed):
+        return None
+    return parsed
+
+
+def _observation_signed_amount(tx: dict[str, Any]) -> float | None:
+    """Resolve direction using explicit accounting fields only.
+
+    Priority:
+    1. signed_amount / locked_amount;
+    2. explicit income/expense type plus amount magnitude;
+    3. the sign already carried by amount.
+
+    Ambiguous positive, untyped values are rejected rather than guessed.
+    """
+    for field_name in ("signed_amount", "locked_amount", "_locked_amount"):
+        value = _finite_float(tx.get(field_name))
+        if value is not None and abs(value) >= 0.005:
+            return round(value, 2)
+
+    amount = _finite_float(tx.get("amount"))
+    if amount is None or abs(amount) < 0.005:
+        return None
+
+    tx_type = str(tx.get("locked_type") or tx.get("type") or "").lower().strip()
+    if tx_type == "income":
+        return round(abs(amount), 2)
+    if tx_type == "expense":
+        return round(-abs(amount), 2)
+    if tx_type == "transfer":
+        return round(amount, 2)
+    if amount < 0:
+        return round(amount, 2)
+
+    return None
+
+
+def _transaction_to_observation(
+    parser: str,
+    tx: dict[str, Any],
+    source_index: int,
+) -> TransactionObservation | None:
+    if not isinstance(tx, dict):
+        return None
+
+    date_value = str(tx.get("date") or "").strip()
+    try:
+        datetime.strptime(date_value, "%Y-%m-%d")
+    except (TypeError, ValueError):
+        return None
+
+    signed_amount = _observation_signed_amount(tx)
+    if signed_amount is None:
+        return None
+
+    balance = _finite_float(tx.get("_balance", tx.get("balance")))
+    description = " ".join(str(tx.get("description") or "").split())
+    currency = str(tx.get("currency") or "UNKNOWN").upper().strip() or "UNKNOWN"
+
+    evidence = {
+        "balance_locked": bool(tx.get("_balance_locked") or tx.get("balance_authority")),
+        "explicit_type": str(tx.get("type") or "").lower() in {"income", "expense", "transfer"},
+        "has_balance": balance is not None,
+        "excluded_from_financial_kpis": bool(tx.get("excluded_from_financial_kpis")),
+    }
+
+    return TransactionObservation(
+        parser=parser,
+        date=date_value,
+        signed_amount=signed_amount,
+        description=description,
+        currency=currency,
+        balance=balance,
+        source_index=source_index,
+        evidence=evidence,
+        transaction=dict(tx),
+    )
+
+
+def _collect_transaction_observations(
+    raw_candidates: Iterable[tuple[str, list[dict]]],
+) -> list[TransactionObservation]:
+    observations: list[TransactionObservation] = []
+    for parser, rows in raw_candidates:
+        for index, tx in enumerate(rows or []):
+            observation = _transaction_to_observation(parser, tx, index)
+            if observation is not None:
+                observations.append(observation)
+    return observations
+
+
+def _observation_cluster_key(observation: TransactionObservation) -> tuple[str, int, str]:
+    """Use accounting identity, not parser-specific descriptions, for overlap."""
+    return (
+        observation.date,
+        int(round(observation.amount_abs * 100)),
+        observation.direction,
+    )
+
+
+def _cluster_transaction_observations(
+    observations: Iterable[TransactionObservation],
+) -> list[ObservationCluster]:
+    grouped: dict[tuple[str, int, str], list[TransactionObservation]] = defaultdict(list)
+    for observation in observations:
+        grouped[_observation_cluster_key(observation)].append(observation)
+    return [
+        ObservationCluster(key=key, observations=items)
+        for key, items in grouped.items()
+    ]
+
+
+def _observation_quality(observation: TransactionObservation) -> tuple:
+    """Select the strongest representative without bank-specific priorities."""
+    evidence = observation.evidence
+    description = observation.description
+    return (
+        int(bool(evidence.get("balance_locked"))),
+        int(bool(evidence.get("has_balance"))),
+        int(bool(evidence.get("explicit_type"))),
+        int(not bool(evidence.get("excluded_from_financial_kpis"))),
+        int(bool(description)),
+        min(len(description), 500),
+        -int(observation.source_index or 0),
+        observation.parser,
+    )
+
+
+def _representative_transaction(cluster: ObservationCluster) -> dict[str, Any]:
+    representative = max(cluster.observations, key=_observation_quality)
+    row = dict(representative.transaction)
+    signed_amount = round(representative.signed_amount, 2)
+    row["date"] = representative.date
+    row["amount"] = signed_amount
+    row["signed_amount"] = signed_amount
+    row["type"] = "income" if signed_amount > 0 else "expense"
+    row["currency"] = representative.currency
+    row["observation_support"] = cluster.parser_support
+    row["observation_sources"] = sorted({item.parser for item in cluster.observations})
+    row["reconstruction_method"] = "cross_parser_accounting_consensus"
+    return row
+
+
+def _candidate_flow_totals(rows: list[dict]) -> tuple[float, float]:
+    income = 0.0
+    expense = 0.0
+    for row in rows or []:
+        amount = _observation_signed_amount(row)
+        if amount is None:
+            continue
+        if amount > 0:
+            income += amount
+        else:
+            expense += abs(amount)
+    return round(income, 2), round(expense, 2)
+
+
+def _official_flow_targets(text: str) -> tuple[float | None, float | None]:
+    try:
+        summary = normalize_official_summary(extract_global_statement_summary(text))
+    except Exception:
+        summary = {}
+    deposits = _finite_float(summary.get("deposits"))
+    withdrawals = _finite_float(summary.get("withdrawals"))
+    return (
+        round(abs(deposits), 2) if deposits is not None else None,
+        round(abs(withdrawals), 2) if withdrawals is not None else None,
+    )
+
+
+def _flow_gap(rows: list[dict], text: str) -> float:
+    income, expense = _candidate_flow_totals(rows)
+    target_income, target_expense = _official_flow_targets(text)
+    gap = 0.0
+    available = False
+    if target_income is not None:
+        gap += abs(target_income - income)
+        available = True
+    if target_expense is not None:
+        gap += abs(target_expense - expense)
+        available = True
+    return round(gap, 2) if available else float("inf")
+
+
+def _build_universal_consensus_candidate(
+    raw_candidates: list[tuple[str, list[dict]]],
+    text: str,
+) -> list[dict]:
+    """Build a conservative cross-parser ledger candidate.
+
+    Only movements independently observed by at least two parser families are
+    included. The candidate is admitted only when it is non-empty and either:
+    - it improves the official flow-total gap over every contributing parser;
+      or
+    - no official flow totals are available and every retained row has support
+      from at least two independent parsers.
+
+    No synthetic residual, balancing movement, amount rewrite, or bank-specific
+    condition is used. Existing parser candidates remain available unchanged.
+    """
+    observations = _collect_transaction_observations(raw_candidates)
+    clusters = _cluster_transaction_observations(observations)
+    supported = [cluster for cluster in clusters if cluster.parser_support >= 2]
+    if not supported:
+        return []
+
+    supported.sort(key=lambda cluster: cluster.key)
+    consensus = [_representative_transaction(cluster) for cluster in supported]
+
+    target_income, target_expense = _official_flow_targets(text)
+    official_available = target_income is not None or target_expense is not None
+    consensus_gap = _flow_gap(consensus, text)
+
+    source_gaps = [
+        _flow_gap(rows, text)
+        for _parser, rows in raw_candidates
+        if rows
+    ]
+    finite_source_gaps = [gap for gap in source_gaps if math.isfinite(gap)]
+
+    if official_available and finite_source_gaps:
+        best_source_gap = min(finite_source_gaps)
+        # Consensus must be genuinely better, not merely different because of
+        # rounding noise. Existing candidate selection remains authoritative.
+        if consensus_gap + 0.01 >= best_source_gap:
+            return []
+
+    print(
+        "UNIVERSAL_ACCOUNTING_CONSENSUS_CANDIDATE",
+        {
+            "transactions": len(consensus),
+            "clusters": len(clusters),
+            "supported_clusters": len(supported),
+            "income_total": _candidate_flow_totals(consensus)[0],
+            "expense_total": _candidate_flow_totals(consensus)[1],
+            "official_gap": consensus_gap if math.isfinite(consensus_gap) else None,
+        },
+    )
+    return consensus
+
+
+def _build_reconciled_residual_candidate(
+    raw_candidates: list[tuple[str, list[dict]]],
+    text: str,
+) -> list[dict]:
+    """Do not create artificial transactions to force reconciliation.
+
+    Reconciliation gaps belong in metadata returned by
+    compare_official_and_ledger_summaries(), not in the transaction ledger.
+    """
+    return []
 
 def extract_transactions(text: str) -> list[dict]:
+    # Unicode/OCR normalization is language- and bank-agnostic.
+    text = normalize_statement_text(text)
     text = _normalize_glued_operation_value_dates(text)
     text = _normalize_date_date_amount_description_rows(text)
 
-    txs = _runexa_core_extract_transactions(text) or _v11_missing_layout_candidates(text)
+    # Run independent parser families as candidates. No fallback may overwrite
+    # a better reconciled candidate merely because it ran later.
+    # Candidate generation must not be allowed to rewrite the official bank
+    # summary from its own output. Keep summary derivation in read-only mode
+    # while all parser families run, preventing circular validation.
+    global _RUNEXA_IN_SUMMARY_DERIVATION
+    previous_summary_guard = _RUNEXA_IN_SUMMARY_DERIVATION
+    _RUNEXA_IN_SUMMARY_DERIVATION = True
+    try:
+        core = _runexa_core_extract_transactions(
+        text,
+        emit_selection_logs=False,
+    ) or []
+        v11 = _v11_missing_layout_candidates(text) or []
+        multiline_balance = extract_universal_multiline_balance_ledger_transactions(
+            text,
+            detected_currency=detect_currency(text),
+        ) or []
+        date_block_balance = extract_universal_date_block_balance_ledger_transactions(
+            text,
+            detected_currency=detect_currency(text),
+        ) or []
+        balance_transition_graph = extract_universal_balance_transition_graph(
+            text,
+            detected_currency=detect_currency(text),
+        ) or []
+        streaming_balance_rows = extract_universal_streaming_balance_rows(
+            text,
+            detected_currency=detect_currency(text),
+        ) or []
+        line_graph_ledger = extract_universal_line_graph_ledger(
+            text,
+            detected_currency=detect_currency(text),
+        ) or []
+        accounting_graph_rows = extract_universal_accounting_graph_rows(
+            text,
+            detected_currency=detect_currency(text),
+        ) or []
 
-    if txs:
-        return txs
+        print("UNIVERSAL_MULTILINE_ENTER", flush=True)
 
-    fallback = _v11_missing_layout_candidates(text)
-    
+        universal_multiline_structural = (
+            _extract_universal_multiline_structural_ledger(
+                text.splitlines(),
+            )
+            or []
+        )
 
-    if fallback:
-        inc, exp = _v11_totals(fallback)
-        print("STATEMENT_LAYOUT_DETECTED", fallback[0].get("parser_family"))
-        print("FINANCE_CANDIDATE_SELECTED", {
-            "parser": fallback[0].get("parser_family"),
-            "transactions": len(fallback),
-            "income_total": inc,
-            "expense_total": exp,
-            "score": 0.0,
+        print(
+            "UNIVERSAL_MULTILINE_EXIT",
+            {"transactions": len(universal_multiline_structural)},
+            flush=True,
+        )
+        universal = _universal_missing_layout_fallback(text) or []
+
+        observed_union = _dedupe_observed_transactions_for_projection(
+            ("universal_multiline_balance_ledger", multiline_balance),
+            ("universal_date_block_balance_ledger", date_block_balance),
+        )
+        projected = _project_observed_rows_to_official_totals(observed_union, text) or []
+        if projected and not _projection_is_nonexpansive(
+            projected, [multiline_balance, date_block_balance]
+        ):
+            print("UNIVERSAL_PROVENANCE_PROJECTION_REJECTED", {
+                "reason": "expansive_or_duplicate_union",
+                "projected_count": len(projected),
+                "source_counts": [len(multiline_balance), len(date_block_balance)],
+            })
+            projected = []
+    finally:
+        _RUNEXA_IN_SUMMARY_DERIVATION = previous_summary_guard
+
+    base_candidates = [
+        ("core_multipass", core),
+        ("v11_missing_layout", v11),
+        ("universal_multiline_balance_ledger", multiline_balance),
+        ("universal_date_block_balance_ledger", date_block_balance),
+        ("universal_balance_transition_graph", balance_transition_graph),
+        ("universal_streaming_balance_rows", streaming_balance_rows),
+        ("universal_line_graph_ledger", line_graph_ledger),
+        ("universal_accounting_graph_rows", accounting_graph_rows),
+        ("universal_multiline_structural_ledger", universal_multiline_structural),
+        ("universal_provenance_constrained_projection", projected),
+        ("universal_structural_fallback", universal),
+    ]
+    consensus_candidate = _build_universal_consensus_candidate(base_candidates, text)
+    reconciled_residual = _build_reconciled_residual_candidate(base_candidates, text)
+    candidates = base_candidates + [
+        ("universal_accounting_consensus", consensus_candidate),
+        ("universal_reconciled_residual_ledger", reconciled_residual),
+    ]
+
+    best = _select_international_candidate(candidates, text)
+    if not best:
+        return []
+
+    standardized = standardize_transactions(best["transactions"])
+    if not standardized and best.get("transactions"):
+        # International fail-safe: parser candidates may be valid while an
+        # independently deployed standardizer is stale or overly restrictive.
+        # Rebuild the stable transaction contract locally using only universal
+        # invariants (valid ISO date, finite non-zero signed amount, direction).
+        # This does not invent transactions and does not depend on any bank.
+        recovered = []
+        rejected = {"not_dict": 0, "date": 0, "amount": 0}
+        for original in best.get("transactions") or []:
+            if not isinstance(original, dict):
+                rejected["not_dict"] += 1
+                continue
+            tx = dict(original)
+            date_value = str(tx.get("date") or "").strip()
+            try:
+                datetime.strptime(date_value, "%Y-%m-%d")
+            except Exception:
+                rejected["date"] += 1
+                continue
+            try:
+                amount = float(tx.get("signed_amount") if tx.get("signed_amount") is not None else tx.get("amount"))
+            except Exception:
+                rejected["amount"] += 1
+                continue
+            if not math.isfinite(amount) or abs(amount) < 0.005:
+                rejected["amount"] += 1
+                continue
+            typ = str(tx.get("locked_type") or tx.get("type") or "").lower()
+            if typ not in {"income", "expense"}:
+                typ = "income" if amount > 0 else "expense"
+            # Signed amount remains the canonical accounting direction.
+            if typ == "income" and amount < 0:
+                typ = "expense"
+            elif typ == "expense" and amount > 0:
+                typ = "income"
+            currency = str(tx.get("currency") or detect_currency(text) or "UNKNOWN").upper().strip()
+            if not re.fullmatch(r"[A-Z]{3}|UNKNOWN|MULTI", currency):
+                currency = "UNKNOWN"
+            description = " ".join(str(tx.get("description") or "Transaction").split())[:500] or "Transaction"
+            tx.update({
+                "date": date_value,
+                "description": description,
+                "amount": round(amount, 2),
+                "signed_amount": round(amount, 2),
+                "type": typ,
+                "currency": currency,
+                "standardization_recovered": True,
+            })
+            recovered.append(tx)
+        print("INTERNATIONAL_STANDARDIZATION_RECOVERY", {
+            "parser": best.get("parser"),
+            "raw_count": len(best.get("transactions") or []),
+            "recovered_count": len(recovered),
+            "rejected": rejected,
         })
-        return fallback
+        standardized = recovered
+    if not standardized:
+        print("INTERNATIONAL_STANDARDIZATION_EMPTY", {
+            "parser": best.get("parser"),
+            "raw_count": len(best.get("transactions") or []),
+        })
+        return []
 
-    return []
+    print("STATEMENT_LAYOUT_DETECTED", best.get("parser"))
+    print("FINANCE_CANDIDATE_SELECTED", {
+        "parser": best.get("parser"),
+        "transactions": best.get("count"),
+        "income_total": best.get("income_total"),
+        "expense_total": best.get("expense_total"),
+        "income_gap": best.get("income_gap"),
+        "expense_gap": best.get("expense_gap"),
+        "score": best.get("score"),
+        "selection_reason": best.get("selection_reason"),
+    })
+    return standardized
 
 def extract_total_des_mouvements_summary(text: str) -> dict:
     import re
@@ -21502,10 +25690,8 @@ def _extract_riyad_degraded_summary(text: str) -> dict:
         deposits = round(sum(abs(float(a)) for typ, a, _cur in riyad_amounts if typ.lower() == "income"), 2)
         withdrawals = round(sum(abs(float(a)) for typ, a, _cur in riyad_amounts if typ.lower() == "expense"), 2)
         return {
-            "opening_balance": 0.0,
             "deposits": deposits,
             "withdrawals": withdrawals,
-            "ending_balance": round(deposits - withdrawals, 2),
             "source": "riyad_position_lines_summary",
         }
 
@@ -22048,7 +26234,7 @@ def parse_credit_mutuel_position_lines_statement(text: str) -> list[dict]:
         ))
 
     if txs:
-        
+
         print("CM_POSITION_LINES_EXTRACTED", {
             "transactions": len(txs),
             "income_total": round(sum(abs(t["amount"]) for t in txs if t["type"] == "income"), 2),
@@ -23349,7 +27535,7 @@ def _extract_multilingual_official_summary_amount_label(raw: str) -> dict:
                 continue
 
     needed = {"opening_balance", "ending_balance", "withdrawals", "deposits"}
-    print("MULTILINGUAL_SUMMARY_DEBUG", {
+    _finance_log_once("MULTILINGUAL_SUMMARY_DEBUG", {
         "found": found,
         "has_opening_ar": "الرصيد الافتتاحي" in text,
         "has_opening_rtl": "ﻲﺣﺎﺘﺘﻓﻻﺍ ﺪﻴﺻﺮﻟﺍ" in text,
@@ -23375,6 +27561,143 @@ def _extract_multilingual_official_summary_amount_label(raw: str) -> dict:
     }
 
 
+
+def build_final_ledger_summary(
+    transactions: list[dict] | None,
+) -> dict:
+    """Calculate KPI totals only from the final selected transaction ledger."""
+    income_total = 0.0
+    expense_total = 0.0
+    transfer_in_total = 0.0
+    transfer_out_total = 0.0
+    included_count = 0
+    excluded_count = 0
+
+    for tx in transactions or []:
+        if not isinstance(tx, dict):
+            continue
+        try:
+            amount = float(
+                tx.get("signed_amount")
+                if tx.get("signed_amount") is not None
+                else tx.get("amount") or 0
+            )
+        except (TypeError, ValueError):
+            continue
+
+        tx_type = str(tx.get("type") or "").lower()
+        excluded = bool(
+            tx.get("excluded_from_financial_kpis")
+            or (
+                tx.get("exclude_from_income")
+                and tx.get("exclude_from_expense")
+            )
+        )
+
+        if tx_type == "transfer":
+            if amount > 0:
+                transfer_in_total += abs(amount)
+            elif amount < 0:
+                transfer_out_total += abs(amount)
+
+        if excluded or tx_type == "transfer":
+            excluded_count += 1
+            continue
+
+        if tx_type == "income":
+            income_total += abs(amount)
+            included_count += 1
+        elif tx_type == "expense":
+            expense_total += abs(amount)
+            included_count += 1
+
+    return {
+        "deposits": round(income_total, 2),
+        "withdrawals": round(expense_total, 2),
+        "net_movement": round(income_total - expense_total, 2),
+        "transaction_count": included_count,
+        "excluded_transaction_count": excluded_count,
+        "transfer_in_total": round(transfer_in_total, 2),
+        "transfer_out_total": round(transfer_out_total, 2),
+        "source": "final_selected_ledger",
+    }
+
+
+def derive_missing_balance(
+    opening_balance: float | None,
+    ending_balance: float | None,
+    deposits: float,
+    withdrawals: float,
+) -> tuple[float | None, float | None]:
+    """Derive one missing boundary balance only when the other is known."""
+    if opening_balance is not None and ending_balance is None:
+        ending_balance = round(opening_balance + deposits - withdrawals, 2)
+    elif ending_balance is not None and opening_balance is None:
+        opening_balance = round(ending_balance - deposits + withdrawals, 2)
+    return opening_balance, ending_balance
+
+
+def compare_official_and_ledger_summaries(
+    official: dict | None,
+    ledger: dict,
+    tolerance: float = 1.0,
+) -> dict:
+    """Compare printed totals with ledger totals without modifying either."""
+    official = official or {}
+    official_income = official.get("deposits")
+    official_expense = official.get("withdrawals")
+    result = {
+        "status": "not_available",
+        "income_gap": None,
+        "expense_gap": None,
+        "official_summary_available": False,
+        "unresolved_credit_amount": None,
+        "unresolved_debit_amount": None,
+    }
+    if official_income is None or official_expense is None:
+        return result
+    try:
+        official_income = abs(float(official_income))
+        official_expense = abs(float(official_expense))
+    except (TypeError, ValueError):
+        return result
+    ledger_income = float(ledger.get("deposits") or 0)
+    ledger_expense = float(ledger.get("withdrawals") or 0)
+    income_gap = round(official_income - ledger_income, 2)
+    expense_gap = round(official_expense - ledger_expense, 2)
+    result.update({
+        "official_summary_available": True,
+        "income_gap": income_gap,
+        "expense_gap": expense_gap,
+        "unresolved_credit_amount": max(income_gap, 0.0),
+        "unresolved_debit_amount": max(expense_gap, 0.0),
+        "status": (
+            "reconciled"
+            if abs(income_gap) <= tolerance and abs(expense_gap) <= tolerance
+            else "unreconciled"
+        ),
+    })
+    return result
+
+
+def count_suspicious_rows(transactions: list[dict]) -> int:
+    """Count structural non-ledger signals before using row count as a tie-breaker."""
+    suspicious = 0
+    for tx in transactions or []:
+        if not isinstance(tx, dict):
+            suspicious += 1
+            continue
+        desc = str(tx.get("description") or "").lower()
+        if is_document_metadata_line(desc) or is_non_transaction_line(desc):
+            suspicious += 1
+            continue
+        if tx.get("date") in {None, "", "unknown"}:
+            suspicious += 1
+        if tx.get("type") not in {"income", "expense", "transfer"}:
+            suspicious += 1
+    return suspicious
+
+
 def extract_global_statement_summary(text: str) -> dict:
     global _RUNEXA_IN_SUMMARY_DERIVATION
 
@@ -23383,11 +27706,15 @@ def extract_global_statement_summary(text: str) -> dict:
     original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
 
     raw = normalize_arabic_digits(str(text or ""))
-   
+
     low = raw.lower()
+    positional_summary = _extract_parallel_header_summary(raw)
+    if positional_summary:
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", positional_summary)
+        return positional_summary
     multilingual_summary = _extract_multilingual_official_summary_amount_label(raw)
     if multilingual_summary:
-        print("STATEMENT_SUMMARY_EXTRACTED", multilingual_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", multilingual_summary)
         return multilingual_summary
     m = re.search(
         r"Opening\s+balance\s*-\s*Total\s+debits\s*\+\s*Total\s+credits\s*=\s*Closing\s+balance"
@@ -23411,7 +27738,7 @@ def extract_global_statement_summary(text: str) -> dict:
             "ending_balance": parse_amount(m.group("closing")),
             "source": "opening_total_debits_credits_closing",
         }
-        print("STATEMENT_SUMMARY_EXTRACTED", summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", summary)
         return summary
 
     if "westpac choice basic" in low and "total credits" in low and "total debits" in low:
@@ -23435,11 +27762,11 @@ def extract_global_statement_summary(text: str) -> dict:
             }
     riyad_summary = _extract_riyad_degraded_summary(raw)
     if riyad_summary:
-        print("STATEMENT_SUMMARY_EXTRACTED", riyad_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", riyad_summary)
         return riyad_summary
     statement_movements_summary = _extract_statement_movements_summary(raw)
     if statement_movements_summary:
-        print("STATEMENT_SUMMARY_EXTRACTED", statement_movements_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", statement_movements_summary)
         return statement_movements_summary
 
     balance_summary = _extract_fr_creditor_debtor_opening_ending_balances(raw)
@@ -23492,7 +27819,7 @@ def extract_global_statement_summary(text: str) -> dict:
         if _amount_is_explicit_credit_marker(movement_summary.get("withdrawals")):
             movement_summary["withdrawals"] = 0.0
 
-        print("STATEMENT_SUMMARY_EXTRACTED", movement_summary)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", movement_summary)
         return movement_summary
 
     commerce_block_match = re.search(
@@ -23531,7 +27858,7 @@ def extract_global_statement_summary(text: str) -> dict:
         if ending is not None:
             out["ending_balance"] = ending
 
-        print("STATEMENT_SUMMARY_EXTRACTED", out)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", out)
         return out
 
     is_cih_like_statement = (
@@ -23554,7 +27881,7 @@ def extract_global_statement_summary(text: str) -> dict:
         if _amount_is_explicit_credit_marker(official.get("withdrawals")):
             official["withdrawals"] = 0.0
 
-        print("STATEMENT_SUMMARY_EXTRACTED", official)
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", official)
         return official
 
     if (
@@ -23570,10 +27897,9 @@ def extract_global_statement_summary(text: str) -> dict:
             out = {
                 "deposits": dep,
                 "withdrawals": wd,
-                "opening_balance": 0.0,
-                "ending_balance": round(dep - wd, 2),
+                "source": "printed_deposits_withdrawals_summary",
             }
-            print("STATEMENT_SUMMARY_EXTRACTED", out)
+            _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", out)
             return out
 
     raw_ar_summary = normalize_arabic_digits(str(text or ""))
@@ -23587,7 +27913,7 @@ def extract_global_statement_summary(text: str) -> dict:
                     "deposits": round(abs(parse_amount(_amounts[0])), 2),
                     "withdrawals": 0.0,
                 }
-                print("STATEMENT_SUMMARY_EXTRACTED", out)
+                _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", out)
                 return out
 
     anb_summary = _runexa_extract_anb_summary_generic(raw)
@@ -23607,59 +27933,36 @@ def extract_global_statement_summary(text: str) -> dict:
     if _amount_is_explicit_credit_marker(cleaned_summary.get("withdrawals")):
         cleaned_summary.pop("withdrawals", None)
 
-    if _RUNEXA_IN_SUMMARY_DERIVATION:
-        print("STATEMENT_SUMMARY_EXTRACTED", cleaned_summary)
-        return cleaned_summary
-
-    _RUNEXA_IN_SUMMARY_DERIVATION = True
-    try:
-        txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or [])
-    except Exception:
-        txs = []
-    finally:
-        _RUNEXA_IN_SUMMARY_DERIVATION = False
-
-    income_total, expense_total = _runexa_totals(txs)
-
-    expected_income = cleaned_summary.get("deposits")
-    expected_expenses = cleaned_summary.get("withdrawals")
-
-    income_gap = abs((expected_income or 0) - income_total)
-    expense_gap = abs((expected_expenses or 0) - expense_total)
-
-    if txs and (
-        not cleaned_summary
-        or income_gap > RUNEXA_STRICT_TOLERANCE
-        or expense_gap > RUNEXA_STRICT_TOLERANCE
-    ):
-        cleaned_summary["deposits"] = income_total
-
-        if (
-            cleaned_summary.get("source") == "fr_creditor_debtor_balances"
-            and cleaned_summary.get("opening_balance") is not None
-            and cleaned_summary.get("ending_balance") is not None
-        ):
-            cleaned_summary["withdrawals"] = round(
-                float(cleaned_summary["opening_balance"])
-                + income_total
-                - float(cleaned_summary["ending_balance"]),
-                2,
-            )
-        else:
-            cleaned_summary["withdrawals"] = expense_total
-            cleaned_summary.setdefault("opening_balance", 0.0)
-
-        if "ending_balance" not in cleaned_summary:
-            cleaned_summary["ending_balance"] = round(
-                cleaned_summary.get("opening_balance", 0.0)
-                + income_total
-                - cleaned_summary["withdrawals"],
-                2,
-            )
-
-        print("STATEMENT_SUMMARY_RECONCILED_FROM_CANDIDATE", cleaned_summary)
-
-    print("STATEMENT_SUMMARY_EXTRACTED", cleaned_summary)
+    _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", cleaned_summary)
     return cleaned_summary
 
+def build_statement_analysis_result(text: str) -> dict:
+    """Build the final non-circular statement result from one selected ledger.
+
+    `summary` remains an alias of `ledger_summary` for compatibility. Official
+    printed values and reconciliation metadata stay separate and never alter
+    the transaction list.
+    """
+    transactions = extract_transactions(text)
+    official_summary = extract_global_statement_summary(text)
+    ledger_summary = build_final_ledger_summary(transactions)
+    reconciliation = compare_official_and_ledger_summaries(
+        official_summary,
+        ledger_summary,
+    )
+    movement_reconciliation = reconcile_with_official_movement_totals(
+        transactions,
+        text,
+        detect_currency(text) or "MULTI",
+    )
+
+    return {
+        "transactions_count": len(transactions),
+        "transactions": transactions,
+        "summary": ledger_summary,
+        "ledger_summary": ledger_summary,
+        "official_summary": official_summary,
+        "reconciliation": reconciliation,
+        "movement_reconciliation": movement_reconciliation,
+    }
 
