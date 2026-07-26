@@ -71,7 +71,7 @@ def debug_log(*args):
 print("RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE", "v24-universal-accounting-observation-consensus")
 
 debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v8-terminal-balance-authority-fr-en-ar")
-CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
+CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "BDT", "XAF", "XOF", "MULTI"]
 
 CANADA_BANKS = [
     # Big Six / grandes banques canadiennes
@@ -4316,6 +4316,58 @@ def log_currency_detection_result(
     debug_log("CURRENCY_DEBUG: result", payload)
 
 
+def detect_primary_account_currency(text: str) -> str | None:
+    """Return the currency of the account, not a secondary conversion currency.
+
+    Priority is deliberately limited to account-level labels and statement
+    identity. This prevents certificates such as a BDT account with a CAD
+    conversion from being classified as CAD, and prevents Moroccan Banque
+    Populaire statements from inheriting EUR merely because the document is in
+    French.
+    """
+    raw = normalize_arabic_digits(clean_db_text(str(text or "")))
+    normalized = unicodedata.normalize("NFKC", raw)
+    lines = [" ".join(line.split()) for line in normalized.splitlines() if " ".join(line.split())]
+    head = "\n".join(lines[:140])
+
+    iso_codes = (
+        "USD|EUR|GBP|AED|MAD|CAD|AUD|JOD|SAR|QAR|KWD|BHD|OMR|DZD|TND|"
+        "EGP|CHF|JPY|CNY|INR|TRY|NGN|ZAR|BDT|XAF|XOF"
+    )
+    label_patterns = [
+        rf"(?im)^\s*(?:account\s+currency|currency|devise|monnaie|عملة|العملة)\s*[:\-]?\s*({iso_codes})\b",
+        rf"(?im)^\s*(?:currency|devise|عملة|العملة)\s*$\s*^\s*({iso_codes})\b",
+        rf"(?i)\b(?:account\s+type|type\s+of\s+account).{{0,100}}?\bcurrency\s*[:\-]?\s*({iso_codes})\b",
+    ]
+    for pattern in label_patterns:
+        match = re.search(pattern, head)
+        if match:
+            return match.group(1).upper()
+
+    # Explicit account-title wording.
+    if re.search(r"(?i)compte(?:\s+de\s+particulier)?\s*-?\s*en\s+euros?\b", head):
+        return "EUR"
+    if re.search(r"(?i)account(?:\s+statement)?\s+(?:in|denominated\s+in)\s+bdt\b", head):
+        return "BDT"
+
+    # Strong institution/jurisdiction identity, used only when no account-level
+    # ISO label exists.
+    upper = head.upper()
+    if any(marker in upper for marker in (
+        "BANQUE POPULAIRE", "BANK CHAABI", "CHAABI", "AL BARID BANK",
+        "ATTIJARIWAFA", "CREDIT DU MAROC", "CRÉDIT DU MAROC",
+    )):
+        return "MAD"
+    if any(marker in upper for marker in (
+        "CORIS BANK", "CORIS BANQUE", "CORIS BANK INTERNATIONAL",
+    )):
+        if "XAF" in upper:
+            return "XAF"
+        return "XOF"
+
+    return None
+
+
 def detect_currency(text: str) -> str:
     """Detect currency safely and generally.
 
@@ -4328,6 +4380,16 @@ def detect_currency(text: str) -> str:
 
     This avoids hardcoding MAD/QAR/SAR globally and keeps FR/EN/US/UK/EU cases safe.
     """
+    primary_currency = detect_primary_account_currency(text)
+    if primary_currency:
+        log_currency_detection_result(
+            primary_currency,
+            "primary_account_currency",
+            110,
+            "account_level_label_or_identity",
+        )
+        return primary_currency
+
     normalized = normalize_arabic_digits(clean_db_text(text)).upper()
 
     mixed_currency_markers = [
@@ -4385,6 +4447,9 @@ def detect_currency(text: str) -> str:
         ("TRY", [r"\bTRY\b", "TURKISH LIRA", "LIVRE TURQUE", "ليرة تركية"]),
         ("NGN", [r"\bNGN\b", "NAIRA", "نيرة"]),
         ("ZAR", [r"\bZAR\b", "RAND", "راند"]),
+        ("BDT", [r"\bBDT\b", "BANGLADESHI TAKA", "BANGLADESH TAKA", "TAKA"]),
+        ("XAF", [r"\bXAF\b", "CENTRAL AFRICAN CFA", "FRANC CFA BEAC"]),
+        ("XOF", [r"\bXOF\b", "WEST AFRICAN CFA", "FRANC CFA BCEAO"]),
     ]
 
     scores = Counter()
@@ -13006,7 +13071,7 @@ INTERNATIONAL_SUMMARY_MONEY_RE = re.compile(
     r"(?P<sign>[+\-−–]?)\s*"
     r"(?:"
     r"(?:USD|EUR|GBP|CAD|AUD|MAD|SAR|QAR|AED|DZD|TND|EGP|"
-    r"JOD|KWD|BHD|OMR|CHF|JPY|CNY|INR|TRY|NGN|ZAR)\s*"
+    r"JOD|KWD|BHD|OMR|CHF|JPY|CNY|INR|TRY|NGN|ZAR|BDT|XAF|XOF)\s*"
     r")?"
     r"(?:[$£€¥₹]\s*)?"
     r"(?P<amount>"
@@ -21719,7 +21784,7 @@ def _extract_parallel_header_summary(text: str) -> dict | None:
     # digit. Accept 1-3 decimal places here, but never use this broad token for
     # transaction parsing.
     money_re = re.compile(
-        r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|(?:USD|EUR|GBP|AUD|CAD|JPY|SAR|AED|MAD)\s*)?"
+        r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|(?:USD|EUR|GBP|AUD|CAD|JPY|SAR|AED|MAD|BDT|XAF|XOF)\s*)?"
         r"(?:\d{1,3}(?:[,\u00a0 ]\d{3})+|\d+)(?:[.,]\d{1,3})(?![A-Za-z0-9])",
         re.I,
     )
@@ -21770,7 +21835,7 @@ def extract_universal_accounting_graph_rows(text: str, detected_currency: str | 
     raw = normalize_arabic_digits(str(text or ''))
     lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
     date_re = re.compile(r"^(?P<d>(?:\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?|\d{1,2}\s*(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Z]*|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Z]*\s*\d{1,2}))\b", re.I)
-    money_re = re.compile(r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|(?:USD|EUR|GBP|AUD|CAD|JPY|SAR|AED|MAD)\s*)?\d{1,3}(?:[,\u00a0]\d{3})*(?:[.,]\d{1,2})|(?<![A-Za-z0-9])[-+]?\s*\d+[.,]\d{2}", re.I)
+    money_re = re.compile(r"(?<![A-Za-z0-9])[-+]?\s*(?:[$€£¥]|(?:USD|EUR|GBP|AUD|CAD|JPY|SAR|AED|MAD|BDT|XAF|XOF)\s*)?\d{1,3}(?:[,\u00a0]\d{3})*(?:[.,]\d{1,2})|(?<![A-Za-z0-9])[-+]?\s*\d+[.,]\d{2}", re.I)
     skip_re = re.compile(r"\b(?:opening|beginning|closing|ending|brought forward|carried forward|subtotal|sub total|totals?|summary|solde précédent|solde initial|solde final|الرصيد الافتتاحي|الرصيد الختامي)\b", re.I)
     credit_re = re.compile(r"\b(?:deposit|credit|salary|refund|received|incoming|vir(?:ement)?\s+re[cç]u|versement|remboursement|d[ée]p[oô]t|دائن|إيداع|وارد|راتب)\b", re.I)
     debit_re = re.compile(r"\b(?:withdrawal|debit|purchase|payment|fee|charge|transfer\s+to|direct debit|pr[ée]l[èe]vement|retrait|paiement|virement\s+[ée]mis|مدين|سحب|شراء|رسوم|تحويل صادر)\b", re.I)
@@ -23134,6 +23199,69 @@ def _normalize_candidate_amounts_by_ledger_invariants(
         return original_copy
 
 
+def _rebuild_candidate_from_running_balances(
+    transactions: list[dict],
+    official_summary: dict | None,
+) -> list[dict]:
+    """Rebuild signed movements from consecutive printed balances.
+
+    When a candidate exposes running balances for most rows, the accounting
+    identity is stronger than locale-dependent number parsing and description
+    keywords. The first row uses the official opening balance when available;
+    subsequent rows use the preceding printed balance.
+    """
+    rows = [dict(tx) for tx in (transactions or [])]
+    if not rows:
+        return rows
+
+    balance_rows = [
+        tx for tx in rows
+        if tx.get("_balance") is not None or tx.get("balance") is not None
+    ]
+    if len(balance_rows) / len(rows) < 0.80:
+        return rows
+
+    summary = normalize_official_summary(official_summary)
+    previous = summary.get("opening_balance")
+    rebuilt: list[dict] = []
+
+    for tx in rows:
+        raw_balance = tx.get("_balance", tx.get("balance"))
+        if raw_balance is None:
+            rebuilt.append(tx)
+            continue
+        try:
+            current = round(float(raw_balance), 2)
+        except (TypeError, ValueError):
+            rebuilt.append(tx)
+            continue
+
+        if previous is None:
+            previous = current
+            rebuilt.append(tx)
+            continue
+
+        movement = round(current - float(previous), 2)
+        previous = current
+        if abs(movement) < 0.005:
+            continue
+
+        typ = "income" if movement > 0 else "expense"
+        tx["amount"] = movement
+        tx["signed_amount"] = movement
+        tx["locked_amount"] = movement
+        tx["_locked_amount"] = movement
+        tx["locked_type"] = typ
+        tx["type"] = typ
+        tx["_balance_locked"] = True
+        tx["balance_authority"] = True
+        tx["balance_delta"] = movement
+        tx["amount_resolution_method"] = "complete_running_balance_chain"
+        rebuilt.append(tx)
+
+    return rebuilt
+
+
 def _select_international_candidate(raw_candidates: list[tuple[str, list[dict]]], text: str) -> dict | None:
     """Select one extraction result using universal accounting controls.
 
@@ -23151,6 +23279,10 @@ def _select_international_candidate(raw_candidates: list[tuple[str, list[dict]]]
 
         normalized_txs = (
             _normalize_candidate_amounts_by_ledger_invariants(txs)
+        )
+        normalized_txs = _rebuild_candidate_from_running_balances(
+            normalized_txs,
+            summary,
         )
 
         candidate = _score_finance_candidate(
@@ -25703,7 +25835,11 @@ def _extract_riyad_degraded_summary(text: str) -> dict:
 
     flat = " ".join(raw.replace("\xa0", " ").replace("\u202f", " ").split())
 
-    compact = re.sub(r"(?<=\d)\s+(?=\d)", "", flat)
+    # Do not globally concatenate every adjacent digit. OCR-spaced account
+    # numbers and dates would otherwise fuse with a genuine 10.00 movement and
+    # create values such as 2410.00. Join only digits inside a decimal token.
+    compact = re.sub(r"(?<=\d)\s+(?=\d(?:\s|[.,]))", "", flat)
+    compact = re.sub(r"(?<=[.,])\s+(?=\d)", "", compact)
     compact = re.sub(r"\s*\.\s*", ".", compact)
     compact = re.sub(r"(?<!\d)\.00", "0.00", compact)
 
@@ -27709,13 +27845,27 @@ def extract_global_statement_summary(text: str) -> dict:
 
     low = raw.lower()
     positional_summary = _extract_parallel_header_summary(raw)
-    if positional_summary:
-        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", positional_summary)
-        return positional_summary
     multilingual_summary = _extract_multilingual_official_summary_amount_label(raw)
-    if multilingual_summary:
-        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", multilingual_summary)
-        return multilingual_summary
+
+    early_summary = merge_official_summaries(
+        positional_summary,
+        multilingual_summary,
+    )
+    if early_summary:
+        # Printed movement totals may occur pages later than opening/closing
+        # balances. Merge them before returning so SG/Banque Populaire-style
+        # statements retain both balance and debit/credit evidence.
+        movement_totals = extract_total_des_mouvements_summary(raw) or {}
+        movement_totals = merge_official_summaries(
+            movement_totals,
+            _extract_statement_movements_summary(raw),
+        )
+        early_summary = merge_official_summaries(
+            early_summary,
+            movement_totals,
+        )
+        _finance_log_once("STATEMENT_SUMMARY_EXTRACTED", early_summary)
+        return early_summary
     m = re.search(
         r"Opening\s+balance\s*-\s*Total\s+debits\s*\+\s*Total\s+credits\s*=\s*Closing\s+balance"
         r".{0,300}?"

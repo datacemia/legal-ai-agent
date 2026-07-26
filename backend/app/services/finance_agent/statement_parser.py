@@ -4,6 +4,7 @@ import os
 import re
 
 from app.services.finance_agent.scan_agent import scan_agent_extract_text
+from app.services.finance_agent.international_standard import normalize_statement_text
 
 
 MIN_TEXT_LENGTH = int(os.getenv("FINANCE_MIN_TEXT_LENGTH", "500"))
@@ -112,6 +113,8 @@ def _merge_amount_only_lines_into_previous(text: str) -> str:
 def _normalize_statement_text_structure(text: str) -> str:
     if not text:
         return text
+
+    text = normalize_statement_text(text)
 
     text = re.sub(
         r"(\d{1,2}[./-]\d{1,2})\s*\n\s*(?=\d{1,3}(?:[ .]\d{3})*[,.]\d{2}\b)",
@@ -448,6 +451,17 @@ def _extract_coris_cfa_position_lines_from_pdf_path(file_path: str) -> str:
 
     tx_lines = []
     previous_balance = None
+    statement_currency = "XOF"
+
+    # Determine the CFA zone from explicit account/document evidence.
+    try:
+        identity_text = _extract_text_from_pdf_path(file_path).upper()
+        if re.search(r"\bXAF\b|FRANC\s+CFA\s+BEAC|CAMEROUN|CAMEROON|GABON|CONGO|TCHAD|CHAD", identity_text):
+            statement_currency = "XAF"
+        elif re.search(r"\bXOF\b|FRANC\s+CFA\s+BCEAO|SENEGAL|COTE D.IVOIRE|BURKINA|MALI|BENIN|TOGO|NIGER", identity_text):
+            statement_currency = "XOF"
+    except Exception:
+        pass
 
     with pdfplumber.open(str(file_path)) as pdf:
         for page_i, page in enumerate(pdf.pages, 1):
@@ -555,7 +569,7 @@ def _extract_coris_cfa_position_lines_from_pdf_path(file_path: str) -> str:
                         iso(dates[0]),
                         typ,
                         f"{signed:.2f}",
-                        "XOF",
+                        statement_currency,
                         desc[:500],
                         f"page={page_i}",
                     ])
@@ -836,14 +850,6 @@ def _extract_credit_mutuel_position_lines_from_pdf_path(file_path: str) -> str:
 
     try:
         with pdfplumber.open(str(file_path)) as pdf:
-            document_text = " ".join((p.extract_text() or "") for p in pdf.pages).lower()
-            document_has_cm_identity = (
-                "creditmutuel.fr" in document_text
-                or "crédit mutuel" in document_text
-                or "credit mutuel" in document_text
-                or "ccm " in document_text
-            )
-
             for page_i, page in enumerate(pdf.pages, 1):
                 words = page.extract_words(x_tolerance=2, y_tolerance=3, use_text_flow=False)
 
@@ -857,17 +863,6 @@ def _extract_credit_mutuel_position_lines_from_pdf_path(file_path: str) -> str:
                             "x1": float(w["x1"]),
                             "top": float(w["top"]),
                         })
-
-                joined = " ".join(w["text"] for w in clean).lower()
-                has_cm_identity = (
-                    "creditmutuel.fr" in joined
-                    or "crédit mutuel" in joined
-                    or "credit mutuel" in joined
-                    or "ccm " in joined
-                )
-
-                if not (has_cm_identity or document_has_cm_identity):
-                    continue
 
                 debit_x = None
                 credit_x = None
@@ -986,6 +981,54 @@ def _extract_credit_mutuel_position_lines_from_pdf_path(file_path: str) -> str:
     except Exception as exc:
         print("CM_POSITION_LINES_FAILED", str(exc)[:200])
         return ""
+
+def _native_text_transaction_signal(text: str) -> dict:
+    """Bank-neutral signal for deciding whether native PDF text is usable.
+
+    A PDF can contain hundreds of header/footer characters while its transaction
+    table is image-only or position-scrambled. This score uses only universal
+    ledger features and never bank names or language-specific labels.
+    """
+    value = normalize_statement_text(str(text or ""))
+    lines = [line.strip() for line in value.splitlines() if line.strip()]
+    date_re = re.compile(
+        r"(?:\b\d{1,4}[./-]\d{1,2}[./-]\d{1,4}\b|"
+        r"[\u0600-\u06ff]*\s*[٠-٩0-9]{1,4}[./-][٠-٩0-9]{1,2}(?:[./-][٠-٩0-9]{1,4})?)"
+    )
+    money_re = re.compile(
+        r"(?<!\w)[+\-]?(?:[0-9٠-٩]{1,3}(?:[ ,.'’\u00a0\u202f٬][0-9٠-٩]{3})+|[0-9٠-٩]+)"
+        r"(?:[.,٫][0-9٠-٩]{2,3})(?!\w)"
+    )
+    dated = 0
+    dated_money = 0
+    money_lines = 0
+    for line in lines:
+        has_date = bool(date_re.search(line))
+        has_money = bool(money_re.search(line))
+        dated += int(has_date)
+        money_lines += int(has_money)
+        dated_money += int(has_date and has_money)
+    return {
+        "line_count": len(lines),
+        "dated_lines": dated,
+        "money_lines": money_lines,
+        "dated_money_lines": dated_money,
+        "usable": dated_money >= 2 or (dated >= 3 and money_lines >= 3),
+    }
+
+
+def _merge_native_and_ocr_text(native_text: str, ocr_text: str) -> str:
+    """Append OCR evidence without replacing reliable native PDF text."""
+    native = _normalize_statement_text_structure(native_text or "")
+    ocr = _normalize_statement_text_structure(ocr_text or "")
+    if not native:
+        return ocr
+    if not ocr:
+        return native
+    # Keep both representations. Candidate parsers and provenance-based
+    # deduplication decide which rows are reliable; no existing parser is removed.
+    return native + "\n\nOCR_AUGMENTED_TEXT_START\n" + ocr
+
 def _extract_text_with_scan_fallback(
     file_path: str | None,
     content: bytes | None = None,
@@ -997,21 +1040,20 @@ def _extract_text_with_scan_fallback(
     elif file_path:
         text = _extract_text_from_pdf_path(file_path)
 
-    if len(text.strip()) >= MIN_TEXT_LENGTH:
+    signal = _native_text_transaction_signal(text)
+    native_is_long = len(text.strip()) >= MIN_TEXT_LENGTH
+    if native_is_long and signal["usable"]:
         print("FINANCE_TEXT_PDF_EXTRACTED", len(text))
-        try:
-            _finance_lines = str(text or "").splitlines()
-            print("PDF_LINES_DEBUG", {
-                "line_count": len(_finance_lines),
-                "non_empty_line_count": sum(1 for _x in _finance_lines if str(_x).strip()),
-                "max_line_len": max([len(_x) for _x in _finance_lines] or [0]),
-                "first_20": [str(_x)[:220] for _x in _finance_lines[:20]],
-            })
-        except Exception as _pdf_dbg_exc:
-            print("PDF_LINES_DEBUG_FAILED", str(_pdf_dbg_exc)[:200])
+        print("FINANCE_NATIVE_TEXT_SIGNAL", signal)
         return _normalize_statement_text_structure(text)
 
-    print("FINANCE_PDF_SCAN_DETECTED_OCR_STARTED")
+    # A long PDF text layer is not automatically usable: headers, terms and
+    # footers can exceed MIN_TEXT_LENGTH while the ledger itself is scanned.
+    # OCR is therefore triggered only when universal date+amount evidence is weak.
+    print("FINANCE_PDF_SCAN_DETECTED_OCR_STARTED", {
+        "native_length": len(text.strip()),
+        "native_signal": signal,
+    })
 
     ocr_text = scan_agent_extract_text(
         file_path=file_path,
@@ -1020,7 +1062,10 @@ def _extract_text_with_scan_fallback(
 
     if ocr_text:
         print("FINANCE_OCR_TEXT_EXTRACTED", len(ocr_text))
-        return _normalize_statement_text_structure(ocr_text.strip())
+        # Preserve usable native evidence and add OCR only as an augmentation.
+        # This keeps all current parser behavior available and prevents OCR from
+        # destructively replacing a partially useful text layer.
+        return _merge_native_and_ocr_text(text, ocr_text.strip())
 
     print("FINANCE_OCR_EMPTY")
 
@@ -1036,52 +1081,96 @@ async def extract_statement_text(file: UploadFile) -> str:
     )
 
 
+def _normalize_statement_identity_text(text: str) -> str:
+    return " ".join(
+        str(text or "")
+        .replace("\xa0", " ")
+        .replace("\u202f", " ")
+        .lower()
+        .split()
+    )
+
+
+def _contains_any_marker(text: str, markers: tuple[str, ...]) -> bool:
+    normalized = _normalize_statement_identity_text(text)
+    return any(marker in normalized for marker in markers)
+
+
 def extract_statement_text_from_path(file_path: str) -> str:
     text = _extract_text_with_scan_fallback(
         file_path=file_path,
         content=None,
     )
 
-    try:
-        bred_lines = _extract_bred_banque_populaire_position_lines_from_pdf_path(file_path)
-        if bred_lines:
-            print("BRED_POSITION_LINES_EXTRACTED", len(bred_lines.splitlines()))
-            text = text + "\n\n" + bred_lines
-    except Exception as exc:
-        print("BRED_POSITION_LINES_FAILED", str(exc)[:200])
+    identity_text = _normalize_statement_identity_text(text)
 
-    try:
-        coris_lines = _extract_coris_cfa_position_lines_from_pdf_path(file_path)
-        if coris_lines:
-            print("CORIS_POSITION_LINES_APPENDED", len(coris_lines.splitlines()))
-            text = text + "\n\n" + coris_lines
-    except Exception as exc:
-        print("CORIS_POSITION_LINES_FAILED", str(exc)[:200])
+    specialized_extractors = [
+        {
+            "name": "BRED",
+            "markers": (
+                "bred banque populaire",
+                "bred.fr",
+            ),
+            "extractor": _extract_bred_banque_populaire_position_lines_from_pdf_path,
+        },
+        {
+            "name": "CORIS",
+            "markers": (
+                "coris bank",
+                "coris banque",
+                "coris bank international",
+            ),
+            "extractor": _extract_coris_cfa_position_lines_from_pdf_path,
+        },
+        {
+            "name": "RIYAD",
+            "markers": (
+                "riyad bank",
+                "bank al riyad",
+                "بنك الرياض",
+            ),
+            "extractor": _extract_riyad_single_transfer_position_lines_from_pdf_path,
+        },
+        {
+            "name": "CIC",
+            "markers": (
+                "cic.fr",
+                "crédit industriel et commercial",
+                "credit industriel et commercial",
+            ),
+            "extractor": _extract_cic_position_lines_from_pdf_path,
+        },
+        {
+            "name": "CM",
+            "markers": (
+                "creditmutuel.fr",
+                "crédit mutuel",
+                "credit mutuel",
+                "caisse de crédit mutuel",
+                "caisse de credit mutuel",
+            ),
+            "extractor": _extract_credit_mutuel_position_lines_from_pdf_path,
+        },
+    ]
 
-    try:
-        riyad_lines = _extract_riyad_single_transfer_position_lines_from_pdf_path(file_path)
-        if riyad_lines:
-            print("RIYAD_POSITION_LINES_APPENDED", len(riyad_lines.splitlines()))
-            text = text + "\n\n" + riyad_lines
-    except Exception as exc:
-        print("RIYAD_POSITION_LINES_FAILED", str(exc)[:200])
+    for config in specialized_extractors:
+        if not any(marker in identity_text for marker in config["markers"]):
+            continue
 
-    try:
-        cic_lines = _extract_cic_position_lines_from_pdf_path(file_path)
-        if cic_lines:
-            print("CIC_POSITION_LINES_APPENDED", len(cic_lines.splitlines()))
-            text = text + "\n\n" + cic_lines
-    except Exception as exc:
-        print("CIC_POSITION_LINES_FAILED", str(exc)[:200])
+        try:
+            extra_lines = config["extractor"](file_path)
 
+            if extra_lines:
+                print(
+                    f"{config['name']}_POSITION_LINES_APPENDED",
+                    len(extra_lines.splitlines()),
+                )
+                text = text + "\n\n" + extra_lines
 
-    try:
-        cm_lines = _extract_credit_mutuel_position_lines_from_pdf_path(file_path)
-        if cm_lines:
-            print("CM_POSITION_LINES_APPENDED", len(cm_lines.splitlines()))
-            text = text + "\n\n" + cm_lines
-    except Exception as exc:
-        print("CM_POSITION_LINES_FAILED", str(exc)[:200])
-
+        except Exception as exc:
+            print(
+                f"{config['name']}_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
 
     return text
