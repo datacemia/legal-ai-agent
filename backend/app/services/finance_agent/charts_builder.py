@@ -19,6 +19,12 @@ from collections import defaultdict
 from typing import Any
 
 
+print(
+    "RUNEXA_FINANCE_CATEGORIZATION_VERSION",
+    "v4-standard-structural-counterparty-matching",
+)
+
+
 CATEGORY_LABELS = {
     "income": {"en": "Income", "fr": "Revenus", "ar": "الدخل"},
     "housing": {"en": "Housing", "fr": "Logement", "ar": "السكن"},
@@ -84,6 +90,9 @@ CATEGORY_KEYWORDS = {
     "income": [
         "salary", "payroll", "wage", "income", "deposit salary", "employer", "bonus",
         "transfer - credit", "salary transfer", "salary transfer cdd",
+        "cash deposit", "benefit payment", "benefits payment",
+        "jobseeker payment", "unemployment benefit", "social security",
+        "government benefit", "welfare payment",
         "salaire", "paie", "revenu", "virement salaire", "rémunération", "remuneration",
         "راتب", "رواتب", "ايداع رواتب", "إيداع رواتب", "دخل", "مكافأة", "مكافاه", "بدل",
         "/payroll/", "samasari",
@@ -115,6 +124,9 @@ CATEGORY_KEYWORDS = {
         "مون مارت", "moon mart",
     ],
     "food_dining": [
+        "chicken", "grill", "grilled", "takeaway",
+        "poulet", "grillade", "à emporter", "a emporter",
+        "دجاج", "مشويات", "وجبة سريعة",
         "restaurant", "cafe", "coffee", "food", "meal", "dining", "fast food", "pizza", "burger",
         "mcdonald", "burger king", "kfc", "subway", "starbucks", "costa", "dunkin", "shawarma",
         "talabat", "tea time",
@@ -124,6 +136,9 @@ CATEGORY_KEYWORDS = {
         "شركة الوجبات", "شركه الوجبات", "بروست ساره", "كافيه",
     ],
     "transport": [
+        "fuel station", "petrol station", "filling station", "service station", "fuel stn", "petrol stn",
+        "station essence", "station carburant",
+        "محطة بنزين", "محطة وقود",
         "fuel", "gas station", "petrol", "parking", "taxi", "uber", "bolt", "lyft", "careem",
         "train", "metro", "bus", "toll", "car wash", "vehicle", "auto repair", "garage", "mechanic",
         "woqod", "qatar fuel",
@@ -348,6 +363,101 @@ def _keyword_matches(keyword: str, normalized: str, tokens: set[str]) -> bool:
     return keyword in tokens
 
 
+
+STANDARD_BANK_ABBREVIATIONS = {
+    # Generic banking abbreviations observed in real statements.
+    # These are lexical expansions only; they do not encode bank, country,
+    # currency, merchant, account holder, or transaction direction.
+    "trns": "transfer",
+    "xfer": "transfer",
+    "xfr": "transfer",
+    "pymt": "payment",
+    "pmt": "payment",
+    "acct": "account",
+    "acc": "account",
+}
+
+
+def _expand_standard_bank_abbreviations(value: str) -> str:
+    surface = _semantic_match_surface_without_abbreviation_expansion(value)
+    tokens = surface.split()
+    return " ".join(
+        STANDARD_BANK_ABBREVIATIONS.get(token, token)
+        for token in tokens
+    )
+
+
+def _semantic_match_surface_without_abbreviation_expansion(value: str) -> str:
+    value = normalize_text(value)
+    value = value.replace("&", " and ")
+    value = re.sub(r"[./_\\-]+", " ", value)
+    value = re.sub(r"\s+", " ", value).strip()
+    return value
+
+
+def _semantic_match_surface(value: str) -> str:
+    """
+    Additive comparison surface for noisy statement descriptions.
+
+    This is intentionally independent of bank, country, currency and merchant.
+    It only normalizes punctuation/separators that PDF/OCR pipelines frequently
+    vary while preserving letters, digits and Arabic text.
+    """
+    return _expand_standard_bank_abbreviations(value)
+
+
+def _conservative_token_variants(value: str) -> set[str]:
+    """
+    Produce conservative lexical variants after the historical exact matcher.
+
+    Only a trailing possessive/plural-like ``s`` is removed, and only for
+    alphabetic tokens of length >= 6. This lets OCR/text variants such as
+    ``sainsburys`` match an existing taxonomy token ``sainsbury`` without
+    introducing bank- or merchant-specific rules.
+    """
+    variants: set[str] = set()
+
+    for token in re.split(
+        r"[^a-z0-9\u0600-\u06FF]+",
+        _semantic_match_surface(value),
+    ):
+        if not token:
+            continue
+
+        variants.add(token)
+
+        if (
+            len(token) >= 6
+            and token.isalpha()
+            and token.endswith("s")
+        ):
+            variants.add(token[:-1])
+
+    return variants
+
+
+def _additive_keyword_matches(
+    keyword: str,
+    original: str,
+) -> bool:
+    """
+    Secondary matcher used only after the historical classifier did not match.
+    """
+    keyword_surface = _semantic_match_surface(keyword)
+    description_surface = _semantic_match_surface(original)
+
+    if not keyword_surface:
+        return False
+
+    if " " in keyword_surface:
+        return keyword_surface in description_surface
+
+    description_variants = _conservative_token_variants(original)
+    keyword_variants = _conservative_token_variants(keyword)
+
+    return bool(description_variants.intersection(keyword_variants))
+
+
 def detect_category(description: str) -> str:
     """
     Layered deterministic classifier.
@@ -369,6 +479,73 @@ def detect_category(description: str) -> str:
         for keyword in CATEGORY_KEYWORDS.get(category, []):
             if _keyword_matches(keyword, normalized, tokens):
                 return _canonical_category(category)
+
+    # ADDITIVE v2 — punctuation/OCR/inflection tolerant matching.
+    # Historical exact matches above always remain authoritative.
+    for category in CATEGORY_PRIORITY:
+        for keyword in CATEGORY_KEYWORDS.get(category, []):
+            if _additive_keyword_matches(keyword, original):
+                return _canonical_category(category)
+
+    # ADDITIVE v4 — standard service-class evidence.
+    #
+    # A token ending in "vpn" identifies a VPN service class rather than a
+    # specific merchant.  This is intentionally narrower than matching payment
+    # processors such as PayPal, which remain unclassified without evidence
+    # about the underlying purchase.
+    semantic_surface = _semantic_match_surface(original)
+
+    if re.search(
+        r"\b[a-z0-9]{2,}vpn\b|\bvpn\s+(?:service|subscription|plan)\b",
+        semantic_surface,
+        flags=re.IGNORECASE,
+    ):
+        return "subscriptions"
+
+    # ADDITIVE v3/v4 — standardized account-transfer phrase.
+    # This path runs only after the historical taxonomy failed.  It relies on
+    # generic banking-role words after abbreviation normalization.
+    if re.search(
+        r"\b(?:linked|internal|own)\s+account\s+transfer\b",
+        semantic_surface,
+        flags=re.IGNORECASE,
+    ):
+        return "transfers"
+
+    # ADDITIVE v4 — named counterparty + opaque reference.
+    #
+    # Real bank statements often render a direct transfer as:
+    #
+    #   <counterparty name> <opaque alphanumeric reference>
+    #
+    # This rule is deliberately conservative. It requires a name-like prefix,
+    # a long terminal reference containing both letters and digits, and rejects
+    # card/purchase/payment-processor/service language. It does not encode any
+    # institution, country, currency, person, or merchant.
+    counterparty_reference_match = re.fullmatch(
+        r"\s*(?:mr|mrs|ms|miss|dr)?\.?\s*"
+        r"[a-z][a-z.'-]*(?:\s+[a-z][a-z.'-]*){1,4}\s+"
+        r"(?=[a-z0-9]{8,16}\b)(?=[a-z0-9]*[a-z])(?=[a-z0-9]*\d)"
+        r"[a-z0-9]{8,16}\s*",
+        semantic_surface,
+        flags=re.IGNORECASE,
+    )
+
+    counterparty_transfer_exclusions = bool(
+        re.search(
+            r"\b(?:card|purchase|pos|atm|cash|paypal|invoice|bill|"
+            r"subscription|merchant|store|shop|restaurant|cafe|hotel|"
+            r"fee|tax|loan|insurance|utility|phone|mobile|internet)\b",
+            semantic_surface,
+            flags=re.IGNORECASE,
+        )
+    )
+
+    if (
+        counterparty_reference_match
+        and not counterparty_transfer_exclusions
+    ):
+        return "transfers"
 
     # Structural bank-transfer fallback.
     # Standard EN/FR/AR rule: opaque reference + bank clearing/core-system

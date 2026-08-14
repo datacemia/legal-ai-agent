@@ -71,7 +71,7 @@ def safe_money(value: Any) -> Optional[float]:
     # Remove currency symbols and alphabetic currency labels.
     text = re.sub(r"[€$£¥₹₩₽₺₴₦₱฿₪₫]", "", text)
     text = re.sub(
-        r"(?i)(USD|EUR|GBP|AUD|CAD|NZD|AED|SAR|QAR|MAD|DZD|ZAR|INR|JPY|CNY|CHF|BDT|XAF|XOF)",
+        r"(?i)(USD|EUR|GBP|AUD|CAD|NZD|AED|SAR|QAR|MAD|DZD|ZAR|INR|JPY|CNY|CHF)",
         "",
         text,
     )
@@ -465,20 +465,6 @@ def refresh_candidate_against_official_summary(
         )
     )
 
-    normalized_official = normalize_official_summary(official_summary)
-    opening = normalized_official.get("opening_balance")
-    ending = normalized_official.get("ending_balance")
-    if opening is not None and ending is not None:
-        expected_net = round(ending - opening, 2)
-        actual_net = round(income_total - expense_total, 2)
-        candidate["expected_net"] = expected_net
-        candidate["actual_net"] = actual_net
-        candidate["balance_net_gap"] = round(abs(actual_net - expected_net), 2)
-    else:
-        candidate["expected_net"] = None
-        candidate["actual_net"] = round(income_total - expense_total, 2)
-        candidate["balance_net_gap"] = None
-
     return candidate
 
 
@@ -519,10 +505,6 @@ def candidate_selection_key(
     if total_gap is None:
         total_gap = float("inf")
 
-    balance_net_gap = candidate.get("balance_net_gap")
-    if balance_net_gap is None:
-        balance_net_gap = float("inf")
-
     direction_collapse = bool(
         candidate.get("direction_collapse", False)
     )
@@ -555,7 +537,6 @@ def candidate_selection_key(
             status_rank,
             direction_collapse,
             float(total_gap),
-            float(balance_net_gap),
             duplicate_count,
             invalid_date_count,
             balance_error_count,
@@ -565,7 +546,6 @@ def candidate_selection_key(
 
     return (
         direction_collapse,
-        float(balance_net_gap),
         duplicate_count,
         invalid_date_count,
         balance_error_count,

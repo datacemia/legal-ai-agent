@@ -110,14 +110,22 @@ def _merge_amount_only_lines_into_previous(text: str) -> str:
     return "\n".join(rebuilt)
 
 
-def _normalize_statement_text_structure(text: str) -> str:
+def _normalize_statement_text_structure(
+    text: str,
+    *,
+    preserve_positional_layout: bool = False,
+) -> str:
     if not text:
         return text
 
     text = normalize_statement_text(text)
 
+    if preserve_positional_layout:
+        return text
+
     text = re.sub(
-        r"(\d{1,2}[./-]\d{1,2})\s*\n\s*(?=\d{1,3}(?:[ .]\d{3})*[,.]\d{2}\b)",
+        r"(\d{1,2}[./-]\d{1,2})\s*\n\s*"
+        r"(?=\d{1,3}(?:[ .]\d{3})*[,.]\d{2}\b)",
         r"\1 ",
         text,
     )
@@ -125,20 +133,28 @@ def _normalize_statement_text_structure(text: str) -> str:
     normalized = _merge_amount_only_lines_into_previous(text)
 
     if normalized != text:
-        print("FINANCE_TEXT_STRUCTURE_NORMALIZED", {
-            "mode": "amount_only_line_merged",
-            "before_lines": len(text.splitlines()),
-            "after_lines": len(normalized.splitlines()),
-        })
+        print(
+            "FINANCE_TEXT_STRUCTURE_NORMALIZED",
+            {
+                "mode": "amount_only_line_merged",
+                "before_lines": len(text.splitlines()),
+                "after_lines": len(normalized.splitlines()),
+            },
+        )
         text = normalized
 
     if _looks_like_word_per_line_statement(text):
         normalized = _normalize_word_per_line_statement(text)
-        print("FINANCE_TEXT_STRUCTURE_NORMALIZED", {
-            "mode": "word_per_line_statement",
-            "before_lines": len(text.splitlines()),
-            "after_lines": len(normalized.splitlines()),
-        })
+
+        print(
+            "FINANCE_TEXT_STRUCTURE_NORMALIZED",
+            {
+                "mode": "word_per_line_statement",
+                "before_lines": len(text.splitlines()),
+                "after_lines": len(normalized.splitlines()),
+            },
+        )
+
         return normalized
 
     return text
@@ -451,17 +467,6 @@ def _extract_coris_cfa_position_lines_from_pdf_path(file_path: str) -> str:
 
     tx_lines = []
     previous_balance = None
-    statement_currency = "XOF"
-
-    # Determine the CFA zone from explicit account/document evidence.
-    try:
-        identity_text = _extract_text_from_pdf_path(file_path).upper()
-        if re.search(r"\bXAF\b|FRANC\s+CFA\s+BEAC|CAMEROUN|CAMEROON|GABON|CONGO|TCHAD|CHAD", identity_text):
-            statement_currency = "XAF"
-        elif re.search(r"\bXOF\b|FRANC\s+CFA\s+BCEAO|SENEGAL|COTE D.IVOIRE|BURKINA|MALI|BENIN|TOGO|NIGER", identity_text):
-            statement_currency = "XOF"
-    except Exception:
-        pass
 
     with pdfplumber.open(str(file_path)) as pdf:
         for page_i, page in enumerate(pdf.pages, 1):
@@ -569,7 +574,7 @@ def _extract_coris_cfa_position_lines_from_pdf_path(file_path: str) -> str:
                         iso(dates[0]),
                         typ,
                         f"{signed:.2f}",
-                        statement_currency,
+                        "XOF",
                         desc[:500],
                         f"page={page_i}",
                     ])
@@ -836,151 +841,1665 @@ def _extract_cic_position_lines_from_pdf_path(file_path: str) -> str:
         return ""
 
 
-def _extract_credit_mutuel_position_lines_from_pdf_path(file_path: str) -> str:
+def _extract_date_description_value_date_debit_credit_position_lines(
+    *,
+    file_path: str | None = None,
+    content: bytes | None = None,
+) -> str:
+    """
+    Additive positional extraction for:
+
+        Date | Description | Value Date | Debit | Credit
+
+    The original PDF text is never replaced. The extractor emits neutral
+    synthetic observations only when a reliable five-column header is found.
+
+    Rows are reconstructed from date anchors and vertical bands. This handles
+    PDFs where the date/amount baseline and the description baseline differ
+    slightly, without using bank, country, merchant, or currency rules.
+    """
+    import io
     import re
-    import pdfplumber
-
-    def norm(s: str) -> str:
-        return " ".join(str(s or "").replace("\xa0", " ").replace("\u202f", " ").split())
-
-    money_re = re.compile(r"^\d{1,3}(?:[ .]\d{3})*,\d{2}|\d+,\d{2}$")
-    date_re = re.compile(r"^\d{2}/\d{2}/\d{4}$")
-
-    out = []
+    import unicodedata
+    from datetime import date
 
     try:
-        with pdfplumber.open(str(file_path)) as pdf:
-            for page_i, page in enumerate(pdf.pages, 1):
-                words = page.extract_words(x_tolerance=2, y_tolerance=3, use_text_flow=False)
+        import pdfplumber
+    except Exception:
+        return ""
 
-                clean = []
-                for w in words:
-                    txt = norm(w.get("text"))
-                    if txt:
-                        clean.append({
-                            "text": txt,
-                            "x0": float(w["x0"]),
-                            "x1": float(w["x1"]),
-                            "top": float(w["top"]),
-                        })
+    if not file_path and content is None:
+        return ""
 
-                debit_x = None
-                credit_x = None
-                for w in clean:
-                    t = w["text"].lower()
-                    if t in {"débit", "debit"}:
-                        debit_x = (w["x0"] + w["x1"]) / 2
-                    elif t in {"crédit", "credit"}:
-                        credit_x = (w["x0"] + w["x1"]) / 2
+    def compact(value: str) -> str:
+        return " ".join(
+            str(value or "")
+            .replace("\xa0", " ")
+            .replace("\u202f", " ")
+            .split()
+        )
 
-                if debit_x is None or credit_x is None or credit_x <= debit_x:
-                    debit_x = 451
-                    credit_x = 526
+    def fold(value: str) -> str:
+        normalized = unicodedata.normalize(
+            "NFKD",
+            compact(value),
+        )
+        normalized = "".join(
+            character
+            for character in normalized
+            if not unicodedata.combining(character)
+        )
+        return normalized.casefold()
 
-                rows = {}
-                for w in clean:
-                    key = round(w["top"] / 3) * 3
-                    rows.setdefault(key, []).append(w)
+    full_date_re = re.compile(
+        r"^(?P<day>\d{1,2})[./-]"
+        r"(?P<month>\d{1,2})[./-]"
+        r"(?P<year>\d{2,4})$"
+    )
+    short_date_re = re.compile(
+        r"^(?P<day>\d{1,2})[./-]"
+        r"(?P<month>\d{1,2})$"
+    )
+    integer_money_re = re.compile(
+        r"^(?:"
+        r"\d{1,3}(?:[ .,\u00a0\u202f]\d{3})+"
+        r"|\d+"
+        r")$"
+    )
 
-                current = None
+    header_terms = {
+        "date": {"date"},
+        "description": {
+            "description",
+            "details",
+            "detail",
+            "narrative",
+            "libelle",
+            "operation",
+            "operations",
+            "nature",
+        },
+        "value_date": {
+            "value",
+            "valeur",
+            "val",
+            "bval",
+            "valor",
+            "valuta",
+        },
+        "debit": {
+            "debit",
+            "debito",
+            "addebito",
+            "belastung",
+            "مدين",
+        },
+        "credit": {
+            "credit",
+            "credito",
+            "accredito",
+            "gutschrift",
+            "دائن",
+        },
+    }
 
-                for top in sorted(rows):
-                    row = sorted(rows[top], key=lambda z: z["x0"])
-                    line = norm(" ".join(r["text"] for r in row))
+    def word_center_x(word: dict) -> float:
+        return (
+            float(word["x0"])
+            + float(word["x1"])
+        ) / 2.0
 
-                    if not line:
+    def word_center_y(word: dict) -> float:
+        return (
+            float(word["top"])
+            + float(word.get("bottom", word["top"]))
+        ) / 2.0
+
+    def group_header_rows(
+        words: list[dict],
+    ) -> list[list[dict]]:
+        rows: list[list[dict]] = []
+        row_centers: list[float] = []
+
+        for word in sorted(
+            words,
+            key=lambda item: (
+                word_center_y(item),
+                float(item["x0"]),
+            ),
+        ):
+            y = word_center_y(word)
+            selected = None
+            selected_distance = None
+
+            for index, center_y in enumerate(row_centers):
+                distance = abs(y - center_y)
+
+                if distance <= 3.5 and (
+                    selected_distance is None
+                    or distance < selected_distance
+                ):
+                    selected = index
+                    selected_distance = distance
+
+            if selected is None:
+                rows.append([word])
+                row_centers.append(y)
+                continue
+
+            rows[selected].append(word)
+            row_centers[selected] = sum(
+                word_center_y(item)
+                for item in rows[selected]
+            ) / len(rows[selected])
+
+        return [
+            sorted(row, key=lambda item: float(item["x0"]))
+            for _, row in sorted(
+                zip(row_centers, rows),
+                key=lambda item: item[0],
+            )
+        ]
+
+    def detect_header(
+        words: list[dict],
+    ) -> dict | None:
+        for row in group_header_rows(words):
+            role_words: dict[str, list[dict]] = {}
+
+            for word in row:
+                token = fold(word.get("text"))
+
+                for role, terms in header_terms.items():
+                    if token in terms:
+                        role_words.setdefault(role, []).append(word)
+
+            required = (
+                "date",
+                "description",
+                "value_date",
+                "debit",
+                "credit",
+            )
+
+            if any(
+                not role_words.get(role)
+                for role in required
+            ):
+                continue
+
+            selected = {
+                role: min(
+                    role_words[role],
+                    key=lambda item: float(item["x0"]),
+                )
+                for role in required
+            }
+            centers = {
+                role: word_center_x(word)
+                for role, word in selected.items()
+            }
+
+            if not (
+                centers["date"]
+                < centers["description"]
+                < centers["value_date"]
+                < centers["debit"]
+                < centers["credit"]
+            ):
+                continue
+
+            return {
+                "centers": centers,
+                "top": min(
+                    float(word["top"])
+                    for word in row
+                ),
+                "bottom": max(
+                    float(word.get("bottom", word["top"]))
+                    for word in row
+                ),
+            }
+
+        return None
+
+    def parse_full_date(token: str) -> str | None:
+        match = full_date_re.fullmatch(
+            compact(token)
+        )
+
+        if match is None:
+            return None
+
+        try:
+            year = int(match.group("year"))
+
+            if year < 100:
+                year += 2000 if year < 70 else 1900
+
+            return date(
+                year,
+                int(match.group("month")),
+                int(match.group("day")),
+            ).isoformat()
+        except (TypeError, ValueError):
+            return None
+
+    def parse_value_date(
+        token: str,
+        operation_date: str,
+    ) -> str | None:
+        match = short_date_re.fullmatch(
+            compact(token)
+        )
+
+        if match is None:
+            return None
+
+        try:
+            operation = date.fromisoformat(
+                operation_date
+            )
+            month = int(match.group("month"))
+            day = int(match.group("day"))
+            candidate = date(
+                operation.year,
+                month,
+                day,
+            )
+            delta = (candidate - operation).days
+
+            if delta < -183:
+                candidate = date(
+                    operation.year + 1,
+                    month,
+                    day,
+                )
+            elif delta > 183:
+                candidate = date(
+                    operation.year - 1,
+                    month,
+                    day,
+                )
+
+            return candidate.isoformat()
+        except (TypeError, ValueError):
+            return None
+
+    def parse_integer_amount(
+        words: list[dict],
+    ) -> float | None:
+        tokens = [
+            compact(word.get("text"))
+            for word in sorted(
+                words,
+                key=lambda item: float(item["x0"]),
+            )
+            if integer_money_re.fullmatch(
+                compact(word.get("text"))
+            )
+        ]
+
+        if not tokens:
+            return None
+
+        digits = "".join(
+            re.sub(r"[^0-9]", "", token)
+            for token in tokens
+        )
+
+        if not digits.isdigit():
+            return None
+
+        value = float(digits)
+        return round(value, 2) if value > 0 else None
+
+    output: list[str] = []
+    header_count = 0
+    transaction_count = 0
+
+    try:
+        pdf_source = (
+            io.BytesIO(content)
+            if content is not None
+            else str(file_path)
+        )
+
+        with pdfplumber.open(pdf_source) as pdf:
+            for page_index, page in enumerate(
+                pdf.pages,
+                1,
+            ):
+                extracted_words = page.extract_words(
+                    x_tolerance=2,
+                    y_tolerance=3,
+                    use_text_flow=False,
+                )
+                words = [
+                    {
+                        "text": compact(word.get("text")),
+                        "x0": float(word["x0"]),
+                        "x1": float(word["x1"]),
+                        "top": float(word["top"]),
+                        "bottom": float(
+                            word.get("bottom", word["top"])
+                        ),
+                    }
+                    for word in extracted_words
+                    if compact(word.get("text"))
+                ]
+
+                header = detect_header(words)
+
+                if header is None:
+                    continue
+
+                header_count += 1
+                centers = header["centers"]
+
+                date_description_boundary = (
+                    centers["date"]
+                    + centers["description"]
+                ) / 2.0
+                description_value_boundary = (
+                    centers["description"]
+                    + centers["value_date"]
+                ) / 2.0
+                value_debit_boundary = (
+                    centers["value_date"]
+                    + centers["debit"]
+                ) / 2.0
+                debit_credit_boundary = (
+                    centers["debit"]
+                    + centers["credit"]
+                ) / 2.0
+                credit_right = min(
+                    float(page.width) + 1.0,
+                    centers["credit"]
+                    + (
+                        centers["credit"]
+                        - centers["debit"]
+                    ),
+                )
+
+                date_anchors = [
+                    word
+                    for word in words
+                    if (
+                        full_date_re.fullmatch(
+                            compact(word.get("text"))
+                        )
+                        and word_center_x(word)
+                        < date_description_boundary
+                        and float(word["top"])
+                        > float(header["bottom"])
+                    )
+                ]
+                date_anchors.sort(
+                    key=lambda item: word_center_y(item)
+                )
+
+                for anchor_index, anchor in enumerate(
+                    date_anchors
+                ):
+                    anchor_y = word_center_y(anchor)
+                    previous_y = (
+                        word_center_y(
+                            date_anchors[anchor_index - 1]
+                        )
+                        if anchor_index > 0
+                        else float(header["bottom"])
+                    )
+                    next_y = (
+                        word_center_y(
+                            date_anchors[anchor_index + 1]
+                        )
+                        if anchor_index + 1
+                        < len(date_anchors)
+                        else min(
+                            float(page.height),
+                            anchor_y + max(
+                                10.0,
+                                anchor_y - previous_y,
+                            ),
+                        )
+                    )
+
+                    row_top = (
+                        previous_y + anchor_y
+                    ) / 2.0
+                    row_bottom = (
+                        anchor_y + next_y
+                    ) / 2.0
+
+                    row_words = [
+                        word
+                        for word in words
+                        if (
+                            row_top
+                            <= word_center_y(word)
+                            < row_bottom
+                        )
+                    ]
+
+                    operation_date = parse_full_date(
+                        anchor["text"]
+                    )
+
+                    if operation_date is None:
                         continue
+
+                    value_candidates = [
+                        word
+                        for word in row_words
+                        if (
+                            description_value_boundary
+                            <= word_center_x(word)
+                            < value_debit_boundary
+                            and short_date_re.fullmatch(
+                                compact(word.get("text"))
+                            )
+                        )
+                    ]
+                    value_date = None
+                    value_word = None
+
+                    if value_candidates:
+                        value_word = min(
+                            value_candidates,
+                            key=lambda item: abs(
+                                word_center_x(item)
+                                - centers["value_date"]
+                            ),
+                        )
+                        value_date = parse_value_date(
+                            value_word["text"],
+                            operation_date,
+                        )
+
+                    description_left = float(anchor["x1"]) + 4.0
+                    description_right = (
+                        float(value_word["x0"]) - 3.0
+                        if value_word is not None
+                        else value_debit_boundary
+                    )
+                    description = compact(
+                        " ".join(
+                            word["text"]
+                            for word in sorted(
+                                row_words,
+                                key=lambda item: (
+                                    word_center_y(item),
+                                    float(item["x0"]),
+                                ),
+                            )
+                            if (
+                                description_left
+                                <= float(word["x0"])
+                                and float(word["x1"])
+                                <= description_right
+                            )
+                        )
+                    )
+
+                    debit = parse_integer_amount([
+                        word
+                        for word in row_words
+                        if (
+                            value_debit_boundary
+                            <= word_center_x(word)
+                            < debit_credit_boundary
+                        )
+                    ])
+                    credit = parse_integer_amount([
+                        word
+                        for word in row_words
+                        if (
+                            debit_credit_boundary
+                            <= word_center_x(word)
+                            < credit_right
+                        )
+                    ])
+
+                    if debit is not None and credit is not None:
+                        continue
+
+                    folded_description = fold(description)
 
                     if re.search(
-                        r"Total des mouvements|SOLDE CREDITEUR AU|SOLDE DEBITEUR AU|QXBAN|IBAN|Sous réserve|Information sur",
-                        line,
-                        re.I,
+                        r"\b(?:"
+                        r"solde initial|"
+                        r"opening balance|"
+                        r"beginning balance"
+                        r")\b",
+                        folded_description,
                     ):
-                        if current:
-                            out.append(current)
-                            current = None
+                        opening = (
+                            credit
+                            if credit is not None
+                            else debit
+                        )
+
+                        if opening is not None:
+                            output.append(
+                                " ".join([
+                                    "DATE_DESC_VALUE_DC_POSITION_BALANCE",
+                                    "opening",
+                                    f"{opening:.2f}",
+                                    f"page={page_index}",
+                                ])
+                            )
+
                         continue
 
-                    dates = [r for r in row if date_re.match(r["text"])]
+                    if (
+                        not description
+                        or (
+                            debit is None
+                            and credit is None
+                        )
+                    ):
+                        continue
 
-                    if len(dates) >= 1:
-                        if current:
-                            out.append(current)
+                    output.append(
+                        "\t".join([
+                            "DATE_DESC_VALUE_DC_POSITION_TX",
+                            operation_date,
+                            value_date or "-",
+                            (
+                                f"{debit:.2f}"
+                                if debit is not None
+                                else "-"
+                            ),
+                            (
+                                f"{credit:.2f}"
+                                if credit is not None
+                                else "-"
+                            ),
+                            description[:500],
+                            f"page={page_index}",
+                        ])
+                    )
+                    transaction_count += 1
 
-                        op_date = dates[0]["text"]
-                        value_date = dates[1]["text"] if len(dates) > 1 else op_date
+                # TOTAL and closing BALANCE remain neutral accounting context.
+                for row in group_header_rows(words):
+                    line = compact(
+                        " ".join(
+                            word["text"]
+                            for word in row
+                        )
+                    )
+                    folded_line = fold(line)
 
+                    if re.match(r"^total\b", folded_line):
+                        total_tokens = [
+                            compact(word.get("text"))
+                            for word in sorted(
+                                row,
+                                key=lambda item: float(item["x0"]),
+                            )
+                            if integer_money_re.fullmatch(
+                                compact(word.get("text"))
+                            )
+                        ]
+
+                        if len(total_tokens) == 2:
+                            debit_total = float(
+                                re.sub(r"[^0-9]", "", total_tokens[0])
+                            )
+                            credit_total = float(
+                                re.sub(r"[^0-9]", "", total_tokens[1])
+                            )
+
+                            output.append(
+                                " ".join([
+                                    "DATE_DESC_VALUE_DC_POSITION_TOTAL",
+                                    f"{debit_total:.2f}",
+                                    f"{credit_total:.2f}",
+                                    f"page={page_index}",
+                                ])
+                            )
+
+                    if re.match(
+                        r"^(?:"
+                        r"solde au|"
+                        r"closing balance|"
+                        r"ending balance"
+                        r")\b",
+                        folded_line,
+                    ):
+                        closing = parse_integer_amount([
+                            word
+                            for word in row
+                            if word_center_x(word)
+                            >= value_debit_boundary
+                        ])
+
+                        if closing is not None:
+                            output.append(
+                                " ".join([
+                                    "DATE_DESC_VALUE_DC_POSITION_BALANCE",
+                                    "closing",
+                                    f"{closing:.2f}",
+                                    f"page={page_index}",
+                                ])
+                            )
+
+    except Exception as exc:
+        print(
+            "DATE_DESCRIPTION_VALUE_DATE_DEBIT_CREDIT_POSITION_EXTRACTION_FAILED",
+            str(exc)[:200],
+        )
+        return ""
+
+    print(
+        "DATE_DESCRIPTION_VALUE_DATE_DEBIT_CREDIT_POSITION_EXTRACTION_AUDIT",
+        {
+            "headers": header_count,
+            "transactions": transaction_count,
+            "lines": len(output),
+        },
+    )
+
+    return "\n".join(output)
+
+
+def _extract_credit_mutuel_position_lines_from_pdf_path(
+    file_path: str | None = None,
+    content: bytes | None = None,
+) -> str:
+    """Extract the structural family:
+
+        Posting Date | Value Date | Description | Debit | Credit
+
+    The historical public helper name is preserved for compatibility. The
+    implementation is institution-, country-, currency-, merchant-, and
+    commercial-label neutral. It activates only when a page exposes a reliable
+    five-column header and classifies amounts exclusively from their horizontal
+    position under Debit or Credit.
+    """
+    import io
+    import re
+    import unicodedata
+    from datetime import date
+
+    try:
+        import pdfplumber
+    except Exception:
+        return ""
+
+    def compact(value: str) -> str:
+        return " ".join(
+            str(value or "")
+            .replace("\xa0", " ")
+            .replace("\u202f", " ")
+            .split()
+        )
+
+    def fold(value: str) -> str:
+        normalized = unicodedata.normalize("NFKD", compact(value))
+        normalized = "".join(
+            char
+            for char in normalized
+            if not unicodedata.combining(char)
+        )
+        return normalized.casefold()
+
+    short_date_re = re.compile(r"^\d{1,2}[./-]\d{1,2}$")
+    full_date_re = re.compile(
+        r"^(?P<day>\d{1,2})[./-](?P<month>\d{1,2})[./-](?P<year>\d{2,4})$"
+    )
+    # Complete monetary cells, including grouped thousands such as
+    # 2.500,00 / 3,342.05. Historical plain decimal cells remain supported.
+    decimal_fragment_re = re.compile(
+        r"^[+\-]?(?:\d{1,3}(?:[ .,'’]\d{3})+|\d+)[.,]\d{2}$"
+    )
+    integer_fragment_re = re.compile(r"^\d{1,3}$")
+
+    date_terms = {"date"}
+    value_terms = {"value", "valeur", "valor", "valuta"}
+    description_terms = {
+        "description", "detail", "details", "operation", "operations",
+        "narrative", "libelle", "concepto", "descrizione", "beschreibung",
+    }
+    debit_terms = {"debit", "debito", "addebito", "belastung", "مدين"}
+    credit_terms = {"credit", "credito", "accredito", "gutschrift", "دائن"}
+
+    # Hard table endings only. A creditor/debtor balance can be an opening
+    # BALANCE row immediately below the header, so it must not close the table.
+    footer_phrases = {
+        "total des mouvements", "total movements", "total operations",
+        "closing balance", "ending balance", "nouveau solde",
+        "iban", "qxban", "legal notice", "terms and conditions",
+        "privacy notice", "information sur", "sous reserve",
+    }
+
+    def word_role(word: dict) -> str | None:
+        token = fold(word.get("text"))
+        if token in date_terms:
+            return "date"
+        if token in value_terms:
+            return "value_date"
+        if token in description_terms:
+            return "description"
+        if token in debit_terms:
+            return "debit"
+        if token in credit_terms:
+            return "credit"
+        return None
+
+    def parse_year_token(token: str) -> int | None:
+        match = full_date_re.fullmatch(compact(token))
+        if not match:
+            return None
+        year = int(match.group("year"))
+        if year < 100:
+            year += 2000
+        try:
+            date(year, int(match.group("month")), int(match.group("day")))
+        except ValueError:
+            return None
+        return year
+
+    def infer_statement_year(words: list[dict]) -> int | None:
+        candidates: list[int] = []
+        for word in words:
+            year = parse_year_token(word.get("text"))
+            if year is not None:
+                candidates.append(year)
+        if not candidates:
+            return None
+        # Statement/header dates are normally repeated across pages. The most
+        # frequent valid year is therefore stronger than the first occurrence.
+        return max(set(candidates), key=lambda item: (candidates.count(item), item))
+
+    def iso_date(token: str, year: int | None) -> str | None:
+        value = compact(token)
+        full = full_date_re.fullmatch(value)
+        if full:
+            local_year = int(full.group("year"))
+            if local_year < 100:
+                local_year += 2000
+            month = int(full.group("month"))
+            day = int(full.group("day"))
+        elif short_date_re.fullmatch(value) and year is not None:
+            day_s, month_s = re.split(r"[./-]", value)
+            local_year = int(year)
+            month = int(month_s)
+            day = int(day_s)
+        else:
+            return None
+        try:
+            return date(local_year, month, day).isoformat()
+        except ValueError:
+            return None
+
+    def group_rows(words: list[dict]) -> dict[float, list[dict]]:
+        rows: dict[float, list[dict]] = {}
+        for word in words:
+            top = round(float(word["top"]) / 3.0) * 3.0
+            rows.setdefault(top, []).append(word)
+        for top in rows:
+            rows[top] = sorted(rows[top], key=lambda item: float(item["x0"]))
+        return rows
+
+    def detect_header(row: list[dict]) -> dict | None:
+        role_words: dict[str, list[dict]] = {}
+        for word in row:
+            role = word_role(word)
+            if role is not None:
+                role_words.setdefault(role, []).append(word)
+
+        # The family requires two date roles, description, debit and credit.
+        # Some languages repeat the word "date" instead of naming value date.
+        date_words = role_words.get("date", [])
+        value_words = role_words.get("value_date", [])
+        description_words = role_words.get("description", [])
+        debit_words = role_words.get("debit", [])
+        credit_words = role_words.get("credit", [])
+
+        if not debit_words or not credit_words:
+            return None
+
+        if not date_words:
+            return None
+
+        date_word = min(date_words, key=lambda item: float(item["x0"]))
+        if value_words:
+            value_word = min(value_words, key=lambda item: float(item["x0"]))
+        elif len(date_words) >= 2:
+            value_word = sorted(date_words, key=lambda item: float(item["x0"]))[1]
+        else:
+            return None
+
+        description_word = (
+            min(description_words, key=lambda item: float(item["x0"]))
+            if description_words
+            else None
+        )
+        debit_word = min(debit_words, key=lambda item: float(item["x0"]))
+        credit_word = min(credit_words, key=lambda item: float(item["x0"]))
+
+        centers = {
+            "date": (float(date_word["x0"]) + float(date_word["x1"])) / 2.0,
+            "value_date": (float(value_word["x0"]) + float(value_word["x1"])) / 2.0,
+            "description": (
+                (float(description_word["x0"]) + float(description_word["x1"])) / 2.0
+                if description_word is not None
+                else (
+                    (float(value_word["x0"]) + float(value_word["x1"])) / 2.0
+                    + (float(debit_word["x0"]) + float(debit_word["x1"])) / 2.0
+                ) / 2.0
+            ),
+            "debit": (float(debit_word["x0"]) + float(debit_word["x1"])) / 2.0,
+            "credit": (float(credit_word["x0"]) + float(credit_word["x1"])) / 2.0,
+        }
+
+        if not (
+            centers["date"] < centers["value_date"]
+            < centers["description"] < centers["debit"] < centers["credit"]
+        ):
+            return None
+
+        return centers
+
+    def monetary_cell(row: list[dict], center: float, half_width: float) -> str | None:
+        candidates = [
+            word
+            for word in row
+            if center - half_width <= float(word["x0"]) <= center + half_width
+            and (
+                integer_fragment_re.fullmatch(compact(word.get("text")))
+                or decimal_fragment_re.fullmatch(compact(word.get("text")))
+            )
+        ]
+        if not candidates:
+            return None
+
+        candidates.sort(key=lambda item: float(item["x0"]))
+        tokens = [compact(item.get("text")) for item in candidates]
+
+        # PDF word extraction may split "3 982,55" into two adjacent words.
+        decimal_positions = [
+            index
+            for index, token in enumerate(tokens)
+            if decimal_fragment_re.fullmatch(token)
+        ]
+        if not decimal_positions:
+            return None
+
+        decimal_index = decimal_positions[-1]
+        selected = [tokens[decimal_index]]
+        cursor = decimal_index - 1
+        while cursor >= 0 and integer_fragment_re.fullmatch(tokens[cursor]):
+            right_word = candidates[cursor + 1]
+            left_word = candidates[cursor]
+            gap = float(right_word["x0"]) - float(left_word["x1"])
+            if gap > 8.0:
+                break
+            selected.insert(0, tokens[cursor])
+            cursor -= 1
+
+        return " ".join(selected)
+
+    def parse_amount_token(token: str | None) -> float | None:
+        if not token:
+            return None
+        raw = compact(token).replace(" ", "")
+        if "," in raw and "." in raw:
+            if raw.rfind(",") > raw.rfind("."):
+                raw = raw.replace(".", "").replace(",", ".")
+            else:
+                raw = raw.replace(",", "")
+        elif "," in raw:
+            raw = raw.replace(",", ".")
+        try:
+            value = round(float(raw), 2)
+        except (TypeError, ValueError):
+            return None
+        return value if value > 0 else None
+
+    output_rows: list[dict] = []
+    detected_headers = 0
+
+    try:
+        if content is not None:
+            pdf_source = io.BytesIO(content)
+        elif file_path:
+            pdf_source = str(file_path)
+        else:
+            return ""
+
+        with pdfplumber.open(pdf_source) as pdf:
+            for page_index, page in enumerate(pdf.pages, 1):
+                extracted = page.extract_words(
+                    x_tolerance=2,
+                    y_tolerance=3,
+                    use_text_flow=False,
+                )
+                words = []
+                for word in extracted:
+                    token = compact(word.get("text"))
+                    if not token:
+                        continue
+                    words.append({
+                        "text": token,
+                        "x0": float(word["x0"]),
+                        "x1": float(word["x1"]),
+                        "top": float(word["top"]),
+                    })
+
+                statement_year = infer_statement_year(words)
+                rows = group_rows(words)
+                active_header: dict | None = None
+                current: dict | None = None
+
+                def flush_current() -> None:
+                    nonlocal current
+                    if current is not None:
+                        output_rows.append(current)
+                        current = None
+
+                for top in sorted(rows):
+                    row = rows[top]
+                    line = compact(" ".join(item["text"] for item in row))
+                    normalized_line = fold(line)
+
+                    header = detect_header(row)
+                    if header is not None:
+                        flush_current()
+                        active_header = header
+                        detected_headers += 1
+                        continue
+
+                    if active_header is None:
+                        continue
+
+                    if any(phrase in normalized_line for phrase in footer_phrases):
+                        flush_current()
+                        active_header = None
+                        continue
+
+                    row_dates = [
+                        item
+                        for item in row
+                        if short_date_re.fullmatch(item["text"])
+                        or full_date_re.fullmatch(item["text"])
+                    ]
+                    row_dates.sort(key=lambda item: float(item["x0"]))
+
+                    date_limit = (
+                        active_header["date"] + active_header["value_date"]
+                    ) / 2.0
+                    description_limit = (
+                        active_header["description"] + active_header["debit"]
+                    ) / 2.0
+                    amount_gap = active_header["credit"] - active_header["debit"]
+                    amount_half_width = max(24.0, min(52.0, amount_gap * 0.46))
+
+                    transaction_dates = [
+                        item
+                        for item in row_dates
+                        if float(item["x0"]) < active_header["description"]
+                    ]
+
+                    if transaction_dates:
+                        flush_current()
+                        posting_token = transaction_dates[0]["text"]
+                        value_token = (
+                            transaction_dates[1]["text"]
+                            if len(transaction_dates) > 1
+                            else posting_token
+                        )
+                        posting_date = iso_date(posting_token, statement_year)
+                        value_date = iso_date(value_token, statement_year)
+                        if posting_date is None:
+                            continue
                         current = {
-                            "date": value_date,
-                            "desc_parts": [],
+                            "date": posting_date,
+                            "value_date": value_date or posting_date,
+                            "description_parts": [],
                             "debit": None,
                             "credit": None,
-                            "page": page_i,
+                            "page": page_index,
+                            "source_top": float(top),
                         }
 
                     if current is None:
                         continue
 
-                    desc_words = [
-                        r["text"]
-                        for r in row
-                        if 145 < r["x0"] < min(debit_x, credit_x) - 10
-                        and not date_re.match(r["text"])
-                        and not money_re.match(r["text"])
+                    description_words = [
+                        item["text"]
+                        for item in row
+                        if active_header["value_date"] + 12.0
+                        < float(item["x0"]) < description_limit
+                        and not short_date_re.fullmatch(item["text"])
+                        and not full_date_re.fullmatch(item["text"])
                     ]
+                    description = compact(" ".join(description_words))
+                    if description:
+                        current["description_parts"].append(description)
 
-                    if desc_words:
-                        current["desc_parts"].append(norm(" ".join(desc_words)))
+                    debit_token = monetary_cell(
+                        row,
+                        active_header["debit"],
+                        amount_half_width,
+                    )
+                    credit_token = monetary_cell(
+                        row,
+                        active_header["credit"],
+                        amount_half_width,
+                    )
+                    debit = parse_amount_token(debit_token)
+                    credit = parse_amount_token(credit_token)
 
-                    for r in row:
-                        if not money_re.match(r["text"]):
-                            continue
+                    # A single physical token cannot belong to both columns.
+                    # When overlapping windows detect the same cell, choose the
+                    # nearest header center from the token's geometric anchor.
+                    if debit is not None and credit is not None and debit == credit:
+                        money_words = [
+                            item
+                            for item in row
+                            if decimal_fragment_re.fullmatch(item["text"])
+                        ]
+                        if money_words:
+                            anchor = (
+                                float(money_words[-1]["x0"])
+                                + float(money_words[-1]["x1"])
+                            ) / 2.0
+                            if abs(anchor - active_header["debit"]) <= abs(
+                                anchor - active_header["credit"]
+                            ):
+                                credit = None
+                            else:
+                                debit = None
 
-                        cx = (r["x0"] + r["x1"]) / 2
-                        if abs(cx - debit_x) <= abs(cx - credit_x):
-                            current["debit"] = r["text"]
-                        else:
-                            current["credit"] = r["text"]
+                    if debit is not None:
+                        current["debit"] = debit
+                    if credit is not None:
+                        current["credit"] = credit
 
-                if current:
-                    out.append(current)
+                flush_current()
 
-        lines = []
-        seen = set()
+        lines: list[str] = []
+        seen: set[tuple] = set()
 
-        for tx in out:
-            try:
-                d, m, y = tx["date"].split("/")
-                iso = f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
-            except Exception:
+        for observation in output_rows:
+            debit = observation.get("debit")
+            credit = observation.get("credit")
+            if (debit is None) == (credit is None):
                 continue
 
-            desc = norm(" ".join(tx.get("desc_parts") or []))
-            if not desc:
+            description = compact(
+                " ".join(observation.get("description_parts") or [])
+            )
+            if not description:
+                description = "Transaction"
+
+            if debit is not None:
+                transaction_type = "expense"
+                amount = -abs(float(debit))
+            else:
+                transaction_type = "income"
+                amount = abs(float(credit))
+
+            key = (
+                observation["date"],
+                observation.get("value_date"),
+                round(amount, 2),
+                description[:160].casefold(),
+                observation["page"],
+                observation.get("source_top"),
+            )
+            if key in seen:
                 continue
+            seen.add(key)
 
-            if tx.get("debit"):
-                key = (iso, "expense", tx["debit"], desc[:100])
-                if key not in seen:
-                    seen.add(key)
-                    lines.append(f"CM_POSITION_TX {iso} expense {tx['debit']} EUR {desc} page={tx['page']}")
+            lines.append(
+                " ".join([
+                    "CM_POSITION_TX",
+                    observation["date"],
+                    transaction_type,
+                    f"{amount:.2f}",
+                    "MULTI",
+                    description[:500],
+                    f"value_date={observation.get('value_date')}",
+                    f"page={observation['page']}",
+                ])
+            )
 
-            if tx.get("credit"):
-                key = (iso, "income", tx["credit"], desc[:100])
-                if key not in seen:
-                    seen.add(key)
-                    lines.append(f"CM_POSITION_TX {iso} income {tx['credit']} EUR {desc} page={tx['page']}")
-
-        print("CM_POSITION_LINES_SAMPLE", {
-            "count": len(lines),
-            "first_20": lines[:20],
-        })
+        print(
+            "DATE_VALUE_DESCRIPTION_DEBIT_CREDIT_POSITION_AUDIT",
+            {
+                "headers": detected_headers,
+                "observations": len(output_rows),
+                "transactions": len(lines),
+                "debits": sum(" expense " in line for line in lines),
+                "credits": sum(" income " in line for line in lines),
+                "sample": lines[:8],
+            },
+        )
 
         return "\n".join(lines)
 
     except Exception as exc:
-        print("CM_POSITION_LINES_FAILED", str(exc)[:200])
+        print(
+            "DATE_VALUE_DESCRIPTION_DEBIT_CREDIT_POSITION_FAILED",
+            str(exc)[:300],
+        )
         return ""
+
+
+
+def _extract_money_out_money_in_balance_position_lines(
+    file_path: str | None = None,
+    content: bytes | None = None,
+) -> str:
+    """Extract neutral observations for the structural family:
+
+        Date | Description | Money out | Money in | Balance
+
+    The historical helper name and all callers remain unchanged. Detection and
+    classification depend only on the physical header and X positions. When the
+    structure is not proved, the function returns an empty string.
+    """
+    import io
+    import re
+    import unicodedata
+    from datetime import date
+
+    try:
+        import pdfplumber
+    except Exception:
+        return ""
+
+    def compact(value: str) -> str:
+        return " ".join(
+            str(value or "")
+            .replace("\xa0", " ")
+            .replace("\u202f", " ")
+            .split()
+        )
+
+    def fold(value: str) -> str:
+        normalized = unicodedata.normalize("NFKD", compact(value))
+        normalized = "".join(
+            char for char in normalized if not unicodedata.combining(char)
+        )
+        return normalized.casefold()
+
+    month_map = {
+        "jan": 1, "january": 1, "janv": 1, "janvier": 1,
+        "feb": 2, "february": 2, "fev": 2, "fevrier": 2,
+        "mar": 3, "march": 3, "mars": 3,
+        "apr": 4, "april": 4, "avr": 4, "avril": 4,
+        "may": 5, "mai": 5,
+        "jun": 6, "june": 6, "juin": 6,
+        "jul": 7, "july": 7, "juil": 7, "juillet": 7,
+        "aug": 8, "august": 8, "aout": 8,
+        "sep": 9, "sept": 9, "september": 9, "septembre": 9,
+        "oct": 10, "october": 10, "octobre": 10,
+        "nov": 11, "november": 11, "novembre": 11,
+        "dec": 12, "december": 12, "decembre": 12,
+    }
+    month_words = "|".join(
+        sorted((re.escape(item) for item in month_map), key=len, reverse=True)
+    )
+
+    period_re = re.compile(
+        rf"(?P<sd>\d{{1,2}})\s+(?P<sm>{month_words})\.?\s+"
+        rf"(?P<sy>\d{{4}})\s*[-–—]\s*"
+        rf"(?P<ed>\d{{1,2}})\s+(?P<em>{month_words})\.?\s+"
+        rf"(?P<ey>\d{{4}})",
+        re.I,
+    )
+    numeric_short_date_re = re.compile(r"^\d{1,2}[./-]\d{1,2}$")
+    numeric_full_date_re = re.compile(
+        r"^(?P<day>\d{1,2})[./-](?P<month>\d{1,2})[./-](?P<year>\d{2,4})$"
+    )
+    day_token_re = re.compile(r"^\d{1,2}$")
+    month_token_re = re.compile(rf"^(?:{month_words})\.?$", re.I)
+    money_token_re = re.compile(
+        r"^[+\-]?(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[.,]\d{2})$"
+    )
+
+    date_terms = {"date"}
+    description_terms = {
+        "description", "details", "detail", "narrative", "operation",
+        "operations", "libelle", "particular", "particulars",
+    }
+    debit_terms = {
+        "money out", "outgoing", "debit", "debits", "withdrawal", "sortie",
+    }
+    credit_terms = {
+        "money in", "incoming", "credit", "credits", "deposit", "entree",
+    }
+    balance_terms = {"balance", "running balance", "solde"}
+
+    hard_footer_phrases = {
+        "continued", "legal notice", "terms and conditions", "privacy notice",
+        "financial services compensation", "anything wrong", "credit interest rates",
+    }
+    balance_role_re = re.compile(
+        r"\b(?:start(?:ing)?|opening|beginning|end(?:ing)?|closing|final|previous)\s+balance\b|"
+        r"\b(?:brought|carried)\s+forward\b|"
+        r"\bsolde\s+(?:initial|final|d['’]ouverture|de\s+cloture)\b",
+        re.I,
+    )
+
+    def token_center(word: dict) -> float:
+        return (float(word["x0"]) + float(word["x1"])) / 2.0
+
+    def group_rows(words: list[dict]) -> dict[float, list[dict]]:
+        rows: dict[float, list[dict]] = {}
+        for word in words:
+            key = round(float(word["top"]) / 3.0) * 3.0
+            rows.setdefault(key, []).append(word)
+        for key in rows:
+            rows[key] = sorted(rows[key], key=lambda item: float(item["x0"]))
+        return rows
+
+    def role_candidates(row: list[dict]) -> dict[str, list[dict]]:
+        result = {role: [] for role in ("date", "description", "debit", "credit", "balance")}
+        ordered = sorted(row, key=lambda item: float(item["x0"]))
+
+        for word in ordered:
+            token = fold(word.get("text"))
+            if token in date_terms:
+                result["date"].append(word)
+            if token in description_terms:
+                result["description"].append(word)
+            if token in debit_terms:
+                result["debit"].append(word)
+            if token in credit_terms:
+                result["credit"].append(word)
+            if token in balance_terms:
+                result["balance"].append(word)
+
+        for size in (2, 3):
+            for index in range(len(ordered) - size + 1):
+                segment = ordered[index:index + size]
+                phrase = fold(" ".join(item["text"] for item in segment))
+                synthetic = {
+                    "text": phrase,
+                    "x0": min(float(item["x0"]) for item in segment),
+                    "x1": max(float(item["x1"]) for item in segment),
+                    "top": min(float(item["top"]) for item in segment),
+                }
+                if phrase in debit_terms:
+                    result["debit"].append(synthetic)
+                if phrase in credit_terms:
+                    result["credit"].append(synthetic)
+                if phrase in balance_terms:
+                    result["balance"].append(synthetic)
+
+        return result
+
+    def detect_header(row: list[dict]) -> dict | None:
+        candidates = role_candidates(row)
+        if not all(candidates[role] for role in candidates):
+            return None
+        selected = {
+            role: min(words, key=lambda item: float(item["x0"]))
+            for role, words in candidates.items()
+        }
+        centers = {role: token_center(word) for role, word in selected.items()}
+        if not (
+            centers["date"] < centers["description"] < centers["debit"]
+            < centers["credit"] < centers["balance"]
+        ):
+            return None
+        return centers
+
+    def infer_year(month: int, period: dict | None, fallback_year: int | None) -> int | None:
+        if period is None:
+            return fallback_year
+        start_year = period["start_year"]
+        end_year = period["end_year"]
+        start_month = period["start_month"]
+        end_month = period["end_month"]
+        if start_year == end_year:
+            return start_year
+        if start_month > end_month:
+            return start_year if month >= start_month else end_year
+        return start_year if month >= start_month else end_year
+
+    def parse_date_words(
+        row: list[dict],
+        date_right_bound: float,
+        period: dict | None,
+        fallback_year: int | None,
+    ) -> str | None:
+        candidates = [word for word in row if token_center(word) < date_right_bound]
+        candidates.sort(key=lambda item: float(item["x0"]))
+
+        for word in candidates:
+            token = compact(word.get("text"))
+            match = numeric_full_date_re.fullmatch(token)
+            if match:
+                year = int(match.group("year"))
+                if year < 100:
+                    year += 2000
+                try:
+                    return date(year, int(match.group("month")), int(match.group("day"))).isoformat()
+                except ValueError:
+                    continue
+            if numeric_short_date_re.fullmatch(token) and fallback_year is not None:
+                day_s, month_s = re.split(r"[./-]", token)
+                try:
+                    return date(int(fallback_year), int(month_s), int(day_s)).isoformat()
+                except ValueError:
+                    continue
+
+        # Additive named-date variant: DD Mon YYYY, usually split into three
+        # adjacent pdfplumber words. The historical numeric paths above remain
+        # authoritative and unchanged.
+        for index in range(len(candidates) - 2):
+            first = compact(candidates[index].get("text"))
+            second = compact(candidates[index + 1].get("text")).rstrip(".")
+            third = compact(candidates[index + 2].get("text"))
+
+            if (
+                not day_token_re.fullmatch(first)
+                or not month_token_re.fullmatch(second)
+                or not re.fullmatch(r"\d{4}", third)
+            ):
+                continue
+
+            month = month_map.get(fold(second))
+            if month is None:
+                continue
+
+            try:
+                return date(int(third), month, int(first)).isoformat()
+            except ValueError:
+                continue
+
+        for index in range(len(candidates) - 1):
+            first = compact(candidates[index].get("text"))
+            second = compact(candidates[index + 1].get("text")).rstrip(".")
+            if not day_token_re.fullmatch(first) or not month_token_re.fullmatch(second):
+                continue
+            month = month_map.get(fold(second))
+            if month is None:
+                continue
+            year = infer_year(month, period, fallback_year)
+            if year is None:
+                continue
+            try:
+                return date(year, month, int(first)).isoformat()
+            except ValueError:
+                continue
+        return None
+
+    def parse_amount(token: str | None) -> float | None:
+        if not token:
+            return None
+        raw = compact(token).replace(" ", "")
+        sign = -1.0 if raw.startswith("-") else 1.0
+        raw = raw.lstrip("+-")
+        if "," in raw and "." in raw:
+            if raw.rfind(",") > raw.rfind("."):
+                raw = raw.replace(".", "").replace(",", ".")
+            else:
+                raw = raw.replace(",", "")
+        elif "," in raw:
+            raw = raw.replace(",", ".")
+        try:
+            return round(sign * float(raw), 2)
+        except (TypeError, ValueError):
+            return None
+
+    def extract_cell(row: list[dict], left: float, right: float) -> tuple[float | None, float | None]:
+        words = [
+            item for item in row
+            if left <= token_center(item) < right
+            and money_token_re.fullmatch(compact(item.get("text")))
+        ]
+        if not words:
+            return None, None
+        words.sort(key=lambda item: float(item["x0"]))
+        chosen = words[-1]
+        return parse_amount(chosen.get("text")), token_center(chosen)
+
+    observations: list[dict] = []
+    detected_headers = 0
+
+    try:
+        if content is not None:
+            pdf_source = io.BytesIO(content)
+        elif file_path:
+            pdf_source = str(file_path)
+        else:
+            return ""
+
+        with pdfplumber.open(pdf_source) as pdf:
+            all_page_words: list[list[dict]] = []
+            document_text_parts: list[str] = []
+            fallback_years: list[int] = []
+
+            for page in pdf.pages:
+                extracted = page.extract_words(
+                    x_tolerance=2,
+                    y_tolerance=3,
+                    use_text_flow=False,
+                )
+                page_words = []
+                for word in extracted:
+                    token = compact(word.get("text"))
+                    if not token:
+                        continue
+                    page_words.append({
+                        "text": token,
+                        "x0": float(word["x0"]),
+                        "x1": float(word["x1"]),
+                        "top": float(word["top"]),
+                    })
+                    document_text_parts.append(token)
+                    full_match = numeric_full_date_re.fullmatch(token)
+                    if full_match:
+                        year = int(full_match.group("year"))
+                        fallback_years.append(year + 2000 if year < 100 else year)
+                all_page_words.append(page_words)
+
+            document_text = compact(" ".join(document_text_parts))
+            period_match = period_re.search(document_text)
+            period = None
+            if period_match:
+                period = {
+                    "start_year": int(period_match.group("sy")),
+                    "end_year": int(period_match.group("ey")),
+                    "start_month": month_map[fold(period_match.group("sm"))],
+                    "end_month": month_map[fold(period_match.group("em"))],
+                }
+            fallback_year = (
+                max(set(fallback_years), key=lambda item: (fallback_years.count(item), item))
+                if fallback_years else None
+            )
+
+            last_date: str | None = None
+
+            for page_index, words in enumerate(all_page_words, 1):
+                rows = group_rows(words)
+                active_header: dict | None = None
+                current: dict | None = None
+
+                def flush_current() -> None:
+                    nonlocal current
+                    if current is None:
+                        return
+                    if current.get("debit") is not None or current.get("credit") is not None:
+                        observations.append(current)
+                    current = None
+
+                for top in sorted(rows):
+                    row = rows[top]
+                    line = compact(" ".join(item["text"] for item in row))
+                    folded_line = fold(line)
+
+                    header = detect_header(row)
+                    if header is not None:
+                        flush_current()
+                        active_header = header
+                        detected_headers += 1
+                        continue
+
+                    if active_header is None:
+                        continue
+
+                    if any(phrase in folded_line for phrase in hard_footer_phrases):
+                        flush_current()
+                        active_header = None
+                        continue
+
+                    date_description_boundary = (
+                        active_header["date"] + active_header["description"]
+                    ) / 2.0
+                    debit_credit_boundary = (
+                        active_header["debit"] + active_header["credit"]
+                    ) / 2.0
+                    credit_balance_boundary = (
+                        active_header["credit"] + active_header["balance"]
+                    ) / 2.0
+                    debit_left = (
+                        active_header["description"] + active_header["debit"]
+                    ) / 2.0
+                    balance_right = active_header["balance"] + max(
+                        35.0,
+                        active_header["balance"] - active_header["credit"],
+                    )
+
+                    row_date = parse_date_words(
+                        row,
+                        date_description_boundary,
+                        period,
+                        fallback_year,
+                    )
+
+                    debit, _ = extract_cell(row, debit_left, debit_credit_boundary)
+                    credit, _ = extract_cell(row, debit_credit_boundary, credit_balance_boundary)
+                    balance, _ = extract_cell(row, credit_balance_boundary, balance_right)
+
+                    # Opening/closing balance lines are BALANCE observations, not transactions.
+                    if balance_role_re.search(line):
+                        flush_current()
+                        if row_date is not None:
+                            last_date = row_date
+                        continue
+
+                    has_movement = debit is not None or credit is not None
+
+                    if row_date is not None:
+                        flush_current()
+                        last_date = row_date
+                        current = {
+                            "date": row_date,
+                            "description_parts": [],
+                            "debit": debit,
+                            "credit": credit,
+                            "balance": balance,
+                            "page": page_index,
+                            "source_top": float(top),
+                        }
+                    elif has_movement:
+                        if current is not None and (
+                            current.get("debit") is not None
+                            or current.get("credit") is not None
+                        ):
+                            flush_current()
+                        if current is None and last_date is not None:
+                            current = {
+                                "date": last_date,
+                                "description_parts": [],
+                                "debit": None,
+                                "credit": None,
+                                "balance": None,
+                                "page": page_index,
+                                "source_top": float(top),
+                            }
+                        if current is not None:
+                            if debit is not None:
+                                current["debit"] = debit
+                            if credit is not None:
+                                current["credit"] = credit
+                            if balance is not None:
+                                current["balance"] = balance
+                    elif current is None:
+                        continue
+
+                    if current is None:
+                        continue
+
+                    description_words = [
+                        item["text"]
+                        for item in row
+                        if date_description_boundary <= token_center(item) < debit_left
+                        and not money_token_re.fullmatch(compact(item.get("text")))
+                    ]
+                    description = compact(" ".join(description_words))
+                    if description:
+                        current["description_parts"].append(description)
+
+                flush_current()
+
+        lines: list[str] = []
+        seen: set[tuple] = set()
+
+        for observation in observations:
+            debit = observation.get("debit")
+            credit = observation.get("credit")
+            if (debit is None) == (credit is None):
+                continue
+            description = compact(" ".join(observation.get("description_parts") or []))
+            if not description:
+                description = "Transaction"
+            balance = observation.get("balance")
+            key = (
+                observation["date"],
+                round(float(debit or 0), 2),
+                round(float(credit or 0), 2),
+                round(float(balance), 2) if balance is not None else None,
+                description[:160].casefold(),
+                observation["page"],
+                observation.get("source_top"),
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            lines.append(
+                " ".join([
+                    "MONEY_LEDGER_POSITION_TX",
+                    f"date={observation['date']}",
+                    f"debit={'' if debit is None else f'{abs(float(debit)):.2f}'}",
+                    f"credit={'' if credit is None else f'{abs(float(credit)):.2f}'}",
+                    f"balance={'' if balance is None else f'{float(balance):.2f}'}",
+                    f"description={description[:500]}",
+                ])
+            )
+
+        print(
+            "MONEY_OUT_MONEY_IN_BALANCE_POSITION_AUDIT",
+            {
+                "headers": detected_headers,
+                "observations": len(observations),
+                "transactions": len(lines),
+                "debits": sum(" debit=" in line and not " debit= " in line for line in lines),
+                "credits": sum(" credit=" in line and not " credit= " in line for line in lines),
+                "sample": lines[:8],
+            },
+        )
+        return "\n".join(lines)
+
+    except Exception as exc:
+        print(
+            "MONEY_OUT_MONEY_IN_BALANCE_POSITION_FAILED",
+            str(exc)[:300],
+        )
+        return ""
+
+
+
 
 def _native_text_transaction_signal(text: str) -> dict:
     """Bank-neutral signal for deciding whether native PDF text is usable.
@@ -1017,17 +2536,33 @@ def _native_text_transaction_signal(text: str) -> dict:
     }
 
 
-def _merge_native_and_ocr_text(native_text: str, ocr_text: str) -> str:
+def _merge_native_and_ocr_text(
+    native_text: str,
+    ocr_text: str,
+) -> str:
     """Append OCR evidence without replacing reliable native PDF text."""
-    native = _normalize_statement_text_structure(native_text or "")
-    ocr = _normalize_statement_text_structure(ocr_text or "")
+
+    native = _normalize_statement_text_structure(
+        native_text or "",
+        preserve_positional_layout=False,
+    )
+
+    ocr = _normalize_statement_text_structure(
+        ocr_text or "",
+        preserve_positional_layout=True,
+    )
+
     if not native:
         return ocr
+
     if not ocr:
         return native
-    # Keep both representations. Candidate parsers and provenance-based
-    # deduplication decide which rows are reliable; no existing parser is removed.
-    return native + "\n\nOCR_AUGMENTED_TEXT_START\n" + ocr
+
+    return (
+        native
+        + "\n\nOCR_AUGMENTED_TEXT_START\n"
+        + ocr
+    )
 
 def _extract_text_with_scan_fallback(
     file_path: str | None,
@@ -1042,43 +2577,168 @@ def _extract_text_with_scan_fallback(
 
     signal = _native_text_transaction_signal(text)
     native_is_long = len(text.strip()) >= MIN_TEXT_LENGTH
+
     if native_is_long and signal["usable"]:
         print("FINANCE_TEXT_PDF_EXTRACTED", len(text))
         print("FINANCE_NATIVE_TEXT_SIGNAL", signal)
-        return _normalize_statement_text_structure(text)
 
-    # A long PDF text layer is not automatically usable: headers, terms and
-    # footers can exceed MIN_TEXT_LENGTH while the ledger itself is scanned.
-    # OCR is therefore triggered only when universal date+amount evidence is weak.
-    print("FINANCE_PDF_SCAN_DETECTED_OCR_STARTED", {
-        "native_length": len(text.strip()),
-        "native_signal": signal,
-    })
+        return _normalize_statement_text_structure(
+            text,
+            preserve_positional_layout=False,
+        )
 
-    ocr_text = scan_agent_extract_text(
-        file_path=file_path,
-        content=content,
+    print(
+        "FINANCE_PDF_SCAN_DETECTED_OCR_STARTED",
+        {
+            "native_length": len(text.strip()),
+            "native_signal": signal,
+        },
     )
+
+    ocr_text = ""
+
+    try:
+        from app.services.finance_agent.universal_positional_ocr import (
+            extract_pdf_text_preserving_layout,
+        )
+
+        print(
+            "FINANCE_POSITIONAL_OCR_STARTED",
+            {
+                "has_file_path": bool(file_path),
+                "has_content": bool(content),
+                "content_size": len(content) if content else 0,
+            },
+        )
+
+        ocr_text = extract_pdf_text_preserving_layout(
+            pdf_path=file_path,
+            content=content,
+            dpi=300,
+            grid_width=180,
+            min_confidence=20.0,
+            psm=4,
+        )
+
+        print(
+            "FINANCE_POSITIONAL_OCR_FINISHED",
+            {
+                "characters": len(ocr_text or ""),
+                "lines": len((ocr_text or "").splitlines()),
+            },
+        )
+
+    except Exception as exc:
+        print(
+            "FINANCE_POSITIONAL_OCR_FAILED",
+            {
+                "error": repr(exc),
+                "error_type": type(exc).__name__,
+            },
+        )
+
+        ocr_text = scan_agent_extract_text(
+            file_path=file_path,
+            content=content,
+        )
+
+        print(
+            "FINANCE_LEGACY_OCR_FALLBACK_FINISHED",
+            {
+                "characters": len(ocr_text or ""),
+                "lines": len((ocr_text or "").splitlines()),
+            },
+        )
 
     if ocr_text:
         print("FINANCE_OCR_TEXT_EXTRACTED", len(ocr_text))
-        # Preserve usable native evidence and add OCR only as an augmentation.
-        # This keeps all current parser behavior available and prevents OCR from
-        # destructively replacing a partially useful text layer.
-        return _merge_native_and_ocr_text(text, ocr_text.strip())
+
+        return _merge_native_and_ocr_text(
+            text,
+            ocr_text.strip(),
+        )
 
     print("FINANCE_OCR_EMPTY")
 
     return text.strip()
-
-
 async def extract_statement_text(file: UploadFile) -> str:
     content = await file.read()
 
-    return _extract_text_with_scan_fallback(
+    text = _extract_text_with_scan_fallback(
         file_path=None,
         content=content,
     )
+
+    # Branche additive pour la famille structurelle :
+    # Date | Value Date | Description | Debit | Credit
+    #
+    # Le chemin historique reste prioritaire. L’extracteur positionnel
+    # s’auto-rejette si cette géométrie n’est pas présente.
+    if "DATE_DESC_VALUE_DC_POSITION_TX" not in text:
+        try:
+            structural_lines = (
+                _extract_date_description_value_date_debit_credit_position_lines(
+                    content=content,
+                )
+            )
+
+            if structural_lines:
+                print(
+                    "DATE_DESCRIPTION_VALUE_DATE_DEBIT_CREDIT_POSITION_LINES_APPENDED",
+                    len(structural_lines.splitlines()),
+                )
+                text = text + "\n\n" + structural_lines
+
+        except Exception as exc:
+            print(
+                "DATE_DESCRIPTION_VALUE_DATE_DEBIT_CREDIT_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
+
+    if "CM_POSITION_TX " not in text:
+        try:
+            structural_lines = (
+                _extract_credit_mutuel_position_lines_from_pdf_path(
+                    content=content,
+                )
+            )
+
+            if structural_lines:
+                print(
+                    "DATE_VALUE_DESCRIPTION_DEBIT_CREDIT_POSITION_LINES_APPENDED",
+                    len(structural_lines.splitlines()),
+                )
+                text = text + "\n\n" + structural_lines
+
+        except Exception as exc:
+            print(
+                "DATE_VALUE_DESCRIPTION_DEBIT_CREDIT_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
+
+
+    if "MONEY_LEDGER_POSITION_TX " not in text:
+        try:
+            structural_lines = (
+                _extract_money_out_money_in_balance_position_lines(
+                    content=content,
+                )
+            )
+
+            if structural_lines:
+                print(
+                    "MONEY_OUT_MONEY_IN_BALANCE_POSITION_LINES_APPENDED",
+                    len(structural_lines.splitlines()),
+                )
+                text = text + "\n\n" + structural_lines
+
+        except Exception as exc:
+            print(
+                "MONEY_OUT_MONEY_IN_BALANCE_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
+
+    return text
 
 
 def _normalize_statement_identity_text(text: str) -> str:
@@ -1102,6 +2762,27 @@ def extract_statement_text_from_path(file_path: str) -> str:
         content=None,
     )
 
+    if "DATE_DESC_VALUE_DC_POSITION_TX" not in text:
+        try:
+            structural_lines = (
+                _extract_date_description_value_date_debit_credit_position_lines(
+                    file_path=file_path,
+                )
+            )
+
+            if structural_lines:
+                print(
+                    "DATE_DESCRIPTION_VALUE_DATE_DEBIT_CREDIT_POSITION_LINES_APPENDED",
+                    len(structural_lines.splitlines()),
+                )
+                text = text + "\n\n" + structural_lines
+
+        except Exception as exc:
+            print(
+                "DATE_DESCRIPTION_VALUE_DATE_DEBIT_CREDIT_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
+
     identity_text = _normalize_statement_identity_text(text)
 
     specialized_extractors = [
@@ -1110,6 +2791,7 @@ def extract_statement_text_from_path(file_path: str) -> str:
             "markers": (
                 "bred banque populaire",
                 "bred.fr",
+                "banque populaire",
             ),
             "extractor": _extract_bred_banque_populaire_position_lines_from_pdf_path,
         },
@@ -1172,5 +2854,50 @@ def extract_statement_text_from_path(file_path: str) -> str:
                 f"{config['name']}_POSITION_LINES_FAILED",
                 str(exc)[:200],
             )
+
+    # Additive structural-family fallback. Historical institution-triggered
+    # extractors remain prioritary. This branch runs only when no existing
+    # position observer has emitted this family's rows, and the helper itself
+    # returns an empty string unless a reliable
+    # Date | Value Date | Description | Debit | Credit header is present.
+    if "CM_POSITION_TX " not in text:
+        try:
+            structural_lines = (
+                _extract_credit_mutuel_position_lines_from_pdf_path(file_path)
+            )
+            if structural_lines:
+                print(
+                    "DATE_VALUE_DESCRIPTION_DEBIT_CREDIT_POSITION_LINES_APPENDED",
+                    len(structural_lines.splitlines()),
+                )
+                text = text + "\n\n" + structural_lines
+        except Exception as exc:
+            print(
+                "DATE_VALUE_DESCRIPTION_DEBIT_CREDIT_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
+
+
+    if "MONEY_LEDGER_POSITION_TX " not in text:
+        try:
+            structural_lines = (
+                _extract_money_out_money_in_balance_position_lines(
+                    file_path=file_path,
+                )
+            )
+
+            if structural_lines:
+                print(
+                    "MONEY_OUT_MONEY_IN_BALANCE_POSITION_LINES_APPENDED",
+                    len(structural_lines.splitlines()),
+                )
+                text = text + "\n\n" + structural_lines
+
+        except Exception as exc:
+            print(
+                "MONEY_OUT_MONEY_IN_BALANCE_POSITION_LINES_FAILED",
+                str(exc)[:200],
+            )
+
 
     return text

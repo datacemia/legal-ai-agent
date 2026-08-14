@@ -1,5 +1,7 @@
 "use client";
 
+// RUNEXA_FINANCE_FRONTEND_VERSION v20b-limited-scope-truthful-ui-fixed
+
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import ReactMarkdown from "react-markdown";
@@ -106,6 +108,7 @@ const categoryLabels: any = {
     business_operations: "Business Expenses",
     food_dining: "Food & Dining",
     savings: "Savings",
+    savings_investments: "Savings & investments",
     transfers: "Transfers",
     business_services: "Business services",
     cash: "Cash withdrawals",
@@ -135,6 +138,7 @@ const categoryLabels: any = {
     business_operations: "Dépenses professionnelles",
     food_dining: "Restaurants & cafés",
     savings: "Épargne",
+    savings_investments: "Épargne et investissements",
     transfers: "Transferts",
     business_services: "Services professionnels",
     cash: "Retraits d’espèces",
@@ -164,6 +168,7 @@ const categoryLabels: any = {
     business_operations: "مصاريف الأعمال",
     food_dining: "المطاعم والمقاهي",
     savings: "الادخار",
+    savings_investments: "الادخار والاستثمارات",
     transfers: "التحويلات",
     business_services: "الخدمات المهنية",
     cash: "السحب النقدي",
@@ -202,14 +207,111 @@ const severityLabels: any = {
   },
 };
 
+
+
+const groundedStrategyLabels: any = {
+  en: {
+    reviewObservedCategory:
+      "Review {category} first; it is the largest specific observed spending category in this statement.",
+    reviewObservedSpending:
+      "Review the largest specific observed spending categories before making category-specific changes.",
+  },
+  fr: {
+    reviewObservedCategory:
+      "Examinez d’abord la catégorie {category} : c’est la plus importante catégorie de dépenses spécifique observée sur ce relevé.",
+    reviewObservedSpending:
+      "Examinez les principales catégories de dépenses spécifiques observées avant toute modification ciblée.",
+  },
+  ar: {
+    reviewObservedCategory:
+      "راجع أولًا فئة {category}، فهي أكبر فئة إنفاق محددة مرصودة في هذا الكشف.",
+    reviewObservedSpending:
+      "راجع أكبر فئات الإنفاق المحددة المرصودة قبل إجراء أي تعديل يستهدف فئة بعينها.",
+  },
+};
+
+
+const groundedWasteLabels: any = {
+  en: {
+    neutral:
+      "A potential savings signal was detected, but no specific merchant or spending category is sufficiently grounded to label as avoidable. Review the underlying transactions before acting.",
+    observedMerchantEvidence:
+      "Observed merchant references: {details}.",
+  },
+  fr: {
+    neutral:
+      "Un signal d’économie potentiel a été détecté, mais aucun marchand ni aucune catégorie de dépense n’est suffisamment étayé pour être qualifié d’évitable. Vérifiez les transactions concernées avant d’agir.",
+    observedMerchantEvidence:
+      "Références marchands observées : {details}.",
+  },
+  ar: {
+    neutral:
+      "تم رصد إشارة محتملة للتوفير، لكن لا يوجد تاجر أو فئة إنفاق محددة مدعومة بما يكفي لوصفها بأنها قابلة للتجنب. راجع المعاملات المعنية قبل اتخاذ أي إجراء.",
+    observedMerchantEvidence:
+      "مراجع التجار المرصودة: {details}.",
+  },
+};
+
+const evidenceLabels: any = {
+  en: {
+    basedOnObservedActivity: "Based on observed activity",
+    observedExpensesVsIncome:
+      "Observed expenses {expenses} vs observed income {income}.",
+    observedExpenseRatio:
+      "Observed expenses represent approximately {ratio} of observed income.",
+    observedNetCashflowEvidence: "Observed net cashflow: {cashflow}.",
+    expensesExceedIncomeBy: "Observed expenses exceed observed income by {amount}.",
+    savingsOpportunityEvidence: "Estimated savings opportunity: {amount}.",
+    categoryEvidence:
+      "{category}: {amount} across {count} observed transactions ({share} of observed expenses).",
+    categoryEvidenceNoCount:
+      "{category}: {amount} ({share} of observed expenses).",
+    categoryEvidenceNoShare:
+      "{category}: {amount} across {count} observed transactions.",
+  },
+  fr: {
+    basedOnObservedActivity: "Basé sur l’activité observée",
+    observedExpensesVsIncome:
+      "Dépenses observées {expenses} contre revenus observés {income}.",
+    observedExpenseRatio:
+      "Les dépenses observées représentent environ {ratio} des revenus observés.",
+    observedNetCashflowEvidence: "Trésorerie nette observée : {cashflow}.",
+    expensesExceedIncomeBy: "Les dépenses observées dépassent les revenus observés de {amount}.",
+    savingsOpportunityEvidence: "Opportunité d’épargne estimée : {amount}.",
+    categoryEvidence:
+      "{category} : {amount} sur {count} transactions observées ({share} des dépenses observées).",
+    categoryEvidenceNoCount:
+      "{category} : {amount} ({share} des dépenses observées).",
+    categoryEvidenceNoShare:
+      "{category} : {amount} sur {count} transactions observées.",
+  },
+  ar: {
+    basedOnObservedActivity: "استنادًا إلى النشاط المرصود",
+    observedExpensesVsIncome:
+      "المصاريف المرصودة {expenses} مقابل الدخل المرصود {income}.",
+    observedExpenseRatio:
+      "تمثل المصاريف المرصودة حوالي {ratio} من الدخل المرصود.",
+    observedNetCashflowEvidence: "صافي التدفق النقدي المرصود: {cashflow}.",
+    expensesExceedIncomeBy: "تتجاوز المصاريف المرصودة الدخل المرصود بمقدار {amount}.",
+    savingsOpportunityEvidence: "فرصة الادخار المقدرة: {amount}.",
+    categoryEvidence:
+      "{category}: {amount} عبر {count} معاملة مرصودة ({share} من المصاريف المرصودة).",
+    categoryEvidenceNoCount:
+      "{category}: {amount} ({share} من المصاريف المرصودة).",
+    categoryEvidenceNoShare:
+      "{category}: {amount} عبر {count} معاملة مرصودة.",
+  },
+};
+
 const labels: any = {
   en: {
-    title: "Personal Finance Coach",
+    title: "Financial Intelligence from Your Bank Statement",
     subtitle:
-      "Turn your bank statement into an AI financial advisor. Detect waste. Track subscriptions. Improve cashflow. Build savings.",
+      "Turn a bank statement into a structured, evidence-based view of your finances.",
     heroSupport:
-      "Upload a bank statement PDF and receive structured insights about spending, recurring charges, cashflow, and saving opportunities.",
-    uploadBadges: ["PDF bank statements", "Private analysis", "Multi-language"],
+      "Runexa analyzes observed transactions to surface income, spending, cashflow, recurring activity, financial risks and savings opportunities — with reconciliation and quality controls built into the analysis.",
+    heroStatement: "Understand your finances with evidence, not assumptions.",
+    uploadBadges: ["Bank statement analysis", "Transaction reconciliation", "Private & multilingual"],
     whoTitle: "Who is this for?",
     whoItems: [
       "Individuals",
@@ -299,6 +401,8 @@ const labels: any = {
     observedExpenses: "Observed Expenses",
     observedNetCashflow: "Observed Net Cashflow",
     daysUntilRisk: "Days Until Risk",
+    cashRiskNow: "Cashflow risk detected now",
+    noImmediateCashRisk: "No immediate cashflow risk detected",
     recommendedBudget: "Recommended Budget",
     savingsTarget: "Savings Target",
     needs: "Needs",
@@ -307,6 +411,8 @@ const labels: any = {
     safeSpending: "Safe Spending",
     estimatedRecurringCharge: "Estimated Recurring Charge",
     noRecurringSubscriptions: "No recurring subscriptions detected.",
+    subscriptionCategoryNotRecurring:
+      "Some spending may be categorized as subscriptions without enough recurrence evidence to confirm an active recurring subscription.",
     aiSavingsOpportunities: "AI Savings Opportunities",
     aiDetected: "AI detected",
     savingsOpportunity: "Savings opportunity",
@@ -356,10 +462,17 @@ const labels: any = {
     suggestedFollowUpQuestions: "Suggested follow-up questions",
     couldNotCheckFinanceStatus: "Could not check finance analysis status.",
     financeAnalysisFailed: "Finance analysis failed.",
-    financeAnalysisLongerThanExpected: "Finance analysis is taking longer than expected. Please retry in a moment.",
+    financeAnalysisLongerThanExpected: "Finance analysis is still processing. Please keep this page open or retry later.",
     aiNarrativeSummary: "AI Narrative Summary",
     aiGeneratedScore: "AI-generated overall finance score.",
     deterministicScore: "Deterministic score based on observed transactions.",
+    limitedScopeTitle: "Limited analysis scope",
+    limitedScopeScoreUnavailable: "Not enough data to calculate a reliable financial habits score.",
+    limitedScopeBudgetUnavailable: "Not enough observed activity to generate a reliable recommended budget.",
+    limitedScopeSubscriptionsUnavailable: "Not enough transaction history to assess recurring subscriptions reliably.",
+    limitedScopeSavingsUnavailable: "Not enough observed activity to estimate savings opportunities reliably.",
+    limitedScopeNotAssessed: "Not assessed",
+    limitedScopeNotEnoughData: "Not enough data",
     savingBehavior: "Saving behavior",
     subscriptionControl: "Subscription control",
     transactions: "transactions",
@@ -378,17 +491,89 @@ const labels: any = {
     riskNotes: "Risk notes",
     noFile: "No file selected",
     chooseFile: "Choose file",
+    confidenceLabel: "Confidence",
+    noAiInsights: "{t.noAiInsights}",
+    aiThinking: "{t.aiThinking}",
+    assistantName: "Runexa AI",
+    ocrRequiredTitle: "OCR required",
+    ocrRequiredMessage: "This PDF is scanned or has no usable text layer. Please upload an exported PDF or process it with OCR before analysis.",
+    verificationVerifiedTitle: "Analysis verified",
+    verificationVerifiedMessage:
+      "The extracted transactions are reconciled with the accounting evidence available in the statement.",
+    verificationLedgerOnlyTitle: "Transactions reconciled",
+    verificationLedgerOnlyMessage:
+      "The extracted transaction ledger is reconciled, but statement-source consistency is not available. The analysis is not presented as fully verified.",
+    confirmedRecurringSubscriptions: "Confirmed recurring subscriptions",
+    categorizedSubscriptionSpend: "Spending categorized as subscriptions",
+    verificationSourceConflictTitle:
+      "Transactions reconciled — statement inconsistency detected",
+    verificationSourceConflictMessage:
+      "The extracted transaction ledger reconciles, but the statement's printed summary contains an internal accounting inconsistency. The statement is not presented as fully verified.",
+    verificationUnverifiedTitle: "Analysis not verified",
+    verificationUnverifiedMessage:
+      "The extracted transactions could not be fully reconciled with the available accounting evidence in the statement.",
+    verificationTransactions: "Transactions analyzed",
+    verificationCurrency: "Currency",
+    verificationConfidence: "Extraction confidence",
+    verificationLedger: "Transaction ledger",
+    verificationSource: "Statement source",
+    verificationReconciled: "Reconciled",
+    verificationInternallySupported: "Internally supported",
+    verificationConsistent: "Consistent",
+    verificationInconsistent: "Inconsistency detected",
+    verificationUnavailable: "Not available",
+    verificationAdvancedResultsWithheld:
+      "Advanced financial indicators are not shown because the statement source contains an accounting inconsistency.",
+    verificationRetryHint:
+      "Review the extracted transactions and upload the original exported PDF if you need a fully verified analysis.",
+    verificationSourceInconsistencyHint:
+      "The statement was recognized, but its accounting evidence is internally inconsistent. Review the original statement or contact the issuing institution if needed.",
+    verificationUnverifiedAnalysisAvailable:
+      "Financial analysis is shown from the extracted transactions, but it is not fully verified.",
+    verificationSourceInconsistentObservedAnalysis:
+      "Analysis based on extracted transactions only — source statement contains an accounting inconsistency.",
+    verificationSourceAlsoInconsistent:
+      "The statement source also contains an internal accounting inconsistency.",
+    qualityControls: "Quality controls",
+    hideQualityControls: "Hide controls",
+    checkStatementRecognized: "Statement recognized",
+    checkTransactionsExtracted: "Transactions extracted",
+    checkCurrencyDetected: "Currency detected",
+    checkLedgerReconciled: "Transaction ledger status",
+    checkSourceConsistent: "Statement source consistent",
+    checkPassed: "Passed",
+    checkWarning: "Warning",
+    checkUnavailable: "Not available",
+    viewTransactions: "View transactions",
+    evidenceIncomeTitle: "Transactions behind observed income",
+    evidenceExpensesTitle: "Transactions behind observed expenses",
+    evidenceCashflowTitle: "Transactions used for observed net cashflow",
+    evidenceDescription: "These are the statement transactions used by Runexa for this figure.",
+    evidenceDate: "Date",
+    evidenceTransaction: "Transaction",
+    evidenceAmount: "Amount",
+    evidenceTotal: "Observed total",
+    close: "Close",
+    categoryShare: "of observed expenses",
+    coachEvidenceTitle: "Analysis context",
+    coachEvidenceBasedOn: "This coach uses the current statement analysis",
+    coachVerificationVerified: "Verified",
+    coachVerificationWarning: "Source inconsistency flagged",
+    coachVerificationLedgerOnly: "Transactions reconciled · Source unavailable",
+    coachVerificationUnverified: "Not verified",
+    coachTransactionsAnalyzed: "transactions analyzed",
     unsupportedDocumentTitle: "Statement format not supported yet",
     unsupportedDocumentMessage:
-      "This bank or statement format is not yet supported by the Finance Agent. No automatic analysis was generated to avoid inaccurate results. Support for this format will be added in a future update.",
+      "This statement format is not yet supported by the Finance Agent. No automatic analysis was generated to avoid inaccurate results. Support for this structure will be added in a future update.",
   },
   fr: {
-    title: "Coach financier personnel",
+    title: "L’intelligence financière à partir de votre relevé bancaire",
     subtitle:
-      "Transformez votre relevé bancaire en conseiller financier IA. Détectez les dépenses inutiles. Suivez les abonnements. Améliorez votre cashflow. Construisez votre épargne.",
+      "Transformez un relevé bancaire en une vision structurée et fondée sur les données de votre situation financière.",
     heroSupport:
-      "Importez un relevé bancaire PDF et recevez des insights structurés sur les dépenses, les frais récurrents, le cashflow et les opportunités d’épargne.",
-    uploadBadges: ["Relevés bancaires PDF", "Analyse privée", "Multilingue"],
+      "Runexa analyse les transactions observées pour identifier revenus, dépenses, trésorerie, opérations récurrentes, risques financiers et opportunités d’épargne, avec réconciliation et contrôles de qualité intégrés.",
+    heroStatement: "Comprenez vos finances à partir des faits, pas des suppositions.",
+    uploadBadges: ["Analyse de relevé bancaire", "Réconciliation des transactions", "Privé & multilingue"],
     whoTitle: "Pour qui ?",
     whoItems: [
       "Particuliers",
@@ -478,6 +663,8 @@ const labels: any = {
     observedExpenses: "Dépenses observées",
     observedNetCashflow: "Trésorerie nette observée",
     daysUntilRisk: "Jours avant risque",
+    cashRiskNow: "Risque de trésorerie détecté maintenant",
+    noImmediateCashRisk: "Aucun risque immédiat de trésorerie détecté",
     recommendedBudget: "Budget recommandé",
     savingsTarget: "Objectif d’épargne",
     needs: "Besoins",
@@ -486,6 +673,8 @@ const labels: any = {
     safeSpending: "Dépenses sûres",
     estimatedRecurringCharge: "Charge récurrente estimée",
     noRecurringSubscriptions: "Aucun abonnement récurrent détecté.",
+    subscriptionCategoryNotRecurring:
+      "Certaines dépenses peuvent être classées dans la catégorie « Abonnements » sans présenter suffisamment de récurrence pour confirmer un abonnement actif.",
     aiSavingsOpportunities: "Opportunités d’épargne IA",
     aiDetected: "Détecté par IA",
     savingsOpportunity: "Opportunité d’épargne",
@@ -535,10 +724,17 @@ const labels: any = {
     suggestedFollowUpQuestions: "Questions de suivi suggérées",
     couldNotCheckFinanceStatus: "Impossible de vérifier le statut de l’analyse financière.",
     financeAnalysisFailed: "L’analyse financière a échoué.",
-    financeAnalysisLongerThanExpected: "L’analyse financière prend plus de temps que prévu. Veuillez réessayer dans un moment.",
+    financeAnalysisLongerThanExpected: "L’analyse financière est toujours en cours. Gardez cette page ouverte ou réessayez plus tard.",
     aiNarrativeSummary: "Résumé narratif IA",
     aiGeneratedScore: "Score financier global généré par l’IA.",
     deterministicScore: "Score déterministe basé sur les transactions observées.",
+    limitedScopeTitle: "Portée d’analyse limitée",
+    limitedScopeScoreUnavailable: "Les données sont insuffisantes pour calculer un score fiable des habitudes financières.",
+    limitedScopeBudgetUnavailable: "L’activité observée est insuffisante pour générer un budget recommandé fiable.",
+    limitedScopeSubscriptionsUnavailable: "L’historique des transactions est insuffisant pour évaluer de façon fiable les abonnements récurrents.",
+    limitedScopeSavingsUnavailable: "L’activité observée est insuffisante pour estimer de façon fiable les opportunités d’épargne.",
+    limitedScopeNotAssessed: "Non évalué",
+    limitedScopeNotEnoughData: "Données insuffisantes",
     savingBehavior: "Comportement d’épargne",
     subscriptionControl: "Contrôle des abonnements",
     transactions: "transactions",
@@ -557,17 +753,89 @@ const labels: any = {
     riskNotes: "Notes de risque",
     noFile: "Aucun fichier sélectionné",
     chooseFile: "Choisir un fichier",
+    confidenceLabel: "Confiance",
+    noAiInsights: "Aucun insight IA disponible pour le moment.",
+    aiThinking: "Runexa AI analyse votre question...",
+    assistantName: "Runexa AI",
+    ocrRequiredTitle: "OCR requis",
+    ocrRequiredMessage: "Ce PDF est scanné ou ne contient pas de couche texte exploitable. Importez un PDF exporté ou traitez-le par OCR avant l’analyse.",
+    verificationVerifiedTitle: "Analyse vérifiée",
+    verificationVerifiedMessage:
+      "Les transactions extraites sont réconciliées avec les éléments comptables disponibles dans le relevé.",
+    verificationLedgerOnlyTitle: "Transactions réconciliées",
+    verificationLedgerOnlyMessage:
+      "Le ledger des transactions extraites est réconcilié, mais la cohérence du relevé source n’est pas disponible. L’analyse n’est pas présentée comme entièrement vérifiée.",
+    confirmedRecurringSubscriptions: "Abonnements récurrents confirmés",
+    categorizedSubscriptionSpend: "Dépenses classées comme abonnements",
+    verificationSourceConflictTitle:
+      "Transactions réconciliées — incohérence détectée dans le relevé",
+    verificationSourceConflictMessage:
+      "Le ledger des transactions extraites est réconcilié, mais le résumé imprimé du relevé contient une incohérence comptable interne. Le relevé n’est pas présenté comme entièrement vérifié.",
+    verificationUnverifiedTitle: "Analyse non vérifiée",
+    verificationUnverifiedMessage:
+      "Les transactions extraites n’ont pas pu être entièrement réconciliées avec les éléments comptables disponibles dans le relevé.",
+    verificationTransactions: "Transactions analysées",
+    verificationCurrency: "Devise",
+    verificationConfidence: "Confiance d’extraction",
+    verificationLedger: "Ledger des transactions",
+    verificationSource: "Relevé source",
+    verificationReconciled: "Réconcilié",
+    verificationInternallySupported: "Supporté en interne",
+    verificationConsistent: "Cohérent",
+    verificationInconsistent: "Incohérence détectée",
+    verificationUnavailable: "Non disponible",
+    verificationAdvancedResultsWithheld:
+      "Les indicateurs financiers avancés ne sont pas affichés car le relevé source contient une incohérence comptable.",
+    verificationRetryHint:
+      "Vérifiez les transactions extraites et importez le PDF original exporté si vous avez besoin d’une analyse entièrement vérifiée.",
+    verificationSourceInconsistencyHint:
+      "Le relevé a été reconnu, mais ses éléments comptables présentent une incohérence interne. Vérifiez le relevé original ou contactez l’établissement émetteur si nécessaire.",
+    verificationUnverifiedAnalysisAvailable:
+      "L’analyse financière est affichée à partir des transactions extraites, mais elle n’est pas entièrement vérifiée.",
+    verificationSourceInconsistentObservedAnalysis:
+      "Analyse basée uniquement sur les transactions extraites — le relevé source contient une incohérence comptable.",
+    verificationSourceAlsoInconsistent:
+      "Le relevé source contient également une incohérence comptable interne.",
+    qualityControls: "Contrôles de qualité",
+    hideQualityControls: "Masquer les contrôles",
+    checkStatementRecognized: "Relevé reconnu",
+    checkTransactionsExtracted: "Transactions extraites",
+    checkCurrencyDetected: "Devise détectée",
+    checkLedgerReconciled: "Statut du ledger des transactions",
+    checkSourceConsistent: "Cohérence du relevé source",
+    checkPassed: "Validé",
+    checkWarning: "Avertissement",
+    checkUnavailable: "Non disponible",
+    viewTransactions: "Voir les transactions",
+    evidenceIncomeTitle: "Transactions à l’origine des revenus observés",
+    evidenceExpensesTitle: "Transactions à l’origine des dépenses observées",
+    evidenceCashflowTitle: "Transactions utilisées pour la trésorerie nette observée",
+    evidenceDescription: "Voici les transactions du relevé utilisées par Runexa pour calculer ce montant.",
+    evidenceDate: "Date",
+    evidenceTransaction: "Transaction",
+    evidenceAmount: "Montant",
+    evidenceTotal: "Total observé",
+    close: "Fermer",
+    categoryShare: "des dépenses observées",
+    coachEvidenceTitle: "Contexte de l’analyse",
+    coachEvidenceBasedOn: "Ce coach utilise l’analyse en cours du relevé",
+    coachVerificationVerified: "Vérifiée",
+    coachVerificationWarning: "Incohérence source signalée",
+    coachVerificationLedgerOnly: "Transactions réconciliées · Source non disponible",
+    coachVerificationUnverified: "Non vérifié",
+    coachTransactionsAnalyzed: "transactions analysées",
     unsupportedDocumentTitle: "Format de relevé non encore pris en charge",
     unsupportedDocumentMessage:
-      "Cette banque ou ce format de relevé n’est pas encore reconnu par l’agent Finance. Aucune analyse automatique n’a été générée afin d’éviter des résultats inexacts. Ce format sera pris en charge dans une prochaine mise à jour.",
+      "Ce format de relevé n’est pas encore pris en charge par l’agent Finance. Aucune analyse automatique n’a été générée afin d’éviter des résultats inexacts. Cette structure sera prise en charge dans une prochaine mise à jour.",
   },
   ar: {
-    title: "وكيل الإدارة المالية الشخصية",
+    title: "ذكاء مالي مستند إلى كشف حسابك البنكي",
     subtitle:
-      "حوّل كشف حسابك البنكي إلى مستشار مالي بالذكاء الاصطناعي. اكتشف الهدر. تابع الاشتراكات. حسّن التدفق النقدي. ابنِ مدخراتك.",
+      "حوّل كشف حسابك البنكي إلى رؤية مالية منظمة تستند إلى البيانات الفعلية.",
     heroSupport:
-      "ارفع كشف حساب بنكي بصيغة PDF واحصل على رؤى منظمة حول الإنفاق، الرسوم المتكررة، التدفق النقدي وفرص الادخار.",
-    uploadBadges: ["كشوفات بنكية PDF", "تحليل خاص", "متعدد اللغات"],
+      "تحلل Runexa المعاملات المرصودة لاستخراج الدخل والمصاريف والتدفق النقدي والعمليات المتكررة والمخاطر المالية وفرص الادخار، مع مطابقة المعاملات وضوابط الجودة ضمن التحليل.",
+    heroStatement: "افهم وضعك المالي استنادًا إلى الأدلة، لا الافتراضات.",
+    uploadBadges: ["تحليل كشف الحساب", "مطابقة المعاملات", "خاص ومتعدد اللغات"],
     whoTitle: "لمن هذا الوكيل؟",
     whoItems: [
       "الأفراد",
@@ -657,6 +925,8 @@ const labels: any = {
     observedExpenses: "المصاريف الفعلية المرصودة",
     observedNetCashflow: "صافي التدفق النقدي المرصود",
     daysUntilRisk: "الأيام قبل الخطر",
+    cashRiskNow: "تم اكتشاف خطر على التدفق النقدي الآن",
+    noImmediateCashRisk: "لم يتم اكتشاف خطر فوري على التدفق النقدي",
     recommendedBudget: "الميزانية المقترحة",
     savingsTarget: "هدف الادخار",
     needs: "الاحتياجات",
@@ -665,6 +935,8 @@ const labels: any = {
     safeSpending: "الإنفاق الآمن",
     estimatedRecurringCharge: "التكلفة المتكررة المقدرة",
     noRecurringSubscriptions: "لم يتم اكتشاف اشتراكات متكررة.",
+    subscriptionCategoryNotRecurring:
+      "قد تُصنَّف بعض المصاريف ضمن فئة الاشتراكات دون وجود تكرار كافٍ لتأكيد اشتراك نشط ومتكرر.",
     aiSavingsOpportunities: "فرص الادخار بالذكاء الاصطناعي",
     aiDetected: "تم اكتشافه بالذكاء الاصطناعي",
     savingsOpportunity: "فرصة ادخار",
@@ -714,10 +986,17 @@ const labels: any = {
     suggestedFollowUpQuestions: "أسئلة متابعة مقترحة",
     couldNotCheckFinanceStatus: "تعذر التحقق من حالة التحليل المالي.",
     financeAnalysisFailed: "فشل التحليل المالي.",
-    financeAnalysisLongerThanExpected: "يستغرق التحليل المالي وقتاً أطول من المتوقع. يرجى المحاولة بعد قليل.",
+    financeAnalysisLongerThanExpected: "لا يزال التحليل المالي قيد المعالجة. اترك هذه الصفحة مفتوحة أو أعد المحاولة لاحقاً.",
     aiNarrativeSummary: "ملخص سردي بالذكاء الاصطناعي",
     aiGeneratedScore: "نتيجة مالية عامة تم إنشاؤها بالذكاء الاصطناعي.",
     deterministicScore: "نتيجة حتمية مبنية على المعاملات المرصودة.",
+    limitedScopeTitle: "نطاق تحليل محدود",
+    limitedScopeScoreUnavailable: "لا توجد بيانات كافية لحساب درجة موثوقة للعادات المالية.",
+    limitedScopeBudgetUnavailable: "النشاط المرصود غير كافٍ لإنشاء ميزانية مقترحة موثوقة.",
+    limitedScopeSubscriptionsUnavailable: "سجل المعاملات غير كافٍ لتقييم الاشتراكات المتكررة بصورة موثوقة.",
+    limitedScopeSavingsUnavailable: "النشاط المرصود غير كافٍ لتقدير فرص الادخار بصورة موثوقة.",
+    limitedScopeNotAssessed: "لم يتم التقييم",
+    limitedScopeNotEnoughData: "بيانات غير كافية",
     savingBehavior: "سلوك الادخار",
     subscriptionControl: "التحكم في الاشتراكات",
     transactions: "معاملات",
@@ -736,9 +1015,80 @@ const labels: any = {
     riskNotes: "ملاحظات المخاطر",
     noFile: "لم يتم اختيار ملف",
     chooseFile: "اختيار ملف",
+    confidenceLabel: "مستوى الثقة",
+    noAiInsights: "لا توجد رؤى ذكية متاحة حالياً.",
+    aiThinking: "يقوم Runexa AI بتحليل سؤالك...",
+    assistantName: "Runexa AI",
+    ocrRequiredTitle: "يلزم التعرف الضوئي على الحروف",
+    ocrRequiredMessage: "ملف PDF ممسوح ضوئياً أو لا يحتوي على طبقة نص قابلة للاستخدام. يرجى رفع ملف PDF مُصدّر أو معالجته بتقنية OCR قبل التحليل.",
+    verificationVerifiedTitle: "تم التحقق من التحليل",
+    verificationVerifiedMessage:
+      "تمت مطابقة المعاملات المستخرجة مع الأدلة المحاسبية المتاحة في كشف الحساب.",
+    verificationLedgerOnlyTitle: "تمت مطابقة المعاملات",
+    verificationLedgerOnlyMessage:
+      "تمت مطابقة سجل المعاملات المستخرجة، لكن التحقق من اتساق كشف الحساب المصدر غير متاح. لذلك لا يتم عرض التحليل على أنه متحقق منه بالكامل.",
+    confirmedRecurringSubscriptions: "الاشتراكات المتكررة المؤكدة",
+    categorizedSubscriptionSpend: "المصاريف المصنفة كاشتراكات",
+    verificationSourceConflictTitle:
+      "تمت مطابقة المعاملات — تم اكتشاف تناقض في كشف الحساب",
+    verificationSourceConflictMessage:
+      "تمت مطابقة سجل المعاملات المستخرجة، لكن الملخص المطبوع في كشف الحساب يحتوي على تناقض محاسبي داخلي. لذلك لا يتم عرض كشف الحساب على أنه متحقق منه بالكامل.",
+    verificationUnverifiedTitle: "لم يتم التحقق من التحليل",
+    verificationUnverifiedMessage:
+      "تعذر مطابقة المعاملات المستخرجة بالكامل مع الأدلة المحاسبية المتاحة في كشف الحساب.",
+    verificationTransactions: "المعاملات التي تم تحليلها",
+    verificationCurrency: "العملة",
+    verificationConfidence: "ثقة الاستخراج",
+    verificationLedger: "سجل المعاملات",
+    verificationSource: "كشف الحساب المصدر",
+    verificationReconciled: "تمت المطابقة",
+    verificationInternallySupported: "مدعوم داخليًا",
+    verificationConsistent: "متسق",
+    verificationInconsistent: "تم اكتشاف تناقض",
+    verificationUnavailable: "غير متاح",
+    verificationAdvancedResultsWithheld:
+      "لا يتم عرض المؤشرات المالية المتقدمة لأن المعاملات المستخرجة لم تتم مطابقتها بالكامل.",
+    verificationRetryHint:
+      "راجع المعاملات المستخرجة وارفع ملف PDF الأصلي المُصدَّر إذا كنت تحتاج إلى تحليل متحقق منه بالكامل.",
+    verificationSourceInconsistencyHint:
+      "تم التعرف على كشف الحساب، لكن الأدلة المحاسبية فيه تتضمن تناقضًا داخليًا. راجع الكشف الأصلي أو تواصل مع الجهة المصدرة عند الحاجة.",
+    verificationUnverifiedAnalysisAvailable:
+      "يتم عرض التحليل المالي استنادًا إلى المعاملات المستخرجة، لكنه غير متحقق منه بالكامل.",
+    verificationSourceInconsistentObservedAnalysis:
+      "يعتمد التحليل فقط على المعاملات المستخرجة — يحتوي كشف الحساب المصدر على عدم اتساق محاسبي.",
+    verificationSourceAlsoInconsistent:
+      "يحتوي كشف الحساب المصدر أيضًا على تناقض محاسبي داخلي.",
+    qualityControls: "ضوابط الجودة",
+    hideQualityControls: "إخفاء الضوابط",
+    checkStatementRecognized: "تم التعرف على كشف الحساب",
+    checkTransactionsExtracted: "تم استخراج المعاملات",
+    checkCurrencyDetected: "تم اكتشاف العملة",
+    checkLedgerReconciled: "حالة سجل المعاملات",
+    checkSourceConsistent: "اتساق كشف الحساب المصدر",
+    checkPassed: "تم التحقق",
+    checkWarning: "تنبيه",
+    checkUnavailable: "غير متاح",
+    viewTransactions: "عرض المعاملات",
+    evidenceIncomeTitle: "المعاملات التي تكوّن الدخل المرصود",
+    evidenceExpensesTitle: "المعاملات التي تكوّن المصاريف المرصودة",
+    evidenceCashflowTitle: "المعاملات المستخدمة لصافي التدفق النقدي المرصود",
+    evidenceDescription: "هذه هي معاملات كشف الحساب التي استخدمتها Runexa لحساب هذا المبلغ.",
+    evidenceDate: "التاريخ",
+    evidenceTransaction: "المعاملة",
+    evidenceAmount: "المبلغ",
+    evidenceTotal: "الإجمالي المرصود",
+    close: "إغلاق",
+    categoryShare: "من المصاريف المرصودة",
+    coachEvidenceTitle: "سياق التحليل",
+    coachEvidenceBasedOn: "يستخدم هذا المدرب التحليل الحالي لكشف الحساب",
+    coachVerificationVerified: "تم التحقق",
+    coachVerificationWarning: "تم التنبيه إلى تناقض في المصدر",
+    coachVerificationLedgerOnly: "تمت مطابقة المعاملات · المصدر غير متاح",
+    coachVerificationUnverified: "غير متحقق منه",
+    coachTransactionsAnalyzed: "معاملة تم تحليلها",
     unsupportedDocumentTitle: "تنسيق كشف الحساب غير مدعوم حالياً",
     unsupportedDocumentMessage:
-      "هذا البنك أو تنسيق كشف الحساب غير مدعوم حالياً من قبل وكيل التحليل المالي. لم يتم إنشاء أي تحليل تلقائي لتجنب تقديم نتائج غير دقيقة. سيتم دعم هذا التنسيق في تحديث قادم.",
+      "تنسيق كشف الحساب هذا غير مدعوم حالياً من قبل وكيل التحليل المالي. لم يتم إنشاء أي تحليل تلقائي لتجنب تقديم نتائج غير دقيقة. سيتم دعم هذه البنية في تحديث قادم.",
   },
 };
 
@@ -786,6 +1136,8 @@ export default function FinanceClient({
   const [loadingStep, setLoadingStep] = useState("");
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [showVerificationDetails, setShowVerificationDetails] = useState(false);
+  const [evidenceView, setEvidenceView] = useState<"income" | "expense" | "cashflow" | null>(null);
 
   useEffect(() => {
     if (lockInitialLocale) {
@@ -828,14 +1180,137 @@ export default function FinanceClient({
 
   const t = labels[language] || labels.en;
 
+  const verificationStatus = String(
+    result?.verification?.status || ""
+  )
+    .trim()
+    .toLowerCase();
+
+  const hasVerificationContract =
+    Boolean(result?.verification) &&
+    ["verified", "verified_with_source_inconsistency", "unverified"].includes(
+      verificationStatus
+    );
+
+  const isVerificationVerified =
+    verificationStatus === "verified" &&
+    result?.verification?.accounting_reconciled === true &&
+    result?.verification?.source_consistent === true &&
+    result?.verification?.source_inconsistency_detected !== true;
+
+  const isVerificationUnverified =
+    hasVerificationContract &&
+    verificationStatus === "unverified";
+
+  const isVerificationSourceConflict =
+    verificationStatus === "verified_with_source_inconsistency" &&
+    result?.verification?.accounting_reconciled === true &&
+    result?.verification?.source_inconsistency_detected === true;
+
+  const isVerificationLedgerOnly =
+    verificationStatus === "verified" &&
+    result?.verification?.accounting_reconciled === true &&
+    result?.verification?.source_consistent !== true &&
+    result?.verification?.source_inconsistency_detected !== true;
+
+  const shouldWithholdFinancialAnalysis =
+    hasVerificationContract &&
+    result?.verification?.analysis_withheld === true;
+
+  // Frontend v20: suppressed analytics are not numeric zeroes.
+  // Activate only on explicit backend limited-scope status.
+  const isLimitedAnalysisScope =
+    String(result?.recommended_budget?.status || "")
+      .trim()
+      .toLowerCase() === "limited_scope" ||
+    String(result?.analysis_scope || "")
+      .trim()
+      .toLowerCase() === "limited_scope" ||
+    result?.limited_analysis_scope === true;
+
+  const coachVerificationStatusLabel = isVerificationSourceConflict
+    ? t.coachVerificationWarning
+    : isVerificationLedgerOnly
+      ? t.coachVerificationLedgerOnly
+      : isVerificationVerified
+        ? t.coachVerificationVerified
+        : t.coachVerificationUnverified;
+
+  const verificationPresentation = isVerificationUnverified
+    ? {
+        tone: "neutral",
+        title: t.verificationUnverifiedTitle,
+        message: t.verificationUnverifiedMessage,
+      }
+    : isVerificationSourceConflict
+    ? {
+        tone: "warning",
+        title: t.verificationSourceConflictTitle,
+        message: t.verificationSourceConflictMessage,
+      }
+    : isVerificationLedgerOnly
+    ? {
+        tone: "neutral",
+        title: t.verificationLedgerOnlyTitle,
+        message: t.verificationLedgerOnlyMessage,
+      }
+    : isVerificationVerified
+    ? {
+        tone: "success",
+        title: t.verificationVerifiedTitle,
+        message: t.verificationVerifiedMessage,
+      }
+    : {
+        tone: "neutral",
+        title: t.verificationUnverifiedTitle,
+        message: t.verificationUnverifiedMessage,
+      };
+
+
   const isInsufficientData =
     result?.status === "insufficient_data" ||
     result?.analysis_status === "insufficient_data";
+
+  const isOcrRequired =
+    result?.status === "ocr_required" ||
+    result?.analysis_status === "ocr_required" ||
+    result?.reason === "scanned_pdf_requires_ocr";
 
   const isUnsupportedDocument =
     result?.status === "unsupported_document" ||
     result?.reason === "unsupported_statement_format" ||
     result?.reason === "no_transactions_extracted";
+
+  const isRecognizedButUnreconciled =
+    !hasVerificationContract &&
+    (
+      result?.status === "recognized_but_unreconciled" ||
+      result?.analysis_status === "recognized_but_unreconciled" ||
+      result?.reason === "source_statement_section_inconsistency" ||
+      (
+        result?.recognized === true &&
+        result?.financial_authority === false
+      )
+    );
+
+
+  const renderSafeText = (
+    value: any,
+    fallback = ""
+  ): string => {
+    if (value === null || value === undefined) return fallback;
+
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean"
+    ) {
+      return String(value);
+    }
+
+    // Never pass raw objects/arrays to React as children.
+    return fallback;
+  };
 
 
   const translateInsightText = (value: any) => {
@@ -890,6 +1365,133 @@ export default function FinanceClient({
     if (typeof value !== "string") return value;
 
     return savingsOpportunityLabels[value]?.[language] || value;
+  };
+
+
+  const normalizeStrategySearchText = (value: unknown): string =>
+    String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[’']/g, "'");
+
+  const canonicalStrategyCategory = (value: unknown): string => {
+    const normalized = normalizeEvidenceCategory(value);
+
+    const aliases: Record<string, string> = {
+      cash_withdrawals: "cash",
+      cash_withdrawal: "cash",
+      atm: "cash",
+      food_dining: "food",
+      restaurants: "food",
+      restaurant: "food",
+      grocery: "groceries",
+      debt_loans: "debt",
+      loans: "debt",
+      business_expenses: "business_operations",
+      business_operations: "business_operations",
+      government_taxes: "government_taxes",
+      taxes: "government_taxes",
+      savings_investments: "savings_investments",
+    };
+
+    return aliases[normalized] || normalized;
+  };
+
+  const strategyCategoryAliases: Record<string, string[]> = {
+    shopping: [
+      "shopping",
+      "shop",
+      "achats",
+      "achat",
+      "shopping et",
+      "التسوق",
+      "المشتريات",
+    ],
+    entertainment: [
+      "entertainment",
+      "leisure",
+      "recreation",
+      "divertissement",
+      "divertissements",
+      "loisirs",
+      "الترفيه",
+      "ترفيه",
+    ],
+    food: [
+      "food",
+      "dining",
+      "restaurant",
+      "restaurants",
+      "nourriture",
+      "repas",
+      "restaurants et cafes",
+      "المطاعم",
+      "الطعام",
+      "الأطعمة",
+    ],
+    groceries: [
+      "groceries",
+      "grocery",
+      "courses",
+      "supermarche",
+      "البقالة",
+    ],
+    cash: [
+      "cash withdrawal",
+      "cash withdrawals",
+      "atm",
+      "retrait d'especes",
+      "retraits d'especes",
+      "السحب النقدي",
+      "الصراف",
+    ],
+    housing: ["housing", "rent", "logement", "loyer", "السكن", "الإيجار"],
+    utilities: [
+      "utilities",
+      "bills",
+      "utility bills",
+      "factures",
+      "services et factures",
+      "المرافق",
+      "الفواتير",
+    ],
+    transport: ["transport", "transportation", "النقل"],
+    travel: ["travel", "voyage", "السفر"],
+    subscriptions: ["subscription", "subscriptions", "abonnement", "abonnements", "الاشتراكات"],
+    fees: ["fees", "frais", "الرسوم"],
+    debt: ["debt", "loan", "loans", "dette", "dettes", "pret", "prets", "الديون", "القروض"],
+    business_operations: [
+      "business expenses",
+      "business expense",
+      "depenses professionnelles",
+      "مصاريف الاعمال",
+      "مصاريف الأعمال",
+    ],
+    government_taxes: [
+      "tax",
+      "taxes",
+      "impot",
+      "impots",
+      "taxe",
+      "taxes",
+      "الضرائب",
+    ],
+    healthcare: ["healthcare", "health", "sante", "الصحة"],
+    insurance: ["insurance", "assurance", "التأمين"],
+    education: ["education", "التعليم"],
+  };
+
+  const getStrategyMentionedCategories = (value: unknown): string[] => {
+    const normalizedText = normalizeStrategySearchText(value);
+
+    return Object.entries(strategyCategoryAliases)
+      .filter(([, aliases]) =>
+        aliases.some((alias) =>
+          normalizedText.includes(normalizeStrategySearchText(alias))
+        )
+      )
+      .map(([category]) => category);
   };
 
   const translateSeverity = (value: any) => {
@@ -965,29 +1567,1098 @@ export default function FinanceClient({
     "#64748b",
   ];
 
-  const currencySymbol =
-    result?.currency_detected === "USD"
-      ? "$"
-      : result?.currency_detected === "EUR"
-      ? "€"
-      : result?.currency_detected === "MAD"
-      ? "MAD"
-      : result?.currency_detected === "GBP"
-      ? "£"
-      : result?.currency_detected === "CAD"
-      ? "CA$"
-      : "";
+  const resolvedCurrency = String(
+    result?.currency_detected || ""
+  ).toUpperCase();
 
   const formatMoney = (value: any) => {
-    const amount = Number(value || 0);
-    return currencySymbol ? `${currencySymbol} ${amount}` : `${amount}`;
+    const parsed = Number(value);
+    const amount = Number.isFinite(parsed) ? parsed : 0;
+    const locale = language === "ar" ? "ar" : language === "fr" ? "fr-FR" : "en-US";
+
+    if (/^[A-Z]{3}$/.test(resolvedCurrency) && resolvedCurrency !== "UNKNOWN") {
+      try {
+        return new Intl.NumberFormat(locale, {
+          style: "currency",
+          currency: resolvedCurrency,
+          currencyDisplay:
+            resolvedCurrency === "GBP" && language === "fr"
+              ? "narrowSymbol"
+              : "symbol",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(amount);
+      } catch {
+        return `${amount.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${resolvedCurrency}`;
+      }
+    }
+
+    return amount.toLocaleString(locale, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+
+  const fillEvidenceTemplate = (
+    template: string,
+    values: Record<string, string | number>
+  ) =>
+    Object.entries(values).reduce(
+      (output, [key, value]) =>
+        output.replaceAll(`{${key}}`, String(value)),
+      template
+    );
+
+  const normalizeEvidenceCategory = (value: any) =>
+    String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[\s&/]+/g, "_");
+
+  const getObservedExpenseTotal = () => {
+    const value = Number(result?.cashflow_forecast?.observed_expenses);
+    return Number.isFinite(value) ? value : null;
+  };
+
+  const getObservedIncomeTotal = () => {
+    const value = Number(result?.cashflow_forecast?.observed_income);
+    return Number.isFinite(value) ? value : null;
+  };
+
+  const sourceEvidenceIsLimited =
+    isVerificationSourceConflict || isVerificationLedgerOnly;
+
+  const evidenceSensitiveCopy = {
+    estimateBadge:
+      language === "fr"
+        ? "Estimation indicative"
+        : language === "ar"
+          ? "تقدير إرشادي"
+          : "Indicative estimate",
+    estimateNoteConflict:
+      language === "fr"
+        ? "À interpréter avec prudence : une incohérence a été détectée dans le relevé source."
+        : language === "ar"
+          ? "يُرجى تفسير هذا التقدير بحذر: تم اكتشاف عدم اتساق في كشف الحساب المصدر."
+          : "Interpret with caution: an inconsistency was detected in the source statement.",
+    estimateNoteUnavailable:
+      language === "fr"
+        ? "À interpréter avec prudence : la cohérence du relevé source n’est pas disponible."
+        : language === "ar"
+          ? "يُرجى تفسير هذا التقدير بحذر: التحقق من اتساق كشف الحساب المصدر غير متاح."
+          : "Interpret with caution: statement-source consistency is unavailable.",
+    budgetHeading:
+      language === "fr"
+        ? "Budget indicatif"
+        : language === "ar"
+          ? "ميزانية إرشادية"
+          : "Indicative budget",
+    savingsHeading:
+      language === "fr"
+        ? "Opportunités d’épargne indicatives"
+        : language === "ar"
+          ? "فرص ادخار إرشادية"
+          : "Indicative savings opportunities",
+  };
+
+  const evidenceSensitiveNote = isVerificationSourceConflict
+    ? evidenceSensitiveCopy.estimateNoteConflict
+    : evidenceSensitiveCopy.estimateNoteUnavailable;
+
+  const formatEvidenceShare = (value: number): string => {
+    const locale =
+      language === "fr" ? "fr-FR" : language === "ar" ? "ar" : "en-US";
+
+    return new Intl.NumberFormat(locale, {
+      style: "percent",
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(value / 100);
+  };
+
+  const getCategoryEvidence = (category: any) => {
+    if (!category) return null;
+
+    const normalizedTarget = normalizeEvidenceCategory(category);
+    const breakdown = Array.isArray(result?.charts?.category_breakdown)
+      ? result.charts.category_breakdown
+      : [];
+
+    const match = breakdown.find(
+      (entry: any) =>
+        normalizeEvidenceCategory(entry?.category) === normalizedTarget
+    );
+
+    if (!match) return null;
+
+    const amount = Number(match?.amount);
+    if (!Number.isFinite(amount)) return null;
+
+    const expenseTotal = getObservedExpenseTotal();
+    const share =
+      expenseTotal !== null && expenseTotal > 0
+        ? Number(((Math.abs(amount) / expenseTotal) * 100).toFixed(1))
+        : null;
+
+    const transactions = Array.isArray(result?.transactions)
+      ? result.transactions.filter(
+          (transaction: any) =>
+            transaction &&
+            transaction.excluded_from_financial_kpis !== true &&
+            transaction.exclude_from_cashflow !== true
+        )
+      : [];
+
+    const count = transactions.filter(
+      (transaction: any) =>
+        normalizeEvidenceCategory(transaction?.category) === normalizedTarget
+    ).length;
+
+    const categoryLabel = translateCategory(match?.category || category);
+    const localized = evidenceLabels[language] || evidenceLabels.en;
+
+    if (count > 0 && share !== null) {
+      return fillEvidenceTemplate(localized.categoryEvidence, {
+        category: categoryLabel,
+        amount: formatMoney(Math.abs(amount)),
+        count,
+        share: formatEvidenceShare(share),
+      });
+    }
+
+    if (share !== null) {
+      return fillEvidenceTemplate(localized.categoryEvidenceNoCount, {
+        category: categoryLabel,
+        amount: formatMoney(Math.abs(amount)),
+        share: formatEvidenceShare(share),
+      });
+    }
+
+    if (count > 0) {
+      return fillEvidenceTemplate(localized.categoryEvidenceNoShare, {
+        category: categoryLabel,
+        amount: formatMoney(Math.abs(amount)),
+        count,
+      });
+    }
+
+    return null;
+  };
+
+
+  const confirmedRecurringSubscriptionCount = Array.isArray(
+    result?.subscriptions_detected
+  )
+    ? result.subscriptions_detected.length
+    : 0;
+
+  const nonActionableStrategyCategories = new Set([
+    "income",
+    "other",
+    "transfers",
+    "savings",
+    "savings_investments",
+  ]);
+
+  const observedActionableStrategyCategories = (
+    Array.isArray(result?.charts?.category_breakdown)
+      ? result.charts.category_breakdown
+      : []
+  )
+    .map((entry: any) => {
+      const amount = Number(entry?.amount);
+      const canonical = canonicalStrategyCategory(entry?.category);
+
+      return {
+        rawCategory: entry?.category,
+        canonical,
+        amount: Number.isFinite(amount) ? Math.abs(amount) : 0,
+      };
+    })
+    .filter(
+      (entry: any) =>
+        entry.amount > 0 &&
+        entry.canonical &&
+        !nonActionableStrategyCategories.has(entry.canonical) &&
+        !(
+          entry.canonical === "subscriptions" &&
+          confirmedRecurringSubscriptionCount === 0
+        )
+    )
+    .sort((a: any, b: any) => b.amount - a.amount);
+
+  const observedActionableStrategySet = new Set(
+    observedActionableStrategyCategories.map((entry: any) => entry.canonical)
+  );
+
+  const getTransactionSearchText = (transaction: any): string =>
+    normalizeStrategySearchText(
+      [
+        transaction?.description,
+        transaction?.merchant,
+        transaction?.merchant_name,
+        transaction?.name,
+        transaction?.label,
+        transaction?.raw_description,
+      ]
+        .filter(Boolean)
+        .join(" ")
+    );
+
+  const observedTransactionSearchTexts = Array.isArray(result?.transactions)
+    ? result.transactions
+        .filter(
+          (transaction: any) =>
+            transaction &&
+            transaction.excluded_from_financial_kpis !== true &&
+            transaction.exclude_from_cashflow !== true
+        )
+        .map((transaction: any) => getTransactionSearchText(transaction))
+    : [];
+
+  const extractWasteMerchantExamples = (value: unknown): string[] => {
+    const raw = String(value || "").trim();
+    if (!raw) return [];
+
+    const match = raw.match(
+      /(?:\blike\b|\bsuch as\b|\bcomme\b|\btels?\s+que\b|مثل)\s+(.+?)(?:[.!؟]|$)/i
+    );
+    if (!match?.[1]) return [];
+
+    return match[1]
+      .split(/\s*(?:,|;)\s*|\s+(?:and|et|و)\s+/i)
+      .map((item) => item.trim())
+      .filter((item) => item.length >= 2 && item.length <= 80)
+      .slice(0, 6);
+  };
+
+  const getObservedMerchantMatchCount = (merchant: string): number => {
+    const normalizedMerchant = normalizeStrategySearchText(merchant);
+    if (!normalizedMerchant) return 0;
+
+    return observedTransactionSearchTexts.filter((textValue) =>
+      textValue.includes(normalizedMerchant)
+    ).length;
+  };
+
+  const normalizeNarrativeMoney = (value: unknown): string => {
+    if (
+      value === null ||
+      value === undefined ||
+      (typeof value !== "string" &&
+        typeof value !== "number" &&
+        typeof value !== "boolean")
+    ) {
+      return "";
+    }
+
+    const textValue = String(value);
+    if (!textValue.trim()) return textValue;
+
+    const locale =
+      language === "fr" ? "fr-FR" : language === "ar" ? "ar" : "en-US";
+
+    return textValue.replace(
+      /(-?\d+(?:[.,]\d+)?)\s+(EUR|GBP|AUD|USD)\b/g,
+      (match, rawAmount, currencyCode) => {
+        const amount = Number(String(rawAmount).replace(",", "."));
+        if (!Number.isFinite(amount)) return match;
+
+        try {
+          return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: currencyCode,
+            currencyDisplay:
+              currencyCode === "GBP" && language === "fr"
+                ? "narrowSymbol"
+                : "symbol",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(amount);
+        } catch {
+          return match;
+        }
+      }
+    );
+  };
+
+
+  const getGroundedWasteItem = (value: unknown) => {
+    const translated = normalizeNarrativeMoney(
+      translateBackendMessage(String(value || ""))
+    );
+
+    const merchants = extractWasteMerchantExamples(translated);
+    if (merchants.length === 0) {
+      return {
+        text: translated,
+        evidence: null as string | null,
+        replaced: false,
+      };
+    }
+
+    const merchantEvidence = merchants.map((merchant) => ({
+      merchant,
+      count: getObservedMerchantMatchCount(merchant),
+    }));
+
+    const allSupported = merchantEvidence.every((item) => item.count > 0);
+    const localized = groundedWasteLabels[language] || groundedWasteLabels.en;
+
+    if (!allSupported) {
+      return {
+        text: localized.neutral,
+        evidence: null as string | null,
+        replaced: true,
+      };
+    }
+
+    const details = merchantEvidence
+      .map((item) => `${item.merchant} (${item.count})`)
+      .join(language === "ar" ? "، " : ", ");
+
+    return {
+      text: translated,
+      evidence: fillEvidenceTemplate(
+        localized.observedMerchantEvidence,
+        { details }
+      ),
+      replaced: false,
+    };
+  };
+
+  const getGroundedSavingStrategy = (value: unknown) => {
+    const translated = normalizeNarrativeMoney(
+      translateBackendMessage(String(value || ""))
+    );
+
+    const mentionedCategories = getStrategyMentionedCategories(translated);
+    const unsupportedCategories = mentionedCategories.filter(
+      (category) => !observedActionableStrategySet.has(category)
+    );
+
+    const firstSupportedMention = mentionedCategories.find((category) =>
+      observedActionableStrategySet.has(category)
+    );
+
+    const supportedObservedEntry = firstSupportedMention
+      ? observedActionableStrategyCategories.find(
+          (entry: any) => entry.canonical === firstSupportedMention
+        )
+      : null;
+
+    // If a strategy names an absent/non-actionable category, never display
+    // that unsupported claim. Replace it with a neutral strategy grounded in
+    // the largest specific observed category.
+    if (unsupportedCategories.length > 0) {
+      const topObserved = observedActionableStrategyCategories[0] || null;
+      const localized =
+        groundedStrategyLabels[language] || groundedStrategyLabels.en;
+
+      if (!topObserved) {
+        return {
+          text: localized.reviewObservedSpending,
+          evidence: null as string | null,
+          replaced: true,
+        };
+      }
+
+      return {
+        text: fillEvidenceTemplate(localized.reviewObservedCategory, {
+          category: translateCategory(topObserved.rawCategory),
+        }),
+        evidence: getCategoryEvidence(topObserved.rawCategory),
+        replaced: true,
+      };
+    }
+
+    // If the backend strategy names a category that really exists, keep the
+    // original strategy and attach factual evidence for that category.
+    if (supportedObservedEntry) {
+      return {
+        text: translated,
+        evidence: getCategoryEvidence(supportedObservedEntry.rawCategory),
+        replaced: false,
+      };
+    }
+
+    // General strategies that do not assert a category remain unchanged.
+    return {
+      text: translated,
+      evidence: null as string | null,
+      replaced: false,
+    };
+  };
+
+  const totalSavingsOpportunity = Number(
+    (result?.savings_opportunities || [])
+      .reduce(
+        (sum: number, item: any) =>
+          sum + Number(item?.estimated_savings_opportunity || 0),
+        0
+      )
+      .toFixed(2)
+  );
+
+
+  const groundedWasteItems = (() => {
+    const backendItems = Array.isArray(result?.waste_detected)
+      ? result.waste_detected
+      : [];
+
+    if (backendItems.length > 0) {
+      return backendItems.map((item: unknown) => getGroundedWasteItem(item));
+    }
+
+    // Preserve the section only when there is a real positive savings signal.
+    // Do not invent a waste merchant/category when the backend provides none.
+    if (totalSavingsOpportunity > 0) {
+      const localized =
+        groundedWasteLabels[language] || groundedWasteLabels.en;
+
+      return [
+        {
+          text: localized.neutral,
+          evidence: null as string | null,
+          replaced: true,
+        },
+      ];
+    }
+
+    return [];
+  })();
+
+  const groundedSavingStrategies = (() => {
+    const backendItems = Array.isArray(result?.saving_strategies)
+      ? result.saving_strategies
+      : [];
+
+    if (backendItems.length > 0) {
+      return backendItems.map((item: unknown) =>
+        getGroundedSavingStrategy(item)
+      );
+    }
+
+    // If a savings opportunity exists but no backend strategy survived,
+    // provide one neutral strategy grounded in the largest specific observed
+    // actionable category. Never use Other/Transfers/Income/Savings.
+    if (totalSavingsOpportunity > 0) {
+      const localized =
+        groundedStrategyLabels[language] || groundedStrategyLabels.en;
+      const topObserved = observedActionableStrategyCategories[0] || null;
+
+      if (!topObserved) {
+        return [
+          {
+            text: localized.reviewObservedSpending,
+            evidence: null as string | null,
+            replaced: true,
+          },
+        ];
+      }
+
+      return [
+        {
+          text: fillEvidenceTemplate(localized.reviewObservedCategory, {
+            category: translateCategory(topObserved.rawCategory),
+          }),
+          evidence: getCategoryEvidence(topObserved.rawCategory),
+          replaced: true,
+        },
+      ];
+    }
+
+    return [];
+  })();
+
+  const getCashflowEvidence = () => {
+    const expenses = getObservedExpenseTotal();
+    const income = getObservedIncomeTotal();
+
+    if (expenses === null || income === null) return null;
+
+    return fillEvidenceTemplate(
+      (evidenceLabels[language] || evidenceLabels.en)
+        .observedExpensesVsIncome,
+      {
+        expenses: formatMoney(expenses),
+        income: formatMoney(income),
+      }
+    );
+  };
+
+
+  const getExpenseShortfallEvidence = () => {
+    const expenses = getObservedExpenseTotal();
+    const income = getObservedIncomeTotal();
+
+    if (expenses === null || income === null || expenses <= income) {
+      return null;
+    }
+
+    return fillEvidenceTemplate(
+      (evidenceLabels[language] || evidenceLabels.en).expensesExceedIncomeBy,
+      {
+        amount: formatMoney(expenses - income),
+      }
+    );
+  };
+
+  const getExpenseRatioEvidence = () => {
+    const expenses = getObservedExpenseTotal();
+    const income = getObservedIncomeTotal();
+
+    if (
+      expenses === null ||
+      income === null ||
+      !Number.isFinite(income) ||
+      income <= 0
+    ) {
+      return null;
+    }
+
+    const ratio = Number(((expenses / income) * 100).toFixed(1));
+
+    return fillEvidenceTemplate(
+      (evidenceLabels[language] || evidenceLabels.en).observedExpenseRatio,
+      {
+        ratio: formatEvidenceShare(ratio),
+        expenses: formatMoney(expenses),
+        income: formatMoney(income),
+      }
+    );
+  };
+
+  const getSavingsEvidence = (item: any) => {
+    // Use an explicit backend category when available.
+    // Do not infer a category or merchant from recommendation wording.
+    const categoryEvidence = getCategoryEvidence(
+      item?.category || item?.expense_category
+    );
+
+    if (categoryEvidence) return categoryEvidence;
+
+    // High-spending recommendations can still be explained using the
+    // already-calculated observed expense and income totals.
+    if (
+      String(item?.issue || "").toLowerCase() ===
+        "high spending detected" ||
+      String(item?.severity || "").toLowerCase() === "high"
+    ) {
+      return getCashflowEvidence();
+    }
+
+    return null;
+  };
+
+  type FinanceInsightConcept =
+    | "cashflow"
+    | "savings_opportunity"
+    | "expense_ratio"
+    | "savings_capacity"
+    | "subscriptions"
+    | "financial_habits"
+    | "other";
+
+  const getInsightConcept = (
+    titleValue: unknown,
+    messageValue: unknown = ""
+  ): FinanceInsightConcept => {
+    const searchable = normalizeStrategySearchText(
+      `${String(titleValue || "")} ${String(messageValue || "")}`
+    );
+
+    const hasAny = (terms: string[]) =>
+      terms.some((term) =>
+        searchable.includes(normalizeStrategySearchText(term))
+      );
+
+    if (
+      hasAny([
+        "cashflow",
+        "cash flow",
+        "negative cashflow",
+        "trésorerie",
+        "flux de trésorerie",
+        "تدفق نقدي",
+        "التدفق النقدي",
+      ])
+    ) {
+      return "cashflow";
+    }
+
+    if (
+      hasAny([
+        "savings opportunities",
+        "saving opportunities",
+        "savings opportunity",
+        "opportunités d’économies",
+        "opportunités d'economies",
+        "opportunités d’épargne",
+        "opportunités d'epargne",
+        "فرص للتوفير",
+        "فرص الادخار",
+        "فرص توفير",
+      ])
+    ) {
+      return "savings_opportunity";
+    }
+
+    if (
+      hasAny([
+        "expense ratio",
+        "expenses consume",
+        "spending level",
+        "moderate spending",
+        "ratio de dépenses",
+        "niveau de dépenses",
+        "dépenses consomment",
+        "نسبة المصاريف",
+        "نسبة مصاريف",
+        "مستوى الإنفاق",
+        "المصاريف تستهلك",
+      ])
+    ) {
+      return "expense_ratio";
+    }
+
+    if (
+      hasAny([
+        "savings capacity",
+        "limited savings capacity",
+        "excellent savings capacity",
+        "capacité d’épargne",
+        "capacité d'epargne",
+        "قدرة محدودة على الادخار",
+        "قدرة الادخار",
+      ])
+    ) {
+      return "savings_capacity";
+    }
+
+    if (
+      hasAny([
+        "subscription",
+        "subscriptions",
+        "abonnement",
+        "abonnements",
+        "اشتراك",
+        "الاشتراكات",
+      ])
+    ) {
+      return "subscriptions";
+    }
+
+    if (
+      hasAny([
+        "financial habits",
+        "habits need improvement",
+        "habitudes financières",
+        "habitudes financieres",
+        "العادات المالية",
+      ])
+    ) {
+      return "financial_habits";
+    }
+
+    return "other";
+  };
+
+  const shouldHideInsightAsDuplicate = (insight: any): boolean => {
+    const concept = getInsightConcept(insight?.title, insight?.message);
+
+    // Dedicated Cashflow Forecast card already states the status/risk.
+    if (concept === "cashflow" && result?.cashflow_forecast) {
+      return true;
+    }
+
+    // Dedicated AI Savings Opportunities card already states the amount.
+    if (
+      concept === "savings_opportunity" &&
+      Array.isArray(result?.savings_opportunities)
+    ) {
+      return true;
+    }
+
+    // Dedicated subscription card already owns subscription-control messaging.
+    if (concept === "subscriptions" && result?.subscriptions) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const visibleFinancialInsights = Array.isArray(result?.financial_insights)
+    ? result.financial_insights.filter(
+        (insight: any) => !shouldHideInsightAsDuplicate(insight)
+      )
+    : [];
+
+  const visibleInsightConcepts = new Set<FinanceInsightConcept>(
+    visibleFinancialInsights.map((insight: any) =>
+      getInsightConcept(insight?.title, insight?.message)
+    )
+  );
+
+  const shouldHideRiskNoteAsDuplicate = (note: unknown): boolean => {
+    const concept = getInsightConcept(note);
+
+    // Cashflow status is already explicit in the dedicated forecast card.
+    if (concept === "cashflow" && result?.cashflow_forecast) {
+      return true;
+    }
+
+    // Savings opportunities have their own card.
+    if (
+      concept === "savings_opportunity" &&
+      Array.isArray(result?.savings_opportunities)
+    ) {
+      return true;
+    }
+
+    // Financial Habits Score already communicates overall habit quality.
+    if (concept === "financial_habits" && result?.financial_habit_scores) {
+      return true;
+    }
+
+    // If the same concept is already explained by a visible Smart Money
+    // Coach insight, avoid repeating it again as a risk note.
+    if (
+      concept !== "other" &&
+      visibleInsightConcepts.has(concept)
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const visibleRiskNotes = Array.isArray(result?.risk_notes)
+    ? result.risk_notes.filter(
+        (note: unknown) => !shouldHideRiskNoteAsDuplicate(note)
+      )
+    : [];
+
+  const getInsightEvidence = (insight: any) => {
+    const categoryEvidence = getCategoryEvidence(
+      insight?.category || insight?.expense_category
+    );
+    if (categoryEvidence) return categoryEvidence;
+
+    const title = String(insight?.title || "").toLowerCase();
+    const message = String(insight?.message || "").toLowerCase();
+    const searchable = `${title} ${message}`;
+    const localized = evidenceLabels[language] || evidenceLabels.en;
+
+    const includesAny = (terms: string[]) =>
+      terms.some((term) => searchable.includes(term));
+
+    const isExpenseRatioInsight = includesAny([
+      "expense ratio",
+      "expenses consume",
+      "moderate spending",
+      "spending level",
+      "spending is moderate",
+      "ratio de dépenses",
+      "dépenses consomment",
+      "niveau de dépenses",
+      "dépenses sont modérées",
+      "نسبة مصاريف",
+      "نسبة المصاريف",
+      "المصاريف تستهلك",
+      "مستوى الإنفاق",
+      "الإنفاق معتدل",
+    ]);
+
+    if (isExpenseRatioInsight) {
+      return getExpenseRatioEvidence();
+    }
+
+    const isSavingsOpportunityInsight = includesAny([
+      "savings opportunities",
+      "saving opportunities",
+      "opportunités d’économies",
+      "opportunités d'économies",
+      "opportunités d’épargne",
+      "opportunités d'épargne",
+      "فرص للتوفير",
+      "فرص الادخار",
+      "فرص توفير",
+    ]);
+
+    if (isSavingsOpportunityInsight) {
+      if (
+        Number.isFinite(totalSavingsOpportunity) &&
+        totalSavingsOpportunity > 0
+      ) {
+        return fillEvidenceTemplate(localized.savingsOpportunityEvidence, {
+          amount: formatMoney(totalSavingsOpportunity),
+        });
+      }
+      return null;
+    }
+
+    const isCashflowInsight = includesAny([
+      "cashflow",
+      "cash flow",
+      "trésorerie",
+      "flux de trésorerie",
+      "تدفق نقدي",
+      "التدفق النقدي",
+    ]);
+
+    if (isCashflowInsight) {
+      const net = Number(result?.cashflow_forecast?.observed_net_cashflow);
+      if (Number.isFinite(net)) {
+        return fillEvidenceTemplate(localized.observedNetCashflowEvidence, {
+          cashflow: formatMoney(net),
+        });
+      }
+      return getCashflowEvidence();
+    }
+
+    const isLimitedSavingsCapacityInsight = includesAny([
+      "limited savings capacity",
+      "limited room for savings",
+      "savings capacity",
+      "capacité d’épargne limitée",
+      "capacité d'epargne limitée",
+      "marge limitée pour l’épargne",
+      "marge limitée pour l'epargne",
+      "قدرة محدودة على الادخار",
+      "مجالًا محدودًا للادخار",
+      "مجالا محدودا للادخار",
+    ]);
+
+    if (isLimitedSavingsCapacityInsight) {
+      return getExpenseShortfallEvidence() || getCashflowEvidence();
+    }
+
+    return null;
   };
 
   const chartData =
-    result?.charts?.category_breakdown?.map((item: any) => ({
-      name: translateCategory(item.category),
-      value: Number(item.amount),
-    })) || [];
+    result?.charts?.category_breakdown?.map((item: any) => {
+      const canonical = canonicalStrategyCategory(item?.category);
+      const isUnconfirmedSubscriptionCategory =
+        canonical === "subscriptions" &&
+        confirmedRecurringSubscriptionCount === 0;
+
+      return {
+        name: isUnconfirmedSubscriptionCategory
+          ? t.categorizedSubscriptionSpend
+          : translateCategory(item.category),
+        value: Number(item.amount),
+      };
+    }) || [];
+
+
+  const usableTransactions = Array.isArray(result?.transactions)
+    ? result.transactions.filter(
+        (tx: any) =>
+          tx &&
+          tx.excluded_from_financial_kpis !== true &&
+          tx.exclude_from_cashflow !== true
+      )
+    : [];
+
+  const incomeEvidenceTransactions = usableTransactions.filter(
+    (tx: any) => String(tx?.type || "").toLowerCase() === "income"
+  );
+
+  const expenseEvidenceTransactions = usableTransactions.filter(
+    (tx: any) => String(tx?.type || "").toLowerCase() === "expense"
+  );
+
+  const cashflowEvidenceTransactions = usableTransactions.filter((tx: any) =>
+    ["income", "expense"].includes(String(tx?.type || "").toLowerCase())
+  );
+
+  const getEvidenceTransactions = () => {
+    if (evidenceView === "income") return incomeEvidenceTransactions;
+    if (evidenceView === "expense") return expenseEvidenceTransactions;
+    if (evidenceView === "cashflow") return cashflowEvidenceTransactions;
+    return [];
+  };
+
+  const getEvidenceTitle = () => {
+    if (evidenceView === "income") return t.evidenceIncomeTitle;
+    if (evidenceView === "expense") return t.evidenceExpensesTitle;
+    return t.evidenceCashflowTitle;
+  };
+
+  const getEvidenceTotal = () => {
+    const rows = getEvidenceTransactions();
+
+    return rows.reduce((sum: number, tx: any) => {
+      const signedCandidate = Number(tx?.signed_amount);
+      const amountCandidate = Number(tx?.amount);
+      const value = Number.isFinite(signedCandidate)
+        ? signedCandidate
+        : Number.isFinite(amountCandidate)
+        ? amountCandidate
+        : 0;
+
+      const txType = String(tx?.type || "").toLowerCase();
+
+      if (evidenceView === "income") {
+        return sum + Math.abs(value);
+      }
+
+      if (evidenceView === "expense") {
+        return sum + Math.abs(value);
+      }
+
+      if (evidenceView === "cashflow") {
+        if (txType === "expense") return sum - Math.abs(value);
+        if (txType === "income") return sum + Math.abs(value);
+      }
+
+      return sum + value;
+    }, 0);
+  };
+
+  const formatEvidenceDate = (value: any) => {
+    if (!value) return "-";
+    const parsed = new Date(String(value));
+    if (Number.isNaN(parsed.getTime())) return String(value);
+    const locale =
+      language === "ar" ? "ar" : language === "fr" ? "fr-FR" : "en-US";
+    return new Intl.DateTimeFormat(locale, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(parsed);
+  };
+
+  const formatChartDate = (value: any) => {
+    if (!value) return "";
+    const parsed = new Date(String(value));
+    if (Number.isNaN(parsed.getTime())) return String(value);
+
+    const locale =
+      language === "ar" ? "ar" : language === "fr" ? "fr-FR" : "en-US";
+
+    return new Intl.DateTimeFormat(locale, {
+      day: "2-digit",
+      month: "short",
+    }).format(parsed);
+  };
+
+  const makeDedupedChartDateFormatter = () => {
+    let previousLabel = "";
+
+    return (value: any) => {
+      const label = formatChartDate(value);
+      if (label === previousLabel) return "";
+      previousLabel = label;
+      return label;
+    };
+  };
+
+  const buildSparseDateTicks = (rows: any[], maxTicks = 7) => {
+    if (!Array.isArray(rows) || rows.length === 0) return undefined;
+
+    const uniqueDates = Array.from(
+      new Set(
+        rows
+          .map((row: any) => row?.date)
+          .filter((value: any) => Boolean(value))
+      )
+    );
+
+    if (uniqueDates.length <= maxTicks) return uniqueDates;
+
+    const lastIndex = uniqueDates.length - 1;
+    const selected: any[] = [];
+
+    for (let i = 0; i < maxTicks; i += 1) {
+      const index = Math.round((i * lastIndex) / (maxTicks - 1));
+      const value = uniqueDates[index];
+      if (!selected.includes(value)) selected.push(value);
+    }
+
+    return selected;
+  };
+
+  const formatChartTooltipDate = (value: any) => {
+    if (!value) return "";
+    const parsed = new Date(String(value));
+    if (Number.isNaN(parsed.getTime())) return String(value);
+
+    const locale =
+      language === "ar" ? "ar" : language === "fr" ? "fr-FR" : "en-US";
+
+    return new Intl.DateTimeFormat(locale, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(parsed);
+  };
+
+  const formatChartAxisAmount = (value: any) => {
+    const amount = Number(value);
+    if (!Number.isFinite(amount)) return String(value ?? "");
+
+    const locale =
+      language === "ar" ? "ar" : language === "fr" ? "fr-FR" : "en-US";
+
+    return new Intl.NumberFormat(locale, {
+      notation: "compact",
+      maximumFractionDigits: 1,
+    }).format(amount);
+  };
+
+  const cashflowTrend = String(
+    result?.cashflow_forecast?.trend || ""
+  ).toLowerCase();
+
+  const cashRiskDays = Number(
+    result?.cashflow_forecast?.days_until_cash_risk
+  );
+
+  const showCashRiskCountdown =
+    ["negative", "risky"].includes(cashflowTrend) &&
+    Number.isFinite(cashRiskDays) &&
+    cashRiskDays > 0;
+
+  const showImmediateCashRisk =
+    ["negative", "risky"].includes(cashflowTrend) &&
+    Number.isFinite(cashRiskDays) &&
+    cashRiskDays <= 0;
+
+  const showNoImmediateCashRisk =
+    !["negative", "risky"].includes(cashflowTrend);
+
+  const totalCategorySpend = chartData.reduce(
+    (sum: number, item: any) =>
+      sum + (Number.isFinite(Number(item.value)) ? Number(item.value) : 0),
+    0
+  );
+
+
+  const subscriptionCategorySpend = Array.isArray(
+    result?.charts?.category_breakdown
+  )
+    ? result.charts.category_breakdown.reduce((sum: number, item: any) => {
+        const category = String(item?.category || "").toLowerCase().trim();
+        const amount = Number(item?.amount);
+
+        if (
+          ["subscriptions", "subscription"].includes(category) &&
+          Number.isFinite(amount)
+        ) {
+          return sum + Math.abs(amount);
+        }
+
+        return sum;
+      }, 0)
+    : 0;
+
+  const hasSubscriptionCategoryWithoutConfirmedRecurring =
+    subscriptionCategorySpend > 0 &&
+    confirmedRecurringSubscriptionCount === 0;
 
 
   const translatedCashflowTrend =
@@ -1000,20 +2671,22 @@ export default function FinanceClient({
     result?.recommended_budget?.status ??
     "unknown";
 
-  const quickQuestions = [
-    result?.subscriptions_detected?.length > 0
-      ? t.chatCancelSubscriptions
-      : t.chatSaveMoreMoney,
-    result?.cashflow_forecast?.trend === "negative" ||
-    result?.cashflow_forecast?.trend === "risky"
-      ? t.chatAvoidCashflowRisk
-      : t.chatBiggestExpenses,
-    (result?.financial_habit_scores?.overall_financial_habits_score || 100) < 60
-      ? t.chatWhyScoreLow
-      : t.chatFinanciallyHealthy,
-    t.chatExplainFinancialScore,
-    t.chatCreateSavingsPlan,
-  ];
+  const quickQuestions = isLimitedAnalysisScope
+    ? [t.chatBiggestExpenses, t.chatSaveMoreMoney]
+    : [
+        result?.subscriptions_detected?.length > 0
+          ? t.chatCancelSubscriptions
+          : t.chatSaveMoreMoney,
+        result?.cashflow_forecast?.trend === "negative" ||
+        result?.cashflow_forecast?.trend === "risky"
+          ? t.chatAvoidCashflowRisk
+          : t.chatBiggestExpenses,
+        (result?.financial_habit_scores?.overall_financial_habits_score || 100) < 60
+          ? t.chatWhyScoreLow
+          : t.chatFinanciallyHealthy,
+        t.chatExplainFinancialScore,
+        t.chatCreateSavingsPlan,
+      ];
 
   const refreshUserBilling = async () => {
     const token = safeGetLocalStorage("token");
@@ -1150,48 +2823,95 @@ export default function FinanceClient({
         let attempts = 0;
         let completed = false;
 
-        while (attempts < 180 && !completed) {
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+        // Finance jobs are processed asynchronously by the worker.
+        // Large scanned statements can legitimately require more than 6 minutes.
+        const maxPollingAttempts = 900;
+        const pollingIntervalMs = 2000;
+
+        while (attempts < maxPollingAttempts && !completed) {
+          await new Promise((resolve) =>
+            setTimeout(resolve, pollingIntervalMs)
+          );
 
           const statusResponse = await fetch(
-            `${API_URL}/jobs/${currentJobId}`,
+            `${API_URL}/jobs/${currentJobId}?timestamp=${Date.now()}`,
             {
+              method: "GET",
+              cache: "no-store",
               headers: {
+                Accept: "application/json",
                 ...(token
                   ? {
                       Authorization: `Bearer ${token}`,
                     }
                   : {}),
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                Pragma: "no-cache",
               },
             }
           );
 
-          if (!statusResponse.ok) {
-            throw new Error(t.couldNotCheckFinanceStatus);
+          const responseText = await statusResponse.text();
+
+          let statusData: any = null;
+
+          try {
+            statusData = responseText ? JSON.parse(responseText) : null;
+          } catch {
+            throw new Error(
+              `Invalid finance job response (${statusResponse.status})`
+            );
           }
 
-          const statusData = await statusResponse.json();
+          if (!statusResponse.ok) {
+            throw new Error(
+              statusData?.detail ||
+                statusData?.error ||
+                t.couldNotCheckFinanceStatus
+            );
+          }
 
-          setJobId(statusData.id || currentJobId);
-          setJobStatus(statusData.status || "");
+          const normalizedStatus = String(statusData?.status || "")
+            .trim()
+            .toLowerCase();
 
-          if (typeof statusData.progress === "number") {
+          console.log("FINANCE_JOB_STATUS", {
+            requestedJobId: currentJobId,
+            response: statusData,
+          });
+
+          setJobId(statusData?.id || currentJobId);
+          setJobStatus(normalizedStatus);
+
+          if (typeof statusData?.progress === "number") {
             setLoadingProgress(statusData.progress);
           }
 
-          if (statusData.status_message) {
-            setLoadingStep(statusData.status_message);
+          if (statusData?.status_message) {
+            setLoadingStep(
+              typeof statusData.status_message === "string"
+                ? statusData.status_message
+                : t.queued
+            );
           }
 
-          if (statusData.status === "completed") {
+          if (normalizedStatus === "completed") {
+            if (!statusData?.result) {
+              throw new Error(
+                `Job ${currentJobId} completed without a result.`
+              );
+            }
+
             data = statusData.result;
             completed = true;
             break;
           }
 
-          if (statusData.status === "failed") {
+          if (normalizedStatus === "failed") {
             throw new Error(
-              statusData.error || t.financeAnalysisFailed
+              statusData?.error ||
+                statusData?.detail ||
+                t.financeAnalysisFailed
             );
           }
 
@@ -1215,7 +2935,12 @@ export default function FinanceClient({
       await refreshUserBilling();
       await refreshFinanceTrial();
     } catch (error) {
-      console.error("Finance analysis failed");
+      console.error("Finance analysis failed", {
+        error,
+        jobId,
+        jobStatus,
+        apiUrl: process.env.NEXT_PUBLIC_API_URL,
+      });
 
       const errorMessage =
         error instanceof Error ? error.message : t.apiError;
@@ -1357,7 +3082,13 @@ export default function FinanceClient({
     addLine(7);
     doc.text(`${t.observedNetCashflow}: ${formatMoney(result.cashflow_forecast?.observed_net_cashflow)}`, 14, y);
     addLine(7);
-    doc.text(`${t.financialHabitsScore}: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
+    doc.text(
+      isLimitedAnalysisScope
+        ? `${t.financialHabitsScore}: ${t.limitedScopeNotAssessed}`
+        : `${t.financialHabitsScore}: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`,
+      14,
+      y
+    );
 
     addLine(12);
     doc.setFontSize(13);
@@ -1368,7 +3099,7 @@ export default function FinanceClient({
 
     (result.savings_opportunities || []).forEach((item: any) => {
       doc.text(
-        `${translateSavingsText(item.issue)}: ${t.estimatedSavingsOpportunity} ${formatMoney(item.estimated_savings_opportunity)}`,
+        `${normalizeNarrativeMoney(translateSavingsText(item.issue))}: ${t.estimatedSavingsOpportunity} ${formatMoney(item.estimated_savings_opportunity)}`,
         14,
         y
       );
@@ -1442,143 +3173,34 @@ export default function FinanceClient({
       className="min-h-screen bg-slate-50 px-4 py-12 sm:py-16"
     >
       <div className="max-w-4xl mx-auto space-y-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+        <section className="rounded-3xl border border-slate-200 bg-white px-6 py-10 text-center shadow-sm sm:px-10 sm:py-12">
+          <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
             {t.title}
           </h1>
 
-          <p className="mx-auto mt-4 max-w-3xl text-slate-500">
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">
             {t.subtitle}
           </p>
 
-          <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-slate-600">
+          <p className="mx-auto mt-4 max-w-3xl text-sm leading-6 text-slate-500">
             {t.heroSupport}
           </p>
-        </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <section className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-            <p className="text-sm font-semibold text-slate-900">
-              {t.whoTitle}
-            </p>
+          <p className="mx-auto mt-6 max-w-2xl text-sm font-semibold text-slate-900">
+            {t.heroStatement}
+          </p>
 
-            <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              {t.whoItems.map((item: string) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-2 text-sm text-slate-600"
-                >
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-bold text-green-700">
-                    ✓
-                  </span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-            <p className="text-sm font-semibold text-slate-900">
-              {t.privacyTitle}
-            </p>
-
-            <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              {t.privacyItems.map((item: string) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-2 text-sm text-slate-600"
-                >
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-700">
-                    ✓
-                  </span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <div className="rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-medium text-blue-600">
-                {t.sampleOutputTitle}
-              </p>
-              <h2 className="mt-1 text-xl font-semibold text-slate-900">
-                {t.previewTitle}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-500">
-                {t.sampleOutputSubtitle}
-              </p>
-            </div>
-            <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
-              {t.previewBadge}
-            </span>
+          <div className="mt-7 flex flex-wrap justify-center gap-2">
+            {t.uploadBadges.map((badge: string) => (
+              <span
+                key={badge}
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600"
+              >
+                {badge}
+              </span>
+            ))}
           </div>
-
-          <div className="mt-6 grid gap-4 lg:grid-cols-3">
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-              <p className="text-sm font-semibold text-emerald-900">
-                {t.sampleIncomeLabel}
-              </p>
-
-              <div className="mt-3 flex items-end gap-2">
-                <span className="text-4xl font-bold text-emerald-700">$4,200</span>
-              </div>
-
-              <p className="mt-4 text-sm leading-6 text-emerald-800">
-                {t.sampleNarrative}
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-red-200 bg-red-50 p-5">
-              <p className="text-sm font-semibold text-red-900">
-                {t.sampleDetectedLabel}
-              </p>
-
-              <div className="mt-4 space-y-3">
-                {t.sampleSubscriptions.map(([name, amount]: string[]) => (
-                  <div
-                    key={name}
-                    className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm"
-                  >
-                    <span className="font-medium text-slate-700">
-                      ✓ {name}
-                    </span>
-                    <span className="font-semibold text-red-600">{amount}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
-              <p className="text-sm font-semibold text-blue-900">
-                {t.sampleAnnualSavingsLabel}
-              </p>
-
-              <div className="mt-3 flex items-end gap-2">
-                <span className="text-4xl font-bold text-blue-700">
-                  {t.sampleAnnualSavings}
-                </span>
-              </div>
-
-              <div className="mt-4 space-y-3">
-                {[
-                  t.previewCancelUnusedSubscriptions,
-                  t.previewReduceDiscretionarySpending,
-                  t.previewSetMonthlySavingsTarget,
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-xl bg-white px-3 py-2 text-sm text-blue-800"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
 
         <div className="bg-gradient-to-b from-white to-slate-50/80 p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-2 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
@@ -1587,17 +3209,6 @@ export default function FinanceClient({
             </p>
             <p>{t.how2}</p>
             <p className="text-xs text-slate-500">{t.disclaimer}</p>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {t.uploadBadges.map((badge: string) => (
-              <span
-                key={badge}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600"
-              >
-                {badge}
-              </span>
-            ))}
           </div>
 
           <select
@@ -1777,7 +3388,10 @@ export default function FinanceClient({
           <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
             <h2 className="text-xl font-semibold">{t.results}</h2>
 
-            {!isUnsupportedDocument && (
+            {!isUnsupportedDocument &&
+              !isOcrRequired &&
+              !isRecognizedButUnreconciled &&
+              !result.detail && (
               <button
                 onClick={exportFinanceReportPdf}
                 className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-md"
@@ -1787,7 +3401,46 @@ export default function FinanceClient({
             )}
 
             {result.detail ? (
-              <p className="text-red-600">{result.detail}</p>
+              <p className="text-red-600">
+                {typeof result.detail === "string"
+                  ? result.detail
+                  : JSON.stringify(result.detail)}
+              </p>
+            ) : isRecognizedButUnreconciled ? (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                <p className="text-sm font-semibold text-amber-900">
+                  {language === "fr"
+                    ? "Analyse non disponible pour ce relevé"
+                    : language === "ar"
+                    ? "التحليل غير متاح لهذا الكشف"
+                    : "Analysis unavailable for this statement"}
+                </p>
+
+                <p className="mt-2 text-sm leading-7 text-amber-800">
+                  {language === "fr"
+                    ? "Les données extraites ne permettent pas de produire une analyse financière suffisamment fiable. Aucun résultat automatique n’a été généré afin d’éviter de présenter des informations inexactes."
+                    : language === "ar"
+                    ? "لا تسمح البيانات المستخرجة بإنتاج تحليل مالي بدرجة كافية من الموثوقية. لم يتم إنشاء نتائج تلقائية لتجنب عرض معلومات غير دقيقة."
+                    : "The extracted data is not reliable enough to produce a financial analysis. No automatic results were generated to avoid presenting inaccurate information."}
+                </p>
+
+                <p className="mt-3 text-xs text-amber-700">
+                  {language === "fr"
+                    ? "Vous pouvez réessayer avec le PDF original exporté depuis votre espace bancaire."
+                    : language === "ar"
+                    ? "يمكنك إعادة المحاولة باستخدام ملف PDF الأصلي المُصدَّر من حسابك البنكي."
+                    : "You can retry with the original PDF exported from your banking portal."}
+                </p>
+              </div>
+            ) : isOcrRequired ? (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                <p className="text-sm font-semibold text-amber-900">
+                  {t.ocrRequiredTitle}
+                </p>
+                <p className="mt-2 text-sm leading-7 text-amber-800">
+                  {renderSafeText(result.message, t.ocrRequiredMessage)}
+                </p>
+              </div>
             ) : isUnsupportedDocument ? (
               <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
                 <p className="text-sm font-semibold text-amber-900">
@@ -1811,61 +3464,343 @@ export default function FinanceClient({
                     </p>
 
                     <p className="mt-2 text-sm leading-7 text-amber-800">
-                      {result.message}
+                      {typeof result.message === "string"
+                        ? result.message
+                        : language === "fr"
+                        ? "Les données extraites ne permettent pas de produire une analyse suffisamment fiable."
+                        : language === "ar"
+                        ? "البيانات المستخرجة غير كافية لإنتاج تحليل موثوق."
+                        : "The extracted data is insufficient to produce a reliable analysis."}
                     </p>
 
                     <p className="mt-3 text-xs text-amber-700">
-                      Confidence: {result.confidence ?? result.analysis_quality?.confidence ?? 25}%
+                      {t.confidenceLabel}: {result.confidence ?? result.analysis_quality?.confidence ?? 25}%
                     </p>
                   </div>
                 ) : (
                   <>
-                    <div className="rounded-2xl border bg-blue-50 p-5">
+                    {hasVerificationContract && (
+                      <div
+                        className={`rounded-2xl border p-5 ${
+                          verificationPresentation.tone === "success"
+                            ? "border-emerald-200 bg-emerald-50"
+                            : verificationPresentation.tone === "warning"
+                            ? "border-amber-200 bg-amber-50"
+                            : "border-slate-200 bg-slate-50"
+                        }`}
+                        dir={language === "ar" ? "rtl" : "ltr"}
+                      >
+                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span
+                                className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold ${
+                                  verificationPresentation.tone === "success"
+                                    ? "bg-emerald-100 text-emerald-700"
+                                    : verificationPresentation.tone === "warning"
+                                    ? "bg-amber-100 text-amber-700"
+                                    : "bg-slate-200 text-slate-700"
+                                }`}
+                                aria-hidden="true"
+                              >
+                                {verificationPresentation.tone === "success"
+                                  ? "✓"
+                                  : verificationPresentation.tone === "warning"
+                                  ? "!"
+                                  : "i"}
+                              </span>
+
+                              <p
+                                className={`text-sm font-semibold ${
+                                  verificationPresentation.tone === "success"
+                                    ? "text-emerald-900"
+                                    : verificationPresentation.tone === "warning"
+                                    ? "text-amber-900"
+                                    : "text-slate-900"
+                                }`}
+                              >
+                                {verificationPresentation.title}
+                              </p>
+                            </div>
+
+                            <p
+                              className={`mt-2 text-sm leading-7 ${
+                                verificationPresentation.tone === "success"
+                                  ? "text-emerald-800"
+                                  : verificationPresentation.tone === "warning"
+                                  ? "text-amber-800"
+                                  : "text-slate-700"
+                              }`}
+                            >
+                              {verificationPresentation.message}
+                            </p>
+                          </div>
+
+                          {typeof result?.verification?.confidence === "number" &&
+                            !(
+                              shouldWithholdFinancialAnalysis &&
+                              Number(result.verification.confidence) <= 0
+                            ) && (
+                            <span
+                              className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${
+                                verificationPresentation.tone === "success"
+                                  ? "bg-emerald-100 text-emerald-800"
+                                  : verificationPresentation.tone === "warning"
+                                  ? "bg-amber-100 text-amber-800"
+                                  : "bg-slate-200 text-slate-700"
+                              }`}
+                            >
+                              {t.verificationConfidence}:{" "}
+                              {result.verification.confidence}%
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+                          <div className="rounded-xl bg-white/70 p-3">
+                            <p className="text-xs text-slate-500">
+                              {shouldWithholdFinancialAnalysis
+                                ? t.checkTransactionsExtracted
+                                : t.verificationTransactions}
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                              {shouldWithholdFinancialAnalysis
+                                ? (
+                                    result?.verification?.extracted_transaction_count ??
+                                    result?.verification?.transaction_count ??
+                                    "-"
+                                  )
+                                : (result?.verification?.transaction_count ?? "-")}
+                            </p>
+                          </div>
+
+                          <div className="rounded-xl bg-white/70 p-3">
+                            <p className="text-xs text-slate-500">
+                              {t.verificationCurrency}
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                              {(() => {
+                                const verificationCurrency = String(
+                                  result?.verification?.currency || ""
+                                ).trim();
+                                const detectedCurrency = String(
+                                  result?.currency_detected || ""
+                                ).trim();
+
+                                if (
+                                  verificationCurrency &&
+                                  verificationCurrency.toUpperCase() !== "UNKNOWN"
+                                ) {
+                                  return verificationCurrency;
+                                }
+
+                                if (
+                                  detectedCurrency &&
+                                  detectedCurrency.toUpperCase() !== "UNKNOWN"
+                                ) {
+                                  return detectedCurrency;
+                                }
+
+                                return t.verificationUnavailable;
+                              })()}
+                            </p>
+                          </div>
+
+                          <div className="rounded-xl bg-white/70 p-3">
+                            <p className="text-xs text-slate-500">
+                              {t.verificationLedger}
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                              {result?.verification?.ledger_status === "reconciled" ||
+                              result?.verification?.accounting_reconciled === true
+                                ? t.verificationReconciled
+                                : result?.verification?.ledger_status ===
+                                  "internally_supported"
+                                ? t.verificationInternallySupported
+                                : t.verificationUnavailable}
+                            </p>
+                          </div>
+
+                          <div className="rounded-xl bg-white/70 p-3">
+                            <p className="text-xs text-slate-500">
+                              {t.verificationSource}
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                              {result?.verification?.source_inconsistency_detected === true
+                                ? t.verificationInconsistent
+                                : result?.verification?.source_consistent === true
+                                ? t.verificationConsistent
+                                : t.verificationUnavailable}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="mt-4 border-t border-black/5 pt-4">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setShowVerificationDetails((current) => !current)
+                            }
+                            className="text-xs font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-slate-950"
+                          >
+                            {showVerificationDetails
+                              ? t.hideQualityControls
+                              : t.qualityControls}
+                          </button>
+
+                          {showVerificationDetails && (
+                            <div className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+                              {[
+                                {
+                                  label: t.checkStatementRecognized,
+                                  value:
+                                    result?.verification?.checks
+                                      ?.statement_recognized === true,
+                                },
+                                {
+                                  label: t.checkTransactionsExtracted,
+                                  value:
+                                    result?.verification?.checks
+                                      ?.transactions_extracted === true,
+                                },
+                                {
+                                  label: t.checkCurrencyDetected,
+                                  value:
+                                    result?.verification?.checks
+                                      ?.currency_detected === true,
+                                },
+                                {
+                                  label: t.checkLedgerReconciled,
+                                  value:
+                                    result?.verification?.checks
+                                      ?.ledger_reconciled === true ||
+                                    result?.verification?.checks
+                                      ?.accounting_reconciled === true,
+                                  warning:
+                                    result?.verification?.ledger_status ===
+                                    "internally_supported",
+                                  warningLabel: t.verificationInternallySupported,
+                                },
+                              ].map((check) => (
+                                <div
+                                  key={check.label}
+                                  className="flex items-center justify-between gap-3 rounded-xl bg-white/70 px-3 py-2"
+                                >
+                                  <span className="text-slate-600">
+                                    {check.label}
+                                  </span>
+                                  <span
+                                    className={`font-semibold ${
+                                      check.value
+                                        ? "text-emerald-700"
+                                        : check.warning
+                                        ? "text-amber-700"
+                                        : "text-slate-600"
+                                    }`}
+                                  >
+                                    {check.value
+                                      ? `✓ ${t.checkPassed}`
+                                      : check.warning
+                                      ? `! ${check.warningLabel}`
+                                      : t.checkUnavailable}
+                                  </span>
+                                </div>
+                              ))}
+
+                              <div className="flex items-center justify-between gap-3 rounded-xl bg-white/70 px-3 py-2 sm:col-span-2">
+                                <span className="text-slate-600">
+                                  {t.checkSourceConsistent}
+                                </span>
+                                <span
+                                  className={`font-semibold ${
+                                    result?.verification
+                                      ?.source_inconsistency_detected === true
+                                      ? "text-amber-700"
+                                      : result?.verification?.source_consistent ===
+                                        true
+                                      ? "text-emerald-700"
+                                      : "text-slate-600"
+                                  }`}
+                                >
+                                  {result?.verification
+                                    ?.source_inconsistency_detected === true
+                                    ? `! ${t.checkWarning}`
+                                    : result?.verification?.source_consistent ===
+                                      true
+                                    ? `✓ ${t.checkPassed}`
+                                    : t.checkUnavailable}
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {shouldWithholdFinancialAnalysis ? (
+                      <div
+                        className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                        dir={language === "ar" ? "rtl" : "ltr"}
+                      >
+                        <p className="text-sm font-semibold text-slate-900">
+                          {t.verificationUnverifiedTitle}
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-slate-700">
+                          {t.verificationAdvancedResultsWithheld}
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-amber-700">
+                          {t.verificationSourceAlsoInconsistent}
+                        </p>
+                        <p className="mt-3 text-xs leading-6 text-slate-500">
+                          {t.verificationSourceInconsistencyHint}
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        {isVerificationUnverified &&
+                          result?.verification?.analysis_available_unverified === true && (
+                            <div
+                              className="mb-4 rounded-2xl border border-amber-200 bg-amber-50 p-4"
+                              dir={language === "ar" ? "rtl" : "ltr"}
+                            >
+                              <p className="text-sm font-semibold text-amber-900">
+                                {t.verificationUnverifiedTitle}
+                              </p>
+                              <p className="mt-1 text-sm leading-6 text-amber-800">
+                                {result?.verification?.source_inconsistent_observed_analysis === true
+                                  ? t.verificationSourceInconsistentObservedAnalysis
+                                  : t.verificationUnverifiedAnalysisAvailable}
+                              </p>
+                              {result?.verification?.source_inconsistent_observed_analysis === true && (
+                                <p className="mt-2 text-xs font-medium leading-5 text-amber-900">
+                                  {t.verificationSourceAlsoInconsistent}
+                                </p>
+                              )}
+                              {typeof result?.verification?.max_direction_gap_ratio === "number" && (
+                                <p className="mt-2 text-xs leading-5 text-amber-700">
+                                  {language === "fr"
+                                    ? `Écart comptable observé : ${(result.verification.max_direction_gap_ratio * 100).toFixed(3)} % du flux officiel concerné.`
+                                    : language === "ar"
+                                    ? `الفارق المحاسبي المرصود: ${(result.verification.max_direction_gap_ratio * 100).toFixed(3)}٪ من التدفق الرسمي المعني.`
+                                    : `Observed accounting gap: ${(result.verification.max_direction_gap_ratio * 100).toFixed(3)}% of the affected official flow.`}
+                                </p>
+                              )}
+                            </div>
+                          )}
+
+                        <div className="rounded-2xl border bg-blue-50 p-5">
                   <p className="text-sm text-blue-700">
                     {t.aiNarrativeSummary}
                   </p>
                   <p className="mt-2 text-sm leading-7 text-slate-700">
-                    {result.summary}
+                    {normalizeNarrativeMoney(renderSafeText(result.summary, "-"))}
                   </p>
                 </div>
 
                 <p>
                   <strong>{t.currency}:</strong>{" "}
-                  {result.currency_detected || t.unknown}
+                  {renderSafeText(result.currency_detected, t.unknown)}
                 </p>
-
-                {result.financial_score !== undefined && (
-                  <div>
-                    <p>
-                      <strong>{t.financialScore}:</strong>{" "}
-                      {result.financial_score ?? "N/A"}/100
-                    </p>
-
-                    <p className="text-xs text-slate-500 mt-1">
-                      {t.aiGeneratedScore}
-                    </p>
-
-                    <div className="mt-4">
-                      <div className="h-3 bg-slate-200 rounded-full">
-                        <div
-                          className={`h-3 rounded-full ${
-                            result.financial_score >= 70
-                              ? "bg-green-500"
-                              : result.financial_score >= 50
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
-                          }`}
-                          style={{
-                            width: `${Math.min(
-                              Math.max(result.financial_score || 0, 0),
-                              100
-                            )}%`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
 
                 <p>
                   <strong>{t.totalSpending}:</strong>{" "}
@@ -1884,6 +3819,15 @@ export default function FinanceClient({
                         result.cashflow_forecast?.observed_income
                       )}
                     </h3>
+                    {incomeEvidenceTransactions.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setEvidenceView("income")}
+                        className="mt-3 text-xs font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 hover:text-blue-900"
+                      >
+                        {t.viewTransactions} ({incomeEvidenceTransactions.length})
+                      </button>
+                    )}
                   </div>
 
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
@@ -1896,6 +3840,15 @@ export default function FinanceClient({
                         result.cashflow_forecast?.observed_expenses
                       )}
                     </h3>
+                    {expenseEvidenceTransactions.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setEvidenceView("expense")}
+                        className="mt-3 text-xs font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 hover:text-blue-900"
+                      >
+                        {t.viewTransactions} ({expenseEvidenceTransactions.length})
+                      </button>
+                    )}
                   </div>
 
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
@@ -1914,6 +3867,15 @@ export default function FinanceClient({
                         result.cashflow_forecast?.observed_net_cashflow
                       )}
                     </h3>
+                    {cashflowEvidenceTransactions.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setEvidenceView("cashflow")}
+                        className="mt-3 text-xs font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 hover:text-blue-900"
+                      >
+                        {t.viewTransactions} ({cashflowEvidenceTransactions.length})
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -1922,26 +3884,39 @@ export default function FinanceClient({
                     {t.financialHabitsScore}
                   </p>
 
-                  <p className="text-xs text-slate-500 mt-1">
-                    {t.deterministicScore}
-                  </p>
+                  {isLimitedAnalysisScope ? (
+                    <div className="mt-3">
+                      <h3 className="text-2xl font-bold text-slate-700">
+                        {t.limitedScopeNotEnoughData}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-500">
+                        {t.limitedScopeScoreUnavailable}
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-xs text-slate-500 mt-1">
+                        {t.deterministicScore}
+                      </p>
 
-                  <div className="mt-2 flex items-end gap-2">
-                    <h3 className="text-4xl font-bold text-blue-600">
-                      {result.financial_habit_scores?.overall_financial_habits_score ?? 0}
-                    </h3>
-                    <span className="text-slate-500 mb-1">/100</span>
-                  </div>
+                      <div className="mt-2 flex items-end gap-2">
+                        <h3 className="text-4xl font-bold text-blue-600">
+                          {result.financial_habit_scores?.overall_financial_habits_score ?? 0}
+                        </h3>
+                        <span className="text-slate-500 mb-1">/100</span>
+                      </div>
 
-                  <p className="text-sm text-slate-500 mt-2">
-                    {t.savingBehavior}:{" "}
-                    {result.financial_habit_scores?.saving_behavior ?? 0}/100
-                  </p>
+                      <p className="text-sm text-slate-500 mt-2">
+                        {t.savingBehavior}:{" "}
+                        {result.financial_habit_scores?.saving_behavior ?? 0}/100
+                      </p>
 
-                  <p className="text-sm text-slate-500">
-                    {t.subscriptionControl}:{" "}
-                    {result.financial_habit_scores?.subscription_control ?? 0}/100
-                  </p>
+                      <p className="text-sm text-slate-500">
+                        {t.subscriptionControl}:{" "}
+                        {result.financial_habit_scores?.subscription_control ?? 0}/100
+                      </p>
+                    </>
+                  )}
                 </div>
 
                 <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
@@ -1964,14 +3939,27 @@ export default function FinanceClient({
                       </h3>
                     </div>
 
-                    <div className="text-right">
-                      <p className="text-sm text-slate-500">
-                        {t.daysUntilRisk}
-                      </p>
-
-                      <p className="text-xl font-semibold">
-                        {result.cashflow_forecast?.days_until_cash_risk ?? "-"}
-                      </p>
+                    <div
+                      className={language === "ar" ? "text-left" : "text-right"}
+                    >
+                      {showCashRiskCountdown ? (
+                        <>
+                          <p className="text-sm text-slate-500">
+                            {t.daysUntilRisk}
+                          </p>
+                          <p className="text-xl font-semibold text-amber-700">
+                            {cashRiskDays}
+                          </p>
+                        </>
+                      ) : showImmediateCashRisk ? (
+                        <p className="max-w-[220px] text-sm font-semibold text-red-700">
+                          {t.cashRiskNow}
+                        </p>
+                      ) : showNoImmediateCashRisk ? (
+                        <p className="max-w-[240px] text-sm font-semibold text-emerald-700">
+                          {t.noImmediateCashRisk}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -1981,111 +3969,119 @@ export default function FinanceClient({
                 </div>
 
                 <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-slate-500">
-                        {t.recommendedBudget}
-                      </p>
+                  <div>
+                    <p className="text-sm text-slate-500">
+                      {sourceEvidenceIsLimited
+                        ? evidenceSensitiveCopy.budgetHeading
+                        : t.recommendedBudget}
+                    </p>
 
-                      <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                        {translatedBudgetStatus}
-                      </h3>
-                    </div>
+                    {isLimitedAnalysisScope ? (
+                      <div className="mt-3">
+                        <h3 className="text-2xl font-bold text-slate-700">
+                          {t.limitedScopeNotAssessed}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-slate-500">
+                          {t.limitedScopeBudgetUnavailable}
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <h3 className="text-2xl font-bold text-slate-800 mt-1">
+                          {translatedBudgetStatus}
+                        </h3>
 
-                    <div className="text-right">
-                      <p className="text-sm text-slate-500">
-                        {t.savingsTarget}
-                      </p>
-
-                      <p className="text-xl font-semibold text-green-600">
-                        {formatMoney(
-                          result.recommended_budget?.savings_target
+                        {sourceEvidenceIsLimited && (
+                          <div className="mt-2 max-w-xl rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+                            <div className="font-semibold">
+                              {evidenceSensitiveCopy.estimateBadge}
+                            </div>
+                            <div>{evidenceSensitiveNote}</div>
+                          </div>
                         )}
-                      </p>
-                    </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-5">
+                          <div>
+                            <p className="text-xs text-slate-500">{t.savingsTarget}</p>
+                            <p className="font-semibold">{formatMoney(result.recommended_budget?.savings_target)}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-slate-500">{t.needs}</p>
+                            <p className="font-semibold">{formatMoney(result.recommended_budget?.needs)}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-slate-500">{t.wants}</p>
+                            <p className="font-semibold">{formatMoney(result.recommended_budget?.wants)}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-slate-500">{t.emergencyFund}</p>
+                            <p className="font-semibold">{formatMoney(result.recommended_budget?.emergency_fund_target)}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-slate-500">{t.safeSpending}</p>
+                            <p className="font-semibold">{formatMoney(result.recommended_budget?.max_safe_spending)}</p>
+                          </div>
+                        </div>
+
+                        <p className="text-sm text-slate-600 mt-4">
+                          {translateBackendMessage(result.recommended_budget?.message)}
+                        </p>
+                      </>
+                    )}
                   </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-                    <div>
-                      <p className="text-xs text-slate-500">
-                        {t.needs}
-                      </p>
-
-                      <p className="font-semibold">
-                        {formatMoney(
-                          result.recommended_budget?.needs
-                        )}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-slate-500">
-                        {t.wants}
-                      </p>
-
-                      <p className="font-semibold">
-                        {formatMoney(
-                          result.recommended_budget?.wants
-                        )}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-slate-500">
-                        {t.emergencyFund}
-                      </p>
-
-                      <p className="font-semibold">
-                        {formatMoney(
-                          result.recommended_budget?.emergency_fund_target
-                        )}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-slate-500">
-                        {t.safeSpending}
-                      </p>
-
-                      <p className="font-semibold">
-                        {formatMoney(
-                          result.recommended_budget?.max_safe_spending
-                        )}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-slate-600 mt-4">
-                    {translateBackendMessage(result.recommended_budget?.message)}
-                  </p>
                 </div>
 
                 <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <p className="text-sm text-slate-500">
-                        {t.detectedSubscriptions}
-                      </p>
+                  <div className="mb-4">
+                    <p className="text-sm font-medium text-slate-700">
+                      {t.detectedSubscriptions}
+                    </p>
 
-                      <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                        {result.subscriptions_detected?.length ?? 0}
-                      </h3>
+                    {isLimitedAnalysisScope ? (
+                      <div className="mt-3 rounded-xl border border-slate-200 bg-white px-4 py-3">
+                        <p className="text-sm font-semibold text-slate-700">
+                          {t.limitedScopeNotAssessed}
+                        </p>
+                        <p className="mt-1 text-sm leading-6 text-slate-500">
+                          {t.limitedScopeSubscriptionsUnavailable}
+                        </p>
+                      </div>
+                    ) : (
+                    <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                      <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+                        <p className="text-xs text-slate-500">
+                          {t.confirmedRecurringSubscriptions}
+                        </p>
+                        <p className="mt-1 text-xl font-bold text-slate-800">
+                          {result.subscriptions_detected?.length ?? 0}
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+                        <p className="text-xs text-slate-500">
+                          {t.categorizedSubscriptionSpend}
+                        </p>
+                        <p className="mt-1 text-xl font-semibold text-slate-800">
+                          {formatMoney(subscriptionCategorySpend)}
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+                        <p className="text-xs text-slate-500">
+                          {t.estimatedRecurringCharge}
+                        </p>
+                        <p className="mt-1 text-xl font-semibold text-red-600">
+                          {formatMoney(
+                            result.financial_habit_scores?.metrics?.subscription_total
+                          )}
+                        </p>
+                      </div>
                     </div>
-
-                    <div className="text-right">
-                      <p className="text-sm text-slate-500">
-                        {t.estimatedRecurringCharge}
-                      </p>
-
-                      <p className="text-xl font-semibold text-red-600">
-                        {formatMoney(
-                          result.financial_habit_scores?.metrics?.subscription_total
-                        )}
-                      </p>
-                    </div>
+                    )}
                   </div>
 
-                  {result.subscriptions_detected?.length > 0 ? (
+                  {!isLimitedAnalysisScope && (
+                    result.subscriptions_detected?.length > 0 ? (
                     <div className="space-y-3">
                       {result.subscriptions_detected.map(
                         (sub: any, index: number) => (
@@ -2121,9 +4117,18 @@ export default function FinanceClient({
                       )}
                     </div>
                   ) : (
-                    <p className="text-sm text-slate-500">
-                      {t.noRecurringSubscriptions}
-                    </p>
+                    <div className="space-y-2">
+                      <p className="text-sm text-slate-500">
+                        {t.noRecurringSubscriptions}
+                      </p>
+
+                      {hasSubscriptionCategoryWithoutConfirmedRecurring && (
+                        <div className="rounded-xl border border-amber-100 bg-amber-50 px-3 py-2 text-xs leading-6 text-amber-800">
+                          {t.subscriptionCategoryNotRecurring}
+                        </div>
+                      )}
+                    </div>
+                    )
                   )}
                 </div>
 
@@ -2131,32 +4136,44 @@ export default function FinanceClient({
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <p className="text-sm text-slate-500">
-                        {t.aiSavingsOpportunities}
+                        {sourceEvidenceIsLimited
+                          ? evidenceSensitiveCopy.savingsHeading
+                          : t.aiSavingsOpportunities}
                       </p>
 
                       <h3 className="text-2xl font-bold text-green-600 mt-1">
-                        {formatMoney(
-                          Number(
-                            (result.savings_opportunities || []).reduce(
-                              (sum: number, item: any) =>
-                                sum + Number(item.estimated_savings_opportunity || 0),
-                              0
-                            ).toFixed(2)
-                          )
-                        )}
+                        {isLimitedAnalysisScope
+                          ? t.limitedScopeNotAssessed
+                          : formatMoney(totalSavingsOpportunity)}
                       </h3>
+                      {sourceEvidenceIsLimited && (
+                        <div className="mt-2 max-w-xl rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+                          <div className="font-semibold">
+                            {evidenceSensitiveCopy.estimateBadge}
+                          </div>
+                          <div>{evidenceSensitiveNote}</div>
+                        </div>
+                      )}
 
                       <p className="text-xs text-slate-500 mt-1">
-                        {t.estimatedSavingsOpportunity}
+                        {isLimitedAnalysisScope
+                          ? t.limitedScopeSavingsUnavailable
+                          : t.estimatedSavingsOpportunity}
                       </p>
                     </div>
 
-                    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
-                      {t.aiDetected}
-                    </span>
+                    {totalSavingsOpportunity > 0 && (
+                      <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                        {t.aiDetected}
+                      </span>
+                    )}
                   </div>
 
-                  {result.savings_opportunities?.length > 0 ? (
+                  {isLimitedAnalysisScope ? (
+                    <p className="text-sm text-slate-500">
+                      {t.limitedScopeSavingsUnavailable}
+                    </p>
+                  ) : result.savings_opportunities?.length > 0 ? (
                     <div className="space-y-3">
                       {result.savings_opportunities.map(
                         (item: any, index: number) => (
@@ -2171,13 +4188,17 @@ export default function FinanceClient({
                                 </p>
 
                                 <p className="text-sm text-slate-500 mt-1">
-                                  {translateSavingsText(item.recommendation)}
+                                  {normalizeNarrativeMoney(
+                                    translateSavingsText(item.recommendation)
+                                  )}
                                 </p>
                               </div>
 
                               <div className="text-right shrink-0">
                                 <p className="font-semibold text-green-600">
-                                  {formatMoney(item.estimated_savings_opportunity)}
+                                  {formatMoney(
+                                    item.estimated_savings_opportunity
+                                  )}
                                 </p>
 
                                 <p className="text-xs text-slate-500">
@@ -2197,6 +4218,24 @@ export default function FinanceClient({
                             >
                               {translateSeverity(item.severity)}
                             </span>
+
+                            {getSavingsEvidence(item) && (
+                              <div
+                                className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2"
+                                dir={language === "ar" ? "rtl" : "ltr"}
+                              >
+                                <p className="text-xs font-semibold text-slate-700">
+                                  {
+                                    (evidenceLabels[language] ||
+                                      evidenceLabels.en)
+                                      .basedOnObservedActivity
+                                  }
+                                </p>
+                                <p className="mt-1 text-xs leading-5 text-slate-600">
+                                  {getSavingsEvidence(item)}
+                                </p>
+                              </div>
+                            )}
                           </div>
                         )
                       )}
@@ -2219,10 +4258,13 @@ export default function FinanceClient({
                     </h3>
                   </div>
 
-                  {result.financial_insights?.length > 0 ? (
+                  {visibleFinancialInsights.length > 0 ? (
                     <div className="space-y-3">
-                      {result.financial_insights.map(
-                        (insight: any, index: number) => (
+                      {visibleFinancialInsights.map(
+                        (insight: any, index: number) => {
+                          const insightEvidence = getInsightEvidence(insight);
+
+                          return (
                           <div
                             key={index}
                             className={`rounded-xl border p-4 ${
@@ -2248,12 +4290,31 @@ export default function FinanceClient({
                                 </p>
 
                                 <p className="text-sm text-slate-600 mt-1">
-                                  {translateInsightText(insight.message)}
+                                  {normalizeNarrativeMoney(translateInsightText(insight.message))}
                                 </p>
+
+                                {insightEvidence && (
+                                  <div
+                                    className="mt-3 rounded-lg border border-slate-200/80 bg-white/70 px-3 py-2"
+                                    dir={language === "ar" ? "rtl" : "ltr"}
+                                  >
+                                    <p className="text-xs font-semibold text-slate-700">
+                                      {
+                                        (evidenceLabels[language] ||
+                                          evidenceLabels.en)
+                                          .basedOnObservedActivity
+                                      }
+                                    </p>
+                                    <p className="mt-1 text-xs leading-5 text-slate-600">
+                                      {insightEvidence}
+                                    </p>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>
-                        )
+                        );
+                        }
                       )}
                     </div>
                   ) : (
@@ -2263,53 +4324,101 @@ export default function FinanceClient({
                   )}
                 </div>
 
-                {result.waste_detected?.length > 0 && (
+                {groundedWasteItems.length > 0 && (
                   <section className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <h3 className="text-xl font-semibold mb-3">
                       {t.wasteDetected}
                     </h3>
 
-                    <div className="space-y-2">
-                      {result.waste_detected.map(
-                        (item: string, i: number) => (
-                          <p key={i} className="text-sm text-slate-700">
-                            {translateBackendMessage(item)}
-                          </p>
-                        )
+                    <div className="space-y-3">
+                      {groundedWasteItems.map(
+                        (groundedWaste: any, i: number) => {
+                          return (
+                            <div
+                              key={i}
+                              className="rounded-xl border border-slate-200 bg-white px-4 py-3"
+                              dir={language === "ar" ? "rtl" : "ltr"}
+                            >
+                              <p className="text-sm text-slate-700">
+                                {groundedWaste.text}
+                              </p>
+
+                              {groundedWaste.evidence && (
+                                <div className="mt-2 border-t border-slate-100 pt-2">
+                                  <p className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
+                                    {
+                                      (evidenceLabels[language] ||
+                                        evidenceLabels.en)
+                                        .basedOnObservedActivity
+                                    }
+                                  </p>
+                                  <p className="mt-1 text-xs leading-5 text-slate-500">
+                                    {groundedWaste.evidence}
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
                       )}
                     </div>
                   </section>
                 )}
 
-                {result.saving_strategies?.length > 0 && (
+                {groundedSavingStrategies.length > 0 && (
                   <section className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <h3 className="text-xl font-semibold mb-3">
                       {t.savingStrategies}
                     </h3>
 
-                    <div className="space-y-2">
-                      {result.saving_strategies.map(
-                        (item: string, i: number) => (
-                          <p key={i} className="text-sm text-slate-700">
-                            {translateBackendMessage(item)}
-                          </p>
-                        )
+                    <div className="space-y-3">
+                      {groundedSavingStrategies.map(
+                        (groundedStrategy: any, i: number) => {
+                          return (
+                            <div
+                              key={i}
+                              className="rounded-xl border border-slate-200 bg-white px-4 py-3"
+                              dir={language === "ar" ? "rtl" : "ltr"}
+                            >
+                              <p className="text-sm text-slate-700">
+                                {groundedStrategy.text}
+                              </p>
+
+                              {groundedStrategy.evidence && (
+                                <div className="mt-2 border-t border-slate-100 pt-2">
+                                  <p className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
+                                    {
+                                      (evidenceLabels[language] ||
+                                        evidenceLabels.en)
+                                        .basedOnObservedActivity
+                                    }
+                                  </p>
+                                  <p className="mt-1 text-xs leading-5 text-slate-500">
+                                    {groundedStrategy.evidence}
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
                       )}
                     </div>
                   </section>
                 )}
 
-                {result.risk_notes?.length > 0 && (
+                {visibleRiskNotes.length > 0 && (
                   <section className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <h3 className="text-xl font-semibold mb-3">
                       {t.riskNotes}
                     </h3>
 
                     <div className="space-y-2">
-                      {result.risk_notes.map(
+                      {visibleRiskNotes.map(
                         (item: string, i: number) => (
                           <p key={i} className="text-sm text-slate-700">
-                            {translateBackendMessage(item)}
+                            {normalizeNarrativeMoney(
+                              translateBackendMessage(item)
+                            )}
                           </p>
                         )
                       )}
@@ -2359,11 +4468,25 @@ export default function FinanceClient({
                           vertical={false}
                         />
 
-                        <XAxis dataKey="date" />
+                        <XAxis
+                          dataKey="date"
+                          tickFormatter={formatChartDate}
+                          minTickGap={52}
+                          tickMargin={8}
+                          tick={{ fontSize: 11 }}
+                          interval="preserveStartEnd"
+                        />
 
-                        <YAxis />
+                        <YAxis
+                          tickFormatter={formatChartAxisAmount}
+                          width={54}
+                          tick={{ fontSize: 11 }}
+                        />
 
-                        <Tooltip />
+                        <Tooltip
+                          labelFormatter={formatChartTooltipDate}
+                          formatter={(value) => formatMoney(value)}
+                        />
 
                         <Area
                           type="monotone"
@@ -2402,16 +4525,31 @@ export default function FinanceClient({
                           vertical={false}
                         />
 
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
+                        <XAxis
+                          dataKey="date"
+                          tickFormatter={formatChartDate}
+                          minTickGap={52}
+                          tickMargin={8}
+                          tick={{ fontSize: 11 }}
+                          interval="preserveStartEnd"
+                        />
+                        <YAxis
+                          tickFormatter={formatChartAxisAmount}
+                          width={54}
+                          tick={{ fontSize: 11 }}
+                        />
+                        <Tooltip
+                          labelFormatter={formatChartTooltipDate}
+                          formatter={(value) => formatMoney(value)}
+                        />
 
                         <Line
                           type="monotone"
                           dataKey="amount"
                           stroke="#16a34a"
                           strokeWidth={3}
-                          dot
+                          dot={false}
+                          activeDot={{ r: 4 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>
@@ -2433,7 +4571,8 @@ export default function FinanceClient({
                     </h3>
                   </div>
 
-                  {result.charts?.subscription_growth?.length > 0 ? (
+                  {confirmedRecurringSubscriptionCount > 0 &&
+                  result.charts?.subscription_growth?.length > 0 ? (
                     <div className="h-80">
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={result.charts.subscription_growth}>
@@ -2442,9 +4581,23 @@ export default function FinanceClient({
                             vertical={false}
                           />
 
-                          <XAxis dataKey="date" />
-                          <YAxis />
-                          <Tooltip />
+                          <XAxis
+                          dataKey="date"
+                          tickFormatter={formatChartDate}
+                          minTickGap={52}
+                          tickMargin={8}
+                          tick={{ fontSize: 11 }}
+                          interval="preserveStartEnd"
+                        />
+                          <YAxis
+                          tickFormatter={formatChartAxisAmount}
+                          width={54}
+                          tick={{ fontSize: 11 }}
+                        />
+                          <Tooltip
+                          labelFormatter={formatChartTooltipDate}
+                          formatter={(value) => formatMoney(value)}
+                        />
 
                           <Bar
                             dataKey="amount"
@@ -2455,7 +4608,7 @@ export default function FinanceClient({
                       </ResponsiveContainer>
                     </div>
                   ) : (
-                    <div className="flex h-80 items-center justify-center rounded-xl bg-slate-50 px-6 text-center text-sm text-slate-500">
+                    <div className="flex min-h-24 items-center justify-center rounded-xl border border-dashed bg-slate-50 px-6 py-6 text-center text-sm text-slate-500">
                       {t.noRecurringSubscriptionSpending}
                     </div>
                   )}
@@ -2486,16 +4639,35 @@ export default function FinanceClient({
                           vertical={false}
                         />
 
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
+                        <XAxis
+                          dataKey="date"
+                          ticks={buildSparseDateTicks(
+                            result.charts?.savings_evolution || [],
+                            7
+                          )}
+                          tickFormatter={makeDedupedChartDateFormatter()}
+                          minTickGap={64}
+                          tickMargin={8}
+                          tick={{ fontSize: 11 }}
+                          interval="preserveStartEnd"
+                        />
+                        <YAxis
+                          tickFormatter={formatChartAxisAmount}
+                          width={54}
+                          tick={{ fontSize: 11 }}
+                        />
+                        <Tooltip
+                          labelFormatter={formatChartTooltipDate}
+                          formatter={(value) => formatMoney(value)}
+                        />
 
                         <Line
                           type="monotone"
                           dataKey="amount"
                           stroke="#7c3aed"
                           strokeWidth={3}
-                          dot
+                          dot={false}
+                          activeDot={{ r: 4 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>
@@ -2556,8 +4728,20 @@ export default function FinanceClient({
                                     </span>
                                   </div>
                                 </td>
-                                <td className="px-3 py-2 text-right font-semibold whitespace-nowrap">
-                                  {formatMoney(item.value)}
+                                <td className="px-3 py-2 text-right whitespace-nowrap">
+                                  <div className="font-semibold">
+                                    {formatMoney(item.value)}
+                                  </div>
+                                  {totalCategorySpend > 0 && (
+                                    <div className="mt-0.5 text-xs font-normal text-slate-500">
+                                      {formatEvidenceShare(
+                                        (Number(item.value) /
+                                          totalCategorySpend) *
+                                          100
+                                      )}{" "}
+                                      {t.categoryShare}
+                                    </div>
+                                  )}
                                 </td>
                               </tr>
                             ))}
@@ -2567,45 +4751,6 @@ export default function FinanceClient({
                     </>
                   )}
                 </div>
-
-                {result.waste_detected?.length > 0 && (
-                  <div>
-                    <strong>{t.wasteDetected}:</strong>
-                    <ul className="list-disc ml-6 text-red-600">
-                      {result.waste_detected.map(
-                        (item: string, i: number) => (
-                          <li key={i}>{item}</li>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                )}
-
-                {result.saving_strategies?.length > 0 && (
-                  <div>
-                    <strong>{t.savingStrategies}:</strong>
-                    <ul className="list-disc ml-6 text-green-600">
-                      {result.saving_strategies.map(
-                        (item: string, i: number) => (
-                          <li key={i}>{item}</li>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                )}
-
-                {result.risk_notes?.length > 0 && (
-                  <div>
-                    <strong>{t.riskNotes}:</strong>
-                    <ul className="list-disc ml-6 text-amber-600">
-                      {result.risk_notes.map(
-                        (item: string, i: number) => (
-                          <li key={i}>{item}</li>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                )}
 
                 <div className="rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -2617,6 +4762,53 @@ export default function FinanceClient({
                       <h3 className="text-2xl font-bold text-slate-800">
                         {t.askFinanceAssistant}
                       </h3>
+                      {hasVerificationContract && (
+                        <div
+                          className="mt-3 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-xs text-slate-600"
+                          dir={language === "ar" ? "rtl" : "ltr"}
+                        >
+                          <span className="font-semibold text-slate-800">
+                            {t.coachEvidenceTitle}:
+                          </span>{" "}
+                          {t.coachEvidenceBasedOn} ·{" "}
+                          {shouldWithholdFinancialAnalysis
+                            ? (
+                                result?.verification?.extracted_transaction_count ??
+                                result?.verification?.transaction_count ??
+                                0
+                              )
+                            : (result?.verification?.transaction_count ?? 0)}{" "}
+                          {shouldWithholdFinancialAnalysis
+                            ? t.checkTransactionsExtracted
+                            : t.coachTransactionsAnalyzed} ·{" "}
+                          {(() => {
+                            const verificationCurrency = String(
+                              result?.verification?.currency || ""
+                            ).trim();
+                            const detectedCurrency = String(
+                              result?.currency_detected || ""
+                            ).trim();
+
+                            if (
+                              verificationCurrency &&
+                              verificationCurrency.toUpperCase() !== "UNKNOWN"
+                            ) {
+                              return verificationCurrency;
+                            }
+
+                            if (
+                              detectedCurrency &&
+                              detectedCurrency.toUpperCase() !== "UNKNOWN"
+                            ) {
+                              return detectedCurrency;
+                            }
+
+                            return t.verificationUnavailable;
+                          })()}{" "}
+                          ·{" "}
+                          {coachVerificationStatusLabel}
+                        </div>
+                      )}
 
                       <p className="mt-2 text-sm text-slate-500">
                         {t.coachSubtitle}
@@ -2655,13 +4847,13 @@ export default function FinanceClient({
                         >
                           <p className="text-sm font-semibold mb-1">
                             {message.role === "user"
-                              ? "You"
-                              : "Runexa AI"}
+                              ? t.you
+                              : t.assistantName}
                           </p>
 
                           <div className="prose prose-sm max-w-none text-slate-700">
                             <ReactMarkdown>
-                              {message.content}
+                              {renderSafeText(message.content)}
                             </ReactMarkdown>
                           </div>
                         </div>
@@ -2671,7 +4863,7 @@ export default function FinanceClient({
                     {chatLoading && (
                       <div className="rounded-2xl bg-blue-50 border border-blue-100 p-4">
                         <p className="text-sm text-slate-500">
-                          Runexa AI is thinking...
+                          {t.aiThinking}
                         </p>
                       </div>
                     )}
@@ -2726,9 +4918,14 @@ export default function FinanceClient({
 
                 {result.disclaimer && (
                   <p className="text-xs text-slate-500 border-t pt-4">
-                    {translateBackendMessage(result.disclaimer)}
+                    {renderSafeText(
+                      translateBackendMessage(result.disclaimer),
+                      t.disclaimer
+                    )}
                   </p>
                 )}
+                      </>
+                    )}
                   </>
                 )}
               </>
@@ -2736,6 +4933,118 @@ export default function FinanceClient({
           </div>
         )}
       </div>
+
+        {evidenceView && (
+          <div
+            className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/40 p-0 sm:items-center sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-label={getEvidenceTitle()}
+            onClick={() => setEvidenceView(null)}
+          >
+            <div
+              className="max-h-[88vh] w-full max-w-4xl overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl"
+              dir={language === "ar" ? "rtl" : "ltr"}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-4 border-b px-5 py-4 sm:px-6">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {getEvidenceTitle()}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-slate-500">
+                    {t.evidenceDescription}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setEvidenceView(null)}
+                  className="rounded-full border px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                >
+                  {t.close}
+                </button>
+              </div>
+
+              <div className="max-h-[62vh] overflow-auto">
+                <table className="w-full text-sm">
+                  <thead className="sticky top-0 bg-slate-50 text-xs text-slate-500">
+                    <tr>
+                      <th className="px-4 py-3 text-start font-medium">
+                        {t.evidenceDate}
+                      </th>
+                      <th className="px-4 py-3 text-start font-medium">
+                        {t.evidenceTransaction}
+                      </th>
+                      <th className="px-4 py-3 text-end font-medium">
+                        {t.evidenceAmount}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {getEvidenceTransactions().map((tx: any, index: number) => {
+                      const signedCandidate = Number(tx?.signed_amount);
+                      const amountCandidate = Number(tx?.amount);
+                      const rawAmount = Number.isFinite(signedCandidate)
+                        ? signedCandidate
+                        : Number.isFinite(amountCandidate)
+                        ? amountCandidate
+                        : 0;
+
+                      const txType = String(tx?.type || "").toLowerCase();
+
+                      const displayAmount =
+                        evidenceView === "expense"
+                          ? Math.abs(rawAmount)
+                          : evidenceView === "income"
+                          ? Math.abs(rawAmount)
+                          : txType === "expense"
+                          ? -Math.abs(rawAmount)
+                          : txType === "income"
+                          ? Math.abs(rawAmount)
+                          : rawAmount;
+
+                      return (
+                        <tr
+                          key={`${tx?.date || "date"}-${tx?.description || "tx"}-${index}`}
+                          className="border-t"
+                        >
+                          <td className="whitespace-nowrap px-4 py-3 text-slate-500">
+                            {formatEvidenceDate(tx?.date)}
+                          </td>
+                          <td className="px-4 py-3 text-slate-800">
+                            {renderSafeText(
+                              tx?.description || tx?.label || tx?.merchant,
+                              "-"
+                            )}
+                          </td>
+                          <td
+                            className={`whitespace-nowrap px-4 py-3 text-end font-semibold ${
+                              displayAmount < 0
+                                ? "text-red-600"
+                                : "text-emerald-700"
+                            }`}
+                          >
+                            {formatMoney(displayAmount)}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="flex items-center justify-between gap-4 border-t bg-slate-50 px-5 py-4 sm:px-6">
+                <span className="text-sm text-slate-600">
+                  {t.evidenceTotal}
+                </span>
+                <span className="text-lg font-bold text-slate-900">
+                  {formatMoney(getEvidenceTotal())}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
     </main>
   );
 }
