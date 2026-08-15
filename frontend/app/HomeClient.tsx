@@ -256,6 +256,38 @@ export default function HomeClient({
                   </div>
                 </Link>
 
+                <Link
+                  href="/free-access"
+                  className="block max-w-2xl rounded-3xl border border-slate-200 bg-white p-5 text-slate-900 shadow-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg active:translate-y-0 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-base font-black">
+                        {language === "fr"
+                          ? "Vous préférez découvrir Runexa avant de payer ?"
+                          : language === "ar"
+                          ? "هل تفضل تجربة Runexa أولاً؟"
+                          : "Prefer to try Runexa first?"}
+                      </p>
+                      <p className="mt-1 text-sm font-medium leading-6 text-slate-600">
+                        {language === "fr"
+                          ? "Demandez un accès d’évaluation offert. Aucun paiement requis. Les demandes sont examinées sous 24 heures."
+                          : language === "ar"
+                          ? "اطلب وصولاً مجانياً للتقييم. لا يتطلب أي دفع. تتم مراجعة الطلبات خلال 24 ساعة."
+                          : "Request complimentary evaluation access. No payment required. Requests are reviewed within 24 hours."}
+                      </p>
+                      <p className="mt-3 text-sm font-bold text-blue-700">
+                        {language === "fr"
+                          ? "Demander un accès gratuit →"
+                          : language === "ar"
+                          ? "طلب وصول مجاني ←"
+                          : "Request Free Access →"}
+                      </p>
+                    </div>
+                    <BadgeCheck className="mt-1 h-6 w-6 shrink-0 text-blue-600" />
+                  </div>
+                </Link>
+
                 <p className="rounded-2xl border border-blue-100 bg-white/85 px-5 py-4 text-sm font-semibold text-slate-700 shadow-sm">{t.trustLine}</p>
               </div>
 
@@ -853,6 +885,21 @@ function PricingSection({ language }: { language: Locale }) {
     <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">{t.desc}</p>
     <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{t.plans.map(([plan, desc, tag]: string[]) => <div key={plan} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><p className="text-xs font-bold uppercase tracking-wide text-blue-600">{tag}</p><p className="mt-2 text-xl font-black text-slate-900">{plan}</p><p className="mt-2 text-sm leading-6 text-slate-600">{desc}</p><CheckCircle2 className="mt-4 h-5 w-5 text-blue-600" /></div>)}</div>
     <Link href="/pricing" className="mt-6 inline-flex rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-blue-700 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{t.cta}</Link>
+
+    <div className="mt-5 text-sm text-slate-600">
+      {language === "fr"
+        ? "Pas encore prêt à acheter ? "
+        : language === "ar"
+        ? "لست مستعداً للشراء بعد؟ "
+        : "Not ready to purchase? "}
+      <Link href="/free-access" className="font-bold text-blue-700 hover:text-blue-800">
+        {language === "fr"
+          ? "Demandez un accès d’évaluation offert."
+          : language === "ar"
+          ? "اطلب وصولاً مجانياً للتقييم."
+          : "Request complimentary evaluation access."}
+      </Link>
+    </div>
   </section>;
 }
 
