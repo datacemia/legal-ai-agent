@@ -316,47 +316,135 @@ def observed_income_from_transactions(
     return round(total, 2)
 
 
+def _currency_from_primary_transaction_header(
+    statement_text: str | None,
+) -> str | None:
+    """Return a concrete currency explicitly printed in a transaction header.
+
+    Additive source-scoped authority only.  Legal/disclosure currency lists are
+    ignored because the marker must occur on the same physical line as a
+    transaction-table header containing movement roles and a balance role.
+    """
+    raw = str(statement_text or "")
+
+    explicit_marker_map = {
+        "S$": "SGD",
+        "SGD": "SGD",
+        "US$": "USD",
+        "USD": "USD",
+        "A$": "AUD",
+        "AUD": "AUD",
+        "C$": "CAD",
+        "CAD": "CAD",
+        "NZ$": "NZD",
+        "NZD": "NZD",
+        "HK$": "HKD",
+        "HKD": "HKD",
+        "EUR": "EUR",
+        "GBP": "GBP",
+        "CHF": "CHF",
+        "JPY": "JPY",
+        "CNY": "CNY",
+        "CNH": "CNH",
+    }
+
+    for raw_line in raw.splitlines():
+        line = " ".join(str(raw_line or "").split())
+        lowered = line.lower()
+
+        has_date_role = bool(re.search(r"\bdate\b", lowered))
+        has_balance_role = bool(
+            re.search(
+                r"\b(?:balance|solde|الرصيد)\b",
+                lowered,
+                flags=re.IGNORECASE,
+            )
+        )
+        has_flow_roles = bool(
+            re.search(
+                r"\b(?:withdrawals?|debits?|débits?|"
+                r"deposits?|credits?|crédits?|"
+                r"money\s+out|money\s+in)\b",
+                lowered,
+                flags=re.IGNORECASE,
+            )
+        )
+
+        if not (has_date_role and has_balance_role and has_flow_roles):
+            continue
+
+        # Prefer a marker explicitly attached to the balance/header role.
+        parenthetical = re.findall(r"\(([^()]{1,24})\)", line)
+        candidates = parenthetical + [line]
+
+        for candidate in candidates:
+            compact = str(candidate or "").upper().strip()
+
+            for marker, code in explicit_marker_map.items():
+                if marker in {"S$", "US$", "A$", "C$", "NZ$", "HK$"}:
+                    if marker in compact:
+                        return code
+                elif re.search(
+                    rf"(?<![A-Z]){re.escape(marker)}(?![A-Z])",
+                    compact,
+                ):
+                    return code
+
+    return None
+
+
 def resolve_finance_currency(
     result_ai: dict,
     transactions: list[dict],
+    statement_text: str | None = None,
 ) -> str:
     """Resolve currency from observed statement evidence before AI fallback.
 
-    Standard priority:
-    1) Strong consensus from extracted transaction observations.
-    2) AI-detected currency when transaction evidence is unavailable/ambiguous.
-    3) unknown.
+    Priority:
+    1) Concrete transaction-level currency consensus.
+    2) Concrete currency printed in the primary transaction-table header.
+    3) AI-detected concrete currency.
+    4) MULTI only when no stronger scoped evidence exists.
+    5) unknown.
 
-    This is bank/country/language neutral. It never maps a bank or country to a
-    currency and does not alter transaction extraction.
+    `MULTI` is intentionally not treated as a concrete transaction consensus:
+    it can be produced when legal/footer currency-code lists coexist with a
+    single-currency account table.
     """
     detected = [
         str(tx.get("currency")).upper().strip()
         for tx in transactions
         if tx.get("currency")
         and str(tx.get("currency")).strip().lower()
-        not in {"", "unknown", "none"}
+        not in {"", "unknown", "none", "multi"}
     ]
 
     if detected:
         counts = Counter(detected)
         most_common_currency, most_common_count = counts.most_common(1)[0]
 
-        # Require a strict majority when more than one currency observation
-        # exists. A unanimous statement naturally passes this rule.
         if (
             len(counts) == 1
             or most_common_count > (len(detected) / 2)
         ):
             return most_common_currency
 
-    currency = result_ai.get("currency_detected")
+    scoped_header_currency = _currency_from_primary_transaction_header(
+        statement_text
+    )
+    if scoped_header_currency:
+        return scoped_header_currency
 
+    currency = result_ai.get("currency_detected")
     if (
         currency not in [None, "", "unknown", "UNKNOWN"]
-        and str(currency).strip().lower() != "none"
+        and str(currency).strip().lower() not in {"none", "multi"}
     ):
         return str(currency).upper().strip()
+
+    # Preserve historical MULTI only as a final non-concrete fallback.
+    if str(result_ai.get("currency_detected") or "").upper().strip() == "MULTI":
+        return "MULTI"
 
     return "unknown"
 
@@ -693,6 +781,125 @@ def _verification_money_to_float(value: object) -> float | None:
         value_float = -abs(value_float)
 
     return value_float
+
+
+def enrich_source_summary_from_transaction_table_totals(
+    statement_text: str | None,
+    statement_summary: dict | None,
+) -> dict:
+    """Fill missing debit/credit totals from a strict transaction TOTAL row.
+
+    This is source-document auditing only.  It does not mutate transactions,
+    parser routing, candidate selection, signs, or financial authority.
+
+    Structural requirements:
+    - a physical header line contains Date + debit/withdrawal + credit/deposit
+      + balance roles;
+    - a later physical line in that same table begins with TOTAL;
+    - that TOTAL line contains exactly two money values;
+    - column order is inherited only from the detected header.
+    """
+    summary = dict(statement_summary or {})
+    if (
+        summary.get("deposits") is not None
+        and summary.get("withdrawals") is not None
+    ):
+        return summary
+
+    lines = [
+        " ".join(str(line or "").split())
+        for line in str(statement_text or "").splitlines()
+    ]
+
+    money_token_re = re.compile(
+        r"(?<!\d)"
+        r"(?:\d{1,3}(?:[ ,.']\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r"(?!\d)"
+    )
+
+    for header_index, line in enumerate(lines):
+        lowered = line.lower()
+
+        if not re.search(r"\bdate\b", lowered):
+            continue
+        if not re.search(r"\b(?:balance|solde|الرصيد)\b", lowered, re.I):
+            continue
+
+        debit_match = re.search(
+            r"\b(?:withdrawals?|debits?|débits?|money\s+out)\b",
+            lowered,
+            re.I,
+        )
+        credit_match = re.search(
+            r"\b(?:deposits?|credits?|crédits?|money\s+in)\b",
+            lowered,
+            re.I,
+        )
+        if debit_match is None or credit_match is None:
+            continue
+
+        first_role = (
+            "withdrawals"
+            if debit_match.start() < credit_match.start()
+            else "deposits"
+        )
+        second_role = (
+            "deposits"
+            if first_role == "withdrawals"
+            else "withdrawals"
+        )
+
+        for candidate in lines[header_index + 1: header_index + 120]:
+            candidate_lower = candidate.lower()
+
+            if re.search(
+                r"\b(?:page\s+\d+\s+of\s+\d+|"
+                r"message\s+for\s+you|terms\s+and\s+codes)\b",
+                candidate_lower,
+                re.I,
+            ):
+                break
+
+            if not re.match(r"^total\b", candidate_lower, re.I):
+                continue
+
+            money_tokens = money_token_re.findall(candidate)
+            if len(money_tokens) != 2:
+                continue
+
+            parsed_values = [
+                _verification_money_to_float(token)
+                for token in money_tokens
+            ]
+            if any(value is None for value in parsed_values):
+                continue
+
+            role_values = {
+                first_role: round(abs(float(parsed_values[0])), 2),
+                second_role: round(abs(float(parsed_values[1])), 2),
+            }
+
+            if summary.get("withdrawals") is None:
+                summary["withdrawals"] = role_values["withdrawals"]
+            if summary.get("deposits") is None:
+                summary["deposits"] = role_values["deposits"]
+
+            summary["source"] = (
+                "source_transaction_table_four_role_summary"
+            )
+            summary.setdefault("evidence", {})
+            if isinstance(summary["evidence"], dict):
+                summary["evidence"]["movement_totals"] = {
+                    "source": "strict_transaction_total_row",
+                    "header": line[:240],
+                    "total_line": candidate[:240],
+                    "column_order": [first_role, second_role],
+                }
+
+            return summary
+
+    return summary
 
 
 def assess_source_statement_consistency(statement_summary: dict | None) -> dict:
@@ -1727,12 +1934,12 @@ def normalize_signed_amounts_before_kpi(transactions):
 
 print(
     "RUNEXA_FINANCE_HANDLER_VERSION",
-    "v28-source-role-period-consistency",
+    "v29-source-table-currency-and-four-role-consistency",
 )
 
 print(
     "SOURCE_PERIOD_DIAGNOSTIC_VERSION",
-    "v3-financial-period-plus-balance-role-dates",
+    "v4-financial-period-source-table-currency-four-role",
 )
 
 def handle_finance_ai(job: Job, db):
@@ -3456,6 +3663,14 @@ def handle_finance_ai(job: Job, db):
     except Exception:
         statement_summary = {}
 
+    # ADDITIVE v29 — when the generic summary contains opening/closing balances
+    # but omits movement totals, recover only a strict two-value TOTAL row from
+    # the same Date | Debit/Withdrawal | Credit/Deposit | Balance table.
+    statement_summary = enrich_source_summary_from_transaction_table_totals(
+        text,
+        statement_summary,
+    )
+
     # Phase 1B: preserve the source statement's own four-role accounting identity
     # before candidate-local totals become the ledger reconciliation authority.
     # Audit only: no parser, router, candidate or transaction mutation.
@@ -3769,6 +3984,7 @@ def handle_finance_ai(job: Job, db):
     currency = resolve_finance_currency(
         result_ai=result_ai,
         transactions=transactions,
+        statement_text=text,
     )
 
     # Keep downstream UI/report fields consistent with the resolved value.
@@ -4781,7 +4997,7 @@ def handle_finance_ai(job: Job, db):
                 "samples": excluded_samples,
             },
         )
-
+    
     print(
         "KPI_AUDIT",
         {
