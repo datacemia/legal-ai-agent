@@ -52,7 +52,6 @@ type FooterCopy = {
   login: string;
   register: string;
   aboutText: string;
-  builtBy: string;
   aboutPage: string;
   copyright: string;
 };
@@ -124,7 +123,6 @@ const footerCopy: Record<Locale, FooterCopy> = {
     register: "Register",
     aboutText:
       "Runexa Systems is an AI platform that provides specialized AI agents to help users analyze documents, learn faster, gain financial intelligence, and make smarter business decisions.",
-    builtBy: "Built by Dr. Rachid Ejjami",
     aboutPage: "About Runexa",
     copyright: "© 2026 Runexa Systems LLC. All rights reserved.",
   },
@@ -163,7 +161,6 @@ const footerCopy: Record<Locale, FooterCopy> = {
     register: "Inscription",
     aboutText:
       "Runexa Systems est une plateforme d’IA proposant des agents spécialisés pour aider les utilisateurs à analyser leurs documents, apprendre plus vite, mieux comprendre leurs données financières et prendre de meilleures décisions.",
-    builtBy: "Développé par le Dr Rachid Ejjami",
     aboutPage: "À propos de Runexa",
     copyright: "© 2026 Runexa Systems LLC. Tous droits réservés.",
   },
@@ -202,7 +199,6 @@ const footerCopy: Record<Locale, FooterCopy> = {
     register: "إنشاء حساب",
     aboutText:
       "Runexa Systems منصة ذكاء اصطناعي توفر وكلاء متخصصين لمساعدة المستخدمين على تحليل المستندات والتعلم بشكل أسرع وفهم البيانات المالية واتخاذ قرارات أكثر ذكاءً.",
-    builtBy: "من تطوير الدكتور رشيد الجامعي",
     aboutPage: "عن Runexa",
     copyright: "© 2026 Runexa Systems LLC. جميع الحقوق محفوظة.",
   },
@@ -463,10 +459,6 @@ export default function Footer() {
 
             <p className="mt-4 text-sm text-slate-400 leading-6">
               {t.aboutText}
-            </p>
-
-            <p className="mt-4 text-sm font-medium text-blue-400">
-              {t.builtBy}
             </p>
 
             <Link
