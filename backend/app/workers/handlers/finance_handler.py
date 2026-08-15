@@ -157,6 +157,86 @@ def build_analysis_ledger(accounting_transactions: list[dict]) -> tuple[list[dic
     return analysis_rows, excluded_rows
 
 
+
+def build_grounded_spending_ledger(
+    analysis_transactions: list[dict],
+) -> tuple[list[dict], list[dict]]:
+    """Project conservatively grounded spending from observed cash outflows.
+
+    This is an ANALYSIS projection only. It never mutates parser output,
+    transaction direction, accounting reconciliation, candidate selection, or
+    the observed cashflow ledger.
+
+    Contract:
+    - every negative movement remains an observed outflow;
+    - a negative movement becomes observed spending only when the existing
+      categorization layer assigns a specific spending category;
+    - structurally/economically neutral or unresolved categories remain
+      outflows but are not promoted to expenses;
+    - positive movements are never spending.
+
+    The rule is international and contains no bank, country, currency, merchant,
+    network, or language identity.
+    """
+    grounded = []
+    unresolved = []
+
+    non_spending_categories = {
+        "",
+        "other",
+        "autres",
+        "أخرى",
+        "unknown",
+        "uncategorized",
+        "unclassified",
+        "transfer",
+        "transfers",
+        "internal transfer",
+        "internal transfers",
+        "cash withdrawal",
+        "cash withdrawals",
+        "withdrawal",
+        "withdrawals",
+    }
+
+    for tx in analysis_transactions or []:
+        if not isinstance(tx, dict):
+            continue
+
+        amount = safe_float(tx.get("amount"))
+        if amount >= 0:
+            continue
+
+        description = str(tx.get("description") or "")
+        raw_category = (
+            tx.get("category")
+            or detect_category(description)
+            or "other"
+        )
+        category = " ".join(
+            str(raw_category or "").strip().lower().split()
+        )
+
+        if category in non_spending_categories:
+            unresolved.append({
+                **tx,
+                "_spending_projection_category": raw_category,
+                "_spending_projection_reason": (
+                    "outflow_not_sufficiently_grounded_as_expense"
+                ),
+            })
+            continue
+
+        grounded.append({
+            **tx,
+            "_spending_projection_category": raw_category,
+            "_spending_projection_reason": "specific_spending_category",
+        })
+
+    return grounded, unresolved
+
+
+
 def get_job_input(job: Job) -> dict:
     """
     Safely read job input data.
@@ -188,12 +268,26 @@ def build_observed_finance_summary(
     currency: str,
     output_language: str = "en",
 ) -> str:
-    income = round(
+    """Build an evidence-based cashflow summary.
+
+    Additive semantic contract:
+    - positive observed movements = inflows;
+    - negative observed movements = outflows;
+    - legacy `observed_expenses` remains accepted internally so existing
+      budget/scoring/forecast engines are not changed by this patch.
+
+    This function changes presentation semantics only. It does not recategorize,
+    re-sign, add, remove, or otherwise mutate transactions.
+    """
+    inflows = round(
         forecast.get("observed_income", 0) or 0,
         2,
     )
-    expenses = round(
-        forecast.get("observed_expenses", 0) or 0,
+    outflows = round(
+        forecast.get(
+            "observed_outflows",
+            forecast.get("observed_expenses", 0),
+        ) or 0,
         2,
     )
     net = round(
@@ -204,67 +298,68 @@ def build_observed_finance_summary(
     if output_language == "fr":
         if net < 0:
             return (
-                f"Les revenus observés s’élèvent à {income} {currency}, "
-                f"tandis que les dépenses observées atteignent {expenses} {currency}. "
+                f"Les entrées de trésorerie observées s’élèvent à {inflows} {currency}, "
+                f"tandis que les sorties de trésorerie observées atteignent {outflows} {currency}. "
                 f"La trésorerie nette observée est négative de {abs(net)} {currency}, "
-                "ce qui indique que les dépenses dépassent les revenus."
+                "ce qui indique que les sorties dépassent les entrées."
             )
 
         if net == 0:
             return (
-                f"Les revenus observés s’élèvent à {income} {currency}, "
-                f"tandis que les dépenses observées atteignent {expenses} {currency}. "
+                f"Les entrées de trésorerie observées s’élèvent à {inflows} {currency}, "
+                f"tandis que les sorties de trésorerie observées atteignent {outflows} {currency}. "
                 f"La trésorerie nette observée est de {net} {currency}."
             )
 
         return (
-            f"Les revenus observés s’élèvent à {income} {currency}, "
-            f"tandis que les dépenses observées atteignent {expenses} {currency}. "
+            f"Les entrées de trésorerie observées s’élèvent à {inflows} {currency}, "
+            f"tandis que les sorties de trésorerie observées atteignent {outflows} {currency}. "
             f"La trésorerie nette observée est positive de {net} {currency}."
         )
 
     if output_language == "ar":
         if net < 0:
             return (
-                f"بلغ الدخل المرصود {income} {currency}، "
-                f"بينما بلغت المصاريف المرصودة {expenses} {currency}. "
+                f"بلغت التدفقات النقدية الداخلة المرصودة {inflows} {currency}، "
+                f"بينما بلغت التدفقات النقدية الخارجة المرصودة {outflows} {currency}. "
                 f"صافي التدفق النقدي المرصود سلبي بقيمة {abs(net)} {currency}، "
-                "مما يشير إلى أن المصاريف تتجاوز الدخل."
+                "مما يشير إلى أن التدفقات الخارجة تتجاوز التدفقات الداخلة."
             )
 
         if net == 0:
             return (
-                f"بلغ الدخل المرصود {income} {currency}، "
-                f"بينما بلغت المصاريف المرصودة {expenses} {currency}. "
+                f"بلغت التدفقات النقدية الداخلة المرصودة {inflows} {currency}، "
+                f"بينما بلغت التدفقات النقدية الخارجة المرصودة {outflows} {currency}. "
                 f"صافي التدفق النقدي المرصود هو {net} {currency}."
             )
 
         return (
-            f"بلغ الدخل المرصود {income} {currency}، "
-            f"بينما بلغت المصاريف المرصودة {expenses} {currency}. "
+            f"بلغت التدفقات النقدية الداخلة المرصودة {inflows} {currency}، "
+            f"بينما بلغت التدفقات النقدية الخارجة المرصودة {outflows} {currency}. "
             f"صافي التدفق النقدي المرصود إيجابي بقيمة {net} {currency}."
         )
 
     if net < 0:
         return (
-            f"Observed income is {income} {currency}, "
-            f"while observed expenses are {expenses} {currency}. "
+            f"Observed inflows are {inflows} {currency}, "
+            f"while observed outflows are {outflows} {currency}. "
             f"Observed net cashflow is negative by {abs(net)} {currency}, "
-            "which indicates that expenses exceed income."
+            "which indicates that outflows exceed inflows."
         )
 
     if net == 0:
         return (
-            f"Observed income is {income} {currency}, "
-            f"while observed expenses are {expenses} {currency}. "
+            f"Observed inflows are {inflows} {currency}, "
+            f"while observed outflows are {outflows} {currency}. "
             f"Observed net cashflow is {net} {currency}."
         )
 
     return (
-        f"Observed income is {income} {currency}, "
-        f"while observed expenses are {expenses} {currency}. "
+        f"Observed inflows are {inflows} {currency}, "
+        f"while observed outflows are {outflows} {currency}. "
         f"Observed net cashflow is positive by {net} {currency}."
     )
+
 
 
 def deduplicate_transactions(
@@ -1107,6 +1202,289 @@ def enrich_source_summary_from_parallel_flow_balance_summary(
         }
 
     return summary
+
+
+
+def enrich_source_summary_from_opening_flow_terminal_summary(
+    statement_text: str | None,
+    statement_summary: dict | None,
+) -> dict:
+    """Recover missing four-role source accounting evidence from independent roles.
+
+    Source-audit only and fully structural.
+
+    Accepted evidence geometry:
+    1) an explicit opening/beginning balance role;
+    2) a compact summary block containing debit/payment/withdrawal and
+       credit/deposit movement totals;
+    3) an explicit terminal/closing/ending/available balance role.
+
+    The helper only fills fields that are still missing. Existing source-summary
+    evidence keeps priority. No bank, country, currency, merchant, network,
+    parser family, router, or candidate-selection identity is consulted.
+
+    A terminal "available balance" is preserved as source evidence, not silently
+    treated as proof of consistency. assess_source_statement_consistency() still
+    performs the independent accounting identity and may flag a contradiction.
+    """
+    summary = dict(statement_summary or {})
+
+    already_complete = bool(
+        summary.get("opening_balance") is not None
+        and summary.get("deposits") is not None
+        and summary.get("withdrawals") is not None
+        and (
+            summary.get("ending_balance") is not None
+            or summary.get("closing_balance") is not None
+        )
+    )
+    if already_complete:
+        return summary
+
+    raw = str(statement_text or "")
+    lines = [
+        " ".join(str(line or "").split())
+        for line in raw.splitlines()
+        if str(line or "").strip()
+    ]
+    if not lines:
+        return summary
+
+    # Generic monetary observation. Alphabetic prefixes are accepted only as
+    # presentation syntax; they are discarded by _verification_money_to_float.
+    money_token = (
+        r"[+\-−]?\s*"
+        r"(?:[A-Z]{1,4}\s*)?"
+        r"(?:[$€£]\s*)?"
+        r"(?:\d{1,3}(?:[ ,.'’]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+    )
+
+    opening_role_re = re.compile(
+        r"\b(?:"
+        r"statement\s+opening\s+balance|"
+        r"opening\s+balance|beginning\s+balance|"
+        r"balance\s+brought\s+forward|brought\s+forward|"
+        r"solde\s+initial|solde\s+de\s+d[ée]but|"
+        r"الرصيد\s+الافتتاحي|رصيد\s+افتتاحي"
+        r")\b",
+        re.I,
+    )
+    terminal_role_re = re.compile(
+        r"\b(?:"
+        r"closing\s+balance|ending\s+balance|"
+        r"available\s+balance|"
+        r"solde\s+final|solde\s+de\s+cl[ôo]ture|solde\s+disponible|"
+        r"الرصيد\s+الختامي|الرصيد\s+المتاح|رصيد\s+ختامي"
+        r")\b",
+        re.I,
+    )
+    summary_role_re = re.compile(
+        r"\b(?:"
+        r"statement\s+summary|account\s+summary|summary|"
+        r"r[ée]sum[ée](?:\s+du\s+compte)?|"
+        r"ملخص\s+الحساب|الملخص"
+        r")\b",
+        re.I,
+    )
+    debit_role_re = re.compile(
+        r"\b(?:"
+        r"payments?|withdrawals?|debits?|d[ée]bits?|money\s+out|"
+        r"paiements?|retraits?|sorties?|"
+        r"السحوبات|المدفوعات|مدين"
+        r")\b",
+        re.I,
+    )
+    credit_role_re = re.compile(
+        r"\b(?:"
+        r"deposits?|credits?|cr[ée]dits?|money\s+in|"
+        r"d[ée]p[ôo]ts?|versements?|entr[ée]es?|"
+        r"الإيداعات|الايداعات|إيداع|ايداع|دائن"
+        r")\b",
+        re.I,
+    )
+
+    def _amount_after_role(line: str, role_re: re.Pattern) -> float | None:
+        match = role_re.search(line)
+        if match is None:
+            return None
+
+        tail = line[match.end():]
+        tokens = re.findall(money_token, tail, flags=re.I)
+        if not tokens:
+            return None
+
+        value = _verification_money_to_float(tokens[0])
+        if value is None:
+            return None
+
+        return round(float(value), 2)
+
+    opening_observations = []
+    terminal_observations = []
+
+    for index, line in enumerate(lines):
+        if opening_role_re.search(line):
+            value = _amount_after_role(line, opening_role_re)
+            if value is not None:
+                opening_observations.append(
+                    {
+                        "line_index": index,
+                        "value": round(float(value), 2),
+                        "line": line[:240],
+                    }
+                )
+
+        if terminal_role_re.search(line):
+            value = _amount_after_role(line, terminal_role_re)
+            if value is not None:
+                terminal_observations.append(
+                    {
+                        "line_index": index,
+                        "value": round(float(value), 2),
+                        "line": line[:240],
+                    }
+                )
+
+    # Movement totals are authoritative only inside an explicit SUMMARY block.
+    movement_observations = []
+    for index, line in enumerate(lines):
+        if summary_role_re.search(line) is None:
+            continue
+
+        # Summary blocks are compact. Stop before a new transaction-table header
+        # or page boundary so movement roles elsewhere cannot leak into this audit.
+        for candidate_index in range(index + 1, min(len(lines), index + 14)):
+            candidate = lines[candidate_index]
+            lowered = candidate.casefold()
+
+            if re.search(
+                r"\b(?:page|pg)\s+\d+\s+(?:of|sur)\s+\d+\b",
+                lowered,
+                re.I,
+            ):
+                break
+
+            if (
+                re.search(r"\bdate\b", lowered, re.I)
+                and re.search(r"\b(?:balance|solde|الرصيد)\b", lowered, re.I)
+                and (
+                    debit_role_re.search(candidate)
+                    or credit_role_re.search(candidate)
+                )
+            ):
+                break
+
+            debit_value = _amount_after_role(candidate, debit_role_re)
+            credit_value = _amount_after_role(candidate, credit_role_re)
+
+            if debit_value is not None:
+                movement_observations.append(
+                    {
+                        "role": "withdrawals",
+                        "line_index": candidate_index,
+                        "value": round(abs(float(debit_value)), 2),
+                        "line": candidate[:240],
+                    }
+                )
+
+            if credit_value is not None:
+                movement_observations.append(
+                    {
+                        "role": "deposits",
+                        "line_index": candidate_index,
+                        "value": round(abs(float(credit_value)), 2),
+                        "line": candidate[:240],
+                    }
+                )
+
+        # First explicit summary block is sufficient; historical evidence keeps
+        # priority and this helper only fills missing roles.
+        if movement_observations:
+            break
+
+    withdrawal_obs = next(
+        (
+            item
+            for item in movement_observations
+            if item["role"] == "withdrawals"
+        ),
+        None,
+    )
+    deposit_obs = next(
+        (
+            item
+            for item in movement_observations
+            if item["role"] == "deposits"
+        ),
+        None,
+    )
+
+    # Opening role: first explicit opening observation.
+    opening_obs = (
+        opening_observations[0]
+        if opening_observations
+        else None
+    )
+
+    # Terminal role: use a value only when all repeated terminal observations
+    # agree. Repeated page headers commonly print the same final available
+    # balance; disagreement is deliberately left unresolved rather than guessed.
+    terminal_obs = None
+    if terminal_observations:
+        terminal_values = {
+            round(float(item["value"]), 2)
+            for item in terminal_observations
+        }
+        if len(terminal_values) == 1:
+            terminal_obs = terminal_observations[-1]
+
+    recovered_any = False
+
+    if summary.get("opening_balance") is None and opening_obs is not None:
+        summary["opening_balance"] = opening_obs["value"]
+        recovered_any = True
+
+    if summary.get("withdrawals") is None and withdrawal_obs is not None:
+        summary["withdrawals"] = withdrawal_obs["value"]
+        recovered_any = True
+
+    if summary.get("deposits") is None and deposit_obs is not None:
+        summary["deposits"] = deposit_obs["value"]
+        recovered_any = True
+
+    if (
+        summary.get("ending_balance") is None
+        and summary.get("closing_balance") is None
+        and terminal_obs is not None
+    ):
+        summary["ending_balance"] = terminal_obs["value"]
+        recovered_any = True
+
+    if not recovered_any:
+        return summary
+
+    summary["source"] = "source_opening_flow_terminal_summary"
+    summary.setdefault("evidence", {})
+
+    if isinstance(summary["evidence"], dict):
+        summary["evidence"]["opening_flow_terminal_summary"] = {
+            "source": "independent_source_accounting_roles",
+            "opening": opening_obs,
+            "withdrawals": withdrawal_obs,
+            "deposits": deposit_obs,
+            "terminal": terminal_obs,
+            "terminal_observation_count": len(terminal_observations),
+            "terminal_values": sorted(
+                {
+                    round(float(item["value"]), 2)
+                    for item in terminal_observations
+                }
+            ),
+        }
+
+    return summary
+
 
 
 def assess_source_statement_consistency(statement_summary: dict | None) -> dict:
@@ -2145,15 +2523,38 @@ def build_frontend_verification(
         or source_section_total.get("available")
     )
 
+    # Additive reason-code projection only. Verification status and financial
+    # authority remain unchanged; the strongest observed source reason is exposed
+    # so the frontend can explain an unverified result precisely.
     if accounting_reconciled and source_inconsistency_detected:
         verification_status = "verified_with_source_inconsistency"
-        reason = "statement_summary_conflict"
+        if source_section_total_inconsistency_detected:
+            reason = "source_section_total_inconsistency"
+        elif source_period_inconsistency_detected:
+            reason = "source_period_inconsistency"
+        elif source_balance_inconsistency_detected:
+            reason = "source_balance_inconsistency"
+        elif source_consistency.get("source_inconsistency_detected") is True:
+            reason = "source_accounting_inconsistency"
+        else:
+            reason = "statement_summary_conflict"
     elif accounting_reconciled:
         verification_status = "verified"
         reason = "accounting_reconciled"
     else:
         verification_status = "unverified"
-        reason = "accounting_not_reconciled"
+        if source_section_total_inconsistency_detected:
+            reason = "source_section_total_inconsistency"
+        elif source_period_inconsistency_detected:
+            reason = "source_period_inconsistency"
+        elif source_balance_inconsistency_detected:
+            reason = "source_balance_inconsistency"
+        elif source_consistency.get("source_inconsistency_detected") is True:
+            reason = "source_accounting_inconsistency"
+        elif source_consistency_available is not True:
+            reason = "source_accounting_evidence_unavailable"
+        else:
+            reason = "accounting_not_reconciled"
 
     localized = finance_verification_copy(
         status=verification_status,
@@ -2168,6 +2569,33 @@ def build_frontend_verification(
     return {
         "status": verification_status,
         "reason": reason,
+        "reason_code": reason,
+        "reason_codes": [
+            code
+            for code, active in (
+                (
+                    "source_accounting_inconsistency",
+                    source_consistency.get("source_inconsistency_detected") is True,
+                ),
+                (
+                    "source_balance_inconsistency",
+                    source_balance_inconsistency_detected,
+                ),
+                (
+                    "source_period_inconsistency",
+                    source_period_inconsistency_detected,
+                ),
+                (
+                    "source_section_total_inconsistency",
+                    source_section_total_inconsistency_detected,
+                ),
+                (
+                    "accounting_not_reconciled",
+                    not accounting_reconciled,
+                ),
+            )
+            if active
+        ],
         "title": localized.get("title"),
         "message": localized.get("message"),
         "language": language_value,
@@ -2341,7 +2769,7 @@ def normalize_signed_amounts_before_kpi(transactions):
 
 print(
     "RUNEXA_FINANCE_HANDLER_VERSION",
-    "v31-parallel-flow-balance-source-summary",
+    "v35.1-safe-publication-grounding-gate",
 )
 
 print(
@@ -4086,6 +4514,15 @@ def handle_finance_ai(job: Job, db):
         statement_summary,
     )
 
+    # ADDITIVE v32 — recover independent source accounting roles when a
+    # statement exposes opening balance, compact movement totals and a repeated
+    # terminal/available balance outside the historical summary layouts.
+    # Source-audit only: no parser/router/candidate/transaction mutation.
+    statement_summary = enrich_source_summary_from_opening_flow_terminal_summary(
+        text,
+        statement_summary,
+    )
+
     # Phase 1B: preserve the source statement's own four-role accounting identity
     # before candidate-local totals become the ledger reconciliation authority.
     # Audit only: no parser, router, candidate or transaction mutation.
@@ -5376,7 +5813,8 @@ def handle_finance_ai(job: Job, db):
         )
 
     forecast["observed_income"] = income_total
-    forecast["observed_expenses"] = expense_total
+    forecast["observed_expenses"] = expense_total  # legacy/internal engine field
+    forecast["observed_outflows"] = expense_total
     forecast["observed_net_cashflow"] = round(income_total - expense_total, 2)
 
     excluded_transactions = max(len(transactions) - len(kpi_transactions), 0)
@@ -5452,25 +5890,77 @@ def handle_finance_ai(job: Job, db):
         None if analysis_observed_income > 0 else fallback_income
     )
 
-    subscriptions = detect_recurring_subscriptions(analysis_transactions)
+    # v34 — separate observed cash outflows from grounded spending.
+    #
+    # Cashflow/reconciliation continue to consume the complete analysis ledger.
+    # Expense-based behavioral engines consume only the conservative spending
+    # projection plus observed positive inflows. This prevents transfers, cash
+    # withdrawals and unresolved "Other" outflows from being asserted as
+    # consumption merely because their signed amount is negative.
+    grounded_spending_transactions, unresolved_outflow_transactions = (
+        build_grounded_spending_ledger(analysis_transactions)
+    )
+
+    analysis_income_transactions = [
+        tx
+        for tx in analysis_transactions
+        if safe_float(tx.get("amount")) > 0
+    ]
+    behavioral_spending_transactions = (
+        analysis_income_transactions + grounded_spending_transactions
+    )
+
+    subscriptions = detect_recurring_subscriptions(
+        behavioral_spending_transactions
+    )
     savings_opportunities = detect_savings_opportunities(
-        transactions=analysis_transactions,
+        transactions=behavioral_spending_transactions,
         subscriptions=subscriptions,
     )
     budget = build_recommended_budget(
-        transactions=analysis_transactions,
+        transactions=behavioral_spending_transactions,
         fallback_income=analysis_fallback_income,
         output_language=output_language,
     )
     scores = calculate_financial_scores(
-        transactions=analysis_transactions,
+        transactions=behavioral_spending_transactions,
         subscriptions=subscriptions,
         fallback_income=analysis_fallback_income,
     )
+
+    # Cashflow remains an observed-cashflow concept, not a spending-category
+    # concept. Keep every analyzed movement here.
     forecast = predict_cashflow(
         transactions=analysis_transactions,
         fallback_income=analysis_fallback_income,
         output_language=output_language,
+    )
+
+    observed_outflows = round(
+        sum(
+            abs(safe_float(tx.get("amount")))
+            for tx in analysis_transactions
+            if safe_float(tx.get("amount")) < 0
+        ),
+        2,
+    )
+    observed_expenses = round(
+        sum(
+            abs(safe_float(tx.get("amount")))
+            for tx in grounded_spending_transactions
+        ),
+        2,
+    )
+
+    forecast["observed_outflows"] = observed_outflows
+    # Legacy engine field is deliberately narrowed at the public/behavioral
+    # boundary to grounded spending. Accounting reconciliation still uses the
+    # untouched accounting ledger and statement withdrawal totals.
+    forecast["observed_expenses"] = observed_expenses
+    forecast["observed_net_cashflow"] = round(
+        float(forecast.get("observed_income", 0) or 0)
+        - observed_outflows,
+        2,
     )
 
     print(
@@ -5479,8 +5969,15 @@ def handle_finance_ai(job: Job, db):
             "accounting_transactions": len(accounting_transactions),
             "analysis_transactions": len(analysis_transactions),
             "analysis_excluded_transactions": len(analysis_excluded_transactions),
+            "grounded_spending_transactions": len(
+                grounded_spending_transactions
+            ),
+            "unresolved_outflow_transactions": len(
+                unresolved_outflow_transactions
+            ),
             "observed_income": forecast.get("observed_income"),
-            "observed_expenses": forecast.get("observed_expenses"),
+            "observed_outflows": observed_outflows,
+            "observed_expenses": observed_expenses,
             "observed_net_cashflow": forecast.get("observed_net_cashflow"),
         },
     )
@@ -5533,29 +6030,130 @@ def handle_finance_ai(job: Job, db):
         savings_rate=savings_rate,
     )
 
+    result_ai["observed_outflows"] = round(
+        float(forecast.get("observed_outflows", 0) or 0),
+        2,
+    )
+    result_ai["observed_expenses"] = round(
+        observed_expenses,
+        2,
+    )
+    result_ai["grounded_spending_transaction_count"] = len(
+        grounded_spending_transactions
+    )
+    result_ai["unresolved_outflow_transaction_count"] = len(
+        unresolved_outflow_transactions
+    )
+    result_ai["expense_grounding_coverage"] = round(
+        (
+            observed_expenses
+            / float(forecast.get("observed_outflows", 0) or 0)
+        )
+        if float(forecast.get("observed_outflows", 0) or 0) > 0
+        else 0.0,
+        4,
+    )
+
+    # v35 — PUBLICATION GROUNDING GATE
+    #
+    # Low expense-classification coverage is an evidence limitation, not a bad
+    # financial behavior signal.  Behavioral conclusions that require complete
+    # spending knowledge are withheld when most observed outflows remain
+    # unresolved.
+    EXPENSE_GROUNDING_MIN_BEHAVIORAL_COVERAGE = 0.50
+    expense_grounding_coverage = float(
+        result_ai.get("expense_grounding_coverage") or 0
+    )
+    behavioral_spending_evidence_sufficient = bool(
+        float(forecast.get("observed_outflows", 0) or 0) <= 0
+        or expense_grounding_coverage
+        >= EXPENSE_GROUNDING_MIN_BEHAVIORAL_COVERAGE
+    )
+
+    result_ai["behavioral_spending_evidence_sufficient"] = (
+        behavioral_spending_evidence_sufficient
+    )
+    result_ai["behavioral_spending_evidence_threshold"] = (
+        EXPENSE_GROUNDING_MIN_BEHAVIORAL_COVERAGE
+    )
+
     if observed_expenses > 0:
         result_ai["total_spending_estimate"] = round(
             observed_expenses,
             2,
         )
+    else:
+        result_ai["total_spending_estimate"] = 0.0
 
     if observed_income > 0:
         result_ai["total_income_estimate"] = round(
             observed_income,
             2,
         )
+        result_ai["observed_inflows"] = round(
+            observed_income,
+            2,
+        )
 
-    result_ai["financial_score"] = scores.get(
-        "overall_financial_habits_score",
-        0,
-    )
+    # Keep the deterministic engine score numeric for internal downstream
+    # engines.  Publication gating must never mutate an engine contract.
+    engine_scores = dict(scores or {})
+
+    if behavioral_spending_evidence_sufficient:
+        published_scores = dict(engine_scores)
+        result_ai["financial_score"] = engine_scores.get(
+            "overall_financial_habits_score",
+            0,
+        )
+    else:
+        # Insufficient evidence is a publication state, not an engine score.
+        # Preserve the numeric score privately for engines that require it,
+        # while withholding it from the public result.
+        result_ai["financial_score"] = None
+        published_scores = {
+            **engine_scores,
+            "status": "insufficient_evidence",
+            "overall_financial_habits_score": None,
+            "reason": "low_expense_grounding_coverage",
+            "expense_grounding_coverage": expense_grounding_coverage,
+            "required_coverage": (
+                EXPENSE_GROUNDING_MIN_BEHAVIORAL_COVERAGE
+            ),
+        }
 
     alerts = generate_financial_alerts(
-        transactions=analysis_transactions,
+        transactions=behavioral_spending_transactions,
         subscriptions=subscriptions,
         forecast=forecast,
-        scores=scores,
+        scores=engine_scores,
     )
+
+    print(
+        "PUBLICATION_GROUNDING_GATE_AUDIT",
+        {
+            "behavioral_spending_evidence_sufficient": (
+                behavioral_spending_evidence_sufficient
+            ),
+            "expense_grounding_coverage": expense_grounding_coverage,
+            "engine_score": engine_scores.get(
+                "overall_financial_habits_score"
+            ),
+            "published_score": published_scores.get(
+                "overall_financial_habits_score"
+            ),
+            "alerts_generated_before_gate": len(alerts or []),
+        },
+    )
+
+    if not behavioral_spending_evidence_sufficient:
+        # Keep only cashflow facts that can be supported by the complete observed
+        # cashflow ledger.  Expense-level behavioral alerts require sufficient
+        # spending classification coverage.
+        alerts = [
+            alert
+            for alert in (alerts or [])
+            if str(alert.get("code") or "") in {"NEGATIVE_CASHFLOW"}
+        ]
 
     RISK_TRANSLATIONS = {
         "NEGATIVE_CASHFLOW": {
@@ -5604,14 +6202,51 @@ def handle_finance_ai(job: Job, db):
     )
 
     insights = generate_financial_insights(
-        transactions=analysis_transactions,
+        transactions=behavioral_spending_transactions,
         subscriptions=subscriptions,
-        scores=scores,
+        scores=engine_scores,
         forecast=forecast,
         opportunities=savings_opportunities,
         currency=currency,
         output_language=output_language,
     )
+
+    if not behavioral_spending_evidence_sufficient:
+        # Fail closed on behavioral claims that depend on knowing what the
+        # unresolved outflows actually represent.
+        insights = []
+
+        savings_opportunities = []
+
+        budget = {
+            **dict(budget or {}),
+            "status": "insufficient_evidence",
+            "assessment_available": False,
+            "reason": "low_expense_grounding_coverage",
+            "expense_grounding_coverage": expense_grounding_coverage,
+            "required_coverage": (
+                EXPENSE_GROUNDING_MIN_BEHAVIORAL_COVERAGE
+            ),
+            # Preserve numerical reference allocations if the budget engine
+            # already produced them, but explicitly remove any health verdict.
+            "health_status": None,
+            "spending_assessment": None,
+        }
+
+        result_ai["saving_strategies"] = []
+        result_ai["waste_detected"] = []
+        result_ai["risk_notes"] = [
+            note
+            for note in result_ai.get("risk_notes", [])
+            if "cashflow" in str(note).lower()
+            or "trésorerie" in str(note).lower()
+            or "التدفق" in str(note)
+        ]
+
+        result_ai["behavioral_analysis_status"] = "insufficient_evidence"
+        result_ai["behavioral_analysis_reason"] = (
+            "low_expense_grounding_coverage"
+        )
 
     update_job_progress(
         job,
@@ -5622,11 +6257,24 @@ def handle_finance_ai(job: Job, db):
 
     charts = build_financial_charts(analysis_transactions)
 
+    # v35 — expose a spending-only chart/category projection for UI consumers.
+    # Existing full-ledger charts stay untouched for cashflow/time-series views.
+    grounded_spending_charts = build_financial_charts(
+        grounded_spending_transactions
+    )
+
     result_ai["summary"] = build_observed_finance_summary(
         forecast=forecast,
         currency=currency,
         output_language=output_language,
     )
+
+    if not behavioral_spending_evidence_sufficient:
+        # Remove upstream free-form spending verdicts that were produced before
+        # the deterministic grounding coverage gate was known.
+        result_ai["financial_insights"] = []
+        result_ai["spending_assessment"] = None
+        result_ai["expense_ratio_assessment"] = None
 
     for field in [
         "saving_strategies",
@@ -5680,12 +6328,29 @@ def handle_finance_ai(job: Job, db):
         )
 
         # Preserve the observed accounting facts.
+        limited_outflows = round(
+            sum(
+                abs(safe_float(tx.get("amount")))
+                for tx in analysis_transactions
+                if safe_float(tx.get("amount")) < 0
+            ),
+            2,
+        )
+        limited_expenses = round(
+            sum(
+                abs(safe_float(tx.get("amount")))
+                for tx in grounded_spending_transactions
+            ),
+            2,
+        )
+
         limited_forecast = {
             "status": "limited_scope",
             "observed_income": round(income_total, 2),
-            "observed_expenses": round(expense_total, 2),
+            "observed_expenses": limited_expenses,
+            "observed_outflows": limited_outflows,
             "observed_net_cashflow": round(
-                income_total - expense_total,
+                income_total - limited_outflows,
                 2,
             ),
             "trend": None,
@@ -5801,23 +6466,61 @@ def handle_finance_ai(job: Job, db):
         "accounting_transactions": accounting_transactions,
         "analysis_transactions": analysis_transactions,
         "analysis_excluded_transactions": analysis_excluded_transactions,
+        "grounded_spending_transactions": grounded_spending_transactions,
+        "unresolved_outflow_transactions": unresolved_outflow_transactions,
 
         "charts": charts,
+        "grounded_spending_charts": grounded_spending_charts,
+        "observed_outflows": round(
+            float(forecast.get("observed_outflows", 0) or 0),
+            2,
+        ),
+        "observed_expenses": round(
+            float(forecast.get("observed_expenses", 0) or 0),
+            2,
+        ),
+        "observed_inflows": round(
+            float(forecast.get("observed_income", 0) or 0),
+            2,
+        ),
+        "grounded_spending_transaction_count": len(
+            grounded_spending_transactions
+        ),
+        "unresolved_outflow_transaction_count": len(
+            unresolved_outflow_transactions
+        ),
         "subscriptions_detected": subscriptions,
         "savings_opportunities": savings_opportunities,
         "recommended_budget": budget,
         "cashflow_forecast": forecast,
-        "financial_habit_scores": scores,
+        "financial_habit_scores": published_scores,
         "financial_alerts": alerts,
         "financial_insights": insights,
         "ledger_scope": {
             "accounting_transactions": len(accounting_transactions),
             "analysis_transactions": len(analysis_transactions),
             "analysis_excluded_transactions": len(analysis_excluded_transactions),
+            "grounded_spending_transactions": len(
+                grounded_spending_transactions
+            ),
+            "unresolved_outflow_transactions": len(
+                unresolved_outflow_transactions
+            ),
             "analysis_rule": "explicit_structural_neutrality_only",
+            "spending_rule": "specific_category_grounding_only",
             "accounting_ledger_preserved": True,
-            "behavioral_engines_use_analysis_ledger": True,
+            "cashflow_uses_analysis_ledger": True,
+            "behavioral_expense_engines_use_grounded_spending_ledger": True,
             "frontend_transactions_use_analysis_ledger": True,
+            "frontend_expense_drilldown_should_use_grounded_spending_ledger": True,
+            "frontend_spending_categories_should_use_grounded_spending_charts": True,
+            "behavioral_spending_evidence_sufficient": (
+                behavioral_spending_evidence_sufficient
+            ),
+            "expense_grounding_coverage": expense_grounding_coverage,
+            "expense_grounding_required_coverage": (
+                EXPENSE_GROUNDING_MIN_BEHAVIORAL_COVERAGE
+            ),
         },
     }
 

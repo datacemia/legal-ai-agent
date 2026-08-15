@@ -1,6 +1,6 @@
 "use client";
 
-// RUNEXA_FINANCE_FRONTEND_VERSION v22-other-link-modal
+// RUNEXA_FINANCE_FRONTEND_VERSION v24-marketing-hero-multilingual
 
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
@@ -305,13 +305,12 @@ const evidenceLabels: any = {
 
 const labels: any = {
   en: {
-    title: "Financial Intelligence from Your Bank Statement",
+    title: "Your Bank Statement. Made Intelligent.",
     subtitle:
-      "Turn a bank statement into a structured, evidence-based view of your finances.",
-    heroSupport:
-      "Runexa analyzes observed transactions to surface income, spending, cashflow, recurring activity, financial risks and savings opportunities — with reconciliation and quality controls built into the analysis.",
-    heroStatement: "Understand your finances with evidence, not assumptions.",
-    uploadBadges: ["Bank statement analysis", "Transaction reconciliation", "Private & multilingual"],
+      "Instantly turn transactions into a clear picture of your financial life — income, spending, cash flow, risks and opportunities.",
+    heroSupport: "",
+    heroStatement: "From transactions to decisions.",
+    uploadBadges: ["Financial Intelligence", "Evidence-Based", "Private & Multilingual"],
     whoTitle: "Who is this for?",
     whoItems: [
       "Individuals",
@@ -569,13 +568,12 @@ const labels: any = {
       "This statement format is not yet supported by the Finance Agent. No automatic analysis was generated to avoid inaccurate results. Support for this structure will be added in a future update.",
   },
   fr: {
-    title: "L’intelligence financière à partir de votre relevé bancaire",
+    title: "Votre relevé bancaire. Désormais intelligent.",
     subtitle:
-      "Transformez un relevé bancaire en une vision structurée et fondée sur les données de votre situation financière.",
-    heroSupport:
-      "Runexa analyse les transactions observées pour identifier revenus, dépenses, trésorerie, opérations récurrentes, risques financiers et opportunités d’épargne, avec réconciliation et contrôles de qualité intégrés.",
-    heroStatement: "Comprenez vos finances à partir des faits, pas des suppositions.",
-    uploadBadges: ["Analyse de relevé bancaire", "Réconciliation des transactions", "Privé & multilingue"],
+      "Transformez instantanément vos transactions en une vision claire de votre vie financière — revenus, dépenses, trésorerie, risques et opportunités.",
+    heroSupport: "",
+    heroStatement: "Des transactions aux décisions.",
+    uploadBadges: ["Intelligence financière", "Fondé sur les données", "Privé & multilingue"],
     whoTitle: "Pour qui ?",
     whoItems: [
       "Particuliers",
@@ -833,13 +831,12 @@ const labels: any = {
       "Ce format de relevé n’est pas encore pris en charge par l’agent Finance. Aucune analyse automatique n’a été générée afin d’éviter des résultats inexacts. Cette structure sera prise en charge dans une prochaine mise à jour.",
   },
   ar: {
-    title: "ذكاء مالي مستند إلى كشف حسابك البنكي",
+    title: "كشف حسابك البنكي. أصبح أكثر ذكاءً.",
     subtitle:
-      "حوّل كشف حسابك البنكي إلى رؤية مالية منظمة تستند إلى البيانات الفعلية.",
-    heroSupport:
-      "تحلل Runexa المعاملات المرصودة لاستخراج الدخل والمصاريف والتدفق النقدي والعمليات المتكررة والمخاطر المالية وفرص الادخار، مع مطابقة المعاملات وضوابط الجودة ضمن التحليل.",
-    heroStatement: "افهم وضعك المالي استنادًا إلى الأدلة، لا الافتراضات.",
-    uploadBadges: ["تحليل كشف الحساب", "مطابقة المعاملات", "خاص ومتعدد اللغات"],
+      "حوّل معاملاتك فورًا إلى رؤية واضحة لحياتك المالية — الدخل، الإنفاق، التدفق النقدي، المخاطر والفرص.",
+    heroSupport: "",
+    heroStatement: "من المعاملات إلى القرارات.",
+    uploadBadges: ["ذكاء مالي", "مدعوم بالأدلة", "خاص ومتعدد اللغات"],
     whoTitle: "لمن هذا الوكيل؟",
     whoItems: [
       "الأفراد",
@@ -1234,6 +1231,24 @@ export default function FinanceClient({
       .trim()
       .toLowerCase() === "limited_scope" ||
     result?.limited_analysis_scope === true;
+
+  // v23 — publication grounding is a display contract, not a score of zero.
+  // Historical limited_scope behavior remains unchanged.
+  const isBehavioralEvidenceInsufficient =
+    String(result?.financial_habit_scores?.status || "")
+      .trim()
+      .toLowerCase() === "insufficient_evidence" ||
+    String(result?.recommended_budget?.status || "")
+      .trim()
+      .toLowerCase() === "insufficient_evidence" ||
+    result?.behavioral_spending_evidence_sufficient === false ||
+    result?.ai_result?.behavioral_spending_evidence_sufficient === false;
+
+  const shouldSuppressBehavioralScore =
+    isLimitedAnalysisScope || isBehavioralEvidenceInsufficient;
+
+  const shouldSuppressBehavioralBudgetAssessment =
+    isLimitedAnalysisScope || isBehavioralEvidenceInsufficient;
 
   const coachVerificationStatusLabel = isVerificationSourceConflict
     ? t.coachVerificationWarning
@@ -1633,6 +1648,26 @@ export default function FinanceClient({
     return Number.isFinite(value) ? value : null;
   };
 
+  // v23 — use the explicit grounded-spending projection when the backend
+  // provides it. Fallbacks preserve historical results from older jobs.
+  const groundedSpendingTransactions = Array.isArray(
+    result?.grounded_spending_transactions
+  )
+    ? result.grounded_spending_transactions
+    : [];
+
+  const hasGroundedSpendingContract =
+    Array.isArray(result?.grounded_spending_transactions) ||
+    Boolean(result?.grounded_spending_charts);
+
+  const spendingCategoryBreakdown = Array.isArray(
+    result?.grounded_spending_charts?.category_breakdown
+  )
+    ? result.grounded_spending_charts.category_breakdown
+    : Array.isArray(result?.charts?.category_breakdown)
+      ? result.charts.category_breakdown
+      : [];
+
   const sourceEvidenceIsLimited =
     isVerificationSourceConflict || isVerificationLedgerOnly;
 
@@ -1688,9 +1723,7 @@ export default function FinanceClient({
     if (!category) return null;
 
     const normalizedTarget = normalizeEvidenceCategory(category);
-    const breakdown = Array.isArray(result?.charts?.category_breakdown)
-      ? result.charts.category_breakdown
-      : [];
+    const breakdown = spendingCategoryBreakdown;
 
     const match = breakdown.find(
       (entry: any) =>
@@ -1708,14 +1741,16 @@ export default function FinanceClient({
         ? Number(((Math.abs(amount) / expenseTotal) * 100).toFixed(1))
         : null;
 
-    const transactions = Array.isArray(result?.transactions)
-      ? result.transactions.filter(
-          (transaction: any) =>
-            transaction &&
-            transaction.excluded_from_financial_kpis !== true &&
-            transaction.exclude_from_cashflow !== true
-        )
-      : [];
+    const transactions = hasGroundedSpendingContract
+      ? groundedSpendingTransactions
+      : Array.isArray(result?.transactions)
+        ? result.transactions.filter(
+            (transaction: any) =>
+              transaction &&
+              transaction.excluded_from_financial_kpis !== true &&
+              transaction.exclude_from_cashflow !== true
+          )
+        : [];
 
     const count = transactions.filter(
       (transaction: any) =>
@@ -1768,11 +1803,7 @@ export default function FinanceClient({
     "savings_investments",
   ]);
 
-  const observedActionableStrategyCategories = (
-    Array.isArray(result?.charts?.category_breakdown)
-      ? result.charts.category_breakdown
-      : []
-  )
+  const observedActionableStrategyCategories = spendingCategoryBreakdown
     .map((entry: any) => {
       const amount = Number(entry?.amount);
       const canonical = canonicalStrategyCategory(entry?.category);
@@ -2446,7 +2477,7 @@ export default function FinanceClient({
   };
 
   const chartData =
-    result?.charts?.category_breakdown?.map((item: any) => {
+    spendingCategoryBreakdown.map((item: any) => {
       const canonical = canonicalStrategyCategory(item?.category);
       const isUnconfirmedSubscriptionCategory =
         canonical === "subscriptions" &&
@@ -2475,9 +2506,11 @@ export default function FinanceClient({
     (tx: any) => String(tx?.type || "").toLowerCase() === "income"
   );
 
-  const expenseEvidenceTransactions = usableTransactions.filter(
-    (tx: any) => String(tx?.type || "").toLowerCase() === "expense"
-  );
+  const expenseEvidenceTransactions = hasGroundedSpendingContract
+    ? groundedSpendingTransactions
+    : usableTransactions.filter(
+        (tx: any) => String(tx?.type || "").toLowerCase() === "expense"
+      );
 
   const cashflowEvidenceTransactions = usableTransactions.filter((tx: any) =>
     ["income", "expense"].includes(String(tx?.type || "").toLowerCase())
@@ -2669,9 +2702,9 @@ export default function FinanceClient({
 
 
   const subscriptionCategorySpend = Array.isArray(
-    result?.charts?.category_breakdown
+    spendingCategoryBreakdown
   )
-    ? result.charts.category_breakdown.reduce((sum: number, item: any) => {
+    ? spendingCategoryBreakdown.reduce((sum: number, item: any) => {
         const category = String(item?.category || "").toLowerCase().trim();
         const amount = Number(item?.amount);
 
@@ -2697,9 +2730,11 @@ export default function FinanceClient({
     "unknown";
 
   const translatedBudgetStatus =
-    budgetLabels[language]?.[result?.recommended_budget?.status] ??
-    result?.recommended_budget?.status ??
-    "unknown";
+    isBehavioralEvidenceInsufficient
+      ? t.limitedScopeNotAssessed
+      : budgetLabels[language]?.[result?.recommended_budget?.status] ??
+        result?.recommended_budget?.status ??
+        "unknown";
 
   const quickQuestions = isLimitedAnalysisScope
     ? [t.chatBiggestExpenses, t.chatSaveMoreMoney]
@@ -2711,7 +2746,11 @@ export default function FinanceClient({
         result?.cashflow_forecast?.trend === "risky"
           ? t.chatAvoidCashflowRisk
           : t.chatBiggestExpenses,
-        (result?.financial_habit_scores?.overall_financial_habits_score || 100) < 60
+        !shouldSuppressBehavioralScore &&
+        Number.isFinite(
+          Number(result?.financial_habit_scores?.overall_financial_habits_score)
+        ) &&
+        Number(result?.financial_habit_scores?.overall_financial_habits_score) < 60
           ? t.chatWhyScoreLow
           : t.chatFinanciallyHealthy,
         t.chatExplainFinancialScore,
@@ -3115,7 +3154,9 @@ export default function FinanceClient({
     doc.text(
       isLimitedAnalysisScope
         ? `${t.financialHabitsScore}: ${t.limitedScopeNotAssessed}`
-        : `${t.financialHabitsScore}: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`,
+        : shouldSuppressBehavioralScore
+          ? `${t.financialHabitsScore}: ${t.limitedScopeNotEnoughData}`
+          : `${t.financialHabitsScore}: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`,
       14,
       y
     );
@@ -3212,9 +3253,11 @@ export default function FinanceClient({
             {t.subtitle}
           </p>
 
-          <p className="mx-auto mt-4 max-w-3xl text-sm leading-6 text-slate-500">
-            {t.heroSupport}
-          </p>
+          {t.heroSupport && (
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-6 text-slate-500">
+              {t.heroSupport}
+            </p>
+          )}
 
           <p className="mx-auto mt-6 max-w-2xl text-sm font-semibold text-slate-900">
             {t.heroStatement}
@@ -3914,7 +3957,7 @@ export default function FinanceClient({
                     {t.financialHabitsScore}
                   </p>
 
-                  {isLimitedAnalysisScope ? (
+                  {shouldSuppressBehavioralScore ? (
                     <div className="mt-3">
                       <h3 className="text-2xl font-bold text-slate-700">
                         {t.limitedScopeNotEnoughData}
@@ -3931,7 +3974,7 @@ export default function FinanceClient({
 
                       <div className="mt-2 flex items-end gap-2">
                         <h3 className="text-4xl font-bold text-blue-600">
-                          {result.financial_habit_scores?.overall_financial_habits_score ?? 0}
+                          {result.financial_habit_scores?.overall_financial_habits_score ?? "-"}
                         </h3>
                         <span className="text-slate-500 mb-1">/100</span>
                       </div>
@@ -4006,7 +4049,7 @@ export default function FinanceClient({
                         : t.recommendedBudget}
                     </p>
 
-                    {isLimitedAnalysisScope ? (
+                    {shouldSuppressBehavioralBudgetAssessment ? (
                       <div className="mt-3">
                         <h3 className="text-2xl font-bold text-slate-700">
                           {t.limitedScopeNotAssessed}
@@ -4014,6 +4057,27 @@ export default function FinanceClient({
                         <p className="mt-2 text-sm leading-6 text-slate-500">
                           {t.limitedScopeBudgetUnavailable}
                         </p>
+
+                        {!isLimitedAnalysisScope && (
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+                            <div>
+                              <p className="text-xs text-slate-500">{t.savingsTarget}</p>
+                              <p className="font-semibold">{formatMoney(result.recommended_budget?.savings_target)}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-500">{t.needs}</p>
+                              <p className="font-semibold">{formatMoney(result.recommended_budget?.needs)}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-500">{t.wants}</p>
+                              <p className="font-semibold">{formatMoney(result.recommended_budget?.wants)}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-500">{t.emergencyFund}</p>
+                              <p className="font-semibold">{formatMoney(result.recommended_budget?.emergency_fund_target)}</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <>
@@ -4741,8 +4805,9 @@ export default function FinanceClient({
                           <tbody>
                             {chartData.map((item: any, index: number) => {
                               const isOtherCategory =
+                                !hasGroundedSpendingContract &&
                                 normalizeEvidenceCategory(item?.category) ===
-                                "other";
+                                  "other";
 
                               return (
                                 <tr

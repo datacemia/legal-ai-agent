@@ -227,7 +227,7 @@ def _finance_log_once(*args) -> None:
 def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
-print("RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE", "v184-date-value-debit-credit-source-authority")
+print("RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE", "v184.5-complete-running-balance-flow-authority")
 
 debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v8-terminal-balance-authority-fr-en-ar")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "BDT", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "ZWG", "MULTI"]
@@ -5509,6 +5509,7 @@ def detect_currency(text: str) -> str:
         "CANADA": "CAD",
         "AUSTRALIA": "AUD",
         "SWITZERLAND": "CHF",
+        "SOUTH_AFRICA": "ZAR",
     }
 
     COUNTRY_HINTS = {
@@ -5538,6 +5539,12 @@ def detect_currency(text: str) -> str:
         "CANADA": ["CANADA", "CANADIEN", "كندا"] + CANADA_BANKS,
         "AUSTRALIA": ["AUSTRALIA", "AUSTRALIE", "أستراليا"] + AUSTRALIA_BANKS,
         "SWITZERLAND": ["SWITZERLAND", "SUISSE", "سويسرا"],
+        "SOUTH_AFRICA": [
+            "SOUTH AFRICA",
+            "REPUBLIC OF SOUTH AFRICA",
+            "AFRIQUE DU SUD",
+            "جنوب أفريقيا",
+        ],
     }
 
     BANK_COUNTRY_HINTS = {
@@ -5612,15 +5619,101 @@ def detect_currency(text: str) -> str:
         return False
 
     # 3) Country/jurisdiction fallback.
+    #
+    # ADDITIVE jurisdiction scoring:
+    # do not let one incidental transaction-location token (for example a
+    # merchant country code/location) outrank repeated statement-level
+    # jurisdiction evidence printed across headers/footers.  Score every
+    # jurisdiction structurally, then keep the strongest one.  Historical
+    # behavior is preserved when only one jurisdiction has evidence.
+    def jurisdiction_hint_score(hints: list[str]) -> tuple[int, int]:
+        occurrences = 0
+        distinct = 0
+
+        for hint in hints:
+            h = str(hint or "").upper().strip()
+            if not h:
+                continue
+
+            if re.fullmatch(r"[A-Z0-9]{2,4}", h) or re.fullmatch(r"[\u0600-\u06FF]{2,4}", h):
+                matches = re.findall(
+                    rf"(?<![A-Z0-9\u0600-\u06FF]){re.escape(h)}(?![A-Z0-9\u0600-\u06FF])",
+                    normalized,
+                )
+                count = len(matches)
+            else:
+                count = normalized.count(h)
+
+            if count > 0:
+                distinct += 1
+                occurrences += count
+
+        return occurrences, distinct
+
+    jurisdiction_candidates = []
+
     for country, hints in COUNTRY_HINTS.items():
-        if has_hint(hints):
-            detected = COUNTRY_CURRENCY[country]
-            debug_log("CURRENCY_DEBUG: country_hint", country, "->", detected)
+        occurrence_count, distinct_count = jurisdiction_hint_score(hints)
+        if occurrence_count <= 0:
+            continue
+
+        jurisdiction_candidates.append(
+            {
+                "country": country,
+                "currency": COUNTRY_CURRENCY[country],
+                "occurrences": occurrence_count,
+                "distinct_hints": distinct_count,
+            }
+        )
+
+    if jurisdiction_candidates:
+        jurisdiction_candidates.sort(
+            key=lambda item: (
+                item["occurrences"],
+                item["distinct_hints"],
+            ),
+            reverse=True,
+        )
+
+        winner = jurisdiction_candidates[0]
+        runner_up = (
+            jurisdiction_candidates[1]
+            if len(jurisdiction_candidates) > 1
+            else None
+        )
+
+        # Require the winner to be strictly stronger than another jurisdiction
+        # when several countries are mentioned. If evidence ties, keep the old
+        # conservative path and let bank hints / unknown resolution continue.
+        winner_is_unambiguous = (
+            runner_up is None
+            or (
+                winner["occurrences"],
+                winner["distinct_hints"],
+            ) > (
+                runner_up["occurrences"],
+                runner_up["distinct_hints"],
+            )
+        )
+
+        if winner_is_unambiguous:
+            detected = winner["currency"]
+            debug_log(
+                "CURRENCY_DEBUG: country_hint_scored",
+                {
+                    "winner": winner,
+                    "runner_up": runner_up,
+                },
+            )
             log_currency_detection_result(
                 detected,
-                "country_hint",
+                "country_hint_scored",
                 90,
-                country,
+                (
+                    f"{winner['country']}|"
+                    f"occurrences={winner['occurrences']}|"
+                    f"distinct={winner['distinct_hints']}"
+                ),
             )
             return detected
 
@@ -13317,6 +13410,96 @@ def parse_international_parallel_date_amount_description_statement(
             calculated_closing - closing_balance,
             2,
         )
+
+    # ------------------------------------------------------------------
+    # Additive signed balance-role authority v5.5
+    # ------------------------------------------------------------------
+    # Some debit/credit/balance statements print running and summary balances
+    # with an explicit accounting suffix:
+    #
+    #     <amount> DR   -> debit balance  -> negative signed balance
+    #     <amount> CR   -> credit balance -> positive signed balance
+    #
+    # The historical summary extractors above intentionally parse only the
+    # numeric cell, so they can lose this sign while the physical transaction
+    # rows keep signed balances.  Recover the sign locally for this structural
+    # family only.  No institution, country, currency, merchant, or transaction
+    # description participates.
+    def apply_printed_balance_role_sign(
+        value: float | None,
+        role_pattern,
+    ) -> float | None:
+        if value is None:
+            return None
+
+        target = round(abs(float(value)), 2)
+
+        for line_index, source_line in enumerate(lines):
+            if not role_pattern.search(source_line):
+                continue
+
+            # A balance amount can be on the role line or on the immediately
+            # following physical line.  Keep the search local to that role.
+            local_lines = [source_line]
+            if line_index + 1 < len(lines):
+                local_lines.append(lines[line_index + 1])
+
+            for local_line in local_lines:
+                for money_match in money_re.finditer(local_line):
+                    parsed = parse_money(money_match.group("amount"))
+                    if parsed is None:
+                        continue
+                    if abs(abs(float(parsed)) - target) > 0.02:
+                        continue
+
+                    marker_window = local_line[
+                        max(0, money_match.start() - 12):
+                        min(len(local_line), money_match.end() + 12)
+                    ]
+                    marker_match = re.search(
+                        r"\b(?P<marker>D\s*R|C\s*R)\b",
+                        marker_window,
+                        re.I,
+                    )
+                    if marker_match is None:
+                        continue
+
+                    marker = re.sub(
+                        r"\s+",
+                        "",
+                        marker_match.group("marker").upper(),
+                    )
+                    signed = (
+                        -target
+                        if marker == "DR"
+                        else target
+                    )
+
+                    print(
+                        "MONEY_OUT_MONEY_IN_BALANCE_SIGNED_ROLE",
+                        {
+                            "role": (
+                                "opening"
+                                if role_pattern is opening_balance_line_re
+                                else "closing"
+                            ),
+                            "printed_marker": marker,
+                            "unsigned_value": target,
+                            "signed_value": signed,
+                        },
+                    )
+                    return round(signed, 2)
+
+        return round(float(value), 2)
+
+    opening_balance = apply_printed_balance_role_sign(
+        opening_balance,
+        opening_balance_line_re,
+    )
+    closing_balance = apply_printed_balance_role_sign(
+        closing_balance,
+        closing_balance_line_re,
+    )
 
     official_summary_complete = all(
         value is not None
@@ -23702,7 +23885,7 @@ def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
 
     print(
         "MONEY_OUT_MONEY_IN_BALANCE_VERSION",
-        "v5.4-additive-vertical-summary-source-inconsistency",
+        "v5.5-additive-dr-cr-balance-role-authority",
     )
 
     raw = normalize_arabic_digits(str(text or ""))
@@ -24577,6 +24760,37 @@ def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
         # One physical movement column only. Ambiguous positional observations
         # are rejected locally and never passed to the common accounting layer.
         if (debit is None) == (credit is None):
+            continue
+
+        # Additive row-role guard v5.5.  PDF geometry can occasionally project
+        # the printed opening/closing balance summary into a dated positional
+        # observation.  Such a line is a BALANCE/SUMMARY observation, never a
+        # transaction.  Reject it locally before infer_balance_delta_rows() so
+        # official total-credit/debit cells cannot become a duplicate movement.
+        # This uses only structural accounting roles already recognized by this
+        # family and does not inspect merchant/commercial wording.
+        position_description = clean_db_text(
+            match.group("description")
+        )
+        if (
+            opening_balance_line_re.search(position_description)
+            or closing_balance_line_re.search(position_description)
+            or re.search(
+                r"\btotal\s+(?:debits?|d[ée]bits?|credits?|cr[ée]dits?)\b",
+                position_description,
+                re.I,
+            )
+        ):
+            print(
+                "MONEY_OUT_MONEY_IN_BALANCE_POSITION_NON_TRANSACTION_REJECTED",
+                {
+                    "date": match.group("date"),
+                    "debit": debit,
+                    "credit": credit,
+                    "balance": balance,
+                    "description": position_description[:180],
+                },
+            )
             continue
 
         position_rows.append(
@@ -30682,14 +30896,19 @@ def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
             ),
         })
 
-    if closing_balance is None:
-        transaction_rows = [
-            row
-            for row in rows
-            if row.get("date") and row.get("balance") is not None
-        ]
-        if transaction_rows:
-            closing_balance = float(transaction_rows[-1]["balance"])
+    # Additive local safety fix for this structural family only:
+    # transaction_rows is needed both when the closing balance must be derived
+    # and when an explicit closing balance was already observed. Initializing it
+    # before the conditional prevents an UnboundLocalError without changing any
+    # parser selection, routing, accounting authority, or transaction content.
+    transaction_rows = [
+        row
+        for row in rows
+        if row.get("date") and row.get("balance") is not None
+    ]
+
+    if closing_balance is None and transaction_rows:
+        closing_balance = float(transaction_rows[-1]["balance"])
 
     if closing_balance is not None:
         rows.append({
@@ -60130,7 +60349,8 @@ def extract_cbq_running_balance_summary(text: str) -> dict:
     prev = amt(open_m.group(1)) if open_m else None
     opening = prev
     deposits = 0.0
-    withdrawals = 0.0  # noqa: F841
+    withdrawals = 0.0
+    matched_movements = 0
 
     for line in raw.splitlines():
         s = " ".join(line.split())
@@ -60146,14 +60366,55 @@ def extract_cbq_running_balance_summary(text: str) -> dict:
             else:
                 withdrawals += abs(delta)
             prev = bal
+            matched_movements += 1
+
+    ending = amt(end_m.group(1)) if end_m else None
+
+    # ADDITIVE v184.5 — source flow totals are authoritative only when the
+    # compact running-balance observations form a COMPLETE chain from the
+    # independently printed opening balance to the independently printed
+    # closing balance.
+    #
+    # Partial physical-text representations are common for multiline tables.
+    # In those cases the accumulator may be 0.00 or a partial subtotal. Neither
+    # is evidence of an official debit/credit total. Preserve opening/closing
+    # anchors, but leave deposits/withdrawals unavailable unless the observed
+    # chain reaches the printed closing balance.
+    complete_flow_chain = bool(
+        matched_movements > 0
+        and ending is not None
+        and prev is not None
+        and abs(round(prev - ending, 2)) <= 0.05
+    )
 
     out = {
         "opening_balance": opening,
-        "deposits": round(deposits, 2),
-        "withdrawals": round(withdrawals, 2),
     }
-    if end_m:
-        out["ending_balance"] = amt(end_m.group(1))
+
+    if complete_flow_chain:
+        out["deposits"] = round(deposits, 2)
+        out["withdrawals"] = round(withdrawals, 2)
+    else:
+        print(
+            "RUNNING_BALANCE_SUMMARY_FLOW_TOTALS_UNAVAILABLE",
+            {
+                "reason": (
+                    "compact_flow_chain_does_not_reach_printed_closing_balance"
+                ),
+                "matched_movements": matched_movements,
+                "opening_balance": opening,
+                "last_observed_balance": prev,
+                "ending_balance": ending,
+                "partial_deposits": round(deposits, 2),
+                "partial_withdrawals": round(withdrawals, 2),
+                "deposits_published": False,
+                "withdrawals_published": False,
+            },
+        )
+
+    if ending is not None:
+        out["ending_balance"] = ending
+
     return out
 
 
@@ -64268,6 +64529,71 @@ def parse_standard_date_particulars_debit_credit_balance(text: str) -> list[dict
         return historical
 
     # ------------------------------------------------------------------
+    # ADDITIVE v184.3 — EARLY structural-family abstention.
+    #
+    # This generic parser represents:
+    #     Date | Description | Debit | Credit | Balance
+    #
+    # When the header exposes a SECOND explicit date role between Description
+    # and Debit, the structure belongs to the more specific family:
+    #     Date | Description | Transaction/Value Date | Debit | Credit | Balance
+    #
+    # The historical path above remains first and unchanged. If it abstains,
+    # this generic parser must not enter either:
+    #   - its layout-preserving sign-assignment solver, or
+    #   - its later flattened subset solver.
+    #
+    # The rule is purely structural and uses no institution/country/currency/
+    # merchant/network identity.
+    def _header_has_secondary_date_role_early(header_line: str) -> bool:
+        folded_header = fold(header_line)
+        description_position = first_label_position(
+            folded_header,
+            DESCRIPTION_LABELS,
+        )
+        debit_position = first_label_position(
+            folded_header,
+            DEBIT_LABELS,
+        )
+        if (
+            description_position is None
+            or debit_position is None
+            or description_position >= debit_position
+        ):
+            return False
+
+        between_description_and_debit = folded_header[
+            description_position:debit_position
+        ]
+
+        return bool(
+            re.search(
+                r"(?<![a-z0-9])(?:date|تاريخ|التاريخ)(?![a-z0-9])",
+                between_description_and_debit,
+                flags=re.IGNORECASE,
+            )
+        )
+
+    early_secondary_date_headers = [
+        physical_lines[index]
+        for index, _columns in headers
+        if _header_has_secondary_date_role_early(physical_lines[index])
+    ]
+
+    if early_secondary_date_headers:
+        print(
+            "STANDARD_DATE_PARTICULARS_DCB_EARLY_SKIPPED",
+            {
+                "reason": "secondary_date_column_belongs_to_specific_family",
+                "headers": len(early_secondary_date_headers),
+                "samples": early_secondary_date_headers[:5],
+                "layout_solver_entered": False,
+                "flattened_solver_entered": False,
+            },
+        )
+        return []
+
+    # ------------------------------------------------------------------
     # 2. Layout-preserving multiline geometry.
     # ------------------------------------------------------------------
     geometry_rows: list[dict] = []
@@ -64411,6 +64737,77 @@ def parse_standard_date_particulars_debit_credit_balance(text: str) -> list[dict
     geometry = finalize(geometry_rows, "multiline_column_geometry")
     if geometry:
         return geometry
+
+    # ------------------------------------------------------------------
+    # ADDITIVE v184.2 — structural-family abstention before the expensive
+    # flattened subset solver.
+    #
+    # This generic family represents:
+    #     Date | Description | Debit | Credit | Balance
+    #
+    # A header that exposes a SECOND explicit date role between Description
+    # and Debit belongs instead to the more specific family:
+    #     Date | Description | Transaction/Value Date | Debit | Credit | Balance
+    #
+    # That more specific parser participates independently in the common
+    # candidate engine. Once both historical paths above have abstained, this
+    # generic parser must not reinterpret numeric continuation tokens through
+    # solve_signed_subset(). Doing so is both structurally inappropriate and
+    # potentially very expensive on long statements containing references,
+    # card numbers, dates and auxiliary amounts.
+    #
+    # The rule is purely structural: no bank, country, currency, merchant,
+    # network or language identity is used.
+    def _header_has_secondary_date_role(header_line: str) -> bool:
+        folded_header = fold(header_line)
+
+        description_position = first_label_position(
+            folded_header,
+            DESCRIPTION_LABELS,
+        )
+        debit_position = first_label_position(
+            folded_header,
+            DEBIT_LABELS,
+        )
+
+        if (
+            description_position is None
+            or debit_position is None
+            or description_position >= debit_position
+        ):
+            return False
+
+        between_description_and_debit = folded_header[
+            description_position:debit_position
+        ]
+
+        date_role_matches = list(
+            re.finditer(
+                r"(?<![a-z0-9])(?:date|تاريخ|التاريخ)(?![a-z0-9])",
+                between_description_and_debit,
+                flags=re.IGNORECASE,
+            )
+        )
+
+        return bool(date_role_matches)
+
+    secondary_date_headers = [
+        physical_lines[index]
+        for index, _columns in headers
+        if _header_has_secondary_date_role(physical_lines[index])
+    ]
+
+    if secondary_date_headers:
+        print(
+            "STANDARD_DATE_PARTICULARS_DCB_FLATTENED_SKIPPED",
+            {
+                "reason": "secondary_date_column_belongs_to_specific_family",
+                "headers": len(secondary_date_headers),
+                "samples": secondary_date_headers[:5],
+                "solver_entered": False,
+            },
+        )
+        return []
 
     # ------------------------------------------------------------------
     # 3. Flattened date/balance blocks. This additive path is activated only
@@ -78008,8 +78405,13 @@ def extract_universal_balance_transition_graph(
     # enabled only for repeated Amount | Balance scopes (the v172 branch).
     pending_text_lines: list[str] = []
 
+    # ADDITIVE performance hardening — keep the same structural acceptance
+    # criteria without a nested quantified group. The previous expression
+    # `(?:X X*){6,}` can catastrophically backtrack on long continuation lines.
+    # Minimum opaque length is already enforced by `compact` below, so a single
+    # linear character-class scan is sufficient and preserves the role logic.
     opaque_reference_re = re.compile(
-        r"^\s*[-#:]?\s*(?:[A-Z0-9][A-Z0-9 ./_-]*){6,}\s*$",
+        r"^\s*[-#:]?\s*[A-Z0-9][A-Z0-9 ./_-]*\s*$",
         re.I,
     )
 
@@ -85323,7 +85725,7 @@ def parse_standard_bank_za_statement(text: str) -> list[dict]:
 
     print(
         "STANDARD_BANK_ZA_VERSION",
-        "v2-structural-payment-deposit-balance-family",
+        "v3-additive-generic-summary-currency-prefix",
     )
 
     raw = normalize_arabic_digits(str(text or ""))
@@ -85582,7 +85984,7 @@ def parse_standard_bank_za_statement(text: str) -> list[dict]:
                 r"\b(?:payments?|debits?|d[ée]bits?)\b"
                 r"[^0-9+\-−]{0,40}"
                 r"(?P<amount>[+\-−]?\s*"
-                r"(?:[$€£]\s*|[A-Z]{3}\s*)?"
+                r"(?:[$€£]\s*|[A-Z]{1,4}\s*)?"
                 r"(?:\d{1,3}(?:[ ,.'’]\d{3})+(?:[.,]\d{2})|"
                 r"\d+(?:[.,]\d{2})))",
                 summary_window,
@@ -85592,7 +85994,7 @@ def parse_standard_bank_za_statement(text: str) -> list[dict]:
                 r"\b(?:deposits?|credits?|cr[ée]dits?)\b"
                 r"[^0-9+\-−]{0,40}"
                 r"(?P<amount>[+\-−]?\s*"
-                r"(?:[$€£]\s*|[A-Z]{3}\s*)?"
+                r"(?:[$€£]\s*|[A-Z]{1,4}\s*)?"
                 r"(?:\d{1,3}(?:[ ,.'’]\d{3})+(?:[.,]\d{2})|"
                 r"\d+(?:[.,]\d{2})))",
                 summary_window,
