@@ -1,6 +1,6 @@
 "use client";
 
-// RUNEXA_FINANCE_FRONTEND_VERSION v20b-limited-scope-truthful-ui-fixed
+// RUNEXA_FINANCE_FRONTEND_VERSION v22-other-link-modal
 
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
@@ -486,6 +486,8 @@ const labels: any = {
     askFinanceAssistant: "Ask your finance assistant",
     notFinancialAdvice: "This is not financial advice. It is for informational purposes only.",
     mainCategories: "Main categories",
+    otherBreakdownTitle: "Observed transactions in Other",
+    otherBreakdownDescription: "Statement-specific detail from the observed transactions already classified as Other. No recategorization is applied.",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
     riskNotes: "Risk notes",
@@ -748,6 +750,8 @@ const labels: any = {
     askFinanceAssistant: "Posez une question à votre assistant financier",
     notFinancialAdvice: "Ceci n’est pas un conseil financier. Ces informations sont fournies à titre informatif uniquement.",
     mainCategories: "Catégories principales",
+    otherBreakdownTitle: "Transactions observées dans Autre",
+    otherBreakdownDescription: "Détail propre à ce relevé, issu des transactions observées déjà classées dans Autre. Aucune recatégorisation n’est appliquée.",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
     riskNotes: "Notes de risque",
@@ -1010,6 +1014,8 @@ const labels: any = {
     askFinanceAssistant: "اسأل مساعدك المالي",
     notFinancialAdvice: "هذه ليست نصيحة مالية. المعلومات لأغراض إعلامية فقط.",
     mainCategories: "الفئات الرئيسية",
+    otherBreakdownTitle: "المعاملات المرصودة ضمن أخرى",
+    otherBreakdownDescription: "تفصيل خاص بهذا الكشف من المعاملات المرصودة المصنفة أصلًا ضمن «أخرى». لا تتم إعادة تصنيف أي معاملة.",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
     riskNotes: "ملاحظات المخاطر",
@@ -1138,6 +1144,7 @@ export default function FinanceClient({
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [showVerificationDetails, setShowVerificationDetails] = useState(false);
   const [evidenceView, setEvidenceView] = useState<"income" | "expense" | "cashflow" | null>(null);
+  const [showOtherBreakdown, setShowOtherBreakdown] = useState(false);
 
   useEffect(() => {
     if (lockInitialLocale) {
@@ -2446,6 +2453,7 @@ export default function FinanceClient({
         confirmedRecurringSubscriptionCount === 0;
 
       return {
+        category: item?.category,
         name: isUnconfirmedSubscriptionCategory
           ? t.categorizedSubscriptionSpend
           : translateCategory(item.category),
@@ -2636,6 +2644,28 @@ export default function FinanceClient({
       sum + (Number.isFinite(Number(item.value)) ? Number(item.value) : 0),
     0
   );
+
+  // Additive frontend-only presentation of the backend evidence behind
+  // the existing "Other" aggregate. This does not classify, rename, merge,
+  // or alter any transaction/category.
+  const otherBreakdown = result?.charts?.other_breakdown;
+
+  const otherBreakdownTransactions =
+    otherBreakdown?.reconciled === true &&
+    Array.isArray(otherBreakdown?.transactions)
+      ? otherBreakdown.transactions.filter((transaction: any) => {
+          const amount = Number(transaction?.amount);
+          return Number.isFinite(amount) && amount > 0;
+        })
+      : [];
+
+  const hasReconciledOtherBreakdown =
+    otherBreakdownTransactions.length > 0 &&
+    Number.isFinite(Number(otherBreakdown?.amount)) &&
+    Number.isFinite(Number(otherBreakdown?.observed_total)) &&
+    Math.abs(
+      Number(otherBreakdown.amount) - Number(otherBreakdown.observed_total)
+    ) <= 0.01;
 
 
   const subscriptionCategorySpend = Array.isArray(
@@ -4709,42 +4739,59 @@ export default function FinanceClient({
                       <div className="mt-4 overflow-hidden rounded-xl border">
                         <table className="w-full text-sm">
                           <tbody>
-                            {chartData.map((item, index) => (
-                              <tr
-                                key={translateCategory(item.name)}
-                                className="border-b last:border-b-0"
-                              >
-                                <td className="px-3 py-2">
-                                  <div className="flex items-center gap-2">
-                                    <span
-                                      className="h-3 w-3 rounded-full shrink-0"
-                                      style={{
-                                        backgroundColor:
-                                          COLORS[index % COLORS.length],
-                                      }}
-                                    />
-                                    <span className="capitalize">
-                                      {translateCategory(item.name)}
-                                    </span>
-                                  </div>
-                                </td>
-                                <td className="px-3 py-2 text-right whitespace-nowrap">
-                                  <div className="font-semibold">
-                                    {formatMoney(item.value)}
-                                  </div>
-                                  {totalCategorySpend > 0 && (
-                                    <div className="mt-0.5 text-xs font-normal text-slate-500">
-                                      {formatEvidenceShare(
-                                        (Number(item.value) /
-                                          totalCategorySpend) *
-                                          100
-                                      )}{" "}
-                                      {t.categoryShare}
+                            {chartData.map((item: any, index: number) => {
+                              const isOtherCategory =
+                                normalizeEvidenceCategory(item?.category) ===
+                                "other";
+
+                              return (
+                                <tr
+                                  key={`${String(item?.category || item?.name)}-${index}`}
+                                  className="border-b last:border-b-0"
+                                >
+                                  <td className="px-3 py-2 align-top">
+                                    <div className="flex items-center gap-2">
+                                      <span
+                                        className="h-3 w-3 rounded-full shrink-0"
+                                        style={{
+                                          backgroundColor:
+                                            COLORS[index % COLORS.length],
+                                        }}
+                                      />
+                                      <span className="capitalize">
+                                        {translateCategory(item.name)}
+                                      </span>
                                     </div>
-                                  )}
-                                </td>
-                              </tr>
-                            ))}
+
+                                    {isOtherCategory &&
+                                      hasReconciledOtherBreakdown && (
+                                        <button
+                                          type="button"
+                                          onClick={() => setShowOtherBreakdown(true)}
+                                          className="mt-1 ml-5 text-xs font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 hover:text-blue-900"
+                                        >
+                                          {t.viewTransactions} ({otherBreakdownTransactions.length})
+                                        </button>
+                                      )}
+                                  </td>
+                                  <td className="px-3 py-2 text-right whitespace-nowrap align-top">
+                                    <div className="font-semibold">
+                                      {formatMoney(item.value)}
+                                    </div>
+                                    {totalCategorySpend > 0 && (
+                                      <div className="mt-0.5 text-xs font-normal text-slate-500">
+                                        {formatEvidenceShare(
+                                          (Number(item.value) /
+                                            totalCategorySpend) *
+                                            100
+                                        )}{" "}
+                                        {t.categoryShare}
+                                      </div>
+                                    )}
+                                  </td>
+                                </tr>
+                              );
+                            })}
                           </tbody>
                         </table>
                       </div>
@@ -4933,6 +4980,82 @@ export default function FinanceClient({
           </div>
         )}
       </div>
+
+        {showOtherBreakdown && hasReconciledOtherBreakdown && (
+          <div
+            className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/40 p-0 sm:items-center sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t.otherBreakdownTitle}
+            onClick={() => setShowOtherBreakdown(false)}
+          >
+            <div
+              className="max-h-[88vh] w-full max-w-4xl overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl"
+              dir={language === "ar" ? "rtl" : "ltr"}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-4 border-b px-5 py-4 sm:px-6">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {t.otherBreakdownTitle}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-slate-500">
+                    {t.otherBreakdownDescription}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowOtherBreakdown(false)}
+                  className="rounded-full border px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                >
+                  {t.close}
+                </button>
+              </div>
+
+              <div className="max-h-[62vh] overflow-auto">
+                <table className="w-full text-sm">
+                  <thead className="sticky top-0 bg-slate-50 text-xs text-slate-500">
+                    <tr>
+                      <th className="px-4 py-3 text-start font-medium">
+                        {t.evidenceDate}
+                      </th>
+                      <th className="px-4 py-3 text-start font-medium">
+                        {t.evidenceTransaction}
+                      </th>
+                      <th className="px-4 py-3 text-end font-medium">
+                        {t.evidenceAmount}
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {otherBreakdownTransactions.map(
+                      (transaction: any, index: number) => (
+                        <tr
+                          key={`${transaction?.date || "date"}-${transaction?.description || "transaction"}-${index}`}
+                          className="border-t"
+                        >
+                          <td className="whitespace-nowrap px-4 py-3 text-slate-500">
+                            {formatEvidenceDate(transaction?.date)}
+                          </td>
+                          <td className="px-4 py-3 text-slate-800">
+                            {renderSafeText(transaction?.description, "-")}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-3 text-end font-semibold text-slate-800">
+                            {formatMoney(
+                              Math.abs(Number(transaction?.amount || 0))
+                            )}
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
 
         {evidenceView && (
           <div

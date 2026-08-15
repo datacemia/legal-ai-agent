@@ -1152,6 +1152,18 @@ def collect_explicit_statement_period_diagnostic(
             rf"\s*(?:to|through|thru|au|à|a|[-–—])\s*"
             rf"(?P<end>{numeric_date_token})"
         ),
+        # ADDITIVE v30 — statement title on one line, explicit period on the
+        # immediately following physical line.  This is source-document
+        # consistency evidence only.  It never changes parser output.
+        re.compile(
+            rf"(?i)\b(?:relev[ée](?:\s+de)?\s+[^\n]{{0,50}}|"
+            rf"account\s+statement|statement)"
+            rf"\s*\n\s*"
+            rf"(?:du|de|from)\s*"
+            rf"(?P<start>{numeric_date_token})"
+            rf"\s*(?:au|à|a|to|through|thru|[-–—])\s*"
+            rf"(?P<end>{numeric_date_token})"
+        ),
     )
 
     auxiliary_period_markers = (
@@ -1607,6 +1619,184 @@ def finance_verification_copy(
     return selected.get(language, selected["en"])
 
 
+def collect_source_section_total_contradiction(
+    statement_text: str | None,
+) -> dict:
+    """Detect a contradiction between complete section subtotals and a global TOTAL.
+
+    Audit/display only:
+    - no parser/router/candidate modification;
+    - no transaction mutation;
+    - no bank/country/currency/merchant identity;
+    - analyses may remain visible even when inconsistency is detected.
+
+    Structural proof requires:
+    1) a Debit/Credit accounting table header;
+    2) at least two section SUBTOTAL rows, each with exactly two money values;
+    3) one later global TOTAL row with exactly two money values;
+    4) the sum of section subtotals materially differs from the global TOTAL.
+    """
+    raw_lines = [
+        " ".join(str(line or "").split())
+        for line in str(statement_text or "").splitlines()
+    ]
+
+    money_token_re = re.compile(
+        r"(?<!\d)"
+        r"(?:\d{1,3}(?:[ .,'’]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r"(?!\d)"
+    )
+
+    def _money(token: str):
+        return _verification_money_to_float(token)
+
+    header_indexes = []
+    for i, line in enumerate(raw_lines):
+        lowered = line.casefold()
+        if (
+            re.search(r"\b(?:d[ée]bit|debit|مدين)\b", lowered, re.I)
+            and re.search(r"\b(?:cr[ée]dit|credit|دائن)\b", lowered, re.I)
+            and re.search(r"\b(?:date|التاريخ)\b", lowered, re.I)
+        ):
+            header_indexes.append(i)
+
+    if not header_indexes:
+        return {
+            "available": False,
+            "source_section_total_inconsistency_detected": False,
+            "section_subtotal_count": 0,
+            "section_debit_total": None,
+            "section_credit_total": None,
+            "global_debit_total": None,
+            "global_credit_total": None,
+            "debit_gap": None,
+            "credit_gap": None,
+            "evidence_source": None,
+        }
+
+    subtotal_rows = []
+    global_rows = []
+
+    for i, line in enumerate(raw_lines):
+        lowered = line.casefold()
+        values = [_money(token) for token in money_token_re.findall(line)]
+        values = [value for value in values if value is not None]
+
+        # Section-role classification only.
+        if re.match(
+            r"^(?:sous\s*total|soustotal|subtotal|sub\s*total|"
+            r"المجموع\s+الفرعي)",
+            lowered,
+            re.I,
+        ):
+            if len(values) == 2:
+                subtotal_rows.append(
+                    {
+                        "line_index": i,
+                        "line": line[:240],
+                        "debit": round(abs(float(values[0])), 2),
+                        "credit": round(abs(float(values[1])), 2),
+                    }
+                )
+            continue
+
+        if re.match(
+            r"^(?:total|totaux|المجموع)\b",
+            lowered,
+            re.I,
+        ):
+            if len(values) == 2:
+                global_rows.append(
+                    {
+                        "line_index": i,
+                        "line": line[:240],
+                        "debit": round(abs(float(values[0])), 2),
+                        "credit": round(abs(float(values[1])), 2),
+                    }
+                )
+
+    if len(subtotal_rows) < 2 or not global_rows:
+        return {
+            "available": False,
+            "source_section_total_inconsistency_detected": False,
+            "section_subtotal_count": len(subtotal_rows),
+            "section_debit_total": None,
+            "section_credit_total": None,
+            "global_debit_total": None,
+            "global_credit_total": None,
+            "debit_gap": None,
+            "credit_gap": None,
+            "evidence_source": None,
+        }
+
+    # Use the last global TOTAL after the first detected accounting header,
+    # and only section subtotals physically preceding it.
+    first_header = min(header_indexes)
+    eligible_globals = [
+        row for row in global_rows
+        if row["line_index"] > first_header
+    ]
+    if not eligible_globals:
+        return {
+            "available": False,
+            "source_section_total_inconsistency_detected": False,
+            "section_subtotal_count": len(subtotal_rows),
+            "section_debit_total": None,
+            "section_credit_total": None,
+            "global_debit_total": None,
+            "global_credit_total": None,
+            "debit_gap": None,
+            "credit_gap": None,
+            "evidence_source": None,
+        }
+
+    global_row = eligible_globals[-1]
+    scoped_subtotals = [
+        row for row in subtotal_rows
+        if first_header < row["line_index"] < global_row["line_index"]
+    ]
+
+    if len(scoped_subtotals) < 2:
+        return {
+            "available": False,
+            "source_section_total_inconsistency_detected": False,
+            "section_subtotal_count": len(scoped_subtotals),
+            "section_debit_total": None,
+            "section_credit_total": None,
+            "global_debit_total": global_row["debit"],
+            "global_credit_total": global_row["credit"],
+            "debit_gap": None,
+            "credit_gap": None,
+            "evidence_source": None,
+        }
+
+    section_debit = round(sum(row["debit"] for row in scoped_subtotals), 2)
+    section_credit = round(sum(row["credit"] for row in scoped_subtotals), 2)
+    debit_gap = round(section_debit - global_row["debit"], 2)
+    credit_gap = round(section_credit - global_row["credit"], 2)
+
+    detected = bool(
+        abs(debit_gap) > 0.02
+        or abs(credit_gap) > 0.02
+    )
+
+    return {
+        "available": True,
+        "source_section_total_inconsistency_detected": detected,
+        "section_subtotal_count": len(scoped_subtotals),
+        "section_debit_total": section_debit,
+        "section_credit_total": section_credit,
+        "global_debit_total": global_row["debit"],
+        "global_credit_total": global_row["credit"],
+        "debit_gap": debit_gap,
+        "credit_gap": credit_gap,
+        "section_samples": scoped_subtotals[:12],
+        "global_total_sample": global_row,
+        "evidence_source": "section_subtotals_vs_global_total",
+    }
+
+
 def build_frontend_verification(
     *,
     extraction_status: dict | None,
@@ -1618,6 +1808,7 @@ def build_frontend_verification(
     source_statement_consistency: dict | None = None,
     source_balance_diagnostic: dict | None = None,
     source_period_diagnostic: dict | None = None,
+    source_section_total_diagnostic: dict | None = None,
 ) -> dict:
     """Build the frontend contract without changing parser or candidate decisions."""
     extraction_status = dict(extraction_status or {})
@@ -1626,6 +1817,7 @@ def build_frontend_verification(
     source_consistency = dict(source_statement_consistency or {})
     source_balance = dict(source_balance_diagnostic or {})
     source_period = dict(source_period_diagnostic or {})
+    source_section_total = dict(source_section_total_diagnostic or {})
 
     reconciliation_status = str(
         details.get("reconciliation_status")
@@ -1677,10 +1869,16 @@ def build_frontend_verification(
     source_period_inconsistency_detected = bool(
         source_period.get("source_period_inconsistency_detected") is True
     )
+    source_section_total_inconsistency_detected = bool(
+        source_section_total.get(
+            "source_section_total_inconsistency_detected"
+        ) is True
+    )
     source_inconsistency_detected = bool(
         source_consistency.get("source_inconsistency_detected") is True
         or source_balance_inconsistency_detected
         or source_period_inconsistency_detected
+        or source_section_total_inconsistency_detected
         or extraction_status.get("reason") == "source_statement_section_inconsistency"
     )
 
@@ -1729,6 +1927,7 @@ def build_frontend_verification(
     if (
         source_balance_inconsistency_detected
         or source_period_inconsistency_detected
+        or source_section_total_inconsistency_detected
     ):
         source_consistent = False
 
@@ -1736,6 +1935,7 @@ def build_frontend_verification(
         source_consistency.get("available")
         or source_balance.get("available")
         or source_period.get("available")
+        or source_section_total.get("available")
     )
 
     if accounting_reconciled and source_inconsistency_detected:
@@ -1934,12 +2134,12 @@ def normalize_signed_amounts_before_kpi(transactions):
 
 print(
     "RUNEXA_FINANCE_HANDLER_VERSION",
-    "v29-source-table-currency-and-four-role-consistency",
+    "v30-source-contradiction-display-only-gate",
 )
 
 print(
     "SOURCE_PERIOD_DIAGNOSTIC_VERSION",
-    "v4-financial-period-source-table-currency-four-role",
+    "v5-financial-period-and-section-total-source-contradiction",
 )
 
 def handle_finance_ai(job: Job, db):
@@ -3700,6 +3900,14 @@ def handle_finance_ai(job: Job, db):
         source_period_diagnostic,
     )
 
+    source_section_total_diagnostic = (
+        collect_source_section_total_contradiction(text)
+    )
+    print(
+        "SOURCE_SECTION_TOTAL_CONTRADICTION_AUDIT",
+        source_section_total_diagnostic,
+    )
+
     candidate_local_summary = _validated_candidate_local_kpi_totals(
         kpi_transactions
     )
@@ -5328,6 +5536,7 @@ def handle_finance_ai(job: Job, db):
         source_statement_consistency=source_statement_consistency,
         source_balance_diagnostic=source_balance_diagnostic,
         source_period_diagnostic=source_period_diagnostic,
+        source_section_total_diagnostic=source_section_total_diagnostic,
     )
 
     print(

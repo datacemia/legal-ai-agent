@@ -21,7 +21,7 @@ from typing import Any
 
 print(
     "RUNEXA_FINANCE_CATEGORIZATION_VERSION",
-    "v4-standard-structural-counterparty-matching",
+    "v5-additive-observed-other-breakdown",
 )
 
 
@@ -644,6 +644,14 @@ def build_financial_charts(transactions: list[dict]) -> dict:
     transfer_breakdown = defaultdict(float)
     subscription_growth = defaultdict(float)
 
+    # ADDITIVE v5 — retain statement-specific evidence behind "Other".
+    #
+    # This does not recategorize any transaction and does not add merchant,
+    # bank, country, currency, or statement-specific rules.  It only preserves
+    # the observed rows that the historical classifier already left in
+    # "other", so the UI can explain that aggregate for the current statement.
+    other_observed_rows = []
+
     savings_evolution = []
     running_net = 0.0
 
@@ -669,6 +677,15 @@ def build_financial_charts(transactions: list[dict]) -> dict:
             spending_over_time[date] += expense_amount
             category_breakdown[category] += expense_amount
 
+            if category == "other":
+                other_observed_rows.append(
+                    {
+                        "date": date,
+                        "description": str(description or "").strip(),
+                        "amount": round(expense_amount, 2),
+                    }
+                )
+
             if category == "subscriptions":
                 subscription_growth[date] += expense_amount
 
@@ -691,6 +708,24 @@ def build_financial_charts(transactions: list[dict]) -> dict:
     adjusted_consumption = round(total_expenses - total_transfers_savings, 2)
     other_amount = round(category_breakdown.get("other", 0.0), 2)
     other_ratio = round((other_amount / total_expenses) * 100, 2) if total_expenses else 0.0
+
+    # Deterministic display order: largest observed "Other" expense first,
+    # then date and description for stable output across runs.
+    other_observed_rows = sorted(
+        other_observed_rows,
+        key=lambda row: (
+            -float(row.get("amount", 0) or 0),
+            str(row.get("date") or ""),
+            str(row.get("description") or ""),
+        ),
+    )
+
+    # Reconcile the detail to the already-existing "Other" aggregate.  This is
+    # an audit/display field only; no category or amount is changed.
+    other_observed_total = round(
+        sum(float(row.get("amount", 0) or 0) for row in other_observed_rows),
+        2,
+    )
 
     def as_series(mapping: defaultdict) -> list[dict]:
         return [{"date": date, "amount": round(amount, 2)} for date, amount in mapping.items()]
@@ -719,6 +754,18 @@ def build_financial_charts(transactions: list[dict]) -> dict:
             "adjusted_net_after_consumption": round(total_income - adjusted_consumption, 2),
         },
         "category_breakdown": as_category_series(category_breakdown),
+
+        # ADDITIVE v5 — statement-specific explanation of the existing
+        # "Other" aggregate. Existing consumers can ignore this key.
+        "other_breakdown": {
+            "amount": other_amount,
+            "observed_total": other_observed_total,
+            "reconciled": abs(other_observed_total - other_amount) <= 0.01,
+            "transaction_count": len(other_observed_rows),
+            "transactions": other_observed_rows,
+            "basis": "observed_transactions_classified_as_other",
+        },
+
         "essential_breakdown": as_category_series(essential_breakdown),
         "discretionary_breakdown": as_category_series(discretionary_breakdown),
         "transfer_breakdown": as_category_series(transfer_breakdown),
