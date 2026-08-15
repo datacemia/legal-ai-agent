@@ -902,6 +902,213 @@ def enrich_source_summary_from_transaction_table_totals(
     return summary
 
 
+def enrich_source_summary_from_parallel_flow_balance_summary(
+    statement_text: str | None,
+    statement_summary: dict | None,
+) -> dict:
+    """Fill missing four-role source summary fields from a compact parallel summary.
+
+    Audit-only and additive:
+    - no parser/router/candidate mutation;
+    - no transaction mutation;
+    - no bank/country/currency/merchant identity;
+    - historical source-summary evidence remains authoritative.
+
+    Structural form accepted:
+        <credit/deposit role> <amount> ... <balance role> <date> <amount>
+        <debit/withdrawal role> <amount> ... <balance role> <date> <amount>
+
+    Example role geometry:
+        Money In  2,717.15   Balance on 01 May 2023   611.62
+        Money Out 2,199.05   Balance on 31 May 2023 1,129.72
+
+    The helper only fills fields that are still missing.
+    """
+    summary = dict(statement_summary or {})
+
+    if all(
+        summary.get(key) is not None
+        for key in (
+            "opening_balance",
+            "deposits",
+            "withdrawals",
+        )
+    ) and (
+        summary.get("ending_balance") is not None
+        or summary.get("closing_balance") is not None
+    ):
+        return summary
+
+    raw = str(statement_text or "")
+    lines = [
+        " ".join(str(line or "").split())
+        for line in raw.splitlines()
+        if str(line or "").strip()
+    ]
+
+    if not lines:
+        return summary
+
+    money_token = (
+        r"(?:"
+        r"[-+]?"
+        r"(?:\d{1,3}(?:[ ,.'’]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r")"
+    )
+
+    credit_role_re = re.compile(
+        r"\b(?:money\s+in|deposits?|credits?|cr[ée]dits?|"
+        r"d[ée]p[ôo]ts?|versements?|entr[ée]es?|"
+        r"الإيداعات|الايداعات|إيداع|ايداع|دائن)\b",
+        re.I,
+    )
+    debit_role_re = re.compile(
+        r"\b(?:money\s+out|withdrawals?|debits?|d[ée]bits?|"
+        r"retraits?|sorties?|"
+        r"السحوبات|سحب|مدين)\b",
+        re.I,
+    )
+    balance_role_re = re.compile(
+        r"\b(?:balance|solde|الرصيد)\b",
+        re.I,
+    )
+
+    date_token = (
+        r"(?:"
+        r"\d{1,2}[./-]\d{1,2}[./-]\d{2,4}"
+        r"|"
+        r"\d{4}[./-]\d{1,2}[./-]\d{1,2}"
+        r"|"
+        r"\d{1,2}\s+"
+        r"(?:"
+        r"Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|"
+        r"Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|"
+        r"Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?|"
+        r"janvier|janv|f[ée]vrier|f[ée]vr|mars|avril|avr|mai|"
+        r"juin|juillet|juil|ao[ûu]t|septembre|sept|octobre|oct|"
+        r"novembre|nov|d[ée]cembre|d[ée]c"
+        r")"
+        r"\s+\d{2,4}"
+        r")"
+    )
+
+    def _extract_flow_amount(line: str, role_match: re.Match) -> float | None:
+        tail = line[role_match.end():]
+        tokens = re.findall(money_token, tail)
+        for token in tokens:
+            value = _verification_money_to_float(token)
+            if value is not None:
+                return round(abs(float(value)), 2)
+        return None
+
+    def _extract_balance_observation(line: str) -> tuple[str | None, float | None]:
+        match = balance_role_re.search(line)
+        if match is None:
+            return None, None
+
+        tail = line[match.end():]
+        date_match = re.search(date_token, tail, re.I)
+        date_text = date_match.group(0) if date_match is not None else None
+
+        amount_search_start = date_match.end() if date_match is not None else 0
+        amount_tail = tail[amount_search_start:]
+        money_matches = re.findall(money_token, amount_tail)
+
+        if not money_matches:
+            return date_text, None
+
+        value = _verification_money_to_float(money_matches[-1])
+        if value is None:
+            return date_text, None
+
+        return date_text, round(float(value), 2)
+
+    observations = []
+
+    windows = []
+    for i, line in enumerate(lines):
+        windows.append((i, line))
+        if i + 1 < len(lines):
+            windows.append((i, f"{line} {lines[i + 1]}"))
+
+    seen_windows = set()
+
+    for line_index, line in windows:
+        normalized = " ".join(str(line or "").split())
+        if not normalized or normalized in seen_windows:
+            continue
+        seen_windows.add(normalized)
+
+        credit_match = credit_role_re.search(normalized)
+        debit_match = debit_role_re.search(normalized)
+
+        if credit_match is None and debit_match is None:
+            continue
+        if balance_role_re.search(normalized) is None:
+            continue
+
+        role = "deposits" if credit_match is not None else "withdrawals"
+        role_match = credit_match if credit_match is not None else debit_match
+
+        flow_amount = _extract_flow_amount(normalized, role_match)
+        balance_date, balance_value = _extract_balance_observation(normalized)
+
+        if flow_amount is None or balance_value is None:
+            continue
+
+        observations.append(
+            {
+                "line_index": line_index,
+                "role": role,
+                "flow_amount": flow_amount,
+                "balance_date": balance_date,
+                "balance_value": balance_value,
+                "line": normalized[:300],
+            }
+        )
+
+    if not observations:
+        return summary
+
+    credit_obs = next((item for item in observations if item["role"] == "deposits"), None)
+    debit_obs = next((item for item in observations if item["role"] == "withdrawals"), None)
+
+    if credit_obs is None or debit_obs is None:
+        return summary
+
+    ordered = sorted([credit_obs, debit_obs], key=lambda item: item["line_index"])
+
+    opening_balance = ordered[0]["balance_value"]
+    ending_balance = ordered[-1]["balance_value"]
+
+    if summary.get("deposits") is None:
+        summary["deposits"] = credit_obs["flow_amount"]
+
+    if summary.get("withdrawals") is None:
+        summary["withdrawals"] = debit_obs["flow_amount"]
+
+    if summary.get("opening_balance") is None:
+        summary["opening_balance"] = opening_balance
+
+    if summary.get("ending_balance") is None and summary.get("closing_balance") is None:
+        summary["ending_balance"] = ending_balance
+
+    summary["source"] = "source_parallel_flow_balance_summary"
+    summary.setdefault("evidence", {})
+
+    if isinstance(summary["evidence"], dict):
+        summary["evidence"]["parallel_flow_balance_summary"] = {
+            "source": "parallel_flow_and_balance_roles",
+            "credit_observation": credit_obs,
+            "debit_observation": debit_obs,
+            "opening_role": ordered[0],
+            "ending_role": ordered[-1],
+        }
+
+    return summary
+
+
 def assess_source_statement_consistency(statement_summary: dict | None) -> dict:
     """Audit the source statement's own four-role accounting identity only."""
     summary = dict(statement_summary or {})
@@ -2134,7 +2341,7 @@ def normalize_signed_amounts_before_kpi(transactions):
 
 print(
     "RUNEXA_FINANCE_HANDLER_VERSION",
-    "v30-source-contradiction-display-only-gate",
+    "v31-parallel-flow-balance-source-summary",
 )
 
 print(
@@ -3867,6 +4074,14 @@ def handle_finance_ai(job: Job, db):
     # but omits movement totals, recover only a strict two-value TOTAL row from
     # the same Date | Debit/Withdrawal | Credit/Deposit | Balance table.
     statement_summary = enrich_source_summary_from_transaction_table_totals(
+        text,
+        statement_summary,
+    )
+
+    # ADDITIVE v31 — recover a complete source four-role summary when the
+    # statement prints movement totals and opening/closing balances in two
+    # compact parallel summary rows. This is source-audit evidence only.
+    statement_summary = enrich_source_summary_from_parallel_flow_balance_summary(
         text,
         statement_summary,
     )
