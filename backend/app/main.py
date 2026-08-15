@@ -26,6 +26,7 @@ from app.api.business_export_routes import router as business_export_router
 from app.api.business_reports import router as business_reports_router
 from app.api.business_routes import router as business_router
 from app.api.contact_routes import router as contact_router
+from app.api.free_access_routes import router as free_access_router
 from app.api.document_routes import router as document_router
 from app.api.enterprise_agent_access_routes import (
     router as enterprise_agent_access_router,
@@ -119,6 +120,7 @@ app.include_router(payment_router)
 app.include_router(user_router)
 app.include_router(admin_router)
 app.include_router(contact_router)
+app.include_router(free_access_router)
 app.include_router(admin_api_management_router)
 app.include_router(api_keys.router)
 app.include_router(public_api.router)

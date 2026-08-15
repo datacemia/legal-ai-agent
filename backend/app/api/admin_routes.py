@@ -11,7 +11,7 @@ from app.models.organization import Organization
 from app.models.organization_agent import OrganizationAgent
 from app.models.organization_member import OrganizationMember
 from app.models.organization_usage_log import OrganizationUsageLog
-
+from app.models.free_access_request import FreeAccessRequest
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
 VALID_ENTERPRISE_AGENTS = ["legal", "study", "finance", "business"]
@@ -108,7 +108,28 @@ def list_contact_requests(
         for r in requests
     ]
 
+@router.get("/free-access-requests")
+def list_free_access_requests(
+    db: Session = Depends(get_db),
+    admin: User = Depends(require_admin)
+):
+    requests = (
+        db.query(FreeAccessRequest)
+        .order_by(FreeAccessRequest.id.desc())
+        .all()
+    )
 
+    return [
+        {
+            "id": r.id,
+            "first_name": r.first_name,
+            "last_name": r.last_name,
+            "email": r.email,
+            "country": r.country,
+            "created_at": r.created_at,
+        }
+        for r in requests
+    ]
 def normalize_agents(agent_slugs: list[str]) -> list[str]:
     cleaned = []
 

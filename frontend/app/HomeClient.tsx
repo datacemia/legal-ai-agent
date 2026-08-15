@@ -13,7 +13,6 @@ import {
   Lock,
   Zap,
   Globe,
-  MessageSquareQuote,
   CheckCircle2,
   FileText,
   FileSpreadsheet,
@@ -36,11 +35,13 @@ type Agent = [string, string, string, AgentKey];
 const labels: Record<Locale, any> = {
   en: {
     platform: "Runexa AI Platform",
-    title: "Upload Your Document.\nGet the Intelligence You Need to Decide.",
+    title: "Turn Documents Into Decisions.\nSpecialized AI for Real-World Work.",
+    heroDesc: "Specialized AI agents analyze contracts, finances, learning materials, and business data — turning complex information into structured intelligence you can act on.",
+    valueLine: "One account. One credit system. Multiple specialized AI agents.",
     explore: "Explore AI Agents",
     pricing: "Plans & Pricing",
     blog: "Insights",
-    trustLine: "$1 trial per account · Unified credits · Privacy-first AI platform",
+    trustLine: "One-time $1 trial for one AI agent per account · Unified credits · Privacy-first AI platform",
     privacyIntroTitle: "Privacy-First Document Processing",
     privacyIntroDesc:
       "Runexa is designed for document analysis workflows where privacy matters. Uploaded files are processed only to generate the requested analysis. Personal identifiers may be replaced with neutral labels before AI processing when applicable. Customer content is never used to train public AI models. Uploaded files are automatically deleted from processing storage after analysis, and customer data remains isolated between users and workspaces.",
@@ -52,10 +53,10 @@ const labels: Record<Locale, any> = {
     ],
     privacyFlow: ["Upload", "Anonymize", "Analyze", "Report", "Delete"],
     available: "Available",
-    ctaTitle: "One Platform. Multiple AI Agents. Smarter Decisions.",
+    ctaTitle: "Ready to Turn Your Documents Into Decisions?",
     ctaDesc:
-      "Runexa is a unified AI platform for document analysis, financial intelligence, learning, and enterprise decision support.",
-    ctaButton: "Create Account",
+      "Start with the specialized AI workflow you need today — and scale across Runexa when you are ready.",
+    ctaButton: "Get Started",
     disclaimer:
       "AI-generated insights may contain errors. Always verify information before making important decisions.",
     faqTitle: "Frequently Asked Questions",
@@ -66,7 +67,7 @@ const labels: Record<Locale, any> = {
       ["Runexa Business Decision Intelligence", "Upload CSV or Excel files and receive KPI dashboards, forecasts, risks, opportunities, charts, and export-ready reports.", "/business-ai", "business"],
     ] as Agent[],
     faqItems: [
-      ["What is Runexa?", "Runexa is an AI workspace with specialized agents for legal, finance, study, and business workflows."],
+      ["What is Runexa?", "Runexa is a specialized AI platform for legal, finance, study, and business workflows."],
       ["How does it work?", "Upload a document or dataset, choose an agent, and receive structured analysis, recommendations, and reports."],
       ["Is Runexa secure?", "Runexa is designed around privacy-first document workflows, customer data isolation, and automatic file deletion after analysis."],
       ["Does it replace professionals?", "No. Runexa provides decision support. Important decisions should be verified by qualified professionals."],
@@ -74,11 +75,13 @@ const labels: Record<Locale, any> = {
   },
   fr: {
     platform: "Plateforme IA Runexa",
-    title: "Importez votre document.\nObtenez l’intelligence nécessaire pour décider.",
+    title: "Transformez vos documents en décisions.\nUne IA spécialisée pour le monde réel.",
+    heroDesc: "Des agents IA spécialisés analysent contrats, finances, supports pédagogiques et données d’entreprise pour transformer l’information complexe en intelligence structurée et exploitable.",
+    valueLine: "Un compte. Un système de crédits. Plusieurs agents IA spécialisés.",
     explore: "Découvrir les agents IA",
     pricing: "Plans et tarifs",
     blog: "Ressources",
-    trustLine: "Un essai à 1 $ par compte · Crédits unifiés · Plateforme IA conçue pour la confidentialité",
+    trustLine: "Un essai unique à 1 $ pour un agent IA par compte · Crédits unifiés · Plateforme IA conçue pour la confidentialité",
     privacyIntroTitle: "Traitement documentaire conçu pour la confidentialité",
     privacyIntroDesc:
       "Runexa est conçu pour les workflows d’analyse documentaire où la confidentialité est essentielle. Les fichiers importés sont traités uniquement pour générer l’analyse demandée. Les identifiants personnels peuvent être remplacés par des libellés neutres avant le traitement par l’IA lorsque cela est applicable. Les contenus clients ne servent jamais à entraîner des modèles IA publics. Les fichiers importés sont automatiquement supprimés du stockage de traitement après analyse, et les données restent isolées entre utilisateurs et espaces de travail.",
@@ -90,9 +93,9 @@ const labels: Record<Locale, any> = {
     ],
     privacyFlow: ["Importer", "Anonymiser", "Analyser", "Rapport", "Supprimer"],
     available: "Disponible",
-    ctaTitle: "Une plateforme. Plusieurs agents IA. Des décisions plus intelligentes.",
-    ctaDesc: "Runexa est une plateforme IA unifiée pour l’analyse documentaire, la finance, l’apprentissage et l’aide à la décision en entreprise.",
-    ctaButton: "Créer un compte",
+    ctaTitle: "Prêt à transformer vos documents en décisions ?",
+    ctaDesc: "Commencez avec le workflow IA spécialisé dont vous avez besoin aujourd’hui, puis évoluez dans Runexa à votre rythme.",
+    ctaButton: "Commencer",
     disclaimer: "Les analyses générées par l’IA peuvent contenir des erreurs. Vérifiez toujours les informations avant de prendre une décision.",
     faqTitle: "Questions fréquentes",
     agents: [
@@ -102,7 +105,7 @@ const labels: Record<Locale, any> = {
       ["Runexa Business Decision Intelligence", "Importez des fichiers CSV ou Excel et obtenez vos KPI, prévisions, risques, opportunités, graphiques et rapports exportables.", "/business-ai", "business"],
     ] as Agent[],
     faqItems: [
-      ["Qu’est-ce que Runexa ?", "Runexa est un workspace IA avec des agents spécialisés pour le juridique, la finance, l’étude et le business."],
+      ["Qu’est-ce que Runexa ?", "Runexa est une plateforme IA spécialisée pour les workflows juridiques, financiers, d’apprentissage et de décision d’entreprise."],
       ["Comment ça marche ?", "Importez un document ou des données, choisissez un agent, puis recevez une analyse structurée et des recommandations."],
       ["Runexa est-il sécurisé ?", "Runexa est conçu autour de workflows confidentiels, de l’isolation des données et de la suppression automatique après analyse."],
       ["Runexa remplace-t-il les professionnels ?", "Non. Runexa fournit une aide à la décision. Les décisions importantes doivent être vérifiées par des professionnels qualifiés."],
@@ -110,11 +113,13 @@ const labels: Record<Locale, any> = {
   },
   ar: {
     platform: "منصة Runexa للذكاء الاصطناعي",
-    title: "ارفع مستندك.\nواحصل على التحليل الذي تحتاجه لاتخاذ القرار.",
+    title: "حوّل مستنداتك إلى قرارات.\nذكاء اصطناعي متخصص للعمل الواقعي.",
+    heroDesc: "يحلل وكلاء ذكاء اصطناعي متخصصون العقود والبيانات المالية والمواد التعليمية وبيانات الأعمال، ويحوّلون المعلومات المعقدة إلى ذكاء منظم وقابل للتنفيذ.",
+    valueLine: "حساب واحد. نظام أرصدة واحد. عدة وكلاء ذكاء اصطناعي متخصصين.",
     explore: "اكتشف وكلاء Runexa",
     pricing: "الخطط والأسعار",
     blog: "المدونة",
-    trustLine: "تجربة واحدة بقيمة 1 دولار لكل حساب · أرصدة موحدة · منصة مصممة لحماية الخصوصية",
+    trustLine: "تجربة واحدة بقيمة 1 دولار لوكيل ذكاء اصطناعي واحد لكل حساب · أرصدة موحدة · منصة مصممة لحماية الخصوصية",
     privacyIntroTitle: "معالجة مستندات تراعي الخصوصية",
     privacyIntroDesc:
       "تم تصميم Runexa لتدفقات عمل تحليل المستندات التي تتطلب الخصوصية. تُعالج الملفات المرفوعة فقط لإنشاء التحليل المطلوب. يمكن استبدال المعرّفات الشخصية بوسوم محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك مناسباً. لا تُستخدم محتويات العملاء أبداً لتدريب نماذج ذكاء اصطناعي عامة. ويتم حذف الملفات المرفوعة تلقائياً بعد اكتمال التحليل، وتبقى بيانات العملاء معزولة بين المستخدمين ومساحات العمل.",
@@ -126,9 +131,9 @@ const labels: Record<Locale, any> = {
     ],
     privacyFlow: ["رفع الملف", "إخفاء الهوية", "التحليل", "إنشاء التقرير", "حذف الملف"],
     available: "متاح",
-    ctaTitle: "منصة واحدة. وكلاء ذكاء اصطناعي متخصصون. قرارات أكثر ذكاءً.",
-    ctaDesc: "Runexa منصة موحدة لتحليل المستندات وفهم البيانات المالية وتسريع التعلم ودعم قرارات الأعمال.",
-    ctaButton: "إنشاء حساب",
+    ctaTitle: "هل أنت مستعد لتحويل مستنداتك إلى قرارات؟",
+    ctaDesc: "ابدأ بسير العمل المتخصص الذي تحتاجه اليوم، ثم توسّع عبر Runexa عندما تكون مستعداً.",
+    ctaButton: "ابدأ الآن",
     disclaimer: "التحليلات مدعومة بالذكاء الاصطناعي وقد تحتوي على أخطاء. يُرجى التحقق من النتائج قبل اتخاذ أي قرار.",
     faqTitle: "الأسئلة الشائعة",
     agents: [
@@ -138,7 +143,7 @@ const labels: Record<Locale, any> = {
       ["Runexa Business Decision Intelligence", "ارفع بيانات بصيغة CSV أو Excel للحصول على مؤشرات أداء وتوقعات ومخاطر وفرص ورسوم بيانية وتقارير قابلة للتصدير.", "/business-ai", "business"],
     ] as Agent[],
     faqItems: [
-      ["ما هي Runexa؟", "Runexa منصة ذكاء اصطناعي تضم وكلاء متخصصين للقانون والمالية والدراسة والأعمال."],
+      ["ما هي Runexa؟", "Runexa هي منصة ذكاء اصطناعي متخصصة لسير العمل القانوني والمالي والتعليمي واتخاذ القرارات التجارية."],
       ["كيف تعمل؟", "ارفع مستنداً أو بيانات، اختر الوكيل المناسب، ثم احصل على تحليل منظم وتوصيات."],
       ["هل Runexa آمنة؟", "تم تصميم Runexa حول الخصوصية وعزل بيانات العملاء والحذف التلقائي بعد التحليل."],
       ["هل تحل محل المختصين؟", "لا. توفر Runexa دعماً لاتخاذ القرار، ويجب التحقق من القرارات المهمة مع مختصين مؤهلين."],
@@ -213,6 +218,9 @@ export default function HomeClient({
                   </span>
                 </h1>
 
+                <p className="max-w-3xl text-base font-medium leading-7 text-slate-600 md:text-lg">{t.heroDesc}</p>
+                <p className="max-w-3xl text-sm font-black text-slate-900 md:text-base">{t.valueLine}</p>
+
                 <div className="flex flex-wrap gap-3">
                   {[
                     [language === "fr" ? "Contrats" : language === "ar" ? "العقود" : "Contracts", Scale, "border-blue-100 bg-blue-50 text-blue-700"],
@@ -242,7 +250,7 @@ export default function HomeClient({
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-lg font-black">{language === "fr" ? "Essayez Runexa pour 1 $" : language === "ar" ? "جرّب Runexa مقابل دولار واحد" : "Try Runexa for $1"}</p>
-                      <p className="mt-1 text-sm font-semibold text-blue-100">{language === "fr" ? "Analysez un document réel en quelques minutes." : language === "ar" ? "حلل مستنداً حقيقياً خلال دقائق." : "Analyze a real document in minutes."}</p>
+                      <p className="mt-1 text-sm font-semibold text-blue-100">{language === "fr" ? "Choisissez un agent IA et analysez un document réel. Un essai unique par compte." : language === "ar" ? "اختر وكيلاً واحداً وحلل مستنداً حقيقياً. تجربة واحدة لكل حساب." : "Choose one AI agent and analyze a real document. One-time trial per account."}</p>
                     </div>
                     <span className="text-2xl">→</span>
                   </div>
@@ -262,7 +270,7 @@ export default function HomeClient({
                 {[
                   [ShieldCheck, language === "fr" ? "Confidentiel" : language === "ar" ? "خصوصية" : "Private", "top-6 right-0", "bg-violet-100 text-violet-700"],
                   [BarChart3, language === "fr" ? "Insights clés" : language === "ar" ? "رؤى رئيسية" : "Key Insights", "right-0 top-40", "bg-emerald-100 text-emerald-700"],
-                  [Lock, language === "fr" ? "Jamais utilisées pour l’entraînement" : language === "ar" ? "لا تُستخدم لتدريب النماذج" : "Never Used for Training", "left-2 bottom-8", "bg-blue-100 text-blue-700"],
+                  [Lock, language === "fr" ? "Les contenus clients ne servent jamais à entraîner des modèles IA publics" : language === "ar" ? "لا تُستخدم محتويات العملاء لتدريب نماذج الذكاء الاصطناعي العامة" : "Customer Content Never Used to Train Public AI Models", "left-2 bottom-8", "bg-blue-100 text-blue-700"],
                 ].map(([Icon, label, pos, color]: any) => (
                   <div key={label} className={`absolute rounded-2xl border border-slate-100 bg-white/90 px-5 py-4 shadow-xl ${pos}`}>
                     <div className="flex items-center gap-3"><div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${color}`}><Icon className="h-6 w-6" /></div><p className="text-sm font-black text-slate-900">{label}</p></div>
@@ -436,23 +444,67 @@ function IntelligencePreviewCard({ language }: { language: Locale }) {
 }
 
 function WhyRunexa({ language }: { language: Locale }) {
-  const rows = language === "fr"
-    ? [["ChatGPT", "Conversation générale", "Analyse documentaire structurée"], ["Claude", "Analyse avancée nécessitant des instructions précises", "Importer → Analyser → Rapport"], ["Gemini", "IA généraliste", "Workflows spécialisés d’aide à la décision"], ["Outils génériques", "Résumé et rédaction", "Scoring des risques, KPI et aide à la décision"]]
-    : language === "ar"
-    ? [["ChatGPT", "محادثة عامة", "سير عمل منظم للمستندات"], ["Claude", "تحليل قوي لكنه يحتاج إلى توجيه", "رفع → تحليل → تقرير"], ["Gemini", "ذكاء اصطناعي عام", "سير عمل متخصص لدعم القرار"], ["أدوات عامة", "تلخيص وكتابة", "تقييم المخاطر والمؤشرات ودعم القرار"]]
-    : [["ChatGPT", "General chat and prompting", "Structured document workflows"], ["Claude", "Powerful document analysis that requires expert prompting", "Upload → Analyze → Report"], ["Gemini", "General-purpose AI", "Specialized decision workflows"], ["Generic AI tools", "Writing and summarization", "Risk scoring, KPI analysis, decision intelligence"]];
+  const copy = {
+    en: {
+      eyebrow: "Why Runexa",
+      title: "Specialized workflows. Structured intelligence. Clearer decisions.",
+      desc: "Runexa is built around purpose-designed AI workflows that turn documents and data into structured outputs you can review, understand, and act on.",
+      items: [
+        ["Specialized workflows", "Purpose-built experiences for Legal, Finance, Study, and Business — not a blank chat box."],
+        ["Structured outputs", "Risk scores, financial signals, study assets, KPIs, forecasts, and reports organized for the task."],
+        ["Evidence-based analysis", "Outputs are designed to stay connected to the information observed in the document or dataset."],
+        ["One platform across domains", "Use one account and one unified credit system across multiple specialized AI agents."],
+      ],
+    },
+    fr: {
+      eyebrow: "Pourquoi Runexa",
+      title: "Des workflows spécialisés. Une intelligence structurée. Des décisions plus claires.",
+      desc: "Runexa repose sur des workflows IA conçus pour transformer documents et données en résultats structurés que vous pouvez examiner, comprendre et utiliser.",
+      items: [
+        ["Workflows spécialisés", "Des expériences conçues pour le juridique, la finance, l’étude et le business — pas une simple page de chat."],
+        ["Résultats structurés", "Scores de risque, signaux financiers, supports d’étude, KPI, prévisions et rapports organisés selon le besoin."],
+        ["Analyse fondée sur les éléments observés", "Les résultats sont conçus pour rester reliés aux informations présentes dans le document ou les données analysées."],
+        ["Une plateforme, plusieurs domaines", "Utilisez un compte et un système de crédits unifié avec plusieurs agents IA spécialisés."],
+      ],
+    },
+    ar: {
+      eyebrow: "لماذا Runexa",
+      title: "سير عمل متخصص. ذكاء منظم. قرارات أوضح.",
+      desc: "صُممت Runexa حول مسارات ذكاء اصطناعي متخصصة تحوّل المستندات والبيانات إلى نتائج منظمة يمكنك مراجعتها وفهمها واستخدامها.",
+      items: [
+        ["سير عمل متخصص", "تجارب مصممة للمجالات القانونية والمالية والتعليمية والأعمال — وليست مجرد نافذة محادثة."],
+        ["نتائج منظمة", "درجات مخاطر وإشارات مالية وأدوات دراسة ومؤشرات أداء وتوقعات وتقارير منظمة حسب المهمة."],
+        ["تحليل قائم على الأدلة", "صُممت النتائج لتبقى مرتبطة بالمعلومات المرصودة في المستند أو مجموعة البيانات."],
+        ["منصة واحدة لمجالات متعددة", "استخدم حساباً واحداً ونظام أرصدة موحداً عبر عدة وكلاء ذكاء اصطناعي متخصصين."],
+      ],
+    },
+  };
 
-  return <section className="rounded-[28px] border border-slate-200 bg-white p-6 text-left shadow-sm">
-    <p className="text-sm font-semibold text-blue-600">{language === "fr" ? "Pourquoi Runexa plutôt qu’une IA généraliste ?" : language === "ar" ? "لماذا Runexa بدلاً من الذكاء الاصطناعي العام؟" : "Why Runexa Instead of Generic AI?"}</p>
-    <h2 className="mt-3 text-2xl font-bold text-slate-900">{language === "fr" ? "La plupart des IA génèrent des réponses. Runexa automatise des workflows spécialisés." : language === "ar" ? "معظم أدوات الذكاء الاصطناعي تولد إجابات. أما Runexa فينفّذ سير عمل ذكياً ومتخصصاً." : "Most AI tools generate answers. Runexa executes specialized AI workflows."}</h2>
-    <p className="mt-3 text-sm leading-6 text-slate-600">{language === "fr" ? "Importez un document. Recevez une analyse structurée. Prenez une décision." : language === "ar" ? "ارفع مستنداً. احصل على تحليل منظم. اتخذ قراراً أفضل." : "Upload a document. Receive structured analysis. Take action."}</p>
-    <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200">
-      <div className="min-w-[680px] md:min-w-0">
-        <div className="grid grid-cols-3 bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500"><div className="p-3">{language === "fr" ? "Concurrent" : language === "ar" ? "المنافس" : "Competitor"}</div><div className="p-3">{language === "fr" ? "Approche" : language === "ar" ? "النهج" : "Their Approach"}</div><div className="p-3">{language === "fr" ? "Avantage Runexa" : language === "ar" ? "ميزة Runexa" : "Runexa Advantage"}</div></div>
-        {rows.map((row) => <div key={row[0]} className="grid grid-cols-3 border-t border-slate-200 text-sm text-slate-700"><div className="p-3 font-semibold text-slate-900">{row[0]}</div><div className="p-3">{row[1]}</div><div className="p-3 font-medium text-blue-700">{row[2]}</div></div>)}
+  const t = copy[language] || copy.en;
+  const icons = [BriefcaseBusiness, ClipboardList, FileCheck, Sparkles];
+
+  return (
+    <section className="rounded-[28px] border border-slate-200 bg-white p-6 text-left shadow-sm md:p-10">
+      <p className="text-sm font-semibold text-blue-600">{t.eyebrow}</p>
+      <h2 className="mt-3 max-w-4xl text-2xl font-bold text-slate-900 md:text-3xl">{t.title}</h2>
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base md:leading-7">{t.desc}</p>
+
+      <div className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {t.items.map(([title, desc], index) => {
+          const Icon = icons[index];
+          return (
+            <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                <Icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 font-bold text-slate-900">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{desc}</p>
+            </div>
+          );
+        })}
       </div>
-    </div>
-  </section>;
+    </section>
+  );
 }
 
 function PrivacySection({ t, language }: { t: any; language: Locale }) {
@@ -491,7 +543,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
       finance: {
         file: "Bank_Statement.pdf",
         rows: [
-          { icon: ShieldCheck, label: "Health score", value: "78" },
+          { icon: ShieldCheck, label: "Financial score", value: "78" },
           { icon: TrendingUp, label: "Monthly income", value: "€20,393" },
           { icon: CreditCard, label: "Expenses", value: "€15,481.28" },
           { icon: PiggyBank, label: "Savings balance", value: "€4,911.12" },
@@ -533,7 +585,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
       finance: {
         file: "Releve_Bancaire.pdf",
         rows: [
-          { icon: ShieldCheck, label: "Santé financière", value: "78/100" },
+          { icon: ShieldCheck, label: "Score financier", value: "78/100" },
           { icon: TrendingUp, label: "Revenus mensuels", value: "20 393 €" },
           { icon: CreditCard, label: "Dépenses", value: "15 481,28 €" },
           { icon: PiggyBank, label: "Solde épargne", value: "4 911,12 €" },
@@ -554,7 +606,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         file: "Rapport_Ventes.xlsx",
         rows: [
           { icon: TrendingUp, label: "Revenus", value: "129 510,85 $" },
-          { icon: Activity, label: "Score de santé", value: "47/100" },
+          { icon: Activity, label: "Score business", value: "47/100" },
           { icon: BarChart3, label: "Marge", value: "52,75 %" },
           { icon: FileSpreadsheet, label: "Recommandation stratégique" },
         ],
@@ -575,7 +627,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
       finance: {
         file: "كشف_حساب.pdf",
         rows: [
-          { icon: ShieldCheck, label: "الصحة المالية", value: "78" },
+          { icon: ShieldCheck, label: "الدرجة المالية", value: "78" },
           { icon: TrendingUp, label: "الدخل الشهري", value: "€20,393" },
           { icon: CreditCard, label: "المصاريف", value: "€15,481.28" },
           { icon: PiggyBank, label: "رصيد الادخار", value: "€4,911.12" },
@@ -681,106 +733,82 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
 }
 
 function ResultTestimonialsSection({ language }: { language: Locale }) {
-  const testimonials = {
+  const copy = {
     en: {
-      eyebrow: "User outcomes",
-      title: "Real use cases. Concrete results.",
-      desc: "Runexa is designed to help users understand documents faster and make clearer decisions.",
+      eyebrow: "Example outcomes",
+      title: "See What Each Workflow Can Produce.",
+      desc: "Illustrative examples of the structured outputs Runexa agents are designed to generate. Actual results depend on the document or data provided.",
       items: [
         {
-          role: "Freelancer",
           useCase: "Contract review",
-          quote:
-            "I uploaded a freelance contract and Runexa highlighted 3 clauses I had completely missed, including payment terms and ownership risks.",
-          result: "3 risky clauses detected",
+          input: "Contract or agreement",
+          output: "Risk scoring · Critical clauses · Obligations · Review priorities",
         },
         {
-          role: "Personal finance user",
           useCase: "Bank statement analysis",
-          quote:
-            "Runexa helped me understand where my money was going and identified recurring expenses I had not noticed.",
-          result: "Subscriptions and savings opportunities found",
+          input: "Bank statement",
+          output: "Cashflow · Spending categories · Recurring activity · Savings signals",
         },
         {
-          role: "Student",
           useCase: "Study preparation",
-          quote:
-            "I uploaded a lesson PDF and received a summary, quiz, flashcards, and a revision plan instead of starting from a blank page.",
-          result: "Complete study plan generated",
+          input: "Course material",
+          output: "Summary · Quiz · Flashcards · Study plan",
         },
       ],
     },
     fr: {
-      eyebrow: "Résultats utilisateurs",
-      title: "Des cas d’usage réels. Des résultats concrets.",
-      desc:
-        "Runexa aide les utilisateurs à comprendre leurs documents plus vite et à prendre des décisions plus claires.",
+      eyebrow: "Exemples de résultats",
+      title: "Découvrez ce que chaque workflow peut produire.",
+      desc: "Exemples illustratifs des résultats structurés que les agents Runexa sont conçus pour générer. Les résultats réels dépendent du document ou des données fournis.",
       items: [
         {
-          role: "Freelance",
           useCase: "Analyse de contrat",
-          quote:
-            "J’ai importé un contrat freelance et Runexa a mis en évidence 3 clauses que j’avais complètement manquées, notamment sur le paiement et les droits de propriété.",
-          result: "3 clauses à risque détectées",
+          input: "Contrat ou accord",
+          output: "Score de risque · Clauses critiques · Obligations · Priorités de revue",
         },
         {
-          role: "Utilisateur finance",
           useCase: "Analyse de relevé bancaire",
-          quote:
-            "Runexa m’a aidé à comprendre où partait mon argent et a identifié des dépenses récurrentes que je n’avais pas remarquées.",
-          result: "Abonnements et économies détectés",
+          input: "Relevé bancaire",
+          output: "Cashflow · Catégories de dépenses · Activité récurrente · Signaux d’économies",
         },
         {
-          role: "Étudiant",
-          useCase: "Préparation de cours",
-          quote:
-            "J’ai importé un PDF de cours et j’ai reçu un résumé, un quiz, des flashcards et un plan de révision au lieu de partir de zéro.",
-          result: "Plan de révision complet généré",
+          useCase: "Préparation des révisions",
+          input: "Support de cours",
+          output: "Résumé · Quiz · Flashcards · Plan de révision",
         },
       ],
     },
     ar: {
-      eyebrow: "نتائج المستخدمين",
-      title: "حالات استخدام واقعية. نتائج ملموسة.",
-      desc:
-        "صُممت Runexa لمساعدة المستخدمين على فهم مستنداتهم بشكل أسرع واتخاذ قرارات أوضح.",
+      eyebrow: "أمثلة على النتائج",
+      title: "اكتشف ما يمكن أن ينتجه كل سير عمل.",
+      desc: "أمثلة توضيحية للنتائج المنظمة التي صُممت وكلاء Runexa لإنتاجها. تعتمد النتائج الفعلية على المستند أو البيانات المقدمة.",
       items: [
         {
-          role: "مستقل",
-          useCase: "مراجعة عقد",
-          quote:
-            "رفعت عقد عمل حر، وساعدتني Runexa على اكتشاف 3 بنود مهمة لم أنتبه لها، خاصة ما يتعلق بالدفع وحقوق الملكية.",
-          result: "تم اكتشاف 3 بنود عالية الأهمية",
+          useCase: "مراجعة العقود",
+          input: "عقد أو اتفاقية",
+          output: "تقييم المخاطر · البنود المهمة · الالتزامات · أولويات المراجعة",
         },
         {
-          role: "مستخدم مالي",
           useCase: "تحليل كشف بنكي",
-          quote:
-            "ساعدتني Runexa على فهم أين تذهب أموالي، واكتشفت مصاريف متكررة لم أكن ألاحظها.",
-          result: "اكتشاف اشتراكات وفرص توفير",
+          input: "كشف حساب بنكي",
+          output: "التدفق النقدي · فئات الإنفاق · النشاط المتكرر · مؤشرات التوفير",
         },
         {
-          role: "طالب",
           useCase: "التحضير للدراسة",
-          quote:
-            "رفعت ملف PDF خاصاً بالدرس، وحصلت على ملخص واختبار وبطاقات مراجعة وخطة دراسة بدل أن أبدأ من الصفر.",
-          result: "إنشاء خطة دراسة كاملة",
+          input: "مادة دراسية",
+          output: "ملخص · اختبار · بطاقات مراجعة · خطة دراسة",
         },
       ],
     },
   };
 
-  const t = testimonials[language] || testimonials.en;
+  const t = copy[language] || copy.en;
 
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-8 text-left shadow-sm md:p-12">
       <p className="text-sm font-semibold text-blue-600">{t.eyebrow}</p>
-
       <h2 className="mt-3 text-3xl font-bold text-slate-900">{t.title}</h2>
-
-      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
-        {t.desc}
-      </p>
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">{t.desc}</p>
 
       <div className="mt-8 grid gap-5 md:grid-cols-3">
         {t.items.map((item) => (
@@ -788,21 +816,21 @@ function ResultTestimonialsSection({ language }: { language: Locale }) {
             key={item.useCase}
             className="rounded-3xl border border-slate-200 bg-slate-50 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-lg"
           >
-            <p className="text-xs font-bold uppercase tracking-wide text-blue-600">
-              {item.useCase}
-            </p>
-
-            <blockquote className="mt-4 text-sm leading-6 text-slate-700">
-              “{item.quote}”
-            </blockquote>
-
-            <div className="mt-5 rounded-2xl bg-white p-4">
+            <p className="text-xs font-bold uppercase tracking-wide text-blue-600">{item.useCase}</p>
+            <div className="mt-5 flex items-start gap-3">
+              <FileText className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" />
+              <div>
+                <p className="text-xs font-semibold text-slate-500">
+                  {language === "fr" ? "Entrée type" : language === "ar" ? "مثال على المدخل" : "Example input"}
+                </p>
+                <p className="mt-1 text-sm font-bold text-slate-900">{item.input}</p>
+              </div>
+            </div>
+            <div className="mt-5 rounded-2xl border border-blue-100 bg-white p-4">
               <p className="text-xs font-semibold text-slate-500">
-                {item.role}
+                {language === "fr" ? "Résultats structurés" : language === "ar" ? "نتائج منظمة" : "Structured outputs"}
               </p>
-              <p className="mt-1 text-sm font-bold text-slate-900">
-                {item.result}
-              </p>
+              <p className="mt-2 text-sm font-semibold leading-6 text-slate-800">{item.output}</p>
             </div>
           </div>
         ))}
@@ -811,23 +839,20 @@ function ResultTestimonialsSection({ language }: { language: Locale }) {
   );
 }
 
-function FeedbackSection({ language }: { language: Locale }) {
-  const items = language === "fr" ? ["Analyse claire avant signature", "Budget plus lisible", "Révisions plus structurées"] : language === "ar" ? ["تحليل أوضح قبل التوقيع", "ميزانية أكثر وضوحاً", "تعلّم أكثر تنظيماً"] : ["Clearer analysis before signing", "More readable budget", "More structured learning"];
-  return <section className="rounded-3xl border border-blue-100 bg-white p-8 text-left shadow-sm md:p-12">
-    <p className="text-sm font-semibold text-blue-600">{language === "fr" ? "Ce que nos utilisateurs obtiennent" : language === "ar" ? "أمثلة على نتائج المستخدمين" : "Representative Customer Results"}</p>
-    <h2 className="mt-3 text-3xl font-bold text-slate-900">{language === "fr" ? "Des workflows conçus pour aider à décider plus vite." : language === "ar" ? "سير عمل مصمم للمساعدة على اتخاذ قرارات أسرع." : "Workflows designed to help users decide faster."}</h2>
-    <div className="mt-6 grid gap-4 md:grid-cols-3">{items.map((item) => <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><MessageSquareQuote className="h-6 w-6 text-blue-600" /><p className="mt-3 font-semibold text-slate-800">{item}</p></div>)}</div>
-  </section>;
-}
 
 function PricingSection({ language }: { language: Locale }) {
+  const copy: any = {
+    en: { eyebrow: "One platform. Flexible access.", title: "Start for $1. Scale with Runexa.", desc: "Choose the access model that fits your workflow — from a one-time trial to unified credits, recurring Pro access, Enterprise workspaces, and API integration.", plans: [["$1 Trial","Try one Runexa AI agent once per account.","Low-friction start"],["Unified Credits","Buy credits once and use the same balance across Legal, Finance, Study, and Business.","Pay as you go"],["Runexa Pro","Recurring access across every Runexa agent with monthly credits and priority processing.","For regular users"],["Enterprise & API","Secure team workspaces, private workflows, integrations, and API access for organizations and developers.","For teams & products"]], cta: "Compare plans & pricing" },
+    fr: { eyebrow: "Une plateforme. Un accès flexible.", title: "Commencez à 1 $. Évoluez avec Runexa.", desc: "Choisissez le modèle adapté à votre usage : essai unique, crédits unifiés, accès Pro récurrent, espaces Enterprise ou intégration API.", plans: [["Essai à 1 $","Essayez une fois un agent IA Runexa par compte.","Pour commencer simplement"],["Crédits unifiés","Achetez des crédits et utilisez le même solde sur Legal, Finance, Study et Business.","Paiement à l’usage"],["Runexa Pro","Accès récurrent à tous les agents Runexa avec crédits mensuels et traitement prioritaire.","Pour les utilisateurs réguliers"],["Enterprise & API","Espaces sécurisés, workflows privés, intégrations et API pour organisations et développeurs.","Pour les équipes et produits"]], cta: "Comparer les plans et tarifs" },
+    ar: { eyebrow: "منصة واحدة. وصول مرن.", title: "ابدأ بدولار واحد. وتوسع مع Runexa.", desc: "اختر نموذج الوصول المناسب لاستخدامك: تجربة لمرة واحدة، أرصدة موحدة، وصول Pro متجدد، مساحات Enterprise أو تكامل عبر API.", plans: [["تجربة بدولار واحد","جرّب وكيل Runexa واحداً مرة واحدة لكل حساب.","بداية سهلة"],["أرصدة موحدة","اشترِ الأرصدة واستخدم الرصيد نفسه عبر Legal وFinance وStudy وBusiness.","الدفع حسب الاستخدام"],["Runexa Pro","وصول متجدد إلى جميع وكلاء Runexa مع أرصدة شهرية ومعالجة ذات أولوية.","للاستخدام المنتظم"],["Enterprise وAPI","مساحات عمل آمنة وسير عمل خاص وتكاملات وواجهات API للمؤسسات والمطورين.","للفرق والمنتجات"]], cta: "مقارنة الخطط والأسعار" },
+  };
+  const t = copy[language] || copy.en;
   return <section className="rounded-3xl border border-slate-200 bg-white p-8 text-left shadow-sm md:p-12">
-    <p className="text-sm font-semibold text-blue-600">{language === "fr" ? "Plans simples" : language === "ar" ? "خطط بسيطة" : "Simple plans"}</p>
-    <h2 className="mt-3 text-3xl font-bold text-slate-900">{language === "fr" ? "Commencez avec l’essai à 1 $, puis passez au plan adapté." : language === "ar" ? "ابدأ بتجربة 1 دولار ثم اختر الخطة المناسبة." : "Start with the $1 trial, then choose the plan that fits."}</h2>
-    <div className="mt-6 grid gap-4 md:grid-cols-3">
-      {(language === "fr" ? ["Essai", "Pro", "Entreprise"] : language === "ar" ? ["التجربة", "Pro", "المؤسسات"] : ["Trial", "Pro", "Enterprise"]).map((plan) => <div key={plan} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><p className="text-xl font-black text-slate-900">{plan}</p><p className="mt-2 text-sm text-slate-600">{language === "fr" ? "Crédits unifiés pour les agents Runexa." : language === "ar" ? "أرصدة موحدة لوكلاء Runexa." : "Unified credits for Runexa agents."}</p><CheckCircle2 className="mt-4 h-5 w-5 text-blue-600" /></div>)}
-    </div>
-    <Link href="/pricing" className="mt-6 inline-flex rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-blue-700 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{language === "fr" ? "Voir les tarifs" : language === "ar" ? "عرض الأسعار" : "View pricing"}</Link>
+    <p className="text-sm font-semibold text-blue-600">{t.eyebrow}</p>
+    <h2 className="mt-3 text-3xl font-bold text-slate-900">{t.title}</h2>
+    <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">{t.desc}</p>
+    <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{t.plans.map(([plan, desc, tag]: string[]) => <div key={plan} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><p className="text-xs font-bold uppercase tracking-wide text-blue-600">{tag}</p><p className="mt-2 text-xl font-black text-slate-900">{plan}</p><p className="mt-2 text-sm leading-6 text-slate-600">{desc}</p><CheckCircle2 className="mt-4 h-5 w-5 text-blue-600" /></div>)}</div>
+    <Link href="/pricing" className="mt-6 inline-flex rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-blue-700 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{t.cta}</Link>
   </section>;
 }
 
