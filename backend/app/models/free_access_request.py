@@ -12,4 +12,5 @@ class FreeAccessRequest(Base):
     last_name = Column(String, nullable=False)
     email = Column(String, nullable=False, index=True)
     country = Column(String, nullable=False)
+    agent = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)

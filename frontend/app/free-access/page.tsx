@@ -6,12 +6,14 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
 
 type Language = "en" | "fr" | "ar";
+type Agent = "legal" | "study" | "business" | "finance";
 
 type FormData = {
   first_name: string;
   last_name: string;
   email: string;
   country: string;
+  agent: Agent | "";
 };
 
 const translations = {
@@ -25,25 +27,42 @@ const translations = {
     accountText:
       "Use the same email address as your Runexa account so we can identify your request.",
     createAccount: "Create account",
+
     firstName: "First name",
     firstNamePlaceholder: "Your first name",
+
     lastName: "Last name",
     lastNamePlaceholder: "Your last name",
+
     email: "Runexa account email",
     emailPlaceholder: "you@example.com",
+
     country: "Country",
     countryPlaceholder: "Your country",
+
+    agent: "AI Agent",
+    agentPlaceholder: "Select an agent",
+    legalAgent: "Legal",
+    studyAgent: "Study",
+    businessAgent: "Business",
+    financeAgent: "Finance",
+
     submit: "Request Free Access",
     submitting: "Sending request...",
+
     successTitle: "Request received",
     success:
       "Your free access request has been received. If approved, complimentary credits will be added to your Runexa account.",
+
     error:
       "We could not submit your request. Please verify your information and try again.",
+
     alreadySubmitted:
       "A free access request has already been submitted with this email address.",
+
     privacy:
       "Your information is used only to review and process your free access request.",
+
     existingAccount: "Already have a Runexa account?",
     login: "Log in",
     backHome: "Back to Runexa",
@@ -59,25 +78,42 @@ const translations = {
     accountText:
       "Utilisez la même adresse e-mail que celle de votre compte Runexa afin que nous puissions identifier votre demande.",
     createAccount: "Créer un compte",
+
     firstName: "Prénom",
     firstNamePlaceholder: "Votre prénom",
+
     lastName: "Nom",
     lastNamePlaceholder: "Votre nom",
+
     email: "E-mail du compte Runexa",
     emailPlaceholder: "vous@exemple.com",
+
     country: "Pays",
     countryPlaceholder: "Votre pays",
+
+    agent: "Agent IA",
+    agentPlaceholder: "Sélectionnez un agent",
+    legalAgent: "Juridique",
+    studyAgent: "Études",
+    businessAgent: "Business",
+    financeAgent: "Finance",
+
     submit: "Demander un accès gratuit",
     submitting: "Envoi de la demande...",
+
     successTitle: "Demande reçue",
     success:
       "Votre demande d'accès gratuit a bien été reçue. Si elle est approuvée, des crédits offerts seront ajoutés à votre compte Runexa.",
+
     error:
       "Impossible d'envoyer votre demande. Vérifiez vos informations et réessayez.",
+
     alreadySubmitted:
       "Une demande d'accès gratuit a déjà été envoyée avec cette adresse e-mail.",
+
     privacy:
       "Vos informations sont utilisées uniquement pour examiner et traiter votre demande d'accès gratuit.",
+
     existingAccount: "Vous avez déjà un compte Runexa ?",
     login: "Se connecter",
     backHome: "Retour à Runexa",
@@ -93,25 +129,42 @@ const translations = {
     accountText:
       "استخدم نفس عنوان البريد الإلكتروني المرتبط بحساب Runexa حتى نتمكن من تحديد طلبك.",
     createAccount: "إنشاء حساب",
+
     firstName: "الاسم الأول",
     firstNamePlaceholder: "الاسم الأول",
+
     lastName: "اسم العائلة",
     lastNamePlaceholder: "اسم العائلة",
+
     email: "البريد الإلكتروني لحساب Runexa",
     emailPlaceholder: "you@example.com",
+
     country: "البلد",
     countryPlaceholder: "بلدك",
+
+    agent: "وكيل الذكاء الاصطناعي",
+    agentPlaceholder: "اختر وكيلاً",
+    legalAgent: "القانون",
+    studyAgent: "الدراسة",
+    businessAgent: "الأعمال",
+    financeAgent: "المالية",
+
     submit: "طلب وصول مجاني",
     submitting: "جارٍ إرسال الطلب...",
+
     successTitle: "تم استلام الطلب",
     success:
       "تم استلام طلب الوصول المجاني. في حال الموافقة عليه، ستتم إضافة رصيد مجاني إلى حساب Runexa الخاص بك.",
+
     error:
       "تعذر إرسال طلبك. يرجى التحقق من المعلومات والمحاولة مرة أخرى.",
+
     alreadySubmitted:
       "تم بالفعل إرسال طلب وصول مجاني باستخدام عنوان البريد الإلكتروني هذا.",
+
     privacy:
       "تُستخدم معلوماتك فقط لمراجعة طلب الوصول المجاني ومعالجته.",
+
     existingAccount: "لديك حساب Runexa بالفعل؟",
     login: "تسجيل الدخول",
     backHome: "العودة إلى Runexa",
@@ -126,6 +179,7 @@ export default function FreeAccessPage() {
     last_name: "",
     email: "",
     country: "",
+    agent: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -133,7 +187,6 @@ export default function FreeAccessPage() {
   const [message, setMessage] = useState("");
 
   const t = translations[language];
-
   const isArabic = language === "ar";
 
   const canSubmit = useMemo(() => {
@@ -141,7 +194,8 @@ export default function FreeAccessPage() {
       form.first_name.trim().length > 0 &&
       form.last_name.trim().length > 0 &&
       form.email.trim().length > 0 &&
-      form.country.trim().length > 0
+      form.country.trim().length > 0 &&
+      form.agent !== ""
     );
   }, [form]);
 
@@ -178,6 +232,7 @@ export default function FreeAccessPage() {
           last_name: form.last_name.trim(),
           email: form.email.trim().toLowerCase(),
           country: form.country.trim(),
+          agent: form.agent,
         }),
       });
 
@@ -213,6 +268,7 @@ export default function FreeAccessPage() {
         last_name: "",
         email: "",
         country: "",
+        agent: "",
       });
     } catch (error) {
       if (
@@ -234,7 +290,6 @@ export default function FreeAccessPage() {
       className="min-h-screen bg-slate-50 px-4 py-10 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-3xl">
-        {/* Top navigation */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <a
             href="/"
@@ -265,7 +320,6 @@ export default function FreeAccessPage() {
         </div>
 
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-          {/* Header */}
           <div className="border-b border-slate-100 px-6 py-8 sm:px-10 sm:py-10">
             <div className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
               {t.badge}
@@ -281,7 +335,6 @@ export default function FreeAccessPage() {
           </div>
 
           <div className="px-6 py-8 sm:px-10">
-            {/* Account notice */}
             <div className="mb-8 rounded-2xl border border-blue-100 bg-blue-50/70 p-5">
               <p className="font-semibold text-slate-950">
                 {t.accountRequired}
@@ -398,7 +451,9 @@ export default function FreeAccessPage() {
                     required
                     maxLength={255}
                     value={form.email}
-                    onChange={(e) => updateField("email", e.target.value)}
+                    onChange={(e) =>
+                      updateField("email", e.target.value)
+                    }
                     placeholder={t.emailPlaceholder}
                     className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-left text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   />
@@ -420,10 +475,52 @@ export default function FreeAccessPage() {
                     required
                     maxLength={100}
                     value={form.country}
-                    onChange={(e) => updateField("country", e.target.value)}
+                    onChange={(e) =>
+                      updateField("country", e.target.value)
+                    }
                     placeholder={t.countryPlaceholder}
                     className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="agent"
+                    className="mb-2 block text-sm font-semibold text-slate-800"
+                  >
+                    {t.agent}
+                  </label>
+
+                  <select
+                    id="agent"
+                    name="agent"
+                    required
+                    value={form.agent}
+                    onChange={(e) =>
+                      updateField("agent", e.target.value)
+                    }
+                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                  >
+                    <option value="">
+                      {t.agentPlaceholder}
+                    </option>
+
+                    <option value="legal">
+                      {t.legalAgent}
+                    </option>
+
+                    <option value="study">
+                      {t.studyAgent}
+                    </option>
+
+                    <option value="business">
+                      {t.businessAgent}
+                    </option>
+
+                    <option value="finance">
+                      {t.financeAgent}
+                    </option>
+                  </select>
                 </div>
 
                 {message && (

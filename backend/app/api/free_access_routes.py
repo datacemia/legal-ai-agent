@@ -17,6 +17,7 @@ class FreeAccessRequestCreate(BaseModel):
     last_name: str
     email: str
     country: str
+    agent: str
 
 
 @router.post("/")
@@ -28,6 +29,7 @@ def create_free_access_request(
     last_name = data.last_name.strip()
     email = data.email.strip().lower()
     country = data.country.strip()
+    agent = data.agent.strip()
 
     if not first_name:
         raise HTTPException(
@@ -53,6 +55,12 @@ def create_free_access_request(
             detail="Country is required.",
         )
 
+    if not agent:
+        raise HTTPException(
+            status_code=400,
+            detail="Agent is required.",
+        )
+
     existing_request = (
         db.query(FreeAccessRequest)
         .filter(FreeAccessRequest.email == email)
@@ -70,6 +78,7 @@ def create_free_access_request(
         last_name=last_name,
         email=email,
         country=country,
+        agent=agent,
     )
 
     db.add(request)

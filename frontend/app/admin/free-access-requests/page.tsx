@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
 
+type Agent = "legal" | "study" | "business" | "finance";
+
 type FreeAccessRequest = {
   id: number;
   first_name: string;
   last_name: string;
   email: string;
   country: string;
+  agent: Agent;
   created_at: string | null;
 };
 
@@ -69,6 +72,7 @@ export default function FreeAccessRequestsPage() {
                   <th className="p-4 text-start">Last name</th>
                   <th className="p-4 text-start">Email</th>
                   <th className="p-4 text-start">Country</th>
+                  <th className="p-4 text-start">Agent</th>
                   <th className="p-4 text-start">Date</th>
                 </tr>
               </thead>
@@ -92,6 +96,10 @@ export default function FreeAccessRequestsPage() {
                       {req.country}
                     </td>
 
+                    <td className="p-4 capitalize">
+                      {req.agent}
+                    </td>
+
                     <td className="p-4">
                       {req.created_at
                         ? new Date(req.created_at).toLocaleDateString()
@@ -104,7 +112,7 @@ export default function FreeAccessRequestsPage() {
                   <tr>
                     <td
                       className="p-6 text-center text-slate-500"
-                      colSpan={5}
+                      colSpan={6}
                     >
                       No free access requests yet.
                     </td>
