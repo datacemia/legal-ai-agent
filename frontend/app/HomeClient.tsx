@@ -312,13 +312,8 @@ export default function HomeClient({
             </div>
           </div>
 
-          <IntelligencePreviewCard language={language} />
-          <WhyRunexa language={language} />
-          <PrivacySection t={t} language={language} />
           <AgentsSection t={t} language={language} />
-          <ResultTestimonialsSection language={language} />
           <PricingSection language={language} />
-          <FAQSection t={t} />
           <CTASection t={t} />
         </div>
       </section>
