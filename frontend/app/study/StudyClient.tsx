@@ -8,9 +8,9 @@ import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 type Locale = "en" | "fr" | "ar";
 
 const STUDY_DEMO_VIDEOS: Record<Locale, string> = {
-  en: "/study/studyan.mp4",
-  fr: "/study/studyfr.mp4",
-  ar: "/study/studyar.mp4",
+  en: "https://drive.google.com/file/d/1KRkbdt21_81RSDWnsLZ9Um3FY5j2TRDX/preview",
+  fr: "https://drive.google.com/file/d/178NFUtjiyfwhau-EwGqtYwUXn4pDaIxi/preview",
+  ar: "",
 };
 
 const API_URL =
@@ -2486,20 +2486,35 @@ export default function StudyClient({
           </div>
 
           <div className="bg-slate-950 p-2 sm:p-4">
-            <video
-              key={studyDemoVideoUrl}
-              controls
-              playsInline
-              preload="metadata"
-              className="aspect-video w-full rounded-2xl bg-black object-contain"
-            >
-              <source src={studyDemoVideoUrl} type="video/mp4" />
-              {language === "fr"
-                ? "Votre navigateur ne prend pas en charge la lecture vidéo."
-                : language === "ar"
-                ? "متصفحك لا يدعم تشغيل الفيديو."
-                : "Your browser does not support video playback."}
-            </video>
+            {studyDemoVideoUrl ? (
+              <iframe
+                key={studyDemoVideoUrl}
+                src={studyDemoVideoUrl}
+                title={
+                  language === "fr"
+                    ? "Démonstration Runexa Study en français"
+                    : "Runexa Study English demonstration"
+                }
+                className="aspect-video w-full rounded-2xl bg-black"
+                allow="autoplay; fullscreen"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <div
+                dir="rtl"
+                className="flex aspect-video w-full items-center justify-center rounded-2xl bg-slate-900 px-6 text-center"
+              >
+                <div>
+                  <p className="text-lg font-bold text-white">
+                    العرض التوضيحي قريباً
+                  </p>
+                  <p className="mt-2 text-sm text-slate-300">
+                    فيديو Runexa Study باللغة العربية سيكون متاحاً قريباً.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
