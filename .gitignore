@@ -111,3 +111,4 @@ backend/*.pdf
 .env.development
 .env.test
 *.env
+frontend/public/study/*.mp4

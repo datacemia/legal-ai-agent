@@ -7,6 +7,12 @@ import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
 type Locale = "en" | "fr" | "ar";
 
+const STUDY_DEMO_VIDEOS: Record<Locale, string> = {
+  en: "/study/studyan.mp4",
+  fr: "/study/studyfr.mp4",
+  ar: "/study/studyar.mp4",
+};
+
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "https://api.runexa.ai";
@@ -1589,6 +1595,7 @@ export default function StudyClient({
   const restoredLastResultRef = useRef(false);
 
   const t = labels[language] || labels.en;
+  const studyDemoVideoUrl = STUDY_DEMO_VIDEOS[language];
 
 
   const hasCredits = creditsBalance > 0;
@@ -2437,6 +2444,64 @@ export default function StudyClient({
             </span>
           </div>
         </div>
+
+        {/* Study demo video — localized, independent from generated audio/results */}
+        <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
+          <div className="border-b border-slate-100 px-6 py-5 sm:px-8">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">
+                  {language === "fr"
+                    ? "Démonstration"
+                    : language === "ar"
+                    ? "عرض توضيحي"
+                    : "Demonstration"}
+                </p>
+
+                <h2 className="mt-1 text-xl font-black text-slate-950 sm:text-2xl">
+                  {language === "fr"
+                    ? "Découvrez Runexa Study Agent en action"
+                    : language === "ar"
+                    ? "شاهد Runexa Study Agent أثناء العمل"
+                    : "See Runexa Study Agent in action"}
+                </h2>
+
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                  {language === "fr"
+                    ? "Regardez une démonstration complète avec image et son."
+                    : language === "ar"
+                    ? "شاهد عرضاً توضيحياً كاملاً بالصورة والصوت."
+                    : "Watch a complete demonstration with video and sound."}
+                </p>
+              </div>
+
+              <span className="inline-flex w-fit rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-600">
+                {language === "fr"
+                  ? "Français"
+                  : language === "ar"
+                  ? "العربية"
+                  : "English"}
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-slate-950 p-2 sm:p-4">
+            <video
+              key={studyDemoVideoUrl}
+              controls
+              playsInline
+              preload="metadata"
+              className="aspect-video w-full rounded-2xl bg-black object-contain"
+            >
+              <source src={studyDemoVideoUrl} type="video/mp4" />
+              {language === "fr"
+                ? "Votre navigateur ne prend pas en charge la lecture vidéo."
+                : language === "ar"
+                ? "متصفحك لا يدعم تشغيل الفيديو."
+                : "Your browser does not support video playback."}
+            </video>
+          </div>
+        </section>
 
         <div id="study-upload-block" className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
 
