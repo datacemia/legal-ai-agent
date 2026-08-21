@@ -10,7 +10,7 @@ type Locale = "en" | "fr" | "ar";
 const STUDY_DEMO_VIDEOS: Record<Locale, string> = {
   en: "https://drive.google.com/file/d/1KRkbdt21_81RSDWnsLZ9Um3FY5j2TRDX/preview",
   fr: "https://drive.google.com/file/d/178NFUtjiyfwhau-EwGqtYwUXn4pDaIxi/preview",
-  ar: "",
+  ar: "https://drive.google.com/file/d/181w3pp1XkeiNRyPNBwAfuBxwAqBwu_eo/preview",
 };
 
 const API_URL =
