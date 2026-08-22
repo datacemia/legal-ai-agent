@@ -328,54 +328,54 @@ function IntelligencePreviewCard({ language }: { language: Locale }) {
       eyebrow: "Runexa Intelligence Report",
       status: "Analysis Complete",
       documentLabel: "Document",
-      documentName: "Contract_Intelligence.pdf",
+      documentName: "SaaS_Agreement.docx",
       scoreLabel: "Overall Risk",
-      scoreValue: "20/100",
+      scoreValue: "39/100",
       findingsLabel: "Key findings",
       findings: [
-        "Risk score: 20/100",
+        "Risk score: 39/100",
         "1 high-risk clause detected",
-        "7 medium-risk clauses found",
-        "Obligations extracted",
+        "5 medium-risk clauses found",
+        "1 contradiction detected",
       ],
       recommendationLabel: "Decision recommendation",
-      recommendation: "Review high-risk clauses before signing.",
+      recommendation: "Review the highest-risk clauses and contradiction before signing.",
       footer: "Legal · Finance · Study · Business",
     },
     fr: {
       eyebrow: "Aperçu d’un rapport Runexa",
       status: "Analyse terminée",
       documentLabel: "Document",
-      documentName: "Analyse_Contrat.pdf",
+      documentName: "Contrat_SaaS.docx",
       scoreLabel: "Risque global",
-      scoreValue: "20/100",
+      scoreValue: "39/100",
       findingsLabel: "Insights clés",
       findings: [
-        "Score de risque : 20/100",
+        "Score de risque : 39/100",
         "1 clause à risque élevé détectée",
-        "7 clauses à risque moyen trouvées",
-        "Obligations identifiées",
+        "5 clauses à risque moyen trouvées",
+        "1 contradiction détectée",
       ],
       recommendationLabel: "Recommandation de décision",
-      recommendation: "Vérifier les clauses à risque avant signature.",
+      recommendation: "Vérifier les clauses les plus sensibles et la contradiction avant signature.",
       footer: "Juridique · Finance · Étude · Business",
     },
     ar: {
       eyebrow: "تقرير Runexa الذكي",
       status: "اكتمل التحليل",
       documentLabel: "المستند",
-      documentName: "تحليل_العقد.pdf",
+      documentName: "عقد_SaaS.docx",
       scoreLabel: "مستوى المخاطر",
-      scoreValue: "20/100",
+      scoreValue: "39/100",
       findingsLabel: "رؤى رئيسية",
       findings: [
-        "تقييم المخاطر: 20/100",
+        "تقييم المخاطر: 39/100",
         "تم اكتشاف بند واحد عالي المخاطر",
-        "تم العثور على 7 بنود متوسطة المخاطر",
-        "تم تحديد الالتزامات",
+        "تم العثور على 5 بنود متوسطة المخاطر",
+        "تم اكتشاف تناقض واحد",
       ],
       recommendationLabel: "توصية القرار",
-      recommendation: "يُنصح بمراجعة البنود عالية المخاطر قبل التوقيع.",
+      recommendation: "يُنصح بمراجعة البنود الأكثر حساسية والتناقض قبل التوقيع.",
       footer: "القانون · المالية · الدراسة · الأعمال",
     },
   };
@@ -552,6 +552,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
       {
         file: string;
         rows: Array<{ icon: any; label: string; value?: string }>;
+        illustrativeLabel?: string;
         outcome: string;
         cta: string;
       }
@@ -559,14 +560,15 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
   > = {
     en: {
       legal: {
-        file: "Contract_Intelligence.pdf",
+        illustrativeLabel: "Illustrative contract",
+        file: "SaaS_Agreement.docx",
         rows: [
-          { icon: ShieldCheck, label: "Risk score", value: "20/100" },
-          { icon: AlertTriangle, label: "High risks", value: "1" },
-          { icon: FileCheck, label: "Medium risks", value: "7" },
-          { icon: BadgeCheck, label: "Obligations", value: "Extracted" },
+          { icon: ShieldCheck, label: "Risk score", value: "39/100" },
+          { icon: AlertTriangle, label: "High-risk clauses", value: "1" },
+          { icon: FileCheck, label: "Medium-risk clauses", value: "5" },
+          { icon: Activity, label: "Contradictions", value: "1" },
         ],
-        outcome: "Know what deserves attention before you sign.",
+        outcome: "Review the clauses that deserve attention before signing.",
         cta: "Open Legal Agent",
       },
       finance: {
@@ -605,14 +607,15 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
     },
     fr: {
       legal: {
-        file: "Analyse_Contrat.pdf",
+        illustrativeLabel: "Exemple de contrat",
+        file: "Contrat_SaaS.docx",
         rows: [
-          { icon: ShieldCheck, label: "Score de risque", value: "20/100" },
-          { icon: AlertTriangle, label: "Risques élevés", value: "1" },
-          { icon: FileCheck, label: "Risques moyens", value: "7" },
-          { icon: BadgeCheck, label: "Obligations", value: "Identifiées" },
+          { icon: ShieldCheck, label: "Score de risque", value: "39/100" },
+          { icon: AlertTriangle, label: "Clauses à risque élevé", value: "1" },
+          { icon: FileCheck, label: "Clauses à risque moyen", value: "5" },
+          { icon: Activity, label: "Contradictions", value: "1" },
         ],
-        outcome: "Identifiez ce qui mérite votre attention avant de signer.",
+        outcome: "Identifiez les clauses qui méritent votre attention avant de signer.",
         cta: "Accéder à l’agent juridique",
       },
       finance: {
@@ -651,14 +654,15 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
     },
     ar: {
       legal: {
-        file: "تحليل_العقد.pdf",
+        illustrativeLabel: "عقد توضيحي",
+        file: "عقد_SaaS.docx",
         rows: [
-          { icon: ShieldCheck, label: "تقييم المخاطر", value: "20/100" },
-          { icon: AlertTriangle, label: "مخاطر عالية", value: "1" },
-          { icon: FileCheck, label: "مخاطر متوسطة", value: "7" },
-          { icon: BadgeCheck, label: "الالتزامات", value: "تم تحديدها" },
+          { icon: ShieldCheck, label: "تقييم المخاطر", value: "39/100" },
+          { icon: AlertTriangle, label: "بنود عالية المخاطر", value: "1" },
+          { icon: FileCheck, label: "بنود متوسطة المخاطر", value: "5" },
+          { icon: Activity, label: "تناقضات", value: "1" },
         ],
-        outcome: "اعرف ما يستحق انتباهك قبل التوقيع.",
+        outcome: "حدد البنود التي تستحق انتباهك قبل التوقيع.",
         cta: "فتح الوكيل القانوني",
       },
       finance: {
@@ -740,6 +744,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
               </h3>
 
               <div className={`mt-4 rounded-2xl border p-4 ${dark ? "border-white/15 bg-white/10" : "border-slate-200 bg-slate-50"}`}>
+                {preview.illustrativeLabel && (
+                  <p
+                    className={`mb-3 text-[11px] font-black uppercase tracking-wide ${
+                      dark ? "text-emerald-50" : "text-blue-700"
+                    }`}
+                  >
+                    {preview.illustrativeLabel}
+                  </p>
+                )}
+
                 <div className="flex items-center gap-2">
                   {agent[3] === "business" ? (
                     <FileSpreadsheet className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
