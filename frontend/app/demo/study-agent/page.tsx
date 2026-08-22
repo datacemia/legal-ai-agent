@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import StudyAgentDemoClient from "./StudyAgentDemoClient";
 
 export const metadata: Metadata = {
-  title: "Runexa Study Agent Demo",
+  title: "عرض Runexa Study Agent | Runexa Systems",
   description:
-    "See Runexa Study Agent in action. Generate AI summaries, quizzes, flashcards, visual learning maps, audio support, and personalized study plans.",
+    "شاهد Runexa Study Agent وهو يحول المواد الدراسية إلى ملخصات واختبارات وبطاقات مراجعة وخرائط تعلم وخطط مراجعة مخصصة بالذكاء الاصطناعي.",
 
   alternates: {
-    canonical: "https://runexa.ai/demo/study-agent",
+    canonical: "https://runexa.ai/ar/demo/study-agent",
     languages: {
       en: "https://runexa.ai/en/demo/study-agent",
       fr: "https://runexa.ai/fr/demo/study-agent",
@@ -17,28 +17,28 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Runexa Study Agent Demo",
+    title: "عرض Runexa Study Agent",
     description:
-      "Turn study materials into summaries, quizzes, flashcards, learning maps, audio, and personalized revision plans with AI.",
-    url: "https://runexa.ai/demo/study-agent",
+      "شاهد كيف يحول Runexa Study المواد الدراسية إلى مساحة تعلم متكاملة مدعومة بالذكاء الاصطناعي.",
+    url: "https://runexa.ai/ar/demo/study-agent",
     siteName: "Runexa Systems",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Runexa Study Agent Demo",
+        alt: "عرض Runexa Study Agent",
       },
     ],
-    locale: "en_US",
+    locale: "ar_AR",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Runexa Study Agent Demo",
+    title: "عرض Runexa Study Agent",
     description:
-      "Turn study materials into summaries, quizzes, flashcards, learning maps, audio, and personalized revision plans with AI.",
+      "ملخصات، اختبارات، بطاقات مراجعة، خرائط تعلم وخطط مراجعة مخصصة بالذكاء الاصطناعي.",
     images: ["/og-image.png"],
   },
 
@@ -54,12 +54,13 @@ const jsonLd = {
   name: "Runexa Study Agent",
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web",
-  url: "https://runexa.ai/demo/study-agent",
+  url: "https://runexa.ai/ar/demo/study-agent",
+  inLanguage: "ar",
   description:
-    "AI study assistant for summaries, quizzes, flashcards, visual learning maps, audio learning support, and personalized study plans.",
+    "مساعد دراسي بالذكاء الاصطناعي لإنشاء الملخصات والاختبارات وبطاقات المراجعة وخرائط التعلم والصوت وخطط المراجعة المخصصة.",
 };
 
-export default function StudyAgentDemoPage() {
+export default function StudyAgentDemoArabicPage() {
   return (
     <>
       <script

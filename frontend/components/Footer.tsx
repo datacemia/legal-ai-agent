@@ -8,7 +8,6 @@ import { getSavedLocale } from "../lib/i18n";
 
 type Locale = "en" | "fr" | "ar";
 
-
 type LegalLabels = {
   terms: string;
   privacy: string;
@@ -127,6 +126,7 @@ const footerCopy: Record<Locale, FooterCopy> = {
     aboutPage: "About Runexa",
     copyright: "© 2026 Runexa Systems LLC. All rights reserved.",
   },
+
   fr: {
     slogan: "Des agents IA spécialisés pour le travail réel",
     footerDesc:
@@ -165,6 +165,7 @@ const footerCopy: Record<Locale, FooterCopy> = {
     aboutPage: "À propos de Runexa",
     copyright: "© 2026 Runexa Systems LLC. Tous droits réservés.",
   },
+
   ar: {
     slogan: "وكلاء ذكاء اصطناعي متخصصون للعمل الواقعي",
     footerDesc:
@@ -217,6 +218,7 @@ const legalLabels: Record<Locale, LegalLabels> = {
     security: "Security",
     company: "Company Information",
   },
+
   fr: {
     terms: "Conditions d’utilisation",
     privacy: "Politique de confidentialité",
@@ -228,6 +230,7 @@ const legalLabels: Record<Locale, LegalLabels> = {
     security: "Sécurité",
     company: "Informations sur l’entreprise",
   },
+
   ar: {
     terms: "شروط الاستخدام",
     privacy: "سياسة الخصوصية",
@@ -260,7 +263,9 @@ export default function Footer() {
   useEffect(() => {
     setLocale(resolveLocale());
 
-    const savedApiEnabled = localStorage.getItem("api_enabled") === "true";
+    const savedApiEnabled =
+      localStorage.getItem("api_enabled") === "true";
+
     setApiEnabled(savedApiEnabled);
 
     const handleLocaleChange = () => {
@@ -270,27 +275,26 @@ export default function Footer() {
     window.addEventListener("locale-change", handleLocaleChange);
 
     return () => {
-      window.removeEventListener("locale-change", handleLocaleChange);
+      window.removeEventListener(
+        "locale-change",
+        handleLocaleChange
+      );
     };
   }, [pathname]);
 
   const t = footerCopy[locale] || footerCopy.en;
   const legal = legalLabels[locale] || legalLabels.en;
 
+  /*
+   * IMPORTANT:
+   * All localized pages are generated from the active locale.
+   *
+   * en -> /en/...
+   * fr -> /fr/...
+   * ar -> /ar/...
+   */
   const localizedHref = (href: string) => {
-    if (pathname === "/en" || pathname?.startsWith("/en/")) {
-      return `/en${href}`;
-    }
-
-    if (pathname === "/fr" || pathname?.startsWith("/fr/")) {
-      return `/fr${href}`;
-    }
-
-    if (pathname === "/ar" || pathname?.startsWith("/ar/")) {
-      return `/ar${href}`;
-    }
-
-    return href;
+    return `/${locale}${href}`;
   };
 
   return (
@@ -300,6 +304,7 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+          {/* Brand */}
           <div>
             <Link href="/" className="inline-flex">
               <Image
@@ -324,27 +329,44 @@ export default function Footer() {
             </p>
           </div>
 
+          {/* Products */}
           <div>
             <h4 className="font-semibold">{t.products}</h4>
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
-              <Link href="/upload" className="block hover:text-white transition">
+              <Link
+                href="/upload"
+                className="block hover:text-white transition"
+              >
                 {t.legalAgent}{" "}
-                <span className="text-green-400">· {t.available}</span>
-              </Link>
-
-              <Link href="/study" className="block hover:text-white transition">
-                {t.studyAgent}{" "}
-                <span className="text-green-400">· {t.available}</span>
-              </Link>
-
-              <Link href="/finance" className="block hover:text-white transition">
-                {t.financeAgent}{" "}
-                <span className="text-green-400">· {t.available}</span>
+                <span className="text-green-400">
+                  · {t.available}
+                </span>
               </Link>
 
               <Link
-                href="/demo/study-agent"
+                href="/study"
+                className="block hover:text-white transition"
+              >
+                {t.studyAgent}{" "}
+                <span className="text-green-400">
+                  · {t.available}
+                </span>
+              </Link>
+
+              <Link
+                href="/finance"
+                className="block hover:text-white transition"
+              >
+                {t.financeAgent}{" "}
+                <span className="text-green-400">
+                  · {t.available}
+                </span>
+              </Link>
+
+              {/* LOCALIZED STUDY DEMO */}
+              <Link
+                href={localizedHref("/demo/study-agent")}
                 className="block hover:text-white transition"
               >
                 {t.studyDemo}
@@ -352,30 +374,47 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Resources */}
           <div>
             <h4 className="font-semibold">{t.resources}</h4>
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
-              <Link href="/legal-ai" className="block hover:text-white transition">
+              <Link
+                href="/legal-ai"
+                className="block hover:text-white transition"
+              >
                 {t.legalResource}
               </Link>
 
-              <Link href="/finance-ai" className="block hover:text-white transition">
+              <Link
+                href="/finance-ai"
+                className="block hover:text-white transition"
+              >
                 {t.financeResource}
               </Link>
 
-              <Link href="/study-ai" className="block hover:text-white transition">
+              <Link
+                href="/study-ai"
+                className="block hover:text-white transition"
+              >
                 {t.studyResource}
               </Link>
 
-              <Link href="/business-ai" className="block hover:text-white transition">
+              <Link
+                href="/business-ai"
+                className="block hover:text-white transition"
+              >
                 {t.businessResource}
               </Link>
 
-              <Link href="/blog" className="block hover:text-white transition">
+              <Link
+                href="/blog"
+                className="block hover:text-white transition"
+              >
                 {t.blog}
               </Link>
 
+              {/* LOCALIZED STUDY DEMO */}
               <Link
                 href={localizedHref("/demo/study-agent")}
                 className="block hover:text-white transition"
@@ -383,15 +422,24 @@ export default function Footer() {
                 {t.studyDemo}
               </Link>
 
-              <Link href="/developers" className="block hover:text-white transition">
+              <Link
+                href="/developers"
+                className="block hover:text-white transition"
+              >
                 {t.developers}
               </Link>
 
-              <Link href="/api" className="block hover:text-white transition">
+              <Link
+                href="/api"
+                className="block hover:text-white transition"
+              >
                 API
               </Link>
 
-              <Link href="/docs" className="block hover:text-white transition">
+              <Link
+                href="/docs"
+                className="block hover:text-white transition"
+              >
                 {t.docs}
               </Link>
 
@@ -406,36 +454,56 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Platform */}
           <div>
             <h4 className="font-semibold">{t.platform}</h4>
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
-              <a href="#agents" className="block hover:text-white transition">
+              <a
+                href="#agents"
+                className="block hover:text-white transition"
+              >
                 {t.exploreAgents}
               </a>
 
-              <Link href="/upload" className="block hover:text-white transition">
+              <Link
+                href="/upload"
+                className="block hover:text-white transition"
+              >
                 {t.tryLegalAgent}
               </Link>
 
-              <Link href="/study" className="block hover:text-white transition">
+              <Link
+                href="/study"
+                className="block hover:text-white transition"
+              >
                 {t.tryStudyAgent}
               </Link>
 
-              <Link href="/finance" className="block hover:text-white transition">
+              <Link
+                href="/finance"
+                className="block hover:text-white transition"
+              >
                 {t.tryFinanceAgent}
               </Link>
 
-              <Link href="/login" className="block hover:text-white transition">
+              <Link
+                href="/login"
+                className="block hover:text-white transition"
+              >
                 {t.login}
               </Link>
 
-              <Link href="/register" className="block hover:text-white transition">
+              <Link
+                href="/register"
+                className="block hover:text-white transition"
+              >
                 {t.register}
               </Link>
             </div>
           </div>
 
+          {/* About */}
           <div>
             <h4 className="font-semibold">{t.about}</h4>
 
@@ -463,15 +531,22 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Legal */}
         <div className="mt-12 border-t border-slate-800 pt-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
           <p>{t.copyright}</p>
 
           <div className="flex flex-wrap gap-5">
-            <Link href="/terms" className="hover:text-white transition">
+            <Link
+              href="/terms"
+              className="hover:text-white transition"
+            >
               {legal.terms}
             </Link>
 
-            <Link href="/privacy" className="hover:text-white transition">
+            <Link
+              href="/privacy"
+              className="hover:text-white transition"
+            >
               {legal.privacy}
             </Link>
 
@@ -482,27 +557,45 @@ export default function Footer() {
               {legal.productTerms}
             </Link>
 
-            <Link href="/legal/acceptable-use" className="hover:text-white transition">
+            <Link
+              href="/legal/acceptable-use"
+              className="hover:text-white transition"
+            >
               {legal.acceptableUse}
             </Link>
 
-            <Link href="/legal/ai-disclaimer" className="hover:text-white transition">
+            <Link
+              href="/legal/ai-disclaimer"
+              className="hover:text-white transition"
+            >
               {legal.aiDisclaimer}
             </Link>
 
-            <Link href="/legal/cookies" className="hover:text-white transition">
+            <Link
+              href="/legal/cookies"
+              className="hover:text-white transition"
+            >
               {legal.cookies}
             </Link>
 
-            <Link href="/legal/refunds" className="hover:text-white transition">
+            <Link
+              href="/legal/refunds"
+              className="hover:text-white transition"
+            >
               {legal.refunds}
             </Link>
 
-            <Link href="/security" className="hover:text-white transition">
+            <Link
+              href="/security"
+              className="hover:text-white transition"
+            >
               {legal.security}
             </Link>
 
-            <Link href="/legal/company" className="hover:text-white transition">
+            <Link
+              href="/legal/company"
+              className="hover:text-white transition"
+            >
               {legal.company}
             </Link>
           </div>
