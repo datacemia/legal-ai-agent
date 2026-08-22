@@ -552,6 +552,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
       {
         file: string;
         rows: Array<{ icon: any; label: string; value?: string }>;
+        outcome: string;
         cta: string;
       }
     >
@@ -565,6 +566,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: FileCheck, label: "Medium risks", value: "7" },
           { icon: BadgeCheck, label: "Obligations", value: "Extracted" },
         ],
+        outcome: "Know what deserves attention before you sign.",
         cta: "Open Legal Agent",
       },
       finance: {
@@ -575,6 +577,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: CreditCard, label: "Expenses", value: "€15,481.28" },
           { icon: PiggyBank, label: "Savings balance", value: "€4,911.12" },
         ],
+        outcome: "See where your money goes and what to improve.",
         cta: "Open Finance Intelligence",
       },
       study: {
@@ -585,6 +588,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: CheckCircle2, label: "Quiz questions" },
           { icon: CalendarCheck, label: "Study plan" },
         ],
+        outcome: "Turn one document into a complete study workspace.",
         cta: "Open Study Workspace",
       },
       business: {
@@ -595,6 +599,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: BarChart3, label: "Profit margin", value: "52.75%" },
           { icon: FileSpreadsheet, label: "Priority decision" },
         ],
+        outcome: "See what changed, why it matters, and what to examine next.",
         cta: "Open Business Intelligence",
       },
     },
@@ -607,6 +612,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: FileCheck, label: "Risques moyens", value: "7" },
           { icon: BadgeCheck, label: "Obligations", value: "Identifiées" },
         ],
+        outcome: "Identifiez ce qui mérite votre attention avant de signer.",
         cta: "Accéder à l’agent juridique",
       },
       finance: {
@@ -617,6 +623,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: CreditCard, label: "Dépenses", value: "15 481,28 €" },
           { icon: PiggyBank, label: "Solde épargne", value: "4 911,12 €" },
         ],
+        outcome: "Voyez où va votre argent et ce que vous pouvez améliorer.",
         cta: "Accéder à Finance Intelligence",
       },
       study: {
@@ -627,6 +634,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: CheckCircle2, label: "Questions de quiz" },
           { icon: CalendarCheck, label: "Plan de révision" },
         ],
+        outcome: "Transformez un document en espace d’apprentissage complet.",
         cta: "Accéder à Study Workspace",
       },
       business: {
@@ -637,6 +645,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: BarChart3, label: "Marge", value: "52,75 %" },
           { icon: FileSpreadsheet, label: "Recommandation stratégique" },
         ],
+        outcome: "Voyez ce qui change, pourquoi cela compte et quoi examiner ensuite.",
         cta: "Accéder à Business Decision Intelligence",
       },
     },
@@ -649,6 +658,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: FileCheck, label: "مخاطر متوسطة", value: "7" },
           { icon: BadgeCheck, label: "الالتزامات", value: "تم تحديدها" },
         ],
+        outcome: "اعرف ما يستحق انتباهك قبل التوقيع.",
         cta: "فتح الوكيل القانوني",
       },
       finance: {
@@ -659,6 +669,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: CreditCard, label: "المصاريف", value: "€15,481.28" },
           { icon: PiggyBank, label: "رصيد الادخار", value: "€4,911.12" },
         ],
+        outcome: "اعرف أين تذهب أموالك وما الذي يمكنك تحسينه.",
         cta: "فتح وكيل الذكاء المالي",
       },
       study: {
@@ -669,6 +680,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: CheckCircle2, label: "أسئلة اختبار" },
           { icon: CalendarCheck, label: "خطة مراجعة" },
         ],
+        outcome: "حوّل مستنداً واحداً إلى مساحة دراسة متكاملة.",
         cta: "فتح مساحة الدراسة",
       },
       business: {
@@ -679,6 +691,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
           { icon: BarChart3, label: "هامش الربح", value: "52.75%" },
           { icon: FileSpreadsheet, label: "توصية استراتيجية" },
         ],
+        outcome: "اعرف ما الذي تغيّر ولماذا يهم وما الذي ينبغي فحصه بعد ذلك.",
         cta: "فتح ذكاء قرارات الأعمال",
       },
     },
@@ -763,6 +776,18 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
                     );
                   })}
                 </div>
+
+                <p
+                  className={`mt-4 border-t pt-4 text-sm font-black leading-5 ${
+                    dark
+                      ? "border-white/15 text-white"
+                      : agent[3] === "study"
+                      ? "border-violet-100 text-violet-900"
+                      : "border-slate-200 text-slate-900"
+                  }`}
+                >
+                  {preview.outcome}
+                </p>
               </div>
 
               <div className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}>
