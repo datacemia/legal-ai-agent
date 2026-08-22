@@ -585,14 +585,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         cta: "Open Finance Intelligence",
       },
       study: {
-        file: "Study_Material.pdf",
+        illustrativeLabel: "Illustrative study analysis",
+        file: "Aviation_Training_Manual.pdf",
         rows: [
-          { icon: FileText, label: "AI summary" },
-          { icon: ClipboardList, label: "Flashcards" },
-          { icon: CheckCircle2, label: "Quiz questions" },
-          { icon: CalendarCheck, label: "Study plan" },
+          { icon: BadgeCheck, label: "Material quality", value: "100/100" },
+          { icon: CheckCircle2, label: "Quiz score", value: "2/10" },
+          { icon: ClipboardList, label: "Flashcards", value: "8" },
+          { icon: CalendarCheck, label: "Study plan", value: "5 days" },
         ],
-        outcome: "Turn one document into a complete study workspace.",
+        outcome:
+          "Needs more practice. Focus on key points and flashcards.",
         cta: "Open Study Workspace",
       },
       business: {
@@ -634,14 +636,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         cta: "Accéder à Finance Intelligence",
       },
       study: {
-        file: "Support_Cours.pdf",
+        illustrativeLabel: "Analyse d’étude illustrative",
+        file: "Manuel_Formation_Aviation.pdf",
         rows: [
-          { icon: FileText, label: "Résumé IA" },
-          { icon: ClipboardList, label: "Flashcards" },
-          { icon: CheckCircle2, label: "Questions de quiz" },
-          { icon: CalendarCheck, label: "Plan de révision" },
+          { icon: BadgeCheck, label: "Qualité du support", value: "100/100" },
+          { icon: CheckCircle2, label: "Score au quiz", value: "2/10" },
+          { icon: ClipboardList, label: "Flashcards", value: "8" },
+          { icon: CalendarCheck, label: "Plan de révision", value: "5 jours" },
         ],
-        outcome: "Transformez un document en espace d’apprentissage complet.",
+        outcome:
+          "Des révisions sont nécessaires. Concentrez-vous sur les points clés et les flashcards.",
         cta: "Accéder à Study Workspace",
       },
       business: {
@@ -683,14 +687,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         cta: "فتح وكيل الذكاء المالي",
       },
       study: {
-        file: "مادة_دراسية.pdf",
+        illustrativeLabel: "تحليل دراسي توضيحي",
+        file: "دليل_التدريب_على_الطيران.pdf",
         rows: [
-          { icon: FileText, label: "ملخص ذكي" },
-          { icon: ClipboardList, label: "بطاقات مراجعة" },
-          { icon: CheckCircle2, label: "أسئلة اختبار" },
-          { icon: CalendarCheck, label: "خطة مراجعة" },
+          { icon: BadgeCheck, label: "جودة المادة", value: "100/100" },
+          { icon: CheckCircle2, label: "نتيجة الاختبار", value: "2/10" },
+          { icon: ClipboardList, label: "بطاقات المراجعة", value: "8" },
+          { icon: CalendarCheck, label: "خطة الدراسة", value: "5 أيام" },
         ],
-        outcome: "حوّل مستنداً واحداً إلى مساحة دراسة متكاملة.",
+        outcome:
+          "تحتاج إلى مزيد من المراجعة. ركز على النقاط الرئيسية وبطاقات المراجعة.",
         cta: "فتح مساحة الدراسة",
       },
       business: {
