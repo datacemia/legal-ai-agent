@@ -686,6 +686,20 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
 
   const previews = agentPreviews[language] || agentPreviews.en;
 
+  const studyDemoHref =
+    language === "fr"
+      ? "/fr/demo/study-agent"
+      : language === "ar"
+      ? "/ar/demo/study-agent"
+      : "/en/demo/study-agent";
+
+  const studyDemoLabel =
+    language === "fr"
+      ? "Voir la démo"
+      : language === "ar"
+      ? "شاهد العرض"
+      : "Watch demo";
+
   return <section id="agents" className="scroll-mt-24 rounded-[32px] border border-slate-200/80 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl md:p-10">
     <div className="mb-8 flex justify-center"><div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700"><Users className="h-4 w-4" />{language === "fr" ? "Agents IA spécialisés" : language === "ar" ? "وكلاء ذكاء اصطناعي متخصصون" : "Specialized AI Agents"}</div></div>
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -695,53 +709,80 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         const dark = agent[3] === "finance";
         const preview = previews[agent[3]];
 
-        return <Link key={agent[0]} href={agent[2]} className={`group relative overflow-hidden rounded-3xl border p-5 shadow-lg transition-all duration-200 ease-out hover:-translate-y-1.5 hover:shadow-2xl active:translate-y-0 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${style.card}`}>
-          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${style.iconBox}`}><Icon className={`h-6 w-6 ${style.iconColor}`} /></div>
+        return (
+          <div
+            key={agent[0]}
+            className={`group relative overflow-hidden rounded-3xl border p-5 shadow-lg transition-all duration-200 ease-out hover:-translate-y-1.5 hover:shadow-2xl ${style.card}`}
+          >
+            <Link
+              href={agent[2]}
+              className="block rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${style.iconBox}`}>
+                <Icon className={`h-6 w-6 ${style.iconColor}`} />
+              </div>
 
-          <h3 className={`mt-4 text-base font-bold ${dark ? "text-white" : "text-slate-900"}`}>{agent[0]}</h3>
+              <h3 className={`mt-4 text-base font-bold ${dark ? "text-white" : "text-slate-900"}`}>
+                {agent[0]}
+              </h3>
 
-          <div className={`mt-4 rounded-2xl border p-4 ${dark ? "border-white/15 bg-white/10" : "border-slate-200 bg-slate-50"}`}>
-            <div className="flex items-center gap-2">
-              {agent[3] === "business" ? (
-                <FileSpreadsheet className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
-              ) : (
-                <FileText className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
-              )}
-              <p className={`truncate text-xs font-bold ${dark ? "text-emerald-50" : "text-slate-700"}`}>
-                {preview.file}
-              </p>
-            </div>
+              <div className={`mt-4 rounded-2xl border p-4 ${dark ? "border-white/15 bg-white/10" : "border-slate-200 bg-slate-50"}`}>
+                <div className="flex items-center gap-2">
+                  {agent[3] === "business" ? (
+                    <FileSpreadsheet className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
+                  ) : (
+                    <FileText className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
+                  )}
 
-            <div className={`my-3 h-px ${dark ? "bg-white/15" : "bg-slate-200"}`} />
+                  <p className={`truncate text-xs font-bold ${dark ? "text-emerald-50" : "text-slate-700"}`}>
+                    {preview.file}
+                  </p>
+                </div>
 
-            <div className="space-y-2.5">
-              {preview.rows.map((row) => {
-                const RowIcon = row.icon;
+                <div className={`my-3 h-px ${dark ? "bg-white/15" : "bg-slate-200"}`} />
 
-                return (
-                  <div key={row.label} className="flex items-center justify-between gap-3">
-                    <div className="flex min-w-0 items-center gap-2">
-                      <RowIcon className={`h-4 w-4 shrink-0 ${dark ? "text-emerald-50" : "text-blue-600"}`} />
-                      <span className={`truncate text-xs font-semibold ${dark ? "text-emerald-50" : "text-slate-700"}`}>
-                        {row.label}
-                      </span>
-                    </div>
+                <div className="space-y-2.5">
+                  {preview.rows.map((row) => {
+                    const RowIcon = row.icon;
 
-                    {row.value && (
-                      <span className={`shrink-0 text-xs font-black ${dark ? "text-white" : "text-slate-900"}`}>
-                        {row.value}
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                    return (
+                      <div key={row.label} className="flex items-center justify-between gap-3">
+                        <div className="flex min-w-0 items-center gap-2">
+                          <RowIcon className={`h-4 w-4 shrink-0 ${dark ? "text-emerald-50" : "text-blue-600"}`} />
+                          <span className={`truncate text-xs font-semibold ${dark ? "text-emerald-50" : "text-slate-700"}`}>
+                            {row.label}
+                          </span>
+                        </div>
+
+                        {row.value && (
+                          <span className={`shrink-0 text-xs font-black ${dark ? "text-white" : "text-slate-900"}`}>
+                            {row.value}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}>
+                {preview.cta} <span>→</span>
+              </div>
+            </Link>
+
+            {agent[3] === "study" && (
+              <div className="mt-4 border-t border-violet-100 pt-4">
+                <Link
+                  href={studyDemoHref}
+                  className="inline-flex items-center gap-2 rounded-xl px-1 py-1 text-sm font-black text-violet-700 transition hover:text-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
+                >
+                  <span aria-hidden="true">▶</span>
+                  <span>{studyDemoLabel}</span>
+                </Link>
+              </div>
+            )}
           </div>
-
-          <div className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}>
-            {preview.cta} <span>→</span>
-          </div>
-        </Link>;
+        );
       })}
     </div>
     <div className="mt-8 grid grid-cols-1 gap-4 border-t border-slate-200 pt-6 md:grid-cols-4">
