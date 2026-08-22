@@ -8,11 +8,6 @@ import { getSavedLocale } from "../lib/i18n";
 
 type Locale = "en" | "fr" | "ar";
 
-const STUDY_DEMO_VIDEOS: Record<Locale, string> = {
-  en: "https://drive.google.com/file/d/1KRkbdt21_81RSDWnsLZ9Um3FY5j2TRDX/preview",
-  fr: "https://drive.google.com/file/d/178NFUtjiyfwhau-EwGqtYwUXn4pDaIxi/preview",
-  ar: "https://drive.google.com/file/d/181w3pp1XkeiNRyPNBwAfuBxwAqBwu_eo/preview",
-};
 
 type LegalLabels = {
   terms: string;
@@ -251,7 +246,6 @@ export default function Footer() {
 
   const [locale, setLocale] = useState<Locale>("en");
   const [apiEnabled, setApiEnabled] = useState(false);
-  const [showStudyDemo, setShowStudyDemo] = useState(false);
 
   const resolveLocale = (): Locale => {
     const pathLocale = getLocaleFromPathname(pathname);
@@ -282,7 +276,6 @@ export default function Footer() {
 
   const t = footerCopy[locale] || footerCopy.en;
   const legal = legalLabels[locale] || legalLabels.en;
-  const studyDemoVideoUrl = STUDY_DEMO_VIDEOS[locale];
 
   const localizedHref = (href: string) => {
     if (pathname === "/en" || pathname?.startsWith("/en/")) {
@@ -350,9 +343,11 @@ export default function Footer() {
                 <span className="text-green-400">· {t.available}</span>
               </Link>
 
-              <Link href="/business" className="block hover:text-white transition">
-                {t.businessAgent}{" "}
-                <span className="text-green-400">· {t.available}</span>
+              <Link
+                href="/demo/study-agent"
+                className="block hover:text-white transition"
+              >
+                {t.studyDemo}
               </Link>
             </div>
           </div>
@@ -381,13 +376,12 @@ export default function Footer() {
                 {t.blog}
               </Link>
 
-              <button
-                type="button"
-                onClick={() => setShowStudyDemo(true)}
-                className="block text-left hover:text-white transition"
+              <Link
+                href={localizedHref("/demo/study-agent")}
+                className="block hover:text-white transition"
               >
                 {t.studyDemo}
-              </button>
+              </Link>
 
               <Link href="/developers" className="block hover:text-white transition">
                 {t.developers}
@@ -468,71 +462,6 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-
-        {showStudyDemo && (
-          <div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
-            onClick={() => setShowStudyDemo(false)}
-          >
-            <div
-              className="w-full max-w-5xl overflow-hidden rounded-3xl border border-slate-700 bg-slate-950 shadow-2xl"
-              onClick={(event) => event.stopPropagation()}
-              dir={locale === "ar" ? "rtl" : "ltr"}
-            >
-              <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4 sm:px-6">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-400">
-                    {locale === "fr"
-                      ? "Démonstration"
-                      : locale === "ar"
-                      ? "عرض توضيحي"
-                      : "Demonstration"}
-                  </p>
-                  <h3 className="mt-1 text-lg font-black text-white sm:text-xl">
-                    {locale === "fr"
-                      ? "Runexa Study Workspace — Démo"
-                      : locale === "ar"
-                      ? "Runexa Study Workspace — العرض التوضيحي"
-                      : "Runexa Study Workspace — Demo"}
-                  </h3>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setShowStudyDemo(false)}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-xl text-slate-300 transition hover:border-slate-500 hover:text-white"
-                  aria-label={
-                    locale === "fr"
-                      ? "Fermer"
-                      : locale === "ar"
-                      ? "إغلاق"
-                      : "Close"
-                  }
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="bg-black p-2 sm:p-4">
-                <iframe
-                  key={`${locale}-${studyDemoVideoUrl}`}
-                  src={studyDemoVideoUrl}
-                  title={
-                    locale === "fr"
-                      ? "Démonstration Runexa Study en français"
-                      : locale === "ar"
-                      ? "عرض Runexa Study باللغة العربية"
-                      : "Runexa Study English demonstration"
-                  }
-                  className="aspect-video w-full rounded-2xl bg-black"
-                  allow="autoplay; fullscreen"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="mt-12 border-t border-slate-800 pt-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
           <p>{t.copyright}</p>
