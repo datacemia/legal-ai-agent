@@ -572,14 +572,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         cta: "Open Legal Agent",
       },
       finance: {
+        illustrativeLabel: "Illustrative statement",
         file: "Bank_Statement.pdf",
         rows: [
-          { icon: ShieldCheck, label: "Financial score", value: "78" },
-          { icon: TrendingUp, label: "Monthly income", value: "€20,393" },
-          { icon: CreditCard, label: "Expenses", value: "€15,481.28" },
-          { icon: PiggyBank, label: "Savings balance", value: "€4,911.12" },
+          { icon: ShieldCheck, label: "Financial score", value: "87/100" },
+          { icon: TrendingUp, label: "Observed income", value: "$2,910" },
+          { icon: CreditCard, label: "Observed expenses", value: "$2,046.95" },
+          { icon: Activity, label: "Net cashflow", value: "-$55.24" },
         ],
-        outcome: "See where your money goes and what to improve.",
+        outcome:
+          "Cashflow risk detected. See where your money goes and what to improve.",
         cta: "Open Finance Intelligence",
       },
       study: {
@@ -619,14 +621,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         cta: "Accéder à l’agent juridique",
       },
       finance: {
+        illustrativeLabel: "Relevé illustratif",
         file: "Releve_Bancaire.pdf",
         rows: [
-          { icon: ShieldCheck, label: "Score financier", value: "78/100" },
-          { icon: TrendingUp, label: "Revenus mensuels", value: "20 393 €" },
-          { icon: CreditCard, label: "Dépenses", value: "15 481,28 €" },
-          { icon: PiggyBank, label: "Solde épargne", value: "4 911,12 €" },
+          { icon: ShieldCheck, label: "Score financier", value: "87/100" },
+          { icon: TrendingUp, label: "Revenus observés", value: "2 910 $" },
+          { icon: CreditCard, label: "Dépenses observées", value: "2 046,95 $" },
+          { icon: Activity, label: "Cashflow net", value: "-55,24 $" },
         ],
-        outcome: "Voyez où va votre argent et ce que vous pouvez améliorer.",
+        outcome:
+          "Risque de cashflow détecté. Voyez où va votre argent et ce que vous pouvez améliorer.",
         cta: "Accéder à Finance Intelligence",
       },
       study: {
@@ -666,14 +670,16 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         cta: "فتح الوكيل القانوني",
       },
       finance: {
+        illustrativeLabel: "كشف حساب توضيحي",
         file: "كشف_حساب.pdf",
         rows: [
-          { icon: ShieldCheck, label: "الدرجة المالية", value: "78" },
-          { icon: TrendingUp, label: "الدخل الشهري", value: "€20,393" },
-          { icon: CreditCard, label: "المصاريف", value: "€15,481.28" },
-          { icon: PiggyBank, label: "رصيد الادخار", value: "€4,911.12" },
+          { icon: ShieldCheck, label: "الدرجة المالية", value: "87/100" },
+          { icon: TrendingUp, label: "الدخل المرصود", value: "$2,910" },
+          { icon: CreditCard, label: "المصاريف المرصودة", value: "$2,046.95" },
+          { icon: Activity, label: "صافي التدفق النقدي", value: "-$55.24" },
         ],
-        outcome: "اعرف أين تذهب أموالك وما الذي يمكنك تحسينه.",
+        outcome:
+          "تم اكتشاف مخاطر في التدفق النقدي. اعرف أين تذهب أموالك وما الذي يمكنك تحسينه.",
         cta: "فتح وكيل الذكاء المالي",
       },
       study: {
